@@ -5,54 +5,152 @@ on:
     branches: [main]
     paths:
       - 'rust/**'
+      - 'docs/**'
       - '.github/workflows/rust.yml'
   pull_request:
+    types: [opened, synchronize, reopened]
     paths:
       - 'rust/**'
+      - 'docs/**'
       - '.github/workflows/rust.yml'
+  workflow_dispatch:
+    inputs:
+      release_mode:
+        description: 'Manual release mode'
+        required: true
+        type: choice
+        default: 'instant'
+        options:
+          - instant
+          - changelog-pr
+      bump_type:
+        description: 'Version bump type'
+        required: true
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+      description:
+        description: 'Release description'
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  pages: write
+  pull-requests: write
 
 concurrency:
   group: rust-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+  cancel-in-progress: ${{ github.ref == 'refs/heads/main' }}
 
 env:
   CARGO_TERM_COLOR: always
   RUST_BACKTRACE: 1
-
-defaults:
-  run:
-    working-directory: rust
+  RUSTFLAGS: -Dwarnings
+  CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN || secrets.CARGO_TOKEN }}
+  CARGO_TOKEN: ${{ secrets.CARGO_TOKEN }}
 
 jobs:
-  fmt:
-    name: rustfmt
+  detect-changes:
+    name: Detect Changes
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: github.event_name != 'workflow_dispatch'
+    outputs:
+      rs-changed: ${{ steps.changes.outputs.rs-changed }}
+      toml-changed: ${{ steps.changes.outputs.toml-changed }}
+      docs-changed: ${{ steps.changes.outputs.docs-changed }}
+      workflow-changed: ${{ steps.changes.outputs.workflow-changed }}
+      any-code-changed: ${{ steps.changes.outputs.any-code-changed }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Install rust-script
+        run: cargo install rust-script
+      - name: Detect Rust changes
+        id: changes
+        env:
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
+        run: rust-script rust/scripts/detect-code-changes.rs
+
+  changelog:
+    name: Changelog Fragment Check
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    needs: [detect-changes]
+    if: github.event_name == 'pull_request' && needs.detect-changes.outputs.any-code-changed == 'true'
     steps:
       - uses: actions/checkout@v6
-      - uses: dtolnay/rust-toolchain@stable
         with:
-          components: rustfmt
-      - run: cargo fmt --all -- --check
+          fetch-depth: 0
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Install rust-script
+        run: cargo install rust-script
+      - name: Check changelog fragments
+        env:
+          GITHUB_BASE_REF: ${{ github.base_ref }}
+        run: rust-script rust/scripts/check-changelog-fragment.rs
 
-  clippy:
-    name: clippy
+  version-check:
+    name: Version Modification Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Install rust-script
+        run: cargo install rust-script
+      - name: Check manual version changes
+        env:
+          GITHUB_HEAD_REF: ${{ github.head_ref }}
+          GITHUB_BASE_REF: ${{ github.base_ref }}
+        run: rust-script rust/scripts/check-version-modification.rs
+
+  lint:
+    name: Lint and Format Check
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    needs: [detect-changes]
+    if: |
+      always() && !cancelled() && (
+        github.event_name == 'workflow_dispatch' ||
+        github.event_name == 'push' ||
+        needs.detect-changes.outputs.rs-changed == 'true' ||
+        needs.detect-changes.outputs.toml-changed == 'true' ||
+        needs.detect-changes.outputs.docs-changed == 'true' ||
+        needs.detect-changes.outputs.workflow-changed == 'true'
+      )
     steps:
       - uses: actions/checkout@v6
       - uses: dtolnay/rust-toolchain@stable
         with:
-          components: clippy
+          components: rustfmt, clippy
       - uses: Swatinem/rust-cache@v2
         with:
           workspaces: rust
-      - run: cargo clippy --all-targets --all-features -- -D warnings
+      - name: Install rust-script
+        run: cargo install rust-script
+      - run: cargo fmt --manifest-path rust/Cargo.toml --all -- --check
+      - run: cargo clippy --manifest-path rust/Cargo.toml --all-targets --all-features -- -D warnings
+      - name: Check file size limit
+        working-directory: rust
+        run: rust-script scripts/check-file-size.rs
 
   test:
-    name: test (${{ matrix.os }})
+    name: Test (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
     timeout-minutes: 20
+    needs: [detect-changes, changelog]
+    if: |
+      always() && !cancelled() &&
+      (github.event_name == 'workflow_dispatch' || github.event_name == 'push' || needs.changelog.result == 'success' || needs.changelog.result == 'skipped')
     strategy:
       fail-fast: false
       matrix:
@@ -63,9 +161,154 @@ jobs:
       - uses: Swatinem/rust-cache@v2
         with:
           workspaces: rust
-      - name: Build
-        run: cargo build --all-targets
-      - name: Run tests
-        run: cargo test --all-targets
-      - name: Run example
-        run: cargo run --example basic --manifest-path lino-i18n/Cargo.toml
+      - run: cargo build --manifest-path rust/Cargo.toml --all-targets
+      - run: cargo test --manifest-path rust/Cargo.toml --all-targets
+      - run: cargo run --manifest-path rust/lino-i18n/Cargo.toml --example basic
+
+  package:
+    name: Package Dry Run
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: [lint, test]
+    steps:
+      - uses: actions/checkout@v6
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: rust
+      - run: cargo package --manifest-path rust/lino-i18n-macros/Cargo.toml --allow-dirty
+      - name: List runtime crate package contents
+        run: cargo package --manifest-path rust/lino-i18n/Cargo.toml --allow-dirty --list
+
+  auto-release:
+    name: Publish Crates and GitHub Release
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: [package]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    environment:
+      name: crates.io
+      url: https://crates.io/crates/lino-i18n
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: rust
+      - name: Install rust-script
+        run: cargo install rust-script
+      - name: Determine bump type
+        id: bump
+        run: rust-script rust/scripts/get-bump-type.rs --rust-root rust
+      - name: Check whether release is needed
+        id: check
+        env:
+          HAS_FRAGMENTS: ${{ steps.bump.outputs.fragment_count != '0' }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: rust-script rust/scripts/check-release-needed.rs --rust-root rust --tag-prefix rust-v
+      - name: Version and commit
+        if: steps.check.outputs.should_release == 'true' && steps.check.outputs.skip_bump != 'true'
+        run: rust-script rust/scripts/version-and-commit.rs --rust-root rust --tag-prefix rust-v --bump-type "${{ steps.bump.outputs.bump_type }}"
+      - name: Read release version
+        if: steps.check.outputs.should_release == 'true'
+        id: version
+        run: rust-script rust/scripts/get-version.rs --rust-root rust
+      - name: Build release
+        if: steps.check.outputs.should_release == 'true'
+        run: cargo build --manifest-path rust/Cargo.toml --release
+      - name: Publish crates
+        if: steps.check.outputs.should_release == 'true' && steps.check.outputs.crate_published != 'true'
+        id: publish
+        run: rust-script rust/scripts/publish-crate.rs --rust-root rust
+      - name: Wait for macro crate
+        if: steps.check.outputs.should_release == 'true' && steps.check.outputs.crate_published != 'true'
+        run: rust-script rust/scripts/wait-for-crate.rs --rust-root rust --crate-name lino-i18n-macros --release-version "${{ steps.version.outputs.version }}"
+      - name: Wait for runtime crate
+        if: steps.check.outputs.should_release == 'true' && steps.check.outputs.crate_published != 'true'
+        run: rust-script rust/scripts/wait-for-crate.rs --rust-root rust --crate-name lino-i18n --release-version "${{ steps.version.outputs.version }}"
+      - name: Create GitHub release
+        if: steps.check.outputs.should_release == 'true'
+        run: rust-script rust/scripts/create-github-release.rs --rust-root rust --release-version "${{ steps.version.outputs.version }}" --repository "${{ github.repository }}" --tag-prefix rust-v --language Rust
+
+  manual-release:
+    name: Manual Rust Release
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.release_mode == 'instant'
+    environment:
+      name: crates.io
+      url: https://crates.io/crates/lino-i18n
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: rust
+      - name: Install rust-script
+        run: cargo install rust-script
+      - name: Version and commit
+        id: version
+        run: rust-script rust/scripts/version-and-commit.rs --rust-root rust --tag-prefix rust-v --bump-type "${{ github.event.inputs.bump_type }}" --description "${{ github.event.inputs.description }}"
+      - run: cargo build --manifest-path rust/Cargo.toml --release
+      - name: Publish crates
+        run: rust-script rust/scripts/publish-crate.rs --rust-root rust
+      - name: Wait for macro crate
+        run: rust-script rust/scripts/wait-for-crate.rs --rust-root rust --crate-name lino-i18n-macros --release-version "${{ steps.version.outputs.new_version }}"
+      - name: Wait for runtime crate
+        run: rust-script rust/scripts/wait-for-crate.rs --rust-root rust --crate-name lino-i18n --release-version "${{ steps.version.outputs.new_version }}"
+      - name: Create GitHub release
+        run: rust-script rust/scripts/create-github-release.rs --rust-root rust --release-version "${{ steps.version.outputs.new_version }}" --repository "${{ github.repository }}" --tag-prefix rust-v --language Rust
+
+  changelog-pr:
+    name: Create Manual Changelog PR
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.release_mode == 'changelog-pr'
+    steps:
+      - uses: actions/checkout@v6
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Install rust-script
+        run: cargo install rust-script
+      - name: Create changelog fragment
+        run: rust-script rust/scripts/create-changelog-fragment.rs --rust-root rust --bump-type "${{ github.event.inputs.bump_type }}" --description "${{ github.event.inputs.description }}"
+      - uses: peter-evans/create-pull-request@v8
+        with:
+          commit-message: 'chore: add changelog for manual ${{ github.event.inputs.bump_type }} release'
+          branch: changelog-manual-release-${{ github.run_id }}
+          title: 'chore: manual ${{ github.event.inputs.bump_type }} release'
+          body: |
+            This PR was created by a manual workflow trigger to prepare a Rust release.
+
+            - Release type: `${{ github.event.inputs.bump_type }}`
+            - Description: ${{ github.event.inputs.description || 'Manual release' }}
+
+  deploy-docs:
+    name: Deploy Rust Docs
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: [package]
+    if: |
+      always() && !cancelled() &&
+      needs.package.result == 'success' &&
+      github.ref == 'refs/heads/main' &&
+      (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Install rust-script
+        run: cargo install rust-script
+      - uses: actions/configure-pages@v6
+      - run: cargo doc --manifest-path rust/Cargo.toml --workspace --no-deps
+      - run: rust-script rust/scripts/build-docs-site.rs
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: rust/site
+      - id: deployment
+        uses: actions/deploy-pages@v5

@@ -142,6 +142,10 @@ vite.config.ts.timestamp-*
 # jscpd reports
 reports/
 
+# Generated docs sites
+js/site/
+rust/site/
+
 # Rust target directories
 target/
 rust/target/

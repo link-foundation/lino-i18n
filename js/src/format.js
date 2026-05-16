@@ -7,8 +7,12 @@ const INTERPOLATION_PATTERN = /\{\{?\s*([\w.$:-]+)\s*\}?\}/g;
 const PLURAL_SUFFIXES = ['zero', 'one', 'two', 'few', 'many', 'other'];
 
 export function interpolate(template, params) {
-  if (typeof template !== 'string') return template;
-  if (!params) return template;
+  if (typeof template !== 'string') {
+    return template;
+  }
+  if (!params) {
+    return template;
+  }
   return template.replace(INTERPOLATION_PATTERN, (match, name) => {
     if (!Object.prototype.hasOwnProperty.call(params, name)) {
       return match;
@@ -19,9 +23,13 @@ export function interpolate(template, params) {
 }
 
 export function pluralSuffix(locale, count) {
-  if (count === undefined || count === null) return null;
+  if (count === undefined || count === null) {
+    return null;
+  }
   const numeric = Number(count);
-  if (!Number.isFinite(numeric)) return null;
+  if (!Number.isFinite(numeric)) {
+    return null;
+  }
   try {
     const rules = new Intl.PluralRules(locale);
     return rules.select(numeric);
@@ -31,13 +39,19 @@ export function pluralSuffix(locale, count) {
 }
 
 export function applyContext(key, context) {
-  if (!context) return key;
+  if (!context) {
+    return key;
+  }
   return `${key}_${context}`;
 }
 
 function lookup(table, key) {
-  if (!table) return undefined;
-  if (Object.prototype.hasOwnProperty.call(table, key)) return table[key];
+  if (!table) {
+    return undefined;
+  }
+  if (Object.prototype.hasOwnProperty.call(table, key)) {
+    return table[key];
+  }
   return undefined;
 }
 
@@ -49,34 +63,50 @@ function lookup(table, key) {
 // Returns `undefined` when the key cannot be resolved. The caller is
 // responsible for fallback handling.
 export function resolveKey(table, key, { count, context, locale } = {}) {
-  if (!table || typeof table !== 'object') return undefined;
+  if (!table || typeof table !== 'object') {
+    return undefined;
+  }
   const withContext = context ? applyContext(key, context) : key;
 
   const targets = context ? [withContext, key] : [withContext];
 
   for (const target of targets) {
-    if (count !== undefined && count !== null && Number.isFinite(Number(count))) {
+    if (
+      count !== undefined &&
+      count !== null &&
+      Number.isFinite(Number(count))
+    ) {
       const numeric = Number(count);
       if (numeric === 0) {
         const zeroCandidate = lookup(table, `${target}_zero`);
-        if (zeroCandidate !== undefined) return zeroCandidate;
+        if (zeroCandidate !== undefined) {
+          return zeroCandidate;
+        }
       }
       const suffix = pluralSuffix(locale, numeric);
       if (suffix) {
         const candidate = lookup(table, `${target}_${suffix}`);
-        if (candidate !== undefined) return candidate;
+        if (candidate !== undefined) {
+          return candidate;
+        }
       }
       const otherCandidate = lookup(table, `${target}_other`);
-      if (otherCandidate !== undefined) return otherCandidate;
+      if (otherCandidate !== undefined) {
+        return otherCandidate;
+      }
     }
 
     const direct = lookup(table, target);
-    if (direct !== undefined) return direct;
+    if (direct !== undefined) {
+      return direct;
+    }
   }
 
   if (context) {
     const otherFallback = lookup(table, `${key}_other`);
-    if (otherFallback !== undefined) return otherFallback;
+    if (otherFallback !== undefined) {
+      return otherFallback;
+    }
   }
 
   return undefined;

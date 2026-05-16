@@ -1,21 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import {
-  fromI18next,
-  fromI18nJs,
-  fromReactIntl,
-} from '../src/index.js';
+import { fromI18next, fromI18nJs, fromReactIntl } from '../src/index.js';
 
 test('fromI18next flattens nested keys with dot separator', () => {
-  const result = fromI18next(
-    {
-      en: {
-        greeting: 'Hello, {{name}}',
-        cart: { title: 'Your cart', items_one: '{{count}} item' },
-      },
-    }
-  );
+  const result = fromI18next({
+    en: {
+      greeting: 'Hello, {{name}}',
+      cart: { title: 'Your cart', items_one: '{{count}} item' },
+    },
+  });
   assert.deepEqual(result, {
     en: {
       greeting: 'Hello, {{name}}',
@@ -72,7 +66,7 @@ test('fromI18nJs rewrites %{var} into {{var}}', () => {
 test('fromReactIntl handles plain ICU strings', () => {
   const result = fromReactIntl(
     {
-      'greeting': 'Hello, {name}',
+      greeting: 'Hello, {name}',
       'cart.title': 'Your cart',
     },
     { locale: 'en' }

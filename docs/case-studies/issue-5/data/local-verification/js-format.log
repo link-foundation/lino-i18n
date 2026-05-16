@@ -1,0 +1,52 @@
+
+> lino-i18n@0.0.1 format
+> prettier --write .
+
+.changeset/config.json 30ms (unchanged)
+.changeset/README.md 23ms (unchanged)
+.jscpd.json 3ms (unchanged)
+.prettierrc 6ms (unchanged)
+.secretlintrc.json 1ms (unchanged)
+bin/lino-i18n.js 51ms
+CHANGELOG.md 5ms (unchanged)
+eslint.config.js 10ms (unchanged)
+examples/basic-usage.mjs 8ms (unchanged)
+package.json 3ms (unchanged)
+README.md 18ms
+scripts/build-docs-site.mjs 10ms
+scripts/changeset-version.mjs 8ms (unchanged)
+scripts/check-changesets.mjs 4ms (unchanged)
+scripts/check-docker-publish.mjs 8ms (unchanged)
+scripts/check-release-needed.mjs 5ms (unchanged)
+scripts/check-version.mjs 8ms (unchanged)
+scripts/check-web-archive.mjs 10ms (unchanged)
+scripts/create-github-release.mjs 13ms (unchanged)
+scripts/create-manual-changeset.mjs 6ms (unchanged)
+scripts/detect-code-changes.mjs 10ms
+scripts/format-github-release.mjs 5ms (unchanged)
+scripts/format-release-notes-helpers.mjs 2ms (unchanged)
+scripts/format-release-notes.mjs 11ms (unchanged)
+scripts/instant-version-bump.mjs 6ms (unchanged)
+scripts/js-paths.mjs 5ms (unchanged)
+scripts/merge-changesets.mjs 9ms (unchanged)
+scripts/package-info.mjs 4ms (unchanged)
+scripts/publish-to-npm.mjs 10ms (unchanged)
+scripts/setup-npm.mjs 15ms (unchanged)
+scripts/update-preview-images.mjs 15ms (unchanged)
+scripts/validate-changeset.mjs 12ms (unchanged)
+scripts/version-and-commit.mjs 17ms (unchanged)
+scripts/wait-for-npm.mjs 12ms (unchanged)
+src/converters/detect.js 3ms (unchanged)
+src/converters/i18n-js.js 3ms
+src/converters/i18next.js 5ms
+src/converters/index.js 1ms (unchanged)
+src/converters/react-intl.js 4ms (unchanged)
+src/format.js 4ms
+src/i18n.js 7ms
+src/index.d.ts 46ms (unchanged)
+src/index.js 1ms (unchanged)
+src/loaders.js 16ms
+tests/cli.test.js 8ms (unchanged)
+tests/converters.test.js 3ms
+tests/i18n.test.js 8ms
+tests/package-metadata.test.js 3ms (unchanged)
