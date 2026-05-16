@@ -5,12 +5,13 @@ import { fileURLToPath } from 'node:url';
 import test from 'node:test';
 
 const packageRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const npmCommand = process.platform === 'win32' ? 'npm.cmd' : 'npm';
+const isWindows = process.platform === 'win32';
 
 test('npm package dry-run contains the publishable runtime surface', () => {
-  const result = spawnSync(npmCommand, ['pack', '--dry-run', '--json'], {
+  const result = spawnSync('npm', ['pack', '--dry-run', '--json'], {
     cwd: packageRoot,
     encoding: 'utf8',
+    shell: isWindows,
   });
 
   assert.ifError(result.error);
