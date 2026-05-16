@@ -389,7 +389,9 @@ export function formatLinoCatalog(locale, translations, options = {}) {
 export function formatLinoCatalogs(catalogues, options = {}) {
   const entries = Array.isArray(catalogues)
     ? catalogues.map(({ locale, translations }) => [locale, translations])
-    : Object.entries(catalogues || {});
+    : Object.entries(catalogues || {}).sort(([left], [right]) =>
+        left.localeCompare(right)
+      );
   return entries
     .map(([locale, translations]) =>
       formatLinoCatalog(locale, translations, options)
@@ -430,7 +432,9 @@ export async function loadLocalesFromFile(filePath) {
 }
 
 export async function loadLocalesFromDirectory(directory) {
-  const entries = await fs.readdir(directory, { withFileTypes: true });
+  const entries = (await fs.readdir(directory, { withFileTypes: true })).sort(
+    (left, right) => left.name.localeCompare(right.name)
+  );
   const catalogues = {};
   for (const entry of entries) {
     if (!entry.isFile()) continue;

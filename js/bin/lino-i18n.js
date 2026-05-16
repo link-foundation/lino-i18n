@@ -151,7 +151,9 @@ async function readJsonInput(inputPath) {
       },
     ];
   }
-  const entries = await fs.readdir(inputPath, { withFileTypes: true });
+  const entries = (await fs.readdir(inputPath, { withFileTypes: true })).sort(
+    (left, right) => left.name.localeCompare(right.name)
+  );
   const out = [];
   for (const entry of entries) {
     if (!entry.isFile()) continue;
