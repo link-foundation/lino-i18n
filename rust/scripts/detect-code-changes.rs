@@ -10,14 +10,18 @@
 //!   so a commit touching only non-code files correctly skips CI jobs
 //!   even when earlier commits in the same PR touched code files.
 //! - For pushes: compares HEAD against HEAD^
-//! - Excludes certain folders and file types from "code changes" detection
+//! - Excludes certain folders and file types from release-affecting code
+//!   detection
 //!
-//! Excluded from code changes (don't require changelog fragments):
+//! Excluded from release-affecting code changes (don't require changelog fragments):
 //! - Markdown files (*.md) in any folder
 //! - changelog.d/ folder (changelog fragments)
 //! - docs/ folder (documentation)
 //! - experiments/ folder (experimental scripts)
 //! - examples/ folder (example scripts)
+//! - scripts/ folder (release/CI maintenance)
+//! - tests/ folder (test-only changes)
+//! - non-Rust language folders in a multi-language repository
 //!
 //! Usage: rust-script scripts/detect-code-changes.rs
 //!
@@ -30,7 +34,7 @@
 //!   - mjs-changed: 'true' if any .mjs files changed
 //!   - docs-changed: 'true' if any .md files changed
 //!   - workflow-changed: 'true' if any .github/workflows/ files changed
-//!   - any-code-changed: 'true' if any code files changed (excludes docs, changelog.d, experiments, examples)
+//!   - any-code-changed: 'true' if any Rust package files changed
 //!
 //! ```cargo
 //! [dependencies]
@@ -138,16 +142,22 @@ fn is_excluded_from_code_changes(file_path: &str) -> bool {
         return true;
     }
 
-    // Exclude specific folders from code changes
+    // Exclude folders that do not affect the published Rust package surface.
     let excluded_folders = [
         "changelog.d/",
         "rust/changelog.d/",
+        ".github/workflows/",
         "docs/",
         "rust/docs/",
         "experiments/",
         "rust/experiments/",
         "examples/",
         "rust/examples/",
+        "scripts/",
+        "rust/scripts/",
+        "tests/",
+        "rust/tests/",
+        "js/",
     ];
 
     for folder in &excluded_folders {
@@ -199,13 +209,13 @@ fn main() {
         if workflow_changed { "true" } else { "false" },
     );
 
-    // Detect code changes (excluding docs, changelog.d, experiments, examples folders, and markdown files)
+    // Detect release-affecting code changes for changelog enforcement.
     let code_changed_files: Vec<&String> = changed_files
         .iter()
         .filter(|f| !is_excluded_from_code_changes(f))
         .collect();
 
-    println!("\nFiles considered as code changes:");
+    println!("\nFiles considered as release-affecting code changes:");
     if code_changed_files.is_empty() {
         println!("  (none)");
     } else {
@@ -215,8 +225,10 @@ fn main() {
     }
     println!();
 
-    // Check if any code files changed (.rs, .toml, .mjs, .yml, .yaml, or workflow files)
-    let code_pattern = Regex::new(r"\.(rs|toml|mjs|js|yml|yaml)$|\.github/workflows/").unwrap();
+    let code_pattern = Regex::new(
+        r"^(src/|[^/]+/src/|Cargo\.(toml|lock)$|[^/]+/Cargo\.toml$|rust/[^/]+/src/|rust/Cargo\.(toml|lock)$|rust/[^/]+/Cargo\.toml$)",
+    )
+    .unwrap();
     let code_changed = code_changed_files.iter().any(|f| code_pattern.is_match(f));
     set_output(
         "any-code-changed",
