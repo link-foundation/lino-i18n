@@ -1,0 +1,6 @@
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+   Compiling lino-i18n-macros v0.0.1 (/tmp/gh-issue-solver-1778962860760/rust/lino-i18n-macros)
+   Compiling lino-i18n v0.0.1 (/tmp/gh-issue-solver-1778962860760/rust/lino-i18n)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.38s

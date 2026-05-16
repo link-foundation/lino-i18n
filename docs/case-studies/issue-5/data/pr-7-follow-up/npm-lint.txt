@@ -1,0 +1,16 @@
+
+> lino-i18n@0.0.1 lint
+> eslint .
+
+
+/tmp/gh-issue-solver-1778962860760/js/bin/lino-i18n.js
+  178:1  warning  Async function 'commandConvert' has a complexity of 18. Maximum allowed is 15  complexity
+  236:1  warning  Async function 'commandCheck' has a complexity of 17. Maximum allowed is 15    complexity
+
+/tmp/gh-issue-solver-1778962860760/js/src/format.js
+  65:8  warning  Function 'resolveKey' has a complexity of 18. Maximum allowed is 15  complexity
+
+/tmp/gh-issue-solver-1778962860760/js/src/loaders.js
+  430:8  warning  Async function 'loadLocaleFromString' has no 'await' expression  require-await
+
+✖ 4 problems (0 errors, 4 warnings)

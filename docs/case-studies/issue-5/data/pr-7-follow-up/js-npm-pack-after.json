@@ -1,0 +1,91 @@
+[
+  {
+    "id": "lino-i18n@0.0.1",
+    "name": "lino-i18n",
+    "version": "0.0.1",
+    "size": 14591,
+    "unpackedSize": 52171,
+    "shasum": "3533009339196143d8dd0e8d9ecfd73645806408",
+    "integrity": "sha512-1Yo924PtL8GbQVvLuycU6ULtshDLda3jcO51ilwgBQFTdgqX9WtxOAz2o+n0NRDIsPsO/z8fAm8TqP3DZ3ceBA==",
+    "filename": "lino-i18n-0.0.1.tgz",
+    "files": [
+      {
+        "path": "CHANGELOG.md",
+        "size": 366,
+        "mode": 420
+      },
+      {
+        "path": "LICENSE",
+        "size": 1211,
+        "mode": 420
+      },
+      {
+        "path": "README.md",
+        "size": 3422,
+        "mode": 420
+      },
+      {
+        "path": "bin/lino-i18n.js",
+        "size": 10842,
+        "mode": 493
+      },
+      {
+        "path": "package.json",
+        "size": 2043,
+        "mode": 420
+      },
+      {
+        "path": "src/converters/detect.js",
+        "size": 1513,
+        "mode": 420
+      },
+      {
+        "path": "src/converters/i18n-js.js",
+        "size": 1887,
+        "mode": 420
+      },
+      {
+        "path": "src/converters/i18next.js",
+        "size": 2647,
+        "mode": 420
+      },
+      {
+        "path": "src/converters/index.js",
+        "size": 463,
+        "mode": 420
+      },
+      {
+        "path": "src/converters/react-intl.js",
+        "size": 2800,
+        "mode": 420
+      },
+      {
+        "path": "src/format.js",
+        "size": 3172,
+        "mode": 420
+      },
+      {
+        "path": "src/i18n.js",
+        "size": 4292,
+        "mode": 420
+      },
+      {
+        "path": "src/index.d.ts",
+        "size": 3909,
+        "mode": 420
+      },
+      {
+        "path": "src/index.js",
+        "size": 849,
+        "mode": 420
+      },
+      {
+        "path": "src/loaders.js",
+        "size": 12755,
+        "mode": 420
+      }
+    ],
+    "entryCount": 15,
+    "bundled": []
+  }
+]

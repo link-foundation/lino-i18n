@@ -1,0 +1,14 @@
+Detected single-language repository (package.json in root)
+Package: lino-i18n
+Current version: 0.0.1
+Has changesets: false
+GitHub release tag: js-v0.0.1
+Checking if lino-i18n@0.0.1 is published on npm...
+Published on npm: false
+Output: npm_published=false
+Checking if GitHub release js-v0.0.1 exists...
+Published as GitHub release: false
+Output: github_release_published=false
+No changesets but v0.0.1 is missing at least one release artifact - release needed (self-healing)
+Output: should_release=true
+Output: skip_bump=true

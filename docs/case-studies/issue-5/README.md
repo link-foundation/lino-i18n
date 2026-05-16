@@ -4,7 +4,10 @@
 
 Issue: https://github.com/link-foundation/lino-i18n/issues/5
 
-Prepared PR: https://github.com/link-foundation/lino-i18n/pull/6
+Prepared PRs:
+
+- Initial restoration: https://github.com/link-foundation/lino-i18n/pull/6
+- False-positive follow-up: https://github.com/link-foundation/lino-i18n/pull/7
 
 The issue reported that PR 2 accidentally removed the full release automation from the original templates while moving the project into language-specific `js/` and `rust/` subdirectories. The requested outcome was not just to restore tests, but to restore the full CI/CD lifecycle: package publishing, GitHub releases with badges, generated GitHub Pages documentation, and preserved investigation data.
 
@@ -29,6 +32,9 @@ Raw data and logs are saved under [`data/`](data/):
 - 2026-05-16 18:21 UTC: main branch JS and Rust checks were green after PR 4. Those checks validated build/test behavior but did not restore publishing, release creation, or Pages deployment.
 - 2026-05-16 18:54 UTC: issue 5 was opened to restore the template-level CI/CD functionality and save a deep case study.
 - Before this fix, branch `issue-5-35d32a59c464` had no CI runs recorded.
+- 2026-05-16 20:09 UTC: PR 6 was merged and both main workflows reported success, but their package, release, and Pages jobs were skipped. Fresh job metadata is stored in `data/pr-7-follow-up/javascript-25971710347-jobs.json` and `data/pr-7-follow-up/rust-25971710351-jobs.json`.
+- 2026-05-16 20:20 UTC: the issue reporter noted that the green CI result was a false positive because badges, package-manager releases, and GitHub releases were still absent.
+- 2026-05-16 20:24 UTC: registry checks still showed no npm package, no crates.io result, and no GitHub releases. GitHub Pages returned 404 until workflow-backed Pages was enabled through the repository Pages API; the resulting status is saved in `data/pr-7-follow-up/pages-status-after-enable.json`.
 
 ## Requirements
 
@@ -49,6 +55,8 @@ Raw data and logs are saved under [`data/`](data/):
 3. The original scripts assumed a single-language repository root. They needed path adaptation so JS scripts use `js/package.json` and Rust scripts use `rust/Cargo.toml`.
 4. The Rust package is a workspace with two publishable crates. Release automation had to publish `lino-i18n-macros` before `lino-i18n`, then wait for the macro crate to appear in the crates.io index.
 5. Registry checks showed the current packages were not published yet: `npm view lino-i18n` returned 404, and `cargo search lino-i18n` returned no result. That means release checks must be able to publish the current `0.0.1` artifacts without forcing an artificial bump first.
+6. PR 6 split template release behavior into separate `package` and `auto-release` jobs, but the `package` jobs used the default implicit `success()` condition. Because optional gates such as changeset/changelog checks can legitimately be skipped, the downstream package jobs were skipped too, so publishing, release creation, and Pages deployment never ran even though the workflows concluded success.
+7. The root README and package READMEs did not expose CI/CD, package, docs, or GitHub Release badges, and JavaScript release notes did not include package or CI/CD badges.
 
 ## Template Assessment
 
@@ -80,6 +88,15 @@ No upstream issue was opened because there is no reproducible defect in either t
 - Updated release checks to verify all publishable crates, not only the first workspace member.
 - Re-exported `Catalogue` from the Rust crate root so public parser APIs have nameable public return types and rustdoc passes with `-Dwarnings`.
 - Replaced `rust.yml` with full CI/CD: change detection, changelog/version checks, fmt/clippy/tests/example, package checks, crates.io publish, GitHub release, manual release, manual changelog PR, and Pages deploy.
+
+### PR 7 Follow-up
+
+- Added a regression test that fails when delivery jobs can be skipped by optional gates, when the root README lacks delivery badges, or when JavaScript release notes omit package/CI badges. The failing pre-fix output is saved in `data/pr-7-follow-up/regression-before.log.txt`.
+- Added explicit `always() && !cancelled()` job conditions to the JS and Rust package jobs and made auto-release jobs require `needs.package.result == 'success'`.
+- Extended the JavaScript release-needed check to treat a missing GitHub Release as an incomplete release artifact, so an already-published npm package can still self-heal a missing `js-v*` GitHub Release on a later main push.
+- Added CI/CD, package, docs, and GitHub Release badges to the root README and package READMEs.
+- Added npm and JavaScript CI/CD badges to JavaScript GitHub Release notes, and added a Rust CI/CD badge to Rust GitHub Release notes.
+- Enabled repository GitHub Pages for workflow deployments and saved the final Pages status under `data/pr-7-follow-up/`.
 
 ## External References Used
 
@@ -113,6 +130,29 @@ Local verification run before PR update:
 - `rust-script rust/scripts/build-docs-site.rs`
 - workflow YAML parsing for `.github/workflows/js.yml` and `.github/workflows/rust.yml`
 - compile-only cargo checks for executable `rust/scripts/*.rs`
+
+Additional PR 7 verification output is saved under `data/pr-7-follow-up/`:
+
+- `npm-ci.txt`
+- `regression-before.log.txt` (failing reproducer before the follow-up fix)
+- `regression-after.log.txt`
+- `npm-test.txt`
+- `npm-lint.txt` (0 errors; existing warnings remain)
+- `npm-format-check.txt`
+- `npm-check-duplication.txt`
+- `check-mjs-syntax.txt`
+- `js-npm-pack-after.json`
+- `js-check-release-needed-after.txt`
+- `workflow-yaml-parse.txt`
+- `cargo-fmt-check.txt`
+- `rust-script-create-github-release-test.txt`
+- `cargo-clippy.txt`
+- `cargo-test.txt`
+- `rust-check-file-size.txt`
+- `cargo-build-all-targets.txt`
+- `cargo-run-example-basic.txt`
+- `cargo-package-macros.txt`
+- `cargo-package-lino-i18n-list.txt`
 
 ## Notes
 

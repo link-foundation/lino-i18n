@@ -2,7 +2,7 @@
 
 /**
  * Create GitHub Release from CHANGELOG.md
- * Usage: node scripts/create-github-release.mjs --release-version <version> --repository <repository> [--tag-prefix <prefix>] [--language <language>]
+ * Usage: node scripts/create-github-release.mjs --release-version <version> --repository <repository> [--tag-prefix <prefix>] [--language <language>] [--workflow-file <file>] [--package-name <name>]
  *   release-version: Version number (e.g., 1.0.0)
  *   repository: GitHub repository (e.g., owner/repo)
  *   tag-prefix: Prefix for the git tag (default: "v", use "js-v" for multi-language repos)
@@ -15,39 +15,42 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const USAGE =
-  'Usage: node scripts/create-github-release.mjs --release-version <version> --repository <repository> [--tag-prefix <prefix>] [--language <language>]';
+  'Usage: node scripts/create-github-release.mjs --release-version <version> --repository <repository> [--tag-prefix <prefix>] [--language <language>] [--workflow-file <file>] [--package-name <name>]';
+
+const ARG_OPTION_KEYS = new Map([
+  ['--release-version', 'releaseVersion'],
+  ['--repository', 'repository'],
+  ['--tag-prefix', 'tagPrefix'],
+  ['--language', 'language'],
+  ['--workflow-file', 'workflowFile'],
+  ['--package-name', 'packageName'],
+]);
 
 export function parseArgs(argv, env = process.env) {
   const config = {
     language: env.LANGUAGE ?? 'JavaScript',
+    packageName: env.PACKAGE_NAME ?? '',
     releaseVersion: env.VERSION ?? '',
     repository: env.REPOSITORY ?? '',
     tagPrefix: env.TAG_PREFIX ?? 'v',
+    workflowFile: env.WORKFLOW_FILE ?? 'js.yml',
   };
 
   for (let index = 0; index < argv.length; index++) {
     const arg = argv[index];
+    const equalsIndex = arg.indexOf('=');
+    const optionName = equalsIndex === -1 ? arg : arg.slice(0, equalsIndex);
+    const configKey = ARG_OPTION_KEYS.get(optionName);
 
-    if (arg === '--release-version') {
-      config.releaseVersion = readOptionValue(argv, index, arg);
+    if (!configKey) {
+      continue;
+    }
+
+    if (equalsIndex === -1) {
+      config[configKey] = readOptionValue(argv, index, optionName);
       index++;
-    } else if (arg.startsWith('--release-version=')) {
-      config.releaseVersion = arg.slice('--release-version='.length);
-    } else if (arg === '--repository') {
-      config.repository = readOptionValue(argv, index, arg);
-      index++;
-    } else if (arg.startsWith('--repository=')) {
-      config.repository = arg.slice('--repository='.length);
-    } else if (arg === '--tag-prefix') {
-      config.tagPrefix = readOptionValue(argv, index, arg);
-      index++;
-    } else if (arg.startsWith('--tag-prefix=')) {
-      config.tagPrefix = arg.slice('--tag-prefix='.length);
-    } else if (arg === '--language') {
-      config.language = readOptionValue(argv, index, arg);
-      index++;
-    } else if (arg.startsWith('--language=')) {
-      config.language = arg.slice('--language='.length);
+    } else {
+      config[configKey] = arg.slice(equalsIndex + 1);
     }
   }
 
@@ -104,11 +107,72 @@ export function buildReleaseTitle(language, releaseVersion) {
   return `[${titleLanguage}] ${normalizeReleaseVersionForTitle(releaseVersion)}`;
 }
 
-export function buildReleasePayload({ changelog, language, tag, version }) {
+export function buildNpmBadge(packageName, version) {
+  const normalizedVersion = normalizeReleaseVersionForTitle(version);
+  const encodedPackageName = encodeURIComponent(packageName);
+
+  return `[![npm](https://img.shields.io/npm/v/${encodedPackageName}?label=npm)](https://www.npmjs.com/package/${packageName}/v/${normalizedVersion})`;
+}
+
+export function buildWorkflowBadge(repository, workflowFile, label) {
+  return `[![${label}](https://github.com/${repository}/actions/workflows/${workflowFile}/badge.svg?branch=main)](https://github.com/${repository}/actions/workflows/${workflowFile})`;
+}
+
+export function buildReleaseBadges({
+  language = 'JavaScript',
+  packageName = '',
+  repository = '',
+  version = '',
+  workflowFile = 'js.yml',
+}) {
+  const badges = [];
+  const trimmedPackageName = packageName.trim();
+  const trimmedRepository = repository.trim();
+  const trimmedWorkflowFile = workflowFile.trim();
+
+  if (trimmedPackageName) {
+    badges.push(buildNpmBadge(trimmedPackageName, version));
+  }
+
+  if (trimmedRepository && trimmedWorkflowFile) {
+    badges.push(
+      buildWorkflowBadge(
+        trimmedRepository,
+        trimmedWorkflowFile,
+        `${language.trim() || 'JavaScript'} CI/CD`
+      )
+    );
+  }
+
+  return badges.join(' ');
+}
+
+function prependBadges(notes, badges) {
+  return badges ? `${badges}\n\n${notes}` : notes;
+}
+
+export function buildReleasePayload({
+  changelog,
+  language,
+  packageName,
+  repository,
+  tag,
+  version,
+  workflowFile,
+}) {
+  const releaseNotes = extractReleaseNotes(changelog, version);
+  const badges = buildReleaseBadges({
+    language,
+    packageName,
+    repository,
+    version,
+    workflowFile,
+  });
+
   return JSON.stringify({
     tag_name: tag,
     name: buildReleaseTitle(language ?? 'JavaScript', tag),
-    body: extractReleaseNotes(changelog, version),
+    body: prependBadges(releaseNotes, badges),
   });
 }
 
@@ -161,6 +225,17 @@ export function createRelease({ payload, repository, spawn = spawnSync }) {
   );
 }
 
+function readPackageName(cwd) {
+  try {
+    const packageInfo = JSON.parse(
+      readFileSync(path.join(cwd, 'package.json'), 'utf8')
+    );
+    return typeof packageInfo.name === 'string' ? packageInfo.name : '';
+  } catch {
+    return '';
+  }
+}
+
 export function main({
   argv = process.argv.slice(2),
   cwd = process.cwd(),
@@ -172,9 +247,11 @@ export function main({
   try {
     const {
       language,
+      packageName,
       releaseVersion: version,
       repository,
       tagPrefix,
+      workflowFile,
     } = parseArgs(argv, env);
 
     if (!version || !repository) {
@@ -188,7 +265,15 @@ export function main({
     stdout(`Creating GitHub release for ${tag}...`);
 
     const changelog = readFileSync(path.join(cwd, 'CHANGELOG.md'), 'utf8');
-    const payload = buildReleasePayload({ changelog, language, tag, version });
+    const payload = buildReleasePayload({
+      changelog,
+      language,
+      packageName: packageName || readPackageName(cwd),
+      repository,
+      tag,
+      version,
+      workflowFile,
+    });
     const result = createRelease({ payload, repository, spawn });
 
     if (result.alreadyExists) {

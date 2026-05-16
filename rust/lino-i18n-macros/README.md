@@ -1,5 +1,10 @@
 # lino-i18n-macros
 
+[![Rust CI/CD](https://github.com/link-foundation/lino-i18n/actions/workflows/rust.yml/badge.svg?branch=main)](https://github.com/link-foundation/lino-i18n/actions/workflows/rust.yml)
+[![Crates.io](https://img.shields.io/crates/v/lino-i18n-macros?label=crates.io)](https://crates.io/crates/lino-i18n-macros)
+[![Docs.rs](https://docs.rs/lino-i18n-macros/badge.svg)](https://docs.rs/lino-i18n-macros)
+[![GitHub Release](https://img.shields.io/github/v/release/link-foundation/lino-i18n?include_prereleases&label=release)](https://github.com/link-foundation/lino-i18n/releases)
+
 Compile-time macros for [`lino-i18n`](https://crates.io/crates/lino-i18n).
 
 The `i18n!` macro reads every `.lino` file from a directory at compile

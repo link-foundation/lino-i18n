@@ -1,0 +1,15 @@
+warning: readme `../../README.md` appears to be a path outside of the package, but there is already a file named `README.md` in the root of the package. The archived crate will contain the copy in the root of the package. Update the readme to point to the path relative to the root of the package to remove this warning.
+.cargo_vcs_info.json
+Cargo.lock
+Cargo.toml
+Cargo.toml.orig
+README.md
+examples/basic.rs
+locales/en.lino
+locales/ru.lino
+src/format.rs
+src/i18n.rs
+src/lib.rs
+src/loader.rs
+src/plurals.rs
+tests/integration.rs

@@ -4,27 +4,27 @@ on:
   push:
     branches: [main]
     paths:
-      - 'js/**'
-      - 'docs/**'
-      - '.github/workflows/js.yml'
+      - "js/**"
+      - "docs/**"
+      - ".github/workflows/js.yml"
   pull_request:
     types: [opened, synchronize, reopened]
     paths:
-      - 'js/**'
-      - 'docs/**'
-      - '.github/workflows/js.yml'
+      - "js/**"
+      - "docs/**"
+      - ".github/workflows/js.yml"
   workflow_dispatch:
     inputs:
       release_mode:
-        description: 'Manual release mode'
+        description: "Manual release mode"
         required: true
         type: choice
-        default: 'instant'
+        default: "instant"
         options:
           - instant
           - changeset-pr
       bump_type:
-        description: 'Manual release type'
+        description: "Manual release type"
         required: true
         type: choice
         options:
@@ -32,7 +32,7 @@ on:
           - minor
           - major
       description:
-        description: 'Manual release description'
+        description: "Manual release description"
         required: false
         type: string
 
@@ -47,8 +47,8 @@ concurrency:
   cancel-in-progress: ${{ github.ref == 'refs/heads/main' }}
 
 env:
-  NODE_VERSION: '24.x'
-  NPM_CONFIG_PROVENANCE: 'true'
+  NODE_VERSION: "24.x"
+  NPM_CONFIG_PROVENANCE: "true"
 
 jobs:
   detect-changes:
@@ -309,6 +309,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     needs: [test, cli-smoke-test]
+    if: |
+      always() && !cancelled() &&
+      needs.test.result == 'success' &&
+      needs.cli-smoke-test.result == 'success'
     defaults:
       run:
         working-directory: js
@@ -327,7 +331,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     needs: [package]
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: |
+      always() && !cancelled() &&
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main' &&
+      needs.package.result == 'success'
     defaults:
       run:
         working-directory: js
@@ -352,6 +360,9 @@ jobs:
         id: check_release
         env:
           HAS_CHANGESETS: ${{ steps.check_changesets.outputs.has_changesets }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GH_TOKEN: ${{ github.token }}
+          TAG_PREFIX: js-v
         run: node scripts/check-release-needed.mjs
       - name: Merge multiple changesets
         if: steps.check_release.outputs.should_release == 'true' && steps.check_changesets.outputs.has_changesets == 'true' && steps.check_changesets.outputs.changeset_count > 1
@@ -365,6 +376,8 @@ jobs:
         run: node scripts/publish-to-npm.mjs --should-pull
       - name: Create GitHub release
         if: steps.check_release.outputs.should_release == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: node scripts/create-github-release.mjs --release-version "${{ steps.publish.outputs.published_version }}" --repository "${{ github.repository }}" --tag-prefix js-v --language JavaScript
 
   manual-release:
@@ -396,6 +409,8 @@ jobs:
         id: publish
         run: node scripts/publish-to-npm.mjs --should-pull
       - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: node scripts/create-github-release.mjs --release-version "${{ steps.publish.outputs.published_version }}" --repository "${{ github.repository }}" --tag-prefix js-v --language JavaScript
 
   changeset-pr:
@@ -418,9 +433,9 @@ jobs:
         run: node scripts/create-manual-changeset.mjs --bump-type "${{ github.event.inputs.bump_type }}" --description "${{ github.event.inputs.description }}"
       - uses: peter-evans/create-pull-request@v8
         with:
-          commit-message: 'chore: add changeset for manual ${{ github.event.inputs.bump_type }} release'
+          commit-message: "chore: add changeset for manual ${{ github.event.inputs.bump_type }} release"
           branch: changeset-manual-release-${{ github.run_id }}
-          title: 'chore: manual ${{ github.event.inputs.bump_type }} release'
+          title: "chore: manual ${{ github.event.inputs.bump_type }} release"
           body: |
             This PR was created by a manual workflow trigger to prepare a JavaScript release.
 

@@ -1,0 +1,13 @@
+   Compiling lino-i18n v0.0.1 (/tmp/gh-issue-solver-1778962860760/rust/lino-i18n)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.21s
+     Running `rust/target/debug/examples/basic`
+Hello, Alice!
+Your cart is empty
+1 item
+5 items
+Keep each language in its own block, nest related messages together,
+and still resolve the same runtime keys.
+Привет, Алиса!
+3 товара
+Home
+She is a developer

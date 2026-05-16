@@ -4,7 +4,7 @@
 //! Automatically includes crates.io and docs.rs badges in release notes
 //! when the crate name can be detected from Cargo.toml.
 //!
-//! Usage: rust-script scripts/create-github-release.rs --release-version <version> --repository <repository> [--tag-prefix <prefix>] [--language <name>] [--release-label <label>] [--docker-hub-url <url>]
+//! Usage: rust-script scripts/create-github-release.rs --release-version <version> --repository <repository> [--tag-prefix <prefix>] [--language <name>] [--release-label <label>] [--docker-hub-url <url>] [--workflow-file <file>]
 //!
 //! ```cargo
 //! [dependencies]
@@ -28,7 +28,7 @@ use std::path::Path;
 use std::process::{exit, Command, Stdio};
 
 #[cfg(not(test))]
-const USAGE: &str = "Usage: rust-script scripts/create-github-release.rs --release-version <version> --repository <repository> [--tag-prefix <prefix>] [--language <name>] [--release-label <label>] [--docker-hub-url <url>]";
+const USAGE: &str = "Usage: rust-script scripts/create-github-release.rs --release-version <version> --repository <repository> [--tag-prefix <prefix>] [--language <name>] [--release-label <label>] [--docker-hub-url <url>] [--workflow-file <file>]";
 
 #[cfg(not(test))]
 #[path = "rust-paths.rs"]
@@ -172,6 +172,12 @@ fn docker_hub_badge(url: &str, version: &str) -> String {
     )
 }
 
+fn workflow_badge(repository: &str, workflow_file: &str, label: &str) -> String {
+    format!(
+        "[![{label}](https://github.com/{repository}/actions/workflows/{workflow_file}/badge.svg?branch=main)](https://github.com/{repository}/actions/workflows/{workflow_file})"
+    )
+}
+
 #[cfg(not(test))]
 fn get_changelog_for_version(version: &str, rust_root: &str) -> String {
     let changelog_path = if rust_root == "." {
@@ -265,6 +271,7 @@ fn main() {
     let release_label = get_arg("release-label");
     let crates_io_url = get_arg("crates-io-url");
     let docker_hub_url = get_arg("docker-hub-url");
+    let workflow_file = get_arg("workflow-file").unwrap_or_else(|| "rust.yml".to_string());
     let normalized_version = normalize_release_version(&version);
 
     let rust_root = get_rust_root();
@@ -292,6 +299,9 @@ fn main() {
     }
     if let Some(url) = docker_hub_url {
         badges.push(docker_hub_badge(&url, &normalized_version));
+    }
+    if !workflow_file.trim().is_empty() {
+        badges.push(workflow_badge(&repository, &workflow_file, "Rust CI/CD"));
     }
     if !badges.is_empty() {
         release_notes = format!("{}\n\n{release_notes}", badges.join(" "));
@@ -425,5 +435,13 @@ mod tests {
 
         assert!(badge.contains("1.2.3%2Bbuild.4"));
         assert!(badge.contains("tags?name=1.2.3%2Bbuild.4"));
+    }
+
+    #[test]
+    fn workflow_badge_links_to_main_branch_status() {
+        let badge = workflow_badge("link-foundation/lino-i18n", "rust.yml", "Rust CI/CD");
+
+        assert!(badge.contains("actions/workflows/rust.yml/badge.svg?branch=main"));
+        assert!(badge.contains("actions/workflows/rust.yml"));
     }
 }

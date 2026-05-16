@@ -1,5 +1,10 @@
 # lino-i18n
 
+[![Rust CI/CD](https://github.com/link-foundation/lino-i18n/actions/workflows/rust.yml/badge.svg?branch=main)](https://github.com/link-foundation/lino-i18n/actions/workflows/rust.yml)
+[![Crates.io](https://img.shields.io/crates/v/lino-i18n?label=crates.io)](https://crates.io/crates/lino-i18n)
+[![Docs.rs](https://docs.rs/lino-i18n/badge.svg)](https://docs.rs/lino-i18n)
+[![GitHub Release](https://img.shields.io/github/v/release/link-foundation/lino-i18n?include_prereleases&label=release)](https://github.com/link-foundation/lino-i18n/releases)
+
 Universal internationalization for Rust, with translations stored in
 [Links Notation](https://github.com/linksplatform/Protocols.Lino) (`.lino`).
 

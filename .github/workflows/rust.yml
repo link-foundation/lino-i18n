@@ -4,27 +4,27 @@ on:
   push:
     branches: [main]
     paths:
-      - 'rust/**'
-      - 'docs/**'
-      - '.github/workflows/rust.yml'
+      - "rust/**"
+      - "docs/**"
+      - ".github/workflows/rust.yml"
   pull_request:
     types: [opened, synchronize, reopened]
     paths:
-      - 'rust/**'
-      - 'docs/**'
-      - '.github/workflows/rust.yml'
+      - "rust/**"
+      - "docs/**"
+      - ".github/workflows/rust.yml"
   workflow_dispatch:
     inputs:
       release_mode:
-        description: 'Manual release mode'
+        description: "Manual release mode"
         required: true
         type: choice
-        default: 'instant'
+        default: "instant"
         options:
           - instant
           - changelog-pr
       bump_type:
-        description: 'Version bump type'
+        description: "Version bump type"
         required: true
         type: choice
         options:
@@ -32,7 +32,7 @@ on:
           - minor
           - major
       description:
-        description: 'Release description'
+        description: "Release description"
         required: false
         type: string
 
@@ -170,6 +170,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     needs: [lint, test]
+    if: |
+      always() && !cancelled() &&
+      needs.lint.result == 'success' &&
+      needs.test.result == 'success'
     steps:
       - uses: actions/checkout@v6
       - uses: dtolnay/rust-toolchain@stable
@@ -185,7 +189,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     needs: [package]
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: |
+      always() && !cancelled() &&
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main' &&
+      needs.package.result == 'success'
     environment:
       name: crates.io
       url: https://crates.io/crates/lino-i18n
@@ -206,6 +214,7 @@ jobs:
         id: check
         env:
           HAS_FRAGMENTS: ${{ steps.bump.outputs.fragment_count != '0' }}
+          GITHUB_TOKEN: ${{ github.token }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: rust-script rust/scripts/check-release-needed.rs --rust-root rust --tag-prefix rust-v
       - name: Version and commit
@@ -230,6 +239,8 @@ jobs:
         run: rust-script rust/scripts/wait-for-crate.rs --rust-root rust --crate-name lino-i18n --release-version "${{ steps.version.outputs.version }}"
       - name: Create GitHub release
         if: steps.check.outputs.should_release == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: rust-script rust/scripts/create-github-release.rs --rust-root rust --release-version "${{ steps.version.outputs.version }}" --repository "${{ github.repository }}" --tag-prefix rust-v --language Rust
 
   manual-release:
@@ -261,6 +272,8 @@ jobs:
       - name: Wait for runtime crate
         run: rust-script rust/scripts/wait-for-crate.rs --rust-root rust --crate-name lino-i18n --release-version "${{ steps.version.outputs.new_version }}"
       - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: rust-script rust/scripts/create-github-release.rs --rust-root rust --release-version "${{ steps.version.outputs.new_version }}" --repository "${{ github.repository }}" --tag-prefix rust-v --language Rust
 
   changelog-pr:
@@ -277,9 +290,9 @@ jobs:
         run: rust-script rust/scripts/create-changelog-fragment.rs --rust-root rust --bump-type "${{ github.event.inputs.bump_type }}" --description "${{ github.event.inputs.description }}"
       - uses: peter-evans/create-pull-request@v8
         with:
-          commit-message: 'chore: add changelog for manual ${{ github.event.inputs.bump_type }} release'
+          commit-message: "chore: add changelog for manual ${{ github.event.inputs.bump_type }} release"
           branch: changelog-manual-release-${{ github.run_id }}
-          title: 'chore: manual ${{ github.event.inputs.bump_type }} release'
+          title: "chore: manual ${{ github.event.inputs.bump_type }} release"
           body: |
             This PR was created by a manual workflow trigger to prepare a Rust release.
 

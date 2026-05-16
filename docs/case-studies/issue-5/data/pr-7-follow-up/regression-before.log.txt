@@ -1,0 +1,546 @@
+TAP version 13
+# Subtest: delivery jobs keep running after optional release gates are skipped
+not ok 1 - delivery jobs keep running after optional release gates are skipped
+  ---
+  duration_ms: 3.084756
+  location: '/tmp/gh-issue-solver-1778962860760/js/tests/release-delivery.test.js:26:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /always\(\) && !cancelled\(\)/. Input:
+
+    '\n' +
+      '  package:\n' +
+      '    name: Package Dry Run\n' +
+      '    runs-on: ubuntu-latest\n' +
+      '    timeout-minutes: 10\n' +
+      '    needs: [test, cli-smoke-test]\n' +
+      '    defaults:\n' +
+      '      run:\n' +
+      '        working-directory: js\n' +
+      '    steps:\n' +
+      '      - uses: actions/checkout@v6\n' +
+      '      - uses: actions/setup-node@v6\n' +
+      '        with:\n' +
+      '          node-version: ${{ env.NODE_VERSION }}\n' +
+      '          cache: npm\n' +
+      '          cache-dependency-path: js/package-lock.json\n' +
+      '      - run: npm ci || npm install\n' +
+      '      - run: npm pack --dry-run\n'
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+
+      package:
+        name: Package Dry Run
+        runs-on: ubuntu-latest
+        timeout-minutes: 10
+        needs: [test, cli-smoke-test]
+        defaults:
+          run:
+            working-directory: js
+        steps:
+          - uses: actions/checkout@v6
+          - uses: actions/setup-node@v6
+            with:
+              node-version: ${{ env.NODE_VERSION }}
+              cache: npm
+              cache-dependency-path: js/package-lock.json
+          - run: npm ci || npm install
+          - run: npm pack --dry-run
+
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (file:///tmp/gh-issue-solver-1778962860760/js/tests/release-delivery.test.js:31:10)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    node:internal/test_runner/harness:255:12
+    node:internal/process/task_queues:140:7
+    AsyncResource.runInAsyncScope (node:async_hooks:206:9)
+    AsyncResource.runMicrotask (node:internal/process/task_queues:137:8)
+  ...
+# Subtest: root README advertises package, release, and CI/CD status badges
+not ok 2 - root README advertises package, release, and CI/CD status badges
+  ---
+  duration_ms: 2.481224
+  location: '/tmp/gh-issue-solver-1778962860760/js/tests/release-delivery.test.js:49:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /actions\/workflows\/js\.yml\/badge\.svg\?branch=main/. Input:
+
+    '# lino-i18n\n' +
+      '\n' +
+      'A universal internationalization (i18n) library that stores translations in\n' +
+      '[Links Notation](https://github.com/linksplatform/Protocols.Lino) (`.lino`) instead\n' +
+      'of JSON or YAML.\n' +
+      '\n' +
+      'The repository ships two implementations and a CLI:\n' +
+      '\n' +
+      '| Path                      | What it is                                                                                     |\n' +
+      '| ------------------------- | ---------------------------------------------------------------------------------------------- |\n' +
+      '| [`js/`](./js)             | The `lino-i18n` JavaScript package (Node.js, Bun, Deno, browsers).                             |\n' +
+      '| [`js/bin/lino-i18n.js`](./js/bin) | A converter CLI that turns `i18next`, `i18n-js`, and `react-intl` catalogues into `.lino`. |\n' +
+      '| [`rust/`](./rust)         | The `lino-i18n` Rust crate plus the `lino-i18n-macros` companion (`i18n!` compile-time macro). |\n' +
+      '\n' +
+      'Both implementations consume the **same** `.lino` files. They share nested\n' +
+      'catalogue authoring, plural categories, placeholder syntax, context suffixes,\n' +
+      'multiline strings, bundled locale files, and fallback semantics, so a catalogue\n' +
+      'you author once works in either runtime.\n' +
+      '\n' +
+      'Released under the [Unlicense](LICENSE) — public domain.\n' +
+      '\n' +
+      '## Why Links Notation?\n' +
+      '\n' +
+      'Translation files are not data — they are content. JSON is brittle for that\n' +
+      'job: every value has to be wrapped in quotes, every nested key needs braces,\n' +
+      'and a missing comma breaks the whole file. `.lino` is a quoted-string + nested\n' +
+      'identifier format that makes large catalogues comfortable to read in plain\n' +
+      'text and trivial to diff.\n' +
+      '\n' +
+      '```lino\n' +
+      'en\n' +
+      '  greeting "Hello, {{name}}!"\n' +
+      '  hero\n' +
+      '    title "Localization that reads like content"\n' +
+      '    description """\n' +
+      '      Keep each language in its own block, nest related messages together,\n' +
+      '      and still resolve the same runtime keys.\n' +
+      '    """\n' +
+      '  cart\n' +
+      '    title "Your cart"\n' +
+      '    items\n' +
+      '      zero "Your cart is empty"\n' +
+      '      one "{{count}} item"\n' +
+      '      other "{{count}} items"\n' +
+      '  role\n' +
+      '    male "He is a developer"\n' +
+      '    female "She is a developer"\n' +
+      '    other "They are a developer"\n' +
+      '```\n' +
+      '\n' +
+      'The loader flattens that catalogue to runtime keys like `cart.title`,\n' +
+      "`cart.items_one`, and `role_female`, so existing `t('cart.items', { count })`\n" +
+      'and context calls stay compact.\n' +
+      '\n' +
+      'The full design rationale lives in [docs/case-studies/issue-1](./docs/case-studies/issue-1).\n' +
+      '\n' +
+      '## Quick start\n' +
+      '\n' +
+      '### JavaScript\n' +
+      '\n' +
+      '```bash\n' +
+      'cd js\n' +
+      'npm install\n' +
+      'npm test\n' +
+      '```\n' +
+      '\n' +
+      '```js\n' +
+      "import { createI18n } from 'lino-i18n';\n" +
+      "import { loadLocalesFromDirectory } from 'lino-i18n/loaders';\n" +
+      '\n' +
+      "const catalogues = await loadLocalesFromDirectory('./locales');\n" +
+      'const i18n = createI18n({\n' +
+      '  locales: catalogues,\n' +
+      "  defaultLocale: 'en',\n" +
+      "  fallback: ['en'],\n" +
+      '});\n' +
+      '\n' +
+      `i18n.t('greeting', { name: 'World' });              // → "Hello, World!"\n` +
+      `i18n.t('cart.items', { count: 0 });                 // → "Your cart is empty"\n` +
+      `i18n.t('cart.items', { count: 3 }, { locale: 'ru' }); // → "3 товара"\n` +
+      '```\n' +
+      '\n' +
+      '### Rust\n' +
+      '\n' +
+      '```bash\n' +
+      'cd rust\n' +
+      'cargo test\n' +
+      'cargo run --example basic\n' +
+      '```\n' +
+      '\n' +
+      '```rust\n' +
+      'use std::sync::OnceLock;\n' +
+      'use lino_i18n::{i18n, I18n, TOptions};\n' +
+      '\n' +
+      "fn catalog() -> &'static I18n {\n" +
+      '    static C: OnceLock<I18n> = OnceLock::new();\n' +
+      '    C.get_or_init(|| i18n!("locales", default = "en", fallback = "en"))\n' +
+      '}\n' +
+      '\n' +
+      'fn main() {\n' +
+      '    let c = catalog();\n' +
+      '    println!("{}", c.t("greeting", &[("name", "World")]));\n' +
+      '    println!("{}", c.t_count("cart.items", 3,\n' +
+      '        &[("count", "3")]));\n' +
+      '    println!("{}", c.t_with(\n' +
+      '        "cart.items",\n' +
+      '        &[("count", "3")],\n' +
+      '        &TOptions::new().locale("ru").count(3),\n' +
+      '    ));\n' +
+      '}\n' +
+      '```\n' +
+      '\n' +
+      'The `i18n!` macro reads every `*.lino` under the given directory at compile\n' +
+      'time, embeds the catalogue text, and builds the `(key → value)` tables when\n' +
+      'the `I18n` value is initialized. Each file is tracked through `include_str!`,\n' +
+      'so Cargo rebuilds when any catalogue changes.\n' +
+      '\n' +
+      '### CLI conversion\n' +
+      '\n' +
+      'The JavaScript package ships a converter CLI usable through `npx`:\n' +
+      '\n' +
+      '```bash\n' +
+      '# Convert i18next JSON to .lino\n' +
+      'npx lino-i18n convert --from i18next \\\n' +
+      '  --in locales/en.json --out locales --locale en\n' +
+      '\n' +
+      '# Convert i18n-js JSON to .lino\n' +
+      'npx lino-i18n convert --from i18n-js \\\n' +
+      '  --in config/locales/en.json --out locales\n' +
+      '\n' +
+      '# Decompile a react-intl message bundle (AST or string) to .lino\n' +
+      'npx lino-i18n convert --from react-intl \\\n' +
+      '  --in messages/en.json --out locales --locale en\n' +
+      '\n' +
+      '# Bundle several locales into one .lino file\n' +
+      'npx lino-i18n convert --from i18next \\\n' +
+      '  --in locales-json --out locales --single-file all.lino\n' +
+      '```\n' +
+      '\n' +
+      'Run `npx lino-i18n --help` for the full option list.\n' +
+      '\n' +
+      '## Feature comparison\n' +
+      '\n' +
+      '| Feature                           | i18next | i18n-js | react-intl | **lino-i18n**           |\n' +
+      '| --------------------------------- | :-----: | :-----: | :--------: | :---------------------: |\n' +
+      '| Text-friendly catalogue format    |    ✗    |    ~    |     ✗      | **✓** (`.lino`)         |\n' +
+      '| Nested authoring format           |    ✓    |    ✓    |     ~      | **✓**                   |\n' +
+      '| Plural categories (CLDR)          |    ✓    |    ✓    |     ✓      | **✓**                   |\n' +
+      '| Placeholder interpolation         |    ✓    |    ✓    |     ✓      | **✓** (`{{x}}` & `{x}`) |\n' +
+      '| Context / gender suffixes         |    ✓    |    ~    |     ✗      | **✓**                   |\n' +
+      '| Namespaces                        |    ✓    |    ✓    |     ✗      | **✓**                   |\n' +
+      '| Fallback locales                  |    ✓    |    ✓    |     ~      | **✓**                   |\n' +
+      '| Missing-key handler               |    ✓    |    ~    |     ~      | **✓**                   |\n' +
+      '| First-class JS API                |    ✓    |    ✓    |     ✓      | **✓**                   |\n' +
+      '| First-class Rust API              |    ✗    |    ✗    |     ✗      | **✓**                   |\n' +
+      '| Compile-time embedding (Rust)     |    ✗    |    ✗    |     ✗      | **✓** (`i18n!` macro)   |\n' +
+      '| CLI converter from other formats  |    ~    |    ~    |     ~      | **✓**                   |\n' +
+      '| Public domain license             |    ✗    |    ✗    |     ✗      | **✓** (Unlicense)       |\n' +
+      '\n' +
+      'See [docs/case-studies/issue-1](./docs/case-studies/issue-1) for the long-form\n' +
+      'comparison including code samples and benchmarks.\n' +
+      '\n' +
+      '## Layout\n' +
+      '\n' +
+      '```\n' +
+      '.\n' +
+      '├── js/\n' +
+      '│   ├── bin/lino-i18n.js          # CLI entry point\n' +
+      '│   ├── src/                       # JS runtime + converters\n' +
+      '│   ├── tests/                     # node --test suites\n' +
+      '│   ├── locales/                   # Sample .lino catalogues\n' +
+      '│   └── package.json\n' +
+      '├── rust/\n' +
+      '│   ├── lino-i18n/                 # Runtime crate\n' +
+      '│   │   ├── src/\n' +
+      '│   │   ├── tests/\n' +
+      '│   │   ├── examples/\n' +
+      '│   │   └── locales/\n' +
+      '│   ├── lino-i18n-macros/          # i18n! proc-macro crate\n' +
+      '│   └── Cargo.toml                 # Workspace manifest\n' +
+      '├── docs/case-studies/issue-1/     # Design rationale + benchmarks\n' +
+      '└── .github/workflows/\n' +
+      '    ├── js.yml                     # JS lint+test matrix\n' +
+      '    └── rust.yml                   # Rust fmt+clippy+test matrix\n' +
+      '```\n' +
+      '\n' +
+      '## CI\n' +
+      '\n' +
+      'Two purpose-built workflows live in `.github/workflows/`:\n' +
+      '\n' +
+      '- **`js.yml`** runs `node --test`, `bun test`, and `deno test` on Linux,\n' +
+      '  macOS, and Windows whenever anything under `js/**` changes, plus a CLI\n' +
+      '  smoke test that round-trips an `i18next` JSON catalogue to `.lino`.\n' +
+      '- **`rust.yml`** runs `cargo fmt --check`, `cargo clippy -D warnings`, and\n' +
+      '  `cargo test --all-targets` on the same three operating systems whenever\n' +
+      '  anything under `rust/**` changes.\n' +
+      '\n' +
+      '## Contributing\n' +
+      '\n' +
+      '1. Fork the repository.\n' +
+      '2. Create a feature branch.\n' +
+      '3. Add a changeset (`bun run changeset` or hand-write a file in `.changeset/`).\n' +
+      '4. Make your changes — keep `js/` and `rust/` behaviour consistent.\n' +
+      '5. Open a pull request.\n' +
+      '\n' +
+      'Both implementations must pass their CI matrix before a PR can land.\n' +
+      '\n' +
+      '## License\n' +
+      '\n' +
+      'Released into the public domain under the [Unlicense](LICENSE). Use this\n' +
+      'library, fork it, vendor it, or strip the attribution — there is no\n' +
+      'restriction.\n'
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+    # lino-i18n
+
+    A universal internationalization (i18n) library that stores translations in
+    [Links Notation](https://github.com/linksplatform/Protocols.Lino) (`.lino`) instead
+    of JSON or YAML.
+
+    The repository ships two implementations and a CLI:
+
+    | Path                      | What it is                                                                                     |
+    | ------------------------- | ---------------------------------------------------------------------------------------------- |
+    | [`js/`](./js)             | The `lino-i18n` JavaScript package (Node.js, Bun, Deno, browsers).                             |
+    | [`js/bin/lino-i18n.js`](./js/bin) | A converter CLI that turns `i18next`, `i18n-js`, and `react-intl` catalogues into `.lino`. |
+    | [`rust/`](./rust)         | The `lino-i18n` Rust crate plus the `lino-i18n-macros` companion (`i18n!` compile-time macro). |
+
+    Both implementations consume the **same** `.lino` files. They share nested
+    catalogue authoring, plural categories, placeholder syntax, context suffixes,
+    multiline strings, bundled locale files, and fallback semantics, so a catalogue
+    you author once works in either runtime.
+
+    Released under the [Unlicense](LICENSE) — public domain.
+
+    ## Why Links Notation?
+
+    Translation files are not data — they are content. JSON is brittle for that
+    job: every value has to be wrapped in quotes, every nested key needs braces,
+    and a missing comma breaks the whole file. `.lino` is a quoted-string + nested
+    identifier format that makes large catalogues comfortable to read in plain
+    text and trivial to diff.
+
+    ```lino
+    en
+      greeting "Hello, {{name}}!"
+      hero
+        title "Localization that reads like content"
+        description """
+          Keep each language in its own block, nest related messages together,
+          and still resolve the same runtime keys.
+        """
+      cart
+        title "Your cart"
+        items
+          zero "Your cart is empty"
+          one "{{count}} item"
+          other "{{count}} items"
+      role
+        male "He is a developer"
+        female "She is a developer"
+        other "They are a developer"
+    ```
+
+    The loader flattens that catalogue to runtime keys like `cart.title`,
+    `cart.items_one`, and `role_female`, so existing `t('cart.items', { count })`
+    and context calls stay compact.
+
+    The full design rationale lives in [docs/case-studies/issue-1](./docs/case-studies/issue-1).
+
+    ## Quick start
+
+    ### JavaScript
+
+    ```bash
+    cd js
+    npm install
+    npm test
+    ```
+
+    ```js
+    import { createI18n } from 'lino-i18n';
+    import { loadLocalesFromDirectory } from 'lino-i18n/loaders';
+
+    const catalogues = await loadLocalesFromDirectory('./locales');
+    const i18n = createI18n({
+      locales: catalogues,
+      defaultLocale: 'en',
+      fallback: ['en'],
+    });
+
+    i18n.t('greeting', { name: 'World' });              // → "Hello, World!"
+    i18n.t('cart.items', { count: 0 });                 // → "Your cart is empty"
+    i18n.t('cart.items', { count: 3 }, { locale: 'ru' }); // → "3 товара"
+    ```
+
+    ### Rust
+
+    ```bash
+    cd rust
+    cargo test
+    cargo run --example basic
+    ```
+
+    ```rust
+    use std::sync::OnceLock;
+    use lino_i18n::{i18n, I18n, TOptions};
+
+    fn catalog() -> &'static I18n {
+        static C: OnceLock<I18n> = OnceLock::new();
+        C.get_or_init(|| i18n!("locales", default = "en", fallback = "en"))
+    }
+
+    fn main() {
+        let c = catalog();
+        println!("{}", c.t("greeting", &[("name", "World")]));
+        println!("{}", c.t_count("cart.items", 3,
+            &[("count", "3")]));
+        println!("{}", c.t_with(
+            "cart.items",
+            &[("count", "3")],
+            &TOptions::new().locale("ru").count(3),
+        ));
+    }
+    ```
+
+    The `i18n!` macro reads every `*.lino` under the given directory at compile
+    time, embeds the catalogue text, and builds the `(key → value)` tables when
+    the `I18n` value is initialized. Each file is tracked through `include_str!`,
+    so Cargo rebuilds when any catalogue changes.
+
+    ### CLI conversion
+
+    The JavaScript package ships a converter CLI usable through `npx`:
+
+    ```bash
+    # Convert i18next JSON to .lino
+    npx lino-i18n convert --from i18next \
+      --in locales/en.json --out locales --locale en
+
+    # Convert i18n-js JSON to .lino
+    npx lino-i18n convert --from i18n-js \
+      --in config/locales/en.json --out locales
+
+    # Decompile a react-intl message bundle (AST or string) to .lino
+    npx lino-i18n convert --from react-intl \
+      --in messages/en.json --out locales --locale en
+
+    # Bundle several locales into one .lino file
+    npx lino-i18n convert --from i18next \
+      --in locales-json --out locales --single-file all.lino
+    ```
+
+    Run `npx lino-i18n --help` for the full option list.
+
+    ## Feature comparison
+
+    | Feature                           | i18next | i18n-js | react-intl | **lino-i18n**           |
+    | --------------------------------- | :-----: | :-----: | :--------: | :---------------------: |
+    | Text-friendly catalogue format    |    ✗    |    ~    |     ✗      | **✓** (`.lino`)         |
+    | Nested authoring format           |    ✓    |    ✓    |     ~      | **✓**                   |
+    | Plural categories (CLDR)          |    ✓    |    ✓    |     ✓      | **✓**                   |
+    | Placeholder interpolation         |    ✓    |    ✓    |     ✓      | **✓** (`{{x}}` & `{x}`) |
+    | Context / gender suffixes         |    ✓    |    ~    |     ✗      | **✓**                   |
+    | Namespaces                        |    ✓    |    ✓    |     ✗      | **✓**                   |
+    | Fallback locales                  |    ✓    |    ✓    |     ~      | **✓**                   |
+    | Missing-key handler               |    ✓    |    ~    |     ~      | **✓**                   |
+    | First-class JS API                |    ✓    |    ✓    |     ✓      | **✓**                   |
+    | First-class Rust API              |    ✗    |    ✗    |     ✗      | **✓**                   |
+    | Compile-time embedding (Rust)     |    ✗    |    ✗    |     ✗      | **✓** (`i18n!` macro)   |
+    | CLI converter from other formats  |    ~    |    ~    |     ~      | **✓**                   |
+    | Public domain license             |    ✗    |    ✗    |     ✗      | **✓** (Unlicense)       |
+
+    See [docs/case-studies/issue-1](./docs/case-studies/issue-1) for the long-form
+    comparison including code samples and benchmarks.
+
+    ## Layout
+
+    ```
+    .
+    ├── js/
+    │   ├── bin/lino-i18n.js          # CLI entry point
+    │   ├── src/                       # JS runtime + converters
+    │   ├── tests/                     # node --test suites
+    │   ├── locales/                   # Sample .lino catalogues
+    │   └── package.json
+    ├── rust/
+    │   ├── lino-i18n/                 # Runtime crate
+    │   │   ├── src/
+    │   │   ├── tests/
+    │   │   ├── examples/
+    │   │   └── locales/
+    │   ├── lino-i18n-macros/          # i18n! proc-macro crate
+    │   └── Cargo.toml                 # Workspace manifest
+    ├── docs/case-studies/issue-1/     # Design rationale + benchmarks
+    └── .github/workflows/
+        ├── js.yml                     # JS lint+test matrix
+        └── rust.yml                   # Rust fmt+clippy+test matrix
+    ```
+
+    ## CI
+
+    Two purpose-built workflows live in `.github/workflows/`:
+
+    - **`js.yml`** runs `node --test`, `bun test`, and `deno test` on Linux,
+      macOS, and Windows whenever anything under `js/**` changes, plus a CLI
+      smoke test that round-trips an `i18next` JSON catalogue to `.lino`.
+    - **`rust.yml`** runs `cargo fmt --check`, `cargo clippy -D warnings`, and
+      `cargo test --all-targets` on the same three operating systems whenever
+      anything under `rust/**` changes.
+
+    ## Contributing
+
+    1. Fork the repository.
+    2. Create a feature branch.
+    3. Add a changeset (`bun run changeset` or hand-write a file in `.changeset/`).
+    4. Make your changes — keep `js/` and `rust/` behaviour consistent.
+    5. Open a pull request.
+
+    Both implementations must pass their CI matrix before a PR can land.
+
+    ## License
+
+    Released into the public domain under the [Unlicense](LICENSE). Use this
+    library, fork it, vendor it, or strip the attribution — there is no
+    restriction.
+
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (file:///tmp/gh-issue-solver-1778962860760/js/tests/release-delivery.test.js:52:10)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: JavaScript GitHub release notes include package and CI/CD badges
+not ok 3 - JavaScript GitHub release notes include package and CI/CD badges
+  ---
+  duration_ms: 0.800435
+  location: '/tmp/gh-issue-solver-1778962860760/js/tests/release-delivery.test.js:60:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /img\.shields\.io\/npm\/v\/lino-i18n\?label=npm/. Input:
+
+    'Initial release'
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: 'Initial release'
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (file:///tmp/gh-issue-solver-1778962860760/js/tests/release-delivery.test.js:73:10)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+1..3
+# tests 3
+# suites 0
+# pass 0
+# fail 3
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 72.553745

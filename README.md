@@ -1,5 +1,12 @@
 # lino-i18n
 
+[![JavaScript CI/CD](https://github.com/link-foundation/lino-i18n/actions/workflows/js.yml/badge.svg?branch=main)](https://github.com/link-foundation/lino-i18n/actions/workflows/js.yml)
+[![Rust CI/CD](https://github.com/link-foundation/lino-i18n/actions/workflows/rust.yml/badge.svg?branch=main)](https://github.com/link-foundation/lino-i18n/actions/workflows/rust.yml)
+[![npm](https://img.shields.io/npm/v/lino-i18n?label=npm)](https://www.npmjs.com/package/lino-i18n)
+[![Crates.io](https://img.shields.io/crates/v/lino-i18n?label=crates.io)](https://crates.io/crates/lino-i18n)
+[![Docs.rs](https://docs.rs/lino-i18n/badge.svg)](https://docs.rs/lino-i18n)
+[![GitHub Release](https://img.shields.io/github/v/release/link-foundation/lino-i18n?include_prereleases&label=release)](https://github.com/link-foundation/lino-i18n/releases)
+
 A universal internationalization (i18n) library that stores translations in
 [Links Notation](https://github.com/linksplatform/Protocols.Lino) (`.lino`) instead
 of JSON or YAML.
@@ -190,10 +197,15 @@ Two purpose-built workflows live in `.github/workflows/`:
 
 - **`js.yml`** runs `node --test`, `bun test`, and `deno test` on Linux,
   macOS, and Windows whenever anything under `js/**` changes, plus a CLI
-  smoke test that round-trips an `i18next` JSON catalogue to `.lino`.
+  smoke test that round-trips an `i18next` JSON catalogue to `.lino`. On
+  `main`, it also dry-runs the npm package, publishes missing package versions,
+  creates `js-v*` GitHub releases, and deploys generated JavaScript docs to
+  GitHub Pages.
 - **`rust.yml`** runs `cargo fmt --check`, `cargo clippy -D warnings`, and
   `cargo test --all-targets` on the same three operating systems whenever
-  anything under `rust/**` changes.
+  anything under `rust/**` changes. On `main`, it also verifies crate package
+  contents, publishes missing crates, creates `rust-v*` GitHub releases, and
+  deploys generated Rust docs to GitHub Pages.
 
 ## Contributing
 
