@@ -1,0 +1,42 @@
+
+X main Rust · 25972666223
+Triggered via push about 30 minutes ago
+
+JOBS
+✓ Detect Changes in 51s (ID 76347322229)
+- Version Modification Check in 0s (ID 76347322372)
+- Manual Rust Release in 0s (ID 76347322401)
+- Create Manual Changelog PR in 0s (ID 76347322447)
+✓ Lint and Format Check in 18s (ID 76347369894)
+- Changelog Fragment Check in 0s (ID 76347370000)
+✓ Test (macos-latest) in 18s (ID 76347370039)
+✓ Test (ubuntu-latest) in 10s (ID 76347370040)
+✓ Test (windows-latest) in 44s (ID 76347370041)
+✓ Package Dry Run in 19s (ID 76347412491)
+✓ Publish Crates and GitHub Release in 2m2s (ID 76347431853)
+X Deploy Rust Docs in 56s (ID 76347431855)
+  ✓ Set up job
+  ✓ Run actions/checkout@v6
+  ✓ Run dtolnay/rust-toolchain@stable
+  ✓ Install rust-script
+  ✓ Run actions/configure-pages@v6
+  ✓ Run cargo doc --manifest-path rust/Cargo.toml --workspace --no-deps
+  ✓ Run rust-script rust/scripts/build-docs-site.rs
+  ✓ Run actions/upload-pages-artifact@v5
+  X Run actions/deploy-pages@v5
+  ✓ Post Run actions/checkout@v6
+  ✓ Complete job
+
+ANNOTATIONS
+- NOTICE: windows-latest requests are being redirected to windows-2025-vs2026 by June 15, 2026
+Test (windows-latest): .github#1
+
+X Ensure GITHUB_TOKEN has permission "id-token: write".
+Deploy Rust Docs: .github#32
+
+
+ARTIFACTS
+github-pages
+
+To see what failed, try: gh run view 25972666223 --log-failed
+View this run on GitHub: https://github.com/link-foundation/lino-i18n/actions/runs/25972666223

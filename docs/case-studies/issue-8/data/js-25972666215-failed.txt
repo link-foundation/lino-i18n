@@ -1,0 +1,221 @@
+Publish npm Package and GitHub Release	Publish to npm	﻿2026-05-16T20:54:56.4305630Z ##[group]Run node scripts/publish-to-npm.mjs --should-pull
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:54:56.4306072Z ^[[36;1mnode scripts/publish-to-npm.mjs --should-pull^[[0m
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:54:56.4344455Z shell: /usr/bin/bash -e {0}
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:54:56.4344814Z env:
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:54:56.4345002Z   NODE_VERSION: 24.x
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:54:56.4345227Z   NPM_CONFIG_PROVENANCE: true
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:54:56.4345617Z   NPM_CONFIG_USERCONFIG: /home/runner/work/_temp/.npmrc
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:54:56.4345971Z   NODE_AUTH_TOKEN: XXXXX-XXXXX-XXXXX-XXXXX
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:54:56.4346326Z ##[endgroup]
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:54:59.2979455Z Detected single-language repository (package.json in root)
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:54:59.4644227Z From https://github.com/link-foundation/lino-i18n
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:54:59.4644965Z  * branch            main       -> FETCH_HEAD
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:54:59.4723725Z Already up to date.
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:54:59.4739708Z Package to publish: lino-i18n
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:54:59.4740239Z Current version to publish: 0.0.1
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:54:59.4740771Z Checking if version 0.0.1 is already published...
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:54:59.7503246Z npm error code E404
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:54:59.7504648Z npm error 404 Not Found - GET https://registry.npmjs.org/lino-i18n - Not found
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:54:59.7505333Z npm error 404
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:54:59.7506514Z npm error 404  The requested resource 'lino-i18n@0.0.1' could not be found or you do not have permission to access it.
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:54:59.7511657Z npm error 404
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:54:59.7512167Z npm error 404 Note that you can also install from a
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:54:59.7514234Z npm error 404 tarball, folder, http url, or git url.
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:54:59.7525927Z npm error A complete log of this run can be found in: /home/runner/.npm/_logs/2026-05-16T20_54_59_531Z-debug-0.log
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:54:59.7596512Z Version 0.0.1 not found on npm, proceeding with publish...
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:54:59.7597108Z Publish attempt 1 of 3...
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:54:59.8627906Z 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:54:59.8628623Z > lino-i18n@0.0.1 changeset:publish
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:54:59.8629055Z > changeset publish
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:54:59.8629244Z 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:00.1792483Z 🦋  ^[[36minfo^[[39m npm info lino-i18n
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:00.4588634Z 🦋  ^[[33mwarn^[[39m Received 404 for npm info ^[[36m"lino-i18n"^[[39m
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:00.4590259Z 🦋  ^[[36minfo^[[39m lino-i18n is being published because our local version (0.0.1) has not been published on npm
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:00.4591021Z 🦋  ^[[36minfo^[[39m Publishing ^[[36m"lino-i18n"^[[39m at ^[[32m"0.0.1"^[[39m
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6431181Z 🦋  ^[[31merror^[[39m an error occurred while publishing lino-i18n: E404 Not Found - PUT https://registry.npmjs.org/lino-i18n - Not found 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6434375Z 🦋  ^[[31merror^[[39m The requested resource 'lino-i18n@0.0.1' could not be found or you do not have permission to access it.
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6435332Z 🦋  ^[[31merror^[[39m 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6435793Z 🦋  ^[[31merror^[[39m Note that you can also install from a
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6436286Z 🦋  ^[[31merror^[[39m tarball, folder, http url, or git url.
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6437959Z 🦋  ^[[31merror^[[39m npm warn publish npm auto-corrected some errors in your package.json when publishing.  Please run "npm pkg fix" to address these errors.
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6438835Z 🦋  ^[[31merror^[[39m npm warn publish errors corrected:
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6439657Z 🦋  ^[[31merror^[[39m npm warn publish "bin[lino-i18n]" script name bin/lino-i18n.js was invalid and removed
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6440623Z 🦋  ^[[31merror^[[39m npm notice Publishing to https://registry.npmjs.org with tag latest and public access
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6442161Z 🦋  ^[[31merror^[[39m npm notice publish Signed provenance statement with source and build information from GitHub Actions
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6443750Z 🦋  ^[[31merror^[[39m npm notice publish Provenance statement published to transparency log: https://search.sigstore.dev/?logIndex=1554482671
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6444794Z 🦋  ^[[31merror^[[39m npm error code E404
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6445767Z 🦋  ^[[31merror^[[39m npm error 404 Not Found - PUT https://registry.npmjs.org/lino-i18n - Not found
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6446617Z 🦋  ^[[31merror^[[39m npm error 404
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6448573Z 🦋  ^[[31merror^[[39m npm error 404  The requested resource 'lino-i18n@0.0.1' could not be found or you do not have permission to access it.
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6449534Z 🦋  ^[[31merror^[[39m npm error 404
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6450248Z 🦋  ^[[31merror^[[39m npm error 404 Note that you can also install from a
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6451187Z 🦋  ^[[31merror^[[39m npm error 404 tarball, folder, http url, or git url.
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6452585Z 🦋  ^[[31merror^[[39m npm error A complete log of this run can be found in: /home/runner/.npm/_logs/2026-05-16T20_55_00_512Z-debug-0.log
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6453506Z 🦋  ^[[31merror^[[39m 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6454031Z 🦋  ^[[31merror^[[39m packages failed to publish:
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6454591Z 🦋  lino-i18n@0.0.1
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6610207Z Changeset output: 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6614723Z Detected publish failure: "packages failed to publish"
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6615647Z > lino-i18n@0.0.1 changeset:publish
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6616215Z > changeset publish
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6616395Z 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6616869Z 🦋  ^[[36minfo^[[39m npm info lino-i18n
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6618196Z 🦋  ^[[36minfo^[[39m lino-i18n is being published because our local version (0.0.1) has not been published on npm
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6619313Z 🦋  ^[[36minfo^[[39m Publishing ^[[36m"lino-i18n"^[[39m at ^[[32m"0.0.1"^[[39m
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6620099Z 🦋  lino-i18n@0.0.1
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6620300Z 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6621059Z 🦋  ^[[33mwarn^[[39m Received 404 for npm info ^[[36m"lino-i18n"^[[39m
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6622435Z 🦋  ^[[31merror^[[39m an error occurred while publishing lino-i18n: E404 Not Found - PUT https://registry.npmjs.org/lino-i18n - Not found 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6624284Z 🦋  ^[[31merror^[[39m The requested resource 'lino-i18n@0.0.1' could not be found or you do not have permission to access it.
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6625404Z 🦋  ^[[31merror^[[39m 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6625981Z 🦋  ^[[31merror^[[39m Note that you can also install from a
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6626709Z 🦋  ^[[31merror^[[39m tarball, folder, http url, or git url.
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6628549Z 🦋  ^[[31merror^[[39m npm warn publish npm auto-corrected some errors in your package.json when publishing.  Please run "npm pkg fix" to address these errors.
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6629805Z 🦋  ^[[31merror^[[39m npm warn publish errors corrected:
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6630878Z 🦋  ^[[31merror^[[39m npm warn publish "bin[lino-i18n]" script name bin/lino-i18n.js was invalid and removed
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6632465Z 🦋  ^[[31merror^[[39m npm notice Publishing to https://registry.npmjs.org with tag latest and public access
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6633931Z 🦋  ^[[31merror^[[39m npm notice publish Signed provenance statement with source and build information from GitHub Actions
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6635697Z 🦋  ^[[31merror^[[39m npm notice publish Provenance statement published to transparency log: https://search.sigstore.dev/?logIndex=1554482671
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6636793Z 🦋  ^[[31merror^[[39m npm error code E404
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6637719Z 🦋  ^[[31merror^[[39m npm error 404 Not Found - PUT https://registry.npmjs.org/lino-i18n - Not found
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6638529Z 🦋  ^[[31merror^[[39m npm error 404
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6640008Z 🦋  ^[[31merror^[[39m npm error 404  The requested resource 'lino-i18n@0.0.1' could not be found or you do not have permission to access it.
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6641296Z 🦋  ^[[31merror^[[39m npm error 404
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6642226Z 🦋  ^[[31merror^[[39m npm error 404 Note that you can also install from a
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6643133Z 🦋  ^[[31merror^[[39m npm error 404 tarball, folder, http url, or git url.
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6644482Z 🦋  ^[[31merror^[[39m npm error A complete log of this run can be found in: /home/runner/.npm/_logs/2026-05-16T20_55_00_512Z-debug-0.log
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6645369Z 🦋  ^[[31merror^[[39m 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6645882Z 🦋  ^[[31merror^[[39m packages failed to publish:
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6646191Z 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:02.6646658Z Publish failed: Publish failed: detected "packages failed to publish" in output, waiting 10s before retry...
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:12.6693944Z Publish attempt 2 of 3...
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:12.7751002Z 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:12.7751728Z > lino-i18n@0.0.1 changeset:publish
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:12.7752238Z > changeset publish
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:12.7752433Z 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:13.0686260Z 🦋  ^[[36minfo^[[39m npm info lino-i18n
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:13.3526959Z 🦋  ^[[33mwarn^[[39m Received 404 for npm info ^[[36m"lino-i18n"^[[39m
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:13.3528549Z 🦋  ^[[36minfo^[[39m lino-i18n is being published because our local version (0.0.1) has not been published on npm
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:13.3529732Z 🦋  ^[[36minfo^[[39m Publishing ^[[36m"lino-i18n"^[[39m at ^[[32m"0.0.1"^[[39m
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0210672Z 🦋  ^[[31merror^[[39m an error occurred while publishing lino-i18n: E404 Not Found - PUT https://registry.npmjs.org/lino-i18n - Not found 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0212554Z 🦋  ^[[31merror^[[39m The requested resource 'lino-i18n@0.0.1' could not be found or you do not have permission to access it.
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0213541Z 🦋  ^[[31merror^[[39m 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0214236Z 🦋  ^[[31merror^[[39m Note that you can also install from a
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0215070Z 🦋  ^[[31merror^[[39m tarball, folder, http url, or git url.
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0216423Z 🦋  ^[[31merror^[[39m npm warn publish npm auto-corrected some errors in your package.json when publishing.  Please run "npm pkg fix" to address these errors.
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0217680Z 🦋  ^[[31merror^[[39m npm warn publish errors corrected:
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0218761Z 🦋  ^[[31merror^[[39m npm warn publish "bin[lino-i18n]" script name bin/lino-i18n.js was invalid and removed
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0219600Z 🦋  ^[[31merror^[[39m npm notice Publishing to https://registry.npmjs.org with tag latest and public access
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0220489Z 🦋  ^[[31merror^[[39m npm notice publish Signed provenance statement with source and build information from GitHub Actions
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0221515Z 🦋  ^[[31merror^[[39m npm notice publish Provenance statement published to transparency log: https://search.sigstore.dev/?logIndex=1554483448
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0222203Z 🦋  ^[[31merror^[[39m npm error code E404
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0222804Z 🦋  ^[[31merror^[[39m npm error 404 Not Found - PUT https://registry.npmjs.org/lino-i18n - Not found
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0223302Z 🦋  ^[[31merror^[[39m npm error 404
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0224052Z 🦋  ^[[31merror^[[39m npm error 404  The requested resource 'lino-i18n@0.0.1' could not be found or you do not have permission to access it.
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0224652Z 🦋  ^[[31merror^[[39m npm error 404
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0225088Z 🦋  ^[[31merror^[[39m npm error 404 Note that you can also install from a
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0225626Z 🦋  ^[[31merror^[[39m npm error 404 tarball, folder, http url, or git url.
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0226442Z 🦋  ^[[31merror^[[39m npm error A complete log of this run can be found in: /home/runner/.npm/_logs/2026-05-16T20_55_13_411Z-debug-0.log
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0226974Z 🦋  ^[[31merror^[[39m 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0227521Z 🦋  ^[[31merror^[[39m packages failed to publish:
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0227902Z 🦋  lino-i18n@0.0.1
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0371850Z Changeset output: 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0372376Z > lino-i18n@0.0.1 changeset:publish
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0372791Z > changeset publish
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0372919Z 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0373326Z 🦋  ^[[36minfo^[[39m npm info lino-i18n
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0374032Z 🦋  ^[[36minfo^[[39m lino-i18n is being published because our local version (0.0.1) has not been published on npm
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0374773Z 🦋  ^[[36minfo^[[39m Publishing ^[[36m"lino-i18n"^[[39m at ^[[32m"0.0.1"^[[39m
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0375153Z 🦋  lino-i18n@0.0.1
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0375283Z 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0375568Z 🦋  ^[[33mwarn^[[39m Received 404 for npm info ^[[36m"lino-i18n"^[[39m
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0376419Z 🦋  ^[[31merror^[[39m an error occurred while publishing lino-i18n: E404 Not Found - PUT https://registry.npmjs.org/lino-i18n - Not found 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0377591Z 🦋  ^[[31merror^[[39m The requested resource 'lino-i18n@0.0.1' could not be found or you do not have permission to access it.
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0378493Z 🦋  ^[[31merror^[[39m 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0378858Z 🦋  ^[[31merror^[[39m Note that you can also install from a
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0379307Z 🦋  ^[[31merror^[[39m tarball, folder, http url, or git url.
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0380214Z 🦋  ^[[31merror^[[39m npm warn publish npm auto-corrected some errors in your package.json when publishing.  Please run "npm pkg fix" to address these errors.
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0380989Z 🦋  ^[[31merror^[[39m npm warn publish errors corrected:
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0381658Z 🦋  ^[[31merror^[[39m npm warn publish "bin[lino-i18n]" script name bin/lino-i18n.js was invalid and removed
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0382461Z 🦋  ^[[31merror^[[39m npm notice Publishing to https://registry.npmjs.org with tag latest and public access
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0383373Z 🦋  ^[[31merror^[[39m npm notice publish Signed provenance statement with source and build information from GitHub Actions
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0384403Z 🦋  ^[[31merror^[[39m npm notice publish Provenance statement published to transparency log: https://search.sigstore.dev/?logIndex=1554483448
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0385075Z 🦋  ^[[31merror^[[39m npm error code E404
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0385666Z 🦋  ^[[31merror^[[39m npm error 404 Not Found - PUT https://registry.npmjs.org/lino-i18n - Not found
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0386156Z 🦋  ^[[31merror^[[39m npm error 404
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0386882Z 🦋  ^[[31merror^[[39m npm error 404  The requested resource 'lino-i18n@0.0.1' could not be found or you do not have permission to access it.
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0387929Z 🦋  ^[[31merror^[[39m npm error 404
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0388378Z 🦋  ^[[31merror^[[39m npm error 404 Note that you can also install from a
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0388927Z 🦋  ^[[31merror^[[39m npm error 404 tarball, folder, http url, or git url.
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0389743Z 🦋  ^[[31merror^[[39m npm error A complete log of this run can be found in: /home/runner/.npm/_logs/2026-05-16T20_55_13_411Z-debug-0.log
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0390267Z 🦋  ^[[31merror^[[39m 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0390601Z 🦋  ^[[31merror^[[39m packages failed to publish:
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0390814Z 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0391065Z Detected publish failure: "packages failed to publish"
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:15.0391689Z Publish failed: Publish failed: detected "packages failed to publish" in output, waiting 10s before retry...
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:25.0417500Z Publish attempt 3 of 3...
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:25.1456026Z 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:25.1456749Z > lino-i18n@0.0.1 changeset:publish
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:25.1457373Z > changeset publish
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:25.1457563Z 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:25.4340315Z 🦋  ^[[36minfo^[[39m npm info lino-i18n
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:25.7147993Z 🦋  ^[[33mwarn^[[39m Received 404 for npm info ^[[36m"lino-i18n"^[[39m
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:25.7149402Z 🦋  ^[[36minfo^[[39m lino-i18n is being published because our local version (0.0.1) has not been published on npm
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:25.7150148Z 🦋  ^[[36minfo^[[39m Publishing ^[[36m"lino-i18n"^[[39m at ^[[32m"0.0.1"^[[39m
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.4984989Z 🦋  ^[[31merror^[[39m an error occurred while publishing lino-i18n: E404 Not Found - PUT https://registry.npmjs.org/lino-i18n - Not found 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.4986761Z 🦋  ^[[31merror^[[39m The requested resource 'lino-i18n@0.0.1' could not be found or you do not have permission to access it.
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.4987844Z 🦋  ^[[31merror^[[39m 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.4988504Z 🦋  ^[[31merror^[[39m Note that you can also install from a
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.4989289Z 🦋  ^[[31merror^[[39m tarball, folder, http url, or git url.
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.4991032Z 🦋  ^[[31merror^[[39m npm warn publish npm auto-corrected some errors in your package.json when publishing.  Please run "npm pkg fix" to address these errors.
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.4991990Z 🦋  ^[[31merror^[[39m npm warn publish errors corrected:
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.4992740Z 🦋  ^[[31merror^[[39m npm warn publish "bin[lino-i18n]" script name bin/lino-i18n.js was invalid and removed
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.4993562Z 🦋  ^[[31merror^[[39m npm notice Publishing to https://registry.npmjs.org with tag latest and public access
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.4994435Z 🦋  ^[[31merror^[[39m npm notice publish Signed provenance statement with source and build information from GitHub Actions
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.4995841Z 🦋  ^[[31merror^[[39m npm notice publish Provenance statement published to transparency log: https://search.sigstore.dev/?logIndex=1554484049
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.4996499Z 🦋  ^[[31merror^[[39m npm error code E404
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.4997081Z 🦋  ^[[31merror^[[39m npm error 404 Not Found - PUT https://registry.npmjs.org/lino-i18n - Not found
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.4997793Z 🦋  ^[[31merror^[[39m npm error 404
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.4998527Z 🦋  ^[[31merror^[[39m npm error 404  The requested resource 'lino-i18n@0.0.1' could not be found or you do not have permission to access it.
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.4999116Z 🦋  ^[[31merror^[[39m npm error 404
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.4999595Z 🦋  ^[[31merror^[[39m npm error 404 Note that you can also install from a
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5000430Z 🦋  ^[[31merror^[[39m npm error 404 tarball, folder, http url, or git url.
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5001802Z 🦋  ^[[31merror^[[39m npm error A complete log of this run can be found in: /home/runner/.npm/_logs/2026-05-16T20_55_25_766Z-debug-0.log
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5002691Z 🦋  ^[[31merror^[[39m 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5003191Z 🦋  ^[[31merror^[[39m packages failed to publish:
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5003717Z 🦋  lino-i18n@0.0.1
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5135160Z Detected publish failure: "packages failed to publish"
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5135806Z Changeset output: 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5136577Z ❌ Failed to publish after 3 attempts
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5137966Z > lino-i18n@0.0.1 changeset:publish
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5138533Z > changeset publish
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5138743Z 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5139048Z 🦋  ^[[36minfo^[[39m npm info lino-i18n
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5139856Z 🦋  ^[[36minfo^[[39m lino-i18n is being published because our local version (0.0.1) has not been published on npm
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5140685Z 🦋  ^[[36minfo^[[39m Publishing ^[[36m"lino-i18n"^[[39m at ^[[32m"0.0.1"^[[39m
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5141063Z 🦋  lino-i18n@0.0.1
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5141195Z 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5141527Z 🦋  ^[[33mwarn^[[39m Received 404 for npm info ^[[36m"lino-i18n"^[[39m
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5142398Z 🦋  ^[[31merror^[[39m an error occurred while publishing lino-i18n: E404 Not Found - PUT https://registry.npmjs.org/lino-i18n - Not found 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5143394Z 🦋  ^[[31merror^[[39m The requested resource 'lino-i18n@0.0.1' could not be found or you do not have permission to access it.
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5143912Z 🦋  ^[[31merror^[[39m 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5144288Z 🦋  ^[[31merror^[[39m Note that you can also install from a
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5144736Z 🦋  ^[[31merror^[[39m tarball, folder, http url, or git url.
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5145629Z 🦋  ^[[31merror^[[39m npm warn publish npm auto-corrected some errors in your package.json when publishing.  Please run "npm pkg fix" to address these errors.
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5146361Z 🦋  ^[[31merror^[[39m npm warn publish errors corrected:
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5147005Z 🦋  ^[[31merror^[[39m npm warn publish "bin[lino-i18n]" script name bin/lino-i18n.js was invalid and removed
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5148318Z 🦋  ^[[31merror^[[39m npm notice Publishing to https://registry.npmjs.org with tag latest and public access
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5149233Z 🦋  ^[[31merror^[[39m npm notice publish Signed provenance statement with source and build information from GitHub Actions
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5150270Z 🦋  ^[[31merror^[[39m npm notice publish Provenance statement published to transparency log: https://search.sigstore.dev/?logIndex=1554484049
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5150952Z 🦋  ^[[31merror^[[39m npm error code E404
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5151534Z 🦋  ^[[31merror^[[39m npm error 404 Not Found - PUT https://registry.npmjs.org/lino-i18n - Not found
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5152027Z 🦋  ^[[31merror^[[39m npm error 404
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5152762Z 🦋  ^[[31merror^[[39m npm error 404  The requested resource 'lino-i18n@0.0.1' could not be found or you do not have permission to access it.
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5153355Z 🦋  ^[[31merror^[[39m npm error 404
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5153777Z 🦋  ^[[31merror^[[39m npm error 404 Note that you can also install from a
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5154547Z 🦋  ^[[31merror^[[39m npm error 404 tarball, folder, http url, or git url.
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5155354Z 🦋  ^[[31merror^[[39m npm error A complete log of this run can be found in: /home/runner/.npm/_logs/2026-05-16T20_55_25_766Z-debug-0.log
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5155889Z 🦋  ^[[31merror^[[39m 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5156221Z 🦋  ^[[31merror^[[39m packages failed to publish:
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5156416Z 
+Publish npm Package and GitHub Release	Publish to npm	2026-05-16T20:55:27.5216511Z ##[error]Process completed with exit code 1.

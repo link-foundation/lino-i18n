@@ -1,0 +1,71 @@
+
+X main JavaScript · 25972666215
+Triggered via push about 30 minutes ago
+
+JOBS
+✓ Detect Changes in 4s (ID 76347322187)
+- Create Manual Changeset PR in 0s (ID 76347322284)
+- Manual npm Release in 0s (ID 76347322429)
+- Check for Manual Version Changes in 0s (ID 76347322437)
+✓ Check File Line Limits in 5s (ID 76347328370)
+✓ Test Compilation in 7s (ID 76347328374)
+✓ Lint and Format Check in 16s (ID 76347328378)
+- Check for Changesets in 0s (ID 76347328559)
+✓ CLI Smoke Test in 10s (ID 76347346160)
+✓ Test (node on ubuntu-latest) in 13s (ID 76347346203)
+✓ Test (deno on ubuntu-latest) in 10s (ID 76347346208)
+✓ Test (deno on macos-latest) in 16s (ID 76347346209)
+✓ Test (node on macos-latest) in 19s (ID 76347346211)
+✓ Test (bun on macos-latest) in 12s (ID 76347346213)
+✓ Test (bun on ubuntu-latest) in 14s (ID 76347346216)
+✓ Test (node on windows-latest) in 45s (ID 76347346217)
+✓ Test (bun on windows-latest) in 49s (ID 76347346236)
+✓ Test (deno on windows-latest) in 33s (ID 76347346243)
+✓ Package Dry Run in 11s (ID 76347391094)
+✓ Deploy JavaScript Docs in 14s (ID 76347402622)
+X Publish npm Package and GitHub Release in 41s (ID 76347402644)
+  ✓ Set up job
+  ✓ Run actions/checkout@v6
+  ✓ Run actions/setup-node@v6
+  ✓ Run npm ci || npm install
+  ✓ Check pending changesets
+  ✓ Check whether release is needed
+  - Merge multiple changesets
+  - Version and commit
+  X Publish to npm
+  - Create GitHub release
+  - Post Run actions/setup-node@v6
+  ✓ Post Run actions/checkout@v6
+  ✓ Complete job
+
+ANNOTATIONS
+! Async function 'loadLocaleFromString' has no 'await' expression
+Lint and Format Check: js/src/loaders.js#430
+
+! Function 'resolveKey' has a complexity of 18. Maximum allowed is 15
+Lint and Format Check: js/src/format.js#65
+
+! Async function 'commandCheck' has a complexity of 17. Maximum allowed is 15  
+Lint and Format Check: js/bin/lino-i18n.js#236
+
+! Async function 'commandConvert' has a complexity of 18. Maximum allowed is 15
+Lint and Format Check: js/bin/lino-i18n.js#178
+
+- NOTICE: windows-latest requests are being redirected to windows-2025-vs2026 by June 15, 2026
+Test (node on windows-latest): .github#1
+
+- NOTICE: windows-latest requests are being redirected to windows-2025-vs2026 by June 15, 2026
+Test (bun on windows-latest): .github#1
+
+- NOTICE: windows-latest requests are being redirected to windows-2025-vs2026 by June 15, 2026
+Test (deno on windows-latest): .github#1
+
+X Process completed with exit code 1.
+Publish npm Package and GitHub Release: .github#221
+
+
+ARTIFACTS
+github-pages
+
+To see what failed, try: gh run view 25972666215 --log-failed
+View this run on GitHub: https://github.com/link-foundation/lino-i18n/actions/runs/25972666215

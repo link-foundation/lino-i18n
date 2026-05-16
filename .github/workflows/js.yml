@@ -353,6 +353,12 @@ jobs:
           cache: npm
           cache-dependency-path: js/package-lock.json
       - run: npm ci || npm install
+      # npm OIDC trusted publishing requires npm >= 11.5.1. Node.js 24.x
+      # ships with npm 10.x which silently falls back to no auth and the
+      # registry rejects the PUT with a 404 (issue #8). This step upgrades
+      # npm with multiple fallback strategies.
+      - name: Update npm for OIDC trusted publishing
+        run: node scripts/setup-npm.mjs
       - name: Check pending changesets
         id: check_changesets
         run: node scripts/check-changesets.mjs
@@ -402,6 +408,8 @@ jobs:
           cache: npm
           cache-dependency-path: js/package-lock.json
       - run: npm ci || npm install
+      - name: Update npm for OIDC trusted publishing
+        run: node scripts/setup-npm.mjs
       - name: Version and commit
         id: version
         run: node scripts/version-and-commit.mjs --mode instant --bump-type "${{ github.event.inputs.bump_type }}" --description "${{ github.event.inputs.description }}"
