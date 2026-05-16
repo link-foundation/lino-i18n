@@ -1,7 +1,7 @@
 # lino-i18n
 
 A universal internationalization (i18n) library that stores translations in
-[Links Notation](https://github.com/linksplatform/Notation) (`.lino`) instead
+[Links Notation](https://github.com/linksplatform/Protocols.Lino) (`.lino`) instead
 of JSON or YAML.
 
 The repository ships two implementations and a CLI:

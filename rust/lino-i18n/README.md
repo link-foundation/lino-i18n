@@ -1,7 +1,7 @@
 # lino-i18n
 
 Universal internationalization for Rust, with translations stored in
-[Links Notation](https://github.com/linksplatform/Notation) (`.lino`).
+[Links Notation](https://github.com/linksplatform/Protocols.Lino) (`.lino`).
 
 ```toml
 [dependencies]

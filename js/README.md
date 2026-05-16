@@ -1,7 +1,7 @@
 # lino-i18n
 
 Universal internationalization for JavaScript with translations stored in
-[Links Notation](https://github.com/linksplatform/Notation) (`.lino`).
+[Links Notation](https://github.com/linksplatform/Protocols.Lino) (`.lino`).
 
 Runs on Node.js (≥ 20), Bun, Deno, and bundlers like Vite/Webpack/esbuild.
 
