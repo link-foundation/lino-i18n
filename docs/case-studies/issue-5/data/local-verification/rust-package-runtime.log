@@ -1,0 +1,9 @@
+warning: readme `../../README.md` appears to be a path outside of the package, but there is already a file named `README.md` in the root of the package. The archived crate will contain the copy in the root of the package. Update the readme to point to the path relative to the root of the package to remove this warning.
+   Packaging lino-i18n v0.0.1 (/tmp/gh-issue-solver-1778957708011/rust/lino-i18n)
+    Updating crates.io index
+error: failed to prepare local package for uploading
+
+Caused by:
+  no matching package named `lino-i18n-macros` found
+  location searched: crates.io index
+  required by package `lino-i18n v0.0.1 (/tmp/gh-issue-solver-1778957708011/rust/lino-i18n)`

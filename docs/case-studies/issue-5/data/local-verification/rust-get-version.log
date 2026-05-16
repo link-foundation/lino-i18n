@@ -1,0 +1,34 @@
+[2026-05-16T19:15:10Z INFO  rust_script] Arguments: Args { script: Some("rust/scripts/get-version.rs"), script_args: ["--rust-root", "rust"], expr: false, loop_: false, count: false, base_path: None, pkg_path: None, gen_pkg_only: false, cargo_output: false, clear_cache: false, debug: false, dep: [], extern_: [], force: false, unstable_features: [], build_kind: Normal, toolchain_version: None, wrapper: None }
+[2026-05-16T19:15:10Z INFO  rust_script] input: File("get-version", "/tmp/gh-issue-solver-1778957708011/rust/scripts/get-version.rs", "#!/usr/bin/env rust-script\n//! Get the current version from Cargo.toml\n//!\n//! This script reads the version from Cargo.toml and outputs it\n//! for use in GitHub Actions.\n//!\n//! Supports both single-language and multi-language repository structures:\n//! - Single-language: Cargo.toml in repository root\n//! - Multi-language: Cargo.toml in rust/ subfolder\n//!\n//! Usage: rust-script scripts/get-version.rs [--rust-root <path>]\n//!\n//! Outputs (written to GITHUB_OUTPUT):\n//!   - version: The current version from Cargo.toml\n//!\n//! ```cargo\n//! [dependencies]\n//! regex = \"1\"\n//! ```\n\nuse std::env;\nuse std::fs;\nuse std::process::exit;\n\n#[path = \"rust-paths.rs\"]\nmod rust_paths;\n\nfn set_output(key: &str, value: &str) {\n    if let Ok(output_file) = env::var(\"GITHUB_OUTPUT\") {\n        if let Err(e) = fs::OpenOptions::new()\n            .create(true)\n            .append(true)\n            .open(&output_file)\n            .and_then(|mut f| {\n                use std::io::Write;\n                writeln!(f, \"{}={}\", key, value)\n            })\n        {\n            eprintln!(\"Warning: Could not write to GITHUB_OUTPUT: {}\", e);\n        }\n    }\n    println!(\"Output: {}={}\", key, value);\n}\n\nfn main() {\n    let rust_root = match rust_paths::get_rust_root(None, true) {\n        Ok(root) => root,\n        Err(e) => {\n            eprintln!(\"Error: {}\", e);\n            exit(1);\n        }\n    };\n    let cargo_toml = rust_paths::get_cargo_toml_path(&rust_root);\n    let package_manifest = match rust_paths::get_package_manifest_path(&cargo_toml) {\n        Ok(path) => path,\n        Err(e) => {\n            eprintln!(\"Error: {}\", e);\n            exit(1);\n        }\n    };\n\n    match rust_paths::read_package_info(&package_manifest) {\n        Ok(info) => {\n            println!(\"Current version: {}\", info.version);\n            set_output(\"version\", &info.version);\n        }\n        Err(e) => {\n            eprintln!(\"Error: {}\", e);\n            exit(1);\n        }\n    }\n}\n", "/tmp/gh-issue-solver-1778957708011/rust/scripts")
+[2026-05-16T19:15:10Z INFO  rust_script] prelude_items: []
+[2026-05-16T19:15:10Z INFO  rust_script] id: "21a026b3303cf5ee15913ff3"
+[2026-05-16T19:15:10Z INFO  rust_script] pkg_path: "/home/box/.cache/rust-script/projects/21a026b3303cf5ee15913ff3"
+[2026-05-16T19:15:10Z INFO  rust_script] using_cache: true
+[2026-05-16T19:15:10Z INFO  rust_script::manifest] part_mani: {"dependencies": Table({"regex": String("1")})}
+[2026-05-16T19:15:10Z INFO  rust_script::manifest] source: None
+[2026-05-16T19:15:10Z INFO  rust_script::manifest] manifest: [[bin]]
+    name = "get-version_21a026b3303cf5ee15913ff3"
+    path = "/tmp/gh-issue-solver-1778957708011/rust/scripts/get-version.rs"
+
+    [dependencies]
+    regex = "1"
+
+    [package]
+    authors = ["Anonymous"]
+    edition = "2021"
+    name = "get-version_21a026b3303cf5ee15913ff3"
+    version = "0.1.0"
+
+    [profile.release]
+    strip = true
+
+[2026-05-16T19:15:10Z INFO  rust_script] action: InputAction { cargo_output: false, force_compile: false, execute: true, pkg_path: "/home/box/.cache/rust-script/projects/21a026b3303cf5ee15913ff3", script_path: "/tmp/gh-issue-solver-1778957708011/rust/scripts/get-version.rs", using_cache: true, toolchain_version: None, debug: false, manifest: "[[bin]]\nname = \"get-version_21a026b3303cf5ee15913ff3\"\npath = \"/tmp/gh-issue-solver-1778957708011/rust/scripts/get-version.rs\"\n\n[dependencies]\nregex = \"1\"\n\n[package]\nauthors = [\"Anonymous\"]\nedition = \"2021\"\nname = \"get-version_21a026b3303cf5ee15913ff3\"\nversion = \"0.1.0\"\n\n[profile.release]\nstrip = true\n", script: None, build_kind: Normal, bin_name: "get-version_21a026b3303cf5ee15913ff3", original_script_path: Some("rust/scripts/get-version.rs") }
+[2026-05-16T19:15:10Z INFO  rust_script] creating pkg dir...
+[2026-05-16T19:15:10Z INFO  rust_script] generating Cargo package...
+[2026-05-16T19:15:10Z DEBUG rust_script] overwrite_file("/home/box/.cache/rust-script/projects/21a026b3303cf5ee15913ff3/Cargo.toml", _)
+[2026-05-16T19:15:10Z DEBUG rust_script] Equal content
+[2026-05-16T19:15:10Z INFO  rust_script] disarming pkg dir cleanup...
+[2026-05-16T19:15:10Z DEBUG rust_script] Keeping old binary
+Using CLI configured Rust root: rust
+Current version: 0.0.1
+Output: version=0.0.1
