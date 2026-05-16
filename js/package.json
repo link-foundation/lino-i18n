@@ -6,7 +6,7 @@
   "main": "./src/index.js",
   "types": "./src/index.d.ts",
   "bin": {
-    "lino-i18n": "./bin/lino-i18n.js"
+    "lino-i18n": "bin/lino-i18n.js"
   },
   "files": [
     "bin/",
