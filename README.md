@@ -103,16 +103,16 @@ The JavaScript package ships a converter CLI usable through `npx`:
 
 ```bash
 # Convert i18next JSON to .lino
-npx lino-i18n convert --from i18next --to lino \
-  --input locales/en.json --output locales/en.lino --locale en
+npx lino-i18n convert --from i18next \
+  --in locales/en.json --out locales --locale en
 
-# Convert ruby-i18n / i18n-js YAML to .lino
-npx lino-i18n convert --from i18n-js --to lino \
-  --input config/locales/en.yml --output locales/en.lino
+# Convert i18n-js JSON to .lino
+npx lino-i18n convert --from i18n-js \
+  --in config/locales/en.json --out locales
 
 # Decompile a react-intl message bundle (AST or string) to .lino
-npx lino-i18n convert --from react-intl --to lino \
-  --input messages/en.json --output locales/en.lino --locale en
+npx lino-i18n convert --from react-intl \
+  --in messages/en.json --out locales --locale en
 ```
 
 Run `npx lino-i18n --help` for the full option list.

@@ -68,6 +68,10 @@ jobs:
         with:
           deno-version: v2.x
 
+      - name: Install dependencies (Deno)
+        if: matrix.runtime == 'deno'
+        run: deno install
+
       - name: Run tests (Deno)
         if: matrix.runtime == 'deno'
         run: deno test --allow-read --allow-write --allow-env
@@ -94,9 +98,9 @@ jobs:
 
       - name: Convert sample i18next JSON to lino
         run: |
-          mkdir -p /tmp/sample
-          cat > /tmp/sample/en.json <<'JSON'
+          mkdir -p /tmp/sample/in /tmp/sample/out
+          cat > /tmp/sample/in/en.json <<'JSON'
           {"greeting": "Hello, {{name}}!", "items": {"one": "{{count}} item", "other": "{{count}} items"}}
           JSON
-          node bin/lino-i18n.js convert --from i18next --to lino --input /tmp/sample/en.json --output /tmp/sample/en.lino --locale en
-          cat /tmp/sample/en.lino
+          node bin/lino-i18n.js convert --from i18next --in /tmp/sample/in/en.json --out /tmp/sample/out --locale en
+          cat /tmp/sample/out/en.lino

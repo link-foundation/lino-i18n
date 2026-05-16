@@ -47,16 +47,16 @@ The package ships a converter that turns popular i18n formats into
 
 ```bash
 # i18next JSON → .lino
-npx lino-i18n convert --from i18next --to lino \
-  --input locales/en.json --output locales/en.lino --locale en
+npx lino-i18n convert --from i18next \
+  --in locales/en.json --out locales --locale en
 
-# ruby-i18n / i18n-js YAML → .lino
-npx lino-i18n convert --from i18n-js --to lino \
-  --input config/locales/en.yml --output locales/en.lino
+# i18n-js JSON → .lino
+npx lino-i18n convert --from i18n-js \
+  --in config/locales/en.json --out locales
 
 # react-intl bundle (AST or string) → .lino
-npx lino-i18n convert --from react-intl --to lino \
-  --input messages/en.json --output locales/en.lino --locale en
+npx lino-i18n convert --from react-intl \
+  --in messages/en.json --out locales --locale en
 ```
 
 Run `npx lino-i18n --help` for every option.
