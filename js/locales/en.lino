@@ -1,0 +1,12 @@
+en
+  greeting "Hello, {{name}}!"
+  farewell "Goodbye, {{name}}."
+  cart.title "Your cart"
+  cart.items_zero "Your cart is empty"
+  cart.items_one "{{count}} item"
+  cart.items_other "{{count}} items"
+  navigation:home "Home"
+  navigation:profile "Profile"
+  role_male "He is a developer"
+  role_female "She is a developer"
+  role_other "They are a developer"

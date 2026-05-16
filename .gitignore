@@ -141,3 +141,10 @@ vite.config.ts.timestamp-*
 
 # jscpd reports
 reports/
+
+# Rust target directories
+target/
+rust/target/
+
+# CI log captures (local debug only)
+ci-logs/

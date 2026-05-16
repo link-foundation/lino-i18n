@@ -1,0 +1,32 @@
+[workspace]
+resolver = "2"
+members = [
+    "lino-i18n",
+    "lino-i18n-macros",
+]
+
+[workspace.package]
+version = "0.0.1"
+edition = "2021"
+rust-version = "1.75"
+license = "Unlicense"
+repository = "https://github.com/link-foundation/lino-i18n"
+homepage = "https://github.com/link-foundation/lino-i18n"
+authors = ["Link Foundation"]
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+missing_debug_implementations = "warn"
+
+[workspace.lints.clippy]
+pedantic = { level = "warn", priority = -1 }
+module_name_repetitions = "allow"
+too_many_lines = "allow"
+missing_errors_doc = "allow"
+missing_panics_doc = "allow"
+must_use_candidate = "allow"
+
+[profile.release]
+lto = true
+codegen-units = 1
+strip = true

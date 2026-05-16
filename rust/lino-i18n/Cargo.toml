@@ -1,0 +1,24 @@
+[package]
+name = "lino-i18n"
+description = "Universal i18n runtime that stores translations as Links Notation (.lino) catalogues, with CLDR plurals, context suffixes and namespaces."
+keywords = ["i18n", "internationalization", "links-notation", "lino", "localization"]
+categories = ["internationalization", "localization", "parser-implementations"]
+readme = "../../README.md"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+authors.workspace = true
+
+[lints]
+workspace = true
+
+[features]
+default = ["macros"]
+macros = ["dep:lino-i18n-macros"]
+
+[dependencies]
+lino-objects-codec = "0.2.1"
+lino-i18n-macros = { version = "0.0.1", path = "../lino-i18n-macros", optional = true }

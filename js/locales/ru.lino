@@ -1,0 +1,11 @@
+ru
+  greeting "Привет, {{name}}!"
+  farewell "До свидания, {{name}}."
+  cart.title "Ваша корзина"
+  cart.items_zero "Корзина пуста"
+  cart.items_one "{{count}} товар"
+  cart.items_few "{{count}} товара"
+  cart.items_many "{{count}} товаров"
+  cart.items_other "{{count}} товаров"
+  navigation:home "Главная"
+  navigation:profile "Профиль"
