@@ -1,0 +1,102 @@
+name: JavaScript
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'js/**'
+      - '.github/workflows/js.yml'
+  pull_request:
+    paths:
+      - 'js/**'
+      - '.github/workflows/js.yml'
+
+concurrency:
+  group: js-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+defaults:
+  run:
+    working-directory: js
+
+jobs:
+  lint-and-test:
+    name: ${{ matrix.runtime }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        runtime: [node, bun, deno]
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        if: matrix.runtime == 'node'
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24.x'
+          cache: 'npm'
+          cache-dependency-path: js/package-lock.json
+
+      - name: Install dependencies (Node.js)
+        if: matrix.runtime == 'node'
+        run: npm ci || npm install
+
+      - name: Run tests (Node.js)
+        if: matrix.runtime == 'node'
+        run: npm test
+
+      - name: Setup Bun
+        if: matrix.runtime == 'bun'
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies (Bun)
+        if: matrix.runtime == 'bun'
+        run: bun install
+
+      - name: Run tests (Bun)
+        if: matrix.runtime == 'bun'
+        run: bun test --timeout 30000
+
+      - name: Setup Deno
+        if: matrix.runtime == 'deno'
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - name: Run tests (Deno)
+        if: matrix.runtime == 'deno'
+        run: deno test --allow-read --allow-write --allow-env
+
+  cli-smoke-test:
+    name: CLI smoke test
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24.x'
+          cache: 'npm'
+          cache-dependency-path: js/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci || npm install
+
+      - name: Show CLI help
+        run: node bin/lino-i18n.js --help || true
+
+      - name: Convert sample i18next JSON to lino
+        run: |
+          mkdir -p /tmp/sample
+          cat > /tmp/sample/en.json <<'JSON'
+          {"greeting": "Hello, {{name}}!", "items": {"one": "{{count}} item", "other": "{{count}} items"}}
+          JSON
+          node bin/lino-i18n.js convert --from i18next --to lino --input /tmp/sample/en.json --output /tmp/sample/en.lino --locale en
+          cat /tmp/sample/en.lino

@@ -1,345 +1,189 @@
-# js-ai-driven-development-pipeline-template
+# lino-i18n
 
-A comprehensive template for AI-driven JavaScript/TypeScript development with full CI/CD pipeline support.
+A universal internationalization (i18n) library that stores translations in
+[Links Notation](https://github.com/linksplatform/Notation) (`.lino`) instead
+of JSON or YAML.
 
-This repository publishes the real test package
-`@link-foundation/example-package-name` so the template release pipeline is
-validated end to end with npm trusted publishing.
+The repository ships two implementations and a CLI:
 
-## Features
+| Path                      | What it is                                                                                     |
+| ------------------------- | ---------------------------------------------------------------------------------------------- |
+| [`js/`](./js)             | The `lino-i18n` JavaScript package (Node.js, Bun, Deno, browsers).                             |
+| [`js/bin/lino-i18n.js`](./js/bin) | A converter CLI that turns `i18next`, `i18n-js`, and `react-intl` catalogues into `.lino`. |
+| [`rust/`](./rust)         | The `lino-i18n` Rust crate plus the `lino-i18n-macros` companion (`i18n!` compile-time macro). |
 
-- **Multi-runtime support**: Works with Bun, Node.js, and Deno
-- **Universal testing**: Uses [test-anywhere](https://github.com/link-foundation/test-anywhere) for cross-runtime tests
-- **Automated releases**: Changesets-based versioning with GitHub Actions
-- **Optional Docker Hub publishing**: Docker images can be published after the matching npm version is visible
-- **Universal app example**: React UI for the package API with GitHub Pages, Electron, and Capacitor build paths
-- **Code quality**: ESLint + Prettier with pre-commit hooks via Husky
-- **Package manager agnostic**: Works with bun, npm, yarn, pnpm, and deno
-- **Broken link checks**: Automated link validation with [lychee](https://github.com/lycheeverse/lychee-action) and Web Archive fallback suggestions
+Both implementations consume the **same** `.lino` files. They share plural
+categories, placeholder syntax, context suffixes, and fallback semantics, so a
+catalogue you author once works in either runtime.
 
-## Quick Start
+Released under the [Unlicense](LICENSE) — public domain.
 
-### Using This Template
+## Why Links Notation?
 
-1. Click "Use this template" on GitHub to create a new repository
-2. Clone your new repository
-3. Update `package.json` with your package name and description
-4. Install dependencies: `bun install`
-5. Start developing!
+Translation files are not data — they are content. JSON is brittle for that
+job: every value has to be wrapped in quotes, every nested key needs braces,
+and a missing comma breaks the whole file. `.lino` is a quoted-string + nested
+identifier format that makes large catalogues comfortable to read in plain
+text and trivial to diff.
 
-### Development
-
-```bash
-# Install dependencies
-bun install
-
-# Run tests
-bun test --timeout 30000
-
-# Or with other runtimes:
-npm test
-deno test --allow-read
-
-# Lint code
-bun run lint
-
-# Format code
-bun run format
-
-# Check all (lint + format + file size)
-bun run check
-
-# Build the universal React example app
-npm install --prefix examples/universal-app
-npm run example:web:build
-npm run example:desktop:package
-
-# Try the CLI locally
-node bin/example-package-name.js add 2 3
+```lino
+en
+  greeting "Hello, {{name}}!"
+  cart.title "Your cart"
+  cart.items_zero "Your cart is empty"
+  cart.items_one "{{count}} item"
+  cart.items_other "{{count}} items"
+  role_male "He is a developer"
+  role_female "She is a developer"
+  role_other "They are a developer"
 ```
 
-## Project Structure
+The full design rationale lives in [docs/case-studies/issue-1](./docs/case-studies/issue-1).
+
+## Quick start
+
+### JavaScript
+
+```bash
+cd js
+npm install
+npm test
+```
+
+```js
+import { createI18n } from 'lino-i18n';
+import { loadLinoCatalogue } from 'lino-i18n/loaders';
+
+const i18n = createI18n({ defaultLocale: 'en', fallback: ['en'] });
+i18n.addTranslations('en', loadLinoCatalogue('./locales/en.lino').translations);
+
+i18n.t('greeting', { name: 'World' });              // → "Hello, World!"
+i18n.t('cart.items', { count: 0 });                 // → "Your cart is empty"
+i18n.t('cart.items', { count: 3, locale: 'ru' });   // → "3 товара"
+```
+
+### Rust
+
+```bash
+cd rust
+cargo test
+cargo run --example basic
+```
+
+```rust
+use std::sync::OnceLock;
+use lino_i18n::{i18n, I18n, TOptions};
+
+fn catalog() -> &'static I18n {
+    static C: OnceLock<I18n> = OnceLock::new();
+    C.get_or_init(|| i18n!("locales", default = "en", fallback = "en"))
+}
+
+fn main() {
+    let c = catalog();
+    println!("{}", c.t("greeting", &[("name", "World")]));
+    println!("{}", c.t_count("cart.items", 3,
+        &[("count", "3")]));
+    println!("{}", c.t_with(
+        "cart.items",
+        &[("count", "3")],
+        &TOptions::new().locale("ru").count(3),
+    ));
+}
+```
+
+The `i18n!` macro reads every `*.lino` under the given directory at compile
+time and bakes the resulting `(key → value)` tables into the binary. Each
+file is tracked through a generated `include_str!`, so Cargo rebuilds when
+any catalogue changes.
+
+### CLI conversion
+
+The JavaScript package ships a converter CLI usable through `npx`:
+
+```bash
+# Convert i18next JSON to .lino
+npx lino-i18n convert --from i18next --to lino \
+  --input locales/en.json --output locales/en.lino --locale en
+
+# Convert ruby-i18n / i18n-js YAML to .lino
+npx lino-i18n convert --from i18n-js --to lino \
+  --input config/locales/en.yml --output locales/en.lino
+
+# Decompile a react-intl message bundle (AST or string) to .lino
+npx lino-i18n convert --from react-intl --to lino \
+  --input messages/en.json --output locales/en.lino --locale en
+```
+
+Run `npx lino-i18n --help` for the full option list.
+
+## Feature comparison
+
+| Feature                           | i18next | i18n-js | react-intl | **lino-i18n**           |
+| --------------------------------- | :-----: | :-----: | :--------: | :---------------------: |
+| Text-friendly catalogue format    |    ✗    |    ~    |     ✗      | **✓** (`.lino`)         |
+| Plural categories (CLDR)          |    ✓    |    ✓    |     ✓      | **✓**                   |
+| Placeholder interpolation         |    ✓    |    ✓    |     ✓      | **✓** (`{{x}}` & `{x}`) |
+| Context / gender suffixes         |    ✓    |    ~    |     ✗      | **✓**                   |
+| Namespaces                        |    ✓    |    ✓    |     ✗      | **✓**                   |
+| Fallback locales                  |    ✓    |    ✓    |     ~      | **✓**                   |
+| Missing-key handler               |    ✓    |    ~    |     ~      | **✓**                   |
+| First-class JS API                |    ✓    |    ✓    |     ✓      | **✓**                   |
+| First-class Rust API              |    ✗    |    ✗    |     ✗      | **✓**                   |
+| Compile-time embedding (Rust)     |    ✗    |    ✗    |     ✗      | **✓** (`i18n!` macro)   |
+| CLI converter from other formats  |    ~    |    ~    |     ~      | **✓**                   |
+| Public domain license             |    ✗    |    ✗    |     ✗      | **✓** (Unlicense)       |
+
+See [docs/case-studies/issue-1](./docs/case-studies/issue-1) for the long-form
+comparison including code samples and benchmarks.
+
+## Layout
 
 ```
 .
-├── .changeset/           # Changeset configuration
-├── .github/workflows/    # GitHub Actions CI/CD
-├── .husky/               # Git hooks (pre-commit)
-├── examples/             # Usage examples
-│   └── universal-app/    # React + GitHub Pages + Electron + Capacitor app
-├── scripts/              # Build and release scripts
-├── src/                  # Source code
-│   ├── index.js          # Main entry point
-│   └── index.d.ts        # TypeScript definitions
-├── tests/                # Test files
-├── .eslintrc.js          # ESLint configuration
-├── .prettierrc           # Prettier configuration
-├── bunfig.toml           # Bun configuration
-├── deno.json             # Deno configuration
-└── package.json          # Node.js package manifest
+├── js/
+│   ├── bin/lino-i18n.js          # CLI entry point
+│   ├── src/                       # JS runtime + converters
+│   ├── tests/                     # node --test suites
+│   ├── locales/                   # Sample .lino catalogues
+│   └── package.json
+├── rust/
+│   ├── lino-i18n/                 # Runtime crate
+│   │   ├── src/
+│   │   ├── tests/
+│   │   ├── examples/
+│   │   └── locales/
+│   ├── lino-i18n-macros/          # i18n! proc-macro crate
+│   └── Cargo.toml                 # Workspace manifest
+├── docs/case-studies/issue-1/     # Design rationale + benchmarks
+└── .github/workflows/
+    ├── js.yml                     # JS lint+test matrix
+    └── rust.yml                   # Rust fmt+clippy+test matrix
 ```
 
-## Design Choices
-
-### Multi-Runtime Support
-
-This template is designed to work seamlessly with all major JavaScript runtimes:
-
-- **Bun**: Primary runtime with highest performance, uses native test support (`bun test`)
-- **Node.js**: Alternative runtime, uses built-in test runner (`node --test`)
-- **Deno**: Secure runtime with built-in TypeScript support (`deno test`)
-
-The [test-anywhere](https://github.com/link-foundation/test-anywhere) framework provides a unified testing API that works identically across all runtimes.
-
-### Package Manager Agnostic
-
-While `package.json` is the source of truth for dependencies, the template supports:
-
-- **bun**: Primary choice, uses `bun.lockb`
-- **npm**: Uses `package-lock.json`
-- **yarn**: Uses `yarn.lock`
-- **pnpm**: Uses `pnpm-lock.yaml`
-- **deno**: Uses `deno.json` for configuration
-
-Note: `package-lock.json` is not committed by default to allow any package manager.
-
-### Universal App Example
-
-The template includes `examples/universal-app`, a Vite React app that imports
-`add` and `multiply` from `src/index.js` and renders a visual calculator UI.
-The same static build is used by:
-
-- GitHub Pages (`npm run example:web:build`)
-- Electron desktop packaging (`npm run example:desktop:package`)
-- Capacitor Android/iOS sync (`npm run example:mobile:sync`)
-
-The example app has its own `package.json` and lockfile so template users can
-opt into the frontend stack without adding React, Electron, or Capacitor to the
-library package itself.
-
-See [examples/universal-app/README.md](examples/universal-app/README.md) for
-local web, desktop, Android, and iOS testing instructions.
-
-### Code Quality
-
-- **ESLint**: Configured with recommended rules + Prettier integration
-- **Prettier**: Consistent code formatting
-- **Husky + lint-staged**: Pre-commit hooks ensure code quality
-- **File size limit**: Files must stay under 1500 lines for maintainability (enforced via ESLint and CI)
-
-### Release Workflow
-
-The release workflow uses [Changesets](https://github.com/changesets/changesets) for version management:
-
-1. **Creating a changeset**: Run `bun run changeset` to document changes
-2. **PR validation**: CI checks for valid changeset in each PR
-3. **Automated versioning**: Merging to `main` triggers version bump
-4. **npm publishing**: Automated via OIDC trusted publishing (no tokens needed)
-5. **Optional Docker Hub publishing**: When configured, waits for the exact npm version and tags the Docker image with that version
-6. **GitHub releases**: Auto-created with formatted release notes
-
-#### Manual Releases
-
-Two manual release modes are available via GitHub Actions:
-
-- **Instant release**: Immediately bump version and publish
-- **Changeset PR**: Create a PR with changeset for review
-
-### CI/CD Pipeline
-
-The GitHub Actions workflow (`.github/workflows/release.yml`) implements a fast-fail pipeline:
-
-**Fast checks** (~7-30s each, run first for fastest feedback):
-
-1. **Test compilation**: Syntax-checks all `.mjs` files with `node --check`
-2. **Lint, format & secrets scan**: ESLint, Prettier, jscpd, and [secretlint](https://github.com/secretlint/secretlint) for credential leak detection
-3. **File line limits**: Enforces 1500-line limit on `.mjs` files and `release.yml`
-4. **Changeset check**: Validates PR has exactly one changeset (added by that PR)
-5. **Version check**: Blocks manual version changes in `package.json`
-6. **Documentation validation**: Checks doc file sizes and required files
-
-**Slow checks** (only run after all fast checks pass):
-
-7. **Test matrix**: 3 runtimes × 3 OS = 9 test combinations
-8. **Broken link checks**: Validates all links in Markdown/HTML files (separate workflow)
-
-**Release** (on merge to main):
-
-9. **Changeset merge**: Combines multiple pending changesets at release time
-10. **Release**: Automated versioning and npm publishing
-11. **Optional Docker publish**: Publishes Docker Hub `latest` and npm-version tags after the npm package is visible
-
-#### Reasonable Timeouts
-
-Every CI job declares an explicit `timeout-minutes` so hung steps fail
-in minutes instead of reaching the GitHub Actions default of six hours.
-Fast checks use 5-10 minute caps, release jobs use 30 minutes, and the
-link checker uses 10 minutes for external network variance.
-
-Individual tests are also capped inside supported runners:
-`npm test` runs `node --test --test-timeout=30000`, and the CI Bun
-runner uses `bun test --timeout 30000`. Deno does not provide a single
-global per-test timeout flag, so Deno tests are protected by the
-10-minute matrix job cap.
-
-See [BEST-PRACTICES.md](docs/BEST-PRACTICES.md) for detailed explanations of each practice.
-
-#### Robust Changeset Handling
-
-The CI/CD pipeline is designed to handle concurrent PRs gracefully:
-
-- **PR Validation**: Only validates changesets **added by the current PR**, not pre-existing ones from other merged PRs. This prevents false failures when multiple PRs merge before a release cycle completes.
-
-- **Release-time Merging**: If multiple changesets exist when releasing, they are automatically merged into a single changeset with:
-  - The highest version bump type (major > minor > patch)
-  - All descriptions preserved in chronological order
-
-This design decouples PR validation from the need to pull changes from the default branch, reducing conflicts and ensuring that even if CI/CD fails, all unpublished changesets will still get published when the error is resolved.
-
-### Deploying the example app
-
-The `example-app.yml` workflow deploys the universal example app to GitHub
-Pages on every push to `main`. Before the first run on `main` in a new
-repository created from this template, open **Settings → Pages** and set
-**Source = GitHub Actions**. This is a one-time manual step and cannot be
-configured from a workflow because the Pages source defaults to
-_Deploy from a branch_. Without it, the `pages-deploy` job fails on
-`actions/deploy-pages` with `Get Pages site failed` /
-`Failed to create deployment`. After flipping the source, the workflow
-provisions the Pages site on its first run.
-
-### Auto-regenerated preview screenshots
-
-The same `example-app.yml` workflow contains a `preview-regen` job that boots
-the built example app in a headless Chromium via
-[`browser-commander`](https://www.npmjs.com/package/browser-commander) +
-Playwright and writes fresh screenshots to
-`docs/screenshots/example-app/example-app-{locale}-{theme}.png` on every
-push to `main` (and on `workflow_dispatch`). Any drift is committed back to
-`main` with `[skip ci]` so README/site images never go stale between
-releases.
-
-The same script is available locally:
-
-```bash
-npm install --prefix examples/universal-app
-npm run example:web:preview-images
-# Verbose probe of <html data-theme>, <html lang>, and PNG signatures:
-PREVIEW_VERBOSE=1 npm run example:web:preview-images
-```
-
-The matrix defaults to `{en, ru} × {light, dark}`. The shipped example app
-has no localization or theme toggle yet, so every cell currently renders
-the same UI — when a fork adds either, the matrix produces real per-cell
-variants without script edits.
-
-### Broken Link Checker
-
-The link checker workflow (`.github/workflows/links.yml`) validates all links in Markdown and HTML files:
-
-1. **Detection**: Uses [lychee](https://github.com/lycheeverse/lychee-action) to scan all `*.md` and `*.html` files
-2. **Web Archive fallback**: For any broken links found, automatically checks the [Wayback Machine](https://web.archive.org) for archived versions
-3. **Actionable suggestions**: Reports one of three outcomes for each broken link:
-   - **Archived**: Suggests the Web Archive URL as a replacement
-   - **Not archived**: Clearly reports the link is unrecoverable
-4. **Scheduled checks**: Runs weekly to catch links that break over time (even if no files changed)
-5. **Issue creation**: On scheduled runs, creates a GitHub Issue with the full broken links report
-
-Add regex patterns to `.lycheeignore` to exclude URLs from checks (e.g., local dev URLs, example.com, known rate-limited sites).
-
-## Configuration
-
-### Updating Package Name
-
-After creating a repository from this template, update the package name in:
-
-1. `package.json`: replace `"@link-foundation/example-package-name"` with your package name
-2. `.changeset/config.json`: Package references
-
-Release scripts derive the package name from `package.json` at runtime, so no
-script-level package-name constants need to be edited during template adoption.
-
-### Optional Docker Hub Publishing
-
-Docker publishing is disabled by default. To enable it for a project that ships
-a Docker image, add a `Dockerfile` and configure these GitHub Actions settings:
-
-| Setting              | Type               | Description                                                                           |
-| -------------------- | ------------------ | ------------------------------------------------------------------------------------- |
-| `DOCKERHUB_IMAGE`    | Variable           | Docker Hub image name, for example `namespace/image`. This enables Docker publishing. |
-| `DOCKERHUB_USERNAME` | Variable           | Docker Hub username used by `docker/login-action`.                                    |
-| `DOCKERHUB_TOKEN`    | Secret             | Docker Hub access token used for registry authentication.                             |
-| `DOCKER_CONTEXT`     | Variable, optional | Docker build context. Defaults to `.`.                                                |
-| `DOCKERFILE`         | Variable, optional | Dockerfile path. Defaults to `./Dockerfile`.                                          |
-
-When enabled, the release workflow waits until the exact published npm version
-is visible in the npm registry, then publishes Docker Hub tags for `latest` and
-that same version. The Docker build also receives `NPM_PACKAGE_VERSION` as a
-build argument so Dockerfiles can install the matching published package.
-
-### ESLint Rules
-
-Customize ESLint in `eslint.config.js`. Current configuration:
-
-- ES Modules support
-- Prettier integration
-- No console restrictions (common in CLI tools)
-- Strict equality enforcement
-- Async/await best practices
-- **Strict unused variables rule**: No exceptions - all unused variables, arguments, and caught errors must be removed (no `_` prefix exceptions)
-
-### Prettier Options
-
-Configured in `.prettierrc`:
-
-- Single quotes
-- Semicolons
-- 2-space indentation
-- 80-character line width
-- ES5 trailing commas
-- LF line endings
-
-## Scripts Reference
-
-| Script                               | Description                                           |
-| ------------------------------------ | ----------------------------------------------------- |
-| `bun test --timeout 30000`           | Run tests with Bun and a 30s per-test cap             |
-| `npm test`                           | Run tests with Node.js and a 30s per-test cap         |
-| `bun run lint`                       | Check code with ESLint                                |
-| `bun run lint:fix`                   | Fix ESLint issues automatically                       |
-| `bun run format`                     | Format code with Prettier                             |
-| `bun run format:check`               | Check formatting without changing files               |
-| `bun run check`                      | Run all checks (lint + format)                        |
-| `npm run example:web:dev`            | Start the universal app Vite dev server               |
-| `npm run example:web:build`          | Build the universal app static web bundle             |
-| `npm run example:web:preview-images` | Regenerate preview screenshots via browser-commander  |
-| `npm run example:desktop:package`    | Package the Electron desktop app locally              |
-| `npm run example:mobile:sync`        | Build and sync the app bundle into Capacitor projects |
-| `bun run changeset`                  | Create a new changeset                                |
+## CI
+
+Two purpose-built workflows live in `.github/workflows/`:
+
+- **`js.yml`** runs `node --test`, `bun test`, and `deno test` on Linux,
+  macOS, and Windows whenever anything under `js/**` changes, plus a CLI
+  smoke test that round-trips an `i18next` JSON catalogue to `.lino`.
+- **`rust.yml`** runs `cargo fmt --check`, `cargo clippy -D warnings`, and
+  `cargo test --all-targets` on the same three operating systems whenever
+  anything under `rust/**` changes.
 
 ## Contributing
 
-See [CONTRIBUTING.md](docs/CONTRIBUTING.md) for detailed contribution guidelines.
+1. Fork the repository.
+2. Create a feature branch.
+3. Add a changeset (`bun run changeset` or hand-write a file in `.changeset/`).
+4. Make your changes — keep `js/` and `rust/` behaviour consistent.
+5. Open a pull request.
 
-Quick steps:
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/my-feature`
-3. Make your changes
-4. Create a changeset: `bun run changeset`
-5. Commit your changes (pre-commit hooks will run automatically)
-6. Push and create a Pull Request
-
-## Best Practices
-
-This template implements CI/CD best practices for AI-driven development. See [BEST-PRACTICES.md](docs/BEST-PRACTICES.md) for details on:
-
-- File size limits for AI readability
-- Automated formatting and linting
-- Multi-runtime and cross-platform testing
-- Changeset-based versioning
-- Concurrency control for CI/CD pipelines
+Both implementations must pass their CI matrix before a PR can land.
 
 ## License
 
-[Unlicense](LICENSE) - Public Domain
+Released into the public domain under the [Unlicense](LICENSE). Use this
+library, fork it, vendor it, or strip the attribution — there is no
+restriction.
