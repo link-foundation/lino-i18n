@@ -25,8 +25,35 @@ fn greet(name: &str) -> String {
 ```
 
 `i18n!` reads every `*.lino` file under the directory (relative to the
-crate's `CARGO_MANIFEST_DIR`) at compile time and bakes the resulting
-translation tables into the binary.
+crate's `CARGO_MANIFEST_DIR`) at compile time, embeds the catalogue text, and
+builds translation tables when the `I18n` value is initialized.
+
+Catalogues are authored as nested Links Notation blocks:
+
+```lino
+en
+  greeting "Hello, {{name}}!"
+  hero
+    description """
+      Keep each language in its own block, nest related messages together,
+      and still resolve the same runtime keys.
+    """
+  cart
+    title "Your cart"
+    items
+      zero "Your cart is empty"
+      one "{{count}} item"
+      other "{{count}} items"
+  role
+    male "He is a developer"
+    female "She is a developer"
+    other "They are a developer"
+```
+
+The loader flattens nested plural and context groups to runtime suffix keys
+such as `cart.items_one` and `role_female`. One file may contain several
+top-level locale blocks, so both `locales/en.lino` and a bundled
+`locales/all.lino` layout work.
 
 ## Runtime API
 
@@ -60,11 +87,13 @@ assert_eq!(
 ## Features
 
 - CLDR plural categories for the locales people actually translate into.
+- Nested `.lino` authoring with multiline quoted values.
 - `{{var}}` and `{var}` placeholder syntax for compatibility with i18next
   and `react-intl`.
 - Context (gender) suffixes: `role_male`, `role_female`, `role_other`.
 - Namespace prefixes with `.` (e.g. `navigation.home`).
 - Configurable fallback chain plus per-call `default_value`.
+- Bundled multi-locale `.lino` files and per-language directories.
 - Optional missing-key handler hook.
 - Compile-time embedding via the `i18n!` macro.
 

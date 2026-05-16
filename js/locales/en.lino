@@ -1,12 +1,22 @@
 en
   greeting "Hello, {{name}}!"
   farewell "Goodbye, {{name}}."
-  cart.title "Your cart"
-  cart.items_zero "Your cart is empty"
-  cart.items_one "{{count}} item"
-  cart.items_other "{{count}} items"
-  navigation:home "Home"
-  navigation:profile "Profile"
-  role_male "He is a developer"
-  role_female "She is a developer"
-  role_other "They are a developer"
+  hero
+    title "Localization that reads like content"
+    description """
+      Keep each language in its own block, nest related messages together,
+      and still resolve the same runtime keys.
+    """
+  cart
+    title "Your cart"
+    items
+      zero "Your cart is empty"
+      one "{{count}} item"
+      other "{{count}} items"
+  navigation
+    home "Home"
+    profile "Profile"
+  role
+    male "He is a developer"
+    female "She is a developer"
+    other "They are a developer"

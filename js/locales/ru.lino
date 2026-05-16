@@ -1,11 +1,24 @@
 ru
   greeting "Привет, {{name}}!"
   farewell "До свидания, {{name}}."
-  cart.title "Ваша корзина"
-  cart.items_zero "Корзина пуста"
-  cart.items_one "{{count}} товар"
-  cart.items_few "{{count}} товара"
-  cart.items_many "{{count}} товаров"
-  cart.items_other "{{count}} товаров"
-  navigation:home "Главная"
-  navigation:profile "Профиль"
+  hero
+    title "Локализация, которая читается как текст"
+    description """
+      Храните каждый язык в своем блоке, группируйте связанные сообщения
+      и используйте те же ключи во время выполнения.
+    """
+  cart
+    title "Ваша корзина"
+    items
+      zero "Корзина пуста"
+      one "{{count}} товар"
+      few "{{count}} товара"
+      many "{{count}} товаров"
+      other "{{count}} товаров"
+  navigation
+    home "Главная"
+    profile "Профиль"
+  role
+    male "Он разработчик"
+    female "Она разработчик"
+    other "Они разработчики"

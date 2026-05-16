@@ -2,7 +2,7 @@
 //!
 //! The [`i18n!`] macro reads every `.lino` file in a directory at
 //! compilation time and expands to an expression that builds an
-//! `::lino_i18n::I18n` instance with every translation already baked in.
+//! `::lino_i18n::I18n` instance from embedded catalogue text.
 //!
 //! ```ignore
 //! use std::sync::OnceLock;
@@ -19,13 +19,11 @@
 //! generated `include_str!` calls so Cargo rebuilds when translations
 //! change.
 
-use std::collections::HashMap;
 use std::path::{Path, PathBuf};
 
-use lino_objects_codec::format::parse_indented;
 use proc_macro::TokenStream;
 use proc_macro2::TokenStream as TokenStream2;
-use quote::{format_ident, quote};
+use quote::quote;
 use syn::parse::{Parse, ParseStream};
 use syn::{parse_macro_input, LitStr, Token};
 
@@ -112,8 +110,8 @@ fn expand(args: &MacroArgs) -> syn::Result<TokenStream2> {
         ));
     }
 
-    let mut catalogues: Vec<(String, Vec<(String, String)>)> = Vec::new();
-    let mut tracked: Vec<PathBuf> = Vec::with_capacity(paths.len());
+    let mut default_locale_candidate = None;
+    let mut add_calls = Vec::with_capacity(paths.len());
     for path in &paths {
         let text = std::fs::read_to_string(path).map_err(|err| {
             syn::Error::new(
@@ -121,51 +119,35 @@ fn expand(args: &MacroArgs) -> syn::Result<TokenStream2> {
                 format!("cannot read {}: {err}", path.display()),
             )
         })?;
-        let (locale, map) = parse_indented(&text).map_err(|err| {
+        let first_locale = first_locale_in_text(&text).ok_or_else(|| {
             syn::Error::new(
                 directory_lit.span(),
-                format!("failed to parse {}: {err}", path.display()),
+                format!("{} is missing a locale identifier", path.display()),
             )
         })?;
-        if locale.is_empty() {
+        if first_locale.is_empty() {
             return Err(syn::Error::new(
                 directory_lit.span(),
                 format!("{} is missing a locale identifier", path.display()),
             ));
         }
-        let entries = sort_map(map);
-        catalogues.push((locale, entries));
-        tracked.push(path.clone());
+        default_locale_candidate.get_or_insert(first_locale);
+        let path_str = path.to_string_lossy().to_string();
+        add_calls.push(quote! {
+            for __catalogue in ::lino_i18n::parse_lino_catalogs(include_str!(#path_str))
+                .expect(concat!("failed to parse ", #path_str))
+            {
+                __i18n.add_translations(__catalogue.locale, __catalogue.translations);
+            }
+        });
     }
 
     let default_locale = args
         .default_locale
         .as_ref()
         .map(LitStr::value)
-        .or_else(|| catalogues.first().map(|(l, _)| l.clone()))
+        .or(default_locale_candidate)
         .expect("at least one catalogue exists");
-
-    let mut add_calls = Vec::with_capacity(catalogues.len());
-    for (locale, entries) in &catalogues {
-        let pairs = entries.iter().map(|(k, v)| {
-            let k = k.as_str();
-            let v = v.as_str();
-            quote! { (#k, #v) }
-        });
-        add_calls.push(quote! {
-            __i18n.add_translations(#locale, [ #( #pairs ),* ]);
-        });
-    }
-
-    let track_includes: Vec<TokenStream2> = tracked
-        .iter()
-        .enumerate()
-        .map(|(index, path)| {
-            let path_str = path.to_string_lossy().to_string();
-            let const_name = format_ident!("__LINO_I18N_INCLUDE_{}", index);
-            quote! { const #const_name: &'static str = include_str!(#path_str); }
-        })
-        .collect();
 
     let fallback_setup = if let Some(fallback) = &args.fallback {
         let fb = fallback.value();
@@ -175,7 +157,6 @@ fn expand(args: &MacroArgs) -> syn::Result<TokenStream2> {
     };
 
     Ok(quote! {{
-        #( #track_includes )*
         let mut __i18n = ::lino_i18n::I18n::new(#default_locale);
         #( #add_calls )*
         #fallback_setup
@@ -193,8 +174,17 @@ fn resolve_directory(input: &str) -> Result<PathBuf, String> {
     Ok(Path::new(&manifest).join(path))
 }
 
-fn sort_map(map: HashMap<String, String>) -> Vec<(String, String)> {
-    let mut entries: Vec<(String, String)> = map.into_iter().collect();
-    entries.sort_by(|a, b| a.0.cmp(&b.0));
-    entries
+fn first_locale_in_text(text: &str) -> Option<String> {
+    for raw in text.lines() {
+        let trimmed = raw.trim();
+        if trimmed.is_empty() || trimmed.starts_with('#') {
+            continue;
+        }
+        if raw.starts_with(' ') || raw.starts_with('\t') {
+            return None;
+        }
+        let token = trimmed.split_whitespace().next()?;
+        return Some(token.trim_end_matches(':').to_string());
+    }
+    None
 }

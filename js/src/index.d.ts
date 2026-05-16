@@ -56,9 +56,21 @@ export declare function parseLinoCatalog(text: string): {
   translations: Record<string, string>;
 };
 
+export declare function parseLinoCatalogs(
+  text: string
+): Array<{ locale: string | null; translations: Record<string, string> }>;
+
 export declare function formatLinoCatalog(
   locale: string,
-  translations: Record<string, string>
+  translations: Record<string, string>,
+  options?: { style?: 'nested' | 'flat' }
+): string;
+
+export declare function formatLinoCatalogs(
+  catalogues:
+    | Record<string, Record<string, string>>
+    | Array<{ locale: string; translations: Record<string, string> }>,
+  options?: { style?: 'nested' | 'flat' }
 ): string;
 
 export declare function loadLocaleFromString(
@@ -69,6 +81,10 @@ export declare function loadLocaleFromString(
 export declare function loadLocaleFromFile(
   filePath: string
 ): Promise<{ locale: string; translations: Record<string, string> }>;
+
+export declare function loadLocalesFromFile(
+  filePath: string
+): Promise<Array<{ locale: string; translations: Record<string, string> }>>;
 
 export declare function loadLocalesFromDirectory(
   directory: string

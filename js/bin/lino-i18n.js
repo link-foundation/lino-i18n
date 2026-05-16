@@ -13,6 +13,7 @@ import { fileURLToPath } from 'node:url';
 import { createI18n } from '../src/i18n.js';
 import {
   formatLinoCatalog,
+  formatLinoCatalogs,
   loadLocalesFromDirectory,
 } from '../src/loaders.js';
 import {
@@ -47,6 +48,8 @@ function commandHelp(command) {
       `  --from <format>    Source format: ${SUPPORTED_FORMATS.join(', ')} (default: auto-detect)`,
       '  --locale <code>    Override locale name when the input is a single-locale file',
       '  --default <code>   Default locale when not detectable (default: en)',
+      '  --single-file <f>  Write all converted locales to one bundled .lino file',
+      '  --config <path>    Read command defaults from a JSON config file',
     ].join('\n');
   }
   if (command === 'check') {
@@ -56,6 +59,7 @@ function commandHelp(command) {
       'Options:',
       '  --dir <dir>            Directory containing .lino files',
       '  --reference <locale>   Reference locale to diff against (default: en)',
+      '  --config <path>        Read command defaults from a JSON config file',
     ].join('\n');
   }
   if (command === 't') {
@@ -66,6 +70,7 @@ function commandHelp(command) {
       '  --dir <dir>      Directory containing .lino files',
       '  --locale <code>  Locale to use when translating',
       '  --fallback <c>   Fallback locale (default: en)',
+      '  --config <path>  Read command defaults from a JSON config file',
     ].join('\n');
   }
   return usage();
@@ -101,6 +106,26 @@ function parseFlags(argv) {
   return { flags, rest };
 }
 
+async function withConfig(command, flags) {
+  if (!flags.config) return flags;
+  const configPath =
+    flags.config === true ? 'lino-i18n.config.json' : String(flags.config);
+  const text = await fs.readFile(configPath, 'utf8');
+  const parsed = JSON.parse(text);
+  const commandConfig =
+    parsed && typeof parsed === 'object' && parsed[command]
+      ? parsed[command]
+      : parsed;
+  if (!commandConfig || typeof commandConfig !== 'object') {
+    return flags;
+  }
+  return { ...commandConfig, ...flags };
+}
+
+function flagValue(flags, kebabName, camelName) {
+  return flags[kebabName] ?? flags[camelName];
+}
+
 function pickConverter(format) {
   switch (format) {
     case 'i18next':
@@ -126,7 +151,9 @@ async function readJsonInput(inputPath) {
       },
     ];
   }
-  const entries = await fs.readdir(inputPath, { withFileTypes: true });
+  const entries = (await fs.readdir(inputPath, { withFileTypes: true })).sort(
+    (left, right) => left.name.localeCompare(right.name)
+  );
   const out = [];
   for (const entry of entries) {
     if (!entry.isFile()) continue;
@@ -178,6 +205,17 @@ async function commandConvert(flags, log = console.log, err = console.error) {
     for (const [locale, table] of Object.entries(result)) {
       aggregated[locale] = { ...(aggregated[locale] || {}), ...table };
     }
+  }
+
+  const singleFile = flagValue(flags, 'single-file', 'singleFile');
+  if (singleFile) {
+    const outputPath = path.isAbsolute(String(singleFile))
+      ? String(singleFile)
+      : path.join(flags.out, String(singleFile));
+    const text = `${formatLinoCatalogs(aggregated)}\n`;
+    await fs.writeFile(outputPath, text, 'utf8');
+    log(`wrote ${outputPath} (${Object.keys(aggregated).length} locales)`);
+    return 0;
   }
 
   for (const [locale, table] of Object.entries(aggregated)) {
@@ -275,14 +313,15 @@ export async function runCli(argv, io = {}) {
     log(commandHelp(command));
     return 0;
   }
+  const configuredFlags = await withConfig(command, flags);
   switch (command) {
     case 'convert':
-      return commandConvert(flags, log, err);
+      return commandConvert(configuredFlags, log, err);
     case 'check':
-      return commandCheck(flags, log, err);
+      return commandCheck(configuredFlags, log, err);
     case 't':
     case 'translate':
-      return commandTranslate(flags, positional, log, err);
+      return commandTranslate(configuredFlags, positional, log, err);
     default:
       err(`Unknown command: ${command}`);
       err(usage());

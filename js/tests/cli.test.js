@@ -46,8 +46,92 @@ test('convert i18next JSON to .lino', async () => {
   const enText = await fs.readFile(path.join(outDir, 'en.lino'), 'utf8');
   assert.match(enText, /^en/);
   assert.match(enText, /greeting ['"]Hello, \{\{name\}\}['"]/);
-  assert.match(enText, /cart\.items_one ['"]\{\{count\}\} item['"]/);
-  assert.match(enText, /cart\.items_other ['"]\{\{count\}\} items['"]/);
+  assert.match(enText, /cart\n    items\n      one ['"]\{\{count\}\} item['"]/);
+  assert.match(enText, /other ['"]\{\{count\}\} items['"]/);
+
+  await fs.rm(tmp, { recursive: true, force: true });
+});
+
+test('convert can bundle multiple locales into one .lino file', async () => {
+  const tmp = await makeTempDir('lino-i18n-convert-bundle-');
+  const inDir = path.join(tmp, 'in');
+  const outDir = path.join(tmp, 'out');
+  await fs.mkdir(inDir, { recursive: true });
+  await fs.writeFile(
+    path.join(inDir, 'en.json'),
+    JSON.stringify({
+      greeting: 'Hello, {{name}}',
+      cart: { items_one: '{{count}} item', items_other: '{{count}} items' },
+    })
+  );
+  await fs.writeFile(
+    path.join(inDir, 'ru.json'),
+    JSON.stringify({
+      greeting: 'Привет, {{name}}',
+      cart: {
+        items_one: '{{count}} товар',
+        items_few: '{{count}} товара',
+        items_many: '{{count}} товаров',
+        items_other: '{{count}} товаров',
+      },
+    })
+  );
+
+  const { io, stdout } = makeIO();
+  const code = await runCli(
+    [
+      'convert',
+      '--in',
+      inDir,
+      '--out',
+      outDir,
+      '--from',
+      'i18next',
+      '--single-file',
+      'all.lino',
+    ],
+    io
+  );
+  assert.equal(code, 0, stdout.join('\n'));
+
+  const text = await fs.readFile(path.join(outDir, 'all.lino'), 'utf8');
+  assert.match(text, /^en\n/);
+  assert.match(text, /\nru\n/);
+  assert.match(text, /cart\n    items\n      one ['"]\{\{count\}\} item['"]/);
+  assert.match(text, /many ['"]\{\{count\}\} товаров['"]/);
+
+  await fs.rm(tmp, { recursive: true, force: true });
+});
+
+test('convert reads defaults from a JSON config file', async () => {
+  const tmp = await makeTempDir('lino-i18n-convert-config-');
+  const inDir = path.join(tmp, 'in');
+  const outDir = path.join(tmp, 'out');
+  await fs.mkdir(inDir, { recursive: true });
+  await fs.writeFile(
+    path.join(inDir, 'en.json'),
+    JSON.stringify({ greeting: 'Hello, {{name}}' })
+  );
+  const configPath = path.join(tmp, 'lino-i18n.config.json');
+  await fs.writeFile(
+    configPath,
+    JSON.stringify({
+      convert: {
+        in: inDir,
+        out: outDir,
+        from: 'i18next',
+        singleFile: 'locales.lino',
+      },
+    })
+  );
+
+  const { io, stdout } = makeIO();
+  const code = await runCli(['convert', '--config', configPath], io);
+  assert.equal(code, 0, stdout.join('\n'));
+
+  const text = await fs.readFile(path.join(outDir, 'locales.lino'), 'utf8');
+  assert.match(text, /^en\n/);
+  assert.match(text, /greeting ['"]Hello, \{\{name\}\}['"]/);
 
   await fs.rm(tmp, { recursive: true, force: true });
 });

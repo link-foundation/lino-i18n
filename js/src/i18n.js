@@ -4,8 +4,8 @@
 // the framework integrations users already have (React, Vue, etc.).
 
 import {
-  loadLocaleFromFile,
   loadLocaleFromString,
+  loadLocalesFromFile,
   loadLocalesFromDirectory,
 } from './loaders.js';
 import { interpolate, resolveKey } from './format.js';
@@ -116,9 +116,11 @@ export function createI18n(options = {}) {
   }
 
   async function loadLocaleFile(filePath) {
-    const { locale, translations } = await loadLocaleFromFile(filePath);
-    addLocale(locale, translations);
-    return locale;
+    const loaded = await loadLocalesFromFile(filePath);
+    for (const { locale, translations } of loaded) {
+      addLocale(locale, translations);
+    }
+    return loaded[0]?.locale;
   }
 
   async function loadDirectory(directory) {

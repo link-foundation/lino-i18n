@@ -10,9 +10,12 @@
 export { createI18n } from './i18n.js';
 export {
   parseLinoCatalog,
+  parseLinoCatalogs,
   formatLinoCatalog,
+  formatLinoCatalogs,
   loadLocaleFromString,
   loadLocaleFromFile,
+  loadLocalesFromFile,
   loadLocalesFromDirectory,
 } from './loaders.js';
 export {
