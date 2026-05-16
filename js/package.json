@@ -1,0 +1,53 @@
+{
+  "name": "lino-i18n",
+  "version": "0.0.1",
+  "description": "Universal i18n library that stores translations in Links Notation (.lino) instead of JSON.",
+  "type": "module",
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "bin": {
+    "lino-i18n": "./bin/lino-i18n.js"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./src/index.js"
+    },
+    "./converters": "./src/converters/index.js",
+    "./loaders": "./src/loaders.js"
+  },
+  "scripts": {
+    "test": "node --test --test-timeout=30000 tests/*.test.js",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "keywords": [
+    "i18n",
+    "internationalization",
+    "translation",
+    "links-notation",
+    "lino",
+    "localization"
+  ],
+  "author": "Link Foundation",
+  "license": "Unlicense",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/link-foundation/lino-i18n.git"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "links-notation": "^0.13.0",
+    "lino-arguments": "^0.3.0",
+    "lino-objects-codec": "^0.4.0"
+  }
+}
