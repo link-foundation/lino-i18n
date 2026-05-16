@@ -29,12 +29,19 @@ function unescapeValue(value, quote = '"') {
     }
     index += 1;
     const next = value[index];
-    if (next === undefined || next === '\\') result += '\\';
-    else if (next === 'n') result += '\n';
-    else if (next === 'r') result += '\r';
-    else if (next === 't') result += '\t';
-    else if (next === quote) result += quote;
-    else result += `\\${next}`;
+    if (next === undefined || next === '\\') {
+      result += '\\';
+    } else if (next === 'n') {
+      result += '\n';
+    } else if (next === 'r') {
+      result += '\r';
+    } else if (next === 't') {
+      result += '\t';
+    } else if (next === quote) {
+      result += quote;
+    } else {
+      result += `\\${next}`;
+    }
   }
   return result;
 }
@@ -95,7 +102,9 @@ function findClosingQuote(value, quote, start = 1) {
       escaped = true;
       continue;
     }
-    if (char === quote) return index;
+    if (char === quote) {
+      return index;
+    }
   }
   return -1;
 }
@@ -158,7 +167,9 @@ function parseQuotedValue(lines, index, rest, indent) {
 }
 
 function parseLogicalLines(text) {
-  const lines = String(text || '').replace(/\r\n/g, '\n').split('\n');
+  const lines = String(text || '')
+    .replace(/\r\n/g, '\n')
+    .split('\n');
   const entries = [];
   for (let index = 0; index < lines.length; ) {
     const raw = lines[index].replace(/\r$/, '');
@@ -207,7 +218,9 @@ function parseEntriesAt(lines, start, indent) {
 
   while (index < lines.length) {
     const line = lines[index];
-    if (line.indent < indent) break;
+    if (line.indent < indent) {
+      break;
+    }
     if (line.indent > indent) {
       throw new Error(`unexpected indentation before ${line.key}`);
     }
@@ -266,8 +279,7 @@ function isSelectorGroup(value) {
   return (
     entries.length > 0 &&
     entries.every(
-      ([key, child]) =>
-        SELECTOR_SUFFIXES.has(key) && typeof child === 'string'
+      ([key, child]) => SELECTOR_SUFFIXES.has(key) && typeof child === 'string'
     )
   );
 }
@@ -278,7 +290,9 @@ function flattenTree(tree, pathParts = [], out = {}) {
       out[[...pathParts, key].join('.')] = value;
       continue;
     }
-    if (!isPlainObject(value)) continue;
+    if (!isPlainObject(value)) {
+      continue;
+    }
 
     const nextPath = [...pathParts, key];
     if (isSelectorGroup(value)) {
@@ -295,16 +309,22 @@ function flattenTree(tree, pathParts = [], out = {}) {
 
 function splitSelectorSuffix(key) {
   const index = key.lastIndexOf('_');
-  if (index <= 0) return null;
+  if (index <= 0) {
+    return null;
+  }
   const suffix = key.slice(index + 1);
-  if (!SELECTOR_SUFFIXES.has(suffix)) return null;
+  if (!SELECTOR_SUFFIXES.has(suffix)) {
+    return null;
+  }
   return { base: key.slice(0, index), suffix };
 }
 
 function setNestedValue(tree, parts, value) {
   let node = tree;
   for (const part of parts.slice(0, -1)) {
-    if (!isPlainObject(node[part])) node[part] = {};
+    if (!isPlainObject(node[part])) {
+      node[part] = {};
+    }
     node = node[part];
   }
   node[parts[parts.length - 1]] = value;
@@ -317,7 +337,11 @@ function translationsToTree(translations) {
     const value = typeof rawValue === 'string' ? rawValue : String(rawValue);
     const selector = splitSelectorSuffix(key);
     if (selector) {
-      setNestedValue(tree, [...selector.base.split('.'), selector.suffix], value);
+      setNestedValue(
+        tree,
+        [...selector.base.split('.'), selector.suffix],
+        value
+      );
     } else {
       setNestedValue(tree, key.split('.'), value);
     }
@@ -341,7 +365,9 @@ function formatTreeLines(tree, indent = '  ') {
       lines.push(`${indent}${key} ${formatValue(value, indent)}`);
       continue;
     }
-    if (!isPlainObject(value)) continue;
+    if (!isPlainObject(value)) {
+      continue;
+    }
     lines.push(`${indent}${key}`);
     lines.push(...formatTreeLines(value, `${indent}  `));
   }
@@ -377,7 +403,9 @@ export function parseLinoCatalogs(text) {
 // output is nested for readability; pass `{ style: 'flat' }` to emit one
 // key/value line per translation.
 export function formatLinoCatalog(locale, translations, options = {}) {
-  if (!locale) throw new Error('formatLinoCatalog requires a locale name');
+  if (!locale) {
+    throw new Error('formatLinoCatalog requires a locale name');
+  }
   if (options.style === 'flat') {
     return formatFlatCatalog(locale, translations);
   }
@@ -401,10 +429,10 @@ export function formatLinoCatalogs(catalogues, options = {}) {
 
 export async function loadLocaleFromString(locale, text) {
   const parsedCatalogues = parseLinoCatalogs(text);
-  const parsed =
-    parsedCatalogues.find((catalogue) => catalogue.locale === locale) ||
-    parsedCatalogues[0] ||
-    { locale: null, translations: {} };
+  const parsed = parsedCatalogues.find(
+    (catalogue) => catalogue.locale === locale
+  ) ||
+    parsedCatalogues[0] || { locale: null, translations: {} };
   return {
     locale: locale || parsed.locale,
     translations: parsed.translations,
@@ -422,7 +450,9 @@ export async function loadLocaleFromFile(filePath) {
 export async function loadLocalesFromFile(filePath) {
   const text = await fs.readFile(filePath, 'utf8');
   const parsed = parseLinoCatalogs(text);
-  if (parsed.length > 0) return parsed;
+  if (parsed.length > 0) {
+    return parsed;
+  }
   return [
     {
       locale: path.basename(filePath, path.extname(filePath)),
@@ -437,11 +467,19 @@ export async function loadLocalesFromDirectory(directory) {
   );
   const catalogues = {};
   for (const entry of entries) {
-    if (!entry.isFile()) continue;
-    if (!entry.name.endsWith('.lino')) continue;
+    if (!entry.isFile()) {
+      continue;
+    }
+    if (!entry.name.endsWith('.lino')) {
+      continue;
+    }
     const filePath = path.join(directory, entry.name);
-    for (const { locale, translations } of await loadLocalesFromFile(filePath)) {
-      if (!locale) continue;
+    for (const { locale, translations } of await loadLocalesFromFile(
+      filePath
+    )) {
+      if (!locale) {
+        continue;
+      }
       catalogues[locale] = {
         ...(catalogues[locale] || {}),
         ...translations,

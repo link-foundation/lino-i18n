@@ -11,8 +11,12 @@ import {
 import { interpolate, resolveKey } from './format.js';
 
 function normalizeFallbacks(fallback) {
-  if (!fallback) return [];
-  if (Array.isArray(fallback)) return fallback.filter(Boolean).map(String);
+  if (!fallback) {
+    return [];
+  }
+  if (Array.isArray(fallback)) {
+    return fallback.filter(Boolean).map(String);
+  }
   return [String(fallback)];
 }
 
@@ -61,22 +65,30 @@ export function createI18n(options = {}) {
     const tried = [];
     const locales = [opts?.locale || currentLocale, ...fallbacks];
     for (const locale of locales) {
-      if (tried.includes(locale)) continue;
+      if (tried.includes(locale)) {
+        continue;
+      }
       tried.push(locale);
       const table = catalogues.get(locale);
-      if (!table) continue;
+      if (!table) {
+        continue;
+      }
       const value = resolveKey(table, key, {
         count: opts?.count,
         context: opts?.context,
         locale,
       });
-      if (value !== undefined) return { value, locale };
+      if (value !== undefined) {
+        return { value, locale };
+      }
     }
     return null;
   }
 
   function t(key, params = {}, options = {}) {
-    if (typeof key !== 'string') return key;
+    if (typeof key !== 'string') {
+      return key;
+    }
     const found = _lookup(key, {
       count: params.count,
       context: params.context ?? options.context,
@@ -85,7 +97,9 @@ export function createI18n(options = {}) {
     if (!found) {
       if (typeof onMissingKey === 'function') {
         const fallbackValue = onMissingKey({ key, params, options });
-        if (typeof fallbackValue === 'string') return interpolate(fallbackValue, params);
+        if (typeof fallbackValue === 'string') {
+          return interpolate(fallbackValue, params);
+        }
       }
       if (params && typeof params.defaultValue === 'string') {
         return interpolate(params.defaultValue, params);

@@ -8,33 +8,43 @@ function isPlainObject(value) {
 }
 
 function flatStringValues(input) {
-  if (!isPlainObject(input)) return false;
+  if (!isPlainObject(input)) {
+    return false;
+  }
   return Object.values(input).every((value) => typeof value === 'string');
 }
 
 function hasIcuPlaceholders(input) {
-  if (!isPlainObject(input)) return false;
+  if (!isPlainObject(input)) {
+    return false;
+  }
   return Object.values(input).some(
     (value) => typeof value === 'string' && /\{\s*\w+\s*[,}]/.test(value)
   );
 }
 
 function hasMustachePlaceholders(input) {
-  if (!isPlainObject(input)) return false;
+  if (!isPlainObject(input)) {
+    return false;
+  }
   return Object.values(input).some(
     (value) => typeof value === 'string' && /\{\{\s*\w+\s*\}\}/.test(value)
   );
 }
 
 function hasPercentPlaceholders(input) {
-  if (!isPlainObject(input)) return false;
+  if (!isPlainObject(input)) {
+    return false;
+  }
   return Object.values(input).some(
     (value) => typeof value === 'string' && /%\{\s*\w+\s*\}/.test(value)
   );
 }
 
 export function detectFormat(input) {
-  if (!isPlainObject(input)) return 'i18next';
+  if (!isPlainObject(input)) {
+    return 'i18next';
+  }
   if (
     flatStringValues(input) &&
     (hasIcuPlaceholders(input) || hasMustachePlaceholders(input) === false)
@@ -43,6 +53,8 @@ export function detectFormat(input) {
       return 'react-intl';
     }
   }
-  if (hasPercentPlaceholders(input)) return 'i18n-js';
+  if (hasPercentPlaceholders(input)) {
+    return 'i18n-js';
+  }
   return 'i18next';
 }

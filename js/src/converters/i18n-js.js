@@ -8,7 +8,9 @@ function isPlainObject(value) {
 }
 
 function rewriteInterpolation(template) {
-  if (typeof template !== 'string') return template;
+  if (typeof template !== 'string') {
+    return template;
+  }
   return template.replace(/%\{\s*([\w.-]+)\s*\}/g, '{{$1}}');
 }
 
@@ -25,7 +27,9 @@ function flatten(prefix, value, out) {
     out[prefix] = value.map(rewriteInterpolation).join('\n');
     return;
   }
-  if (!isPlainObject(value)) return;
+  if (!isPlainObject(value)) {
+    return;
+  }
   for (const [key, child] of Object.entries(value)) {
     const nextKey = prefix ? `${prefix}.${key}` : key;
     flatten(nextKey, child, out);
@@ -37,16 +41,20 @@ function looksLikeLocale(name) {
 }
 
 function looksMultiLocale(input) {
-  if (!isPlainObject(input)) return false;
+  if (!isPlainObject(input)) {
+    return false;
+  }
   const keys = Object.keys(input);
-  if (keys.length === 0) return false;
-  return keys.every(
-    (key) => looksLikeLocale(key) && isPlainObject(input[key])
-  );
+  if (keys.length === 0) {
+    return false;
+  }
+  return keys.every((key) => looksLikeLocale(key) && isPlainObject(input[key]));
 }
 
 export function fromI18nJs(input, { locale, defaultLocale = 'en' } = {}) {
-  if (!input) return {};
+  if (!input) {
+    return {};
+  }
   if (looksMultiLocale(input)) {
     const result = {};
     for (const [lc, content] of Object.entries(input)) {

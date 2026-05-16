@@ -8,7 +8,7 @@
 
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, URL } from 'node:url';
 
 import { createI18n } from '../src/i18n.js';
 import {
@@ -107,7 +107,9 @@ function parseFlags(argv) {
 }
 
 async function withConfig(command, flags) {
-  if (!flags.config) return flags;
+  if (!flags.config) {
+    return flags;
+  }
   const configPath =
     flags.config === true ? 'lino-i18n.config.json' : String(flags.config);
   const text = await fs.readFile(configPath, 'utf8');
@@ -156,8 +158,12 @@ async function readJsonInput(inputPath) {
   );
   const out = [];
   for (const entry of entries) {
-    if (!entry.isFile()) continue;
-    if (!entry.name.endsWith('.json')) continue;
+    if (!entry.isFile()) {
+      continue;
+    }
+    if (!entry.name.endsWith('.json')) {
+      continue;
+    }
     const filePath = path.join(inputPath, entry.name);
     const text = await fs.readFile(filePath, 'utf8');
     out.push({
@@ -236,26 +242,40 @@ async function commandCheck(flags, log = console.log, err = console.error) {
   const reference = flags.reference || 'en';
   const catalogues = await loadLocalesFromDirectory(flags.dir);
   if (!catalogues[reference]) {
-    err(`lino-i18n check: reference locale '${reference}' not found in ${flags.dir}`);
+    err(
+      `lino-i18n check: reference locale '${reference}' not found in ${flags.dir}`
+    );
     return 1;
   }
   const referenceKeys = new Set(Object.keys(catalogues[reference]));
   let issues = 0;
   for (const [locale, table] of Object.entries(catalogues)) {
-    if (locale === reference) continue;
+    if (locale === reference) {
+      continue;
+    }
     const missing = [];
     const unknown = [];
     for (const key of referenceKeys) {
-      if (!Object.prototype.hasOwnProperty.call(table, key)) missing.push(key);
+      if (!Object.prototype.hasOwnProperty.call(table, key)) {
+        missing.push(key);
+      }
     }
     for (const key of Object.keys(table)) {
-      if (!referenceKeys.has(key)) unknown.push(key);
+      if (!referenceKeys.has(key)) {
+        unknown.push(key);
+      }
     }
-    if (missing.length === 0 && unknown.length === 0) continue;
+    if (missing.length === 0 && unknown.length === 0) {
+      continue;
+    }
     issues += missing.length + unknown.length;
     log(`# ${locale}`);
-    for (const key of missing) log(`  missing: ${key}`);
-    for (const key of unknown) log(`  unknown: ${key}`);
+    for (const key of missing) {
+      log(`  missing: ${key}`);
+    }
+    for (const key of unknown) {
+      log(`  unknown: ${key}`);
+    }
   }
   if (issues === 0) {
     log('All catalogues are aligned with the reference locale.');
@@ -264,7 +284,12 @@ async function commandCheck(flags, log = console.log, err = console.error) {
   return 2;
 }
 
-async function commandTranslate(flags, rest, log = console.log, err = console.error) {
+async function commandTranslate(
+  flags,
+  rest,
+  log = console.log,
+  err = console.error
+) {
   if (!flags.dir || !flags.locale || rest.length === 0) {
     err('lino-i18n t: --dir, --locale, and a key are required');
     err(commandHelp('t'));
@@ -280,7 +305,9 @@ async function commandTranslate(flags, rest, log = console.log, err = console.er
   const values = {};
   for (const entry of params) {
     const eq = entry.indexOf('=');
-    if (eq === -1) continue;
+    if (eq === -1) {
+      continue;
+    }
     const name = entry.slice(0, eq);
     const value = entry.slice(eq + 1);
     values[name] = /^-?\d+(\.\d+)?$/.test(value) ? Number(value) : value;
@@ -299,10 +326,7 @@ export async function runCli(argv, io = {}) {
   }
   if (argv[0] === '--version' || argv[0] === '-v') {
     const pkg = JSON.parse(
-      await fs.readFile(
-        new URL('../package.json', import.meta.url),
-        'utf8'
-      )
+      await fs.readFile(new URL('../package.json', import.meta.url), 'utf8')
     );
     log(pkg.version);
     return 0;
@@ -330,7 +354,9 @@ export async function runCli(argv, io = {}) {
 }
 
 function isCliEntryPoint() {
-  if (!process.argv[1]) return false;
+  if (!process.argv[1]) {
+    return false;
+  }
   try {
     return process.argv[1] === fileURLToPath(import.meta.url);
   } catch {

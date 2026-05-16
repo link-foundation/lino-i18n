@@ -46,7 +46,7 @@ test('convert i18next JSON to .lino', async () => {
   const enText = await fs.readFile(path.join(outDir, 'en.lino'), 'utf8');
   assert.match(enText, /^en/);
   assert.match(enText, /greeting ['"]Hello, \{\{name\}\}['"]/);
-  assert.match(enText, /cart\n    items\n      one ['"]\{\{count\}\} item['"]/);
+  assert.match(enText, /cart\n {4}items\n {6}one ['"]\{\{count\}\} item['"]/);
   assert.match(enText, /other ['"]\{\{count\}\} items['"]/);
 
   await fs.rm(tmp, { recursive: true, force: true });
@@ -97,7 +97,7 @@ test('convert can bundle multiple locales into one .lino file', async () => {
   const text = await fs.readFile(path.join(outDir, 'all.lino'), 'utf8');
   assert.match(text, /^en\n/);
   assert.match(text, /\nru\n/);
-  assert.match(text, /cart\n    items\n      one ['"]\{\{count\}\} item['"]/);
+  assert.match(text, /cart\n {4}items\n {6}one ['"]\{\{count\}\} item['"]/);
   assert.match(text, /many ['"]\{\{count\}\} товаров['"]/);
 
   await fs.rm(tmp, { recursive: true, force: true });

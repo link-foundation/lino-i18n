@@ -27,10 +27,7 @@ test('interpolate replaces {{var}} and {var}', () => {
     interpolate('You have {count} items', { count: 3 }),
     'You have 3 items'
   );
-  assert.equal(
-    interpolate('Hi {{name}}', {}),
-    'Hi {{name}}'
-  );
+  assert.equal(interpolate('Hi {{name}}', {}), 'Hi {{name}}');
 });
 
 test('pluralSuffix follows CLDR rules', () => {
@@ -94,13 +91,7 @@ test('parseLinoCatalog flattens nested groups and selector variants', () => {
 
 test('parseLinoCatalogs accepts bundled multi-locale files', () => {
   const parsed = parseLinoCatalogs(
-    [
-      'en',
-      '  greeting "Hello"',
-      'ru',
-      '  greeting "Привет"',
-      '',
-    ].join('\n')
+    ['en', '  greeting "Hello"', 'ru', '  greeting "Привет"', ''].join('\n')
   );
   assert.deepEqual(parsed, [
     { locale: 'en', translations: { greeting: 'Hello' } },
@@ -120,9 +111,12 @@ test('formatLinoCatalog emits nested catalogue syntax by default', () => {
     role_other: 'They are a developer',
     legal: 'First line\nSecond line',
   });
-  assert.match(text, /cart\n    title "Your cart"\n    items\n      zero "Your cart is empty"/);
-  assert.match(text, /role\n    male "He is a developer"/);
-  assert.match(text, /legal """\n    First line\n    Second line\n  """/);
+  assert.match(
+    text,
+    /cart\n {4}title "Your cart"\n {4}items\n {6}zero "Your cart is empty"/
+  );
+  assert.match(text, /role\n {4}male "He is a developer"/);
+  assert.match(text, /legal """\n {4}First line\n {4}Second line\n {2}"""/);
 
   const parsed = parseLinoCatalog(text);
   assert.equal(parsed.translations.legal, 'First line\nSecond line');
@@ -199,17 +193,13 @@ test('loadLocalesFromDirectory merges bundled and per-language files', async () 
 });
 
 test('createI18n.loadLocaleFile registers bundled locale files', async () => {
-  const tmp = await fs.mkdtemp(path.join(os.tmpdir(), 'lino-i18n-bundle-file-'));
+  const tmp = await fs.mkdtemp(
+    path.join(os.tmpdir(), 'lino-i18n-bundle-file-')
+  );
   const filePath = path.join(tmp, 'all.lino');
   await fs.writeFile(
     filePath,
-    [
-      'en',
-      '  greeting "Hello"',
-      'ru',
-      '  greeting "Привет"',
-      '',
-    ].join('\n')
+    ['en', '  greeting "Hello"', 'ru', '  greeting "Привет"', ''].join('\n')
   );
 
   const i18n = createI18n({ defaultLocale: 'en', fallback: ['en'] });

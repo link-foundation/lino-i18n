@@ -22,10 +22,10 @@ const i18n = createI18n({
   fallback: ['en'],
 });
 
-i18n.t('greeting', { name: 'World' });            // → "Hello, World!"
-i18n.t('cart.items', { count: 0 });               // → "Your cart is empty"
+i18n.t('greeting', { name: 'World' }); // → "Hello, World!"
+i18n.t('cart.items', { count: 0 }); // → "Your cart is empty"
 i18n.t('cart.items', { count: 3 }, { locale: 'ru' }); // → "3 товара"
-i18n.t('role', { context: 'female' });            // → "She is a developer"
+i18n.t('role', { context: 'female' }); // → "She is a developer"
 ```
 
 A sample `.lino` catalogue looks like this:
