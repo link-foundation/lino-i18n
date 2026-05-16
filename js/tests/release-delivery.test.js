@@ -10,7 +10,10 @@ const jsRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const repoRoot = resolve(jsRoot, '..');
 
 function readRepoFile(...pathParts) {
-  return readFileSync(resolve(repoRoot, ...pathParts), 'utf8');
+  return readFileSync(resolve(repoRoot, ...pathParts), 'utf8').replaceAll(
+    '\r\n',
+    '\n'
+  );
 }
 
 function extractWorkflowJob(workflow, jobName) {

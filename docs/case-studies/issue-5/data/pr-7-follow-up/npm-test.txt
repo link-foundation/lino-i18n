@@ -6,147 +6,147 @@ TAP version 13
 # Subtest: convert i18next JSON to .lino
 ok 1 - convert i18next JSON to .lino
   ---
-  duration_ms: 10.725353
+  duration_ms: 23.067445
   ...
 # Subtest: convert can bundle multiple locales into one .lino file
 ok 2 - convert can bundle multiple locales into one .lino file
   ---
-  duration_ms: 12.019816
+  duration_ms: 19.624313
   ...
 # Subtest: convert reads defaults from a JSON config file
 ok 3 - convert reads defaults from a JSON config file
   ---
-  duration_ms: 4.687753
+  duration_ms: 7.987921
   ...
 # Subtest: check reports missing keys against a reference locale
 ok 4 - check reports missing keys against a reference locale
   ---
-  duration_ms: 3.763683
+  duration_ms: 10.595797
   ...
 # Subtest: t command translates a key with parameters
 ok 5 - t command translates a key with parameters
   ---
-  duration_ms: 4.333273
+  duration_ms: 6.670913
   ...
 # Subtest: fromI18next flattens nested keys with dot separator
 ok 6 - fromI18next flattens nested keys with dot separator
   ---
-  duration_ms: 1.568203
+  duration_ms: 4.147825
   ...
 # Subtest: fromI18next supports namespace shape with `ns:` prefix
 ok 7 - fromI18next supports namespace shape with `ns:` prefix
   ---
-  duration_ms: 0.298886
+  duration_ms: 0.494489
   ...
 # Subtest: fromI18next defaults to provided locale when input is a single catalogue
 ok 8 - fromI18next defaults to provided locale when input is a single catalogue
   ---
-  duration_ms: 0.11394
+  duration_ms: 0.176414
   ...
 # Subtest: fromI18nJs rewrites %{var} into {{var}}
 ok 9 - fromI18nJs rewrites %{var} into {{var}}
   ---
-  duration_ms: 0.291807
+  duration_ms: 0.394369
   ...
 # Subtest: fromReactIntl handles plain ICU strings
 ok 10 - fromReactIntl handles plain ICU strings
   ---
-  duration_ms: 0.32099
+  duration_ms: 0.299527
   ...
 # Subtest: fromReactIntl extracts defaultMessage
 ok 11 - fromReactIntl extracts defaultMessage
   ---
-  duration_ms: 0.117125
+  duration_ms: 0.136123
   ...
 # Subtest: fromReactIntl decompiles compiled AST nodes
 ok 12 - fromReactIntl decompiles compiled AST nodes
   ---
-  duration_ms: 0.129764
+  duration_ms: 0.169082
   ...
 # Subtest: interpolate replaces {{var}} and {var}
 ok 13 - interpolate replaces {{var}} and {var}
   ---
-  duration_ms: 1.148657
+  duration_ms: 4.476696
   ...
 # Subtest: pluralSuffix follows CLDR rules
 ok 14 - pluralSuffix follows CLDR rules
   ---
-  duration_ms: 0.737071
+  duration_ms: 1.278149
   ...
 # Subtest: parseLinoCatalog round-trips with formatLinoCatalog
 ok 15 - parseLinoCatalog round-trips with formatLinoCatalog
   ---
-  duration_ms: 1.520482
+  duration_ms: 1.796524
   ...
 # Subtest: parseLinoCatalog flattens nested groups and selector variants
 ok 16 - parseLinoCatalog flattens nested groups and selector variants
   ---
-  duration_ms: 0.516941
+  duration_ms: 0.532775
   ...
 # Subtest: parseLinoCatalogs accepts bundled multi-locale files
 ok 17 - parseLinoCatalogs accepts bundled multi-locale files
   ---
-  duration_ms: 1.186302
+  duration_ms: 0.857341
   ...
 # Subtest: formatLinoCatalog emits nested catalogue syntax by default
 ok 18 - formatLinoCatalog emits nested catalogue syntax by default
   ---
-  duration_ms: 0.789019
+  duration_ms: 1.004851
   ...
 # Subtest: createI18n resolves missing keys via fallback
 ok 19 - createI18n resolves missing keys via fallback
   ---
-  duration_ms: 0.575039
+  duration_ms: 0.746385
   ...
 # Subtest: createI18n applies CLDR plurals per locale
 ok 20 - createI18n applies CLDR plurals per locale
   ---
-  duration_ms: 15.283483
+  duration_ms: 23.080075
   ...
 # Subtest: loadLocalesFromDirectory merges bundled and per-language files
 ok 21 - loadLocalesFromDirectory merges bundled and per-language files
   ---
-  duration_ms: 5.734086
+  duration_ms: 5.559795
   ...
 # Subtest: createI18n.loadLocaleFile registers bundled locale files
 ok 22 - createI18n.loadLocaleFile registers bundled locale files
   ---
-  duration_ms: 4.673872
+  duration_ms: 6.250356
   ...
 # Subtest: createI18n falls back to onMissingKey when set
 ok 23 - createI18n falls back to onMissingKey when set
   ---
-  duration_ms: 0.420828
+  duration_ms: 0.346938
   ...
 # Subtest: createI18n exposes context (gender) suffixes
 ok 24 - createI18n exposes context (gender) suffixes
   ---
-  duration_ms: 0.23397
+  duration_ms: 0.133109
   ...
 # Subtest: createI18n exposes namespace-prefixed keys
 ok 25 - createI18n exposes namespace-prefixed keys
   ---
-  duration_ms: 0.23409
+  duration_ms: 0.138707
   ...
 # Subtest: npm package dry-run contains the publishable runtime surface
 ok 26 - npm package dry-run contains the publishable runtime surface
   ---
-  duration_ms: 411.94646
+  duration_ms: 534.485295
   ...
 # Subtest: delivery jobs keep running after optional release gates are skipped
 ok 27 - delivery jobs keep running after optional release gates are skipped
   ---
-  duration_ms: 1.514603
+  duration_ms: 2.561587
   ...
 # Subtest: root README advertises package, release, and CI/CD status badges
 ok 28 - root README advertises package, release, and CI/CD status badges
   ---
-  duration_ms: 1.491949
+  duration_ms: 2.819422
   ...
 # Subtest: JavaScript GitHub release notes include package and CI/CD badges
 ok 29 - JavaScript GitHub release notes include package and CI/CD badges
   ---
-  duration_ms: 0.737472
+  duration_ms: 1.253022
   ...
 1..29
 # tests 29
@@ -156,4 +156,4 @@ ok 29 - JavaScript GitHub release notes include package and CI/CD badges
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 474.409036
+# duration_ms 638.622383
