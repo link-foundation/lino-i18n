@@ -13,16 +13,18 @@ npm install lino-i18n
 
 ```js
 import { createI18n } from 'lino-i18n';
-import { loadLinoCatalogue } from 'lino-i18n/loaders';
+import { loadLocalesFromDirectory } from 'lino-i18n/loaders';
 
-const i18n = createI18n({ defaultLocale: 'en', fallback: ['en'] });
-
-const en = loadLinoCatalogue('./locales/en.lino');
-i18n.addTranslations(en.locale, en.translations);
+const catalogues = await loadLocalesFromDirectory('./locales');
+const i18n = createI18n({
+  locales: catalogues,
+  defaultLocale: 'en',
+  fallback: ['en'],
+});
 
 i18n.t('greeting', { name: 'World' });            // → "Hello, World!"
 i18n.t('cart.items', { count: 0 });               // → "Your cart is empty"
-i18n.t('cart.items', { count: 3, locale: 'ru' }); // → "3 товара"
+i18n.t('cart.items', { count: 3 }, { locale: 'ru' }); // → "3 товара"
 i18n.t('role', { context: 'female' });            // → "She is a developer"
 ```
 
@@ -31,14 +33,26 @@ A sample `.lino` catalogue looks like this:
 ```lino
 en
   greeting "Hello, {{name}}!"
-  cart.title "Your cart"
-  cart.items_zero "Your cart is empty"
-  cart.items_one "{{count}} item"
-  cart.items_other "{{count}} items"
-  role_male "He is a developer"
-  role_female "She is a developer"
-  role_other "They are a developer"
+  hero
+    description """
+      Keep each language in its own block, nest related messages together,
+      and still resolve the same runtime keys.
+    """
+  cart
+    title "Your cart"
+    items
+      zero "Your cart is empty"
+      one "{{count}} item"
+      other "{{count}} items"
+  role
+    male "He is a developer"
+    female "She is a developer"
+    other "They are a developer"
 ```
+
+Nested plural and context groups flatten to the runtime suffix keys
+`cart.items_one`, `cart.items_other`, and `role_female`. A single file may also
+contain several top-level locale blocks, for example `en` followed by `ru`.
 
 ## CLI
 
@@ -57,6 +71,10 @@ npx lino-i18n convert --from i18n-js \
 # react-intl bundle (AST or string) → .lino
 npx lino-i18n convert --from react-intl \
   --in messages/en.json --out locales --locale en
+
+# Bundle all converted locales into one .lino file
+npx lino-i18n convert --from i18next \
+  --in locales-json --out locales --single-file all.lino
 ```
 
 Run `npx lino-i18n --help` for every option.
@@ -64,13 +82,16 @@ Run `npx lino-i18n --help` for every option.
 ## Features
 
 - CLDR plural categories via `Intl.PluralRules`.
+- Nested `.lino` authoring with multiline quoted values.
 - `{{var}}` and `{var}` placeholder syntax for compatibility with i18next
   and `react-intl`.
 - Context (gender) suffixes: `role_male`, `role_female`, `role_other`.
 - Namespace prefixes via `:` (`navigation:home`) and `.` (`cart.title`).
 - Configurable fallback chain.
+- Bundled multi-locale `.lino` files and per-language directories.
 - Optional missing-key handler.
 - Converter CLI for `i18next`, `i18n-js`, and `react-intl`.
+- JSON config files via `--config`.
 
 ## Scripts
 

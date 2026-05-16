@@ -21,6 +21,7 @@ console.log(i18n.t('greeting', { name: 'Alice' }));
 console.log(i18n.t('cart.items', { count: 0 }));
 console.log(i18n.t('cart.items', { count: 1 }));
 console.log(i18n.t('cart.items', { count: 5 }));
+console.log(i18n.t('hero.description'));
 
 i18n.setLocale('ru');
 console.log(i18n.t('greeting', { name: 'Алиса' }));
@@ -28,5 +29,5 @@ console.log(i18n.t('cart.items', { count: 1 }));
 console.log(i18n.t('cart.items', { count: 3 }));
 console.log(i18n.t('cart.items', { count: 7 }));
 
-console.log(i18n.t('navigation:home'));
+console.log(i18n.t('navigation.home'));
 console.log(i18n.t('role', { context: 'female' }));

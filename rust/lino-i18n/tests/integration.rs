@@ -27,6 +27,10 @@ fn macro_loads_translations() {
         "Your cart is empty"
     );
     assert_eq!(c.t_count("cart.items", 5, &[("count", "5")]), "5 items");
+    assert_eq!(
+        c.t("hero.description", &[]),
+        "Keep each language in its own block, nest related messages together,\nand still resolve the same runtime keys."
+    );
 }
 
 #[test]
@@ -96,5 +100,26 @@ fn fallback_chain_picks_first_available() {
     assert_eq!(
         i18n.t_with("xx", &[], &TOptions::new().default_value("Default")),
         "Default"
+    );
+}
+
+#[test]
+fn runtime_loads_bundled_locale_file() {
+    let path = std::env::temp_dir().join(format!("lino-i18n-bundle-{}.lino", std::process::id()));
+    std::fs::write(
+        &path,
+        "en\n  greeting \"Hello\"\nru\n  greeting \"Привет\"\n",
+    )
+    .unwrap();
+
+    let mut i18n = I18n::new("en");
+    let first = i18n.load_lino_file(&path).unwrap();
+    std::fs::remove_file(&path).unwrap();
+
+    assert_eq!(first, "en");
+    assert_eq!(i18n.list_locales(), vec!["en", "ru"]);
+    assert_eq!(
+        i18n.t_with("greeting", &[], &TOptions::new().locale("ru")),
+        "Привет"
     );
 }

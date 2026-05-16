@@ -17,6 +17,7 @@ fn main() {
     println!("{}", c.t_count("cart.items", 0, &[("count", "0")]));
     println!("{}", c.t_count("cart.items", 1, &[("count", "1")]));
     println!("{}", c.t_count("cart.items", 5, &[("count", "5")]));
+    println!("{}", c.t("hero.description", &[]));
 
     println!(
         "{}",

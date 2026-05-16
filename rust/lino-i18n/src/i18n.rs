@@ -5,7 +5,7 @@ use std::path::Path;
 use std::sync::Arc;
 
 use crate::format::interpolate;
-use crate::loader::{load_lino_catalog, load_lino_directory, parse_lino_catalog, LoaderError};
+use crate::loader::{load_lino_catalogs, load_lino_directory, parse_lino_catalogs, LoaderError};
 use crate::plurals::plural_suffix;
 
 /// Callback invoked when a key cannot be resolved in any locale or fallback.
@@ -109,22 +109,39 @@ impl I18n {
 
     /// Load a `.lino` catalogue from text and register it.
     pub fn load_lino(&mut self, text: &str) -> Result<String, LoaderError> {
-        let cat = parse_lino_catalog(text)?;
-        let table = self.locales.entry(cat.locale.clone()).or_default();
-        for (k, v) in cat.translations {
-            table.insert(k, v);
+        let cats = parse_lino_catalogs(text)?;
+        let first_locale =
+            cats.first()
+                .map(|cat| cat.locale.clone())
+                .ok_or_else(|| LoaderError::Shape {
+                    path: Path::new("<inline>").to_path_buf(),
+                })?;
+        for cat in cats {
+            let table = self.locales.entry(cat.locale).or_default();
+            for (k, v) in cat.translations {
+                table.insert(k, v);
+            }
         }
-        Ok(cat.locale)
+        Ok(first_locale)
     }
 
-    /// Load a single `.lino` file from disk.
+    /// Load one `.lino` file from disk. Bundled files with multiple top-level
+    /// locale blocks register every locale and return the first locale name.
     pub fn load_lino_file(&mut self, path: impl AsRef<Path>) -> Result<String, LoaderError> {
-        let cat = load_lino_catalog(path)?;
-        let table = self.locales.entry(cat.locale.clone()).or_default();
-        for (k, v) in cat.translations {
-            table.insert(k, v);
+        let cats = load_lino_catalogs(path)?;
+        let first_locale =
+            cats.first()
+                .map(|cat| cat.locale.clone())
+                .ok_or_else(|| LoaderError::Shape {
+                    path: Path::new("<file>").to_path_buf(),
+                })?;
+        for cat in cats {
+            let table = self.locales.entry(cat.locale).or_default();
+            for (k, v) in cat.translations {
+                table.insert(k, v);
+            }
         }
-        Ok(cat.locale)
+        Ok(first_locale)
     }
 
     /// Load every `*.lino` file from a directory.

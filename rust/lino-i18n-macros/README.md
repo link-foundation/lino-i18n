@@ -3,8 +3,8 @@
 Compile-time macros for [`lino-i18n`](https://crates.io/crates/lino-i18n).
 
 The `i18n!` macro reads every `.lino` file from a directory at compile
-time and expands to an `::lino_i18n::I18n` value with every translation
-already baked in.
+time and expands to an `::lino_i18n::I18n` value populated from embedded
+catalogue text.
 
 ```rust,ignore
 use std::sync::OnceLock;
@@ -17,7 +17,6 @@ fn catalog() -> &'static I18n {
 ```
 
 Paths are resolved relative to `CARGO_MANIFEST_DIR`. Each `.lino` file is
-tracked via a generated `include_str!` so Cargo rebuilds when translations
-change.
+tracked through `include_str!` so Cargo rebuilds when translations change.
 
 Licensed under the Unlicense (public domain).

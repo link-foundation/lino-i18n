@@ -12,9 +12,10 @@ The repository ships two implementations and a CLI:
 | [`js/bin/lino-i18n.js`](./js/bin) | A converter CLI that turns `i18next`, `i18n-js`, and `react-intl` catalogues into `.lino`. |
 | [`rust/`](./rust)         | The `lino-i18n` Rust crate plus the `lino-i18n-macros` companion (`i18n!` compile-time macro). |
 
-Both implementations consume the **same** `.lino` files. They share plural
-categories, placeholder syntax, context suffixes, and fallback semantics, so a
-catalogue you author once works in either runtime.
+Both implementations consume the **same** `.lino` files. They share nested
+catalogue authoring, plural categories, placeholder syntax, context suffixes,
+multiline strings, bundled locale files, and fallback semantics, so a catalogue
+you author once works in either runtime.
 
 Released under the [Unlicense](LICENSE) — public domain.
 
@@ -29,14 +30,27 @@ text and trivial to diff.
 ```lino
 en
   greeting "Hello, {{name}}!"
-  cart.title "Your cart"
-  cart.items_zero "Your cart is empty"
-  cart.items_one "{{count}} item"
-  cart.items_other "{{count}} items"
-  role_male "He is a developer"
-  role_female "She is a developer"
-  role_other "They are a developer"
+  hero
+    title "Localization that reads like content"
+    description """
+      Keep each language in its own block, nest related messages together,
+      and still resolve the same runtime keys.
+    """
+  cart
+    title "Your cart"
+    items
+      zero "Your cart is empty"
+      one "{{count}} item"
+      other "{{count}} items"
+  role
+    male "He is a developer"
+    female "She is a developer"
+    other "They are a developer"
 ```
+
+The loader flattens that catalogue to runtime keys like `cart.title`,
+`cart.items_one`, and `role_female`, so existing `t('cart.items', { count })`
+and context calls stay compact.
 
 The full design rationale lives in [docs/case-studies/issue-1](./docs/case-studies/issue-1).
 
@@ -52,14 +66,18 @@ npm test
 
 ```js
 import { createI18n } from 'lino-i18n';
-import { loadLinoCatalogue } from 'lino-i18n/loaders';
+import { loadLocalesFromDirectory } from 'lino-i18n/loaders';
 
-const i18n = createI18n({ defaultLocale: 'en', fallback: ['en'] });
-i18n.addTranslations('en', loadLinoCatalogue('./locales/en.lino').translations);
+const catalogues = await loadLocalesFromDirectory('./locales');
+const i18n = createI18n({
+  locales: catalogues,
+  defaultLocale: 'en',
+  fallback: ['en'],
+});
 
 i18n.t('greeting', { name: 'World' });              // → "Hello, World!"
 i18n.t('cart.items', { count: 0 });                 // → "Your cart is empty"
-i18n.t('cart.items', { count: 3, locale: 'ru' });   // → "3 товара"
+i18n.t('cart.items', { count: 3 }, { locale: 'ru' }); // → "3 товара"
 ```
 
 ### Rust
@@ -93,9 +111,9 @@ fn main() {
 ```
 
 The `i18n!` macro reads every `*.lino` under the given directory at compile
-time and bakes the resulting `(key → value)` tables into the binary. Each
-file is tracked through a generated `include_str!`, so Cargo rebuilds when
-any catalogue changes.
+time, embeds the catalogue text, and builds the `(key → value)` tables when
+the `I18n` value is initialized. Each file is tracked through `include_str!`,
+so Cargo rebuilds when any catalogue changes.
 
 ### CLI conversion
 
@@ -113,6 +131,10 @@ npx lino-i18n convert --from i18n-js \
 # Decompile a react-intl message bundle (AST or string) to .lino
 npx lino-i18n convert --from react-intl \
   --in messages/en.json --out locales --locale en
+
+# Bundle several locales into one .lino file
+npx lino-i18n convert --from i18next \
+  --in locales-json --out locales --single-file all.lino
 ```
 
 Run `npx lino-i18n --help` for the full option list.
@@ -122,6 +144,7 @@ Run `npx lino-i18n --help` for the full option list.
 | Feature                           | i18next | i18n-js | react-intl | **lino-i18n**           |
 | --------------------------------- | :-----: | :-----: | :--------: | :---------------------: |
 | Text-friendly catalogue format    |    ✗    |    ~    |     ✗      | **✓** (`.lino`)         |
+| Nested authoring format           |    ✓    |    ✓    |     ~      | **✓**                   |
 | Plural categories (CLDR)          |    ✓    |    ✓    |     ✓      | **✓**                   |
 | Placeholder interpolation         |    ✓    |    ✓    |     ✓      | **✓** (`{{x}}` & `{x}`) |
 | Context / gender suffixes         |    ✓    |    ~    |     ✗      | **✓**                   |
