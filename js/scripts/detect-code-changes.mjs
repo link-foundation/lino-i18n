@@ -11,13 +11,14 @@
 // This ensures a commit touching only non-code files skips tests,
 // even when earlier commits in the same PR changed code.
 //
-// Excluded from code changes (don't require changesets):
+// Excluded from release-affecting code changes (don't require changesets):
 // - Markdown files in any folder
 // - js/.changeset/ folder (changeset metadata)
 // - docs/ folder (documentation)
 // - experiments/ folder (experimental scripts)
 // - examples/ folder (example scripts)
 // - js/scripts/ and workflow-only changes (CI/CD maintenance)
+// - js/tests/ folder (test-only changes)
 //
 // Outputs (written to GITHUB_OUTPUT):
 //   mjs-changed, js-changed, package-changed, docs-changed,
@@ -94,8 +95,10 @@ function isExcludedFromCodeChanges(filePath) {
     'docs/',
     'experiments/',
     'examples/',
+    '.github/workflows/',
     'js/examples/',
     'js/scripts/',
+    'js/tests/',
   ];
 
   for (const folder of excludedFolders) {
@@ -143,7 +146,7 @@ function detectChanges() {
     (file) => !isExcludedFromCodeChanges(file)
   );
 
-  console.log('\nFiles considered as code changes:');
+  console.log('\nFiles considered as release-affecting code changes:');
   if (codeChangedFiles.length === 0) {
     console.log('  (none)');
   } else {
@@ -152,7 +155,7 @@ function detectChanges() {
   console.log('');
 
   const codePattern =
-    /^(js\/(bin|src|tests)\/.*\.(mjs|js|json)|js\/package-lock\.json)$/;
+    /^(js\/(bin|src)\/.*\.(mjs|js|json)|js\/package(?:-lock)?\.json)$/;
   const anyCodeChanged = codeChangedFiles.some((file) =>
     codePattern.test(file)
   );
