@@ -1,5 +1,9 @@
 # lino-i18n
 
+[![JavaScript CI/CD](https://github.com/link-foundation/lino-i18n/actions/workflows/js.yml/badge.svg?branch=main)](https://github.com/link-foundation/lino-i18n/actions/workflows/js.yml)
+[![npm](https://img.shields.io/npm/v/lino-i18n?label=npm)](https://www.npmjs.com/package/lino-i18n)
+[![GitHub Release](https://img.shields.io/github/v/release/link-foundation/lino-i18n?include_prereleases&label=release)](https://github.com/link-foundation/lino-i18n/releases)
+
 Universal internationalization for JavaScript with translations stored in
 [Links Notation](https://github.com/linksplatform/Protocols.Lino) (`.lino`).
 
