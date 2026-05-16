@@ -299,11 +299,25 @@ jobs:
             - Release type: `${{ github.event.inputs.bump_type }}`
             - Description: ${{ github.event.inputs.description || 'Manual release' }}
 
+  # === DEPLOY DOCUMENTATION ===
+  # actions/deploy-pages requires id-token: write to mint the OIDC token
+  # used by GitHub Pages. Without it the deploy step fails with
+  # "Ensure GITHUB_TOKEN has permission 'id-token: write'." (issue #8).
+  # The top-level permissions block intentionally omits id-token: write so
+  # only this job can mint OIDC tokens.
+  #
+  # One-time setup: in the repository's Settings -> Pages, set Source to
+  # "GitHub Actions". Otherwise the first run fails on actions/deploy-pages
+  # with "Get Pages site failed" / "Failed to create deployment".
   deploy-docs:
     name: Deploy Rust Docs
     runs-on: ubuntu-latest
     timeout-minutes: 15
     needs: [package]
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     if: |
       always() && !cancelled() &&
       needs.package.result == 'success' &&

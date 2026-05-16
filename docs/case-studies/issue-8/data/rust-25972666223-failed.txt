@@ -1,0 +1,32 @@
+Deploy Rust Docs	Run actions/deploy-pages@v5	﻿2026-05-16T20:56:13.5787383Z ##[group]Run actions/deploy-pages@v5
+Deploy Rust Docs	Run actions/deploy-pages@v5	2026-05-16T20:56:13.5787708Z with:
+Deploy Rust Docs	Run actions/deploy-pages@v5	2026-05-16T20:56:13.5788047Z   token: ***
+Deploy Rust Docs	Run actions/deploy-pages@v5	2026-05-16T20:56:13.5788245Z   timeout: 600000
+Deploy Rust Docs	Run actions/deploy-pages@v5	2026-05-16T20:56:13.5788448Z   error_count: 10
+Deploy Rust Docs	Run actions/deploy-pages@v5	2026-05-16T20:56:13.5788682Z   reporting_interval: 5000
+Deploy Rust Docs	Run actions/deploy-pages@v5	2026-05-16T20:56:13.5788928Z   artifact_name: github-pages
+Deploy Rust Docs	Run actions/deploy-pages@v5	2026-05-16T20:56:13.5789174Z   preview: false
+Deploy Rust Docs	Run actions/deploy-pages@v5	2026-05-16T20:56:13.5789370Z env:
+Deploy Rust Docs	Run actions/deploy-pages@v5	2026-05-16T20:56:13.5789550Z   CARGO_TERM_COLOR: always
+Deploy Rust Docs	Run actions/deploy-pages@v5	2026-05-16T20:56:13.5789789Z   RUST_BACKTRACE: 1
+Deploy Rust Docs	Run actions/deploy-pages@v5	2026-05-16T20:56:13.5790023Z   RUSTFLAGS: -Dwarnings
+Deploy Rust Docs	Run actions/deploy-pages@v5	2026-05-16T20:56:13.5790339Z   CARGO_REGISTRY_TOKEN: ***
+Deploy Rust Docs	Run actions/deploy-pages@v5	2026-05-16T20:56:13.5790628Z   CARGO_TOKEN: ***
+Deploy Rust Docs	Run actions/deploy-pages@v5	2026-05-16T20:56:13.5790829Z   CARGO_HOME: /home/runner/.cargo
+Deploy Rust Docs	Run actions/deploy-pages@v5	2026-05-16T20:56:13.5791072Z   CARGO_INCREMENTAL: 0
+Deploy Rust Docs	Run actions/deploy-pages@v5	2026-05-16T20:56:13.5791276Z   GITHUB_PAGES: true
+Deploy Rust Docs	Run actions/deploy-pages@v5	2026-05-16T20:56:13.5791476Z ##[endgroup]
+Deploy Rust Docs	Run actions/deploy-pages@v5	2026-05-16T20:56:13.7703657Z (node:3461) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Deploy Rust Docs	Run actions/deploy-pages@v5	2026-05-16T20:56:13.7704464Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Deploy Rust Docs	Run actions/deploy-pages@v5	2026-05-16T20:56:13.9837638Z Error: Error message: Unable to get ACTIONS_ID_TOKEN_REQUEST_URL env variable
+Deploy Rust Docs	Run actions/deploy-pages@v5	2026-05-16T20:56:13.9838759Z     at OidcClient.<anonymous> (/home/runner/work/_actions/actions/deploy-pages/v5/node_modules/@actions/core/lib/oidc-utils.js:71:1)
+Deploy Rust Docs	Run actions/deploy-pages@v5	2026-05-16T20:56:13.9839334Z     at Generator.next (<anonymous>)
+Deploy Rust Docs	Run actions/deploy-pages@v5	2026-05-16T20:56:13.9839774Z     at /home/runner/work/_actions/actions/deploy-pages/v5/node_modules/@actions/core/lib/oidc-utils.js:8:1
+Deploy Rust Docs	Run actions/deploy-pages@v5	2026-05-16T20:56:13.9840243Z     at new Promise (<anonymous>)
+Deploy Rust Docs	Run actions/deploy-pages@v5	2026-05-16T20:56:13.9840800Z     at __webpack_modules__.98041.__awaiter (/home/runner/work/_actions/actions/deploy-pages/v5/node_modules/@actions/core/lib/oidc-utils.js:4:1)
+Deploy Rust Docs	Run actions/deploy-pages@v5	2026-05-16T20:56:13.9841635Z     at OidcClient.getIDToken (/home/runner/work/_actions/actions/deploy-pages/v5/node_modules/@actions/core/lib/oidc-utils.js:57:1)
+Deploy Rust Docs	Run actions/deploy-pages@v5	2026-05-16T20:56:13.9842413Z     at Object.<anonymous> (/home/runner/work/_actions/actions/deploy-pages/v5/node_modules/@actions/core/lib/core.js:315:1)
+Deploy Rust Docs	Run actions/deploy-pages@v5	2026-05-16T20:56:13.9843208Z     at Generator.next (<anonymous>)
+Deploy Rust Docs	Run actions/deploy-pages@v5	2026-05-16T20:56:13.9843866Z     at /home/runner/work/_actions/actions/deploy-pages/v5/node_modules/@actions/core/lib/core.js:27:1
+Deploy Rust Docs	Run actions/deploy-pages@v5	2026-05-16T20:56:13.9844531Z     at new Promise (<anonymous>)
+Deploy Rust Docs	Run actions/deploy-pages@v5	2026-05-16T20:56:13.9878060Z ##[error]Ensure GITHUB_TOKEN has permission "id-token: write".
