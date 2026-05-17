@@ -48,6 +48,9 @@ en
       zero "Your cart is empty"
       one "{{count}} item"
       other "{{count}} items"
+  error
+    label "Error"
+    invalid_github_url "Error: Invalid GitHub URL format"
   role
     male "He is a developer"
     female "She is a developer"
@@ -57,6 +60,9 @@ en
 Nested plural and context groups flatten to the runtime suffix keys
 `cart.items_one`, `cart.items_other`, and `role_female`. A single file may also
 contain several top-level locale blocks, for example `en` followed by `ru`.
+Use a `label` child when a translated group also needs its own runtime key:
+`error.label` and `error` both resolve to `"Error"`, and an explicit `error`
+translation wins over the generated alias.
 
 For migrations from flatter catalogues, enable compatibility aliases when
 loading or creating the runtime:
@@ -112,6 +118,7 @@ Run `npx lino-i18n --help` for every option.
 - Context (gender) suffixes: `role_male`, `role_female`, `role_other`.
 - Migration aliases for deeper nested keys and parent labels.
 - Namespace prefixes via `:` (`navigation:home`) and `.` (`cart.title`).
+- Group label aliases via `label` children.
 - Configurable fallback chain.
 - Bundled multi-locale `.lino` files and per-language directories.
 - Optional missing-key handler.

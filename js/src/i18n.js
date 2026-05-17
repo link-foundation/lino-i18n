@@ -69,7 +69,7 @@ export function createI18n(options = {}) {
 
   function has(key, locale = currentLocale) {
     const table = catalogues.get(locale);
-    return Boolean(table && Object.prototype.hasOwnProperty.call(table, key));
+    return resolveKey(table, key, { locale }) !== undefined;
   }
 
   function _lookup(key, opts) {

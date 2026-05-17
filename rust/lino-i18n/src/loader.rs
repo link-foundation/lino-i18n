@@ -54,6 +54,7 @@ struct LogicalLine {
 const SELECTOR_SUFFIXES: &[&str] = &[
     "zero", "one", "two", "few", "many", "other", "male", "female", "neutral",
 ];
+const LABEL_ALIAS_KEY: &str = "label";
 
 /// Parse a `.lino` string into a [`Catalogue`].
 pub fn parse_lino_catalog(text: &str) -> Result<Catalogue, LoaderError> {
@@ -483,10 +484,24 @@ fn parse_locale_trees(text: &str, path: &Path) -> Result<Vec<LocaleTree>, Loader
 }
 
 fn is_selector_group(tree: &TreeMap) -> bool {
-    !tree.is_empty()
-        && tree
-            .iter()
-            .all(|(key, value)| is_selector_suffix(key) && matches!(value, TreeValue::Leaf(_)))
+    let mut suffix_count = 0;
+    for (key, value) in tree {
+        if key == LABEL_ALIAS_KEY {
+            continue;
+        }
+        if !is_selector_suffix(key) || !matches!(value, TreeValue::Leaf(_)) {
+            return false;
+        }
+        suffix_count += 1;
+    }
+    suffix_count > 0
+}
+
+fn label_alias_value(tree: &TreeMap) -> Option<&String> {
+    match tree.get(LABEL_ALIAS_KEY) {
+        Some(TreeValue::Leaf(text)) => Some(text),
+        _ => None,
+    }
 }
 
 fn flatten_tree(tree: &TreeMap, path: &[String], out: &mut BTreeMap<String, String>) {
@@ -501,7 +516,14 @@ fn flatten_tree(tree: &TreeMap, path: &[String], out: &mut BTreeMap<String, Stri
                 let mut parts = path.to_vec();
                 parts.push(key.clone());
                 let base = parts.join(".");
+                if let Some(text) = label_alias_value(children) {
+                    out.insert(format!("{base}.{LABEL_ALIAS_KEY}"), text.clone());
+                    out.entry(base.clone()).or_insert_with(|| text.clone());
+                }
                 for (suffix, child) in children {
+                    if suffix == LABEL_ALIAS_KEY {
+                        continue;
+                    }
                     if let TreeValue::Leaf(text) = child {
                         out.insert(format!("{base}_{suffix}"), text.clone());
                     }
@@ -510,7 +532,11 @@ fn flatten_tree(tree: &TreeMap, path: &[String], out: &mut BTreeMap<String, Stri
             TreeValue::Branch(children) => {
                 let mut parts = path.to_vec();
                 parts.push(key.clone());
+                let base = parts.join(".");
                 flatten_tree(children, &parts, out);
+                if let Some(text) = label_alias_value(children) {
+                    out.entry(base).or_insert_with(|| text.clone());
+                }
             }
         }
     }
@@ -527,15 +553,26 @@ fn split_selector_suffix(key: &str) -> Option<(&str, &str)> {
 fn set_nested_value(tree: &mut TreeMap, parts: &[&str], value: String) {
     if let Some((first, rest)) = parts.split_first() {
         if rest.is_empty() {
-            tree.insert((*first).to_string(), TreeValue::Leaf(value));
+            if let Some(TreeValue::Branch(children)) = tree.get_mut(*first) {
+                children
+                    .entry(LABEL_ALIAS_KEY.to_string())
+                    .or_insert(TreeValue::Leaf(value));
+            } else {
+                tree.insert((*first).to_string(), TreeValue::Leaf(value));
+            }
             return;
         }
 
         let entry = tree
             .entry((*first).to_string())
             .or_insert_with(|| TreeValue::Branch(BTreeMap::new()));
-        if !matches!(entry, TreeValue::Branch(_)) {
-            *entry = TreeValue::Branch(BTreeMap::new());
+        if let TreeValue::Leaf(existing) = entry {
+            let mut children = BTreeMap::new();
+            children.insert(
+                LABEL_ALIAS_KEY.to_string(),
+                TreeValue::Leaf(std::mem::take(existing)),
+            );
+            *entry = TreeValue::Branch(children);
         }
         if let TreeValue::Branch(children) = entry {
             set_nested_value(children, rest, value);
@@ -578,7 +615,24 @@ fn format_value(value: &str, indent: &str) -> String {
 }
 
 fn format_tree_lines(tree: &TreeMap, indent: &str, lines: &mut Vec<String>) {
+    if let Some(value) = tree.get(LABEL_ALIAS_KEY) {
+        match value {
+            TreeValue::Leaf(text) => {
+                lines.push(format!(
+                    "{indent}{LABEL_ALIAS_KEY} {}",
+                    format_value(text, indent)
+                ));
+            }
+            TreeValue::Branch(children) => {
+                lines.push(format!("{indent}{LABEL_ALIAS_KEY}"));
+                format_tree_lines(children, &format!("{indent}  "), lines);
+            }
+        }
+    }
     for (key, value) in tree {
+        if key == LABEL_ALIAS_KEY {
+            continue;
+        }
         match value {
             TreeValue::Leaf(text) => {
                 lines.push(format!("{indent}{key} {}", format_value(text, indent)));
@@ -753,5 +807,86 @@ mod tests {
             translations.get("error"),
             Some(&"Explicit error".to_string())
         );
+    }
+
+    #[test]
+    fn format_preserves_scalar_parent_translations_as_labels() {
+        let mut t = BTreeMap::new();
+        t.insert("error".to_string(), "Error".to_string());
+        t.insert(
+            "error.invalid_github_url".to_string(),
+            "Error: Invalid GitHub URL format".to_string(),
+        );
+
+        let text = format_lino_catalog("en", &t);
+        assert!(text.contains("error\n    label \"Error\""));
+        assert!(text.contains("invalid_github_url \"Error: Invalid GitHub URL format\""));
+
+        let cat = parse_lino_catalog(&text).unwrap();
+        assert_eq!(cat.translations.get("error"), Some(&"Error".to_string()));
+        assert_eq!(
+            cat.translations.get("error.label"),
+            Some(&"Error".to_string())
+        );
+        assert_eq!(
+            cat.translations.get("error.invalid_github_url"),
+            Some(&"Error: Invalid GitHub URL format".to_string())
+        );
+    }
+
+    #[test]
+    fn parse_aliases_nested_label_children_to_their_parent_key() {
+        let text = [
+            "en",
+            "  error",
+            "    label \"Error\"",
+            "    invalid_github_url \"Error: Invalid GitHub URL format\"",
+            "",
+        ]
+        .join("\n");
+
+        let cat = parse_lino_catalog(&text).unwrap();
+        assert_eq!(cat.translations.get("error"), Some(&"Error".to_string()));
+        assert_eq!(
+            cat.translations.get("error.label"),
+            Some(&"Error".to_string())
+        );
+        assert_eq!(
+            cat.translations.get("error.invalid_github_url"),
+            Some(&"Error: Invalid GitHub URL format".to_string())
+        );
+    }
+
+    #[test]
+    fn label_aliases_preserve_selector_suffix_groups() {
+        let mut t = BTreeMap::new();
+        t.insert("cart.items".to_string(), "Items".to_string());
+        t.insert("cart.items_one".to_string(), "{{count}} item".to_string());
+        t.insert(
+            "cart.items_other".to_string(),
+            "{{count}} items".to_string(),
+        );
+
+        let text = format_lino_catalog("en", &t);
+        assert!(text.contains("items\n      label \"Items\"\n      one \"{{count}} item\""));
+
+        let cat = parse_lino_catalog(&text).unwrap();
+        assert_eq!(
+            cat.translations.get("cart.items"),
+            Some(&"Items".to_string())
+        );
+        assert_eq!(
+            cat.translations.get("cart.items.label"),
+            Some(&"Items".to_string())
+        );
+        assert_eq!(
+            cat.translations.get("cart.items_one"),
+            Some(&"{{count}} item".to_string())
+        );
+        assert_eq!(
+            cat.translations.get("cart.items_other"),
+            Some(&"{{count}} items".to_string())
+        );
+        assert!(!cat.translations.contains_key("cart.items.one"));
     }
 }

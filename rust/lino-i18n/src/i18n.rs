@@ -11,6 +11,8 @@ use crate::loader::{
 };
 use crate::plurals::plural_suffix;
 
+const LABEL_ALIAS_KEY: &str = "label";
+
 /// Callback invoked when a key cannot be resolved in any locale or fallback.
 /// Returning `Some` replaces the would-be fallback (typically the raw key)
 /// with the provided string.
@@ -320,6 +322,9 @@ fn resolve(
         if let Some(v) = table.get(*target) {
             return Some(v.clone());
         }
+        if let Some(v) = table.get(&format!("{target}.{LABEL_ALIAS_KEY}")) {
+            return Some(v.clone());
+        }
     }
 
     if options.context.is_some() {
@@ -468,5 +473,23 @@ mod tests {
             "Tool aliases imply --tool <tool>"
         );
         assert_eq!(i18n.t("error", &[]), "Error");
+    }
+
+    #[test]
+    fn resolves_label_aliases_while_explicit_keys_win() {
+        let mut i18n = I18n::new("en");
+        i18n.add_translations(
+            "en",
+            [
+                ("error", "Explicit error"),
+                ("error.label", "Error"),
+                ("warning.label", "Warning"),
+            ],
+        );
+
+        assert_eq!(i18n.t("error", &[]), "Explicit error");
+        assert_eq!(i18n.t("error.label", &[]), "Error");
+        assert_eq!(i18n.t("warning", &[]), "Warning");
+        assert_eq!(i18n.t("warning.label", &[]), "Warning");
     }
 }

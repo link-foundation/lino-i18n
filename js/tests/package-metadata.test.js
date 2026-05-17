@@ -1,10 +1,14 @@
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import test from 'node:test';
 
 const packageRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const packageJson = JSON.parse(
+  readFileSync(resolve(packageRoot, 'package.json'), 'utf8')
+);
 const isWindows = process.platform === 'win32';
 
 test('npm package dry-run contains the publishable runtime surface', () => {
@@ -21,7 +25,7 @@ test('npm package dry-run contains the publishable runtime surface', () => {
   const files = new Set(pack.files.map((file) => file.path));
 
   assert.equal(pack.name, 'lino-i18n');
-  assert.equal(pack.version, '0.0.1');
+  assert.equal(pack.version, packageJson.version);
   assert.equal(pack.bundled.length, 0);
 
   assert.ok(files.has('README.md'));
