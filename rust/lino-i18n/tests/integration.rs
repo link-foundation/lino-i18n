@@ -10,6 +10,18 @@ fn macro_catalog() -> &'static I18n {
     C.get_or_init(|| i18n!("locales", default = "en", fallback = "en"))
 }
 
+fn macro_catalog_with_aliases() -> &'static I18n {
+    static C: OnceLock<I18n> = OnceLock::new();
+    C.get_or_init(|| {
+        i18n!(
+            "locales",
+            default = "en",
+            fallback = "en",
+            compatibility_aliases = "collapse-tail,parent-label"
+        )
+    })
+}
+
 fn loader_catalog() -> I18n {
     let mut i18n = I18n::new("en");
     i18n.set_fallbacks(["en".to_string()]);
@@ -31,6 +43,12 @@ fn macro_loads_translations() {
         c.t("hero.description", &[]),
         "Keep each language in its own block, nest related messages together,\nand still resolve the same runtime keys."
     );
+}
+
+#[test]
+fn macro_accepts_compatibility_alias_options() {
+    let c = macro_catalog_with_aliases();
+    assert_eq!(c.t("greeting", &[("name", "World")]), "Hello, World!");
 }
 
 #[test]

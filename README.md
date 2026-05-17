@@ -64,6 +64,24 @@ and context calls stay compact. A nested group's `label` child is also exposed
 as the parent key, so `error.label` and `error` both resolve to `"Error"` while
 an explicit `error` entry still takes precedence.
 
+### Migration aliases
+
+Projects that migrate older mixed dot/underscore keys to deeper `.lino`
+nesting can opt into generated compatibility aliases:
+
+```js
+const catalogues = await loadLocalesFromDirectory('./locales', {
+  compatibilityAliases: ['collapseTail', 'parentLabel'],
+});
+const i18n = createI18n({ locales: catalogues, defaultLocale: 'en' });
+```
+
+With `collapseTail`, a canonical key such as
+`telegram.help.solve.alias.detail` also exposes
+`telegram.help_solve_alias_detail`, `telegram.help.solve_alias_detail`, and
+`telegram.help.solve.alias_detail`. With `parentLabel`, `error.label` also
+exposes `error`. Explicit catalogue entries always win over generated aliases.
+
 The full design rationale lives in [docs/case-studies/issue-1](./docs/case-studies/issue-1).
 
 ## Quick start

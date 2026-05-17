@@ -7,6 +7,8 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 
+import { expandCompatibilityAliases } from './compatibility.js';
+
 const SELECTOR_SUFFIXES = new Set([
   'zero',
   'one',
@@ -429,16 +431,16 @@ function formatFlatCatalog(locale, translations) {
 // Parse the contents of one `.lino` catalogue. Returns the first
 // `{ locale, translations }` pair when the file contains multiple locale
 // roots. Use `parseLinoCatalogs` to keep every root.
-export function parseLinoCatalog(text) {
-  const catalogues = parseLinoCatalogs(text);
+export function parseLinoCatalog(text, options = {}) {
+  const catalogues = parseLinoCatalogs(text, options);
   return catalogues[0] || { locale: null, translations: {} };
 }
 
 // Parse every top-level locale block in a `.lino` string.
-export function parseLinoCatalogs(text) {
+export function parseLinoCatalogs(text, options = {}) {
   return parseLocaleTrees(text).map(({ locale, tree }) => ({
     locale: locale || null,
-    translations: flattenTree(tree),
+    translations: expandCompatibilityAliases(flattenTree(tree), options),
   }));
 }
 
@@ -470,8 +472,8 @@ export function formatLinoCatalogs(catalogues, options = {}) {
     .join('\n\n');
 }
 
-export async function loadLocaleFromString(locale, text) {
-  const parsedCatalogues = parseLinoCatalogs(text);
+export async function loadLocaleFromString(locale, text, options = {}) {
+  const parsedCatalogues = parseLinoCatalogs(text, options);
   const parsed = parsedCatalogues.find(
     (catalogue) => catalogue.locale === locale
   ) ||
@@ -482,17 +484,17 @@ export async function loadLocaleFromString(locale, text) {
   };
 }
 
-export async function loadLocaleFromFile(filePath) {
+export async function loadLocaleFromFile(filePath, options = {}) {
   const text = await fs.readFile(filePath, 'utf8');
-  const parsed = parseLinoCatalog(text);
+  const parsed = parseLinoCatalog(text, options);
   const locale =
     parsed.locale || path.basename(filePath, path.extname(filePath));
   return { locale, translations: parsed.translations };
 }
 
-export async function loadLocalesFromFile(filePath) {
+export async function loadLocalesFromFile(filePath, options = {}) {
   const text = await fs.readFile(filePath, 'utf8');
-  const parsed = parseLinoCatalogs(text);
+  const parsed = parseLinoCatalogs(text, options);
   if (parsed.length > 0) {
     return parsed;
   }
@@ -504,7 +506,7 @@ export async function loadLocalesFromFile(filePath) {
   ];
 }
 
-export async function loadLocalesFromDirectory(directory) {
+export async function loadLocalesFromDirectory(directory, options = {}) {
   const entries = (await fs.readdir(directory, { withFileTypes: true })).sort(
     (left, right) => left.name.localeCompare(right.name)
   );
@@ -528,6 +530,9 @@ export async function loadLocalesFromDirectory(directory) {
         ...translations,
       };
     }
+  }
+  for (const [locale, translations] of Object.entries(catalogues)) {
+    catalogues[locale] = expandCompatibilityAliases(translations, options);
   }
   return catalogues;
 }
