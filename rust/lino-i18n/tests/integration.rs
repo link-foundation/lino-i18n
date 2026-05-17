@@ -3,7 +3,7 @@
 
 use std::sync::OnceLock;
 
-use lino_i18n::{i18n, I18n, TOptions};
+use lino_i18n::{i18n, parse_lino_catalog, I18n, TOptions};
 
 fn macro_catalog() -> &'static I18n {
     static C: OnceLock<I18n> = OnceLock::new();
@@ -30,6 +30,96 @@ fn macro_loads_translations() {
     assert_eq!(
         c.t("hero.description", &[]),
         "Keep each language in its own block, nest related messages together,\nand still resolve the same runtime keys."
+    );
+}
+
+#[test]
+fn parser_flattens_hive_mind_style_deep_multiline_catalogues() {
+    let parsed = parse_lino_catalog(
+        r#"en
+  telegram
+    help
+      title "Help"
+      solve
+        alias
+          detail "Tool aliases imply `--tool <tool>`"
+  prompt
+    system
+      general
+        guidelines
+          header "General guidelines."
+          body """
+            When you start, create a detailed plan for yourself.
+            Follow your todo list step by step.
+          """
+  error
+    label "Error"
+    invalid
+      github
+        url "Error: Invalid GitHub URL format"
+"#,
+    )
+    .unwrap();
+
+    let body =
+        "When you start, create a detailed plan for yourself.\nFollow your todo list step by step.";
+    assert_eq!(
+        parsed
+            .translations
+            .get("telegram.help.solve.alias.detail")
+            .map(String::as_str),
+        Some("Tool aliases imply `--tool <tool>`")
+    );
+    assert_eq!(
+        parsed
+            .translations
+            .get("prompt.system.general.guidelines.body")
+            .map(String::as_str),
+        Some(body)
+    );
+    assert_eq!(
+        parsed.translations.get("error.label").map(String::as_str),
+        Some("Error")
+    );
+    assert_eq!(
+        parsed
+            .translations
+            .get("error.invalid.github.url")
+            .map(String::as_str),
+        Some("Error: Invalid GitHub URL format")
+    );
+}
+
+#[test]
+fn deeply_nested_sample_catalogues_resolve() {
+    let c = macro_catalog();
+    assert_eq!(c.t("telegram.help.title", &[]), "Help");
+    assert_eq!(
+        c.t("telegram.help.solve.alias.detail", &[]),
+        "Tool aliases imply `--tool <tool>`"
+    );
+    assert_eq!(
+        c.t("prompt.system.general.guidelines.body", &[]),
+        "When you start, create a detailed plan for yourself.\nFollow your todo list step by step."
+    );
+    assert_eq!(c.t("error.label", &[]), "Error");
+    assert_eq!(
+        c.t("error.invalid.github.url", &[]),
+        "Error: Invalid GitHub URL format"
+    );
+
+    let loader = loader_catalog();
+    assert_eq!(
+        loader.t_with("telegram.help.title", &[], &TOptions::new().locale("ru")),
+        "Справка"
+    );
+    assert_eq!(
+        loader.t_with(
+            "prompt.system.general.guidelines.header",
+            &[],
+            &TOptions::new().locale("ru"),
+        ),
+        "Общие рекомендации."
     );
 }
 

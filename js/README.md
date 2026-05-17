@@ -30,6 +30,7 @@ i18n.t('greeting', { name: 'World' }); // → "Hello, World!"
 i18n.t('cart.items', { count: 0 }); // → "Your cart is empty"
 i18n.t('cart.items', { count: 3 }, { locale: 'ru' }); // → "3 товара"
 i18n.t('role', { context: 'female' }); // → "She is a developer"
+i18n.t('telegram.help.solve.alias.detail'); // → "Tool aliases imply `--tool <tool>`"
 ```
 
 A sample `.lino` catalogue looks like this:
@@ -37,11 +38,26 @@ A sample `.lino` catalogue looks like this:
 ```lino
 en
   greeting "Hello, {{name}}!"
-  hero
-    description """
-      Keep each language in its own block, nest related messages together,
-      and still resolve the same runtime keys.
-    """
+  telegram
+    help
+      title "Help"
+      solve
+        alias
+          detail "Tool aliases imply `--tool <tool>`"
+  prompt
+    system
+      general
+        guidelines
+          header "General guidelines."
+          body """
+            When you start, create a detailed plan for yourself.
+            Follow your todo list step by step.
+          """
+  error
+    label "Error"
+    invalid
+      github
+        url "Error: Invalid GitHub URL format"
   cart
     title "Your cart"
     items
@@ -54,9 +70,20 @@ en
     other "They are a developer"
 ```
 
-Nested plural and context groups flatten to the runtime suffix keys
-`cart.items_one`, `cart.items_other`, and `role_female`. A single file may also
-contain several top-level locale blocks, for example `en` followed by `ru`.
+Deeply nested blocks flatten to canonical dot keys such as
+`telegram.help.solve.alias.detail` and
+`prompt.system.general.guidelines.body`. Nested plural and context groups still
+flatten to runtime suffix keys such as `cart.items_one`, `cart.items_other`,
+and `role_female`. A single file may also contain several top-level locale
+blocks, for example `en` followed by `ru`.
+
+When a namespace also needs a translated label, author it explicitly as a child
+such as `error.label`. Built-in parent aliases like `error → error.label` are
+tracked in [issue #10](https://github.com/link-foundation/lino-i18n/issues/10).
+Old underscore-tail migration aliases such as
+`telegram.help_solve_alias_detail` are tracked in
+[issue #11](https://github.com/link-foundation/lino-i18n/issues/11); keep those
+aliases in application code until that helper is available.
 
 ## CLI
 
