@@ -49,6 +49,9 @@ en
       zero "Your cart is empty"
       one "{{count}} item"
       other "{{count}} items"
+  error
+    label "Error"
+    invalid_github_url "Error: Invalid GitHub URL format"
   role
     male "He is a developer"
     female "She is a developer"
@@ -58,7 +61,9 @@ en
 The loader flattens nested plural and context groups to runtime suffix keys
 such as `cart.items_one` and `role_female`. One file may contain several
 top-level locale blocks, so both `locales/en.lino` and a bundled
-`locales/all.lino` layout work.
+`locales/all.lino` layout work. Use a `label` child when a translated group
+also needs its own runtime key: `error.label` and `error` both resolve to
+`"Error"`, and an explicit `error` translation wins over the generated alias.
 
 ## Runtime API
 
@@ -97,6 +102,7 @@ assert_eq!(
   and `react-intl`.
 - Context (gender) suffixes: `role_male`, `role_female`, `role_other`.
 - Namespace prefixes with `.` (e.g. `navigation.home`).
+- Group label aliases via `label` children.
 - Configurable fallback chain plus per-call `default_value`.
 - Bundled multi-locale `.lino` files and per-language directories.
 - Optional missing-key handler hook.

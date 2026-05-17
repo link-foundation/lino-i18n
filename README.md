@@ -49,6 +49,9 @@ en
       zero "Your cart is empty"
       one "{{count}} item"
       other "{{count}} items"
+  error
+    label "Error"
+    invalid_github_url "Error: Invalid GitHub URL format"
   role
     male "He is a developer"
     female "She is a developer"
@@ -57,7 +60,9 @@ en
 
 The loader flattens that catalogue to runtime keys like `cart.title`,
 `cart.items_one`, and `role_female`, so existing `t('cart.items', { count })`
-and context calls stay compact.
+and context calls stay compact. A nested group's `label` child is also exposed
+as the parent key, so `error.label` and `error` both resolve to `"Error"` while
+an explicit `error` entry still takes precedence.
 
 The full design rationale lives in [docs/case-studies/issue-1](./docs/case-studies/issue-1).
 

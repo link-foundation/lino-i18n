@@ -3,6 +3,7 @@
 // resolution algorithm shared between the runtime and the CLI.
 
 const INTERPOLATION_PATTERN = /\{\{?\s*([\w.$:-]+)\s*\}?\}/g;
+const LABEL_ALIAS_KEY = 'label';
 
 const PLURAL_SUFFIXES = ['zero', 'one', 'two', 'few', 'many', 'other'];
 
@@ -100,6 +101,10 @@ export function resolveKey(table, key, { count, context, locale } = {}) {
     if (direct !== undefined) {
       return direct;
     }
+    const labelAlias = lookup(table, `${target}.${LABEL_ALIAS_KEY}`);
+    if (labelAlias !== undefined) {
+      return labelAlias;
+    }
   }
 
   if (context) {
@@ -112,4 +117,8 @@ export function resolveKey(table, key, { count, context, locale } = {}) {
   return undefined;
 }
 
-export const _internals = { PLURAL_SUFFIXES, INTERPOLATION_PATTERN };
+export const _internals = {
+  PLURAL_SUFFIXES,
+  INTERPOLATION_PATTERN,
+  LABEL_ALIAS_KEY,
+};

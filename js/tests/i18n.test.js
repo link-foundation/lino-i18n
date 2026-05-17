@@ -124,6 +124,60 @@ test('formatLinoCatalog emits nested catalogue syntax by default', () => {
   assert.equal(parsed.translations.role_female, 'She is a developer');
 });
 
+test('formatLinoCatalog preserves scalar parent translations as labels', () => {
+  const text = formatLinoCatalog('en', {
+    error: 'Error',
+    'error.invalid_github_url': 'Error: Invalid GitHub URL format',
+  });
+
+  assert.match(text, /error\n {4}label "Error"/);
+  assert.match(text, /invalid_github_url "Error: Invalid GitHub URL format"/);
+
+  const parsed = parseLinoCatalog(text);
+  assert.equal(parsed.translations.error, 'Error');
+  assert.equal(parsed.translations['error.label'], 'Error');
+  assert.equal(
+    parsed.translations['error.invalid_github_url'],
+    'Error: Invalid GitHub URL format'
+  );
+});
+
+test('parseLinoCatalog aliases nested label children to their parent key', () => {
+  const parsed = parseLinoCatalog(
+    [
+      'en',
+      '  error',
+      '    label "Error"',
+      '    invalid_github_url "Error: Invalid GitHub URL format"',
+      '',
+    ].join('\n')
+  );
+
+  assert.equal(parsed.translations.error, 'Error');
+  assert.equal(parsed.translations['error.label'], 'Error');
+  assert.equal(
+    parsed.translations['error.invalid_github_url'],
+    'Error: Invalid GitHub URL format'
+  );
+});
+
+test('label aliases preserve selector suffix groups', () => {
+  const text = formatLinoCatalog('en', {
+    'cart.items': 'Items',
+    'cart.items_one': '{{count}} item',
+    'cart.items_other': '{{count}} items',
+  });
+
+  assert.match(text, /items\n {6}label "Items"\n {6}one "\{\{count\}\} item"/);
+
+  const parsed = parseLinoCatalog(text);
+  assert.equal(parsed.translations['cart.items'], 'Items');
+  assert.equal(parsed.translations['cart.items.label'], 'Items');
+  assert.equal(parsed.translations['cart.items_one'], '{{count}} item');
+  assert.equal(parsed.translations['cart.items_other'], '{{count}} items');
+  assert.equal(parsed.translations['cart.items.one'], undefined);
+});
+
 test('createI18n resolves missing keys via fallback', () => {
   const i18n = createI18n({
     locales: {
@@ -248,4 +302,22 @@ test('createI18n exposes namespace-prefixed keys', () => {
   });
   assert.equal(i18n.t('nav:home'), 'Home');
   assert.equal(i18n.t('nav:profile'), 'Profile');
+});
+
+test('createI18n resolves label aliases while explicit keys win', () => {
+  const i18n = createI18n({
+    locales: {
+      en: {
+        error: 'Explicit error',
+        'error.label': 'Error',
+        'warning.label': 'Warning',
+      },
+    },
+    defaultLocale: 'en',
+  });
+
+  assert.equal(i18n.t('error'), 'Explicit error');
+  assert.equal(i18n.t('error.label'), 'Error');
+  assert.equal(i18n.t('warning'), 'Warning');
+  assert.equal(i18n.t('warning.label'), 'Warning');
 });
