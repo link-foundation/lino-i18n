@@ -59,6 +59,24 @@ The loader flattens that catalogue to runtime keys like `cart.title`,
 `cart.items_one`, and `role_female`, so existing `t('cart.items', { count })`
 and context calls stay compact.
 
+### Migration aliases
+
+Projects that migrate older mixed dot/underscore keys to deeper `.lino`
+nesting can opt into generated compatibility aliases:
+
+```js
+const catalogues = await loadLocalesFromDirectory('./locales', {
+  compatibilityAliases: ['collapseTail', 'parentLabel'],
+});
+const i18n = createI18n({ locales: catalogues, defaultLocale: 'en' });
+```
+
+With `collapseTail`, a canonical key such as
+`telegram.help.solve.alias.detail` also exposes
+`telegram.help_solve_alias_detail`, `telegram.help.solve_alias_detail`, and
+`telegram.help.solve.alias_detail`. With `parentLabel`, `error.label` also
+exposes `error`. Explicit catalogue entries always win over generated aliases.
+
 The full design rationale lives in [docs/case-studies/issue-1](./docs/case-studies/issue-1).
 
 ## Quick start

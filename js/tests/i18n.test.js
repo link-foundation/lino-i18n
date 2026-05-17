@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 
 import {
   createI18n,
+  expandCompatibilityAliases,
   parseLinoCatalog,
   parseLinoCatalogs,
   formatLinoCatalog,
@@ -97,6 +98,33 @@ test('parseLinoCatalogs accepts bundled multi-locale files', () => {
     { locale: 'en', translations: { greeting: 'Hello' } },
     { locale: 'ru', translations: { greeting: 'Привет' } },
   ]);
+});
+
+test('parseLinoCatalog can expand compatibility aliases while loading', () => {
+  const parsed = parseLinoCatalog(
+    [
+      'en',
+      '  telegram',
+      '    help',
+      '      solve',
+      '        alias',
+      '          detail "Tool aliases imply --tool <tool>"',
+      '  error',
+      '    label "Error"',
+      '',
+    ].join('\n'),
+    { compatibilityAliases: ['collapseTail', 'parentLabel'] }
+  );
+
+  assert.equal(
+    parsed.translations['telegram.help_solve_alias_detail'],
+    'Tool aliases imply --tool <tool>'
+  );
+  assert.equal(
+    parsed.translations['telegram.help.solve_alias_detail'],
+    'Tool aliases imply --tool <tool>'
+  );
+  assert.equal(parsed.translations.error, 'Error');
 });
 
 test('formatLinoCatalog emits nested catalogue syntax by default', () => {
@@ -248,4 +276,57 @@ test('createI18n exposes namespace-prefixed keys', () => {
   });
   assert.equal(i18n.t('nav:home'), 'Home');
   assert.equal(i18n.t('nav:profile'), 'Profile');
+});
+
+test('expandCompatibilityAliases adds migration aliases without overwriting explicit keys', () => {
+  const expanded = expandCompatibilityAliases(
+    {
+      'telegram.help.solve.alias.detail': 'Tool aliases imply --tool <tool>',
+      'telegram.help_solve_alias_detail': 'Explicit legacy value',
+      'error.label': 'Error',
+      error: 'Explicit error',
+    },
+    { compatibilityAliases: ['collapseTail', 'parentLabel'] }
+  );
+
+  assert.equal(
+    expanded['telegram.help_solve_alias_detail'],
+    'Explicit legacy value'
+  );
+  assert.equal(
+    expanded['telegram.help.solve_alias_detail'],
+    'Tool aliases imply --tool <tool>'
+  );
+  assert.equal(
+    expanded['telegram.help.solve.alias_detail'],
+    'Tool aliases imply --tool <tool>'
+  );
+  assert.equal(expanded.error, 'Explicit error');
+});
+
+test('createI18n can expose underscore-tail migration aliases', () => {
+  const i18n = createI18n({
+    locales: {
+      en: {
+        'telegram.help.solve.alias.detail': 'Tool aliases imply --tool <tool>',
+        'error.label': 'Error',
+      },
+    },
+    defaultLocale: 'en',
+    compatibilityAliases: ['collapseTail', 'parentLabel'],
+  });
+
+  assert.equal(
+    i18n.t('telegram.help_solve_alias_detail'),
+    'Tool aliases imply --tool <tool>'
+  );
+  assert.equal(
+    i18n.t('telegram.help.solve_alias_detail'),
+    'Tool aliases imply --tool <tool>'
+  );
+  assert.equal(
+    i18n.t('telegram.help.solve.alias_detail'),
+    'Tool aliases imply --tool <tool>'
+  );
+  assert.equal(i18n.t('error'), 'Error');
 });

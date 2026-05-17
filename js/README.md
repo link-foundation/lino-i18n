@@ -58,6 +58,26 @@ Nested plural and context groups flatten to the runtime suffix keys
 `cart.items_one`, `cart.items_other`, and `role_female`. A single file may also
 contain several top-level locale blocks, for example `en` followed by `ru`.
 
+For migrations from flatter catalogues, enable compatibility aliases when
+loading or creating the runtime:
+
+```js
+const catalogues = await loadLocalesFromDirectory('./locales', {
+  compatibilityAliases: ['collapseTail', 'parentLabel'],
+});
+const i18n = createI18n({
+  locales: catalogues,
+  defaultLocale: 'en',
+});
+```
+
+`collapseTail` exposes underscore-tail aliases for deeper keys, so
+`telegram.help.solve.alias.detail` also resolves through
+`telegram.help_solve_alias_detail`, `telegram.help.solve_alias_detail`, and
+`telegram.help.solve.alias_detail`. `parentLabel` maps `error.label` to the
+legacy parent key `error`. Generated aliases never overwrite explicit
+translations.
+
 ## CLI
 
 The package ships a converter that turns popular i18n formats into
@@ -90,6 +110,7 @@ Run `npx lino-i18n --help` for every option.
 - `{{var}}` and `{var}` placeholder syntax for compatibility with i18next
   and `react-intl`.
 - Context (gender) suffixes: `role_male`, `role_female`, `role_other`.
+- Migration aliases for deeper nested keys and parent labels.
 - Namespace prefixes via `:` (`navigation:home`) and `.` (`cart.title`).
 - Configurable fallback chain.
 - Bundled multi-locale `.lino` files and per-language directories.

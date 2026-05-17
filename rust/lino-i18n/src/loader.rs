@@ -25,6 +25,16 @@ pub struct Catalogue {
     pub translations: BTreeMap<String, String>,
 }
 
+/// Compatibility aliases generated from canonical keys during catalogue
+/// migrations.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum CompatibilityAlias {
+    /// `a.b.c.d` also exposes `a.b_c_d` and `a.b.c_d`.
+    CollapseTail,
+    /// `a.label` also exposes `a`.
+    ParentLabel,
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 enum TreeValue {
     Leaf(String),
@@ -145,6 +155,67 @@ pub fn format_lino_catalog(locale: &str, translations: &BTreeMap<String, String>
     let mut lines = vec![locale.to_string()];
     format_tree_lines(&tree, "  ", &mut lines);
     lines.join("\n")
+}
+
+/// Add compatibility aliases to a flat translation table.
+///
+/// Existing entries are preserved. Generated aliases are inserted only when no
+/// explicit translation already exists for that key.
+pub fn expand_compatibility_aliases(
+    translations: &mut BTreeMap<String, String>,
+    aliases: &[CompatibilityAlias],
+) {
+    if aliases.is_empty() {
+        return;
+    }
+    let originals: Vec<(String, String)> = translations
+        .iter()
+        .map(|(key, value)| (key.clone(), value.clone()))
+        .collect();
+    for (key, value) in originals {
+        for alias in compatibility_aliases_for_key(&key, aliases) {
+            translations.entry(alias).or_insert_with(|| value.clone());
+        }
+    }
+}
+
+pub(crate) fn compatibility_aliases_for_key(
+    key: &str,
+    aliases: &[CompatibilityAlias],
+) -> Vec<String> {
+    let mut out = Vec::new();
+    if aliases.contains(&CompatibilityAlias::CollapseTail) {
+        out.extend(collapse_tail_aliases(key));
+    }
+    if aliases.contains(&CompatibilityAlias::ParentLabel) {
+        if let Some(parent) = parent_label_alias(key) {
+            out.push(parent);
+        }
+    }
+    out
+}
+
+fn collapse_tail_aliases(key: &str) -> Vec<String> {
+    let parts: Vec<&str> = key.split('.').collect();
+    if parts.len() < 3 {
+        return Vec::new();
+    }
+
+    let mut aliases = Vec::with_capacity(parts.len().saturating_sub(2));
+    for index in 1..(parts.len() - 1) {
+        aliases.push(format!(
+            "{}.{}",
+            parts[..index].join("."),
+            parts[index..].join("_")
+        ));
+    }
+    aliases
+}
+
+fn parent_label_alias(key: &str) -> Option<String> {
+    key.strip_suffix(".label")
+        .filter(|parent| !parent.is_empty())
+        .map(ToOwned::to_owned)
 }
 
 fn is_selector_suffix(value: &str) -> bool {
@@ -641,5 +712,46 @@ mod tests {
         let cat = parse_lino_catalog(&text).unwrap();
         assert_eq!(cat.locale, "en");
         assert_eq!(cat.translations, t);
+    }
+
+    #[test]
+    fn expands_compatibility_aliases_without_overwriting_explicit_keys() {
+        let mut translations = BTreeMap::from([
+            (
+                "telegram.help.solve.alias.detail".to_string(),
+                "Tool aliases imply --tool <tool>".to_string(),
+            ),
+            (
+                "telegram.help_solve_alias_detail".to_string(),
+                "Explicit legacy value".to_string(),
+            ),
+            ("error.label".to_string(), "Error".to_string()),
+            ("error".to_string(), "Explicit error".to_string()),
+        ]);
+
+        expand_compatibility_aliases(
+            &mut translations,
+            &[
+                CompatibilityAlias::CollapseTail,
+                CompatibilityAlias::ParentLabel,
+            ],
+        );
+
+        assert_eq!(
+            translations.get("telegram.help_solve_alias_detail"),
+            Some(&"Explicit legacy value".to_string())
+        );
+        assert_eq!(
+            translations.get("telegram.help.solve_alias_detail"),
+            Some(&"Tool aliases imply --tool <tool>".to_string())
+        );
+        assert_eq!(
+            translations.get("telegram.help.solve.alias_detail"),
+            Some(&"Tool aliases imply --tool <tool>".to_string())
+        );
+        assert_eq!(
+            translations.get("error"),
+            Some(&"Explicit error".to_string())
+        );
     }
 }

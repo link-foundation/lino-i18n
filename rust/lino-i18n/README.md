@@ -60,6 +60,28 @@ such as `cart.items_one` and `role_female`. One file may contain several
 top-level locale blocks, so both `locales/en.lino` and a bundled
 `locales/all.lino` layout work.
 
+For migrations from flatter catalogues, configure compatibility aliases before
+loading translations:
+
+```rust
+use lino_i18n::{CompatibilityAlias, I18n};
+
+let mut i18n = I18n::new("en");
+i18n.set_compatibility_aliases([
+    CompatibilityAlias::CollapseTail,
+    CompatibilityAlias::ParentLabel,
+]);
+i18n.load_lino_file("locales/en.lino").unwrap();
+```
+
+`CollapseTail` exposes underscore-tail aliases for deeper keys, so
+`telegram.help.solve.alias.detail` also resolves through
+`telegram.help_solve_alias_detail`, `telegram.help.solve_alias_detail`, and
+`telegram.help.solve.alias_detail`. `ParentLabel` maps `error.label` to the
+legacy parent key `error`. Generated aliases never overwrite explicit
+translations. The compile-time macro accepts the same behavior with
+`compatibility_aliases = "collapse-tail,parent-label"`.
+
 ## Runtime API
 
 The runtime is also usable without the macro:
@@ -96,6 +118,7 @@ assert_eq!(
 - `{{var}}` and `{var}` placeholder syntax for compatibility with i18next
   and `react-intl`.
 - Context (gender) suffixes: `role_male`, `role_female`, `role_other`.
+- Migration aliases for deeper nested keys and parent labels.
 - Namespace prefixes with `.` (e.g. `navigation.home`).
 - Configurable fallback chain plus per-call `default_value`.
 - Bundled multi-locale `.lino` files and per-language directories.

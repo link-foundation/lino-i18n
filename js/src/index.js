@@ -8,6 +8,7 @@
 // framework.
 
 export { createI18n } from './i18n.js';
+export { expandCompatibilityAliases } from './compatibility.js';
 export {
   parseLinoCatalog,
   parseLinoCatalogs,
