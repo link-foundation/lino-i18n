@@ -153,19 +153,6 @@ struct CratesIoVersionEntry {
     yanked: bool,
 }
 
-fn get_crate_name(cargo_toml_path: &str) -> Result<String, String> {
-    let content = fs::read_to_string(cargo_toml_path)
-        .map_err(|e| format!("Failed to read {}: {}", cargo_toml_path, e))?;
-
-    let re = Regex::new(r#"(?m)^name\s*=\s*"([^"]+)""#).unwrap();
-
-    if let Some(caps) = re.captures(&content) {
-        Ok(caps.get(1).unwrap().as_str().to_string())
-    } else {
-        Err(format!("Could not find name in {}", cargo_toml_path))
-    }
-}
-
 fn check_tag_exists(tag_prefix: &str, version: &str) -> bool {
     exec_check("git", &["rev-parse", &format!("{}{}", tag_prefix, version)])
 }

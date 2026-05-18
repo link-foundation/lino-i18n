@@ -137,6 +137,18 @@ jobs:
           workspaces: rust
       - name: Install rust-script
         run: cargo install rust-script
+      - name: Check Rust scripts compile
+        run: |
+          set -euo pipefail
+          for script in rust/scripts/*.rs; do
+            if [ "$(basename "$script")" = "rust-paths.rs" ]; then
+              continue
+            fi
+
+            echo "Checking $script"
+            package_path=$(RUST_LOG=error rust-script --package "$script" | grep "^/" | tail -n 1)
+            cargo check --manifest-path "$package_path/Cargo.toml"
+          done
       - run: cargo fmt --manifest-path rust/Cargo.toml --all -- --check
       - run: cargo clippy --manifest-path rust/Cargo.toml --all-targets --all-features -- -D warnings
       - name: Check file size limit

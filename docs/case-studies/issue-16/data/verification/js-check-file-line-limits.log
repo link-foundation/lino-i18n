@@ -1,0 +1,30 @@
+Checking that all .mjs files are under 1500 lines...
+./scripts/instant-version-bump.mjs: 172 lines
+./scripts/check-web-archive.mjs: 263 lines
+./scripts/format-release-notes-helpers.mjs: 26 lines
+./scripts/create-manual-changeset.mjs: 100 lines
+./scripts/version-and-commit.mjs: 284 lines
+./scripts/create-github-release.mjs: 302 lines
+./scripts/update-preview-images.mjs: 343 lines
+./scripts/package-info.mjs: 99 lines
+./scripts/format-release-notes.mjs: 230 lines
+./scripts/publish-to-npm.mjs: 325 lines
+./scripts/format-github-release.mjs: 90 lines
+./scripts/check-release-needed.mjs: 166 lines
+./scripts/check-version.mjs: 129 lines
+./scripts/validate-changeset.mjs: 285 lines
+./scripts/changeset-version.mjs: 75 lines
+./scripts/setup-npm.mjs: 265 lines
+./scripts/wait-for-npm.mjs: 191 lines
+./scripts/check-changesets.mjs: 67 lines
+./scripts/detect-code-changes.mjs: 168 lines
+./scripts/merge-changesets.mjs: 274 lines
+./scripts/build-docs-site.mjs: 140 lines
+./scripts/check-docker-publish.mjs: 143 lines
+./scripts/js-paths.mjs: 177 lines
+./examples/basic-usage.mjs: 33 lines
+
+Checking that the JavaScript workflow is under 1500 lines...
+../.github/workflows/release.yml: 483 lines
+
+All checked files are within the 1500 line limit!

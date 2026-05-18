@@ -1,0 +1,129 @@
+--- /tmp/lino-i18n-template-compare/rust-ai-driven-development-pipeline-template/scripts/rust-paths.rs	2026-05-18 16:37:40.788232603 +0000
++++ rust/scripts/rust-paths.rs	2026-05-18 16:34:27.550456655 +0000
+@@ -170,11 +170,43 @@
+     let name = find_manifest_value(&content, "name")
+         .ok_or_else(|| format!("Could not find name in {}", manifest_path.display()))?;
+     let version = find_manifest_value(&content, "version")
++        .or_else(|| find_workspace_version_for_member(manifest_path))
+         .ok_or_else(|| format!("Could not find version in {}", manifest_path.display()))?;
+
+     Ok(PackageInfo { name, version })
+ }
+
++pub fn get_publishable_member_manifests(root_manifest: &Path) -> Result<Vec<PathBuf>, String> {
++    let content = fs::read_to_string(root_manifest)
++        .map_err(|e| format!("Failed to read {}: {}", root_manifest.display(), e))?;
++
++    if has_package_section(&content) && !is_publish_false(&content) {
++        return Ok(vec![root_manifest.to_path_buf()]);
++    }
++
++    if has_workspace_section(&content) {
++        return resolve_publishable_workspace_member_manifests(root_manifest, &content);
++    }
++
++    Err(format!(
++        "Could not find [package] or [workspace] in {}",
++        root_manifest.display()
++    ))
++}
++
++pub fn get_version_manifest_path(package_manifest: &Path) -> PathBuf {
++    let Ok(content) = fs::read_to_string(package_manifest) else {
++        return package_manifest.to_path_buf();
++    };
++
++    if find_manifest_value(&content, "version").is_some() {
++        return package_manifest.to_path_buf();
++    }
++
++    find_workspace_manifest_for_member(package_manifest)
++        .unwrap_or_else(|| package_manifest.to_path_buf())
++}
++
+ fn has_package_section(content: &str) -> bool {
+     Regex::new(r"(?m)^\[package\]\s*$")
+         .unwrap()
+@@ -191,6 +223,20 @@
+     root_manifest: &Path,
+     content: &str,
+ ) -> Result<PathBuf, String> {
++    let manifests = resolve_publishable_workspace_member_manifests(root_manifest, content)?;
++
++    manifests.into_iter().next().ok_or_else(|| {
++        format!(
++            "No publishable workspace members found in {}",
++            root_manifest.display()
++        )
++    })
++}
++
++fn resolve_publishable_workspace_member_manifests(
++    root_manifest: &Path,
++    content: &str,
++) -> Result<Vec<PathBuf>, String> {
+     let members = parse_workspace_members(content).ok_or_else(|| {
+         format!(
+             "Could not find workspace members in {}",
+@@ -205,6 +251,7 @@
+         )
+     })?;
+
++    let mut manifests = Vec::new();
+     for member in members {
+         let manifest = base_dir.join(member).join("Cargo.toml");
+         let Ok(member_content) = fs::read_to_string(&manifest) else {
+@@ -215,13 +262,17 @@
+             continue;
+         }
+
+-        return Ok(manifest);
++        manifests.push(manifest);
+     }
+
+-    Err(format!(
+-        "No publishable workspace members found in {}",
+-        root_manifest.display()
+-    ))
++    if manifests.is_empty() {
++        Err(format!(
++            "No publishable workspace members found in {}",
++            root_manifest.display()
++        ))
++    } else {
++        Ok(manifests)
++    }
+ }
+
+ fn parse_workspace_members(content: &str) -> Option<Vec<String>> {
+@@ -256,6 +307,30 @@
+         .and_then(|caps| caps.get(1).map(|m| m.as_str().to_string()))
+ }
+
++fn find_workspace_manifest_for_member(manifest_path: &Path) -> Option<PathBuf> {
++    for ancestor in manifest_path.ancestors().skip(1) {
++        let candidate = ancestor.join("Cargo.toml");
++        if candidate == manifest_path {
++            continue;
++        }
++
++        let Ok(content) = fs::read_to_string(&candidate) else {
++            continue;
++        };
++        if has_workspace_section(&content) {
++            return Some(candidate);
++        }
++    }
++
++    None
++}
++
++fn find_workspace_version_for_member(manifest_path: &Path) -> Option<String> {
++    let workspace_manifest = find_workspace_manifest_for_member(manifest_path)?;
++    let content = fs::read_to_string(workspace_manifest).ok()?;
++    find_manifest_value(&content, "version")
++}
++
+ #[cfg(not(test))]
+ fn main() {
+     // When run directly, just print the detected rust root
