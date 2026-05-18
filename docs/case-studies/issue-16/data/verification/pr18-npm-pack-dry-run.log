@@ -1,0 +1,30 @@
+npm notice
+npm notice 📦  lino-i18n@0.1.1
+npm notice Tarball Contents
+npm notice 821B CHANGELOG.md
+npm notice 1.2kB LICENSE
+npm notice 4.9kB README.md
+npm notice 10.8kB bin/lino-i18n.js
+npm notice 2.0kB package.json
+npm notice 2.3kB src/compatibility.js
+npm notice 1.5kB src/converters/detect.js
+npm notice 1.9kB src/converters/i18n-js.js
+npm notice 2.6kB src/converters/i18next.js
+npm notice 463B src/converters/index.js
+npm notice 2.8kB src/converters/react-intl.js
+npm notice 3.4kB src/format.js
+npm notice 4.7kB src/i18n.js
+npm notice 5.1kB src/index.d.ts
+npm notice 914B src/index.js
+npm notice 14.4kB src/loaders.js
+npm notice Tarball Details
+npm notice name: lino-i18n
+npm notice version: 0.1.1
+npm notice filename: lino-i18n-0.1.1.tgz
+npm notice package size: 16.7 kB
+npm notice unpacked size: 60.0 kB
+npm notice shasum: 85fd50b91046df0d311ee5c07c2647e2c1692cbf
+npm notice integrity: sha512-sVLcGOP8Qh4Ey[...]yMzlB/DDKsvIQ==
+npm notice total files: 16
+npm notice
+lino-i18n-0.1.1.tgz

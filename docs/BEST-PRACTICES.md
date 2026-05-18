@@ -128,7 +128,7 @@ Slow test matrix only runs after all fast checks pass. This dramatically reduces
 In addition to the ESLint `max-lines` rule (which only covers source files), a separate CI check enforces the 1500-line limit on:
 
 - All `.mjs` files (including scripts)
-- `.github/workflows/release.yml` (to prevent workflow bloat)
+- `.github/workflows/js.yml` (to prevent workflow bloat)
 
 This is enforced by `scripts/check-file-line-limits.sh`.
 

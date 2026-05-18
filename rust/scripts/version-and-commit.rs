@@ -26,10 +26,11 @@
 use chrono::Utc;
 use regex::Regex;
 use serde::Deserialize;
+use std::collections::HashSet;
 use std::env;
 use std::fs;
 use std::io::Write;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 use std::process::{exit, Command};
 
 #[path = "rust-paths.rs"]
@@ -140,6 +141,134 @@ fn update_cargo_toml(cargo_toml_path: &str, new_version: &str) -> Result<(), Str
 
     println!("Updated {} to version {}", cargo_toml_path, new_version);
     Ok(())
+}
+
+fn read_publishable_package_names(manifests: &[PathBuf]) -> Result<Vec<String>, String> {
+    let mut package_names = Vec::new();
+    for manifest in manifests {
+        package_names.push(rust_paths::read_package_info(manifest)?.name);
+    }
+    Ok(package_names)
+}
+
+fn update_workspace_path_dependency_versions(
+    manifests: &[PathBuf],
+    package_names: &[String],
+    new_version: &str,
+) -> Result<Vec<PathBuf>, String> {
+    let version_re = Regex::new(r#"(version\s*=\s*")[^"]+(")"#).unwrap();
+    let mut updated_manifests = Vec::new();
+
+    for manifest in manifests {
+        let content = fs::read_to_string(manifest)
+            .map_err(|e| format!("Failed to read {}: {}", manifest.display(), e))?;
+        let mut changed = false;
+        let mut updated_lines = Vec::new();
+
+        for line in content.lines() {
+            let trimmed = line.trim_start();
+            let mut updated_line = line.to_string();
+
+            for package_name in package_names {
+                if trimmed.starts_with(&format!("{package_name} ="))
+                    && trimmed.contains("path =")
+                    && trimmed.contains("version =")
+                {
+                    let replaced = version_re
+                        .replace(&updated_line, format!("${{1}}{new_version}${{2}}").as_str())
+                        .to_string();
+
+                    if replaced != updated_line {
+                        updated_line = replaced;
+                        changed = true;
+                    }
+                }
+            }
+
+            updated_lines.push(updated_line);
+        }
+
+        if changed {
+            let mut updated_content = updated_lines.join("\n");
+            if content.ends_with('\n') {
+                updated_content.push('\n');
+            }
+            fs::write(manifest, updated_content)
+                .map_err(|e| format!("Failed to write {}: {}", manifest.display(), e))?;
+            println!(
+                "Updated local path dependency versions in {} to {}",
+                manifest.display(),
+                new_version
+            );
+            updated_manifests.push(manifest.clone());
+        }
+    }
+
+    Ok(updated_manifests)
+}
+
+fn update_cargo_lock_package_versions(
+    cargo_lock_path: &Path,
+    package_names: &[String],
+    new_version: &str,
+) -> Result<Option<PathBuf>, String> {
+    if !cargo_lock_path.exists() {
+        return Ok(None);
+    }
+
+    let package_names: HashSet<&str> = package_names.iter().map(String::as_str).collect();
+    let content = fs::read_to_string(cargo_lock_path)
+        .map_err(|e| format!("Failed to read {}: {}", cargo_lock_path.display(), e))?;
+    let name_re = Regex::new(r#"^name\s*=\s*"([^"]+)""#).unwrap();
+    let version_re = Regex::new(r#"(version\s*=\s*")[^"]+(")"#).unwrap();
+
+    let mut current_package: Option<String> = None;
+    let mut changed = false;
+    let mut updated_lines = Vec::new();
+
+    for line in content.lines() {
+        let trimmed = line.trim_start();
+        let mut updated_line = line.to_string();
+
+        if trimmed == "[[package]]" {
+            current_package = None;
+        } else if let Some(captures) = name_re.captures(trimmed) {
+            current_package = captures.get(1).map(|name| name.as_str().to_string());
+        } else if trimmed.starts_with("version =") {
+            if current_package
+                .as_deref()
+                .is_some_and(|package_name| package_names.contains(package_name))
+            {
+                let replaced = version_re
+                    .replace(&updated_line, format!("${{1}}{new_version}${{2}}").as_str())
+                    .to_string();
+
+                if replaced != updated_line {
+                    updated_line = replaced;
+                    changed = true;
+                }
+            }
+        }
+
+        updated_lines.push(updated_line);
+    }
+
+    if changed {
+        let mut updated_content = updated_lines.join("\n");
+        if content.ends_with('\n') {
+            updated_content.push('\n');
+        }
+        fs::write(cargo_lock_path, updated_content)
+            .map_err(|e| format!("Failed to write {}: {}", cargo_lock_path.display(), e))?;
+        println!(
+            "Updated workspace package versions in {} to {}",
+            cargo_lock_path.display(),
+            new_version
+        );
+        return Ok(Some(cargo_lock_path.to_path_buf()));
+    }
+
+    Ok(None)
 }
 
 #[derive(Deserialize)]
@@ -384,6 +513,20 @@ fn main() {
             exit(1);
         }
     };
+    let package_manifests = match rust_paths::get_publishable_member_manifests(&cargo_toml) {
+        Ok(paths) => paths,
+        Err(e) => {
+            eprintln!("Error: {}", e);
+            exit(1);
+        }
+    };
+    let package_names = match read_publishable_package_names(&package_manifests) {
+        Ok(names) => names,
+        Err(e) => {
+            eprintln!("Error: {}", e);
+            exit(1);
+        }
+    };
     let changelog_dir = get_changelog_dir(&rust_root);
     let changelog_file = get_changelog_path(&rust_root);
 
@@ -454,12 +597,42 @@ fn main() {
         exit(1);
     }
 
+    let updated_dependency_manifests =
+        match update_workspace_path_dependency_versions(
+            &package_manifests,
+            &package_names,
+            &new_version,
+        ) {
+            Ok(manifests) => manifests,
+            Err(e) => {
+                eprintln!("Error: {}", e);
+                exit(1);
+            }
+        };
+    let cargo_lock_path = rust_paths::get_cargo_lock_path(&rust_root);
+    let updated_cargo_lock =
+        match update_cargo_lock_package_versions(&cargo_lock_path, &package_names, &new_version) {
+            Ok(path) => path,
+            Err(e) => {
+                eprintln!("Error: {}", e);
+                exit(1);
+            }
+        };
+
     // Collect changelog fragments
     collect_changelog(&changelog_dir, &changelog_file, &new_version);
 
     // Stage Cargo.toml and CHANGELOG.md
     let version_manifest_str = version_manifest.to_string_lossy().to_string();
     let _ = exec("git", &["add", &version_manifest_str, &changelog_file]);
+    for manifest in &updated_dependency_manifests {
+        let manifest_str = manifest.to_string_lossy().to_string();
+        let _ = exec("git", &["add", &manifest_str]);
+    }
+    if let Some(cargo_lock) = &updated_cargo_lock {
+        let cargo_lock_str = cargo_lock.to_string_lossy().to_string();
+        let _ = exec("git", &["add", &cargo_lock_str]);
+    }
 
     // Check if there are changes to commit
     if exec_check("git", &["diff", "--cached", "--quiet"]) {

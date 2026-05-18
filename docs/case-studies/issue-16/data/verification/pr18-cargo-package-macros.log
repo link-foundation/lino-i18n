@@ -1,0 +1,6 @@
+   Packaging lino-i18n-macros v0.1.0 (/tmp/gh-issue-solver-1779125389245/rust/lino-i18n-macros)
+    Updating crates.io index
+    Packaged 6 files, 13.4KiB (4.5KiB compressed)
+   Verifying lino-i18n-macros v0.1.0 (/tmp/gh-issue-solver-1779125389245/rust/lino-i18n-macros)
+   Compiling lino-i18n-macros v0.1.0 (/tmp/gh-issue-solver-1779125389245/rust/target/package/lino-i18n-macros-0.1.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.34s
