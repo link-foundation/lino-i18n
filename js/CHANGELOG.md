@@ -1,5 +1,11 @@
 # lino-i18n Changelog
 
+## 0.1.0
+
+### Minor Changes
+
+- 4c3b133: Add configurable compatibility aliases for deeper nested migration keys.
+
 ## 0.0.2
 
 ### Patch Changes
