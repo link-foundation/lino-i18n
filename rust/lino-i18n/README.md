@@ -38,32 +38,48 @@ Catalogues are authored as nested Links Notation blocks:
 ```lino
 en
   greeting "Hello, {{name}}!"
-  hero
-    description """
-      Keep each language in its own block, nest related messages together,
-      and still resolve the same runtime keys.
-    """
+  telegram
+    help
+      title "Help"
+      solve
+        alias
+          detail "Tool aliases imply `--tool <tool>`"
+  prompt
+    system
+      general
+        guidelines
+          header "General guidelines."
+          body """
+            When you start, create a detailed plan for yourself.
+            Follow your todo list step by step.
+          """
+  error
+    label "Error"
+    invalid
+      github
+        url "Error: Invalid GitHub URL format"
   cart
     title "Your cart"
     items
       zero "Your cart is empty"
       one "{{count}} item"
       other "{{count}} items"
-  error
-    label "Error"
-    invalid_github_url "Error: Invalid GitHub URL format"
   role
     male "He is a developer"
     female "She is a developer"
     other "They are a developer"
 ```
 
-The loader flattens nested plural and context groups to runtime suffix keys
-such as `cart.items_one` and `role_female`. One file may contain several
-top-level locale blocks, so both `locales/en.lino` and a bundled
-`locales/all.lino` layout work. Use a `label` child when a translated group
-also needs its own runtime key: `error.label` and `error` both resolve to
-`"Error"`, and an explicit `error` translation wins over the generated alias.
+The loader flattens deeply nested blocks to runtime dot keys such as
+`telegram.help.solve.alias.detail` and
+`prompt.system.general.guidelines.body`. Nested plural and context groups still
+flatten to runtime suffix keys such as `cart.items_one` and `role_female`. One
+file may contain several top-level locale blocks, so both `locales/en.lino` and
+a bundled `locales/all.lino` layout work.
+
+Use a `label` child when a translated group also needs its own runtime key:
+`error.label` and `error` both resolve to `"Error"`, and an explicit `error`
+translation wins over the generated alias.
 
 For migrations from flatter catalogues, configure compatibility aliases before
 loading translations:

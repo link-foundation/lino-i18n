@@ -30,6 +30,7 @@ i18n.t('greeting', { name: 'World' }); // → "Hello, World!"
 i18n.t('cart.items', { count: 0 }); // → "Your cart is empty"
 i18n.t('cart.items', { count: 3 }, { locale: 'ru' }); // → "3 товара"
 i18n.t('role', { context: 'female' }); // → "She is a developer"
+i18n.t('telegram.help.solve.alias.detail'); // → "Tool aliases imply `--tool <tool>`"
 ```
 
 A sample `.lino` catalogue looks like this:
@@ -37,29 +38,45 @@ A sample `.lino` catalogue looks like this:
 ```lino
 en
   greeting "Hello, {{name}}!"
-  hero
-    description """
-      Keep each language in its own block, nest related messages together,
-      and still resolve the same runtime keys.
-    """
+  telegram
+    help
+      title "Help"
+      solve
+        alias
+          detail "Tool aliases imply `--tool <tool>`"
+  prompt
+    system
+      general
+        guidelines
+          header "General guidelines."
+          body """
+            When you start, create a detailed plan for yourself.
+            Follow your todo list step by step.
+          """
+  error
+    label "Error"
+    invalid
+      github
+        url "Error: Invalid GitHub URL format"
   cart
     title "Your cart"
     items
       zero "Your cart is empty"
       one "{{count}} item"
       other "{{count}} items"
-  error
-    label "Error"
-    invalid_github_url "Error: Invalid GitHub URL format"
   role
     male "He is a developer"
     female "She is a developer"
     other "They are a developer"
 ```
 
-Nested plural and context groups flatten to the runtime suffix keys
-`cart.items_one`, `cart.items_other`, and `role_female`. A single file may also
-contain several top-level locale blocks, for example `en` followed by `ru`.
+Deeply nested blocks flatten to canonical dot keys such as
+`telegram.help.solve.alias.detail` and
+`prompt.system.general.guidelines.body`. Nested plural and context groups still
+flatten to runtime suffix keys such as `cart.items_one`, `cart.items_other`,
+and `role_female`. A single file may also contain several top-level locale
+blocks, for example `en` followed by `ru`.
+
 Use a `label` child when a translated group also needs its own runtime key:
 `error.label` and `error` both resolve to `"Error"`, and an explicit `error`
 translation wins over the generated alias.

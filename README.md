@@ -37,32 +37,49 @@ text and trivial to diff.
 ```lino
 en
   greeting "Hello, {{name}}!"
-  hero
-    title "Localization that reads like content"
-    description """
-      Keep each language in its own block, nest related messages together,
-      and still resolve the same runtime keys.
-    """
+  telegram
+    help
+      title "Help"
+      solve
+        alias
+          detail "Tool aliases imply `--tool <tool>`"
+  prompt
+    system
+      general
+        guidelines
+          header "General guidelines."
+          body """
+            When you start, create a detailed plan for yourself.
+            Follow your todo list step by step.
+          """
+  error
+    label "Error"
+    invalid
+      github
+        url "Error: Invalid GitHub URL format"
   cart
     title "Your cart"
     items
       zero "Your cart is empty"
       one "{{count}} item"
       other "{{count}} items"
-  error
-    label "Error"
-    invalid_github_url "Error: Invalid GitHub URL format"
   role
     male "He is a developer"
     female "She is a developer"
     other "They are a developer"
 ```
 
-The loader flattens that catalogue to runtime keys like `cart.title`,
-`cart.items_one`, and `role_female`, so existing `t('cart.items', { count })`
-and context calls stay compact. A nested group's `label` child is also exposed
-as the parent key, so `error.label` and `error` both resolve to `"Error"` while
-an explicit `error` entry still takes precedence.
+The loader flattens that catalogue to runtime keys like
+`telegram.help.solve.alias.detail`,
+`prompt.system.general.guidelines.body`, `error.label`,
+`error.invalid.github.url`, `cart.items_one`, and `role_female`, so deeply
+nested authoring still resolves stable flat runtime keys.
+
+A nested group's `label` child is also exposed as the parent key, so
+`error.label` and `error` both resolve to `"Error"` while an explicit `error`
+entry still takes precedence. The Hive Mind migration that motivated this
+pattern is summarized in
+[docs/case-studies/issue-12](./docs/case-studies/issue-12).
 
 ### Migration aliases
 

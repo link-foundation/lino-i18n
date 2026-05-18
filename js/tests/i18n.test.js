@@ -90,6 +90,45 @@ test('parseLinoCatalog flattens nested groups and selector variants', () => {
   });
 });
 
+test('parseLinoCatalog flattens Hive Mind style deep multiline catalogues', () => {
+  const text = [
+    'en',
+    '  telegram',
+    '    help',
+    '      title "Help"',
+    '      solve',
+    '        alias',
+    '          detail "Tool aliases imply `--tool <tool>`"',
+    '  prompt',
+    '    system',
+    '      general',
+    '        guidelines',
+    '          header "General guidelines."',
+    '          body """',
+    '            When you start, create a detailed plan for yourself.',
+    '            Follow your todo list step by step.',
+    '          """',
+    '  error',
+    '    label "Error"',
+    '    invalid',
+    '      github',
+    '        url "Error: Invalid GitHub URL format"',
+    '',
+  ].join('\n');
+
+  const parsed = parseLinoCatalog(text);
+  assert.deepEqual(parsed.translations, {
+    'telegram.help.title': 'Help',
+    'telegram.help.solve.alias.detail': 'Tool aliases imply `--tool <tool>`',
+    'prompt.system.general.guidelines.header': 'General guidelines.',
+    'prompt.system.general.guidelines.body':
+      'When you start, create a detailed plan for yourself.\nFollow your todo list step by step.',
+    'error.label': 'Error',
+    'error.invalid.github.url': 'Error: Invalid GitHub URL format',
+    error: 'Error',
+  });
+});
+
 test('parseLinoCatalogs accepts bundled multi-locale files', () => {
   const parsed = parseLinoCatalogs(
     ['en', '  greeting "Hello"', 'ru', '  greeting "Привет"', ''].join('\n')
@@ -234,11 +273,30 @@ test('createI18n applies CLDR plurals per locale', async () => {
     i18n.t('hero.description'),
     'Keep each language in its own block, nest related messages together,\nand still resolve the same runtime keys.'
   );
+  assert.equal(i18n.t('telegram.help.title'), 'Help');
+  assert.equal(
+    i18n.t('telegram.help.solve.alias.detail'),
+    'Tool aliases imply `--tool <tool>`'
+  );
+  assert.equal(
+    i18n.t('prompt.system.general.guidelines.body'),
+    'When you start, create a detailed plan for yourself.\nFollow your todo list step by step.'
+  );
+  assert.equal(i18n.t('error.label'), 'Error');
+  assert.equal(
+    i18n.t('error.invalid.github.url'),
+    'Error: Invalid GitHub URL format'
+  );
 
   i18n.setLocale('ru');
   assert.equal(i18n.t('cart.items', { count: 1 }), '1 товар');
   assert.equal(i18n.t('cart.items', { count: 3 }), '3 товара');
   assert.equal(i18n.t('cart.items', { count: 7 }), '7 товаров');
+  assert.equal(i18n.t('telegram.help.title'), 'Справка');
+  assert.equal(
+    i18n.t('prompt.system.general.guidelines.header'),
+    'Общие рекомендации.'
+  );
 });
 
 test('loadLocalesFromDirectory merges bundled and per-language files', async () => {

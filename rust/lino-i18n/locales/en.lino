@@ -20,3 +20,23 @@ en
     male "He is a developer"
     female "She is a developer"
     other "They are a developer"
+  telegram
+    help
+      title "Help"
+      solve
+        alias
+          detail "Tool aliases imply `--tool <tool>`"
+  prompt
+    system
+      general
+        guidelines
+          header "General guidelines."
+          body """
+            When you start, create a detailed plan for yourself.
+            Follow your todo list step by step.
+          """
+  error
+    label "Error"
+    invalid
+      github
+        url "Error: Invalid GitHub URL format"
