@@ -1,5 +1,11 @@
 # lino-i18n Changelog
 
+## 0.1.1
+
+### Patch Changes
+
+- 22cf52e: Document the Hive Mind deep catalogue authoring pattern and keep JS examples aligned.
+
 ## 0.1.0
 
 ### Minor Changes
