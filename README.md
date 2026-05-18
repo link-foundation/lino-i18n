@@ -1,6 +1,6 @@
 # lino-i18n
 
-[![JavaScript CI/CD](https://github.com/link-foundation/lino-i18n/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/link-foundation/lino-i18n/actions/workflows/release.yml)
+[![JavaScript CI/CD](https://github.com/link-foundation/lino-i18n/actions/workflows/js.yml/badge.svg?branch=main)](https://github.com/link-foundation/lino-i18n/actions/workflows/js.yml)
 [![Rust CI/CD](https://github.com/link-foundation/lino-i18n/actions/workflows/rust.yml/badge.svg?branch=main)](https://github.com/link-foundation/lino-i18n/actions/workflows/rust.yml)
 [![npm](https://img.shields.io/npm/v/lino-i18n?label=npm)](https://www.npmjs.com/package/lino-i18n)
 [![Crates.io](https://img.shields.io/crates/v/lino-i18n?label=crates.io)](https://crates.io/crates/lino-i18n)
@@ -227,7 +227,7 @@ comparison including code samples and benchmarks.
 │   └── Cargo.toml                 # Workspace manifest
 ├── docs/case-studies/issue-1/     # Design rationale + benchmarks
 └── .github/workflows/
-    ├── release.yml                # JS CI/CD, npm release, and docs deployment
+    ├── js.yml                     # JS CI/CD, npm release, and docs deployment
     └── rust.yml                   # Rust fmt+clippy+test matrix
 ```
 
@@ -235,7 +235,7 @@ comparison including code samples and benchmarks.
 
 Two purpose-built workflows live in `.github/workflows/`:
 
-- **`release.yml`** runs `node --test`, `bun test`, and `deno test` on Linux,
+- **`js.yml`** runs `node --test`, `bun test`, and `deno test` on Linux,
   macOS, and Windows whenever anything under `js/**` changes, plus a CLI
   smoke test that round-trips an `i18next` JSON catalogue to `.lino`. On
   `main`, it also dry-runs the npm package, publishes missing package versions,

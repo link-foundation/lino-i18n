@@ -27,7 +27,7 @@ function extractWorkflowJob(workflow, jobName) {
 }
 
 test('delivery jobs keep running after optional release gates are skipped', () => {
-  const jsWorkflow = readRepoFile('.github/workflows/release.yml');
+  const jsWorkflow = readRepoFile('.github/workflows/js.yml');
   const rustWorkflow = readRepoFile('.github/workflows/rust.yml');
 
   const jsPackage = extractWorkflowJob(jsWorkflow, 'package');
@@ -52,10 +52,7 @@ test('delivery jobs keep running after optional release gates are skipped', () =
 test('root README advertises package, release, and CI/CD status badges', () => {
   const readme = readRepoFile('README.md');
 
-  assert.match(
-    readme,
-    /actions\/workflows\/release\.yml\/badge\.svg\?branch=main/
-  );
+  assert.match(readme, /actions\/workflows\/js\.yml\/badge\.svg\?branch=main/);
   assert.match(
     readme,
     /actions\/workflows\/rust\.yml\/badge\.svg\?branch=main/
@@ -72,6 +69,36 @@ test('root README advertises package, release, and CI/CD status badges', () => {
   );
 });
 
+test('Rust local path dependencies match the workspace package version', () => {
+  const workspaceManifest = readRepoFile('rust/Cargo.toml');
+  const runtimeManifest = readRepoFile('rust/lino-i18n/Cargo.toml');
+  const cargoLock = readRepoFile('rust/Cargo.lock');
+
+  const workspaceVersion = workspaceManifest.match(
+    /\[workspace\.package\][\s\S]*?\nversion\s*=\s*"([^"]+)"/
+  )?.[1];
+  assert.ok(workspaceVersion, 'expected Rust workspace version to be declared');
+
+  const macrosDependency = runtimeManifest.match(
+    /^lino-i18n-macros\s*=\s*\{([^}]+)\}/m
+  )?.[1];
+  assert.ok(macrosDependency, 'expected lino-i18n-macros dependency');
+  assert.match(macrosDependency, /path\s*=\s*"..\/lino-i18n-macros"/);
+
+  const macrosVersion = macrosDependency.match(/version\s*=\s*"([^"]+)"/)?.[1];
+  assert.equal(macrosVersion, workspaceVersion);
+
+  for (const packageName of ['lino-i18n', 'lino-i18n-macros']) {
+    const packageBlock = cargoLock
+      .split(/\n(?=\[\[package\]\])/)
+      .find((block) => block.includes(`name = "${packageName}"`));
+    assert.ok(packageBlock, `expected ${packageName} in Cargo.lock`);
+
+    const lockVersion = packageBlock.match(/^version\s*=\s*"([^"]+)"/m)?.[1];
+    assert.equal(lockVersion, workspaceVersion);
+  }
+});
+
 test('JavaScript GitHub release notes include package and CI/CD badges', () => {
   const payload = JSON.parse(
     buildReleasePayload({
@@ -81,14 +108,14 @@ test('JavaScript GitHub release notes include package and CI/CD badges', () => {
       repository: 'link-foundation/lino-i18n',
       tag: 'js-v0.0.1',
       version: '0.0.1',
-      workflowFile: 'release.yml',
+      workflowFile: 'js.yml',
     })
   );
 
   assert.match(payload.body, /img\.shields\.io\/npm\/v\/lino-i18n\?label=npm/);
   assert.match(
     payload.body,
-    /actions\/workflows\/release\.yml\/badge\.svg\?branch=main/
+    /actions\/workflows\/js\.yml\/badge\.svg\?branch=main/
   );
   assert.match(payload.body, /Initial release/);
 });

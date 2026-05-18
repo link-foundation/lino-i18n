@@ -33,7 +33,7 @@ export function parseArgs(argv, env = process.env) {
     releaseVersion: env.VERSION ?? '',
     repository: env.REPOSITORY ?? '',
     tagPrefix: env.TAG_PREFIX ?? 'v',
-    workflowFile: env.WORKFLOW_FILE ?? 'release.yml',
+    workflowFile: env.WORKFLOW_FILE ?? 'js.yml',
   };
 
   for (let index = 0; index < argv.length; index++) {
@@ -123,7 +123,7 @@ export function buildReleaseBadges({
   packageName = '',
   repository = '',
   version = '',
-  workflowFile = 'release.yml',
+  workflowFile = 'js.yml',
 }) {
   const badges = [];
   const trimmedPackageName = packageName.trim();

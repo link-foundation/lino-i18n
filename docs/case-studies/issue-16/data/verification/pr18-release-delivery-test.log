@@ -1,0 +1,30 @@
+TAP version 13
+# Subtest: delivery jobs keep running after optional release gates are skipped
+ok 1 - delivery jobs keep running after optional release gates are skipped
+  ---
+  duration_ms: 1.83392
+  ...
+# Subtest: root README advertises package, release, and CI/CD status badges
+ok 2 - root README advertises package, release, and CI/CD status badges
+  ---
+  duration_ms: 1.514814
+  ...
+# Subtest: Rust local path dependencies match the workspace package version
+ok 3 - Rust local path dependencies match the workspace package version
+  ---
+  duration_ms: 0.734919
+  ...
+# Subtest: JavaScript GitHub release notes include package and CI/CD badges
+ok 4 - JavaScript GitHub release notes include package and CI/CD badges
+  ---
+  duration_ms: 0.802379
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 69.623432

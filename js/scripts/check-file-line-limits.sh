@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # check-file-line-limits.sh
 #
-# Enforces a 1500-line limit on all .mjs files and on release.yml.
+# Enforces a 1500-line limit on all .mjs files and on js.yml.
 #
 # Usage:
 #   bash scripts/check-file-line-limits.sh
@@ -33,24 +33,24 @@ done < <(find . -name "*.mjs" -type f -not -path "*/node_modules/*" -print0)
 
 echo ""
 echo "Checking that the JavaScript workflow is under ${LIMIT} lines..."
-RELEASE_YML="../.github/workflows/release.yml"
-if [ ! -f "$RELEASE_YML" ]; then
-  RELEASE_YML=".github/workflows/release.yml"
+JS_WORKFLOW="../.github/workflows/js.yml"
+if [ ! -f "$JS_WORKFLOW" ]; then
+  JS_WORKFLOW=".github/workflows/js.yml"
 fi
-if [ -f "$RELEASE_YML" ]; then
-  line_count=$(wc -l < "$RELEASE_YML" | tr -d '[:space:]')
-  echo "$RELEASE_YML: $line_count lines"
+if [ -f "$JS_WORKFLOW" ]; then
+  line_count=$(wc -l < "$JS_WORKFLOW" | tr -d '[:space:]')
+  echo "$JS_WORKFLOW: $line_count lines"
   if [ "$line_count" -gt "$LIMIT" ]; then
-    echo "ERROR: $RELEASE_YML has $line_count lines (limit: ${LIMIT})"
-    echo "::error file=$RELEASE_YML::File has $line_count lines (limit: ${LIMIT}). Move inline scripts to ./scripts/ folder."
-    FAILURES+=("$RELEASE_YML")
+    echo "ERROR: $JS_WORKFLOW has $line_count lines (limit: ${LIMIT})"
+    echo "::error file=$JS_WORKFLOW::File has $line_count lines (limit: ${LIMIT}). Move inline scripts to ./scripts/ folder."
+    FAILURES+=("$JS_WORKFLOW")
   elif [ "$line_count" -gt "$WARN_THRESHOLD" ]; then
-    echo "WARNING: $RELEASE_YML has $line_count lines (approaching limit of ${LIMIT}, warning threshold: ${WARN_THRESHOLD})"
-    echo "::warning file=$RELEASE_YML::File has $line_count lines (approaching limit of ${LIMIT}). Consider moving inline scripts to ./scripts/ folder."
-    WARNINGS+=("$RELEASE_YML")
+    echo "WARNING: $JS_WORKFLOW has $line_count lines (approaching limit of ${LIMIT}, warning threshold: ${WARN_THRESHOLD})"
+    echo "::warning file=$JS_WORKFLOW::File has $line_count lines (approaching limit of ${LIMIT}). Consider moving inline scripts to ./scripts/ folder."
+    WARNINGS+=("$JS_WORKFLOW")
   fi
 else
-  echo "WARNING: $RELEASE_YML not found, skipping"
+  echo "WARNING: $JS_WORKFLOW not found, skipping"
 fi
 
 echo ""

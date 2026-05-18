@@ -6,15 +6,15 @@ on:
     paths:
       - "js/**"
       - "docs/**"
-      - ".github/workflows/release.yml"
+      - ".github/workflows/js.yml"
   pull_request:
     types: [opened, synchronize, reopened]
     paths:
       - "js/**"
       - "docs/**"
-      - ".github/workflows/release.yml"
+      - ".github/workflows/js.yml"
   # npm Trusted Publisher configuration is bound to a workflow file.
-  # Keep JavaScript publishing in release.yml so npm OIDC matches the
+  # Keep JavaScript publishing in js.yml so npm OIDC matches the
   # configured publisher identity for automated and manual releases.
   workflow_dispatch:
     inputs:

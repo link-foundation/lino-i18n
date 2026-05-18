@@ -1,0 +1,62 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.01s
+     Running unittests src/lib.rs (rust/target/debug/deps/lino_i18n-73da23bb16464391)
+
+running 29 tests
+test format::tests::missing_value_left_untouched ... ok
+test format::tests::double_braces ... ok
+test format::tests::dotted_names_supported ... ok
+test format::tests::preserves_multibyte_text ... ok
+test i18n::tests::compatibility_aliases_resolve_migrated_deep_keys ... ok
+test i18n::tests::context_suffix ... ok
+test i18n::tests::interpolates ... ok
+test i18n::tests::default_value_used_when_missing ... ok
+test i18n::tests::fallback_chain ... ok
+test i18n::tests::missing_key_handler ... ok
+test i18n::tests::resolves_label_aliases_while_explicit_keys_win ... ok
+test i18n::tests::plurals_in_english ... ok
+test loader::tests::expands_compatibility_aliases_without_overwriting_explicit_keys ... ok
+test i18n::tests::plurals_in_russian ... ok
+test format::tests::single_braces ... ok
+test loader::tests::format_preserves_scalar_parent_translations_as_labels ... ok
+test loader::tests::parse_aliases_nested_label_children_to_their_parent_key ... ok
+test loader::tests::parses_simple_catalogue ... ok
+test loader::tests::label_aliases_preserve_selector_suffix_groups ... ok
+test loader::tests::parses_bundled_multi_locale_file ... ok
+test plurals::tests::english ... ok
+test loader::tests::round_trips ... ok
+test plurals::tests::arabic ... ok
+test plurals::tests::japanese_has_one_form ... ok
+test plurals::tests::polish ... ok
+test plurals::tests::russian ... ok
+test format::tests::whitespace_inside_braces ... ok
+test loader::tests::parses_nested_catalogue ... ok
+test plurals::tests::french_zero_is_one ... ok
+
+test result: ok. 29 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/integration.rs (rust/target/debug/deps/integration-11843e9cd802ed88)
+
+running 9 tests
+test fallback_chain_picks_first_available ... ok
+test deeply_nested_sample_catalogues_resolve ... ok
+test macro_accepts_compatibility_alias_options ... ok
+test macro_supports_locale_override_and_plurals ... ok
+test macro_loads_translations ... ok
+test namespaces_and_context_resolve ... ok
+test loader_and_macro_agree_on_keys ... ok
+test parser_flattens_hive_mind_style_deep_multiline_catalogues ... ok
+test runtime_loads_bundled_locale_file ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples/basic.rs (rust/target/debug/examples/basic-6093319cc912f1da)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (rust/target/debug/deps/lino_i18n_macros-33704d59ce6982cb)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
