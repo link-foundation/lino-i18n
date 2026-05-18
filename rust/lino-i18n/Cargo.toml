@@ -21,4 +21,4 @@ macros = ["dep:lino-i18n-macros"]
 
 [dependencies]
 lino-objects-codec = "0.2.1"
-lino-i18n-macros = { version = "0.1.0", path = "../lino-i18n-macros", optional = true }
+lino-i18n-macros = { version = "0.2.0", path = "../lino-i18n-macros", optional = true }
