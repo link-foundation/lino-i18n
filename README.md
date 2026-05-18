@@ -1,6 +1,6 @@
 # lino-i18n
 
-[![JavaScript CI/CD](https://github.com/link-foundation/lino-i18n/actions/workflows/js.yml/badge.svg?branch=main)](https://github.com/link-foundation/lino-i18n/actions/workflows/js.yml)
+[![JavaScript CI/CD](https://github.com/link-foundation/lino-i18n/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/link-foundation/lino-i18n/actions/workflows/release.yml)
 [![Rust CI/CD](https://github.com/link-foundation/lino-i18n/actions/workflows/rust.yml/badge.svg?branch=main)](https://github.com/link-foundation/lino-i18n/actions/workflows/rust.yml)
 [![npm](https://img.shields.io/npm/v/lino-i18n?label=npm)](https://www.npmjs.com/package/lino-i18n)
 [![Crates.io](https://img.shields.io/crates/v/lino-i18n?label=crates.io)](https://crates.io/crates/lino-i18n)
@@ -227,7 +227,7 @@ comparison including code samples and benchmarks.
 │   └── Cargo.toml                 # Workspace manifest
 ├── docs/case-studies/issue-1/     # Design rationale + benchmarks
 └── .github/workflows/
-    ├── js.yml                     # JS lint+test matrix
+    ├── release.yml                # JS CI/CD, npm release, and docs deployment
     └── rust.yml                   # Rust fmt+clippy+test matrix
 ```
 
@@ -235,12 +235,14 @@ comparison including code samples and benchmarks.
 
 Two purpose-built workflows live in `.github/workflows/`:
 
-- **`js.yml`** runs `node --test`, `bun test`, and `deno test` on Linux,
+- **`release.yml`** runs `node --test`, `bun test`, and `deno test` on Linux,
   macOS, and Windows whenever anything under `js/**` changes, plus a CLI
   smoke test that round-trips an `i18next` JSON catalogue to `.lino`. On
   `main`, it also dry-runs the npm package, publishes missing package versions,
   creates `js-v*` GitHub releases, and deploys generated JavaScript docs to
-  GitHub Pages.
+  GitHub Pages. The filename stays aligned with npm Trusted Publisher
+  configuration because npm validates the workflow identity during OIDC
+  publishing.
 - **`rust.yml`** runs `cargo fmt --check`, `cargo clippy -D warnings`, and
   `cargo test --all-targets` on the same three operating systems whenever
   anything under `rust/**` changes. On `main`, it also verifies crate package

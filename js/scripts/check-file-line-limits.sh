@@ -33,9 +33,9 @@ done < <(find . -name "*.mjs" -type f -not -path "*/node_modules/*" -print0)
 
 echo ""
 echo "Checking that the JavaScript workflow is under ${LIMIT} lines..."
-RELEASE_YML="../.github/workflows/js.yml"
+RELEASE_YML="../.github/workflows/release.yml"
 if [ ! -f "$RELEASE_YML" ]; then
-  RELEASE_YML=".github/workflows/js.yml"
+  RELEASE_YML=".github/workflows/release.yml"
 fi
 if [ -f "$RELEASE_YML" ]; then
   line_count=$(wc -l < "$RELEASE_YML" | tr -d '[:space:]')

@@ -1,0 +1,112 @@
+{
+  "_id": "lino-i18n@0.0.1",
+  "name": "lino-i18n",
+  "dist-tags": {
+    "latest": "0.0.1"
+  },
+  "versions": [
+    "0.0.1"
+  ],
+  "time": {
+    "created": "2026-05-16T22:23:27.017Z",
+    "0.0.1": "2026-05-16T22:23:27.252Z",
+    "modified": "2026-05-16T22:23:27.442Z"
+  },
+  "maintainers": [
+    "konard <drakonard@gmail.com>"
+  ],
+  "description": "Universal i18n library that stores translations in Links Notation (.lino) instead of JSON.",
+  "homepage": "https://github.com/link-foundation/lino-i18n#readme",
+  "keywords": [
+    "i18n",
+    "internationalization",
+    "translation",
+    "links-notation",
+    "lino",
+    "localization"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/link-foundation/lino-i18n.git"
+  },
+  "author": "Link Foundation",
+  "bugs": {
+    "url": "https://github.com/link-foundation/lino-i18n/issues"
+  },
+  "license": "Unlicense",
+  "readmeFilename": "README.md",
+  "_rev": "1-25d1ec880e03719f776ce842ad9978cb",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "bin": {
+    "lino-i18n": "bin/lino-i18n.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./src/index.js"
+    },
+    "./converters": "./src/converters/index.js",
+    "./loaders": "./src/loaders.js"
+  },
+  "scripts": {
+    "test": "node --test --test-timeout=30000 tests/*.test.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check:duplication": "jscpd .",
+    "check": "npm run lint && npm run format:check && npm run check:duplication",
+    "changeset": "changeset",
+    "changeset:version": "changeset version",
+    "changeset:publish": "changeset publish",
+    "pack:dry-run": "npm pack --dry-run"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "links-notation": "^0.13.0",
+    "lino-arguments": "^0.3.0",
+    "lino-objects-codec": "^0.4.0"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.31.0",
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.4.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "jscpd": "^4.2.2",
+    "prettier": "^3.8.3",
+    "test-anywhere": "^0.9.1"
+  },
+  "gitHead": "8fbe2ff33067fb86691b000ee3654dad602975b5",
+  "_nodeVersion": "20.19.4",
+  "_npmVersion": "11.7.0",
+  "dist": {
+    "integrity": "sha512-dYGSGvdQ5VOKER2S2KaM3Tn7+iL0u3/Mqe+n6U7iV4YcOkFdLmKjeyRUWCfmZyd/OXEiEJUZvVo3eR3cKmUhMA==",
+    "shasum": "2879365c247888890aa52699ffe6daead8173e32",
+    "tarball": "https://registry.npmjs.org/lino-i18n/-/lino-i18n-0.0.1.tgz",
+    "fileCount": 15,
+    "unpackedSize": 52169,
+    "signatures": [
+      {
+        "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U",
+        "sig": "MEYCIQCW+C5qzq+ieOB7ZzSxUdsFRprAtFyb+r81N+pp4QMcygIhALcK8RAV5gli1lG9nQ/7t13zyV92JZHvb+8cTfmCvGf9"
+      }
+    ]
+  },
+  "_npmUser": "konard <drakonard@gmail.com>",
+  "directories": {},
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages-npm-production",
+    "tmp": "tmp/lino-i18n_0.0.1_1778970207098_0.6631504507836041"
+  },
+  "_hasShrinkwrap": false
+}
