@@ -173,4 +173,6 @@ Commands run successfully:
   for each Rust helper script except the shared `rust-paths.rs` module
 - `actionlint .github/workflows/release.yml .github/workflows/rust.yml`
 
-Fresh GitHub Actions runs still need to be checked after the branch is pushed.
+Fresh GitHub Actions verification for commit `820dacd` showed the JavaScript
+workflow passing. The Rust workflow caught the missing changelog fragment for
+the release-script change; that fragment was added in this pull request.
