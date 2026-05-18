@@ -8,6 +8,10 @@ import {
   loadLocalesFromFile,
   loadLocalesFromDirectory,
 } from './loaders.js';
+import {
+  expandCompatibilityAliases,
+  normalizeCompatibilityAliases,
+} from './compatibility.js';
 import { interpolate, resolveKey } from './format.js';
 
 function normalizeFallbacks(fallback) {
@@ -27,11 +31,18 @@ export function createI18n(options = {}) {
     fallback = ['en'],
     onMissingKey,
     interpolation = { prefix: '{{', suffix: '}}' },
+    compatibilityAliases: requestedCompatibilityAliases = [],
   } = options;
+  const compatibilityAliases = normalizeCompatibilityAliases(
+    requestedCompatibilityAliases
+  );
 
   const catalogues = new Map();
   for (const [locale, translations] of Object.entries(locales)) {
-    catalogues.set(locale, { ...translations });
+    catalogues.set(
+      locale,
+      expandCompatibilityAliases(translations, { compatibilityAliases })
+    );
   }
 
   let currentLocale = defaultLocale;
@@ -58,7 +69,7 @@ export function createI18n(options = {}) {
 
   function has(key, locale = currentLocale) {
     const table = catalogues.get(locale);
-    return Boolean(table && Object.prototype.hasOwnProperty.call(table, key));
+    return resolveKey(table, key, { locale }) !== undefined;
   }
 
   function _lookup(key, opts) {
@@ -117,7 +128,13 @@ export function createI18n(options = {}) {
       throw new TypeError('addLocale requires a string locale name');
     }
     const current = catalogues.get(locale) || {};
-    catalogues.set(locale, { ...current, ...translations });
+    catalogues.set(
+      locale,
+      expandCompatibilityAliases(
+        { ...current, ...translations },
+        { compatibilityAliases }
+      )
+    );
   }
 
   async function loadLocale(locale, text) {

@@ -5,8 +5,13 @@ use std::path::Path;
 use std::sync::Arc;
 
 use crate::format::interpolate;
-use crate::loader::{load_lino_catalogs, load_lino_directory, parse_lino_catalogs, LoaderError};
+use crate::loader::{
+    compatibility_aliases_for_key, load_lino_catalogs, load_lino_directory, parse_lino_catalogs,
+    CompatibilityAlias, LoaderError,
+};
 use crate::plurals::plural_suffix;
+
+const LABEL_ALIAS_KEY: &str = "label";
 
 /// Callback invoked when a key cannot be resolved in any locale or fallback.
 /// Returning `Some` replaces the would-be fallback (typically the raw key)
@@ -65,6 +70,7 @@ pub struct I18n {
     current_locale: String,
     fallback: Vec<String>,
     locales: BTreeMap<String, HashMap<String, String>>,
+    compatibility_aliases: Vec<CompatibilityAlias>,
     on_missing: Option<MissingKeyHandler>,
 }
 
@@ -75,6 +81,7 @@ impl std::fmt::Debug for I18n {
             .field("current_locale", &self.current_locale)
             .field("fallback", &self.fallback)
             .field("locales", &self.locales.keys().collect::<Vec<_>>())
+            .field("compatibility_aliases", &self.compatibility_aliases)
             .field("on_missing", &self.on_missing.as_ref().map(|_| "<handler>"))
             .finish()
     }
@@ -89,6 +96,7 @@ impl I18n {
             default_locale,
             fallback: Vec::new(),
             locales: BTreeMap::new(),
+            compatibility_aliases: Vec::new(),
             on_missing: None,
         }
     }
@@ -105,6 +113,27 @@ impl I18n {
         for (k, v) in entries {
             table.insert(k.into(), v.into());
         }
+        expand_hash_compatibility_aliases(table, &self.compatibility_aliases);
+    }
+
+    /// Configure compatibility aliases generated from canonical keys.
+    ///
+    /// Existing explicit translations are preserved. Changing aliases expands
+    /// every loaded locale table immediately and also affects future loads.
+    pub fn set_compatibility_aliases<I>(&mut self, aliases: I)
+    where
+        I: IntoIterator<Item = CompatibilityAlias>,
+    {
+        self.compatibility_aliases = aliases.into_iter().collect();
+        for table in self.locales.values_mut() {
+            expand_hash_compatibility_aliases(table, &self.compatibility_aliases);
+        }
+    }
+
+    /// Return the configured compatibility alias modes.
+    #[must_use]
+    pub fn compatibility_aliases(&self) -> &[CompatibilityAlias] {
+        &self.compatibility_aliases
     }
 
     /// Load a `.lino` catalogue from text and register it.
@@ -117,10 +146,7 @@ impl I18n {
                     path: Path::new("<inline>").to_path_buf(),
                 })?;
         for cat in cats {
-            let table = self.locales.entry(cat.locale).or_default();
-            for (k, v) in cat.translations {
-                table.insert(k, v);
-            }
+            self.add_translations(cat.locale, cat.translations);
         }
         Ok(first_locale)
     }
@@ -136,10 +162,7 @@ impl I18n {
                     path: Path::new("<file>").to_path_buf(),
                 })?;
         for cat in cats {
-            let table = self.locales.entry(cat.locale).or_default();
-            for (k, v) in cat.translations {
-                table.insert(k, v);
-            }
+            self.add_translations(cat.locale, cat.translations);
         }
         Ok(first_locale)
     }
@@ -152,10 +175,7 @@ impl I18n {
         let cats = load_lino_directory(directory)?;
         let mut loaded = Vec::with_capacity(cats.len());
         for cat in cats {
-            let table = self.locales.entry(cat.locale.clone()).or_default();
-            for (k, v) in cat.translations {
-                table.insert(k, v);
-            }
+            self.add_translations(cat.locale.clone(), cat.translations);
             loaded.push(cat.locale);
         }
         Ok(loaded)
@@ -252,6 +272,24 @@ fn apply(template: &str, params: &[(&str, &str)]) -> String {
     interpolate(template, &map)
 }
 
+fn expand_hash_compatibility_aliases(
+    table: &mut HashMap<String, String>,
+    aliases: &[CompatibilityAlias],
+) {
+    if aliases.is_empty() {
+        return;
+    }
+    let originals: Vec<(String, String)> = table
+        .iter()
+        .map(|(key, value)| (key.clone(), value.clone()))
+        .collect();
+    for (key, value) in originals {
+        for alias in compatibility_aliases_for_key(&key, aliases) {
+            table.entry(alias).or_insert_with(|| value.clone());
+        }
+    }
+}
+
 fn resolve(
     table: &HashMap<String, String>,
     key: &str,
@@ -282,6 +320,9 @@ fn resolve(
             }
         }
         if let Some(v) = table.get(*target) {
+            return Some(v.clone());
+        }
+        if let Some(v) = table.get(&format!("{target}.{LABEL_ALIAS_KEY}")) {
             return Some(v.clone());
         }
     }
@@ -399,5 +440,56 @@ mod tests {
             i18n.t_with("xx", &[], &TOptions::new().default_value("fallback")),
             "fallback"
         );
+    }
+
+    #[test]
+    fn compatibility_aliases_resolve_migrated_deep_keys() {
+        let mut i18n = I18n::new("en");
+        i18n.set_compatibility_aliases([
+            CompatibilityAlias::CollapseTail,
+            CompatibilityAlias::ParentLabel,
+        ]);
+        i18n.add_translations(
+            "en",
+            [
+                (
+                    "telegram.help.solve.alias.detail",
+                    "Tool aliases imply --tool <tool>",
+                ),
+                ("error.label", "Error"),
+            ],
+        );
+
+        assert_eq!(
+            i18n.t("telegram.help_solve_alias_detail", &[]),
+            "Tool aliases imply --tool <tool>"
+        );
+        assert_eq!(
+            i18n.t("telegram.help.solve_alias_detail", &[]),
+            "Tool aliases imply --tool <tool>"
+        );
+        assert_eq!(
+            i18n.t("telegram.help.solve.alias_detail", &[]),
+            "Tool aliases imply --tool <tool>"
+        );
+        assert_eq!(i18n.t("error", &[]), "Error");
+    }
+
+    #[test]
+    fn resolves_label_aliases_while_explicit_keys_win() {
+        let mut i18n = I18n::new("en");
+        i18n.add_translations(
+            "en",
+            [
+                ("error", "Explicit error"),
+                ("error.label", "Error"),
+                ("warning.label", "Warning"),
+            ],
+        );
+
+        assert_eq!(i18n.t("error", &[]), "Explicit error");
+        assert_eq!(i18n.t("error.label", &[]), "Error");
+        assert_eq!(i18n.t("warning", &[]), "Warning");
+        assert_eq!(i18n.t("warning.label", &[]), "Warning");
     }
 }

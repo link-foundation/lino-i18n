@@ -9,9 +9,9 @@
 Hive Mind adopted `lino-i18n` in
 [link-assistant/hive-mind#1816](https://github.com/link-assistant/hive-mind/pull/1816)
 and then applied review feedback to group every existing translation more
-deeply. As of May 17, 2026, that Hive Mind PR is open and keeps local
-compatibility aliases while upstream parent-label and old-key alias support are
-tracked here.
+deeply. As of May 17, 2026, that Hive Mind PR is open; this repository now
+documents the catalogue shape and provides built-in parent-label and old-key
+alias support for similar migrations.
 
 ## Production Shape
 
@@ -61,9 +61,7 @@ keys for downstream applications.
 ## Parent Labels
 
 Some production catalogues need a key to be both a visible label and a parent
-namespace. Until
-[issue #10](https://github.com/link-foundation/lino-i18n/issues/10) is
-implemented, author the label explicitly as a child key:
+namespace. Author the label explicitly as a child key:
 
 ```lino
 error
@@ -73,8 +71,8 @@ error
       url "Error: Invalid GitHub URL format"
 ```
 
-This resolves `error.label` today. Applications that must keep a historic
-`error` key should add that alias outside `lino-i18n` for now.
+This resolves both `error.label` and `error`, while an explicit `error`
+translation still wins over the generated parent-label alias.
 
 ## Migration Aliases
 
@@ -86,10 +84,11 @@ prompt.system_general_guidelines_body
 ```
 
 Deep authoring now produces canonical dot keys such as
-`telegram.help.solve.alias.detail`. Until
-[issue #11](https://github.com/link-foundation/lino-i18n/issues/11) adds a
-shared helper, migrations should keep explicit application-level aliases and
-let explicit translations win over generated compatibility keys.
+`telegram.help.solve.alias.detail`. Enable compatibility aliases during
+loading to expose old underscore-tail keys such as
+`telegram.help_solve_alias_detail`, `telegram.help.solve_alias_detail`, and
+`telegram.help.solve.alias_detail`. Explicit translations win over generated
+compatibility keys.
 
 ## Verification
 

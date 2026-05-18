@@ -33,11 +33,13 @@ use syn::{parse_macro_input, LitStr, Token};
 /// i18n!("locales")
 /// i18n!("locales", default = "en")
 /// i18n!("locales", default = "en", fallback = "en")
+/// i18n!("locales", compatibility_aliases = "collapse-tail,parent-label")
 /// ```
 struct MacroArgs {
     directory: LitStr,
     default_locale: Option<LitStr>,
     fallback: Option<LitStr>,
+    compatibility_aliases: Option<LitStr>,
 }
 
 impl Parse for MacroArgs {
@@ -45,6 +47,7 @@ impl Parse for MacroArgs {
         let directory: LitStr = input.parse()?;
         let mut default_locale: Option<LitStr> = None;
         let mut fallback: Option<LitStr> = None;
+        let mut compatibility_aliases: Option<LitStr> = None;
         while input.peek(Token![,]) {
             let _: Token![,] = input.parse()?;
             if input.is_empty() {
@@ -56,10 +59,13 @@ impl Parse for MacroArgs {
             match key.to_string().as_str() {
                 "default" | "default_locale" => default_locale = Some(value),
                 "fallback" => fallback = Some(value),
+                "compatibility_aliases" => compatibility_aliases = Some(value),
                 other => {
                     return Err(syn::Error::new(
                         key.span(),
-                        format!("unknown argument `{other}` (expected `default` or `fallback`)"),
+                        format!(
+                            "unknown argument `{other}` (expected `default`, `fallback`, or `compatibility_aliases`)"
+                        ),
                     ))
                 }
             }
@@ -68,6 +74,7 @@ impl Parse for MacroArgs {
             directory,
             default_locale,
             fallback,
+            compatibility_aliases,
         })
     }
 }
@@ -155,9 +162,17 @@ fn expand(args: &MacroArgs) -> syn::Result<TokenStream2> {
     } else {
         quote! {}
     };
+    let compatibility_alias_setup = if let Some(compatibility_aliases) = &args.compatibility_aliases
+    {
+        let aliases = compatibility_alias_tokens(compatibility_aliases)?;
+        quote! { __i18n.set_compatibility_aliases([ #( #aliases ),* ]); }
+    } else {
+        quote! {}
+    };
 
     Ok(quote! {{
         let mut __i18n = ::lino_i18n::I18n::new(#default_locale);
+        #compatibility_alias_setup
         #( #add_calls )*
         #fallback_setup
         __i18n
@@ -172,6 +187,32 @@ fn resolve_directory(input: &str) -> Result<PathBuf, String> {
     let manifest = std::env::var("CARGO_MANIFEST_DIR")
         .map_err(|_| "CARGO_MANIFEST_DIR not set; macro must be invoked from a cargo build")?;
     Ok(Path::new(&manifest).join(path))
+}
+
+fn compatibility_alias_tokens(value: &LitStr) -> syn::Result<Vec<TokenStream2>> {
+    let mut aliases = Vec::new();
+    for raw in value.value().split(',') {
+        let alias = raw.trim();
+        if alias.is_empty() {
+            continue;
+        }
+        let token = match alias {
+            "collapseTail" | "collapse-tail" => {
+                quote! { ::lino_i18n::CompatibilityAlias::CollapseTail }
+            }
+            "parentLabel" | "parent-label" => {
+                quote! { ::lino_i18n::CompatibilityAlias::ParentLabel }
+            }
+            other => {
+                return Err(syn::Error::new(
+                    value.span(),
+                    format!("unknown compatibility alias `{other}`"),
+                ));
+            }
+        };
+        aliases.push(token);
+    }
+    Ok(aliases)
 }
 
 fn first_locale_in_text(text: &str) -> Option<String> {

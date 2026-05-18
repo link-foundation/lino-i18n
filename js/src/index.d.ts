@@ -1,5 +1,18 @@
 // Type declarations for the `lino-i18n` package.
 
+export type CompatibilityAlias =
+  | 'collapseTail'
+  | 'collapse-tail'
+  | 'parentLabel'
+  | 'parent-label';
+
+export interface CompatibilityAliasOptions {
+  /** Alias modes used to expose migration keys without overwriting explicit keys. */
+  compatibilityAliases?: CompatibilityAlias | CompatibilityAlias[];
+  /** Alias mode shortcut for helper-style calls. */
+  mode?: CompatibilityAlias | CompatibilityAlias[];
+}
+
 export interface I18nOptions {
   /** Translation catalogues keyed by locale code. */
   locales?: Record<string, Record<string, string>>;
@@ -15,6 +28,8 @@ export interface I18nOptions {
   }) => string | void;
   /** Interpolation tokens; currently informational only. */
   interpolation?: { prefix?: string; suffix?: string };
+  /** Compatibility aliases generated from canonical keys during migration. */
+  compatibilityAliases?: CompatibilityAlias | CompatibilityAlias[];
 }
 
 export interface TOptions {
@@ -51,13 +66,31 @@ export interface I18nInstance {
 
 export declare function createI18n(options?: I18nOptions): I18nInstance;
 
+export declare function expandCompatibilityAliases(
+  translations: Record<string, string>,
+  options?: CompatibilityAliasOptions
+): Record<string, string>;
+
 export declare function parseLinoCatalog(text: string): {
+  locale: string | null;
+  translations: Record<string, string>;
+};
+
+export declare function parseLinoCatalog(
+  text: string,
+  options: CompatibilityAliasOptions
+): {
   locale: string | null;
   translations: Record<string, string>;
 };
 
 export declare function parseLinoCatalogs(
   text: string
+): Array<{ locale: string | null; translations: Record<string, string> }>;
+
+export declare function parseLinoCatalogs(
+  text: string,
+  options: CompatibilityAliasOptions
 ): Array<{ locale: string | null; translations: Record<string, string> }>;
 
 export declare function formatLinoCatalog(
@@ -75,19 +108,23 @@ export declare function formatLinoCatalogs(
 
 export declare function loadLocaleFromString(
   locale: string,
-  text: string
+  text: string,
+  options?: CompatibilityAliasOptions
 ): Promise<{ locale: string; translations: Record<string, string> }>;
 
 export declare function loadLocaleFromFile(
-  filePath: string
+  filePath: string,
+  options?: CompatibilityAliasOptions
 ): Promise<{ locale: string; translations: Record<string, string> }>;
 
 export declare function loadLocalesFromFile(
-  filePath: string
+  filePath: string,
+  options?: CompatibilityAliasOptions
 ): Promise<Array<{ locale: string; translations: Record<string, string> }>>;
 
 export declare function loadLocalesFromDirectory(
-  directory: string
+  directory: string,
+  options?: CompatibilityAliasOptions
 ): Promise<Record<string, Record<string, string>>>;
 
 export declare function interpolate(

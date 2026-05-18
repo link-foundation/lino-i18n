@@ -7,6 +7,8 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 
+import { expandCompatibilityAliases } from './compatibility.js';
+
 const SELECTOR_SUFFIXES = new Set([
   'zero',
   'one',
@@ -18,6 +20,8 @@ const SELECTOR_SUFFIXES = new Set([
   'female',
   'neutral',
 ]);
+
+const LABEL_ALIAS_KEY = 'label';
 
 function unescapeValue(value, quote = '"') {
   let result = '';
@@ -275,13 +279,27 @@ function isPlainObject(value) {
 }
 
 function isSelectorGroup(value) {
-  const entries = Object.entries(value);
+  const entries = Object.entries(value).filter(
+    ([key]) => key !== LABEL_ALIAS_KEY
+  );
   return (
     entries.length > 0 &&
     entries.every(
       ([key, child]) => SELECTOR_SUFFIXES.has(key) && typeof child === 'string'
     )
   );
+}
+
+function labelAliasValue(value) {
+  return typeof value[LABEL_ALIAS_KEY] === 'string'
+    ? value[LABEL_ALIAS_KEY]
+    : undefined;
+}
+
+function addLabelAlias(out, base, value) {
+  if (!Object.prototype.hasOwnProperty.call(out, base)) {
+    out[base] = value;
+  }
 }
 
 function flattenTree(tree, pathParts = [], out = {}) {
@@ -295,14 +313,25 @@ function flattenTree(tree, pathParts = [], out = {}) {
     }
 
     const nextPath = [...pathParts, key];
+    const base = nextPath.join('.');
+    const labelValue = labelAliasValue(value);
     if (isSelectorGroup(value)) {
-      const base = nextPath.join('.');
+      if (labelValue !== undefined) {
+        out[`${base}.${LABEL_ALIAS_KEY}`] = labelValue;
+        addLabelAlias(out, base, labelValue);
+      }
       for (const [suffix, child] of Object.entries(value)) {
+        if (suffix === LABEL_ALIAS_KEY) {
+          continue;
+        }
         out[`${base}_${suffix}`] = child;
       }
       continue;
     }
     flattenTree(value, nextPath, out);
+    if (labelValue !== undefined) {
+      addLabelAlias(out, base, labelValue);
+    }
   }
   return out;
 }
@@ -322,12 +351,23 @@ function splitSelectorSuffix(key) {
 function setNestedValue(tree, parts, value) {
   let node = tree;
   for (const part of parts.slice(0, -1)) {
-    if (!isPlainObject(node[part])) {
+    const current = node[part];
+    if (!isPlainObject(current)) {
       node[part] = {};
+      if (typeof current === 'string') {
+        node[part][LABEL_ALIAS_KEY] = current;
+      }
     }
     node = node[part];
   }
-  node[parts[parts.length - 1]] = value;
+  const leaf = parts[parts.length - 1];
+  if (isPlainObject(node[leaf])) {
+    if (!Object.prototype.hasOwnProperty.call(node[leaf], LABEL_ALIAS_KEY)) {
+      node[leaf][LABEL_ALIAS_KEY] = value;
+    }
+    return;
+  }
+  node[leaf] = value;
 }
 
 function translationsToTree(translations) {
@@ -360,7 +400,12 @@ function formatValue(value, indent) {
 
 function formatTreeLines(tree, indent = '  ') {
   const lines = [];
-  for (const [key, value] of Object.entries(tree)) {
+  const entries = Object.entries(tree);
+  const labelEntry = entries.find(([key]) => key === LABEL_ALIAS_KEY);
+  const orderedEntries = labelEntry
+    ? [labelEntry, ...entries.filter(([key]) => key !== LABEL_ALIAS_KEY)]
+    : entries;
+  for (const [key, value] of orderedEntries) {
     if (typeof value === 'string') {
       lines.push(`${indent}${key} ${formatValue(value, indent)}`);
       continue;
@@ -386,16 +431,16 @@ function formatFlatCatalog(locale, translations) {
 // Parse the contents of one `.lino` catalogue. Returns the first
 // `{ locale, translations }` pair when the file contains multiple locale
 // roots. Use `parseLinoCatalogs` to keep every root.
-export function parseLinoCatalog(text) {
-  const catalogues = parseLinoCatalogs(text);
+export function parseLinoCatalog(text, options = {}) {
+  const catalogues = parseLinoCatalogs(text, options);
   return catalogues[0] || { locale: null, translations: {} };
 }
 
 // Parse every top-level locale block in a `.lino` string.
-export function parseLinoCatalogs(text) {
+export function parseLinoCatalogs(text, options = {}) {
   return parseLocaleTrees(text).map(({ locale, tree }) => ({
     locale: locale || null,
-    translations: flattenTree(tree),
+    translations: expandCompatibilityAliases(flattenTree(tree), options),
   }));
 }
 
@@ -427,8 +472,8 @@ export function formatLinoCatalogs(catalogues, options = {}) {
     .join('\n\n');
 }
 
-export async function loadLocaleFromString(locale, text) {
-  const parsedCatalogues = parseLinoCatalogs(text);
+export async function loadLocaleFromString(locale, text, options = {}) {
+  const parsedCatalogues = parseLinoCatalogs(text, options);
   const parsed = parsedCatalogues.find(
     (catalogue) => catalogue.locale === locale
   ) ||
@@ -439,17 +484,17 @@ export async function loadLocaleFromString(locale, text) {
   };
 }
 
-export async function loadLocaleFromFile(filePath) {
+export async function loadLocaleFromFile(filePath, options = {}) {
   const text = await fs.readFile(filePath, 'utf8');
-  const parsed = parseLinoCatalog(text);
+  const parsed = parseLinoCatalog(text, options);
   const locale =
     parsed.locale || path.basename(filePath, path.extname(filePath));
   return { locale, translations: parsed.translations };
 }
 
-export async function loadLocalesFromFile(filePath) {
+export async function loadLocalesFromFile(filePath, options = {}) {
   const text = await fs.readFile(filePath, 'utf8');
-  const parsed = parseLinoCatalogs(text);
+  const parsed = parseLinoCatalogs(text, options);
   if (parsed.length > 0) {
     return parsed;
   }
@@ -461,7 +506,7 @@ export async function loadLocalesFromFile(filePath) {
   ];
 }
 
-export async function loadLocalesFromDirectory(directory) {
+export async function loadLocalesFromDirectory(directory, options = {}) {
   const entries = (await fs.readdir(directory, { withFileTypes: true })).sort(
     (left, right) => left.name.localeCompare(right.name)
   );
@@ -485,6 +530,9 @@ export async function loadLocalesFromDirectory(directory) {
         ...translations,
       };
     }
+  }
+  for (const [locale, translations] of Object.entries(catalogues)) {
+    catalogues[locale] = expandCompatibilityAliases(translations, options);
   }
   return catalogues;
 }

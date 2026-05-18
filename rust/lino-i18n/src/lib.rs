@@ -45,8 +45,9 @@ mod plurals;
 pub use format::interpolate;
 pub use i18n::{I18n, MissingKeyHandler, TOptions};
 pub use loader::{
-    format_lino_catalog, load_lino_catalog, load_lino_catalogs, load_lino_directory,
-    parse_lino_catalog, parse_lino_catalogs, Catalogue, LoaderError,
+    expand_compatibility_aliases, format_lino_catalog, load_lino_catalog, load_lino_catalogs,
+    load_lino_directory, parse_lino_catalog, parse_lino_catalogs, Catalogue, CompatibilityAlias,
+    LoaderError,
 };
 pub use plurals::{plural_category, plural_suffix, PluralCategory};
 
