@@ -1,5 +1,19 @@
 # lino-i18n Rust Changelog
 
+
+## [0.1.0] - 2026-05-18
+
+### Fixed
+
+- Preserve scalar parent translations as `label` children when formatting nested catalogues, and resolve `foo` from `foo.label` when no explicit `foo` translation exists.
+
+### Added
+- Configurable compatibility aliases for deeper nested migration keys.
+
+### Fixed
+
+- Catch Rust release-script compile failures during pull request linting and clean up release package metadata.
+
 ## [0.0.1] - 2026-05-16
 
 Initial release of the Rust `lino-i18n` crates.
