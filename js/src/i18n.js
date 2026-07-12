@@ -46,7 +46,30 @@ export function createI18n(options = {}) {
   }
 
   let currentLocale = defaultLocale;
+  let revision = 0;
+  const listeners = new Set();
   const fallbacks = normalizeFallbacks(fallback);
+
+  function notify() {
+    revision += 1;
+    for (const listener of listeners) {
+      listener();
+    }
+  }
+
+  function subscribe(listener) {
+    if (typeof listener !== 'function') {
+      throw new TypeError('subscribe expects a function');
+    }
+    listeners.add(listener);
+    return () => {
+      listeners.delete(listener);
+    };
+  }
+
+  function getRevision() {
+    return revision;
+  }
 
   function getLocale() {
     return currentLocale;
@@ -56,7 +79,10 @@ export function createI18n(options = {}) {
     if (typeof locale !== 'string' || !locale) {
       throw new TypeError('setLocale expects a non-empty string locale');
     }
-    currentLocale = locale;
+    if (locale !== currentLocale) {
+      currentLocale = locale;
+      notify();
+    }
   }
 
   function getFallbacks() {
@@ -135,6 +161,7 @@ export function createI18n(options = {}) {
         { compatibilityAliases }
       )
     );
+    notify();
   }
 
   async function loadLocale(locale, text) {
@@ -174,5 +201,7 @@ export function createI18n(options = {}) {
     loadLocaleFile,
     loadDirectory,
     interpolation,
+    subscribe,
+    getRevision,
   };
 }

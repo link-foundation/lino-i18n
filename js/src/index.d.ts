@@ -62,6 +62,8 @@ export interface I18nInstance {
   loadLocaleFile(filePath: string): Promise<string>;
   loadDirectory(directory: string): Promise<string[]>;
   interpolation: { prefix?: string; suffix?: string };
+  subscribe(listener: () => void): () => void;
+  getRevision(): number;
 }
 
 export declare function createI18n(options?: I18nOptions): I18nInstance;

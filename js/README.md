@@ -33,6 +33,51 @@ i18n.t('role', { context: 'female' }); // → "She is a developer"
 i18n.t('telegram.help.solve.alias.detail'); // → "Tool aliases imply `--tool <tool>`"
 ```
 
+## React
+
+React is an optional peer dependency. The `lino-i18n/react` adapter uses the
+same `.lino` catalogues as the framework-independent runtime:
+
+```jsx
+import { createI18n } from 'lino-i18n';
+import {
+  CurrencyFormat,
+  I18nProvider,
+  LocaleSelector,
+  Trans,
+  useTranslation,
+} from 'lino-i18n/react';
+
+const i18n = createI18n({ locales: catalogues, defaultLocale: 'en' });
+
+function Checkout() {
+  const { t } = useTranslation('checkout');
+  return (
+    <>
+      <h1>{t('title')}</h1>
+      <Trans
+        id="checkout.total"
+        values={{ amount: <CurrencyFormat value={19.99} currency="USD" /> }}
+      />
+      <LocaleSelector labels={{ en: 'English', fr: 'Français' }} />
+    </>
+  );
+}
+
+export default function App() {
+  return (
+    <I18nProvider i18n={i18n}>
+      <Checkout />
+    </I18nProvider>
+  );
+}
+```
+
+`useI18n`, `useLocale`, and `useTranslation` update when `setLocale`,
+`addLocale`, or an asynchronous catalogue loader changes the instance.
+`NumberFormat`, `DateTimeFormat`, `CurrencyFormat`, and `RelativeTimeFormat`
+format values with the active locale through the platform `Intl` APIs.
+
 A sample `.lino` catalogue looks like this:
 
 ```lino
