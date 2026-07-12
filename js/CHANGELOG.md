@@ -1,5 +1,12 @@
 # lino-i18n Changelog
 
+## 0.2.0
+
+### Minor Changes
+
+- 8e331fd: Add reactive runtime subscriptions and first-class React bindings with provider,
+  translation hooks, rich interpolation, locale selection, and Intl formatters.
+
 ## 0.1.1
 
 ### Patch Changes
