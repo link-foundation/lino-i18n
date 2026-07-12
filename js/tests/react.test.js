@@ -54,8 +54,8 @@ test('provider hooks react to locale changes and support key prefixes', async ()
 test('Trans, locale selector, and locale-aware format components compose', async () => {
   const i18n = createI18n({
     locales: {
-      en: { total: 'Total: {{amount}}' },
-      de: { total: 'Summe: {{amount}}' },
+      en: { total: '{{name}}, total: {{amount}}' },
+      de: { total: '{{name}}, Summe: {{amount}}' },
     },
   });
 
@@ -68,6 +68,7 @@ test('Trans, locale selector, and locale-aware format components compose', async
         h(Trans, {
           id: 'total',
           values: {
+            name: 'Ada',
             amount: h(NumberFormat, {
               value: 1234.5,
               options: { minimumFractionDigits: 1 },
@@ -78,11 +79,11 @@ test('Trans, locale selector, and locale-aware format components compose', async
       )
     );
   });
-  assert.equal(renderedText(root.toJSON()), 'Total: 1,234.5ende');
+  assert.equal(renderedText(root.toJSON()), 'Ada, total: 1,234.5ende');
 
   const select = root.root.findByType('select');
   await act(() => select.props.onChange({ target: { value: 'de' } }));
-  assert.equal(renderedText(root.toJSON()), 'Summe: 1.234,5ende');
+  assert.equal(renderedText(root.toJSON()), 'Ada, Summe: 1.234,5ende');
   assert.equal(i18n.getLocale(), 'de');
 });
 

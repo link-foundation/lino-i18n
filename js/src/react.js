@@ -48,7 +48,10 @@ export function Trans({ id, values = {}, options, fallback }) {
   const i18n = useI18nContext();
   const entries = Object.entries(values);
   const markers = Object.fromEntries(
-    entries.map(([key], index) => [key, `\uE000${index}\uE001`])
+    entries.map(([key, value], index) => [
+      key,
+      React.isValidElement(value) ? `\uE000${index}\uE001` : value,
+    ])
   );
   const translated = i18n.t(
     id,
