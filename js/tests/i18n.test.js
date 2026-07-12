@@ -259,6 +259,21 @@ test('createI18n resolves missing keys via fallback', () => {
   assert.equal(i18n.t('unknown', { defaultValue: 'Default' }), 'Default');
 });
 
+test('createI18n subscriptions report observable catalogue changes', () => {
+  const i18n = createI18n({ locales: { en: { hi: 'Hello' } } });
+  const revisions = [];
+  const unsubscribe = i18n.subscribe(() => revisions.push(i18n.getRevision()));
+
+  i18n.setLocale('en'); // Setting the current value is a no-op.
+  i18n.setLocale('fr');
+  i18n.addLocale('fr', { hi: 'Bonjour' });
+  unsubscribe();
+  i18n.setLocale('en');
+
+  assert.deepEqual(revisions, [1, 2]);
+  assert.equal(i18n.getRevision(), 3);
+});
+
 test('createI18n applies CLDR plurals per locale', async () => {
   const catalogues = await loadLocalesFromDirectory(localesDir);
   const i18n = createI18n({

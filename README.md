@@ -199,6 +199,7 @@ Run `npx lino-i18n --help` for the full option list.
 | Fallback locales                  |    ✓    |    ✓    |     ~      | **✓**                   |
 | Missing-key handler               |    ✓    |    ~    |     ~      | **✓**                   |
 | First-class JS API                |    ✓    |    ✓    |     ✓      | **✓**                   |
+| Optional React provider + hooks   |    ✓    |    ~    |     ✓      | **✓** (`lino-i18n/react`) |
 | First-class Rust API              |    ✗    |    ✗    |     ✗      | **✓**                   |
 | Compile-time embedding (Rust)     |    ✗    |    ✗    |     ✗      | **✓** (`i18n!` macro)   |
 | CLI converter from other formats  |    ~    |    ~    |     ~      | **✓**                   |
