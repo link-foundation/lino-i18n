@@ -1,5 +1,11 @@
 # lino-i18n Changelog
 
+## 0.3.0
+
+### Minor Changes
+
+- f73aa48: Add a tree-shakeable browser entry point with URL-based Links Notation catalog loading, navigator language detection, and the shared translation runtime.
+
 ## 0.2.0
 
 ### Minor Changes
