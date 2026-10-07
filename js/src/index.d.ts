@@ -50,7 +50,7 @@ export interface TParams extends Record<string, unknown> {
   defaultValue?: string;
 }
 
-export interface I18nInstance {
+export interface I18nCoreInstance {
   t(key: string, params?: TParams, options?: TOptions): string;
   has(key: string, locale?: string): boolean;
   getLocale(): string;
@@ -59,11 +59,14 @@ export interface I18nInstance {
   listLocales(): string[];
   addLocale(locale: string, translations: Record<string, string>): void;
   loadLocale(locale: string, text: string): Promise<string>;
-  loadLocaleFile(filePath: string): Promise<string>;
-  loadDirectory(directory: string): Promise<string[]>;
   interpolation: { prefix?: string; suffix?: string };
   subscribe(listener: () => void): () => void;
   getRevision(): number;
+}
+
+export interface I18nInstance extends I18nCoreInstance {
+  loadLocaleFile(filePath: string): Promise<string>;
+  loadDirectory(directory: string): Promise<string[]>;
 }
 
 export declare function createI18n(options?: I18nOptions): I18nInstance;

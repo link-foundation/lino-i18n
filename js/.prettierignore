@@ -6,6 +6,8 @@ package-lock.json
 .eslintcache
 .playwright-mcp/
 site/
+test-results/
+playwright-report/
 CLAUDE.md
 # Case study raw data files (downloaded from external sources)
 docs/case-studies/*/data/

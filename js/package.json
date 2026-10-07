@@ -3,6 +3,7 @@
   "version": "0.2.0",
   "description": "Universal i18n library that stores translations in Links Notation (.lino) instead of JSON.",
   "type": "module",
+  "sideEffects": false,
   "main": "./src/index.js",
   "types": "./src/index.d.ts",
   "bin": {
@@ -22,6 +23,10 @@
     },
     "./converters": "./src/converters/index.js",
     "./loaders": "./src/loaders.js",
+    "./browser": {
+      "types": "./src/browser.d.ts",
+      "import": "./src/browser.js"
+    },
     "./react": {
       "types": "./src/react.d.ts",
       "import": "./src/react.js"
@@ -29,6 +34,8 @@
   },
   "scripts": {
     "test": "node --test --test-timeout=30000 tests/*.test.js",
+    "test:browser": "playwright test",
+    "test:types": "tsc --project tests/types/tsconfig.json",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
@@ -73,8 +80,10 @@
   "devDependencies": {
     "@changesets/cli": "^2.31.0",
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.63.0",
     "@types/node": "^26.1.1",
     "@types/react": "^19.2.17",
+    "esbuild": "^0.28.2",
     "eslint": "^10.4.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.5",
@@ -82,7 +91,8 @@
     "prettier": "^3.8.3",
     "react": "^19.1.1",
     "react-test-renderer": "^19.1.1",
-    "test-anywhere": "^0.9.1"
+    "test-anywhere": "^0.9.1",
+    "typescript": "^7.0.2"
   },
   "peerDependencies": {
     "react": ">=18.0.0"

@@ -344,6 +344,15 @@ test('loadLocalesFromDirectory merges bundled and per-language files', async () 
   assert.equal(catalogues.en['cart.items_other'], '{{count}} items');
   assert.equal(catalogues.ru['cart.items_few'], '{{count}} товара');
 
+  const i18n = createI18n();
+  let notifications = 0;
+  i18n.subscribe(() => {
+    notifications += 1;
+  });
+  assert.deepEqual(await i18n.loadDirectory(tmp), ['en', 'ru']);
+  assert.equal(i18n.t('greeting', { name: 'Ada' }), 'Hello, Ada!');
+  assert.equal(notifications, 2);
+
   await fs.rm(tmp, { recursive: true, force: true });
 });
 

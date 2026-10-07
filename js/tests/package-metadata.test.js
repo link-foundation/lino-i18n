@@ -34,6 +34,14 @@ test('npm package dry-run contains the publishable runtime surface', () => {
   assert.ok(files.has('bin/lino-i18n.js'));
   assert.ok(files.has('src/index.js'));
   assert.ok(files.has('src/index.d.ts'));
+  assert.ok(files.has('src/browser.js'));
+  assert.ok(files.has('src/browser.d.ts'));
+  assert.ok(files.has('src/catalogs.js'));
+  assert.equal(packageJson.sideEffects, false);
+  assert.deepEqual(packageJson.exports['./browser'], {
+    types: './src/browser.d.ts',
+    import: './src/browser.js',
+  });
   assert.ok(files.has('src/loaders.js'));
   assert.ok(!files.has('tests/i18n.test.js'));
   assert.ok(!files.has('scripts/publish-to-npm.mjs'));

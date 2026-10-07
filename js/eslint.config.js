@@ -76,12 +76,21 @@ export default [
     },
   },
   {
-    files: ['examples/universal-app/src/**/*.js'],
+    files: [
+      'examples/universal-app/src/**/*.js',
+      'examples/browser-usage/*.js',
+    ],
     languageOptions: {
       globals: {
         document: 'readonly',
         window: 'readonly',
       },
+    },
+  },
+  {
+    files: ['tests/browser/*.pw.js'],
+    languageOptions: {
+      globals: { URL: 'readonly', Blob: 'readonly' },
     },
   },
   {
@@ -100,6 +109,8 @@ export default [
       '**/dist/**',
       '**/out/**',
       'site/**',
+      'test-results/**',
+      'playwright-report/**',
       '*.min.js',
       '.eslintcache',
       // Case study raw data files (downloaded from external sources)

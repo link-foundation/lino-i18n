@@ -1,0 +1,6 @@
+en
+  greeting "Hello, {{name}}!"
+  items
+    one "{{count}} item"
+    other "{{count}} items"
+  onlyEnglish "This text falls back to English."

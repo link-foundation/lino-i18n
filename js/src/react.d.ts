@@ -1,15 +1,24 @@
 import type { ReactNode, SelectHTMLAttributes } from 'react';
-import type { I18nInstance, TOptions, TParams } from './index.js';
+import type {
+  I18nCoreInstance,
+  I18nInstance,
+  TOptions,
+  TParams,
+} from './index.js';
 
 export declare function I18nProvider(props: {
-  i18n: I18nInstance;
+  i18n: I18nCoreInstance;
   children?: ReactNode;
 }): ReactNode;
-export declare function useI18n(): I18nInstance;
+export declare function useI18n<T extends I18nCoreInstance = I18nInstance>(): T;
 export declare function useLocale(): string;
-export declare function useTranslation(keyPrefix?: string): {
+export declare function useTranslation<
+  T extends I18nCoreInstance = I18nInstance,
+>(
+  keyPrefix?: string
+): {
   t(key: string, params?: TParams, options?: TOptions): string;
-  i18n: I18nInstance;
+  i18n: T;
   locale: string;
 };
 export declare function Trans(props: {

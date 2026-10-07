@@ -281,6 +281,31 @@ jobs:
         if: matrix.runtime == 'deno'
         run: deno test --no-check --allow-read --allow-write --allow-env --allow-run
 
+  browser-test:
+    name: Browser Test (Chromium)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [lint]
+    defaults:
+      run:
+        working-directory: js
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: js/package-lock.json
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:types
+      - run: npm run test:browser
+      - uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: browser-test-results
+          path: js/test-results/
+
   cli-smoke-test:
     name: CLI Smoke Test
     runs-on: ubuntu-latest
@@ -311,11 +336,12 @@ jobs:
     name: Package Dry Run
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    needs: [test, cli-smoke-test]
+    needs: [test, cli-smoke-test, browser-test]
     if: |
       always() && !cancelled() &&
       needs.test.result == 'success' &&
-      needs.cli-smoke-test.result == 'success'
+      needs.cli-smoke-test.result == 'success' &&
+      needs.browser-test.result == 'success'
     defaults:
       run:
         working-directory: js
