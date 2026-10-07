@@ -1,0 +1,7 @@
+ru
+  greeting "Привет, {{name}}!"
+  items
+    one "{{count}} предмет"
+    few "{{count}} предмета"
+    many "{{count}} предметов"
+    other "{{count}} предмета"

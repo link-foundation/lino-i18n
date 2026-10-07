@@ -7,7 +7,7 @@
 // missing-key callbacks) without locking us to a specific bundler or
 // framework.
 
-export { createI18n } from './i18n.js';
+export { createI18n } from './node-i18n.js';
 export { expandCompatibilityAliases } from './compatibility.js';
 export {
   parseLinoCatalog,

@@ -33,6 +33,64 @@ i18n.t('role', { context: 'female' }); // → "She is a developer"
 i18n.t('telegram.help.solve.alias.detail'); // → "Tool aliases imply `--tool <tool>`"
 ```
 
+## Browser
+
+Import `lino-i18n/browser` for native ES modules or browser bundles. This
+entry point has no Node built-ins and uses the same translation engine and
+`t(key, params, options)` API as the main entry point:
+
+```js
+import { createI18n, detectLanguage, loadCatalogs } from 'lino-i18n/browser';
+
+const locales = await loadCatalogs(['/locales/en.lino', '/locales/ru.lino']);
+const i18n = createI18n({
+  locales,
+  defaultLocale: detectLanguage('auto', {
+    supportedLanguages: Object.keys(locales),
+    defaultLocale: 'en',
+  }),
+  fallback: ['en'],
+});
+
+i18n.t('greeting', { name: 'Ada' });
+i18n.setLocale('ru');
+i18n.t('greeting', { name: 'Ada' });
+```
+
+`loadCatalogs(urls, options)` fetches URLs concurrently and merges every locale
+root in URL order. Later catalogs override earlier values for matching keys.
+It returns locale tables ready for `createI18n`; errors reject the promise and
+identify the failing URL. `options.requestInit` forwards fetch options such as
+`cache`, `credentials`, and `signal`. `options.fetch` overrides the platform
+fetch, and `options.compatibilityAliases` enables migration aliases after merging.
+
+`detectLanguage(preference, options)` checks an explicit preference first, then
+`navigator.languages` in preference order. It uses `navigator.language` when
+the language list is empty. `resolveLanguage(preference, candidates, options)`
+performs the same matching with a supplied list, without reading the navigator.
+Both accept `supportedLanguages` (default `['en']`) and `defaultLocale` (default
+`'en'`). Tags are compared without case sensitivity, underscores become hyphens,
+and exact tags are tried before parent tags (`pt-BR` before `pt`). An unsupported
+preference or `'auto'` defers to candidates, then the default locale, then the
+first supported locale. With no supported locales, the default is returned.
+Detection also works in environments without a navigator.
+
+The browser instance includes `subscribe`, `addLocale`, and `loadLocale` and
+works with `lino-i18n/react`. File methods `loadLocaleFile` and `loadDirectory`
+are available through the main entry point. URL loading stays explicit: fetch
+more catalogs with `loadCatalogs`, then register their tables with `addLocale`.
+ES module exports and `sideEffects: false` let bundlers remove unused helpers.
+For TypeScript browser hooks, pass the exported `I18nCoreInstance` type to
+`useI18n<I18nCoreInstance>()` or `useTranslation<I18nCoreInstance>()`. Their
+default type preserves the main entry point's existing file-loading API.
+
+Run the static browser example from `js/`:
+
+```bash
+node examples/browser-usage/server.mjs
+# Open http://127.0.0.1:4173/examples/browser-usage/
+```
+
 ## React
 
 React is an optional peer dependency. The `lino-i18n/react` adapter uses the
@@ -191,6 +249,9 @@ Run `npx lino-i18n --help` for every option.
 
 ```bash
 npm test           # node --test --test-timeout=30000 tests/*.test.js
+npm run test:types # browser and React TypeScript API checks
+npx playwright install chromium
+npm run test:browser # real browser catalog loading and runtime language switching
 ```
 
 ## License

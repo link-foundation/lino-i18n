@@ -1,13 +1,5 @@
-// Runtime engine. Returns an i18n instance with `t`, `setLocale`,
-// `getLocale`, `loadLocale`, `loadLocaleFile`, `loadDirectory`,
-// `getFallbacks`, and `has`. The API is small on purpose: combine it with
-// the framework integrations users already have (React, Vue, etc.).
-
-import {
-  loadLocaleFromString,
-  loadLocalesFromFile,
-  loadLocalesFromDirectory,
-} from './loaders.js';
+// Shared translation engine. Platform-specific loading stays in adapters.
+import { loadLocaleFromString } from './catalogs.js';
 import {
   expandCompatibilityAliases,
   normalizeCompatibilityAliases,
@@ -173,22 +165,6 @@ export function createI18n(options = {}) {
     return parsed.locale;
   }
 
-  async function loadLocaleFile(filePath) {
-    const loaded = await loadLocalesFromFile(filePath);
-    for (const { locale, translations } of loaded) {
-      addLocale(locale, translations);
-    }
-    return loaded[0]?.locale;
-  }
-
-  async function loadDirectory(directory) {
-    const loaded = await loadLocalesFromDirectory(directory);
-    for (const [locale, translations] of Object.entries(loaded)) {
-      addLocale(locale, translations);
-    }
-    return Object.keys(loaded);
-  }
-
   return {
     t,
     has,
@@ -198,8 +174,6 @@ export function createI18n(options = {}) {
     listLocales,
     addLocale,
     loadLocale,
-    loadLocaleFile,
-    loadDirectory,
     interpolation,
     subscribe,
     getRevision,

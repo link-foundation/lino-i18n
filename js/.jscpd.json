@@ -9,6 +9,8 @@
     "**/dist/**",
     "**/*.min.js",
     "**/coverage/**",
+    "**/test-results/**",
+    "**/playwright-report/**",
     "**/.changeset/**",
     "**/docs/case-studies/**/data/**",
     "**/package-lock.json",
