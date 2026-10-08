@@ -20,7 +20,7 @@
 //! ```cargo
 //! [dependencies]
 //! regex = "1"
-//! ureq = "2"
+//! ureq = "3"
 //! serde_json = "1"
 //! ```
 

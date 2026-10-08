@@ -37,7 +37,7 @@
 //! ```cargo
 //! [dependencies]
 //! regex = "1"
-//! ureq = "2"
+//! ureq = "3"
 //! serde = { version = "1", features = ["derive"] }
 //! serde_json = "1"
 //! ```
@@ -109,12 +109,14 @@ fn check_docker_hub_tag(image: &str, version: &str) -> bool {
     );
 
     match ureq::get(&url)
-        .timeout(std::time::Duration::from_secs(15))
-        .set("User-Agent", "rust-script-check-release")
+        .config()
+        .timeout_global(Some(std::time::Duration::from_secs(15)))
+        .build()
+        .header("User-Agent", "rust-script-check-release")
         .call()
     {
         Ok(response) => response.status() == 200,
-        Err(ureq::Error::Status(404, _)) => false,
+        Err(ureq::Error::StatusCode(404)) => false,
         Err(e) => {
             eprintln!("::error::Docker Hub state is unknown: {e}");
             exit(1)
@@ -129,20 +131,22 @@ fn check_github_release(repository: &str, tag_prefix: &str, version: &str) -> bo
     );
 
     let mut request = ureq::get(&url)
-        .timeout(std::time::Duration::from_secs(15))
-        .set("User-Agent", "rust-script-check-release")
-        .set("Accept", "application/vnd.github+json");
+        .config()
+        .timeout_global(Some(std::time::Duration::from_secs(15)))
+        .build()
+        .header("User-Agent", "rust-script-check-release")
+        .header("Accept", "application/vnd.github+json");
 
     if let Ok(token) = env::var("GITHUB_TOKEN") {
         if !token.is_empty() {
             let auth_header = format!("Bearer {}", token);
-            request = request.set("Authorization", &auth_header);
+            request = request.header("Authorization", &auth_header);
         }
     }
 
     match request.call() {
         Ok(response) => response.status() == 200,
-        Err(ureq::Error::Status(404, _)) => false,
+        Err(ureq::Error::StatusCode(404)) => false,
         Err(e) => {
             eprintln!("::error::GitHub release state is unknown: {e}");
             exit(1)
@@ -182,13 +186,15 @@ fn get_max_published_version(crate_name: &str) -> Option<String> {
     let url = format!("https://crates.io/api/v1/crates/{}", crate_name);
 
     match ureq::get(&url)
-        .timeout(std::time::Duration::from_secs(15))
-        .set("User-Agent", "rust-script-check-release")
+        .config()
+        .timeout_global(Some(std::time::Duration::from_secs(15)))
+        .build()
+        .header("User-Agent", "rust-script-check-release")
         .call()
     {
-        Ok(response) => {
+        Ok(mut response) => {
             if response.status() == 200 {
-                if let Ok(body) = response.into_string() {
+                if let Ok(body) = response.body_mut().read_to_string() {
                     if let Ok(data) = serde_json::from_str::<CratesIoCrate>(&body) {
                         if let Some(versions) = data.versions {
                             let mut max_version: Option<(u32, u32, u32, String)> = None;
@@ -223,7 +229,7 @@ fn get_max_published_version(crate_name: &str) -> Option<String> {
             eprintln!("::error::Crates.io version list metadata is unreadable or malformed");
             exit(1)
         }
-        Err(ureq::Error::Status(404, _)) => None,
+        Err(ureq::Error::StatusCode(404)) => None,
         Err(e) => {
             eprintln!("::error::Crates.io version state is unknown: {e}");
             exit(1)
@@ -359,7 +365,9 @@ fn main() {
                 image, dockerhub_published
             );
         } else {
-            println!("Docker Hub artifact check skipped: DOCKERHUB_IMAGE or Dockerfile is not configured");
+            println!(
+                "Docker Hub artifact check skipped: DOCKERHUB_IMAGE or Dockerfile is not configured"
+            );
         }
         println!(
             "GitHub release {}{} published: {}",

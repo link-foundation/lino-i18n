@@ -18,7 +18,7 @@
 //! [dependencies]
 //! regex = "1"
 //! chrono = "0.4"
-//! ureq = "2"
+//! ureq = "3"
 //! serde = { version = "1", features = ["derive"] }
 //! serde_json = "1"
 //! ```
@@ -283,13 +283,15 @@ fn check_version_on_crates_io(crate_name: &str, version: &str) -> bool {
 fn get_max_published_version(crate_name: &str) -> Option<(u32, u32, u32)> {
     let url = format!("https://crates.io/api/v1/crates/{}", crate_name);
     match ureq::get(&url)
-        .timeout(std::time::Duration::from_secs(15))
-        .set("User-Agent", "rust-script-version-and-commit")
+        .config()
+        .timeout_global(Some(std::time::Duration::from_secs(15)))
+        .build()
+        .header("User-Agent", "rust-script-version-and-commit")
         .call()
     {
-        Ok(response) => {
+        Ok(mut response) => {
             if response.status() == 200 {
-                if let Ok(body) = response.into_string() {
+                if let Ok(body) = response.body_mut().read_to_string() {
                     if let Ok(data) = serde_json::from_str::<CratesIoCrate>(&body) {
                         if let Some(versions) = data.versions {
                             let mut max: Option<(u32, u32, u32)> = None;
@@ -323,7 +325,7 @@ fn get_max_published_version(crate_name: &str) -> Option<(u32, u32, u32)> {
             eprintln!("::error::Crates.io version list metadata is unreadable or malformed");
             exit(1)
         }
-        Err(ureq::Error::Status(404, _)) => None,
+        Err(ureq::Error::StatusCode(404)) => None,
         Err(error) => {
             eprintln!("::error::Crates.io state is unknown: {error}");
             exit(1);
@@ -355,9 +357,15 @@ fn ensure_version_exceeds_published(
         if (major, minor, patch) <= (pub_major, pub_minor, pub_patch) {
             println!(
                 "Version {}.{}.{} is not greater than max published {}.{}.{}, adjusting to {}.{}.{}",
-                major, minor, patch,
-                pub_major, pub_minor, pub_patch,
-                pub_major, pub_minor, pub_patch + 1
+                major,
+                minor,
+                patch,
+                pub_major,
+                pub_minor,
+                pub_patch,
+                pub_major,
+                pub_minor,
+                pub_patch + 1
             );
             major = pub_major;
             minor = pub_minor;
@@ -518,7 +526,9 @@ fn main() {
     let bump_type = match get_arg("bump-type") {
         Some(bt) => bt,
         None => {
-            eprintln!("Usage: rust-script scripts/version-and-commit.rs --bump-type <major|minor|patch> [--description <desc>] [--rust-root <path>] [--tag-prefix <prefix>] [--release-label <label>]");
+            eprintln!(
+                "Usage: rust-script scripts/version-and-commit.rs --bump-type <major|minor|patch> [--description <desc>] [--rust-root <path>] [--tag-prefix <prefix>] [--release-label <label>]"
+            );
             exit(1);
         }
     };
@@ -744,7 +754,9 @@ fn main() {
                     || lower.contains("protected branch")
                     || lower.contains("repository rule")
                 {
-                    eprintln!("::error::Branch rules rejected the release metadata push: {error}. Configure the approved bot bypass; no PR fallback is attempted.");
+                    eprintln!(
+                        "::error::Branch rules rejected the release metadata push: {error}. Configure the approved bot bypass; no PR fallback is attempted."
+                    );
                     exit(1);
                 }
                 if attempt == 3
