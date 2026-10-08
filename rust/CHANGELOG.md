@@ -2,6 +2,25 @@
 
 
 
+
+## [0.3.0] - 2026-10-08
+
+### Fixed
+
+- Preserve scalar parent translations as `label` children when formatting nested catalogues, and resolve `foo` from `foo.label` when no explicit `foo` translation exists.
+
+### Added
+- Configurable compatibility aliases for deeper nested migration keys.
+
+### Fixed
+
+- Catch Rust release-script compile failures during pull request linting and clean up release package metadata.
+
+### Fixed
+- Kept Rust workspace path dependency and lockfile package versions in sync during release version bumps so release builds can resolve companion crates.
+
+Synchronize a clean release checkout before versioning, consume published fragments, and validate all workspace changes with strict CI guards.
+
 ## [0.2.0] - 2026-05-18
 
 ### Fixed
