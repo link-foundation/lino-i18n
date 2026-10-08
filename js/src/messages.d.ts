@@ -31,6 +31,7 @@ export interface MessageTranslator {
   (strings: TemplateStringsArray, ...values: MessageValue[]): string;
 }
 export interface TranslatorOptions extends I18nOptions {
+  dictionary?: DictionarySchema;
   localeConfig?: LocaleConfig | LocaleConfigOptions;
   sourceLocale?: string;
   enabled?: boolean;
@@ -54,12 +55,17 @@ export interface TranslatorOptions extends I18nOptions {
 export interface Translator extends I18nCoreInstance {
   gt: MessageTranslator;
   m: MessageTranslator;
-  dictionary(key: string, values?: MessageValues, options?: TOptions): string;
+  dictionary: DictionaryFunction;
   dictionaryObject(
     prefix?: string,
     values?: MessageValues,
     options?: TOptions
   ): DictionaryObject;
+  dictionaryTree(
+    prefix?: string,
+    values?: MessageValues,
+    options?: TOptions
+  ): DictionaryTree;
   tx(
     message: string | MessageDescriptor,
     values?: MessageValues,
@@ -83,6 +89,78 @@ export declare function createTranslator(
 export interface DictionaryObject {
   [key: string]: string | DictionaryObject;
 }
+export type DictionarySchema =
+  | string
+  | readonly DictionarySchema[]
+  | {
+      readonly [key: string]: DictionarySchema;
+    };
+export type DictionaryTree =
+  string | DictionaryTree[] | { [key: string]: DictionaryTree };
+export interface DictionaryFunction {
+  (key: string, values?: MessageValues, options?: TOptions): string;
+  obj(
+    prefix?: string,
+    values?: MessageValues,
+    options?: TOptions
+  ): DictionaryTree;
+}
+export type TranslatedDictionary<T> = T extends string
+  ? string
+  : {
+      -readonly [K in keyof T]: TranslatedDictionary<T[K]>;
+    };
+export type ReadonlyDictionary<T> = T extends string
+  ? T
+  : {
+      readonly [K in keyof T]: ReadonlyDictionary<T[K]>;
+    };
+export type DictionaryPath<
+  T,
+  Depth extends unknown[] = [],
+> = Depth['length'] extends 8
+  ? never
+  : T extends string
+    ? never
+    : T extends readonly (infer Element)[]
+      ? | `${number}`
+        | `${number}.${DictionaryPath<Element, [...Depth, unknown]>}`
+      : {
+          [K in keyof T & string]:
+            K | `${K}.${DictionaryPath<T[K], [...Depth, unknown]>}`;
+        }[keyof T & string];
+export type DictionaryAt<
+  T,
+  Path extends string,
+> = Path extends `${infer Key}.${infer Rest}`
+  ? Key extends keyof T
+    ? DictionaryAt<T[Key], Rest>
+    : T extends readonly (infer Element)[]
+      ? DictionaryAt<Element, Rest>
+      : never
+  : Path extends keyof T
+    ? T[Path]
+    : T extends readonly (infer Element)[]
+      ? Element
+      : never;
+export type TypedTranslator<T> = Omit<Translator, 'dictionaryTree'> & {
+  dictionaryTree(
+    prefix?: '',
+    values?: MessageValues,
+    options?: TOptions
+  ): TranslatedDictionary<T>;
+  dictionaryTree<Path extends DictionaryPath<T>>(
+    prefix: Path,
+    values?: MessageValues,
+    options?: TOptions
+  ): TranslatedDictionary<DictionaryAt<T, Path>>;
+};
+export declare function defineDictionary<
+  const T extends Exclude<DictionarySchema, string>,
+>(schema: T): ReadonlyDictionary<T>;
+export declare function createDictionaryTranslator<
+  const T extends Exclude<DictionarySchema, string>,
+>(schema: T, options?: TranslatorOptions): TypedTranslator<T>;
 export declare function msg(
   source: string,
   options?: { id?: string; description?: string; values?: MessageValues }

@@ -68,6 +68,9 @@ test('opt-in Node ambient helpers use the active translator for deferred and dic
   await adapter.runWithTranslator(i18n, async () => {
     assert.equal(adapter.gt('Hi {name}', { name: 'Ada' }), 'Hi Ada');
     assert.equal(adapter.getTranslations('actions')('save'), 'Enregistrer');
+    assert.deepEqual(adapter.getTranslations('actions').obj(), {
+      save: 'Enregistrer',
+    });
     assert.equal(await adapter.tx('Hi'), 'Hi');
     assert.deepEqual(adapter.getLocales(), ['en', 'fr']);
     assert.equal(adapter.getDefaultLocale(), 'fr');

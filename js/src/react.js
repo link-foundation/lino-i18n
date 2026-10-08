@@ -5,6 +5,7 @@ import React, {
   createElement,
   useCallback,
   useContext,
+  useMemo,
   useSyncExternalStore,
 } from 'react';
 import {
@@ -16,6 +17,7 @@ import {
   Plural as PluralMarker,
   selectPlural,
 } from './react-content.js';
+import { scopedDictionary } from './dictionary.js';
 import {
   getLocaleDirection,
   getLocaleProperties,
@@ -178,19 +180,7 @@ export function useMessages() {
 
 export function useTranslations(prefix = '') {
   const i18n = useI18nContext();
-  return useCallback(
-    (key, values, options) => {
-      if (!i18n.dictionary) {
-        throw new Error('useTranslations requires a createTranslator instance');
-      }
-      return i18n.dictionary(
-        prefix ? `${prefix}.${key}` : key,
-        values,
-        options
-      );
-    },
-    [i18n, prefix]
-  );
+  return useMemo(() => scopedDictionary(() => i18n, prefix), [i18n, prefix]);
 }
 
 export function useLocales() {

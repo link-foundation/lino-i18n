@@ -1,5 +1,7 @@
 import {
   createTranslator,
+  createDictionaryTranslator,
+  defineDictionary,
   msg,
   declareStatic,
   derive,
@@ -53,6 +55,21 @@ config.formatRelativeTimeFromDate('2026-01-02', 'en', {
   baseDate: '2026-01-01',
 });
 runWithTranslator(i18n, () => getGT()('Hi'));
+const dictionary = defineDictionary({
+  actions: ['Save', 'Cancel'],
+  card: { title: 'Hello' },
+});
+const typed = createDictionaryTranslator(dictionary);
+const actions: [string, string] = typed.dictionaryTree('actions');
+const title: string = typed.dictionaryTree('card.title');
+typed.dictionaryTree().card.title.toUpperCase();
+actions.push(title);
+// @ts-expect-error Unknown dictionary paths are rejected.
+typed.dictionaryTree('card.typo');
+// @ts-expect-error A dictionary array is not a scalar message.
+const scalar: string = typed.dictionaryTree('actions');
+// @ts-expect-error Defined schemas are deeply readonly.
+dictionary.actions[0] = 'Changed';
 // @ts-expect-error Deferred descriptors require source text.
 msg(123);
 // @ts-expect-error Counts must be numeric.

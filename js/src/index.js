@@ -28,6 +28,8 @@ export {
 export { fromI18next, fromI18nJs, fromReactIntl } from './converters/index.js';
 export {
   createTranslator,
+  createDictionaryTranslator,
+  defineDictionary,
   msg,
   derive,
   bindMessage,

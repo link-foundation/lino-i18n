@@ -54,6 +54,36 @@ and formats the selected translation as ICU. `dictionaryObject('actions')`
 returns the dotted-key subtree. Keep dictionary sources in the source catalog;
 source extraction discovers source declarations, not arbitrary dictionary files.
 
+Use `defineDictionary` and `createDictionaryTranslator` when the dictionary has
+arrays or needs typed paths:
+
+```ts
+import {
+  defineDictionary,
+  createDictionaryTranslator,
+} from "lino-i18n/messages";
+const schema = defineDictionary({
+  actions: ["Save", "Cancel"],
+  card: { title: "Hello {name}" },
+});
+const dictionary = createDictionaryTranslator(schema, {
+  defaultLocale: "fr",
+  locales: { fr: { "actions.0": "Enregistrer" } },
+});
+dictionary.dictionaryTree("actions"); // ['Enregistrer', 'Cancel']
+dictionary.dictionaryTree("card.title", { name: "Ada" }); // Hello Ada
+```
+
+Schemas register source strings under dotted keys and preserve array/object
+shape through snapshots. `dictionaryTree()` returns the whole tree, while
+`dictionary.obj(prefix)` returns a subtree. React `useTranslations(prefix).obj()`
+and Node `getTranslations(prefix).obj()` expose the same operation. TypeScript
+rejects unknown paths and infers string/object/tuple output (typed paths cover
+eight levels; runtime schemas allow twenty). The original `dictionaryObject`
+retains its object representation of dotted keys. Schemas are copied/frozen;
+cycles, sparse arrays, accessors, dotted/empty keys and excessive depth or node
+count fail validation. Catalogs still store only source/translated strings.
+
 ```js
 import { derive, declareStatic } from "lino-i18n/messages";
 const action = condition ? "Save" : "Cancel";

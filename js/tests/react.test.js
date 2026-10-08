@@ -219,3 +219,17 @@ test('React source, plural and locale metadata support custom catalog identities
   assert.match(markup, /rtl: Company Arabic/);
   assert.match(markup, /pair/);
 });
+
+test('dictionary hooks expose array subtrees and update after locale switches', async () => {
+  const i18n = createTranslator({
+    dictionary: { actions: ['Save', 'Cancel'] },
+    locales: { fr: { 'actions.0': 'Enregistrer' } },
+  });
+  function Actions() {
+    return adapters.useTranslations('actions').obj().join(' / ');
+  }
+  const root = render(h(I18nProvider, { i18n }, h(Actions)));
+  assert.equal(root.container.textContent, 'Save / Cancel');
+  await act(() => i18n.setLocale('fr'));
+  assert.equal(root.container.textContent, 'Enregistrer / Cancel');
+});

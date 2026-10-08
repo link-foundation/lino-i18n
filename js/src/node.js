@@ -1,6 +1,7 @@
 // Opt-in ambient request access; no Node imports enter the browser/core graph.
 import { AsyncLocalStorage } from 'node:async_hooks';
 import { createRequestTranslator } from './server.js';
+import { scopedDictionary } from './dictionary.js';
 
 export function createTranslationContext() {
   const storage = new AsyncLocalStorage();
@@ -27,12 +28,7 @@ export function createTranslationContext() {
     getMessages: () => getTranslator().m,
     getTranslations(prefix = '') {
       // Resolve inside each call so a retained helper cannot capture another request.
-      return (key, values, options) =>
-        getTranslator().dictionary(
-          prefix ? `${prefix}.${key}` : key,
-          values,
-          options
-        );
+      return scopedDictionary(getTranslator, prefix);
     },
     gt: (...args) => getTranslator().gt(...args),
     tx: (...args) => getTranslator().tx(...args),

@@ -3,8 +3,13 @@ import { IntlMessageFormat } from 'intl-messageformat';
 import { createI18n } from './i18n.js';
 import { parseLinoCatalogs } from './catalogs.js';
 import { escapeMessageText } from './message-schema.js';
-import { createDictionaryApi } from './dictionary.js';
+import { createDictionaryApi, withDictionary } from './dictionary.js';
 import { LocaleConfig } from './intl.js';
+
+export { defineDictionary } from './dictionary.js';
+export function createDictionaryTranslator(schema, options = {}) {
+  return createTranslator({ ...options, dictionary: schema });
+}
 
 const compiled = new Map();
 
@@ -204,6 +209,7 @@ function translatorSnapshot(core, tables, options, state, localeConfig) {
     ...state,
     version: options.version,
     sourceLocale: options.sourceLocale,
+    dictionary: options.dictionary,
     localeConfig: localeConfig.snapshot(),
     compatibilityAliases: options.compatibilityAliases,
   };
@@ -227,7 +233,15 @@ function cloneTables(options) {
   );
 }
 
+function resolveFormatLocale(config, code, region) {
+  const locale = new Intl.Locale(config.resolveCanonicalLocale(code));
+  return region
+    ? new Intl.Locale(locale, { region }).toString()
+    : locale.toString();
+}
+
 export function createTranslator(options = {}) {
+  options = withDictionary(options);
   const localeConfig = configuredLocales(options);
   const core = createI18n({
     ...options,
@@ -336,7 +350,7 @@ export function createTranslator(options = {}) {
     ...core,
     gt,
     m: gt,
-    ...createDictionaryApi(core, gt, tables, options.sourceLocale || 'en'),
+    ...createDictionaryApi(core, gt, tables, options),
     async tx(message, values, callOptions = {}) {
       const locale = callOptions.locale || core.getLocale();
       await load(locale);
@@ -359,14 +373,8 @@ export function createTranslator(options = {}) {
     getDefaultLocale: () => options.defaultLocale || localeConfig.defaultLocale,
     getVersion: () => options.version || 'default',
     getLocaleConfig: () => localeConfig,
-    getFormatLocale() {
-      const locale = new Intl.Locale(
-        localeConfig.resolveCanonicalLocale(core.getLocale())
-      );
-      return region
-        ? new Intl.Locale(locale, { region }).toString()
-        : locale.toString();
-    },
+    getFormatLocale: () =>
+      resolveFormatLocale(localeConfig, core.getLocale(), region),
     getRevision: () => revision,
     subscribe(listener) {
       if (typeof listener !== 'function') {

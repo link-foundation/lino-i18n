@@ -1,6 +1,8 @@
 // Type declarations for the `lino-i18n` package.
 export {
   createTranslator,
+  createDictionaryTranslator,
+  defineDictionary,
   msg,
   derive,
   bindMessage,
