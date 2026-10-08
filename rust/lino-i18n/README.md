@@ -15,6 +15,14 @@ lino-i18n = { version = "0.0.1", features = ["macros"] }
 
 ## Quick start
 
+Source messages are also available through `I18n::gt(source, params)` and deferred
+`Message::new(source).id(key)` passed to `I18n::m`. Source sentences can be quoted
+catalog keys. Enable the optional `icu` feature for `I18n::format_message` with
+full ICU formatting via FormatJS; that feature requires Rust 1.92 or newer.
+Default features retain Rust 1.87 support. See the
+[source-message guide](../../docs/source-messages.md)
+for the cross-language workflow and its limits.
+
 ```rust
 use std::sync::OnceLock;
 use lino_i18n::{i18n, I18n, TOptions};

@@ -1,0 +1,176 @@
+{
+  "name": "gt",
+  "version": "2.25.2",
+  "main": "dist/index.js",
+  "bin": "bin/main.js",
+  "files": [
+    "bin",
+    "dist",
+    "binaries",
+    "CHANGELOG.md"
+  ],
+  "type": "module",
+  "scripts": {
+    "generate-version": "node scripts/generate-version.js",
+    "emit-types": "sh ../../scripts/emit-types.sh",
+    "transpile": "pnpm run generate-version && tsdown && pnpm run emit-types",
+    "copy-instructions": "rm -rf dist/setup/instructions && cp -r src/setup/instructions dist/setup/instructions",
+    "build": "pnpm run transpile && pnpm run copy-instructions",
+    "build:clean": "sh ../../scripts/clean.sh && pnpm bin:restore && rm -rf binaries && pnpm run build",
+    "build:release": "pnpm run build:clean",
+    "build:bin": "pnpm run build && bash scripts/build-exe.sh all",
+    "build:bin:clean": "sh ../../scripts/clean.sh && rm -rf binaries && pnpm run build:bin",
+    "build:bin:release": "pnpm run build:bin:clean",
+    "build:bin:darwin-x64": "bash scripts/build-exe.sh darwin-x64",
+    "build:bin:darwin-arm64": "bash scripts/build-exe.sh darwin-arm64",
+    "build:bin:linux-x64": "bash scripts/build-exe.sh linux-x64",
+    "build:bin:linux-arm64": "bash scripts/build-exe.sh linux-arm64",
+    "build:bin:windows-x64": "bash scripts/build-exe.sh windows-x64",
+    "test": "pnpm run generate-version && vitest run --config=./vitest.config.ts",
+    "test:watch": "pnpm run generate-version && vitest --config=./vitest.config.ts",
+    "release": "pnpm run release:normal && pnpm run release:bin",
+    "release:normal": "pnpm run build:clean && pnpm publish",
+    "release:bin": "pnpm run bin:prep && pnpm run build:bin:clean && pnpm publish --tag bin --no-git-checks && pnpm run bin:restore && pnpm run build:clean",
+    "release:alpha": "pnpm run build:clean && pnpm publish --tag alpha",
+    "release:beta": "pnpm run build:clean && pnpm publish --tag beta",
+    "release:latest": "pnpm run build:clean && pnpm publish --tag latest",
+    "bin:restore": "node scripts/restore-package-json.js",
+    "bin:prep": "node scripts/prepare-binary-release.js",
+    "typecheck": "pnpm run generate-version && tsc --noEmit"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./types": {
+      "import": "./dist/types.js",
+      "types": "./dist/types.d.ts"
+    },
+    "./functions": {
+      "import": "./dist/functions.js",
+      "types": "./dist/functions.d.ts"
+    },
+    "./updates/*": {
+      "import": "./dist/updates/*.js",
+      "types": "./dist/updates/*.d.ts"
+    },
+    "./jsx/*": {
+      "import": "./dist/jsx/*.js",
+      "types": "./dist/jsx/*.d.ts"
+    },
+    "./fs/*": {
+      "import": "./dist/fs/*.js",
+      "types": "./dist/fs/*.d.ts"
+    },
+    "./console/*": {
+      "import": "./dist/console/*.js",
+      "types": "./dist/console/*.d.ts"
+    },
+    "./config/*": {
+      "import": "./dist/config/*.js",
+      "types": "./dist/config/*.d.ts"
+    },
+    "./api/*": {
+      "import": "./dist/api/*.js",
+      "types": "./dist/api/*.d.ts"
+    },
+    "./setup/*": {
+      "import": "./dist/setup/*.js",
+      "types": "./dist/setup/*.d.ts"
+    },
+    "./*": {
+      "import": "./dist/*.js",
+      "types": "./dist/*.d.ts"
+    },
+    "./utils/*": {
+      "import": "./dist/utils/*.js",
+      "types": "./dist/utils/*.d.ts"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/generaltranslation/gt.git"
+  },
+  "keywords": [
+    "i18n",
+    "l10n",
+    "translation",
+    "internationalization",
+    "localization",
+    "cli"
+  ],
+  "author": "General Translation, Inc.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/generaltranslation/gt/issues"
+  },
+  "homepage": "https://generaltranslation.com/",
+  "description": "CLI tool for AI-powered i18n",
+  "dependencies": {
+    "@babel/generator": "^7.25.7",
+    "@babel/parser": "^7.25.7",
+    "@babel/plugin-transform-react-jsx": "^7.25.9",
+    "@babel/traverse": "^7.25.7",
+    "@babel/types": "^7.25.7",
+    "@clack/prompts": "1.0.0-alpha.6",
+    "@generaltranslation/format": "workspace:*",
+    "@generaltranslation/icu": "workspace:*",
+    "@generaltranslation/python-extractor": "workspace:*",
+    "@generaltranslation/supported-locales": "workspace:*",
+    "@generaltranslation/vue-extractor": "workspace:*",
+    "chalk": "^5.4.1",
+    "commander": "^12.1.0",
+    "dotenv": "^16.4.5",
+    "enhanced-resolve": "^5.18.3",
+    "esbuild-wasm": "^0.27.7",
+    "fast-glob": "^3.3.3",
+    "fast-json-stable-stringify": "^2.1.0",
+    "fflate": "^0.8.2",
+    "generaltranslation": "workspace:*",
+    "gt-remark": "workspace:*",
+    "html-entities": "^2.6.0",
+    "json-pointer": "^0.6.2",
+    "jsonpath-plus": "^10.3.0",
+    "jsonpointer": "^5.0.1",
+    "mdast-util-find-and-replace": "^3.0.2",
+    "micromatch": "^4.0.8",
+    "open": "^10.1.1",
+    "openid-client": "6.8.8",
+    "package-manager-detector": "^1.8.0",
+    "pino": "^10.1.0",
+    "remark-frontmatter": "^5.0.0",
+    "remark-mdx": "^3.1.0",
+    "remark-parse": "^11.0.0",
+    "remark-stringify": "^11.0.0",
+    "resolve": "^1.22.10",
+    "semver": "^7.8.5",
+    "smol-toml": "^1.3.1",
+    "tsconfig-paths": "^4.2.0",
+    "unified": "^11.0.5",
+    "unist-util-visit": "^5.0.0",
+    "yaml": "^2.8.0"
+  },
+  "devDependencies": {
+    "@types/babel__generator": "^7.27.0",
+    "@types/babel__traverse": "^7.20.6",
+    "@types/figlet": "^1.7.0",
+    "@types/mdast": "^4.0.0",
+    "@types/micromatch": "^4.0.9",
+    "@types/mock-require": "^2.0.3",
+    "@types/node": "catalog:",
+    "@types/resolve": "^1.20.2",
+    "@types/semver": "^7.7.1",
+    "ajv": "^8.18.0",
+    "eslint": "^9.20.0",
+    "esm": "^3.2.25",
+    "mdast-util-mdx-jsx": "^3.2.0",
+    "mdast-util-mdxjs-esm": "^2.0.1",
+    "prettier": "^3.4.2",
+    "ts-node": "^10.9.2",
+    "tsdown": "catalog:",
+    "tslib": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

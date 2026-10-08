@@ -26,6 +26,20 @@ you author once works in either runtime.
 
 Released under the [Unlicense](LICENSE) — public domain.
 
+## Source messages and rich React content
+
+The optional source runtime provides `createTranslator`, `gt` tagged templates,
+deferred `msg` descriptors, full ICU messages, dictionaries, lazy catalog loading
+and request snapshots. The React adapter adds source `T`, named `Var`, branches,
+plurals and locale-aware formatting. Source extraction, catalog validation and
+translation-provider candidates are available through the CLI and a Vite/Rollup
+plugin. Rust adds source/deferred messages and an optional ICU engine.
+
+See the [source-message guide](docs/source-messages.md),
+[framework boundaries](docs/framework-integrations.md) and
+[GT capability study](docs/case-studies/issue-25/README.md) for examples and
+explicit coverage limits. Existing keyed translation APIs remain available.
+
 ## Why Links Notation?
 
 Translation files are not data — they are content. JSON is brittle for that

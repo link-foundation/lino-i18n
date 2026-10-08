@@ -1,0 +1,181 @@
+{
+  "name": "gt-next",
+  "version": "11.4.10",
+  "description": "A Next.js library for automatic internationalization.",
+  "main": "dist/index.server.js",
+  "peerDependencies": {
+    "@generaltranslation/compiler": "^1.3.61",
+    "next": ">=13.0.0 <15.2.1 || >15.2.2",
+    "react": ">=16.8.0 <20.0.0",
+    "react-dom": ">=16.8.0 <20.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@generaltranslation/compiler": {
+      "optional": true
+    }
+  },
+  "files": [
+    "dist",
+    "CHANGELOG.md"
+  ],
+  "sideEffects": [
+    "./dist/index.server.*",
+    "./dist/index.rsc.*",
+    "./dist/index.client.*",
+    "./dist/server.*",
+    "./dist/link.*",
+    "./dist/link/Link.*",
+    "./dist/utils/client-boundary.*"
+  ],
+  "dependencies": {
+    "@generaltranslation/format": "workspace:*",
+    "@generaltranslation/react-core": "workspace:*",
+    "generaltranslation": "workspace:*",
+    "gt-react": "workspace:*",
+    "gt-i18n": "workspace:*"
+  },
+  "scripts": {
+    "patch": "pnpm version patch",
+    "emit-types": "sh ../../scripts/emit-types.sh",
+    "transpile": "tsdown && pnpm run emit-types",
+    "build": "pnpm run transpile && pnpm run build:swc-plugin",
+    "build:clean": "rm -rf ./swc-plugin/target && sh ../../scripts/clean.sh && pnpm run build",
+    "build:release": "pnpm run build:clean",
+    "build:swc-plugin": "cd swc-plugin && cargo build --release --target wasm32-wasip1 && cd .. && node scripts/copy-wasm.js",
+    "build:no-swc-plugin": "pnpm run transpile",
+    "release": "pnpm run build:clean && pnpm publish",
+    "release:alpha": "pnpm run build:clean && pnpm publish --tag alpha",
+    "release:beta": "pnpm run build:clean && pnpm publish --tag beta",
+    "release:latest": "pnpm run build:clean && pnpm publish --tag latest",
+    "test": "pnpm run test:js && pnpm run test:rust",
+    "test:js": "vitest run",
+    "test:rust": "cargo test --manifest-path ./swc-plugin/Cargo.toml",
+    "test:watch": "vitest",
+    "bench": "vitest bench --run --config vitest.config.bench.ts",
+    "bench:unit:json": "vitest bench --run --config vitest.config.bench.ts --outputJson benchmarks/results/unit-latest.json",
+    "typecheck": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/generaltranslation/gt.git"
+  },
+  "author": "General Translation, Inc.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/generaltranslation/gt/issues"
+  },
+  "homepage": "https://generaltranslation.com/",
+  "devDependencies": {
+    "@generaltranslation/compiler": "workspace:*",
+    "@edge-runtime/vm": "^4.0.0",
+    "@types/node": "catalog:",
+    "@types/react": ">=18.0.0 <20.0.0",
+    "@types/react-dom": ">=18.0.0 <20.0.0",
+    "next": "15.2.3",
+    "tsdown": "catalog:",
+    "typescript": "catalog:"
+  },
+  "exports": {
+    ".": {
+      "react-server": {
+        "types": "./dist/index.rsc.d.ts",
+        "import": "./dist/index.rsc.mjs",
+        "default": "./dist/index.rsc.js"
+      },
+      "workerd": {
+        "import": "./dist/index.server.mjs",
+        "default": "./dist/index.server.js"
+      },
+      "worker": {
+        "import": "./dist/index.server.mjs",
+        "default": "./dist/index.server.js"
+      },
+      "browser": {
+        "import": "./dist/index.client.mjs",
+        "default": "./dist/index.client.js"
+      },
+      "types": "./dist/index.types.d.ts",
+      "import": "./dist/index.server.mjs",
+      "default": "./dist/index.server.js"
+    },
+    "./config": {
+      "types": "./dist/config.d.ts",
+      "import": "./dist/config.mjs",
+      "default": "./dist/config.js"
+    },
+    "./server": {
+      "types": "./dist/server.d.ts",
+      "import": "./dist/server.mjs",
+      "default": "./dist/server.js"
+    },
+    "./middleware": {
+      "types": "./dist/middleware.d.ts",
+      "import": "./dist/middleware.mjs",
+      "default": "./dist/middleware.js"
+    },
+    "./link": {
+      "types": "./dist/link.d.ts",
+      "import": "./dist/link.mjs",
+      "default": "./dist/link.js"
+    },
+    "./internal/_dictionary": {
+      "import": "./dist/internal/_dictionary.mjs",
+      "default": "./dist/internal/_dictionary.js"
+    },
+    "./internal/_load-translations": {
+      "import": "./dist/internal/_load-translations.mjs",
+      "default": "./dist/internal/_load-translations.js"
+    },
+    "./internal/_load-dictionary": {
+      "import": "./dist/internal/_load-dictionary.mjs",
+      "default": "./dist/internal/_load-dictionary.js"
+    },
+    "./internal/_getLocale": {
+      "import": "./dist/internal/_getLocale.mjs",
+      "default": "./dist/internal/_getLocale.js"
+    },
+    "./internal/_getRegion": {
+      "import": "./dist/internal/_getRegion.mjs",
+      "default": "./dist/internal/_getRegion.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "config": [
+        "./dist/config.d.ts"
+      ],
+      "server": [
+        "./dist/server.d.ts"
+      ],
+      "middleware": [
+        "./dist/middleware.d.ts"
+      ],
+      "link": [
+        "./dist/link.d.ts"
+      ],
+      "internal/_dictionary": [
+        "./dist/internal/_dictionary.d.ts"
+      ],
+      "internal/_load-translations": [
+        "./dist/internal/_load-translations.d.ts"
+      ],
+      "internal/_load-dictionary": [
+        "./dist/internal/_load-dictionary.d.ts"
+      ],
+      "internal/_getLocale": [
+        "./dist/internal/_getLocale.d.ts"
+      ],
+      "internal/_getRegion": [
+        "./dist/internal/_getRegion.d.ts"
+      ]
+    }
+  },
+  "keywords": [
+    "react",
+    "translation",
+    "internationalization",
+    "localization",
+    "i18n",
+    "l10n"
+  ]
+}

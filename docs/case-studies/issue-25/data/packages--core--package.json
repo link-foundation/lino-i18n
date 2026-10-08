@@ -1,0 +1,167 @@
+{
+  "name": "generaltranslation",
+  "version": "9.5.5",
+  "description": "A language toolkit for AI developers",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.cts",
+  "files": [
+    "dist",
+    "CHANGELOG.md"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build:release": "pnpm run build:clean",
+    "build:clean": "sh ../../scripts/clean.sh && pnpm run build",
+    "build": "tsdown",
+    "test": "vitest run --config=./vitest.config.ts",
+    "test:watch": "vitest --config=./vitest.config.ts",
+    "release": "pnpm run build:clean && pnpm publish",
+    "release:alpha": "pnpm run build:clean && pnpm publish --tag alpha",
+    "release:beta": "pnpm run build:clean && pnpm publish --tag beta",
+    "release:latest": "pnpm run build:clean && pnpm publish --tag latest",
+    "typecheck": "tsc --noEmit && tsc -p tsconfig.type-tests.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/generaltranslation/gt.git"
+  },
+  "keywords": [
+    "language",
+    "translation",
+    "internationalization",
+    "localization",
+    "translate",
+    "locale",
+    "i18n",
+    "toolkit"
+  ],
+  "author": "General Translation, Inc.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/generaltranslation/gt/issues"
+  },
+  "homepage": "https://generaltranslation.com/",
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "tsdown": "catalog:",
+    "typescript": "catalog:"
+  },
+  "typescript": {
+    "definition": "dist/index.d.cts"
+  },
+  "dependencies": {
+    "@generaltranslation/api": "workspace:*",
+    "@generaltranslation/icu": "workspace:*",
+    "@noble/hashes": "^2.2.0",
+    "@generaltranslation/format": "workspace:*"
+  },
+  "exports": {
+    ".": {
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      },
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      }
+    },
+    "./runtime": {
+      "require": {
+        "types": "./dist/runtime.d.cts",
+        "default": "./dist/runtime.cjs"
+      },
+      "import": {
+        "types": "./dist/runtime.d.mts",
+        "default": "./dist/runtime.mjs"
+      }
+    },
+    "./api": {
+      "require": {
+        "types": "./dist/api.d.cts",
+        "default": "./dist/api.cjs"
+      },
+      "import": {
+        "types": "./dist/api.d.mts",
+        "default": "./dist/api.mjs"
+      }
+    },
+    "./api/openapi.json": "./dist/openapi.json",
+    "./id": {
+      "require": {
+        "types": "./dist/id.d.cts",
+        "default": "./dist/id.cjs"
+      },
+      "import": {
+        "types": "./dist/id.d.mts",
+        "default": "./dist/id.mjs"
+      }
+    },
+    "./internal": {
+      "require": {
+        "types": "./dist/internal.d.cts",
+        "default": "./dist/internal.cjs"
+      },
+      "import": {
+        "types": "./dist/internal.d.mts",
+        "default": "./dist/internal.mjs"
+      }
+    },
+    "./types": {
+      "require": {
+        "types": "./dist/types.d.cts",
+        "default": "./dist/types.cjs"
+      },
+      "import": {
+        "types": "./dist/types.d.mts",
+        "default": "./dist/types.mjs"
+      }
+    },
+    "./errors": {
+      "require": {
+        "types": "./dist/errors.d.cts",
+        "default": "./dist/errors.cjs"
+      },
+      "import": {
+        "types": "./dist/errors.d.mts",
+        "default": "./dist/errors.mjs"
+      }
+    },
+    "./diagnostics": {
+      "require": {
+        "types": "./dist/diagnostics.d.cts",
+        "default": "./dist/diagnostics.cjs"
+      },
+      "import": {
+        "types": "./dist/diagnostics.d.mts",
+        "default": "./dist/diagnostics.mjs"
+      }
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "internal": [
+        "./dist/internal.d.cts"
+      ],
+      "api": [
+        "./dist/api.d.cts"
+      ],
+      "id": [
+        "./dist/id.d.cts"
+      ],
+      "types": [
+        "./dist/types.d.cts"
+      ],
+      "errors": [
+        "./dist/errors.d.cts"
+      ],
+      "diagnostics": [
+        "./dist/diagnostics.d.cts"
+      ],
+      "runtime": [
+        "./dist/runtime.d.cts"
+      ]
+    }
+  }
+}

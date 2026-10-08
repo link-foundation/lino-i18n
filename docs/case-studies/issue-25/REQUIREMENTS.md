@@ -1,0 +1,77 @@
+# Requirement inventory and solution plans
+
+The issue's body has six explicit requirements: React support similar to GT;
+simple code-only APIs; at least GT's capabilities with improvements; collected
+repository evidence; deep online comparison and solutions for every requirement;
+and execution in one PR. Its title expands capability scope to every GT feature
+and every lino-i18n usage mode. The table below separates shipped behavior,
+partial equivalents and outstanding integrations. A plan is not an implemented
+feature, and similarly named APIs are not necessarily compatible.
+
+Evidence identifiers refer to pinned files listed in [data/snapshot.json](data/snapshot.json).
+The upstream API surface includes internals exported for framework packages;
+those internals are inventoried as architecture boundaries, not promises to
+copy GT's internal wire encodings into lino-i18n.
+
+## Runtime, authoring and formats
+
+| Requirement / GT surface | Current solution | Remaining work and validation plan |
+| --- | --- | --- |
+| React provider, source `T`, hooks (`react`, `react-core`) | Provider subscriptions; source JSX with safe code-owned restoration; locale/region/enabled/message/dictionary hooks. React SSR and hydration tested. | GT initializer/browser condition-store, custom mappings, render pipelines and singleton encodings are not API-compatible. Specify instance-based equivalents only where applications need them; test SPA/SSR/RSC adapters against framework fixtures. |
+| Code-only `t`, `msg`, arrays and tagged templates (`i18n`) | `createTranslator().gt/m/tx`, descriptors, arrays, tagged `gt`, explicit ids/descriptions and bound functions. Existing keyed `t` retained. | GT's singleton/template `t`, `decodeMsg`, `decodeOptions`, fallback encodings differ. A migration converter would decode GT descriptors at import/build time; test against pinned fixtures before claiming drop-in compatibility. |
+| Static derivation `derive`/`Derive` | Bounded AST enumeration of local literal functions/dictionaries/conditionals, matching runtime source identities. Unsupported forms diagnose rather than execute. | Broader expressions, imported declarations and GT's custom derivation markers need module-graph analysis; define import resolution and bounds, then add multi-file/cyclic/imported-function tests. |
+| Context variables `declareVar`, `Var`, `Static` | `declareStatic` encodes select context plus actual `nameValue`; React `Var`/`Static` preserve opaque runtime nodes. | GT variable metadata/serialization differ. Add an explicit adapter if interchange is needed; retain names and types in fixtures and test malformed encodings. |
+| Dictionary translations and object subtrees | `dictionary`, `dictionaryObject`, `useTranslations(prefix)` use source catalogs and ICU fallback. | Typed generated dictionaries and GT `t.obj` array/object semantics need schema/code generation; test nesting, arrays, missing sources and locale change subscriptions. |
+| ICU selects, plural/ordinal, offsets, skeletons (`icu`, `format`) | JS FormatJS runtime; lossless compiled React Intl AST conversion; optional Rust FormatJS engine. | JS/Rust output is not guaranteed identical across Intl/ICU versions. Add shared cross-language conformance fixtures for any promised byte-level output. |
+| React branches, numbers, money, date/time, relative time | `Branch`, `Plural`, `Num`, `Currency`, `DateTime`, `RelativeTime`, list component. | GT native data-format props differ; document mappings. Add relative-date React component only after specifying deterministic `now` and calendar behavior. |
+| Locale/region selectors and state | HTML selectors, async switch hook, region formatting, enabled flags and subscriptions. | Native/framework selectors, cookie persistence and full GT selector hook options remain adapter work; test router/cookie updates and loading failures in real frameworks. |
+| Canonicalization, direction, names, flags and formatting (`format`) | Intl-backed helpers, locale/region properties, lists/list parts, grapheme cutoff and explicit-now relative date formatting. | GT `LocaleConfig`, custom locale/region mappings, aliases, `determineLocale`, `isSupersetLocale`, `requiresTranslation`, HTML data formats are not reproduced. Implement a documented locale configuration object with explicit mapping/priority semantics and tests for alias cycles, dialect fallbacks and per-format locale overrides. |
+| Supported locale registry (`supported-locales`) | Host Intl and configured catalog locale lists. Existing language resolution retained. | GT's supported-service locale registry is a service-specific dataset. Provide an optional pinned dataset adapter with update provenance; test registry/host/catalog differences rather than claiming host Intl equals service availability. |
+| Catalog loading, versions and caching | Version-keyed in-flight deduplication, optional async cache, retries, latest-selection guard and serializable snapshots. | GT distributed cache, automatic CDN fetch, custom render cache and stale-refresh policies need provider adapters; test offline/stale/multiversion/concurrent behavior. |
+| Rust usage modes | Source/deferred API, existing macros/fallbacks, quoted keys and optional ICU. Default MSRV preserved. | JS extraction does not inspect Rust call sites and Rust has no React/JS plugin surface. Use Rust token/AST tooling or macros to produce shared manifests, with compile-fail/static-id tests. |
+| Native browser, Node, Bun, Deno | Native browser entry preserves old dependency-free API and pure Intl; optional source/React APIs resolve npm dependencies. Unit suite runs across Node/Bun/Deno. | Direct browser source ICU requires bundled/import-map dependencies. Test a published import-map distribution before advertising unbundled source support. |
+
+## Build tools, services and frameworks
+
+| Requirement / GT package | Current solution | Remaining work and validation plan |
+| --- | --- | --- |
+| AST extraction and diagnostic CLI (`cli`) | `extract`, manifest/source `.lino`, locations/descriptions, scope-aware JS/TS/JSX, catalog checks, source diffs and provider candidates. | GT init/setup, arbitrary file formats, translation progress UX, diagnostic repair and upload/download commands are not reproduced. Add subcommands behind catalog/provider contracts and integration-test isolated CLI projects. |
+| Automatic compiler (`compiler`) | Vite/Rollup build plugin emits catalogs/manifests without code rewrite. Explicit `gt` property expressions extract. | Automatic JSX wrapping and configured attribute localization (upstream PR 2382) require a transform preserving semantics/source maps. Add transform fixtures for expressions, side effects, accessibility props, namespaced components and sourcemap positions, then real Vite and Next builds. |
+| Translation generation and incremental updates | Provider API receives missing sources, validates ICU and tags, preserves existing entries and writes candidates separately. Stable-id source changes are flagged for review. | GT's translation quality/model selection and background updates are external services. Add optional SDK providers with batching/retries/rate limits and mock-server contract tests; measure quality with curated human-reviewed multilingual fixtures. |
+| General Translation project services (`core`, `api`) | Explicit loader/provider/cache boundaries can integrate services. | Project credentials, branches/tags, version ids, file uploads, jobs, translation queues, project publishing and hosted font assets are not implemented. Build an opt-in GT SDK adapter using its supported API, map `.lino` messages to provider format, and test upload/poll/download/version failures against a mock plus credentialed staging. Never equate a generic callback with these operations. |
+| CDN and development/live translation workflows | Applications can load versioned approved `.lino` files through their own infrastructure. | GT's CDN project publication and runtime/development translation stores require a backend. Specify an HTTP catalog/job protocol, implement backend/provider separately or reuse GT, and test cache headers, authentication, deployment rollback and preview isolation. |
+| Next.js (`next`) | Web request negotiation/path/middleware helpers; explicit server components and snapshot hydration. | No dedicated Next package, request context store, link/navigation wrappers, SSG/SEO or config integration. Build optional Next adapter with App Router fixtures; test simultaneous SSR/RSC requests, cookie/path navigation, static builds and hydration. |
+| Node server (`node`) | Explicit per-request translator; Node may adapt request headers to Web Request. | GT AsyncLocalStorage/request stores and singleton helpers are not implemented. An optional Node context adapter should expose explicit opt-in scoped access; test overlapping async requests and context cleanup. |
+| TanStack Start (`tanstack-start`) | Web request and path helpers can be called by route loaders. | No dedicated router/server-function plugin. Add adapter with typed route context and link handling, then actual server/client navigation/build tests. |
+| React Native (`react-native`) | Instance hooks/provider can wrap opaque native values. | HTML selectors and intrinsic rich traversal are not native support. Add native-element serializer/render adapter, locale persistence and native selectors; test with React Native renderer and device/emulator integration. |
+| Vue and extractor (`vue`, `vue-extractor`) | Plain JS messages can be shared. | No Vue components/directives/reactive provider/template extraction. Build optional Vue adapter using official SFC parser, reuse ICU catalog schema and add SSR/hydration/template-scope tests. |
+| Sanity (`sanity`) | Translation provider/catalog contract is reusable. | No CMS schema, studio UI or document publishing. Build optional Sanity plugin using official studio APIs; test field/document locale variants, permissions and publication. |
+| Markdown/MDX (`remark`) | Existing converters handle supported catalog formats; JS extraction handles sources outside Markdown. | No remark/MDX node extraction and restoration. Add a remark plugin preserving code/links/metadata; round-trip nested Markdown/MDX fixtures and validate translated AST structure. |
+| Session replay (`rrweb`) | No equivalent shipped. | Wrap rrweb recording/replay with locale and opaque message metadata; test translated replays without recording secrets or changing event order. |
+| Python extraction (`python-extractor`) | No equivalent shipped. | Parse Python AST source calls into the shared manifest; add fixtures for imports, f-strings, shadowing and dynamic diagnostics without executing code. |
+| Agent/dev tooling (`locadex`, `gtx-cli`, `react-core-linter`) | CLI diagnostics and provider candidates cover local catalogs. | No GT agent protocol, extraction daemon or specialized lint package. Define protocol/diagnostic schema, reuse extractor and add editor/daemon cancellation/incremental tests; keep service-specific commands optional. |
+
+## Issue process requirements
+
+| Requirement | Result / acceptance evidence |
+| --- | --- |
+| Collect issue and related data in the repository | Saved issue, all available issue comments, related local/upstream PR metadata, pinned upstream manifests/entrypoints, checksums and license. |
+| Search online for additional facts | Primary upstream/framework/parser/runtime sources linked in the study; recent GT changes inform derivation and attribute-localization boundaries. |
+| Deep study and solutions for every requirement | Root-cause analysis, alternatives, this capability inventory, per-row implementation/validation plans and explicit evidence limits. |
+| Reuse known existing components | FormatJS JS/Rust engines, Babel parser/traverse, Intl, React, existing catalog/runtime abstractions and existing test/CI/release frameworks. |
+| Improve where possible | Portable `.lino` storage, explicit request state, bounded static derivation/caches, scope-aware extraction, no application execution, validated candidates and preservation of old APIs. These are design properties, not a measured claim that translation quality beats GT. |
+| Execute every capability in one PR | Runtime and local tooling changes are in PR 28. Entire ecosystem/service parity is incomplete; the remaining rows cannot honestly be marked done. The PR does not auto-close the issue. |
+
+## Sequence for remaining work
+
+1. Specify interchange/version contracts and locale mapping semantics. Add
+   shared ICU conformance fixtures and generated dictionary schema.
+2. Extend module-aware extraction, add a real compiler transform and format
+   plugins. Prove identity equivalence between compile-time and runtime paths.
+3. Build optional framework adapters, starting with Next and Node request
+   contexts, then TanStack, Native and Vue. Keep framework dependencies out of
+   the native browser/core entries.
+4. Integrate hosted services through optional providers. Verify real
+   publication/version/CDN/job behavior, not only unit mocks.
+5. Add CMS/MDX/Python/replay/dev-tool packages with their own integration suites.
+   Revisit this matrix for the exact upstream revision before a parity claim.

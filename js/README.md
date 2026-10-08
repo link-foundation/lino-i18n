@@ -13,6 +13,35 @@ Runs on Node.js (≥ 22.11), Bun, Deno, and bundlers like Vite/Webpack/esbuild.
 npm install lino-i18n
 ```
 
+## Source messages and tooling
+
+```js
+import { createTranslator, msg } from 'lino-i18n/messages';
+const i18n = createTranslator({
+  locales: { fr: { greeting: 'Bonjour {name}' } },
+  defaultLocale: 'fr',
+});
+i18n.gt(msg('Hello {name}', { id: 'greeting' }), { name: 'Ada' });
+i18n.gt('{n, plural, one {# file} other {# files}}', { n: 2 });
+```
+
+`lino-i18n/react` provides source `T`, `Var`, `Derive`, `Branch`, `Plural` and
+formatting components alongside the existing keyed adapter. Optional exports
+include `messages`, `intl`, `server`, `react-server`, `tooling` and `compiler`.
+The native browser entry retains its dependency-free keyed runtime; source ICU
+and React browser applications use a bundler.
+
+```bash
+lino-i18n extract --in src --out locales --locale en
+lino-i18n check --dir locales --manifest locales/messages.json
+```
+
+The complete [source-message guide](../docs/source-messages.md)
+covers dictionaries, static derivation, provider candidates, versioned loading,
+request isolation and snapshot hydration. The
+[GT capability study](../docs/case-studies/issue-25/README.md)
+records supported workflows and remaining ecosystem integrations.
+
 ## Usage
 
 ```js

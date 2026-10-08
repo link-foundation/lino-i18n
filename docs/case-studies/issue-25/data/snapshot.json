@@ -1,0 +1,198 @@
+{
+  "repository": "https://github.com/generaltranslation/gt",
+  "commit": "fb7584f5548b7454a7c95827de459c684f659d5b",
+  "observed": "2026-10-08",
+  "license": "MIT (see gt-LICENSE.txt)",
+  "files": [
+    {
+      "path": "packages/api/package.json",
+      "file": "packages--api--package.json",
+      "sha256": "b33bc32da6a8f8bcdff5ca4e6d8b3330ef24c480b5339ba9eac08ec8f7fd3efd"
+    },
+    {
+      "path": "packages/cli/package.json",
+      "file": "packages--cli--package.json",
+      "sha256": "c15253f0e9ec47f064f730ef45fd44e85c8535af1bb6016d49da9bc1eb06ac70"
+    },
+    {
+      "path": "packages/compiler/package.json",
+      "file": "packages--compiler--package.json",
+      "sha256": "bd4f0752203530aea9358c1569ae7383b36cba1bda72ef1452050c7a9f3da7aa"
+    },
+    {
+      "path": "packages/compiler/src/index.ts",
+      "file": "packages--compiler--src--index.ts",
+      "sha256": "922cbfa7acf12bbeeb342f0931f35dfb2200014c7928147d5e2a296fdf6e6ae1"
+    },
+    {
+      "path": "packages/core/package.json",
+      "file": "packages--core--package.json",
+      "sha256": "7d95b68bff90e8fa339aa775e68aac1d64df30e4ae01a4a28979367eb157e232"
+    },
+    {
+      "path": "packages/core/src/derive/declareVar.ts",
+      "file": "packages--core--src--derive--declareVar.ts",
+      "sha256": "e35549eade42a9984b6aab3a7e5e5baf97cf05835229accbf72df19adc727728"
+    },
+    {
+      "path": "packages/core/src/derive/derive.ts",
+      "file": "packages--core--src--derive--derive.ts",
+      "sha256": "85c0c4b05f51e4be118cc7028ca964bb91c9bc070994bf8a84643f62a1bc55e4"
+    },
+    {
+      "path": "packages/core/src/index.ts",
+      "file": "packages--core--src--index.ts",
+      "sha256": "196943f005de9607c12dbc412b86023554f81c29387b1439da4578a9167b4796"
+    },
+    {
+      "path": "packages/format/package.json",
+      "file": "packages--format--package.json",
+      "sha256": "23eb6d202fc451c145f185123fd3e4fea2b956aa66b3cf264579a59adf86e148"
+    },
+    {
+      "path": "packages/format/src/LocaleConfig.ts",
+      "file": "packages--format--src--LocaleConfig.ts",
+      "sha256": "8678f244695644225951f843cf4fc991193e4e7b7778b2fc8ea9b02e65e6240a"
+    },
+    {
+      "path": "packages/format/src/formatting/format.ts",
+      "file": "packages--format--src--formatting--format.ts",
+      "sha256": "3b108e45bc0bf24ca66312072f5e0f53ba6eb0aa0af135625f76a91d28fffd98"
+    },
+    {
+      "path": "packages/format/src/index.ts",
+      "file": "packages--format--src--index.ts",
+      "sha256": "bebc5151ce8cebd8ed9180f2a3dc93f4819998a2b0ee851778109e01a9f457d2"
+    },
+    {
+      "path": "packages/gtx-cli/package.json",
+      "file": "packages--gtx-cli--package.json",
+      "sha256": "769e14797653b0425cc8f993fa4ed5265333408ae93ff99903e3343e8bbce820"
+    },
+    {
+      "path": "packages/i18n/package.json",
+      "file": "packages--i18n--package.json",
+      "sha256": "67a3a4a8e6fb776c4f005147ca2da8b410bfefbc0625868aa5a18b917feceb22"
+    },
+    {
+      "path": "packages/i18n/src/index.ts",
+      "file": "packages--i18n--src--index.ts",
+      "sha256": "a999fa454f8d4bbe74ac01f2fc99f4868fcd0ae4c3d34cf86bc0563fccb2d7ed"
+    },
+    {
+      "path": "packages/i18n/src/translation-functions/msg/msg.ts",
+      "file": "packages--i18n--src--translation-functions--msg--msg.ts",
+      "sha256": "e083c8e89b5dc07167f7dcab26c7915defd151d20f443eaadfed3a4584fa55b7"
+    },
+    {
+      "path": "packages/i18n/src/translation-functions/t.ts",
+      "file": "packages--i18n--src--translation-functions--t.ts",
+      "sha256": "6f97832efaa1016b1e8af9e3e6edb3a52bf3cd025744ed452e824b14afbe9c55"
+    },
+    {
+      "path": "packages/icu/package.json",
+      "file": "packages--icu--package.json",
+      "sha256": "ca1a8ab2aed584a192530ef4cf459748cfd382d2cad62c1bd7d78c48559da585"
+    },
+    {
+      "path": "packages/locadex/package.json",
+      "file": "packages--locadex--package.json",
+      "sha256": "5bf4f2e1a3828656df221f4e5a1293727d82df000a410ff7fc80d9a75f25781b"
+    },
+    {
+      "path": "packages/next/package.json",
+      "file": "packages--next--package.json",
+      "sha256": "a570dc903e66a4dac6e001fb82e98cd7d2bc0df9c1fec126e679854126441df4"
+    },
+    {
+      "path": "packages/node/package.json",
+      "file": "packages--node--package.json",
+      "sha256": "d1048734f2d40b7705536b3c3f75528a4db45984929a98217073c049c35df3ef"
+    },
+    {
+      "path": "packages/node/src/index.ts",
+      "file": "packages--node--src--index.ts",
+      "sha256": "7a415520f755292dfa3d080f2e207f4b025e75f6c8c80d8c84892a38045b57d7"
+    },
+    {
+      "path": "packages/python-extractor/package.json",
+      "file": "packages--python-extractor--package.json",
+      "sha256": "699b145f13a4644540541e5e6931745918f0db7cf7d619a37093cc24ad0d7fc2"
+    },
+    {
+      "path": "packages/react-core-linter/package.json",
+      "file": "packages--react-core-linter--package.json",
+      "sha256": "c5935261e87a9d482a010547375b07712385f1ebd9239d5c47481a1fa527e211"
+    },
+    {
+      "path": "packages/react-core/package.json",
+      "file": "packages--react-core--package.json",
+      "sha256": "f04f14fd39617212955880faedb5b1d08e28dc99fe43276c880e8948c3220406"
+    },
+    {
+      "path": "packages/react-core/src/components/derivation/Derive.tsx",
+      "file": "packages--react-core--src--components--derivation--Derive.tsx",
+      "sha256": "c371cd91be4a1111b825ba8f2742b16457c5c4c41caca003e1048a8103b426c6"
+    },
+    {
+      "path": "packages/react-native/package.json",
+      "file": "packages--react-native--package.json",
+      "sha256": "8b18537417946f03032a91a86a7524ce4e6fcffee6d4d8b40f89ee7518e84743"
+    },
+    {
+      "path": "packages/react/package.json",
+      "file": "packages--react--package.json",
+      "sha256": "666ab567e1825140e91e5d074586f8dec6cba2dbe23888ce063b069789d5dc99"
+    },
+    {
+      "path": "packages/react/src/index.client.ts",
+      "file": "packages--react--src--index.client.ts",
+      "sha256": "4490f558b163ba5a1a1320837ac3fd1d9ca2798f7f7261b9bbb6fff888221eda"
+    },
+    {
+      "path": "packages/react/src/index.rsc.ts",
+      "file": "packages--react--src--index.rsc.ts",
+      "sha256": "20c5e83816e31dd43694e45edd0c24f1e2df78a37c5881bd784e3b3487308b83"
+    },
+    {
+      "path": "packages/react/src/index.server.ts",
+      "file": "packages--react--src--index.server.ts",
+      "sha256": "e1dc17eabcf2b76ebbc82c77fdf5d6374d7ceb5748aa479d14e8df9238f7dfd4"
+    },
+    {
+      "path": "packages/remark/package.json",
+      "file": "packages--remark--package.json",
+      "sha256": "24a84ca6b4ef162fec860d77d0d1c52310c25fc3dac910963d453f72c829c858"
+    },
+    {
+      "path": "packages/rrweb/package.json",
+      "file": "packages--rrweb--package.json",
+      "sha256": "40eed189b196df61cf9910a3781f80254103506ae288894d9699388a8d366dd9"
+    },
+    {
+      "path": "packages/sanity/package.json",
+      "file": "packages--sanity--package.json",
+      "sha256": "27b7ea9e2fa772755d3ec8cae964f40a96b17d5ea306f2069c89a6bd92ba5057"
+    },
+    {
+      "path": "packages/supported-locales/package.json",
+      "file": "packages--supported-locales--package.json",
+      "sha256": "52c8bf2448a63db2b78179b6859c3ea00639c4abff0a92234a749a59ea0b97db"
+    },
+    {
+      "path": "packages/tanstack-start/package.json",
+      "file": "packages--tanstack-start--package.json",
+      "sha256": "2e0ec6944268242a9668ff0fd507d21ea4609360f9225a45d01d2b9dd4d7b976"
+    },
+    {
+      "path": "packages/vue-extractor/package.json",
+      "file": "packages--vue-extractor--package.json",
+      "sha256": "bf7e5f8ecf94d32819d465202e573f6b7295d5e8f1c8f11e92e997df300fc608"
+    },
+    {
+      "path": "packages/vue/package.json",
+      "file": "packages--vue--package.json",
+      "sha256": "37dfa8115095375a561043383282e432425ce975067c7e5501f9f92f1a90af78"
+    }
+  ]
+}

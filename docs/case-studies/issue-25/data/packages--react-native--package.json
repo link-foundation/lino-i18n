@@ -1,0 +1,136 @@
+{
+  "name": "gt-react-native",
+  "version": "11.4.10",
+  "description": "An i18n package for React Native",
+  "main": "./dist/commonjs/index.js",
+  "module": "./dist/module/index.js",
+  "types": "./dist/module/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.tsx",
+      "types": "./dist/module/index.d.ts",
+      "default": "./dist/module/index.js"
+    },
+    "./plugin": {
+      "source": "./src/plugin.ts",
+      "types": "./dist/module/plugin.d.ts",
+      "require": "./dist/commonjs/plugin.js",
+      "import": "./dist/module/plugin.js",
+      "default": "./dist/commonjs/plugin.js"
+    },
+    "./internal": {
+      "source": "./src/internal.ts",
+      "types": "./dist/module/internal.d.ts",
+      "default": "./dist/module/internal.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "typesVersions": {
+    "*": {
+      "plugin": [
+        "./dist/module/plugin.d.ts"
+      ],
+      "internal": [
+        "./dist/module/internal.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "src",
+    "dist",
+    "android",
+    "ios",
+    "*.podspec",
+    "!ios/build",
+    "!android/build",
+    "!android/gradle",
+    "!android/gradlew",
+    "!android/gradlew.bat",
+    "!android/local.properties",
+    "!**/__tests__",
+    "!**/__fixtures__",
+    "!**/__mocks__",
+    "!**/.*"
+  ],
+  "sideEffects": [
+    "./dist/commonjs/NativeGtReactNative.*",
+    "./dist/module/NativeGtReactNative.*",
+    "./src/NativeGtReactNative.*"
+  ],
+  "scripts": {
+    "patch": "pnpm version patch",
+    "emit-types": "sh ../../scripts/emit-types.sh -p tsconfig.build.json --declaration --outDir dist/module --rootDir src",
+    "transpile": "tsdown && pnpm run emit-types",
+    "build": "pnpm run transpile",
+    "build:clean": "sh ../../scripts/clean.sh && pnpm run build",
+    "build:release": "pnpm run build:clean",
+    "clean": "del-cli android/build dist",
+    "test": "vitest run --passWithNoTests",
+    "test:watch": "vitest",
+    "release": "pnpm run build:clean && pnpm publish",
+    "release:alpha": "pnpm run build:clean && pnpm publish --tag alpha",
+    "release:beta": "pnpm run build:clean && pnpm publish --tag beta",
+    "release:latest": "pnpm run build:clean && pnpm publish --tag latest",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "react-native",
+    "translation",
+    "internationalization",
+    "localization",
+    "i18n",
+    "ios",
+    "android"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/generaltranslation/gt.git"
+  },
+  "author": "General Translation, Inc.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/generaltranslation/gt/issues"
+  },
+  "homepage": "https://generaltranslation.com/",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "peerDependencies": {
+    "react": ">=19.0.0",
+    "react-native": ">=0.78.0"
+  },
+  "dependencies": {
+    "@formatjs/intl-datetimeformat": "^6.18.2",
+    "@formatjs/intl-displaynames": "^6.8.13",
+    "@formatjs/intl-getcanonicallocales": "^2.5.6",
+    "@formatjs/intl-listformat": "^7.7.13",
+    "@formatjs/intl-locale": "^4.2.13",
+    "@formatjs/intl-numberformat": "^8.15.6",
+    "@formatjs/intl-pluralrules": "^5.4.6",
+    "@formatjs/intl-relativetimeformat": "^11.4.13",
+    "@generaltranslation/format": "workspace:*",
+    "@generaltranslation/react-core": "workspace:*",
+    "@generaltranslation/supported-locales": "workspace:*",
+    "generaltranslation": "workspace:*",
+    "gt-i18n": "workspace:*"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.28.4",
+    "@types/babel__core": "^7.20.5",
+    "@types/node": "catalog:",
+    "@types/react": "^19.1.0",
+    "del-cli": "^6.0.0",
+    "react": "19.1.0",
+    "react-native": "0.81.1",
+    "tsdown": "catalog:",
+    "typescript": "catalog:"
+  },
+  "codegenConfig": {
+    "name": "GtReactNativeSpec",
+    "type": "modules",
+    "jsSrcsDir": "./src",
+    "android": {
+      "javaPackageName": "com.gtreactnative"
+    }
+  }
+}

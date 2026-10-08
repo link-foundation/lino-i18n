@@ -1,0 +1,71 @@
+{
+  "name": "@generaltranslation/python-extractor",
+  "version": "0.2.60",
+  "description": "Python source code extraction for General Translation",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "author": "General Translation, Inc.",
+  "license": "MIT",
+  "scripts": {
+    "emit-types": "sh ../../scripts/emit-types.sh",
+    "transpile": "tsdown && pnpm run emit-types",
+    "build": "pnpm run transpile",
+    "build:watch": "tsdown --watch",
+    "build:clean": "sh ../../scripts/clean.sh && pnpm run build",
+    "build:release": "pnpm run build:clean",
+    "format": "oxfmt src",
+    "patch": "pnpm version patch",
+    "release": "pnpm run build:clean && pnpm publish",
+    "release:alpha": "pnpm run build:clean && pnpm publish --tag alpha",
+    "release:beta": "pnpm run build:clean && pnpm publish --tag beta",
+    "release:latest": "pnpm run build:clean && pnpm publish --tag latest",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./types": {
+      "import": "./dist/types.js",
+      "types": "./dist/types.d.ts"
+    },
+    "./constants": {
+      "import": "./dist/constants.js",
+      "types": "./dist/constants.d.ts"
+    },
+    "./tree-sitter-python.wasm": "./dist/tree-sitter-python.wasm"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/generaltranslation/gt.git"
+  },
+  "keywords": [
+    "python",
+    "extraction",
+    "translation",
+    "i18n",
+    "flask",
+    "fastapi"
+  ],
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "tree-sitter-python": "^0.25.0",
+    "tsdown": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "dependencies": {
+    "generaltranslation": "workspace:*",
+    "web-tree-sitter": "^0.26.6"
+  }
+}

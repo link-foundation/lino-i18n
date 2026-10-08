@@ -1,0 +1,137 @@
+{
+  "name": "gt-react",
+  "version": "11.4.10",
+  "description": "A React library for automatic internationalization.",
+  "main": "./dist/index.server.cjs",
+  "module": "./dist/index.server.mjs",
+  "types": "./dist/index.types.d.cts",
+  "files": [
+    "dist",
+    "CHANGELOG.md"
+  ],
+  "sideEffects": [
+    "./dist/macros.*"
+  ],
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "dependencies": {
+    "generaltranslation": "workspace:*",
+    "@generaltranslation/react-core": "workspace:*",
+    "gt-i18n": "workspace:*"
+  },
+  "scripts": {
+    "patch": "pnpm version patch",
+    "transpile": "tsdown",
+    "build": "tsdown",
+    "build:clean": "sh ../../scripts/clean.sh && pnpm run build",
+    "build:release": "pnpm run build:clean",
+    "release": "pnpm run build:clean && pnpm publish",
+    "release:alpha": "pnpm run build:clean && pnpm publish --tag alpha",
+    "release:beta": "pnpm run build:clean && pnpm publish --tag beta",
+    "release:latest": "pnpm run build:clean && pnpm publish --tag latest",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/generaltranslation/gt.git"
+  },
+  "author": "General Translation, Inc.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/generaltranslation/gt/issues"
+  },
+  "homepage": "https://generaltranslation.com/",
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "@types/react": ">=18.0.0 <20.0.0",
+    "@types/react-dom": ">=18.0.0 <20.0.0",
+    "jsdom": "^26.1.0",
+    "tsdown": "catalog:",
+    "typescript": "catalog:"
+  },
+  "exports": {
+    ".": {
+      "react-server": {
+        "require": {
+          "types": "./dist/index.rsc.d.cts",
+          "default": "./dist/index.rsc.cjs"
+        },
+        "import": {
+          "types": "./dist/index.rsc.d.mts",
+          "default": "./dist/index.rsc.mjs"
+        },
+        "default": "./dist/index.rsc.mjs"
+      },
+      "workerd": {
+        "require": {
+          "types": "./dist/index.types.d.cts",
+          "default": "./dist/index.server.cjs"
+        },
+        "import": {
+          "types": "./dist/index.types.d.mts",
+          "default": "./dist/index.server.mjs"
+        },
+        "default": "./dist/index.server.mjs"
+      },
+      "worker": {
+        "require": {
+          "types": "./dist/index.types.d.cts",
+          "default": "./dist/index.server.cjs"
+        },
+        "import": {
+          "types": "./dist/index.types.d.mts",
+          "default": "./dist/index.server.mjs"
+        },
+        "default": "./dist/index.server.mjs"
+      },
+      "browser": {
+        "require": {
+          "types": "./dist/index.types.d.cts",
+          "default": "./dist/index.client.cjs"
+        },
+        "import": {
+          "types": "./dist/index.types.d.mts",
+          "default": "./dist/index.client.mjs"
+        },
+        "default": "./dist/index.client.mjs"
+      },
+      "require": {
+        "types": "./dist/index.types.d.cts",
+        "default": "./dist/index.server.cjs"
+      },
+      "import": {
+        "types": "./dist/index.types.d.mts",
+        "default": "./dist/index.server.mjs"
+      },
+      "default": "./dist/index.server.mjs"
+    },
+    "./macros": {
+      "require": {
+        "types": "./dist/macros.d.cts",
+        "default": "./dist/macros.cjs"
+      },
+      "import": {
+        "types": "./dist/macros.d.mts",
+        "default": "./dist/macros.mjs"
+      }
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "macros": [
+        "./dist/macros.d.cts"
+      ]
+    }
+  },
+  "keywords": [
+    "react",
+    "translation",
+    "internationalization",
+    "localization",
+    "i18n"
+  ]
+}
