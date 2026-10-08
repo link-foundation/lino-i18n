@@ -14,7 +14,7 @@ const extensions = [
   '.cts',
 ];
 const library =
-  /^lino-i18n(?:\/(?:messages|react|react-server|server|node|vue|next\/(?:server|client)))?$/;
+  /^lino-i18n(?:\/(?:messages|react|react-native|react-server|server|node|vue|next\/(?:server|client)))?$/;
 
 export function projectLimits({
   maxFiles = 1000,
@@ -124,6 +124,13 @@ function namedExports(program, statement, named) {
 function createResolver(modules, resolveImport) {
   const files = new Set(modules.keys());
   function imported(file, source, name, seen) {
+    if (['react-native', 'react-native-web'].includes(source)) {
+      return name === '*'
+        ? { api: 'native-module' }
+        : name === 'Text'
+          ? { api: 'NativeText' }
+          : undefined;
+    }
     if (library.test(source)) {
       return { api: name };
     }

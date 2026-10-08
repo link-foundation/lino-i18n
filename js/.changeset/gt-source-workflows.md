@@ -19,3 +19,5 @@ Resolve shared translator factories, imported finite derivation and dictionary s
 Add optional Vue 3.5 reactive source components, formatting, lazy initialization and SSR snapshots, plus SFC/module-aware extraction and CLI integration with compiler and browser regression coverage.
 
 Add bounded Python AST extraction into shared manifests, optional upstream Markdown helpers with safe entity serialization, and a GT service locale registry bridge.
+
+Add an injected React Native Text adapter with rich content, native formatter wrappers, headless selectors, serialized locale persistence and matching JSX extraction.

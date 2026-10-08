@@ -291,3 +291,6 @@ Released into the public domain under the
 [Unlicense](https://unlicense.org/).
 
 See [Python extraction, Markdown helpers and GT locale data](../docs/ecosystem-tools.md) for optional source and content tools.
+
+See [React Native source messages](../docs/react-native.md) for native text,
+formatters, selectors and persisted locale choices.

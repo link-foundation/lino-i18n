@@ -50,10 +50,10 @@ function jsxText(value) {
   return nonEmpty.join(' ');
 }
 
-function opaqueElement(name, child) {
+function opaqueElement(name, child, api) {
   return (
-    name.type !== 'JSXIdentifier' ||
-    !/^[a-z]/.test(name.name) ||
+    (api !== 'NativeText' &&
+      (name.type !== 'JSXIdentifier' || !/^[a-z]/.test(name.name))) ||
     child.children.every(
       (entry) =>
         (entry.type === 'JSXText' && !jsxText(entry.value)) ||
@@ -63,7 +63,26 @@ function opaqueElement(name, child) {
   );
 }
 
-export function extractJSX(node, resolveName, resolveDerived) {
+function validateNativeElement(child, api, native) {
+  if (
+    native &&
+    api !== 'NativeText' &&
+    child.children.some(
+      (entry) => entry.type !== 'JSXText' || entry.value.trim()
+    )
+  ) {
+    throw new Error(
+      'Native rich JSX requires an imported Text; wrap opaque custom components in Var or provide an explicit source'
+    );
+  }
+}
+
+export function extractJSX(
+  node,
+  resolveName,
+  resolveDerived,
+  { native = false } = {}
+) {
   let nodeId = 0;
   let branchId = 0;
 
@@ -133,7 +152,8 @@ export function extractJSX(node, resolveName, resolveDerived) {
       return serializeBranch(child, api === 'Plural');
     }
     const token = `c${nodeId++}`;
-    if (opaqueElement(name, child)) {
+    validateNativeElement(child, api, native);
+    if (opaqueElement(name, child, api)) {
       return `{${token}}`;
     }
     return `<${token}>${serialize(child.children)}</${token}>`;

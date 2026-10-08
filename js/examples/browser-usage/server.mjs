@@ -28,20 +28,15 @@ const server = createServer(async (request, response) => {
         '/examples/react-usage/bundle.js',
         '/examples/compiler-usage/bundle.js',
         '/examples/vue-usage/bundle.js',
+        '/examples/native-usage/bundle.js',
       ].includes(url.pathname)
     ) {
       const compiled = url.pathname.includes('compiler-usage');
       const vue = url.pathname.includes('vue-usage');
+      const example = url.pathname.split('/')[2];
       const result = await build({
         entryPoints: [
-          resolve(
-            root,
-            vue
-              ? 'examples/vue-usage/app.js'
-              : compiled
-                ? 'examples/compiler-usage/app.jsx'
-                : 'examples/react-usage/app.js'
-          ),
+          resolve(root, `examples/${example}/app.${compiled ? 'jsx' : 'js'}`),
         ],
         bundle: true,
         format: 'esm',

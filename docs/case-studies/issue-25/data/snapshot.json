@@ -215,9 +215,24 @@
       "sha256": "8b18537417946f03032a91a86a7524ce4e6fcffee6d4d8b40f89ee7518e84743"
     },
     {
+      "path": "packages/react-native/src/hooks/selectors.ts",
+      "file": "packages--react-native--src--hooks--selectors.ts",
+      "sha256": "30d59e2de036116594521fea0fe0d963be6052e8b46f35b90f7480a0579b567b"
+    },
+    {
       "path": "packages/react-native/src/index.tsx",
       "file": "packages--react-native--src--index.tsx",
       "sha256": "ee5bdbc62046163fd16d1f5899bdb063c3e421866014409e0502c15484bfd360"
+    },
+    {
+      "path": "packages/react-native/src/setup/initializeGT.ts",
+      "file": "packages--react-native--src--setup--initializeGT.ts",
+      "sha256": "d4248721d82a4bd3f2ed46b97bf9f2cf366d390da154f984d241729fc8cecb21"
+    },
+    {
+      "path": "packages/react-native/src/utils/nativeStore.ts",
+      "file": "packages--react-native--src--utils--nativeStore.ts",
+      "sha256": "69d8516fb32a69aed6a0cfb9ecb32ad3c5ba9da105d0d35fdea3c60167c8cd1e"
     },
     {
       "path": "packages/react/package.json",

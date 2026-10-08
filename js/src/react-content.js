@@ -14,7 +14,7 @@ export function Static(props) {
 export function Derive({ children }) {
   return children;
 }
-function describe(node) {
+function describe(node, richComponents) {
   if (typeof node === 'string' || typeof node === 'number') {
     return { kind: 'text', value: node };
   }
@@ -42,16 +42,22 @@ function describe(node) {
   return {
     kind: 'element',
     children: props.children,
-    opaque: typeof type !== 'string' || props.children === undefined,
+    opaque:
+      (typeof type !== 'string' && !richComponents.has(type)) ||
+      props.children === undefined,
   };
 }
-export function prepareContent(children) {
-  return prepare(children, {
-    nodes: Children.toArray,
-    describe,
-    clone: (node, chunks, key) => React.cloneElement(node, { key }, ...chunks),
-  });
+export function createContentRenderer(richComponents = []) {
+  const rich = new Set(richComponents);
+  return (children) =>
+    prepare(children, {
+      nodes: Children.toArray,
+      describe: (node) => describe(node, rich),
+      clone: (node, chunks, key) =>
+        React.cloneElement(node, { key }, ...chunks),
+    });
 }
+export const prepareContent = createContentRenderer();
 export function renderContent(i18n, props) {
   return render(i18n, props, prepareContent);
 }

@@ -33,9 +33,28 @@ export function apiName(path, node, seen = new Set()) {
   return bindingApi(binding, node.name, seen);
 }
 
+function nativeMember(object, property) {
+  if (object === 'native-module') {
+    return property === 'Text' ? 'NativeText' : undefined;
+  }
+  if (object === 'native') {
+    if (property === 'i18n') {
+      return 'translator';
+    }
+    return property === 'T'
+      ? 'NativeT'
+      : ['Var', 'Static', 'Derive', 'Branch', 'Plural'].includes(property)
+        ? property
+        : undefined;
+  }
+}
+
 function memberApi(path, node, seen) {
   const object = apiName(path, node.object, seen);
   const property = node.computed ? literal(node.property) : node.property.name;
+  if (object === 'native-module' || object === 'native') {
+    return nativeMember(object, property);
+  }
   if (object?.resolveApi) {
     return object.resolveApi(property, seen);
   }
@@ -58,6 +77,14 @@ function bindingApi(binding, localName, seen) {
   return undefined;
 }
 
+function nativeImport(binding) {
+  return binding.path.isImportNamespaceSpecifier()
+    ? 'native-module'
+    : binding.path.node.imported?.name === 'Text'
+      ? 'NativeText'
+      : undefined;
+}
+
 function importApi(binding, seen) {
   if (
     binding.path.node.importKind === 'type' ||
@@ -66,8 +93,11 @@ function importApi(binding, seen) {
     return undefined;
   }
   const source = binding.path.parent.source.value;
+  if (['react-native', 'react-native-web'].includes(source)) {
+    return nativeImport(binding);
+  }
   if (
-    !/^lino-i18n(?:\/(?:messages|react|react-server|server|node|vue|next\/(?:server|client)))?$/.test(
+    !/^lino-i18n(?:\/(?:messages|react|react-native|react-server|server|node|vue|next\/(?:server|client)))?$/.test(
       source
     )
   ) {
@@ -84,6 +114,11 @@ function importApi(binding, seen) {
     : binding.path.node.imported?.name;
 }
 
+function nativeBinding(id, localName) {
+  const api = factoryBinding(id, localName, 'native');
+  return api === 'T' ? 'NativeT' : api === 'i18n' ? 'translator' : api;
+}
+
 export function valueApi(path, node, seen = new Set(), id, localName) {
   if (/^Import/.test(path.type)) {
     return apiName(path, path.node.local, seen);
@@ -97,12 +132,16 @@ export function valueApi(path, node, seen = new Set(), id, localName) {
     if (['useGT', 'useMessages', 'getGT', 'getMessages'].includes(name)) {
       return 'gt';
     }
+    if (name === 'createNativeI18n') {
+      return nativeBinding(id, localName);
+    }
     if (name === 'createNextI18n') {
       return factoryBinding(id, localName, 'next');
     }
     if (
       [
         'createVueI18n',
+        'createNativeI18n',
         'createTranslator',
         'createDictionaryTranslator',
         'createRequestTranslator',
@@ -221,6 +260,7 @@ export function extractMessages(code, { file = '<source>', ast: parsed } = {}) {
           'defineDictionary',
           'createDictionaryTranslator',
           'createVueI18n',
+          'createNativeI18n',
           'createTranslator',
           'createRequestTranslator',
         ].includes(name)
@@ -277,7 +317,8 @@ export function extractMessages(code, { file = '<source>', ast: parsed } = {}) {
       );
     },
     JSXElement(path) {
-      if (apiName(path, path.node.openingElement.name) !== 'T') {
+      const component = apiName(path, path.node.openingElement.name);
+      if (!['T', 'NativeT'].includes(component)) {
         return;
       }
       safely(path, () => {
@@ -288,7 +329,16 @@ export function extractMessages(code, { file = '<source>', ast: parsed } = {}) {
         }
         const { sources, derived } = attributes.source
           ? { sources: [literal(attributes.source)], derived: false }
-          : derivedJSX(path, (name) => apiName(path, name));
+          : derivedJSX(
+              path,
+              (name) => {
+                const api = apiName(path, name);
+                return api === 'NativeText' && component !== 'NativeT'
+                  ? undefined
+                  : api;
+              },
+              { native: component === 'NativeT' }
+            );
         if (derived && id) {
           throw new Error(
             'Derived messages use source identities; omit an explicit id'

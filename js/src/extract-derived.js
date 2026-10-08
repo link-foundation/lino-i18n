@@ -45,24 +45,32 @@ export function derivedCalls(path, source, resolveApi) {
   return messages;
 }
 
-export function derivedJSX(path, resolveApi) {
+export function derivedJSX(path, resolveApi, options) {
   const choices = [];
-  const source = extractJSX(path.node, resolveApi, (element) => {
-    const children = element.children.filter(
-      (child) => child.type !== 'JSXText' || child.value.trim()
-    );
-    if (
-      children.length !== 1 ||
-      children[0].type !== 'JSXExpressionContainer'
-    ) {
-      throw new Error(
-        'Derive requires a single statically derivable expression'
+  const source = extractJSX(
+    path.node,
+    resolveApi,
+    (element) => {
+      const children = element.children.filter(
+        (child) => child.type !== 'JSXText' || child.value.trim()
       );
-    }
-    const token = `\uE002derived${choices.length}\uE003`;
-    choices.push({ token, values: staticValues(path, children[0].expression) });
-    return token;
-  });
+      if (
+        children.length !== 1 ||
+        children[0].type !== 'JSXExpressionContainer'
+      ) {
+        throw new Error(
+          'Derive requires a single statically derivable expression'
+        );
+      }
+      const token = `\uE002derived${choices.length}\uE003`;
+      choices.push({
+        token,
+        values: staticValues(path, children[0].expression),
+      });
+      return token;
+    },
+    options
+  );
   const sources = choices.reduce(
     (messages, { token, values }) =>
       combine(messages, values, (message, value) =>

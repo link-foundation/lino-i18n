@@ -171,3 +171,24 @@ the platform encoding. The parser now explicitly reconfigures stdin to UTF-8.
 `js/experiments/python-encoding.mjs` reproduces a cp1252 pipe locally and verifies
 both the column and a Chinese literal. The automated regression covers that
 encoding regardless of the host OS.
+
+## Native text adapter
+
+Eight runtime regressions use actual React Native Web 0.21.4; two Chromium
+scenarios cover translated native Text, preserved nested styles/presses, zero
+currency, storage reload and failed catalog loads. The complete Node suite has
+168 tests; the complete ordinary browser suite has eight scenarios. Strict types
+retain injected Text props. A separate optional probe compiled actual React
+Native 0.87.1 with platform globals isolated; upstream generated declarations
+required skipLibCheck there only. The CI type suite uses no skipLibCheck. Native
+Metro dependencies were removed after that probe, keeping the default install's
+audit clear. Device/emulator and older Hermes Intl behavior were unavailable.
+
+MCP opened the example, selected French, verified persisted `fr`, saved both
+1000 × 720 screenshots and closed the browser.
+
+All five workflows for the Windows encoding fix `26c5172` completed successfully
+(runs 37847797680, 37847797682, 37847797708, 37847797796 and 37847797875,
+created 2026-10-08 21:35 UTC). The Native extraction barrel regression first
+failed with an unresolved Text diagnostic; module resolution now preserves
+external native Text metadata. Eight affected tests pass in Bun and Deno as well.

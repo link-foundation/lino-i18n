@@ -151,9 +151,9 @@ a before/after screenshot of a reported visual defect.
 ## Acceptance limits
 
 The optional Next App Router adapter, JSX compiler and published GT SDK bridge
-are implemented and tested. Dedicated TanStack/Native/Vue/Sanity packages, a
-replacement GT project/CDN backend, editor UI, replay tooling and Python
-extraction remain outstanding. The matrix supplies concrete solutions and
+are implemented and tested, as are Vue/SFC, Python extraction and Native Text
+adapters. Dedicated TanStack/Sanity integrations, a replacement GT project/CDN
+backend, editor UI and replay tooling remain outstanding. The matrix supplies concrete solutions and
 validation plans for them. They cannot be called complete because a generic
 provider or a framework recipe exists. The issue's request for entire-monorepo
 parity remains broader than the implementation, and PR 28 should report that
