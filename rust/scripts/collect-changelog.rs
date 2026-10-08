@@ -193,15 +193,17 @@ fn remove_fragments(changelog_dir: &str) {
         return;
     }
 
-    if let Ok(entries) = fs::read_dir(dir_path) {
+    {
+        let entries = fs::read_dir(dir_path).expect("Cannot inspect fragments for removal");
         for entry in entries.map(|e| e.expect("Cannot read changelog directory entry")) {
             let path = entry.path();
             if path.extension().map_or(false, |ext| ext == "md")
                 && path.file_name().map_or(false, |name| name != "README.md")
             {
-                if fs::remove_file(&path).is_ok() {
-                    println!("Removed {}", path.display());
-                }
+                fs::remove_file(&path).unwrap_or_else(|error| {
+                    panic!("Cannot remove fragment {}: {error}", path.display())
+                });
+                println!("Removed {}", path.display());
             }
         }
     }
@@ -234,4 +236,30 @@ fn main() {
     remove_fragments(&changelog_dir);
 
     println!("Changelog collection complete");
+}
+
+#[cfg(test)]
+mod tests {
+    use super::{fs, remove_fragments};
+
+    #[test]
+    fn fragment_cleanup_does_not_hide_filesystem_errors() {
+        let root = std::env::temp_dir().join(format!(
+            "lino-fragment-cleanup-{}-{}",
+            std::process::id(),
+            std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap()
+                .as_nanos()
+        ));
+        fs::create_dir(&root).unwrap();
+        // A fragment replaced by a directory cannot be removed as a file.
+        fs::create_dir(root.join("fragment.md")).unwrap();
+        let result = std::panic::catch_unwind(|| remove_fragments(root.to_str().unwrap()));
+        fs::remove_dir_all(root).unwrap();
+        assert!(
+            result.is_err(),
+            "Fragment removal failed without reporting it"
+        );
+    }
 }

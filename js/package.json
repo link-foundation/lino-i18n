@@ -33,7 +33,7 @@
     }
   },
   "scripts": {
-    "test": "node --test --test-timeout=30000 tests/*.test.js",
+    "test": "node --throw-deprecation --test --test-timeout=30000 tests/*.test.js",
     "test:browser": "playwright test",
     "test:types": "tsc --project tests/types/tsconfig.json",
     "lint": "eslint . --max-warnings 0",

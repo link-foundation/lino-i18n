@@ -19,6 +19,10 @@ def check(path):
         concurrency = job["concurrency"]
         writer = bool(job.get("permissions", {}).get("contents") == "write" or job.get("permissions", {}).get("pages") == "write")
         assert concurrency["cancel-in-progress"] is not writer, f"{path}/{name}: cancellation policy disagrees with writer role"
+        if writer:
+            assert concurrency.get("queue") == "max", f"{path}/{name}: pending writers can be replaced; require queue: max"
+        else:
+            assert concurrency.get("queue", "single") == "single", f"{path}/{name}: cancellable checks cannot queue: max"
         for step in job["steps"]:
             if step.get("uses", "").startswith("actions/checkout@"):
                 git_writer = job.get("permissions", {}).get("contents") == "write"

@@ -509,6 +509,7 @@ jobs:
     concurrency:
       group: main-writer-${{ github.repository }}-main
       cancel-in-progress: false
+      queue: max
   manual-release:
     name: Manual npm Release
     runs-on: ubuntu-24.04
@@ -566,6 +567,7 @@ jobs:
     concurrency:
       group: main-writer-${{ github.repository }}-main
       cancel-in-progress: false
+      queue: max
   changeset-pr:
     name: Create Manual Changeset PR
     runs-on: ubuntu-24.04
@@ -607,6 +609,7 @@ jobs:
     concurrency:
       group: main-writer-${{ github.repository }}-main
       cancel-in-progress: false
+      queue: max
   deploy-docs:
     name: Deploy JavaScript Docs
     runs-on: ubuntu-24.04
@@ -657,6 +660,7 @@ jobs:
     concurrency:
       group: main-writer-${{ github.repository }}-main
       cancel-in-progress: false
+      queue: max
   release-preflight:
     name: Release credential preflight
     runs-on: ubuntu-24.04

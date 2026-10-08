@@ -25,4 +25,33 @@ Commit `126f834bca60d8ac9a29766c0205daf813f61093` was pushed before these five r
 
 The configured Node, Bun and Deno commands each pass all 60 tests after the alias fix. Types, ESLint with zero warnings, formatting, duplication scanning, hook regression, policy and actionlint pass. Results are in `verification/portable-*.log`. An exploratory Deno invocation omitted the repository's `--no-check` flag; its declaration-resolution errors are preserved as `deno-unconfigured-command.log`. The configured runtime test command passes, and the separate TypeScript check passes.
 
-Latest-SHA workflow outcomes will be appended after the follow-up push; no pending or older result is classified as successful final CI.
+## Portability follow-up CI
+
+Commit `ad168d68addbf6522d52921cd0a394190ccaddaf` preceded these runs, created on 2026-10-08 at approximately 11:24:50 UTC. All five completed successfully; complete logs and archived job metadata are preserved.
+
+| Workflow | Run | Result |
+| --- | --- | --- |
+| Documentation | [37769807796](https://github.com/link-foundation/lino-i18n/actions/runs/37769807796) | Success |
+| JavaScript | [37769807872](https://github.com/link-foundation/lino-i18n/actions/runs/37769807872) | Success |
+| Rust | [37769807973](https://github.com/link-foundation/lino-i18n/actions/runs/37769807973) | Success |
+| Security | [37769807895](https://github.com/link-foundation/lino-i18n/actions/runs/37769807895) | Success |
+| Workflows | [37769807995](https://github.com/link-foundation/lino-i18n/actions/runs/37769807995) | Success |
+
+All nine JavaScript OS/runtime combinations passed, including the Windows alias fixtures. Required dependency review and all three CodeQL languages passed without the earlier diff-size failure. Successful logs still exposed a package-test deprecation warning, addressed below. These runs validate this commit only; later fixes require their own fresh results.
+
+## Writer queue review
+
+Diff review identified a further concrete configuration defect: shared noncancellable writers still used GitHub's default single-pending queue. Three jobs in the same group can run/pending/replace-pending, cancelling a release or deployment. A new policy assertion fails on that configuration (`writer-queue-before.log`) and passes after all eight writers set `queue: max` (`writer-queue-after.log`). Read-only cancellable checks retain the single queue; the policy also rejects the invalid max/cancel combination.
+
+Primary GitHub documentation confirms the queue behavior. Existing template issues JS 117 and Rust 113 previously removed this key; Rust 113's later comment correctly records the changed platform behavior and known actionlint schema lag. The current released actionlint 1.7.12 still rejects it, and upstream PR 654 remains open. `writer-queue-actionlint.log` preserves the stale diagnostic; the workflow now ignores only that exact diagnostic while policy validates its meaning. All remaining actionlint syntax, ShellCheck and Pyflakes validation stays active.
+
+## Remaining warning, detection and cleanup regressions
+
+- **Windows npm invocation:** `javascript-37769807872.log:2207` and `:4841` contain Node DEP0190: spawning an argument array with `shell: true` is deprecated. The package test now uses a fixed literal shell command, accommodating Windows' npm.cmd without interpolated arguments. Normal Node tests use `--throw-deprecation`. `npm-warning-before.log` reproduces the old failure under that setting and `npm-warning-after.log` passes.
+- **Configuration and hooks:** a one-commit fixture demonstrates that changing `js/.prettierrc` previously emitted all-false change flags. JS configuration, changeset configuration, shared hooks and guard experiments now trigger validation. Independent Rust hook/experiment comparisons exercise the equivalent scope. `config-detection-before.log` and `rust-hook-detection-before.log` fail; their `-after.log` counterparts pass. Hook changes also start the Workflows pipeline.
+- **Fragment cleanup:** the standalone Rust changelog collector previously ignored failed removal and directory reads. A portable unit fixture makes a fragment path a directory and observes the deletion error. `fragment-cleanup-before.log` fails, `fragment-cleanup-after.log` passes, and helper CI runs this regression with warnings denied. Failed cleanup now includes the path and underlying OS error.
+- **Release tag annotations:** final review restored the existing description and release-label fields after moving tag creation behind successful commit publication. The real Git release fixture now verifies both fields in the remote annotated tag. `tag-notes-before.log` exposes the omission and `tag-notes-after.log` verifies the repair.
+
+Current local checks pass all **61** JavaScript tests on Node, Bun and Deno, along with types, zero-warning ESLint, formatting, secret scanning and duplication scanning (65 files, 4.28%). Workflow policy, actionlint with the precise schema exception, and zizmor's pedantic/high-confidence/high-severity checks pass. `verification/final-checks.tar.gz` preserves these outputs as individually hashed `final-*.log` members; all 16 executable Rust helpers are checked and tested with warnings denied.
+
+Fresh CI for the final code will be recorded after the next push. No pending result is classified as successful.

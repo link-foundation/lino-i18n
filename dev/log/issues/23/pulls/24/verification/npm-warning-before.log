@@ -1,0 +1,12 @@
+✔ npm package dry-run contains the publishable runtime surface (1112.579019ms)
+ℹ Error: Test "npm package dry-run contains the publishable runtime surface" at [eval1]:14:1 generated asynchronous activity after the test ended. This activity created the error "DeprecationWarning: Passing args to a child process with shell option true can lead to security vulnerabilities, as the arguments are not escaped, only concatenated." and would have caused the test to fail, but instead triggered an uncaughtException event.
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1138.637678
+
+

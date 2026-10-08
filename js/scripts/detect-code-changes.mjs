@@ -12,8 +12,13 @@ try {
       /^js\/package(?:-lock)?\.json$/.test(file)
     ),
     'docs-changed': files.some((file) => /^(?:docs\/|js\/).*\.md$/.test(file)),
-    'workflow-changed': files.some((file) =>
-      /^(?:\.github\/|scripts\/)/.test(file)
+    'workflow-changed': files.some(
+      (file) =>
+        /^(?:\.github\/|\.githooks\/|scripts\/|experiments\/issue-23-)/.test(
+          file
+        ) ||
+        (/^js\/[^/]+$/.test(file) && !file.endsWith('.md')) ||
+        file === 'js/.changeset/config.json'
     ),
     'any-code-changed': files.some((file) =>
       /^(?:js\/(?:src|bin)\/.*|js\/package(?:-lock)?\.json)$/.test(file)

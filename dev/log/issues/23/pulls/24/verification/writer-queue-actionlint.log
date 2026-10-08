@@ -1,0 +1,32 @@
+.github/workflows/js.yml:512:7: unexpected key "queue" for "concurrency" section. expected one of "cancel-in-progress", "group" [syntax-check]
+    |
+512 |       queue: max
+    |       ^~~~~~
+.github/workflows/js.yml:570:7: unexpected key "queue" for "concurrency" section. expected one of "cancel-in-progress", "group" [syntax-check]
+    |
+570 |       queue: max
+    |       ^~~~~~
+.github/workflows/js.yml:612:7: unexpected key "queue" for "concurrency" section. expected one of "cancel-in-progress", "group" [syntax-check]
+    |
+612 |       queue: max
+    |       ^~~~~~
+.github/workflows/js.yml:663:7: unexpected key "queue" for "concurrency" section. expected one of "cancel-in-progress", "group" [syntax-check]
+    |
+663 |       queue: max
+    |       ^~~~~~
+.github/workflows/rust.yml:350:7: unexpected key "queue" for "concurrency" section. expected one of "cancel-in-progress", "group" [syntax-check]
+    |
+350 |       queue: max
+    |       ^~~~~~
+.github/workflows/rust.yml:417:7: unexpected key "queue" for "concurrency" section. expected one of "cancel-in-progress", "group" [syntax-check]
+    |
+417 |       queue: max
+    |       ^~~~~~
+.github/workflows/rust.yml:455:7: unexpected key "queue" for "concurrency" section. expected one of "cancel-in-progress", "group" [syntax-check]
+    |
+455 |       queue: max
+    |       ^~~~~~
+.github/workflows/rust.yml:503:7: unexpected key "queue" for "concurrency" section. expected one of "cancel-in-progress", "group" [syntax-check]
+    |
+503 |       queue: max
+    |       ^~~~~~

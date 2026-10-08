@@ -61,7 +61,8 @@ with tempfile.TemporaryDirectory(prefix="lino-rust-release-") as temporary:
     source = source.replace('ensure_version_exceeds_published(&initial_bump, &crate_name, &tag_prefix, max_published)',
                             'initial_bump.clone()')
     release.write_text(source)
-    result = subprocess.run(["rust-script", str(release), "--rust-root", "rust", "--tag-prefix", "rust-v", "--bump-type", "patch"],
+    result = subprocess.run(["rust-script", str(release), "--rust-root", "rust", "--tag-prefix", "rust-v", "--bump-type", "patch",
+                             "--description", "Race fixture release", "--release-label", "verification"],
                             cwd=repo, text=True, capture_output=True,
                             env={**os.environ, "RUSTFLAGS": "-A dead_code -A unused_variables", "GITHUB_OUTPUT": "", "GITHUB_SHA": "", "RUST_LOG": "error"})
     print(result.stdout, result.stderr)
@@ -73,4 +74,6 @@ with tempfile.TemporaryDirectory(prefix="lino-rust-release-") as temporary:
     assert (repo / "rust/Cargo.lock").read_text().count('"1.0.1"') == 2
     assert run("git", "rev-parse", "rust-v1.0.1^{}", cwd=repo).stdout == run("git", "rev-parse", "HEAD", cwd=repo).stdout
     assert run("git", "rev-parse", "HEAD", cwd=repo).stdout == run("git", "rev-parse", "main", cwd=remote).stdout
+    annotation = run("git", "for-each-ref", "--format=%(contents)", "refs/tags/rust-v1.0.1", cwd=remote).stdout
+    assert "verification" in annotation and "Race fixture release" in annotation, "release tags must preserve the supplied label and description"
     print("Rust release synchronized, consumed fragments, committed metadata and pushed the correct tag.")

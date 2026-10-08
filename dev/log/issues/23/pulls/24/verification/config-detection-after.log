@@ -1,0 +1,14 @@
+✔ a main merge detects source changes before the final docs commit (383.720338ms)
+✔ PR detection uses all commits, including when the last commit is docs (348.032378ms)
+✔ invalid explicit PR refs fail instead of reporting no changes (192.956209ms)
+✔ a dependency lock change triggers package validation (235.967485ms)
+✔ configuration, hooks and guard experiments trigger validation (1246.438638ms)
+✔ version guard catches monorepo changes and ignores manifest formatting (650.098916ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3200.10784

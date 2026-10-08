@@ -347,6 +347,7 @@ jobs:
     concurrency:
       group: main-writer-${{ github.repository }}-main
       cancel-in-progress: false
+      queue: max
   manual-release:
     name: Manual Rust Release
     runs-on: ubuntu-24.04
@@ -413,6 +414,7 @@ jobs:
     concurrency:
       group: main-writer-${{ github.repository }}-main
       cancel-in-progress: false
+      queue: max
   changelog-pr:
     name: Create Manual Changelog PR
     runs-on: ubuntu-24.04
@@ -450,6 +452,7 @@ jobs:
     concurrency:
       group: main-writer-${{ github.repository }}-main
       cancel-in-progress: false
+      queue: max
   deploy-docs:
     name: Deploy Rust Docs
     runs-on: ubuntu-24.04
@@ -497,6 +500,7 @@ jobs:
     concurrency:
       group: main-writer-${{ github.repository }}-main
       cancel-in-progress: false
+      queue: max
     defaults:
       run:
         working-directory: .

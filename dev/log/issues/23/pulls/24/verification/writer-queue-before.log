@@ -1,0 +1,9 @@
+.github/workflows/security.yml: all 5 jobs covered
+Traceback (most recent call last):
+  File "/tmp/gh-issue-solver-1791452293811/scripts/check-ci-policy.py", line 34, in <module>
+    check(path)
+    ~~~~~^^^^^^
+  File "/tmp/gh-issue-solver-1791452293811/scripts/check-ci-policy.py", line 23, in check
+    assert concurrency.get("queue") == "max", f"{path}/{name}: pending writers can be replaced; require queue: max"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: .github/workflows/rust.yml/auto-release: pending writers can be replaced; require queue: max

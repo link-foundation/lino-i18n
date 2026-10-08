@@ -100,6 +100,30 @@ test('a dependency lock change triggers package validation', (t) => {
   assert.match(result.stdout, /package-changed=true/);
 });
 
+test('configuration, hooks and guard experiments trigger validation', (t) => {
+  const { cwd, commit, base } = fixture(t);
+  let previous = base;
+  for (const path of [
+    'js/.prettierrc',
+    'js/.prettierignore',
+    'js/.jscpd.json',
+    'js/.secretlintrc.json',
+    'js/.changeset/config.json',
+    '.githooks/pre-commit',
+    'experiments/issue-23-hook.py',
+  ]) {
+    const head = commit(path);
+    const result = run(cwd, 'scripts/detect-code-changes.mjs', {
+      GITHUB_EVENT_NAME: 'pull_request',
+      GITHUB_BASE_SHA: previous,
+      GITHUB_HEAD_SHA: head,
+    });
+    assert.equal(result.status, 0, result.stderr);
+    assert.match(result.stdout, /workflow-changed=true/, path);
+    previous = head;
+  }
+});
+
 test('version guard catches monorepo changes and ignores manifest formatting', (t) => {
   const { cwd, git, commit, base } = fixture(t);
   const alias = resolve(cwd, 'package-alias');

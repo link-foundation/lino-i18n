@@ -776,7 +776,10 @@ fn main() {
         }
     }
     let tag_name = format!("{tag_prefix}{new_version}");
-    let tag_msg = format!("Release {tag_name}");
+    let tag_msg = match &description {
+        Some(desc) => format!("Release {tag_name}{label_suffix}\n\n{desc}"),
+        None => format!("Release {tag_name}{label_suffix}"),
+    };
     exec("git", &["tag", "-a", &tag_name, "-m", &tag_msg]).expect("Cannot tag landed release");
     exec("git", &["push", "origin", &format!("refs/tags/{tag_name}")])
         .expect("Cannot push release tag");

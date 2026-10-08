@@ -70,6 +70,8 @@ Options considered: force push (would lose history); check out latest main direc
 
 Both helpers now synchronize while clean, validate that differences from the tested commit contain only permissible release metadata, and reject source/dependency changes. They update versions and consume fragments after synchronization, validate staged paths, commit, push and only then expose success outputs. Only genuine non-fast-forward push rejection is retried; GH006/GH013 branch-rule rejection, auth and network errors fail with their real diagnostics. No force push is used. Rust tags the successfully pushed release commit and publishes macros before the dependent runtime, using locked Cargo state.
 
+The shared writer group explicitly uses `queue: max`. GitHub's default single-pending queue can otherwise cancel the second writer when a third arrives, even with `cancel-in-progress: false`. All eight JS/Rust release, manual-PR and Pages writers retain up to 100 pending jobs; overflow still fails visibly. The current actionlint 1.7.12 has a documented schema lag ([issue 657](https://github.com/rhysd/actionlint/issues/657), unmerged PR 654), so only its exact stale queue-key diagnostic is ignored. Workflow policy validates writer `queue: max` and rejects that queue on cancellable checks. Both pinned templates also omit the setting after older removals; upstream discussions and their later correction are preserved.
+
 The actual Rust script is exercised against a temporary bare remote with an intervening JavaScript metadata commit. The fixture stubs registry reads only and verifies workspace version inheritance, local path dependency requirements, lock metadata, fragment consumption and the remote release tag. JavaScript has the reciprocal release fixture and detached-checkout coverage.
 
 A later external writer that changes the same package's chosen version cannot be silently accepted: overlapping metadata rebases fail. The shared queue prevents this repository's two language writers from overlapping; the initial clean synchronization recomputes release decisions from accepted metadata. The safe recovery for an incompatible outside race is a fresh run, not a replayed stale publication.
@@ -84,6 +86,8 @@ Shared comparison helpers now inspect the whole PR, explicit push before/after c
 
 The baseline's five JavaScript failures, Rust git fixtures and semantic guard fixtures are preserved under `verification/`. Tests include earlier-commit changes, declarations, invalid refs, empty diffs, formatting-only edits, workspace members and renamed fragments.
 
+Final review added isolated one-commit regressions for each top-level JS tool configuration, Changesets configuration, shared Git hooks and guard experiments. These paths previously left all relevant validation flags false. Both language detectors now recognize shared hooks/experiments, JS recognizes package/tool configuration, and the workflow-validation triggers include Git hooks. `config-detection-before.log` and `rust-hook-detection-before.log` preserve the failures; corresponding after logs pass.
+
 ### 4. Silent helper output and changeset parsing failures
 
 Cause: JavaScript changeset merging warned and skipped malformed fragments, potentially consuming valid data alongside an invalid fragment while returning success. Several Rust helpers warned when GITHUB_OUTPUT could not be written, leaving downstream decisions empty and green.
@@ -91,6 +95,8 @@ Cause: JavaScript changeset merging warned and skipped malformed fragments, pote
 Options considered: add log warnings only (still false success); make failures fatal before changing release data and centralize output writing (selected).
 
 Malformed changesets now stop the merge before output mutation. Rust fragment and file-size helpers also treated unreadable inputs as empty or healthy; bounded file/directory fixtures reproduced both false successes, and read/traversal errors now fail. All six affected Rust producers use `github-output.rs`: unset output supports local execution, configured output must be writable, and open/write errors are fatal. Code comparisons show the JavaScript template already fixed malformed fragments; the Rust template still reproduces warning-only output failure. [Upstream issue 192](https://github.com/link-foundation/rust-ai-driven-development-pipeline-template/issues/192) includes the pinned reproduction, workaround and shared-helper proposal.
+
+The standalone Rust changelog collector also swallowed directory-read and fragment-removal errors, reporting completion with consumed fragments still present. A filesystem-error unit test fails before the repair (`fragment-cleanup-before.log`) and passes afterward; cleanup errors now stop the helper with the failed path and OS error. This test runs with every helper in CI.
 
 ### 5. Missing validation, false-green checks and noisy tools
 
@@ -101,6 +107,8 @@ Plan: strict lock installation; zero-warning ESLint and Clippy; actual JS/TS/bas
 The duplication threshold is the template's explicit 10% policy. The prior 0% value was attached to a nonfunctional `console` format, so it was not an established working zero-duplication guarantee. The repaired check scans 65 files and reports 4.31%, primarily test and CLI boilerplate; comments are excluded using the template's weak mode. Empty scans now fail.
 
 Changesets 3.0.3 and jscpd 5.4.0 resolve the audited development dependency findings; the committed lock audit reports zero vulnerabilities after the original 21. Node 24 is used for development tooling; published JS engines remain Node >=20. React tests use Testing Library/JSDOM and retain assertions without the deprecated renderer. Public async API behavior is preserved with a narrow explained `require-await` exception. Resolver and CLI functions were simplified to meet the existing complexity policy.
+
+Fresh Windows Node/Deno CI additionally emitted DEP0190 from the npm package dry-run test's shell-plus-argument-array invocation (`javascript-37769807872.log:2207` and `:4841`). The real test is replayed through its Windows branch on Linux with `--throw-deprecation`; it fails before and passes after using one fixed command string. This preserves Windows shim support without unsafe argument concatenation. The normal Node test command now treats deprecations as errors; no warning is suppressed.
 
 ### 6. Permissions, source validation, recovery and documentation writers
 
@@ -140,7 +148,7 @@ Credential preflights run before expensive release work and again inside the wri
 | 16 | Prove publish capability early | Conditional main preflights, environment-scoped crates credentials, writer recheck and explicit npm OIDC proof limitations |
 | 17 | Distinguish broken pipeline from changed world | Deterministic checks remain fatal; bounded live-link retries; complete report gate; main-only external-link warning policy |
 
-The job-level writer group uses GitHub's default latest-pending semantics. These release/deploy jobs reread latest permissible state and are idempotent; they do not require every obsolete queued deployment to execute. `queue: max` is an available alternative when every queued write is required, but changing that policy is unnecessary here.
+All eight release/deployment writers use one noncancellable `queue: max` group. GitHub's default single-pending queue replaces a pending job when another arrives, which can discard required release work. Repository policy rejects that configuration and incompatible cancellation. A narrowly scoped actionlint exception accommodates the released validator's older schema while retaining all other validation; primary documentation and upstream reports are recorded in [FINAL-VERIFICATION.md](FINAL-VERIFICATION.md).
 
 ## Diagnostics and unresolved external facts
 
@@ -156,7 +164,7 @@ Representative commands from the repository root:
 
 ```bash
 (cd js && npm ci && npm run check && npm test && npm run test:types)
-(cd js && bun test && deno test --allow-read --allow-env --allow-run --allow-write tests/)
+(cd js && bun test && deno test --no-check --allow-read --allow-env --allow-run --allow-write tests/)
 (cd js && npm run test:browser && npm run lint:secrets && npm audit --audit-level=high)
 cargo test --locked --manifest-path rust/Cargo.toml --workspace --all-targets --all-features
 cargo clippy --locked --manifest-path rust/Cargo.toml --workspace --all-targets --all-features -- -D warnings
@@ -167,7 +175,7 @@ python3 experiments/issue-23-rust-output.py
 python3 experiments/issue-23-shared-guards.py
 node --test scripts/*.test.mjs
 python3 scripts/check-ci-policy.py
-actionlint
+actionlint -ignore 'unexpected key "queue" for "concurrency" section'
 ```
 
 Exact local commands and before/after outcomes are in `verification/`. Python policy validation requires the pinned `scripts/requirements-ci.txt`. The runtime matrix retains Node, Bun and Deno on Linux/macOS/Windows; browser integration uses real Playwright Chromium. Product tests are unchanged in purpose and release fixtures exercise actual helpers with isolated Git repositories.

@@ -1,0 +1,794 @@
+actionlint	Set up job	﻿2026-10-08T11:25:13.5327215Z Current runner version: '2.337.0'
+actionlint	Set up job	2026-10-08T11:25:13.5353509Z ##[group]Runner Image Provisioner
+actionlint	Set up job	2026-10-08T11:25:13.5354435Z Hosted Compute Agent
+actionlint	Set up job	2026-10-08T11:25:13.5355144Z Version: 20261002.596
+actionlint	Set up job	2026-10-08T11:25:13.5356034Z Commit: c3d12f3313a95f25162a1503be624f3b0617f8c0
+actionlint	Set up job	2026-10-08T11:25:13.5356821Z Build Date: 2026-10-02T22:28:27Z
+actionlint	Set up job	2026-10-08T11:25:13.5357597Z Worker ID: {01072e33-309d-4e99-bc63-3df078f63e9a}
+actionlint	Set up job	2026-10-08T11:25:13.5358313Z Region: eastus2
+actionlint	Set up job	2026-10-08T11:25:13.5358887Z Cloud: Azure
+actionlint	Set up job	2026-10-08T11:25:13.5359441Z ##[endgroup]
+actionlint	Set up job	2026-10-08T11:25:13.5361039Z ##[group]Operating System
+actionlint	Set up job	2026-10-08T11:25:13.5361834Z Ubuntu
+actionlint	Set up job	2026-10-08T11:25:13.5362388Z 24.04.5
+actionlint	Set up job	2026-10-08T11:25:13.5362935Z LTS
+actionlint	Set up job	2026-10-08T11:25:13.5363463Z ##[endgroup]
+actionlint	Set up job	2026-10-08T11:25:13.5364073Z ##[group]Runner Image
+actionlint	Set up job	2026-10-08T11:25:13.5364721Z Image: ubuntu-24.04
+actionlint	Set up job	2026-10-08T11:25:13.5365296Z Version: 20261004.327.1
+actionlint	Set up job	2026-10-08T11:25:13.5366607Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261004.327/images/ubuntu/Ubuntu2404-Readme.md
+actionlint	Set up job	2026-10-08T11:25:13.5368520Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261004.327
+actionlint	Set up job	2026-10-08T11:25:13.5369627Z ##[endgroup]
+actionlint	Set up job	2026-10-08T11:25:13.5370761Z ##[group]GITHUB_TOKEN Permissions
+actionlint	Set up job	2026-10-08T11:25:13.5372927Z Contents: read
+actionlint	Set up job	2026-10-08T11:25:13.5373615Z Metadata: read
+actionlint	Set up job	2026-10-08T11:25:13.5374193Z ##[endgroup]
+actionlint	Set up job	2026-10-08T11:25:13.5376778Z Secret source: Actions
+actionlint	Set up job	2026-10-08T11:25:13.5377781Z Cache mode: write
+actionlint	Set up job	2026-10-08T11:25:13.5378656Z Prepare workflow directory
+actionlint	Set up job	2026-10-08T11:25:13.5777232Z Prepare all required actions
+actionlint	Set up job	2026-10-08T11:25:13.5829226Z Getting action download info
+actionlint	Set up job	2026-10-08T11:25:13.8202597Z Download action repository 'actions/checkout@v6' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+actionlint	Set up job	2026-10-08T11:25:14.0123049Z Complete job name: actionlint
+actionlint	Pull rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667	﻿2026-10-08T11:25:14.0639711Z ##[group]Pull down action image 'rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667'
+actionlint	Pull rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667	2026-10-08T11:25:14.0753685Z ##[command]/usr/bin/docker pull rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667
+actionlint	Pull rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667	2026-10-08T11:25:14.3526340Z docker.io/rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667: Pulling from rhysd/actionlint
+actionlint	Pull rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667	2026-10-08T11:25:14.4323101Z 589002ba0eae: Pulling fs layer
+actionlint	Pull rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667	2026-10-08T11:25:14.4324234Z c09af8888d6a: Pulling fs layer
+actionlint	Pull rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667	2026-10-08T11:25:14.4325024Z 4ccd7d76ca98: Pulling fs layer
+actionlint	Pull rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667	2026-10-08T11:25:14.4326130Z b6b4b7b0e257: Pulling fs layer
+actionlint	Pull rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667	2026-10-08T11:25:14.4327283Z b6b4b7b0e257: Waiting
+actionlint	Pull rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667	2026-10-08T11:25:14.5242736Z c09af8888d6a: Download complete
+actionlint	Pull rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667	2026-10-08T11:25:14.5325320Z 589002ba0eae: Verifying Checksum
+actionlint	Pull rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667	2026-10-08T11:25:14.5326625Z 589002ba0eae: Download complete
+actionlint	Pull rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667	2026-10-08T11:25:14.5491966Z 4ccd7d76ca98: Verifying Checksum
+actionlint	Pull rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667	2026-10-08T11:25:14.5493668Z 4ccd7d76ca98: Download complete
+actionlint	Pull rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667	2026-10-08T11:25:14.6729321Z b6b4b7b0e257: Verifying Checksum
+actionlint	Pull rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667	2026-10-08T11:25:14.6730474Z b6b4b7b0e257: Download complete
+actionlint	Pull rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667	2026-10-08T11:25:14.6849350Z 589002ba0eae: Pull complete
+actionlint	Pull rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667	2026-10-08T11:25:14.7430392Z c09af8888d6a: Pull complete
+actionlint	Pull rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667	2026-10-08T11:25:14.8206726Z 4ccd7d76ca98: Pull complete
+actionlint	Pull rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667	2026-10-08T11:25:15.4107812Z b6b4b7b0e257: Pull complete
+actionlint	Pull rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667	2026-10-08T11:25:15.4148760Z Digest: sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667
+actionlint	Pull rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667	2026-10-08T11:25:15.4159159Z Status: Downloaded newer image for rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667
+actionlint	Pull rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667	2026-10-08T11:25:15.4166415Z docker.io/rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667
+actionlint	Pull rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667	2026-10-08T11:25:15.4185736Z ##[endgroup]
+actionlint	Run actions/checkout@v6	﻿2026-10-08T11:25:15.4692565Z ##[group]Run actions/checkout@v6
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.4694063Z with:
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.4694997Z   persist-credentials: false
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.4696439Z   repository: link-foundation/lino-i18n
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.4707273Z   token: ***
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.4708181Z   ssh-strict: true
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.4709112Z   ssh-user: git
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.4709992Z   clean: true
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.4711234Z   sparse-checkout-cone-mode: true
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.4712402Z   fetch-depth: 1
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.4713337Z   fetch-tags: false
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.4714274Z   show-progress: true
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.4715269Z   lfs: false
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.4716362Z   submodules: false
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.4717326Z   set-safe-directory: true
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.4718425Z   allow-unsafe-pr-checkout: false
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.4719869Z env:
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.4720715Z   GIT_CONFIG_COUNT: 1
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.4721740Z   GIT_CONFIG_KEY_0: init.defaultBranch
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.4722934Z   GIT_CONFIG_VALUE_0: main
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.4724000Z ##[endgroup]
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.5832334Z Syncing repository: link-foundation/lino-i18n
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.5835879Z ##[group]Getting Git version info
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.5837537Z Working directory is '/home/runner/work/lino-i18n/lino-i18n'
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.5839795Z [command]/usr/bin/git version
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.5892676Z git version 2.55.0
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.5933565Z ##[endgroup]
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.5966590Z Temporarily overriding HOME='/home/runner/work/_temp/e7ec2c8a-dec4-4c4f-9f2f-36a08d0e36bc' before making global git config changes
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.5970492Z Adding repository directory to the temporary git global config as a safe directory
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.5974279Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/lino-i18n/lino-i18n
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.6020186Z Deleting the contents of '/home/runner/work/lino-i18n/lino-i18n'
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.6026759Z ##[group]Determining repository object format
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.6029370Z ##[endgroup]
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.6030982Z ##[group]Initializing the repository
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.6034729Z [command]/usr/bin/git init /home/runner/work/lino-i18n/lino-i18n
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.6145930Z Initialized empty Git repository in /home/runner/work/lino-i18n/lino-i18n/.git/
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.6161576Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/lino-i18n
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.6213595Z ##[endgroup]
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.6216208Z ##[group]Disabling automatic garbage collection
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.6218145Z [command]/usr/bin/git config --local gc.auto 0
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.6251255Z ##[endgroup]
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.6253665Z ##[group]Setting up auth
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.6255052Z Removing SSH command configuration
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.6259470Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.6297502Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.6678409Z Removing HTTP extra header
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.6688543Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.6730807Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.6951474Z Removing includeIf entries pointing to credentials config files
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.6957530Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.6994798Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.7225983Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-6ce80405-b151-4ceb-a44b-94871788d00e.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.7268711Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git.path /home/runner/work/_temp/git-credentials-6ce80405-b151-4ceb-a44b-94871788d00e.config
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.7307782Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-6ce80405-b151-4ceb-a44b-94871788d00e.config
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.7383564Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-6ce80405-b151-4ceb-a44b-94871788d00e.config
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.7420252Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-6ce80405-b151-4ceb-a44b-94871788d00e.config
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.7450996Z ##[endgroup]
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.7452567Z ##[group]Fetching the repository
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:15.7459901Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +d43d3a0209600ff358511a940d64eb1208f92c99:refs/remotes/pull/24/merge
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.3441648Z From https://github.com/link-foundation/lino-i18n
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.3443186Z  * [new ref]         d43d3a0209600ff358511a940d64eb1208f92c99 -> pull/24/merge
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.3448802Z ##[endgroup]
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.3449662Z ##[group]Determining the checkout info
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.3450582Z ##[endgroup]
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.3455911Z [command]/usr/bin/git sparse-checkout disable
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.3510550Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.3543876Z ##[group]Checking out the ref
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.3548270Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/24/merge
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.4646091Z Note: switching to 'refs/remotes/pull/24/merge'.
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.4646661Z 
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.4647082Z You are in 'detached HEAD' state. You can look around, make experimental
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.4648058Z changes and commit them, and you can discard any commits you make in this
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.4648948Z state without impacting any branches by switching back to a branch.
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.4649479Z 
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.4649817Z If you want to create a new branch to retain commits you create, you may
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.4650624Z do so (now or later) by using -c with the switch command. Example:
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.4651073Z 
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.4651277Z   git switch -c <new-branch-name>
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.4651587Z 
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.4651760Z Or undo this operation with:
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.4652039Z 
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.4652186Z   git switch -
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.4652445Z 
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.4652834Z Turn off this advice by setting config variable advice.detachedHead to false
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.4653390Z 
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.4654029Z HEAD is now at d43d3a0 Merge ad168d68addbf6522d52921cd0a394190ccaddaf into 36ff249dd256393ff4c8e1bf5e42bc04b3db166c
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.4663452Z ##[endgroup]
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.4710070Z [command]/usr/bin/git log -1 --format=%H
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.4737564Z d43d3a0209600ff358511a940d64eb1208f92c99
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.4748001Z ##[group]Removing auth
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.4749008Z Removing SSH command configuration
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.4752649Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.4784744Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.5010653Z Removing HTTP extra header
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.5015028Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.5053717Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.5279847Z Removing includeIf entries pointing to credentials config files
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.5284225Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.5314792Z includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git.path
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.5316103Z includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git/worktrees/*.path
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.5316949Z includeif.gitdir:/github/workspace/.git.path
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.5317336Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.5324730Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git.path
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.5351345Z /home/runner/work/_temp/git-credentials-6ce80405-b151-4ceb-a44b-94871788d00e.config
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.5362354Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git.path /home/runner/work/_temp/git-credentials-6ce80405-b151-4ceb-a44b-94871788d00e.config
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.5399214Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git/worktrees/*.path
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.5425084Z /home/runner/work/_temp/git-credentials-6ce80405-b151-4ceb-a44b-94871788d00e.config
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.5434381Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-6ce80405-b151-4ceb-a44b-94871788d00e.config
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.5471298Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.5500851Z /github/runner_temp/git-credentials-6ce80405-b151-4ceb-a44b-94871788d00e.config
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.5518899Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-6ce80405-b151-4ceb-a44b-94871788d00e.config
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.5553990Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.5580119Z /github/runner_temp/git-credentials-6ce80405-b151-4ceb-a44b-94871788d00e.config
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.5591173Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-6ce80405-b151-4ceb-a44b-94871788d00e.config
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.5626547Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.5842685Z Removing credentials config '/home/runner/work/_temp/git-credentials-6ce80405-b151-4ceb-a44b-94871788d00e.config'
+actionlint	Run actions/checkout@v6	2026-10-08T11:25:16.5851420Z ##[endgroup]
+actionlint	Run rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667	﻿2026-10-08T11:25:16.6038786Z ##[group]Run docker://rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667
+actionlint	Run rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667	2026-10-08T11:25:16.6039380Z with:
+actionlint	Run rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667	2026-10-08T11:25:16.6039603Z   args: -color
+actionlint	Run rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667	2026-10-08T11:25:16.6039800Z env:
+actionlint	Run rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667	2026-10-08T11:25:16.6039985Z   GIT_CONFIG_COUNT: 1
+actionlint	Run rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667	2026-10-08T11:25:16.6040230Z   GIT_CONFIG_KEY_0: init.defaultBranch
+actionlint	Run rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667	2026-10-08T11:25:16.6040514Z   GIT_CONFIG_VALUE_0: main
+actionlint	Run rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667	2026-10-08T11:25:16.6040746Z ##[endgroup]
+actionlint	Run rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667	2026-10-08T11:25:16.6209962Z ##[command]/usr/bin/docker run --name rhysdactionlintsha256b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667_440427 --label ba7fc1 --workdir /github/workspace --rm -e "GIT_CONFIG_COUNT" -e "GIT_CONFIG_KEY_0" -e "GIT_CONFIG_VALUE_0" -e "INPUT_ARGS" -e "HOME" -e "GITHUB_JOB" -e "GITHUB_REF" -e "GITHUB_SHA" -e "GITHUB_REPOSITORY" -e "GITHUB_REPOSITORY_OWNER" -e "GITHUB_REPOSITORY_OWNER_ID" -e "GITHUB_RUN_ID" -e "GITHUB_RUN_NUMBER" -e "GITHUB_RETENTION_DAYS" -e "GITHUB_RUN_ATTEMPT" -e "GITHUB_ACTOR_ID" -e "GITHUB_ACTOR" -e "GITHUB_WORKFLOW" -e "GITHUB_HEAD_REF" -e "GITHUB_BASE_REF" -e "GITHUB_EVENT_NAME" -e "GITHUB_SERVER_URL" -e "GITHUB_API_URL" -e "GITHUB_GRAPHQL_URL" -e "GITHUB_REF_NAME" -e "GITHUB_REF_PROTECTED" -e "GITHUB_REF_TYPE" -e "GITHUB_WORKFLOW_REF" -e "GITHUB_WORKFLOW_SHA" -e "GITHUB_REPOSITORY_ID" -e "GITHUB_TRIGGERING_ACTOR" -e "GITHUB_WORKSPACE" -e "GITHUB_ACTION" -e "GITHUB_EVENT_PATH" -e "GITHUB_ACTION_REPOSITORY" -e "GITHUB_ACTION_REF" -e "GITHUB_PATH" -e "GITHUB_ENV" -e "GITHUB_STEP_SUMMARY" -e "GITHUB_STATE" -e "GITHUB_OUTPUT" -e "GITHUB_ARTIFACTS" -e "GITHUB_ARTIFACTS_LIST" -e "RUNNER_OS" -e "RUNNER_ARCH" -e "RUNNER_NAME" -e "RUNNER_ENVIRONMENT" -e "RUNNER_TOOL_CACHE" -e "RUNNER_TEMP" -e "RUNNER_WORKSPACE" -e "ACTIONS_RUNTIME_URL" -e "ACTIONS_RUNTIME_TOKEN" -e "ACTIONS_CACHE_URL" -e "ACTIONS_RESULTS_URL" -e "ACTIONS_CACHE_MODE" -e "ACTIONS_ORCHESTRATION_ID" -e GITHUB_ACTIONS=true -e CI=true -v "/var/run/docker.sock":"/var/run/docker.sock" -v "/home/runner/work/_temp":"/github/runner_temp" -v "/home/runner/work/_temp/_github_home":"/github/home" -v "/home/runner/work/_temp/_github_workflow":"/github/workflow" -v "/home/runner/work/_temp/_runner_file_commands":"/github/file_commands" -v "/home/runner/work/lino-i18n/lino-i18n":"/github/workspace" rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667 -color
+actionlint	Post Run actions/checkout@v6	﻿2026-10-08T11:25:17.2574414Z Post job cleanup.
+actionlint	Post Run actions/checkout@v6	2026-10-08T11:25:17.3415790Z [command]/usr/bin/git version
+actionlint	Post Run actions/checkout@v6	2026-10-08T11:25:17.3459287Z git version 2.55.0
+actionlint	Post Run actions/checkout@v6	2026-10-08T11:25:17.3499536Z Temporarily overriding HOME='/home/runner/work/_temp/e52d207f-2473-4ce2-b2e6-7506585667df' before making global git config changes
+actionlint	Post Run actions/checkout@v6	2026-10-08T11:25:17.3501036Z Adding repository directory to the temporary git global config as a safe directory
+actionlint	Post Run actions/checkout@v6	2026-10-08T11:25:17.3505059Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/lino-i18n/lino-i18n
+actionlint	Post Run actions/checkout@v6	2026-10-08T11:25:17.3537217Z Removing SSH command configuration
+actionlint	Post Run actions/checkout@v6	2026-10-08T11:25:17.3544480Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+actionlint	Post Run actions/checkout@v6	2026-10-08T11:25:17.3580811Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+actionlint	Post Run actions/checkout@v6	2026-10-08T11:25:17.3824060Z Removing HTTP extra header
+actionlint	Post Run actions/checkout@v6	2026-10-08T11:25:17.3830051Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+actionlint	Post Run actions/checkout@v6	2026-10-08T11:25:17.3867594Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+actionlint	Post Run actions/checkout@v6	2026-10-08T11:25:17.4123670Z Removing includeIf entries pointing to credentials config files
+actionlint	Post Run actions/checkout@v6	2026-10-08T11:25:17.4131364Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+actionlint	Post Run actions/checkout@v6	2026-10-08T11:25:17.4185739Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+actionlint	Complete job	﻿2026-10-08T11:25:17.4601298Z Cleaning up orphan processes
+zizmor	Set up job	﻿2026-10-08T11:24:25.0419592Z Current runner version: '2.337.0'
+zizmor	Set up job	2026-10-08T11:24:25.0446372Z ##[group]Runner Image Provisioner
+zizmor	Set up job	2026-10-08T11:24:25.0447330Z Hosted Compute Agent
+zizmor	Set up job	2026-10-08T11:24:25.0447993Z Version: 20260901.588
+zizmor	Set up job	2026-10-08T11:24:25.0448637Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+zizmor	Set up job	2026-10-08T11:24:25.0449714Z Build Date: 2026-09-01T19:56:44Z
+zizmor	Set up job	2026-10-08T11:24:25.0450416Z Worker ID: {98d0899e-9e91-49f8-af28-6e2c4811fe5d}
+zizmor	Set up job	2026-10-08T11:24:25.0451206Z Azure Region: northcentralus
+zizmor	Set up job	2026-10-08T11:24:25.0451859Z ##[endgroup]
+zizmor	Set up job	2026-10-08T11:24:25.0453318Z ##[group]Operating System
+zizmor	Set up job	2026-10-08T11:24:25.0454074Z Ubuntu
+zizmor	Set up job	2026-10-08T11:24:25.0454618Z 24.04.5
+zizmor	Set up job	2026-10-08T11:24:25.0455192Z LTS
+zizmor	Set up job	2026-10-08T11:24:25.0455788Z ##[endgroup]
+zizmor	Set up job	2026-10-08T11:24:25.0456367Z ##[group]Runner Image
+zizmor	Set up job	2026-10-08T11:24:25.0457039Z Image: ubuntu-24.04
+zizmor	Set up job	2026-10-08T11:24:25.0457664Z Version: 20260927.320.1
+zizmor	Set up job	2026-10-08T11:24:25.0458745Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+zizmor	Set up job	2026-10-08T11:24:25.0460871Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+zizmor	Set up job	2026-10-08T11:24:25.0461953Z ##[endgroup]
+zizmor	Set up job	2026-10-08T11:24:25.0463121Z ##[group]GITHUB_TOKEN Permissions
+zizmor	Set up job	2026-10-08T11:24:25.0465192Z Contents: read
+zizmor	Set up job	2026-10-08T11:24:25.0465895Z Metadata: read
+zizmor	Set up job	2026-10-08T11:24:25.0466473Z ##[endgroup]
+zizmor	Set up job	2026-10-08T11:24:25.0468763Z Secret source: Actions
+zizmor	Set up job	2026-10-08T11:24:25.0469970Z Cache mode: write
+zizmor	Set up job	2026-10-08T11:24:25.0471148Z Prepare workflow directory
+zizmor	Set up job	2026-10-08T11:24:25.1006301Z Prepare all required actions
+zizmor	Set up job	2026-10-08T11:24:25.1076393Z Getting action download info
+zizmor	Set up job	2026-10-08T11:24:25.3229741Z Download action repository 'actions/checkout@v6' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+zizmor	Set up job	2026-10-08T11:24:25.5015722Z Complete job name: zizmor
+zizmor	Run actions/checkout@v6	﻿2026-10-08T11:24:25.5798037Z ##[group]Run actions/checkout@v6
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.5798906Z with:
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.5799654Z   persist-credentials: false
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.5800231Z   repository: link-foundation/lino-i18n
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.5804495Z   token: ***
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.5804955Z   ssh-strict: true
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.5805420Z   ssh-user: git
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.5805853Z   clean: true
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.5806312Z   sparse-checkout-cone-mode: true
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.5806849Z   fetch-depth: 1
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.5807298Z   fetch-tags: false
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.5807751Z   show-progress: true
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.5808213Z   lfs: false
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.5808633Z   submodules: false
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.5809207Z   set-safe-directory: true
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.5809736Z   allow-unsafe-pr-checkout: false
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.5810490Z env:
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.5810924Z   GIT_CONFIG_COUNT: 1
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.5811419Z   GIT_CONFIG_KEY_0: init.defaultBranch
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.5811975Z   GIT_CONFIG_VALUE_0: main
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.5812507Z ##[endgroup]
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.6889774Z Syncing repository: link-foundation/lino-i18n
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.6892835Z ##[group]Getting Git version info
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.6894002Z Working directory is '/home/runner/work/lino-i18n/lino-i18n'
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.6895632Z [command]/usr/bin/git version
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.6939856Z git version 2.55.0
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.6965419Z ##[endgroup]
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.6981818Z Temporarily overriding HOME='/home/runner/work/_temp/675d7b5b-3784-482c-911b-663c4f3f6c3b' before making global git config changes
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.6983962Z Adding repository directory to the temporary git global config as a safe directory
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.6988484Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/lino-i18n/lino-i18n
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.7045756Z Deleting the contents of '/home/runner/work/lino-i18n/lino-i18n'
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.7050112Z ##[group]Determining repository object format
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.7053423Z ##[endgroup]
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.7054725Z ##[group]Initializing the repository
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.7059365Z [command]/usr/bin/git init /home/runner/work/lino-i18n/lino-i18n
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.7138109Z Initialized empty Git repository in /home/runner/work/lino-i18n/lino-i18n/.git/
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.7150452Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/lino-i18n
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.7201666Z ##[endgroup]
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.7202935Z ##[group]Disabling automatic garbage collection
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.7206794Z [command]/usr/bin/git config --local gc.auto 0
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.7242717Z ##[endgroup]
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.7243533Z ##[group]Setting up auth
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.7244385Z Removing SSH command configuration
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.7252481Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.7292704Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.7664341Z Removing HTTP extra header
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.7672745Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.7716432Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.7998704Z Removing includeIf entries pointing to credentials config files
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.8001126Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.8043371Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.8306244Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-807db90a-3801-4f58-9592-90bf775982db.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.8356716Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git.path /home/runner/work/_temp/git-credentials-807db90a-3801-4f58-9592-90bf775982db.config
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.8400566Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-807db90a-3801-4f58-9592-90bf775982db.config
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.8444321Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-807db90a-3801-4f58-9592-90bf775982db.config
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.8493839Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-807db90a-3801-4f58-9592-90bf775982db.config
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.8528648Z ##[endgroup]
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.8529665Z ##[group]Fetching the repository
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:25.8538362Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +d43d3a0209600ff358511a940d64eb1208f92c99:refs/remotes/pull/24/merge
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.6772608Z From https://github.com/link-foundation/lino-i18n
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.6775190Z  * [new ref]         d43d3a0209600ff358511a940d64eb1208f92c99 -> pull/24/merge
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.6779917Z ##[endgroup]
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.6781683Z ##[group]Determining the checkout info
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.6783571Z ##[endgroup]
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.6785817Z [command]/usr/bin/git sparse-checkout disable
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.6840997Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.6879513Z ##[group]Checking out the ref
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.6883764Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/24/merge
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.7881092Z Note: switching to 'refs/remotes/pull/24/merge'.
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.7882135Z 
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.7882889Z You are in 'detached HEAD' state. You can look around, make experimental
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.7884702Z changes and commit them, and you can discard any commits you make in this
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.7886425Z state without impacting any branches by switching back to a branch.
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.7887753Z 
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.7888482Z If you want to create a new branch to retain commits you create, you may
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.7890559Z do so (now or later) by using -c with the switch command. Example:
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.7891813Z 
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.7892321Z   git switch -c <new-branch-name>
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.7892969Z 
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.7893441Z Or undo this operation with:
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.7894206Z 
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.7894705Z   git switch -
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.7895387Z 
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.7896704Z Turn off this advice by setting config variable advice.detachedHead to false
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.7898315Z 
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.7900017Z HEAD is now at d43d3a0 Merge ad168d68addbf6522d52921cd0a394190ccaddaf into 36ff249dd256393ff4c8e1bf5e42bc04b3db166c
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.7905187Z ##[endgroup]
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.7952309Z [command]/usr/bin/git log -1 --format=%H
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.7985210Z d43d3a0209600ff358511a940d64eb1208f92c99
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.8000196Z ##[group]Removing auth
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.8001725Z Removing SSH command configuration
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.8005313Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.8044475Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.8294336Z Removing HTTP extra header
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.8297565Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.8341673Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.8600986Z Removing includeIf entries pointing to credentials config files
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.8604514Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.8638286Z includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git.path
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.8641040Z includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git/worktrees/*.path
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.8643252Z includeif.gitdir:/github/workspace/.git.path
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.8645059Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.8651120Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git.path
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.8680396Z /home/runner/work/_temp/git-credentials-807db90a-3801-4f58-9592-90bf775982db.config
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.8692569Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git.path /home/runner/work/_temp/git-credentials-807db90a-3801-4f58-9592-90bf775982db.config
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.8733789Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git/worktrees/*.path
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.8763232Z /home/runner/work/_temp/git-credentials-807db90a-3801-4f58-9592-90bf775982db.config
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.8776838Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-807db90a-3801-4f58-9592-90bf775982db.config
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.8818762Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.8853017Z /github/runner_temp/git-credentials-807db90a-3801-4f58-9592-90bf775982db.config
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.8898026Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-807db90a-3801-4f58-9592-90bf775982db.config
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.8939986Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.8968991Z /github/runner_temp/git-credentials-807db90a-3801-4f58-9592-90bf775982db.config
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.8982421Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-807db90a-3801-4f58-9592-90bf775982db.config
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.9030522Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.9281544Z Removing credentials config '/home/runner/work/_temp/git-credentials-807db90a-3801-4f58-9592-90bf775982db.config'
+zizmor	Run actions/checkout@v6	2026-10-08T11:24:26.9290005Z ##[endgroup]
+zizmor	Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --min-confidence medium .github/workflows .github/actions	﻿2026-10-08T11:24:26.9558607Z ##[group]Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --min-confidence medium .github/workflows .github/actions
+zizmor	Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --min-confidence medium .github/workflows .github/actions	2026-10-08T11:24:26.9562898Z ^[[36;1mpipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --min-confidence medium .github/workflows .github/actions^[[0m
+zizmor	Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --min-confidence medium .github/workflows .github/actions	2026-10-08T11:24:26.9803788Z shell: /usr/bin/bash -e {0}
+zizmor	Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --min-confidence medium .github/workflows .github/actions	2026-10-08T11:24:26.9805069Z env:
+zizmor	Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --min-confidence medium .github/workflows .github/actions	2026-10-08T11:24:26.9805940Z   GIT_CONFIG_COUNT: 1
+zizmor	Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --min-confidence medium .github/workflows .github/actions	2026-10-08T11:24:26.9807044Z   GIT_CONFIG_KEY_0: init.defaultBranch
+zizmor	Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --min-confidence medium .github/workflows .github/actions	2026-10-08T11:24:26.9808287Z   GIT_CONFIG_VALUE_0: main
+zizmor	Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --min-confidence medium .github/workflows .github/actions	2026-10-08T11:24:26.9809476Z ##[endgroup]
+zizmor	Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --min-confidence medium .github/workflows .github/actions	2026-10-08T11:24:27.7747350Z creating virtual environment...
+zizmor	Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --min-confidence medium .github/workflows .github/actions	2026-10-08T11:24:28.0182045Z installing zizmor from spec 'zizmor==1.30.1'...
+zizmor	Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --min-confidence medium .github/workflows .github/actions	2026-10-08T11:24:29.7832078Z ^[[32m INFO^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 zizmor v1.30.1
+zizmor	Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --min-confidence medium .github/workflows .github/actions	2026-10-08T11:24:29.8335605Z ^[[33m WARN^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m zizmor is running in offline mode by default; some audits and auto-fixes will not be available. see https://docs.zizmor.sh/usage/#operating-modes for details
+zizmor	Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --min-confidence medium .github/workflows .github/actions	2026-10-08T11:24:29.8338137Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/actions/publish-dockerhub/action.yml
+zizmor	Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --min-confidence medium .github/workflows .github/actions	2026-10-08T11:24:29.8350072Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/docs.yml
+zizmor	Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --min-confidence medium .github/workflows .github/actions	2026-10-08T11:24:29.8394402Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/js.yml
+zizmor	Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --min-confidence medium .github/workflows .github/actions	2026-10-08T11:24:29.8437015Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/rust.yml
+zizmor	Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --min-confidence medium .github/workflows .github/actions	2026-10-08T11:24:29.8442966Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/security.yml
+zizmor	Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --min-confidence medium .github/workflows .github/actions	2026-10-08T11:24:29.8448098Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/workflows.yml
+zizmor	Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --persona pedantic --min-severity high --min-confidence high .github/workflows .github/actions	﻿2026-10-08T11:24:29.8611276Z ##[group]Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --persona pedantic --min-severity high --min-confidence high .github/workflows .github/actions
+zizmor	Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --persona pedantic --min-severity high --min-confidence high .github/workflows .github/actions	2026-10-08T11:24:29.8612560Z ^[[36;1mpipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --persona pedantic --min-severity high --min-confidence high .github/workflows .github/actions^[[0m
+zizmor	Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --persona pedantic --min-severity high --min-confidence high .github/workflows .github/actions	2026-10-08T11:24:29.8684835Z shell: /usr/bin/bash -e {0}
+zizmor	Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --persona pedantic --min-severity high --min-confidence high .github/workflows .github/actions	2026-10-08T11:24:29.8685195Z env:
+zizmor	Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --persona pedantic --min-severity high --min-confidence high .github/workflows .github/actions	2026-10-08T11:24:29.8685458Z   GIT_CONFIG_COUNT: 1
+zizmor	Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --persona pedantic --min-severity high --min-confidence high .github/workflows .github/actions	2026-10-08T11:24:29.8685825Z   GIT_CONFIG_KEY_0: init.defaultBranch
+zizmor	Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --persona pedantic --min-severity high --min-confidence high .github/workflows .github/actions	2026-10-08T11:24:29.8686197Z   GIT_CONFIG_VALUE_0: main
+zizmor	Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --persona pedantic --min-severity high --min-confidence high .github/workflows .github/actions	2026-10-08T11:24:29.8686488Z ##[endgroup]
+zizmor	Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --persona pedantic --min-severity high --min-confidence high .github/workflows .github/actions	2026-10-08T11:24:30.1033439Z ^[[32m INFO^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 zizmor v1.30.1
+zizmor	Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --persona pedantic --min-severity high --min-confidence high .github/workflows .github/actions	2026-10-08T11:24:30.1541657Z ^[[33m WARN^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m zizmor is running in offline mode by default; some audits and auto-fixes will not be available. see https://docs.zizmor.sh/usage/#operating-modes for details
+zizmor	Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --persona pedantic --min-severity high --min-confidence high .github/workflows .github/actions	2026-10-08T11:24:30.1543849Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/actions/publish-dockerhub/action.yml
+zizmor	Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --persona pedantic --min-severity high --min-confidence high .github/workflows .github/actions	2026-10-08T11:24:30.1556475Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/docs.yml
+zizmor	Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --persona pedantic --min-severity high --min-confidence high .github/workflows .github/actions	2026-10-08T11:24:30.1599613Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/js.yml
+zizmor	Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --persona pedantic --min-severity high --min-confidence high .github/workflows .github/actions	2026-10-08T11:24:30.1642162Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/rust.yml
+zizmor	Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --persona pedantic --min-severity high --min-confidence high .github/workflows .github/actions	2026-10-08T11:24:30.1647908Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/security.yml
+zizmor	Run pipx run zizmor==1.30.1 --format=github --config .github/zizmor.yml --persona pedantic --min-severity high --min-confidence high .github/workflows .github/actions	2026-10-08T11:24:30.1653526Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/workflows.yml
+zizmor	Post Run actions/checkout@v6	﻿2026-10-08T11:24:30.1795108Z Post job cleanup.
+zizmor	Post Run actions/checkout@v6	2026-10-08T11:24:30.2679429Z [command]/usr/bin/git version
+zizmor	Post Run actions/checkout@v6	2026-10-08T11:24:30.2725943Z git version 2.55.0
+zizmor	Post Run actions/checkout@v6	2026-10-08T11:24:30.2770132Z Temporarily overriding HOME='/home/runner/work/_temp/036043a2-f3a1-4475-a005-2ea58ebecafb' before making global git config changes
+zizmor	Post Run actions/checkout@v6	2026-10-08T11:24:30.2771462Z Adding repository directory to the temporary git global config as a safe directory
+zizmor	Post Run actions/checkout@v6	2026-10-08T11:24:30.2774927Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/lino-i18n/lino-i18n
+zizmor	Post Run actions/checkout@v6	2026-10-08T11:24:30.2812908Z Removing SSH command configuration
+zizmor	Post Run actions/checkout@v6	2026-10-08T11:24:30.2820783Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+zizmor	Post Run actions/checkout@v6	2026-10-08T11:24:30.2861037Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+zizmor	Post Run actions/checkout@v6	2026-10-08T11:24:30.3134664Z Removing HTTP extra header
+zizmor	Post Run actions/checkout@v6	2026-10-08T11:24:30.3141376Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+zizmor	Post Run actions/checkout@v6	2026-10-08T11:24:30.3181651Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+zizmor	Post Run actions/checkout@v6	2026-10-08T11:24:30.3462470Z Removing includeIf entries pointing to credentials config files
+zizmor	Post Run actions/checkout@v6	2026-10-08T11:24:30.3471177Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+zizmor	Post Run actions/checkout@v6	2026-10-08T11:24:30.3514920Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+zizmor	Complete job	﻿2026-10-08T11:24:30.3967859Z Cleaning up orphan processes
+Workflow policy	Set up job	﻿2026-10-08T11:24:57.4077868Z Current runner version: '2.337.0'
+Workflow policy	Set up job	2026-10-08T11:24:57.4115083Z ##[group]Runner Image Provisioner
+Workflow policy	Set up job	2026-10-08T11:24:57.4116609Z Hosted Compute Agent
+Workflow policy	Set up job	2026-10-08T11:24:57.4117703Z Version: 20261002.596
+Workflow policy	Set up job	2026-10-08T11:24:57.4118805Z Commit: c3d12f3313a95f25162a1503be624f3b0617f8c0
+Workflow policy	Set up job	2026-10-08T11:24:57.4120233Z Build Date: 2026-10-02T22:28:27Z
+Workflow policy	Set up job	2026-10-08T11:24:57.4121490Z Worker ID: {f3e1ea9a-2128-4bb1-b433-068511ea3f5e}
+Workflow policy	Set up job	2026-10-08T11:24:57.4123239Z Region: eastus
+Workflow policy	Set up job	2026-10-08T11:24:57.4124336Z Cloud: Azure
+Workflow policy	Set up job	2026-10-08T11:24:57.4125324Z ##[endgroup]
+Workflow policy	Set up job	2026-10-08T11:24:57.4128197Z ##[group]Operating System
+Workflow policy	Set up job	2026-10-08T11:24:57.4129351Z Ubuntu
+Workflow policy	Set up job	2026-10-08T11:24:57.4130265Z 24.04.5
+Workflow policy	Set up job	2026-10-08T11:24:57.4131290Z LTS
+Workflow policy	Set up job	2026-10-08T11:24:57.4132193Z ##[endgroup]
+Workflow policy	Set up job	2026-10-08T11:24:57.4133609Z ##[group]Runner Image
+Workflow policy	Set up job	2026-10-08T11:24:57.4134863Z Image: ubuntu-24.04
+Workflow policy	Set up job	2026-10-08T11:24:57.4135957Z Version: 20261004.327.1
+Workflow policy	Set up job	2026-10-08T11:24:57.4138058Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261004.327/images/ubuntu/Ubuntu2404-Readme.md
+Workflow policy	Set up job	2026-10-08T11:24:57.4141232Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261004.327
+Workflow policy	Set up job	2026-10-08T11:24:57.4143478Z ##[endgroup]
+Workflow policy	Set up job	2026-10-08T11:24:57.4145581Z ##[group]GITHUB_TOKEN Permissions
+Workflow policy	Set up job	2026-10-08T11:24:57.4148734Z Contents: read
+Workflow policy	Set up job	2026-10-08T11:24:57.4149737Z Metadata: read
+Workflow policy	Set up job	2026-10-08T11:24:57.4151045Z ##[endgroup]
+Workflow policy	Set up job	2026-10-08T11:24:57.4154331Z Secret source: Actions
+Workflow policy	Set up job	2026-10-08T11:24:57.4156021Z Cache mode: write
+Workflow policy	Set up job	2026-10-08T11:24:57.4157450Z Prepare workflow directory
+Workflow policy	Set up job	2026-10-08T11:24:57.4724811Z Prepare all required actions
+Workflow policy	Set up job	2026-10-08T11:24:57.4797249Z Getting action download info
+Workflow policy	Set up job	2026-10-08T11:24:57.6942033Z Download action repository 'actions/checkout@v6' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+Workflow policy	Set up job	2026-10-08T11:24:57.8811295Z Complete job name: Workflow policy
+Workflow policy	Run actions/checkout@v6	﻿2026-10-08T11:24:57.9633984Z ##[group]Run actions/checkout@v6
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:57.9634935Z with:
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:57.9635386Z   persist-credentials: false
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:57.9635955Z   repository: link-foundation/lino-i18n
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:57.9640061Z   token: ***
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:57.9640499Z   ssh-strict: true
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:57.9640940Z   ssh-user: git
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:57.9641366Z   clean: true
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:57.9641817Z   sparse-checkout-cone-mode: true
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:57.9642346Z   fetch-depth: 1
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:57.9642773Z   fetch-tags: false
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:57.9643490Z   show-progress: true
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:57.9643963Z   lfs: false
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:57.9644374Z   submodules: false
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:57.9644823Z   set-safe-directory: true
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:57.9645328Z   allow-unsafe-pr-checkout: false
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:57.9646146Z env:
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:57.9646557Z   GIT_CONFIG_COUNT: 1
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:57.9647045Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:57.9647594Z   GIT_CONFIG_VALUE_0: main
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:57.9648109Z ##[endgroup]
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.0670427Z Syncing repository: link-foundation/lino-i18n
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.0673482Z ##[group]Getting Git version info
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.0674720Z Working directory is '/home/runner/work/lino-i18n/lino-i18n'
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.0676374Z [command]/usr/bin/git version
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.0742266Z git version 2.55.0
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.0782028Z ##[endgroup]
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.0800327Z Temporarily overriding HOME='/home/runner/work/_temp/606eb917-9a5b-4072-b744-384e8624e97b' before making global git config changes
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.0802909Z Adding repository directory to the temporary git global config as a safe directory
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.0808688Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/lino-i18n/lino-i18n
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.0863996Z Deleting the contents of '/home/runner/work/lino-i18n/lino-i18n'
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.0868237Z ##[group]Determining repository object format
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.0870446Z ##[endgroup]
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.0871799Z ##[group]Initializing the repository
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.0875805Z [command]/usr/bin/git init /home/runner/work/lino-i18n/lino-i18n
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.1006931Z Initialized empty Git repository in /home/runner/work/lino-i18n/lino-i18n/.git/
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.1011682Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/lino-i18n
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.1066937Z ##[endgroup]
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.1071669Z ##[group]Disabling automatic garbage collection
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.1072842Z [command]/usr/bin/git config --local gc.auto 0
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.1108409Z ##[endgroup]
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.1109679Z ##[group]Setting up auth
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.1110613Z Removing SSH command configuration
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.1118252Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.1157290Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.1546773Z Removing HTTP extra header
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.1555279Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.1600730Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.1838592Z Removing includeIf entries pointing to credentials config files
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.1845455Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.1883696Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.2119516Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-ebbd2258-543f-4ad6-b51b-0849caddb328.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.2162244Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git.path /home/runner/work/_temp/git-credentials-ebbd2258-543f-4ad6-b51b-0849caddb328.config
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.2200015Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-ebbd2258-543f-4ad6-b51b-0849caddb328.config
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.2239159Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-ebbd2258-543f-4ad6-b51b-0849caddb328.config
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.2280365Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-ebbd2258-543f-4ad6-b51b-0849caddb328.config
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.2310629Z ##[endgroup]
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.2311426Z ##[group]Fetching the repository
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.2319788Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +d43d3a0209600ff358511a940d64eb1208f92c99:refs/remotes/pull/24/merge
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.8429865Z From https://github.com/link-foundation/lino-i18n
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.8432612Z  * [new ref]         d43d3a0209600ff358511a940d64eb1208f92c99 -> pull/24/merge
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.8437246Z ##[endgroup]
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.8438486Z ##[group]Determining the checkout info
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.8440614Z ##[endgroup]
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.8442275Z [command]/usr/bin/git sparse-checkout disable
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.8496200Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.8530097Z ##[group]Checking out the ref
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.8533589Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/24/merge
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.9493947Z Note: switching to 'refs/remotes/pull/24/merge'.
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.9495467Z 
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.9496271Z You are in 'detached HEAD' state. You can look around, make experimental
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.9498155Z changes and commit them, and you can discard any commits you make in this
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.9499942Z state without impacting any branches by switching back to a branch.
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.9501309Z 
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.9502036Z If you want to create a new branch to retain commits you create, you may
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.9503874Z do so (now or later) by using -c with the switch command. Example:
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.9504813Z 
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.9505262Z   git switch -c <new-branch-name>
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.9506000Z 
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.9506562Z Or undo this operation with:
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.9507664Z 
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.9508310Z   git switch -
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.9509039Z 
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.9510049Z Turn off this advice by setting config variable advice.detachedHead to false
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.9511388Z 
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.9513159Z HEAD is now at d43d3a0 Merge ad168d68addbf6522d52921cd0a394190ccaddaf into 36ff249dd256393ff4c8e1bf5e42bc04b3db166c
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.9518118Z ##[endgroup]
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.9556027Z [command]/usr/bin/git log -1 --format=%H
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.9583390Z d43d3a0209600ff358511a940d64eb1208f92c99
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.9594079Z ##[group]Removing auth
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.9595939Z Removing SSH command configuration
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.9598571Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.9633861Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.9860647Z Removing HTTP extra header
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.9867586Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:58.9912631Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:59.0136481Z Removing includeIf entries pointing to credentials config files
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:59.0139872Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:59.0170723Z includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git.path
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:59.0173974Z includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git/worktrees/*.path
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:59.0176673Z includeif.gitdir:/github/workspace/.git.path
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:59.0178550Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:59.0183777Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git.path
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:59.0207120Z /home/runner/work/_temp/git-credentials-ebbd2258-543f-4ad6-b51b-0849caddb328.config
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:59.0219237Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git.path /home/runner/work/_temp/git-credentials-ebbd2258-543f-4ad6-b51b-0849caddb328.config
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:59.0256709Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git/worktrees/*.path
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:59.0281487Z /home/runner/work/_temp/git-credentials-ebbd2258-543f-4ad6-b51b-0849caddb328.config
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:59.0292202Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-ebbd2258-543f-4ad6-b51b-0849caddb328.config
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:59.0332050Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:59.0363613Z /github/runner_temp/git-credentials-ebbd2258-543f-4ad6-b51b-0849caddb328.config
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:59.0375509Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-ebbd2258-543f-4ad6-b51b-0849caddb328.config
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:59.0417898Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:59.0465632Z /github/runner_temp/git-credentials-ebbd2258-543f-4ad6-b51b-0849caddb328.config
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:59.0482293Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-ebbd2258-543f-4ad6-b51b-0849caddb328.config
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:59.0530867Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:59.0776916Z Removing credentials config '/home/runner/work/_temp/git-credentials-ebbd2258-543f-4ad6-b51b-0849caddb328.config'
+Workflow policy	Run actions/checkout@v6	2026-10-08T11:24:59.0785691Z ##[endgroup]
+Workflow policy	Run python3 -m pip install --requirement scripts/requirements-ci.txt	﻿2026-10-08T11:24:59.1035311Z ##[group]Run python3 -m pip install --requirement scripts/requirements-ci.txt
+Workflow policy	Run python3 -m pip install --requirement scripts/requirements-ci.txt	2026-10-08T11:24:59.1037729Z ^[[36;1mpython3 -m pip install --requirement scripts/requirements-ci.txt^[[0m
+Workflow policy	Run python3 -m pip install --requirement scripts/requirements-ci.txt	2026-10-08T11:24:59.1302438Z shell: /usr/bin/bash -e {0}
+Workflow policy	Run python3 -m pip install --requirement scripts/requirements-ci.txt	2026-10-08T11:24:59.1303862Z env:
+Workflow policy	Run python3 -m pip install --requirement scripts/requirements-ci.txt	2026-10-08T11:24:59.1304698Z   GIT_CONFIG_COUNT: 1
+Workflow policy	Run python3 -m pip install --requirement scripts/requirements-ci.txt	2026-10-08T11:24:59.1305710Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Workflow policy	Run python3 -m pip install --requirement scripts/requirements-ci.txt	2026-10-08T11:24:59.1306961Z   GIT_CONFIG_VALUE_0: main
+Workflow policy	Run python3 -m pip install --requirement scripts/requirements-ci.txt	2026-10-08T11:24:59.1307959Z ##[endgroup]
+Workflow policy	Run python3 -m pip install --requirement scripts/requirements-ci.txt	2026-10-08T11:24:59.5776315Z Defaulting to user installation because normal site-packages is not writeable
+Workflow policy	Run python3 -m pip install --requirement scripts/requirements-ci.txt	2026-10-08T11:24:59.9718408Z Collecting PyYAML==6.0.3 (from -r scripts/requirements-ci.txt (line 1))
+Workflow policy	Run python3 -m pip install --requirement scripts/requirements-ci.txt	2026-10-08T11:25:00.0019796Z   Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+Workflow policy	Run python3 -m pip install --requirement scripts/requirements-ci.txt	2026-10-08T11:25:00.0095256Z Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+Workflow policy	Run python3 -m pip install --requirement scripts/requirements-ci.txt	2026-10-08T11:25:00.0314742Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 807.9/807.9 kB 41.6 MB/s eta 0:00:00
+Workflow policy	Run python3 -m pip install --requirement scripts/requirements-ci.txt	2026-10-08T11:25:00.3186169Z Installing collected packages: PyYAML
+Workflow policy	Run python3 -m pip install --requirement scripts/requirements-ci.txt	2026-10-08T11:25:00.3729695Z Successfully installed PyYAML-6.0.3
+Workflow policy	Run python3 scripts/check-ci-policy.py && python3 scripts/check-file-line-limits.py && python3 experiments/issue-23-shared-guards.py && python3 experiments/issue-23-hook.py	﻿2026-10-08T11:25:00.4446653Z ##[group]Run python3 scripts/check-ci-policy.py && python3 scripts/check-file-line-limits.py && python3 experiments/issue-23-shared-guards.py && python3 experiments/issue-23-hook.py
+Workflow policy	Run python3 scripts/check-ci-policy.py && python3 scripts/check-file-line-limits.py && python3 experiments/issue-23-shared-guards.py && python3 experiments/issue-23-hook.py	2026-10-08T11:25:00.4448060Z ^[[36;1mpython3 scripts/check-ci-policy.py && python3 scripts/check-file-line-limits.py && python3 experiments/issue-23-shared-guards.py && python3 experiments/issue-23-hook.py^[[0m
+Workflow policy	Run python3 scripts/check-ci-policy.py && python3 scripts/check-file-line-limits.py && python3 experiments/issue-23-shared-guards.py && python3 experiments/issue-23-hook.py	2026-10-08T11:25:00.4514395Z shell: /usr/bin/bash -e {0}
+Workflow policy	Run python3 scripts/check-ci-policy.py && python3 scripts/check-file-line-limits.py && python3 experiments/issue-23-shared-guards.py && python3 experiments/issue-23-hook.py	2026-10-08T11:25:00.4514666Z env:
+Workflow policy	Run python3 scripts/check-ci-policy.py && python3 scripts/check-file-line-limits.py && python3 experiments/issue-23-shared-guards.py && python3 experiments/issue-23-hook.py	2026-10-08T11:25:00.4514863Z   GIT_CONFIG_COUNT: 1
+Workflow policy	Run python3 scripts/check-ci-policy.py && python3 scripts/check-file-line-limits.py && python3 experiments/issue-23-shared-guards.py && python3 experiments/issue-23-hook.py	2026-10-08T11:25:00.4515114Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Workflow policy	Run python3 scripts/check-ci-policy.py && python3 scripts/check-file-line-limits.py && python3 experiments/issue-23-shared-guards.py && python3 experiments/issue-23-hook.py	2026-10-08T11:25:00.4515415Z   GIT_CONFIG_VALUE_0: main
+Workflow policy	Run python3 scripts/check-ci-policy.py && python3 scripts/check-file-line-limits.py && python3 experiments/issue-23-shared-guards.py && python3 experiments/issue-23-hook.py	2026-10-08T11:25:00.4515646Z ##[endgroup]
+Workflow policy	Run python3 scripts/check-ci-policy.py && python3 scripts/check-file-line-limits.py && python3 experiments/issue-23-shared-guards.py && python3 experiments/issue-23-hook.py	2026-10-08T11:25:00.5940129Z .github/workflows/workflows.yml: all 4 jobs covered
+Workflow policy	Run python3 scripts/check-ci-policy.py && python3 scripts/check-file-line-limits.py && python3 experiments/issue-23-shared-guards.py && python3 experiments/issue-23-hook.py	2026-10-08T11:25:00.5940819Z .github/workflows/js.yml: all 16 jobs covered
+Workflow policy	Run python3 scripts/check-ci-policy.py && python3 scripts/check-file-line-limits.py && python3 experiments/issue-23-shared-guards.py && python3 experiments/issue-23-hook.py	2026-10-08T11:25:00.5941319Z .github/workflows/rust.yml: all 12 jobs covered
+Workflow policy	Run python3 scripts/check-ci-policy.py && python3 scripts/check-file-line-limits.py && python3 experiments/issue-23-shared-guards.py && python3 experiments/issue-23-hook.py	2026-10-08T11:25:00.5941819Z .github/workflows/docs.yml: all 3 jobs covered
+Workflow policy	Run python3 scripts/check-ci-policy.py && python3 scripts/check-file-line-limits.py && python3 experiments/issue-23-shared-guards.py && python3 experiments/issue-23-hook.py	2026-10-08T11:25:00.5942431Z .github/workflows/security.yml: all 5 jobs covered
+Workflow policy	Run python3 scripts/check-ci-policy.py && python3 scripts/check-file-line-limits.py && python3 experiments/issue-23-shared-guards.py && python3 experiments/issue-23-hook.py	2026-10-08T11:25:00.8369426Z Allowed release metadata: js/package.json
+Workflow policy	Run python3 scripts/check-ci-policy.py && python3 scripts/check-file-line-limits.py && python3 experiments/issue-23-shared-guards.py && python3 experiments/issue-23-hook.py	2026-10-08T11:25:00.8369864Z 
+Workflow policy	Run python3 scripts/check-ci-policy.py && python3 scripts/check-file-line-limits.py && python3 experiments/issue-23-shared-guards.py && python3 experiments/issue-23-hook.py	2026-10-08T11:25:00.8370394Z Release validation failed: Non-version change in js/package.json; rerun CI on the new main commit
+Workflow policy	Run python3 scripts/check-ci-policy.py && python3 scripts/check-file-line-limits.py && python3 experiments/issue-23-shared-guards.py && python3 experiments/issue-23-hook.py	2026-10-08T11:25:00.8371007Z 
+Workflow policy	Run python3 scripts/check-ci-policy.py && python3 scripts/check-file-line-limits.py && python3 experiments/issue-23-shared-guards.py && python3 experiments/issue-23-hook.py	2026-10-08T11:25:00.8371472Z Release validation failed: Untested change A js/source.js; rerun CI on the new main commit
+Workflow policy	Run python3 scripts/check-ci-policy.py && python3 scripts/check-file-line-limits.py && python3 experiments/issue-23-shared-guards.py && python3 experiments/issue-23-hook.py	2026-10-08T11:25:00.8372138Z 
+Workflow policy	Run python3 scripts/check-ci-policy.py && python3 scripts/check-file-line-limits.py && python3 experiments/issue-23-shared-guards.py && python3 experiments/issue-23-hook.py	2026-10-08T11:25:00.8372551Z Metadata-only synchronization and failed/cancelled/unknown terminal statuses verified.
+Workflow policy	Run python3 scripts/check-ci-policy.py && python3 scripts/check-file-line-limits.py && python3 experiments/issue-23-shared-guards.py && python3 experiments/issue-23-hook.py	2026-10-08T11:25:01.0326749Z 
+Workflow policy	Run python3 scripts/check-ci-policy.py && python3 scripts/check-file-line-limits.py && python3 experiments/issue-23-shared-guards.py && python3 experiments/issue-23-hook.py	2026-10-08T11:25:01.0327368Z /tmp/lino-hook-qqww94n8/bin/npm run lint:secrets
+Workflow policy	Run python3 scripts/check-ci-policy.py && python3 scripts/check-file-line-limits.py && python3 experiments/issue-23-shared-guards.py && python3 experiments/issue-23-hook.py	2026-10-08T11:25:01.0327859Z /tmp/lino-hook-qqww94n8/bin/npm run check
+Workflow policy	Run python3 scripts/check-ci-policy.py && python3 scripts/check-file-line-limits.py && python3 experiments/issue-23-shared-guards.py && python3 experiments/issue-23-hook.py	2026-10-08T11:25:01.0328294Z /tmp/lino-hook-qqww94n8/bin/npm run test:types
+Workflow policy	Run python3 scripts/check-ci-policy.py && python3 scripts/check-file-line-limits.py && python3 experiments/issue-23-shared-guards.py && python3 experiments/issue-23-hook.py	2026-10-08T11:25:01.0328908Z /tmp/lino-hook-qqww94n8/bin/cargo fmt --manifest-path rust/Cargo.toml --all -- --check
+Workflow policy	Run python3 scripts/check-ci-policy.py && python3 scripts/check-file-line-limits.py && python3 experiments/issue-23-shared-guards.py && python3 experiments/issue-23-hook.py	2026-10-08T11:25:01.0329906Z /tmp/lino-hook-qqww94n8/bin/cargo clippy --locked --manifest-path rust/Cargo.toml --all-targets --all-features -- -D warnings
+Workflow policy	Run python3 scripts/check-ci-policy.py && python3 scripts/check-file-line-limits.py && python3 experiments/issue-23-shared-guards.py && python3 experiments/issue-23-hook.py	2026-10-08T11:25:01.0330556Z 
+Workflow policy	Run python3 scripts/check-ci-policy.py && python3 scripts/check-file-line-limits.py && python3 experiments/issue-23-shared-guards.py && python3 experiments/issue-23-hook.py	2026-10-08T11:25:01.0330901Z Pre-commit checks run for a large staged file list.
+Workflow policy	Post Run actions/checkout@v6	﻿2026-10-08T11:25:01.0510421Z Post job cleanup.
+Workflow policy	Post Run actions/checkout@v6	2026-10-08T11:25:01.1378152Z [command]/usr/bin/git version
+Workflow policy	Post Run actions/checkout@v6	2026-10-08T11:25:01.1421760Z git version 2.55.0
+Workflow policy	Post Run actions/checkout@v6	2026-10-08T11:25:01.1465455Z Temporarily overriding HOME='/home/runner/work/_temp/49cdd0d1-fc2b-4db4-a66c-699871284307' before making global git config changes
+Workflow policy	Post Run actions/checkout@v6	2026-10-08T11:25:01.1466991Z Adding repository directory to the temporary git global config as a safe directory
+Workflow policy	Post Run actions/checkout@v6	2026-10-08T11:25:01.1472296Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/lino-i18n/lino-i18n
+Workflow policy	Post Run actions/checkout@v6	2026-10-08T11:25:01.1508220Z Removing SSH command configuration
+Workflow policy	Post Run actions/checkout@v6	2026-10-08T11:25:01.1516162Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Workflow policy	Post Run actions/checkout@v6	2026-10-08T11:25:01.1555700Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Workflow policy	Post Run actions/checkout@v6	2026-10-08T11:25:01.1808180Z Removing HTTP extra header
+Workflow policy	Post Run actions/checkout@v6	2026-10-08T11:25:01.1813903Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Workflow policy	Post Run actions/checkout@v6	2026-10-08T11:25:01.1851499Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Workflow policy	Post Run actions/checkout@v6	2026-10-08T11:25:01.2109423Z Removing includeIf entries pointing to credentials config files
+Workflow policy	Post Run actions/checkout@v6	2026-10-08T11:25:01.2117999Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Workflow policy	Post Run actions/checkout@v6	2026-10-08T11:25:01.2158512Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Workflow policy	Complete job	﻿2026-10-08T11:25:01.2566158Z Cleaning up orphan processes
+Pipeline Status	Set up job	﻿2026-10-08T11:25:22.8633171Z Current runner version: '2.337.0'
+Pipeline Status	Set up job	2026-10-08T11:25:22.8659920Z ##[group]Runner Image Provisioner
+Pipeline Status	Set up job	2026-10-08T11:25:22.8660957Z Hosted Compute Agent
+Pipeline Status	Set up job	2026-10-08T11:25:22.8661576Z Version: 20261002.596
+Pipeline Status	Set up job	2026-10-08T11:25:22.8662225Z Commit: c3d12f3313a95f25162a1503be624f3b0617f8c0
+Pipeline Status	Set up job	2026-10-08T11:25:22.8663133Z Build Date: 2026-10-02T22:28:27Z
+Pipeline Status	Set up job	2026-10-08T11:25:22.8663828Z Worker ID: {115a3db9-8187-4701-993d-e758192a9983}
+Pipeline Status	Set up job	2026-10-08T11:25:22.8664576Z Region: westus2
+Pipeline Status	Set up job	2026-10-08T11:25:22.8665152Z Cloud: Azure
+Pipeline Status	Set up job	2026-10-08T11:25:22.8665675Z ##[endgroup]
+Pipeline Status	Set up job	2026-10-08T11:25:22.8667248Z ##[group]Operating System
+Pipeline Status	Set up job	2026-10-08T11:25:22.8667935Z Ubuntu
+Pipeline Status	Set up job	2026-10-08T11:25:22.8668773Z 24.04.5
+Pipeline Status	Set up job	2026-10-08T11:25:22.8669352Z LTS
+Pipeline Status	Set up job	2026-10-08T11:25:22.8669871Z ##[endgroup]
+Pipeline Status	Set up job	2026-10-08T11:25:22.8670571Z ##[group]Runner Image
+Pipeline Status	Set up job	2026-10-08T11:25:22.8671194Z Image: ubuntu-24.04
+Pipeline Status	Set up job	2026-10-08T11:25:22.8671804Z Version: 20261004.327.1
+Pipeline Status	Set up job	2026-10-08T11:25:22.8672929Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261004.327/images/ubuntu/Ubuntu2404-Readme.md
+Pipeline Status	Set up job	2026-10-08T11:25:22.8674807Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261004.327
+Pipeline Status	Set up job	2026-10-08T11:25:22.8675809Z ##[endgroup]
+Pipeline Status	Set up job	2026-10-08T11:25:22.8676956Z ##[group]GITHUB_TOKEN Permissions
+Pipeline Status	Set up job	2026-10-08T11:25:22.8679389Z Contents: read
+Pipeline Status	Set up job	2026-10-08T11:25:22.8680185Z Metadata: read
+Pipeline Status	Set up job	2026-10-08T11:25:22.8680786Z ##[endgroup]
+Pipeline Status	Set up job	2026-10-08T11:25:22.8683356Z Secret source: Actions
+Pipeline Status	Set up job	2026-10-08T11:25:22.8684493Z Cache mode: write
+Pipeline Status	Set up job	2026-10-08T11:25:22.8685240Z Prepare workflow directory
+Pipeline Status	Set up job	2026-10-08T11:25:22.9092612Z Prepare all required actions
+Pipeline Status	Set up job	2026-10-08T11:25:22.9142622Z Getting action download info
+Pipeline Status	Set up job	2026-10-08T11:25:23.3038089Z Download action repository 'actions/checkout@v6' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+Pipeline Status	Set up job	2026-10-08T11:25:23.5022230Z Complete job name: Pipeline Status
+Pipeline Status	Run actions/checkout@v6	﻿2026-10-08T11:25:23.5792859Z ##[group]Run actions/checkout@v6
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.5793875Z with:
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.5794349Z   persist-credentials: false
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.5794939Z   repository: link-foundation/lino-i18n
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.5798886Z   token: ***
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.5799356Z   ssh-strict: true
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.5799816Z   ssh-user: git
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.5800257Z   clean: true
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.5800706Z   sparse-checkout-cone-mode: true
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.5801240Z   fetch-depth: 1
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.5801674Z   fetch-tags: false
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.5802128Z   show-progress: true
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.5802579Z   lfs: false
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.5803007Z   submodules: false
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.5803469Z   set-safe-directory: true
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.5803997Z   allow-unsafe-pr-checkout: false
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.5804769Z env:
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.5805215Z   GIT_CONFIG_COUNT: 1
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.5805777Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.5806382Z   GIT_CONFIG_VALUE_0: main
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.5806903Z ##[endgroup]
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.6871813Z Syncing repository: link-foundation/lino-i18n
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.6874334Z ##[group]Getting Git version info
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.6875780Z Working directory is '/home/runner/work/lino-i18n/lino-i18n'
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.6877316Z [command]/usr/bin/git version
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.6971221Z git version 2.55.0
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.6987124Z ##[endgroup]
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.7002613Z Temporarily overriding HOME='/home/runner/work/_temp/2ddbc6fe-aa06-4c2d-a060-8c23f28151dc' before making global git config changes
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.7005045Z Adding repository directory to the temporary git global config as a safe directory
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.7009436Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/lino-i18n/lino-i18n
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.7069933Z Deleting the contents of '/home/runner/work/lino-i18n/lino-i18n'
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.7074213Z ##[group]Determining repository object format
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.7076471Z ##[endgroup]
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.7077818Z ##[group]Initializing the repository
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.7081415Z [command]/usr/bin/git init /home/runner/work/lino-i18n/lino-i18n
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.7186747Z Initialized empty Git repository in /home/runner/work/lino-i18n/lino-i18n/.git/
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.7206214Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/lino-i18n
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.7249096Z ##[endgroup]
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.7250560Z ##[group]Disabling automatic garbage collection
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.7253734Z [command]/usr/bin/git config --local gc.auto 0
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.7287212Z ##[endgroup]
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.7288872Z ##[group]Setting up auth
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.7289849Z Removing SSH command configuration
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.7296056Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.7335078Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.7733798Z Removing HTTP extra header
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.7741449Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.7779555Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.8000713Z Removing includeIf entries pointing to credentials config files
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.8007518Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.8044179Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.8272996Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-02874e3b-ad98-4da7-be75-694120f1403e.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.8320101Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git.path /home/runner/work/_temp/git-credentials-02874e3b-ad98-4da7-be75-694120f1403e.config
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.8358234Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-02874e3b-ad98-4da7-be75-694120f1403e.config
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.8408250Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-02874e3b-ad98-4da7-be75-694120f1403e.config
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.8444168Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-02874e3b-ad98-4da7-be75-694120f1403e.config
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.8501742Z ##[endgroup]
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.8502597Z ##[group]Fetching the repository
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:23.8510906Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +d43d3a0209600ff358511a940d64eb1208f92c99:refs/remotes/pull/24/merge
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.6206284Z From https://github.com/link-foundation/lino-i18n
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.6207878Z  * [new ref]         d43d3a0209600ff358511a940d64eb1208f92c99 -> pull/24/merge
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.6212136Z ##[endgroup]
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.6213861Z ##[group]Determining the checkout info
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.6215285Z ##[endgroup]
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.6218980Z [command]/usr/bin/git sparse-checkout disable
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.6271711Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.6306444Z ##[group]Checking out the ref
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.6309570Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/24/merge
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.7266200Z Note: switching to 'refs/remotes/pull/24/merge'.
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.7267658Z 
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.7268933Z You are in 'detached HEAD' state. You can look around, make experimental
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.7270886Z changes and commit them, and you can discard any commits you make in this
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.7272592Z state without impacting any branches by switching back to a branch.
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.7273864Z 
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.7274543Z If you want to create a new branch to retain commits you create, you may
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.7276168Z do so (now or later) by using -c with the switch command. Example:
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.7277133Z 
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.7277591Z   git switch -c <new-branch-name>
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.7278340Z 
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.7279114Z Or undo this operation with:
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.7279827Z 
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.7280240Z   git switch -
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.7280808Z 
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.7281682Z Turn off this advice by setting config variable advice.detachedHead to false
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.7282968Z 
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.7284443Z HEAD is now at d43d3a0 Merge ad168d68addbf6522d52921cd0a394190ccaddaf into 36ff249dd256393ff4c8e1bf5e42bc04b3db166c
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.7306078Z ##[endgroup]
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.7352433Z [command]/usr/bin/git log -1 --format=%H
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.7380214Z d43d3a0209600ff358511a940d64eb1208f92c99
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.7391897Z ##[group]Removing auth
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.7393643Z Removing SSH command configuration
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.7396350Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.7430491Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.7660541Z Removing HTTP extra header
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.7664487Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.7704940Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.7930885Z Removing includeIf entries pointing to credentials config files
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.7933827Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.7965071Z includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git.path
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.7968970Z includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git/worktrees/*.path
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.7972803Z includeif.gitdir:/github/workspace/.git.path
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.7975692Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.7983008Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git.path
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.8006888Z /home/runner/work/_temp/git-credentials-02874e3b-ad98-4da7-be75-694120f1403e.config
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.8020698Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git.path /home/runner/work/_temp/git-credentials-02874e3b-ad98-4da7-be75-694120f1403e.config
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.8058004Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git/worktrees/*.path
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.8083225Z /home/runner/work/_temp/git-credentials-02874e3b-ad98-4da7-be75-694120f1403e.config
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.8094669Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-02874e3b-ad98-4da7-be75-694120f1403e.config
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.8130145Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.8158315Z /github/runner_temp/git-credentials-02874e3b-ad98-4da7-be75-694120f1403e.config
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.8175049Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-02874e3b-ad98-4da7-be75-694120f1403e.config
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.8212807Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.8240345Z /github/runner_temp/git-credentials-02874e3b-ad98-4da7-be75-694120f1403e.config
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.8252123Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-02874e3b-ad98-4da7-be75-694120f1403e.config
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.8294794Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.8540249Z Removing credentials config '/home/runner/work/_temp/git-credentials-02874e3b-ad98-4da7-be75-694120f1403e.config'
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:25:24.8550103Z ##[endgroup]
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	﻿2026-10-08T11:25:24.8804781Z ##[group]Run python3 scripts/check-pipeline-status.py
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	2026-10-08T11:25:24.8805495Z ^[[36;1mpython3 scripts/check-pipeline-status.py^[[0m
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	2026-10-08T11:25:24.9058619Z shell: /usr/bin/bash -e {0}
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	2026-10-08T11:25:24.9059111Z env:
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	2026-10-08T11:25:24.9059466Z   GIT_CONFIG_COUNT: 1
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	2026-10-08T11:25:24.9059881Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	2026-10-08T11:25:24.9060328Z   GIT_CONFIG_VALUE_0: main
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	2026-10-08T11:25:24.9061196Z   NEEDS_JSON: {
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	  "actionlint": {
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	    "result": "success",
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	    "outputs": {}
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	  },
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	  "policy": {
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	    "result": "success",
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	    "outputs": {}
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	  },
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	  "zizmor": {
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	    "result": "success",
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	    "outputs": {}
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	  }
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	}
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	2026-10-08T11:25:24.9062163Z   CANCELLABLE_JOBS: ["actionlint", "policy", "zizmor"]
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	2026-10-08T11:25:24.9062677Z   RUN_SHA: ad168d68addbf6522d52921cd0a394190ccaddaf
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	2026-10-08T11:25:24.9063154Z   BRANCH_NAME: issue-23-bc288e2f1144
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	2026-10-08T11:25:24.9063572Z ##[endgroup]
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	2026-10-08T11:25:24.9400707Z Every dependency passed, was skipped, or was superseded under its cancellation policy.
+Pipeline Status	Post Run actions/checkout@v6	﻿2026-10-08T11:25:24.9724097Z Post job cleanup.
+Pipeline Status	Post Run actions/checkout@v6	2026-10-08T11:25:25.0583430Z [command]/usr/bin/git version
+Pipeline Status	Post Run actions/checkout@v6	2026-10-08T11:25:25.0631808Z git version 2.55.0
+Pipeline Status	Post Run actions/checkout@v6	2026-10-08T11:25:25.0679414Z Temporarily overriding HOME='/home/runner/work/_temp/76f0baf6-9ec3-4c79-937d-0d851509fb80' before making global git config changes
+Pipeline Status	Post Run actions/checkout@v6	2026-10-08T11:25:25.0681413Z Adding repository directory to the temporary git global config as a safe directory
+Pipeline Status	Post Run actions/checkout@v6	2026-10-08T11:25:25.0685970Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/lino-i18n/lino-i18n
+Pipeline Status	Post Run actions/checkout@v6	2026-10-08T11:25:25.0720150Z Removing SSH command configuration
+Pipeline Status	Post Run actions/checkout@v6	2026-10-08T11:25:25.0727771Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Pipeline Status	Post Run actions/checkout@v6	2026-10-08T11:25:25.0765241Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Pipeline Status	Post Run actions/checkout@v6	2026-10-08T11:25:25.1006616Z Removing HTTP extra header
+Pipeline Status	Post Run actions/checkout@v6	2026-10-08T11:25:25.1012845Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Pipeline Status	Post Run actions/checkout@v6	2026-10-08T11:25:25.1048794Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Pipeline Status	Post Run actions/checkout@v6	2026-10-08T11:25:25.1304247Z Removing includeIf entries pointing to credentials config files
+Pipeline Status	Post Run actions/checkout@v6	2026-10-08T11:25:25.1314264Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Pipeline Status	Post Run actions/checkout@v6	2026-10-08T11:25:25.1356447Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Pipeline Status	Complete job	﻿2026-10-08T11:25:25.1765469Z Cleaning up orphan processes

@@ -41,6 +41,13 @@ with tempfile.TemporaryDirectory(prefix="lino-rust-guards-") as temporary:
         assert (result.returncode == 0) == success, f"Unexpected guard result: {script}"
         return result.stdout
 
+    previous = base
+    for path in (".githooks/pre-commit", "experiments/issue-23-hook.py"):
+        head = commit(path, "Guard configuration.\n")
+        assert "workflow-changed=true" in guard("detect-code-changes.rs", True,
+                                                GITHUB_BASE_SHA=previous)
+        previous = head
+
     run("git", "checkout", "-qb", "feature", cwd=repo)
     commit("rust/member/src/lib.rs", "pub fn example() {}\n")
     commit("docs/example.md", "Last commit changes only documentation.\n")

@@ -257,7 +257,8 @@ Five workflows live in `.github/workflows/`:
   studies and investigation data are excluded from live-link validation.
 
 Read-only checks cancel superseded work. Release and deployment jobs share one
-repository-wide queue and finish once started. Writers synchronize a clean,
+repository-wide queue with `queue: max`, preserving pending jobs and letting
+started jobs finish. Writers synchronize a clean,
 validated checkout before changing versions and reject untested source drift.
 Both Pages jobs publish the complete site: JavaScript at the root and Rust
 under `/rust/`, so a language deployment cannot erase the other site's docs.

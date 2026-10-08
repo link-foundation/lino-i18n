@@ -1,0 +1,14 @@
+No versions published on crates.io yet (or crate not found)
+Initial bump (patch) from 1.0.0: 1.0.1
+Final release version: 1.0.1
+Updated rust/Cargo.toml to version 1.0.1
+Updated local path dependency versions in rust/fixture/Cargo.toml to 1.0.1
+Updated workspace package versions in rust/Cargo.lock to 1.0.1
+Collected and consumed 1 changelog fragment(s)
+Committed version 1.0.1
+Pushed release commit and rust-v1.0.1
+Output: version_committed=true
+Output: new_version=1.0.1
+ Using CLI configured Rust root: rust
+
+Rust release synchronized, consumed fragments, committed metadata and pushed the correct tag.

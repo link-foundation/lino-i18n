@@ -1,0 +1,15 @@
+detect-code-changes.rs: exit 0
+Changed files: [".githooks/pre-commit"]
+rs-changed=false
+toml-changed=false
+docs-changed=false
+workflow-changed=false
+any-code-changed=false
+
+Traceback (most recent call last):
+  File "/tmp/gh-issue-solver-1791452293811/experiments/issue-23-rust-guards.py", line 47, in <module>
+    assert "workflow-changed=true" in guard("detect-code-changes.rs", True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                            GITHUB_BASE_SHA=previous)
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

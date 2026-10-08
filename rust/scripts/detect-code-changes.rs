@@ -31,9 +31,12 @@ fn main() {
         ),
         (
             "workflow-changed",
-            files
-                .iter()
-                .any(|f| f.starts_with(".github/") || f.starts_with("scripts/")),
+            files.iter().any(|f| {
+                f.starts_with(".github/")
+                    || f.starts_with(".githooks/")
+                    || f.starts_with("scripts/")
+                    || f.starts_with("experiments/issue-23-")
+            }),
         ),
         (
             "any-code-changed",
