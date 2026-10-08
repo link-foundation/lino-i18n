@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import React, { act } from 'react';
-import { JSDOM } from 'jsdom';
+import { setupDOM } from './helpers/dom.js';
 import { cleanup, fireEvent, render } from '@testing-library/react';
 import { renderToString } from 'react-dom/server';
 import { hydrateRoot } from 'react-dom/client';
@@ -21,13 +21,9 @@ import {
   CurrencyFormat,
 } from '../src/react.js';
 
-globalThis.IS_REACT_ACT_ENVIRONMENT = true;
-const dom = new JSDOM('<!doctype html><html><body></body></html>');
-globalThis.window = dom.window;
-globalThis.document = dom.window.document;
-globalThis.HTMLElement = dom.window.HTMLElement;
+const disposeDOM = setupDOM();
 test.afterEach(cleanup);
-test.after(() => dom.window.close());
+test.after(disposeDOM);
 
 const h = React.createElement;
 

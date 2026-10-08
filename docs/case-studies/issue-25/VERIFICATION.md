@@ -192,3 +192,12 @@ All five workflows for the Windows encoding fix `26c5172` completed successfully
 created 2026-10-08 21:35 UTC). The Native extraction barrel regression first
 failed with an unresolved Text diagnostic; module resolution now preserves
 external native Text metadata. Eight affected tests pass in Bun and Deno as well.
+
+The Native commit's JavaScript run 37849032057 (2026-10-08 21:45 UTC,
+`afb0853`) failed only on macOS/Bun: `ReferenceError: ShadowRoot is not defined`
+at downloaded log line 8717. Bun shares test-file globals; the React fixture
+installed an incomplete DOM and left its closed window in place. A child-process
+regression reproduced the exact stylesheet import failure before the fix. The
+shared DOM fixture now supplies ShadowRoot and restores every original global
+descriptor on disposal. Complete Node/Bun suites and the affected Deno suite
+pass, including the import and restoration regression.
