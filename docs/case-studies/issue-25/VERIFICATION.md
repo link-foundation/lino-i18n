@@ -7,56 +7,56 @@ See PR 28's checks for the final pushed revision and platform matrix.
 
 ## Before implementation
 
-| Reproduction | Observed failure | Regression coverage |
-| --- | --- | --- |
-| Import the source runtime and render rich source content | `ERR_MODULE_NOT_FOUND` for `js/src/messages.js`; source APIs did not exist. | `messages.test.js`, `react-content.test.js` |
-| Extract source and request-isolated server messages | Source/tooling/server exports were absent. | `tooling.test.js`, `server.test.js` |
-| Format and reload quoted sentence keys | JS lost source keys; Rust failed with `locale root break cannot have a direct value` for a newline key. | `source-keys.test.js`, Rust `tests/messages.rs` |
-| Convert compiled ICU select, quoted literal and skeletons | Converter produced `{literal} {gender} {price}`; formatting threw `MISSING_VALUE` for `literal`. | `icu-conversion.test.js` |
-| Round-trip `__proto__` as a catalog key | JavaScript result omitted the own property. | `source-keys.test.js` |
-| Pass an explicit id in a source call | Returned `Welcome` instead of catalog value `Bienvenue`. | `messages.test.js` |
-| Compare old/new stable-id source manifests | CLI returned success despite changed source requiring review. | `tooling-integration.test.js` |
-| Extract the `m` tagged alias and boolean/comment-only JSX | Extraction omitted `m` and produced `falseHello <c0></c0>` instead of runtime identities. | `tooling.test.js` |
-| Derive one JSX variant with an explicit id | Extractor accepted an id inconsistent with source-variant identities. | `derivation.test.js` |
-| Derive a boolean JSX child | Extracted `Hello false` where React renders `Hello `. | `derivation.test.js` |
-| Follow inherited case-study links after moving their files | Three links target missing files. | `experiments/issue-25-ci-regressions.py` |
-| Run PR checks with the release preflight intentionally skipped | Changeset, changelog, browser and CLI jobs skip despite detected code changes. | Workflow policy and `experiments/issue-25-ci-regressions.py` |
-| Pass a currency value as React children with a locale override | The component displayed `NaN` in the provider locale instead of `$2.00`. | `react.test.js`, browser React example and before/after screenshots |
+| Reproduction                                                   | Observed failure                                                                                        | Regression coverage                                                 |
+| -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Import the source runtime and render rich source content       | `ERR_MODULE_NOT_FOUND` for `js/src/messages.js`; source APIs did not exist.                             | `messages.test.js`, `react-content.test.js`                         |
+| Extract source and request-isolated server messages            | Source/tooling/server exports were absent.                                                              | `tooling.test.js`, `server.test.js`                                 |
+| Format and reload quoted sentence keys                         | JS lost source keys; Rust failed with `locale root break cannot have a direct value` for a newline key. | `source-keys.test.js`, Rust `tests/messages.rs`                     |
+| Convert compiled ICU select, quoted literal and skeletons      | Converter produced `{literal} {gender} {price}`; formatting threw `MISSING_VALUE` for `literal`.        | `icu-conversion.test.js`                                            |
+| Round-trip `__proto__` as a catalog key                        | JavaScript result omitted the own property.                                                             | `source-keys.test.js`                                               |
+| Pass an explicit id in a source call                           | Returned `Welcome` instead of catalog value `Bienvenue`.                                                | `messages.test.js`                                                  |
+| Compare old/new stable-id source manifests                     | CLI returned success despite changed source requiring review.                                           | `tooling-integration.test.js`                                       |
+| Extract the `m` tagged alias and boolean/comment-only JSX      | Extraction omitted `m` and produced `falseHello <c0></c0>` instead of runtime identities.               | `tooling.test.js`                                                   |
+| Derive one JSX variant with an explicit id                     | Extractor accepted an id inconsistent with source-variant identities.                                   | `derivation.test.js`                                                |
+| Derive a boolean JSX child                                     | Extracted `Hello false` where React renders `Hello `.                                                   | `derivation.test.js`                                                |
+| Follow inherited case-study links after moving their files     | Three links target missing files.                                                                       | `experiments/issue-25-ci-regressions.py`                            |
+| Run PR checks with the release preflight intentionally skipped | Changeset, changelog, browser and CLI jobs skip despite detected code changes.                          | Workflow policy and `experiments/issue-25-ci-regressions.py`        |
+| Pass a currency value as React children with a locale override | The component displayed `NaN` in the provider locale instead of `$2.00`.                                | `react.test.js`, browser React example and before/after screenshots |
 
 ## Local checks
 
 Run JavaScript commands from `js/` and other commands from the repository root.
 
-| Command | Result |
-| --- | --- |
-| `npm test` | 135 tests pass with a 30-second per-test timeout. |
-| `bun test --timeout 30000` | 135 tests pass. |
-| `deno test --no-check --allow-read --allow-write --allow-env --allow-run` | 135 tests pass. Node subprocesses run CLI/Rollup build integration fixtures. |
-| `npm run test:types` | Core declarations compile with the existing strict check; optional Next usage compiles with the framework type configuration. |
-| `npm run test:browser` | Four Chromium tests pass, including React source content switching and native browser export/tree shaking. |
-| `npm run build:next` and `LINO_NEXT_PRODUCTION=1 npm run test:next` | Production Next 16.4.0 build generates both locale static pages; four Chromium tests cover hydration, request/cache isolation, cookies, navigation, metadata and document language/direction. |
-| `node experiments/gt-sdk-contract.mjs` | Published GT 9.5.5 SDK sends real HTTP runtime, upload and versioned-download contracts to an isolated loopback fixture. |
-| `npm run check` | ESLint, Prettier and duplication checks pass. |
-| `npm run lint:secrets` | Pass. |
-| `npm audit --package-lock-only --audit-level=high` | Zero vulnerabilities reported. |
-| `bash scripts/check-mjs-syntax.sh` | Pass. |
-| `node examples/source-messages.mjs` | Source/deferred/context/derived example runs. |
-| `node experiments/currency-props.mjs` | Generates before/after browser fixtures using the archived adapter and current adapter with identical source children. |
-| `node bin/lino-i18n.js extract --in examples/source-messages.mjs --out ../ci-logs/example-catalogs` | Example sources extract without executing application code. |
-| `cargo test --locked --manifest-path rust/Cargo.toml --workspace --all-features` | Pass, including optional ICU and doctests. |
-| `cargo +1.87.0 test --locked --manifest-path rust/Cargo.toml --workspace --all-targets` | Default-feature MSRV tests pass. |
-| `cargo fmt --manifest-path rust/Cargo.toml --all -- --check` | Pass. |
-| `cargo clippy --locked --manifest-path rust/Cargo.toml --workspace --all-targets --all-features -- -D warnings` | Pass. |
-| `node --test --test-timeout=30000 scripts/*.test.mjs` | 48 repository tooling tests pass. |
-| `python3 scripts/check-docs.py` | Pass. Raw upstream HTML README is preserved as `.txt`. |
-| `python3 scripts/check-file-line-limits.py` | Pass. |
-| `python3 scripts/check-ci-policy.py` | Pass with pinned PyYAML installed. |
-| `python3 scripts/check-dependency-pins.py` | Pass with pinned PyYAML installed. |
-| `python3 experiments/issue-26-dependency-pins.py` | Pass; deliberate action/tool/MSRV/Node drift fixtures are rejected. |
-| `python3 experiments/issue-23-shared-guards.py` | Pass. |
-| `python3 experiments/issue-25-ci-regressions.py` | Three tests pass; before the fix, five subcases fail for moved links and implicit workflow status conditions. |
-| `node js/scripts/build-docs-site.mjs` and `cargo doc --locked --manifest-path rust/Cargo.toml --workspace --no-deps` | Documentation builds pass. |
-| `python3 experiments/collect-issue-25.py` | Pinned evidence recollection succeeds. |
+| Command                                                                                                              | Result                                                                                                                                                                                        |
+| -------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `npm test`                                                                                                           | 147 tests pass with a 30-second per-test timeout.                                                                                                                                             |
+| `bun test --timeout 30000`                                                                                           | 147 tests pass.                                                                                                                                                                               |
+| `deno test --no-check --allow-read --allow-write --allow-env --allow-run`                                            | 147 tests pass. Node subprocesses run CLI/Rollup build integration fixtures.                                                                                                                  |
+| `npm run test:types`                                                                                                 | Core declarations compile with the existing strict check; optional Vue and Next usage compile with the framework type configuration.                                                          |
+| `npm run test:browser`                                                                                               | Six Chromium tests pass, including React source content switching and native browser export/tree shaking.                                                                                     |
+| `npm run build:next` and `LINO_NEXT_PRODUCTION=1 npm run test:next`                                                  | Production Next 16.4.0 build generates both locale static pages; four Chromium tests cover hydration, request/cache isolation, cookies, navigation, metadata and document language/direction. |
+| `node experiments/gt-sdk-contract.mjs`                                                                               | Published GT 9.5.5 SDK sends real HTTP runtime, upload and versioned-download contracts to an isolated loopback fixture.                                                                      |
+| `npm run check`                                                                                                      | ESLint, Prettier and duplication checks pass.                                                                                                                                                 |
+| `npm run lint:secrets`                                                                                               | Pass.                                                                                                                                                                                         |
+| `npm audit --package-lock-only --audit-level=high`                                                                   | Zero vulnerabilities reported.                                                                                                                                                                |
+| `bash scripts/check-mjs-syntax.sh`                                                                                   | Pass.                                                                                                                                                                                         |
+| `node examples/source-messages.mjs`                                                                                  | Source/deferred/context/derived example runs.                                                                                                                                                 |
+| `node experiments/currency-props.mjs`                                                                                | Generates before/after browser fixtures using the archived adapter and current adapter with identical source children.                                                                        |
+| `node bin/lino-i18n.js extract --in examples/source-messages.mjs --out ../ci-logs/example-catalogs`                  | Example sources extract without executing application code.                                                                                                                                   |
+| `cargo test --locked --manifest-path rust/Cargo.toml --workspace --all-features`                                     | Pass, including optional ICU and doctests.                                                                                                                                                    |
+| `cargo +1.87.0 test --locked --manifest-path rust/Cargo.toml --workspace --all-targets`                              | Default-feature MSRV tests pass.                                                                                                                                                              |
+| `cargo fmt --manifest-path rust/Cargo.toml --all -- --check`                                                         | Pass.                                                                                                                                                                                         |
+| `cargo clippy --locked --manifest-path rust/Cargo.toml --workspace --all-targets --all-features -- -D warnings`      | Pass.                                                                                                                                                                                         |
+| `node --test --test-timeout=30000 scripts/*.test.mjs`                                                                | 48 repository tooling tests pass.                                                                                                                                                             |
+| `python3 scripts/check-docs.py`                                                                                      | Pass. Raw upstream HTML README is preserved as `.txt`.                                                                                                                                        |
+| `python3 scripts/check-file-line-limits.py`                                                                          | Pass.                                                                                                                                                                                         |
+| `python3 scripts/check-ci-policy.py`                                                                                 | Pass with pinned PyYAML installed.                                                                                                                                                            |
+| `python3 scripts/check-dependency-pins.py`                                                                           | Pass with pinned PyYAML installed.                                                                                                                                                            |
+| `python3 experiments/issue-26-dependency-pins.py`                                                                    | Pass; deliberate action/tool/MSRV/Node drift fixtures are rejected.                                                                                                                           |
+| `python3 experiments/issue-23-shared-guards.py`                                                                      | Pass.                                                                                                                                                                                         |
+| `python3 experiments/issue-25-ci-regressions.py`                                                                     | Three tests pass; before the fix, five subcases fail for moved links and implicit workflow status conditions.                                                                                 |
+| `node js/scripts/build-docs-site.mjs` and `cargo doc --locked --manifest-path rust/Cargo.toml --workspace --no-deps` | Documentation builds pass.                                                                                                                                                                    |
+| `python3 experiments/collect-issue-25.py`                                                                            | Pinned evidence recollection succeeds.                                                                                                                                                        |
 
 The npm package dry-run is part of the automated test suite and checks that new
 runtime exports and declarations ship while tests/build scripts stay excluded.
@@ -107,17 +107,17 @@ totals; the unit regression also checks an explicit locale and zero value.
 
 ## Additional conformance regressions
 
-| Reproduction | Before / after | Regression coverage |
-| --- | --- | --- |
-| Use a custom Arabic catalog identity for keyed or server plural selection | Selected the wrong plural category; now uses the canonical locale without changing catalog identity. | `locale-config.test.js`, `react-server.test.js` |
-| Extract Node scoped helpers and async server factories | Sources were omitted; now follow the recognized imported APIs and await expressions. | `tooling.test.js` |
-| Compile an automatic variable beside an explicit `auto0` variable | Compiler names collided; automatic names now reserve existing explicit names. | `compiler.test.js` |
-| Pass `__proto__` to the real GT SDK record input | SDK's ordinary-object conversion omitted the id; array input safely preserves it. | `gt-provider.test.js`, `experiments/gt-sdk-contract.mjs` |
-| Call Next `getTranslator()` and `getGT()` in one server render | React's omitted/undefined argument keys created different instances; normalized keys share one instance. | `tests/next-browser/app.pw.js` |
-| Build a Next client entry with `export *` | Next rejects wildcard exports at the client boundary; named exports build successfully. | Production Next fixture in CI |
-| Prefetch a link targeting another locale | Next strips prefetch headers before Proxy; background fetches now only forward the payload locale, and actual link navigation persists the preference while respecting cancellation. | `next.test.js` and `tests/next-browser/app.pw.js` |
-| Request an unknown asset path in the Next fixture | Filename became a locale and returned 500; route validation now returns 404. | `tests/next-browser/app.pw.js` |
-| Navigate Next locale pages without document language attributes | `html.lang` was absent; the localized root layout supplies canonical language and direction, including static pages. | `tests/next-browser/app.pw.js` |
+| Reproduction                                                              | Before / after                                                                                                                                                                       | Regression coverage                                      |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------- |
+| Use a custom Arabic catalog identity for keyed or server plural selection | Selected the wrong plural category; now uses the canonical locale without changing catalog identity.                                                                                 | `locale-config.test.js`, `react-server.test.js`          |
+| Extract Node scoped helpers and async server factories                    | Sources were omitted; now follow the recognized imported APIs and await expressions.                                                                                                 | `tooling.test.js`                                        |
+| Compile an automatic variable beside an explicit `auto0` variable         | Compiler names collided; automatic names now reserve existing explicit names.                                                                                                        | `compiler.test.js`                                       |
+| Pass `__proto__` to the real GT SDK record input                          | SDK's ordinary-object conversion omitted the id; array input safely preserves it.                                                                                                    | `gt-provider.test.js`, `experiments/gt-sdk-contract.mjs` |
+| Call Next `getTranslator()` and `getGT()` in one server render            | React's omitted/undefined argument keys created different instances; normalized keys share one instance.                                                                             | `tests/next-browser/app.pw.js`                           |
+| Build a Next client entry with `export *`                                 | Next rejects wildcard exports at the client boundary; named exports build successfully.                                                                                              | Production Next fixture in CI                            |
+| Prefetch a link targeting another locale                                  | Next strips prefetch headers before Proxy; background fetches now only forward the payload locale, and actual link navigation persists the preference while respecting cancellation. | `next.test.js` and `tests/next-browser/app.pw.js`        |
+| Request an unknown asset path in the Next fixture                         | Filename became a locale and returned 500; route validation now returns 404.                                                                                                         | `tests/next-browser/app.pw.js`                           |
+| Navigate Next locale pages without document language attributes           | `html.lang` was absent; the localized root layout supplies canonical language and direction, including static pages.                                                                 | `tests/next-browser/app.pw.js`                           |
 
 Imported translator factories previously produced no extracted messages. The
 module graph regression now follows named/default/namespace/barrel imports,
@@ -136,3 +136,11 @@ extraction, then passed after resolving its shared modules.
 ![Next App Router in English](../../screenshots/issue-25-next-en.png)
 
 ![Next App Router in French](../../screenshots/issue-25-next-fr.png)
+
+## Vue regressions and evidence
+
+The absent Vue entry initially raised `ERR_MODULE_NOT_FOUND`. The optional adapter now passes actual Vue/compiler/server-renderer fixtures, isolated SSR and browser hydration. An ordinal bare-attribute test initially selected the cardinal fallback; marker serialization and component boolean props now select ordinal cases. Source-only initialization initially rejected without a catalog loader; source bootstrapping and switching no longer require a download. SFC extraction initially included an imported `T` under `v-pre`; its regression now preserves the literal native tag. Tests also verify import/slot/loop scope, UTF-16 offsets, finite template bounds and the CLI output.
+
+![Vue in English](../../screenshots/issue-25-vue-en.png)
+
+![Vue in French](../../screenshots/issue-25-vue-fr.png)

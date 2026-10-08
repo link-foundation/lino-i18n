@@ -10,6 +10,23 @@ import { formatLinoCatalog, loadLocalesFromDirectory } from './loaders.js';
 import { readProjectSources } from './source-project-files.js';
 
 export async function extractFiles(input, options = {}) {
+  if (options.syntax && !['js', 'vue'].includes(options.syntax)) {
+    throw new Error('Extraction syntax must be js or vue');
+  }
+  if (options.syntax === 'vue' || String(input).endsWith('.vue')) {
+    const { extractVueProject, parseVueSource } =
+      await import('./vue-extract.js');
+    const { parseSource } = await import('./extract.js');
+    const sources = await readProjectSources(input, {
+      ...options,
+      includeVue: true,
+      parser: (code, file) =>
+        file.endsWith('.vue')
+          ? parseVueSource(code, { file })
+          : parseSource(code, file),
+    });
+    return extractVueProject(sources, options);
+  }
   return extractProject(await readProjectSources(input, options), options);
 }
 
@@ -21,6 +38,7 @@ export async function commandExtract(flags, log, err) {
     return 1;
   }
   const manifest = await extractFiles(flags.in, {
+    syntax: flags.syntax,
     maxFiles:
       flags['max-files'] === undefined ? undefined : Number(flags['max-files']),
     maxBytes:

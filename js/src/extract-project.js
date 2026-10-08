@@ -14,7 +14,7 @@ const extensions = [
   '.cts',
 ];
 const library =
-  /^lino-i18n(?:\/(?:messages|react|react-server|server|node|next\/(?:server|client)))?$/;
+  /^lino-i18n(?:\/(?:messages|react|react-server|server|node|vue|next\/(?:server|client)))?$/;
 
 export function projectLimits({
   maxFiles = 1000,
@@ -189,7 +189,7 @@ function createResolver(modules, resolveImport) {
     );
 }
 
-function parseModules(sources, limits, diagnostics) {
+function parseModules(sources, limits, diagnostics, parser) {
   const modules = new Map();
   const entries = Object.entries(sources);
   if (entries.length > limits.maxFiles) {
@@ -207,7 +207,7 @@ function parseModules(sources, limits, diagnostics) {
       throw new Error('Project byte limit exceeded');
     }
     try {
-      const ast = parseSource(code, file);
+      const ast = parser(code, file);
       let program;
       traverse(ast, {
         Program(found) {
@@ -227,9 +227,14 @@ function parseModules(sources, limits, diagnostics) {
   return modules;
 }
 
-export function extractProject(sources, options = {}) {
+export function extractProject(sources, options = {}, parser = parseSource) {
   const diagnostics = [];
-  const modules = parseModules(sources, projectLimits(options), diagnostics);
+  const modules = parseModules(
+    sources,
+    projectLimits(options),
+    diagnostics,
+    parser
+  );
   const resolver = createResolver(modules, options.resolveImport);
   checkImports(modules, diagnostics, options.resolveImport);
   const messages = new Map();

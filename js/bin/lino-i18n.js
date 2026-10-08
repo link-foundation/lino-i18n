@@ -39,7 +39,7 @@ function usage() {
 
 function commandHelp(command) {
   if (command === 'extract') {
-    return 'Usage: lino-i18n extract --in <source file or directory> --out <directory> [--locale en] [--max-files 1000] [--max-bytes 10485760]';
+    return 'Usage: lino-i18n extract --in <source file or directory> --out <directory> [--locale en] [--syntax js|vue] [--max-files 1000] [--max-bytes 10485760]';
   }
   if (command === 'translate-catalog') {
     return 'Usage: lino-i18n translate-catalog --manifest <messages.json> --dir <catalogs> --locale <locale> --provider <module.mjs> --out <locale.lino>';

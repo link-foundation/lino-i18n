@@ -85,6 +85,7 @@ export default [
       'examples/universal-app/src/**/*.js',
       'examples/browser-usage/*.js',
       'examples/react-usage/*.js',
+      'examples/vue-usage/*.js',
       'src/next/client.js',
     ],
     languageOptions: {

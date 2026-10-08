@@ -6,7 +6,7 @@ Translation (GT), collected evidence, and a plan covering every requirement in
 one pull request. [PR 28](https://github.com/link-foundation/lino-i18n/pull/28)
 implements source messages, rich React translation, optional ICU in Rust,
 request isolation, typed dictionaries, locale configuration, a JSX compiler,
-Next App Router integration, optional GT SDK services and bounded module-aware
+Next App Router and Vue/SFC integration, optional GT SDK services and bounded module-aware
 extraction/translation workflows.
 
 **This is substantial runtime and tooling coverage, not complete feature parity
@@ -72,17 +72,17 @@ so a slow previous locale selection cannot overwrite the latest selection.
 
 ## Implementation choices and alternatives
 
-| Area | Alternatives considered | Chosen approach and reason |
-| --- | --- | --- |
-| JS ICU | Hand-written parser; ICU subset; FormatJS runtime | `intl-messageformat` and its parser/printer preserve nested ICU, skeletons and quotes with maintained implementations. |
-| Rust ICU | Reimplement ICU; require new Rust for all users; optional engine | Optional `formatjs_icu_messageformat` feature. Default Rust 1.87 remains supported; ICU needs 1.92. |
-| Extraction | Regex; TypeScript-only compiler; Babel AST | Babel handles JS/TS/JSX, import aliases and lexical scope with no application execution. |
-| JSX restoration | HTML-string injection; translation-generated props; code-owned elements | ICU tags restore only original elements and props. Arbitrary dynamic values are named opaque placeholders. |
-| Derivation | Execute application functions; unlimited enumeration; bounded static analysis | Enumerate local/imported static returns/dictionaries/conditionals; fail with diagnostics at 100 variants or 20 levels. |
-| Framework state | Global mutable singleton; per-request explicit instance | Explicit instances and JSON snapshots make concurrency and hydration testable without framework dependencies. |
-| Translation services | Embed one vendor SDK; use a provider interface | Providers return validated candidates; approved entries are preserved and catalog format stays portable. |
-| Compiler integration | Regex wrapping; unbounded evaluation; AST transformation | Opt-in Babel transform wraps JSX text/variables and configured attributes, retains source maps and explicit boundaries, and emits matching manifests through Vite/Rollup. |
-| Native browser | Add npm imports to the browser entry; optional bundled features | Native browser API remains dependency-free; source ICU and React use separate bundled entries. |
+| Area                 | Alternatives considered                                                       | Chosen approach and reason                                                                                                                                                |
+| -------------------- | ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| JS ICU               | Hand-written parser; ICU subset; FormatJS runtime                             | `intl-messageformat` and its parser/printer preserve nested ICU, skeletons and quotes with maintained implementations.                                                    |
+| Rust ICU             | Reimplement ICU; require new Rust for all users; optional engine              | Optional `formatjs_icu_messageformat` feature. Default Rust 1.87 remains supported; ICU needs 1.92.                                                                       |
+| Extraction           | Regex; TypeScript-only compiler; Babel AST                                    | Babel handles JS/TS/JSX, import aliases and lexical scope with no application execution.                                                                                  |
+| JSX restoration      | HTML-string injection; translation-generated props; code-owned elements       | ICU tags restore only original elements and props. Arbitrary dynamic values are named opaque placeholders.                                                                |
+| Derivation           | Execute application functions; unlimited enumeration; bounded static analysis | Enumerate local/imported static returns/dictionaries/conditionals; fail with diagnostics at 100 variants or 20 levels.                                                    |
+| Framework state      | Global mutable singleton; per-request explicit instance                       | Explicit instances and JSON snapshots make concurrency and hydration testable without framework dependencies.                                                             |
+| Translation services | Embed one vendor SDK; use a provider interface                                | Providers return validated candidates; approved entries are preserved and catalog format stays portable.                                                                  |
+| Compiler integration | Regex wrapping; unbounded evaluation; AST transformation                      | Opt-in Babel transform wraps JSX text/variables and configured attributes, retains source maps and explicit boundaries, and emits matching manifests through Vite/Rollup. |
+| Native browser       | Add npm imports to the browser entry; optional bundled features               | Native browser API remains dependency-free; source ICU and React use separate bundled entries.                                                                            |
 
 Known alternatives include GT itself for its hosted/framework workflows,
 FormatJS/react-intl for ICU and React formatting, and i18next for keyed catalogs,
@@ -114,20 +114,20 @@ reproduced for quoted source keys in JS/Rust, complete compiled ICU conversion,
 prototype-like keys, explicit-id derivation consistency and CLI stale-source
 review. Fixes made those tests pass; adding exports alone was insufficient.
 
-| Behavior | Automated evidence |
-| --- | --- |
-| Source/descriptors/templates, ICU select/ordinal/offset/skeletons | `js/tests/messages.test.js` |
-| Loader deduplication, retry, latest-switch ordering, versions/cache/snapshots | `js/tests/messages.test.js` |
-| JSX restoration, safe dynamic values, branches and server content | `js/tests/react-content.test.js`, `js/tests/server.test.js` |
-| Snapshot hydration and catalog/region updates | `js/tests/react.test.js` |
-| Finite function/dictionary/JSX derivation; cycles and unsupported expressions | `js/tests/derivation.test.js` |
-| Aliases, shadowing, descriptors, JSX structure, ICU catalog/provider validation | `js/tests/tooling.test.js` |
-| CLI extraction/provider/check and real Rollup build | `js/tests/tooling-integration.test.js`, `js/experiments/rollup-extraction.mjs` |
-| Quoted and prototype-like catalog keys | `js/tests/source-keys.test.js`, Rust integration tests |
-| Full ICU AST conversion | `js/tests/icu-conversion.test.js` |
-| Native browser loading and locale controls | Existing Playwright browser suite |
-| New public declarations | `js/tests/types/messages.tsx` |
-| Rust source/deferred/optional ICU | `rust/lino-i18n/tests/messages.rs` |
+| Behavior                                                                        | Automated evidence                                                             |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| Source/descriptors/templates, ICU select/ordinal/offset/skeletons               | `js/tests/messages.test.js`                                                    |
+| Loader deduplication, retry, latest-switch ordering, versions/cache/snapshots   | `js/tests/messages.test.js`                                                    |
+| JSX restoration, safe dynamic values, branches and server content               | `js/tests/react-content.test.js`, `js/tests/server.test.js`                    |
+| Snapshot hydration and catalog/region updates                                   | `js/tests/react.test.js`                                                       |
+| Finite function/dictionary/JSX derivation; cycles and unsupported expressions   | `js/tests/derivation.test.js`                                                  |
+| Aliases, shadowing, descriptors, JSX structure, ICU catalog/provider validation | `js/tests/tooling.test.js`                                                     |
+| CLI extraction/provider/check and real Rollup build                             | `js/tests/tooling-integration.test.js`, `js/experiments/rollup-extraction.mjs` |
+| Quoted and prototype-like catalog keys                                          | `js/tests/source-keys.test.js`, Rust integration tests                         |
+| Full ICU AST conversion                                                         | `js/tests/icu-conversion.test.js`                                              |
+| Native browser loading and locale controls                                      | Existing Playwright browser suite                                              |
+| New public declarations                                                         | `js/tests/types/messages.tsx`                                                  |
+| Rust source/deferred/optional ICU                                               | `rust/lino-i18n/tests/messages.rs`                                             |
 
 Local verification runs Node, Bun, Deno, TypeScript, Chromium browser tests,
 ESLint/Prettier/duplication/secrets checks, npm audit, Cargo tests with all

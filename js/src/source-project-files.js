@@ -30,7 +30,7 @@ async function collectDirectory(input, files, budget, depth = 0) {
       await collectDirectory(file, files, budget, depth + 1);
     } else if (
       entry.isFile() &&
-      sourceExtension.test(entry.name) &&
+      budget.extension.test(entry.name) &&
       !entry.name.endsWith('.d.ts')
     ) {
       files.push(file);
@@ -41,18 +41,26 @@ async function collectDirectory(input, files, budget, depth = 0) {
   }
 }
 
-async function resolveDiskImport(file, source) {
+async function resolveDiskImport(file, source, includeVue) {
   const base = path.resolve(path.dirname(file), source);
   const candidates = [
     base,
     ...(/\.[mc]?js$/.test(base)
       ? [base.replace(/js$/, 'ts'), base.replace(/js$/, 'tsx')]
-      : ['.js', '.jsx', '.ts', '.tsx', '.mjs', '.mts', '.cjs', '.cts'].flatMap(
-          (extension) => [
-            base + extension,
-            path.join(base, `index${extension}`),
-          ]
-        )),
+      : [
+          '.js',
+          '.jsx',
+          '.ts',
+          '.tsx',
+          '.mjs',
+          '.mts',
+          '.cjs',
+          '.cts',
+          ...(includeVue ? ['.vue'] : []),
+        ].flatMap((extension) => [
+          base + extension,
+          path.join(base, `index${extension}`),
+        ])),
   ];
   const found = [];
   for (const candidate of candidates) {
@@ -75,10 +83,10 @@ async function resolveDiskImport(file, source) {
   return found[0];
 }
 
-async function dependencies(code, file) {
+async function dependencies(code, file, { parser, extension, includeVue }) {
   let ast;
   try {
-    ast = parseSource(code, file);
+    ast = parser(code, file);
   } catch {
     return []; // The project extractor reports source syntax with its location.
   }
@@ -87,11 +95,11 @@ async function dependencies(code, file) {
     const source = statement.source?.value;
     if (
       !source?.startsWith('.') ||
-      (path.extname(source) && !sourceExtension.test(source))
+      (path.extname(source) && !extension.test(source))
     ) {
       continue;
     }
-    const dependency = await resolveDiskImport(file, source);
+    const dependency = await resolveDiskImport(file, source, includeVue);
     if (dependency) {
       result.push(dependency);
     }
@@ -101,6 +109,13 @@ async function dependencies(code, file) {
 
 export async function readProjectSources(input, options = {}) {
   const limits = projectLimits(options);
+  const extraction = {
+    includeVue: options.includeVue || false,
+    extension: options.includeVue
+      ? /(?:\.[cm]?[jt]sx?|\.vue)$/
+      : sourceExtension,
+    parser: options.parser || parseSource,
+  };
   const absolute = path.resolve(
     input instanceof URL ? fileURLToPath(input) : input
   );
@@ -108,7 +123,11 @@ export async function readProjectSources(input, options = {}) {
   const root = single ? path.dirname(absolute) : absolute;
   const files = single ? [absolute] : [];
   if (!single) {
-    await collectDirectory(root, files, { ...limits, directories: 0 });
+    await collectDirectory(root, files, {
+      ...limits,
+      ...extraction,
+      directories: 0,
+    });
   }
   const sources = Object.create(null);
   const visited = new Set();
@@ -130,7 +149,7 @@ export async function readProjectSources(input, options = {}) {
     sources[path.relative(root, file).replaceAll('\\', '/')] = code;
     if (single) {
       files.push(
-        ...(await dependencies(code, file)).filter(
+        ...(await dependencies(code, file, extraction)).filter(
           (dependency) => !visited.has(dependency)
         )
       );

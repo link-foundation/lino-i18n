@@ -28,6 +28,8 @@ i18n.gt('{n, plural, one {# file} other {# files}}', { n: 2 });
 `lino-i18n/react` provides source `T`, `Var`, `Derive`, `Branch`, `Plural` and
 formatting components alongside the existing keyed adapter. Optional exports
 include `messages`, `intl`, `server`, `react-server`, `tooling` and `compiler`.
+[Optional Vue components and SFC extraction](../docs/vue.md) provide reactive
+source messages, SSR/hydration and template-scope diagnostics.
 The native browser entry retains its dependency-free keyed runtime; source ICU
 and React browser applications use a bundler.
 

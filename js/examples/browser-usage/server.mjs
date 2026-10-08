@@ -27,22 +27,33 @@ const server = createServer(async (request, response) => {
       [
         '/examples/react-usage/bundle.js',
         '/examples/compiler-usage/bundle.js',
+        '/examples/vue-usage/bundle.js',
       ].includes(url.pathname)
     ) {
       const compiled = url.pathname.includes('compiler-usage');
+      const vue = url.pathname.includes('vue-usage');
       const result = await build({
         entryPoints: [
           resolve(
             root,
-            compiled
-              ? 'examples/compiler-usage/app.jsx'
-              : 'examples/react-usage/app.js'
+            vue
+              ? 'examples/vue-usage/app.js'
+              : compiled
+                ? 'examples/compiler-usage/app.jsx'
+                : 'examples/react-usage/app.js'
           ),
         ],
         bundle: true,
         format: 'esm',
         platform: 'browser',
         write: false,
+        define: vue
+          ? {
+              __VUE_OPTIONS_API__: 'true',
+              __VUE_PROD_DEVTOOLS__: 'false',
+              __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: 'true',
+            }
+          : {},
         plugins: compiled
           ? [
               {
@@ -69,7 +80,27 @@ const server = createServer(async (request, response) => {
         .end(result.outputFiles[0].text);
       return;
     }
-    const body = await readFile(filePath);
+    let body = await readFile(filePath);
+    if (pathname === '/examples/vue-usage/index.html') {
+      const { createSSRApp } = await import('vue');
+      const { renderToString } = await import('@vue/server-renderer');
+      const { createVueI18n } = await import('../../src/vue.js');
+      const { App, locales } = await import('../vue-usage/shared.js');
+      const locale = url.searchParams.get('locale') === 'fr' ? 'fr' : 'en';
+      const plugin = createVueI18n({ defaultLocale: locale, locales });
+      const content = await renderToString(createSSRApp(App).use(plugin));
+      const snapshot = JSON.stringify(plugin.i18n.snapshot()).replaceAll(
+        '<',
+        '\\u003c'
+      );
+      body = body
+        .toString()
+        .replace('<html lang="en">', `<html lang="${locale}">`)
+        .replace(
+          '<div id="app"></div>',
+          `<div id="app">${content}</div><script>window.__LINO_SNAPSHOT__=${snapshot}</script>`
+        );
+    }
     response.writeHead(200, {
       'Content-Type': types[extname(filePath)] || 'application/octet-stream',
     });

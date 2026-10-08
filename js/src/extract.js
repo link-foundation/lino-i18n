@@ -67,7 +67,7 @@ function importApi(binding, seen) {
   }
   const source = binding.path.parent.source.value;
   if (
-    !/^lino-i18n(?:\/(?:messages|react|react-server|server|node|next\/(?:server|client)))?$/.test(
+    !/^lino-i18n(?:\/(?:messages|react|react-server|server|node|vue|next\/(?:server|client)))?$/.test(
       source
     )
   ) {
@@ -102,6 +102,7 @@ export function valueApi(path, node, seen = new Set(), id, localName) {
     }
     if (
       [
+        'createVueI18n',
         'createTranslator',
         'createDictionaryTranslator',
         'createRequestTranslator',
@@ -219,6 +220,7 @@ export function extractMessages(code, { file = '<source>', ast: parsed } = {}) {
         [
           'defineDictionary',
           'createDictionaryTranslator',
+          'createVueI18n',
           'createTranslator',
           'createRequestTranslator',
         ].includes(name)
