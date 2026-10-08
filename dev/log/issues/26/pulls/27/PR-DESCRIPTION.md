@@ -37,4 +37,7 @@ The full [requirement matrix, per-ecosystem before/after tables, majors crossed 
   - Workflow policy, pin guard, actionlint and zizmor (pedantic).
 - `npm audit`, `cargo audit` (including the helper lock trees) and `pip-audit` report no vulnerabilities.
 - CI on every pushed commit passes all five workflows, with no warning or error annotations. The results and archived logs are in [FINAL-VERIFICATION.md](https://github.com/link-foundation/lino-i18n/blob/issue-26-f68d85bd297d/dev/log/issues/26/pulls/27/FINAL-VERIFICATION.md).
+- Two CI incidents, both recorded in FINAL-VERIFICATION.md:
+  - The first evidence commit had log names containing `:`, which Windows checkout rejects. They were renamed, and windows-2025 now checks out and passes.
+  - Some macos-26 jobs were never assigned a GitHub-hosted runner ("not acquired by Runner of type hosted"). They ran no code, no GitHub incident was open, and they passed once re-run.
 - The unused composite action `.github/actions/publish-dockerhub` is called by no workflow, so CI doesn't run it. Its docker actions are already at their latest majors.

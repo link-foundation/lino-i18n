@@ -39,4 +39,23 @@
 - **Why it failed:** Windows doesn't allow `:` in file names. `actions/checkout` failed with `error: invalid path 'dev/log/issues/26/pulls/27/verification/after1-check:duplication.log'` in every windows-2025 job: [JavaScript 37799669177](https://github.com/link-foundation/lino-i18n/actions/runs/37799669177) (Node, Bun and Deno) and [Rust 37799669184](https://github.com/link-foundation/lino-i18n/actions/runs/37799669184). Pipeline Status reported the failed `test` job in both.
 - **Unaffected:** Documentation, Security and Workflows passed, and so did every Linux and macOS job.
 - **Evidence:** the failed-job logs are in `ci-logs/pr-27-0d3017b-failed-logs.tar.gz`, with checksums in `ci-logs/pr-27-0d3017b-failed-logs.sha256`.
-- **Fix:** the next commit renames the six files, replacing `:` with `-`, and `git ls-files | grep ':'` is now empty. The windows-2025 checkout in PR CI is the regression check: it fails on any path Windows can't create. The rerun results show in the PR 27 checks.
+- **Fix:** the next commit renames the six files, replacing `:` with `-`, and `git ls-files | grep ':'` is now empty. The windows-2025 checkout in PR CI is the regression check: it fails on any path Windows can't create. At `8bce350`, every windows-2025 job checks out and passes.
+
+## macOS runner acquisition
+
+GitHub never assigned a runner to some macos-26 jobs. Each sat queued for 15 minutes with no steps and was then cancelled with "The job was not acquired by Runner of type hosted even after multiple attempts":
+
+- **7d0cedd:** 1 job, `Test (deno on macos-26)`.
+- **8bce350:** 2 jobs, `Test (node 24.x on macos-26)` and `Test (bun on macos-26)`.
+
+Evidence for each is in `ci-logs/js-*-attempt1-runner-not-acquired.txt`. Re-running only the failed jobs (`gh run rerun --failed`) is the remedy.
+
+Why this isn't caused by the change:
+
+- No job code ran, and the other macos-26 jobs of the same runs passed.
+- githubstatus.com listed no incident.
+- Users have reported the same cancellation since 2026-10-05 for ubuntu and windows jobs too ([smormah/vsift#316](https://github.com/smormah/vsift/issues/316), [ShaulLavo/mesh#253](https://github.com/ShaulLavo/mesh/issues/253), [Cratis/Chronicle.Go#74](https://github.com/Cratis/Chronicle.Go/issues/74)).
+- GitHub's notice is about macOS arm64 capacity in general, and that pool includes macos-15.
+- `macos-latest` already resolves to macos-26, so the label is kept.
+
+Limit: earlier today, the macos-15 runs on main and issue 23 (24 jobs) were all assigned a runner. These samples can't separate peak-hour load from a smaller macos-26 pool.

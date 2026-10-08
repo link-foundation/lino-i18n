@@ -1,0 +1,9 @@
+# JavaScript run 37802557535 at 8bce350, attempt 1
+job 113398647337 Test (node 24.x on macos-26): conclusion=cancelled created=2026-10-08T15:40:17Z completed=2026-10-08T15:55:19Z runner= labels=["macos-26"] steps=0
+  failure: The job was not acquired by Runner of type hosted even after multiple attempts
+  notice: Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+job 113398647687 Test (bun on macos-26): conclusion=cancelled created=2026-10-08T15:40:17Z completed=2026-10-08T15:55:20Z runner= labels=["macos-26"] steps=0
+  failure: The job was not acquired by Runner of type hosted even after multiple attempts
+  notice: Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+githubstatus.com at 2026-10-08T15:57:27Z: 0 unresolved incidents; Actions operational
+Remedy: gh run rerun 37802557535 --failed (attempt 2)
