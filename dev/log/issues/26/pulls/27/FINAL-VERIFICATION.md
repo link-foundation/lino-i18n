@@ -33,4 +33,10 @@
 - `.github/actions/publish-dockerhub/action.yml` is called by no workflow. Its `docker/*` actions are already at their latest majors, and Dependabot's `/.github/actions/*` entry and the pin guard cover it.
 - The protected release jobs (npm and crates.io publication, Pages deployment) only run on `main`. They are skipped on this PR branch, as in every PR.
 
-The commit that adds this folder changes only `dev/log/`. Its own CI run shows in the PR 27 checks.
+## Evidence commit `0d3017b`: Windows checkout failure and fix
+
+- **What happened:** the first evidence commit named six local logs after their npm scripts, for example `verification/after1-check:duplication.log`.
+- **Why it failed:** Windows doesn't allow `:` in file names. `actions/checkout` failed with `error: invalid path 'dev/log/issues/26/pulls/27/verification/after1-check:duplication.log'` in every windows-2025 job: [JavaScript 37799669177](https://github.com/link-foundation/lino-i18n/actions/runs/37799669177) (Node, Bun and Deno) and [Rust 37799669184](https://github.com/link-foundation/lino-i18n/actions/runs/37799669184). Pipeline Status reported the failed `test` job in both.
+- **Unaffected:** Documentation, Security and Workflows passed, and so did every Linux and macOS job.
+- **Evidence:** the failed-job logs are in `ci-logs/pr-27-0d3017b-failed-logs.tar.gz`, with checksums in `ci-logs/pr-27-0d3017b-failed-logs.sha256`.
+- **Fix:** the next commit renames the six files, replacing `:` with `-`, and `git ls-files | grep ':'` is now empty. The windows-2025 checkout in PR CI is the regression check: it fails on any path Windows can't create. The rerun results show in the PR 27 checks.
