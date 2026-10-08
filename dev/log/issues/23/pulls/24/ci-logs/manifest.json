@@ -49,7 +49,12 @@
     "download_exit_code": 1,
     "log": "dev/log/issues/23/pulls/24/ci-logs/javascript-26050991046.log",
     "bytes": 0,
-    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/expired-log-downloads.tar.gz",
+    "archive_member": "javascript-26050991046.log",
+    "stderr_archive_member": "javascript-26050991046.stderr",
+    "download_error": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/link-foundation/lino-i18n/actions/runs/26050991046/logs)\n",
+    "stderr_sha256": "29eced76e1a1894cd4c56688d4d36b713f465b5bc7efb6af40276c2aef5868d8"
   },
   {
     "conclusion": "success",
@@ -62,7 +67,12 @@
     "download_exit_code": 1,
     "log": "dev/log/issues/23/pulls/24/ci-logs/rust-26050991084.log",
     "bytes": 0,
-    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/expired-log-downloads.tar.gz",
+    "archive_member": "rust-26050991084.log",
+    "stderr_archive_member": "rust-26050991084.stderr",
+    "download_error": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/link-foundation/lino-i18n/actions/runs/26050991084/logs)\n",
+    "stderr_sha256": "b20b327361ee10b219608caaf7457d623ae00246564ec0dec7bee5a5ace5d72d"
   },
   {
     "conclusion": "failure",
@@ -75,7 +85,12 @@
     "download_exit_code": 1,
     "log": "dev/log/issues/23/pulls/24/ci-logs/rust-26048388072.log",
     "bytes": 0,
-    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/expired-log-downloads.tar.gz",
+    "archive_member": "rust-26048388072.log",
+    "stderr_archive_member": "rust-26048388072.stderr",
+    "download_error": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/link-foundation/lino-i18n/actions/runs/26048388072/logs)\n",
+    "stderr_sha256": "bcddec7d6cfef2805fc67c5892db64c50fb985cc08fcc2aab649510f8f87daeb"
   },
   {
     "conclusion": "failure",
@@ -88,7 +103,12 @@
     "download_exit_code": 1,
     "log": "dev/log/issues/23/pulls/24/ci-logs/javascript-26048385125.log",
     "bytes": 0,
-    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/expired-log-downloads.tar.gz",
+    "archive_member": "javascript-26048385125.log",
+    "stderr_archive_member": "javascript-26048385125.stderr",
+    "download_error": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/link-foundation/lino-i18n/actions/runs/26048385125/logs)\n",
+    "stderr_sha256": "c5a144c20878bb9d69c0d4f15dd26b17d0c0b99c2a9f9f787e9e6bbdb9c5b440"
   },
   {
     "conclusion": "failure",
@@ -101,7 +121,12 @@
     "download_exit_code": 1,
     "log": "dev/log/issues/23/pulls/24/ci-logs/javascript-26036984249.log",
     "bytes": 0,
-    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/expired-log-downloads.tar.gz",
+    "archive_member": "javascript-26036984249.log",
+    "stderr_archive_member": "javascript-26036984249.stderr",
+    "download_error": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/link-foundation/lino-i18n/actions/runs/26036984249/logs)\n",
+    "stderr_sha256": "274a0d2244a43743649e9220060301e278ba890ef9f2aba7bfa53cbc4284e13a"
   },
   {
     "conclusion": "failure",
@@ -114,7 +139,12 @@
     "download_exit_code": 1,
     "log": "dev/log/issues/23/pulls/24/ci-logs/rust-26036984313.log",
     "bytes": 0,
-    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/expired-log-downloads.tar.gz",
+    "archive_member": "rust-26036984313.log",
+    "stderr_archive_member": "rust-26036984313.stderr",
+    "download_error": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/link-foundation/lino-i18n/actions/runs/26036984313/logs)\n",
+    "stderr_sha256": "c9531f73029f65e0dff1fbca085fd4d4ee41d553c89b92b5a4b6a5d5e3284f80"
   },
   {
     "conclusion": "failure",
@@ -127,7 +157,12 @@
     "download_exit_code": 1,
     "log": "dev/log/issues/23/pulls/24/ci-logs/rust-26006426861.log",
     "bytes": 0,
-    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/expired-log-downloads.tar.gz",
+    "archive_member": "rust-26006426861.log",
+    "stderr_archive_member": "rust-26006426861.stderr",
+    "download_error": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/link-foundation/lino-i18n/actions/runs/26006426861/logs)\n",
+    "stderr_sha256": "57a1dcd63638ae24eaf731939e947fd6e6515255d41e11b4296b8481e58532f5"
   },
   {
     "conclusion": "failure",
@@ -140,7 +175,12 @@
     "download_exit_code": 1,
     "log": "dev/log/issues/23/pulls/24/ci-logs/javascript-26006426871.log",
     "bytes": 0,
-    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/expired-log-downloads.tar.gz",
+    "archive_member": "javascript-26006426871.log",
+    "stderr_archive_member": "javascript-26006426871.stderr",
+    "download_error": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/link-foundation/lino-i18n/actions/runs/26006426871/logs)\n",
+    "stderr_sha256": "6dd93590bc52eeda28d49fb816156a09299c06f5abe144e4db084f75cbf75c49"
   },
   {
     "conclusion": "failure",
@@ -153,7 +193,12 @@
     "download_exit_code": 1,
     "log": "dev/log/issues/23/pulls/24/ci-logs/javascript-25998782274.log",
     "bytes": 0,
-    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/expired-log-downloads.tar.gz",
+    "archive_member": "javascript-25998782274.log",
+    "stderr_archive_member": "javascript-25998782274.stderr",
+    "download_error": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/link-foundation/lino-i18n/actions/runs/25998782274/logs)\n",
+    "stderr_sha256": "bb87fda3db265a2fb3bb9dd548c8c68bef1e447598ddd73e17816c53d8b196e3"
   },
   {
     "conclusion": "failure",
@@ -166,7 +211,12 @@
     "download_exit_code": 1,
     "log": "dev/log/issues/23/pulls/24/ci-logs/rust-25998782281.log",
     "bytes": 0,
-    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/expired-log-downloads.tar.gz",
+    "archive_member": "rust-25998782281.log",
+    "stderr_archive_member": "rust-25998782281.stderr",
+    "download_error": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/link-foundation/lino-i18n/actions/runs/25998782281/logs)\n",
+    "stderr_sha256": "2833f016173be998da7dc242c9323029114b31a1353b1ed463133fef337a29ae"
   },
   {
     "conclusion": "success",
@@ -179,7 +229,12 @@
     "download_exit_code": 1,
     "log": "dev/log/issues/23/pulls/24/ci-logs/javascript-25974542960.log",
     "bytes": 0,
-    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/expired-log-downloads.tar.gz",
+    "archive_member": "javascript-25974542960.log",
+    "stderr_archive_member": "javascript-25974542960.stderr",
+    "download_error": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/link-foundation/lino-i18n/actions/runs/25974542960/logs)\n",
+    "stderr_sha256": "b077d0f3b08ff1a4b7d3bd4f20a88d8ab62bdacbecb04e41ddca41fd49e36527"
   },
   {
     "conclusion": "failure",
@@ -192,7 +247,12 @@
     "download_exit_code": 1,
     "log": "dev/log/issues/23/pulls/24/ci-logs/javascript-25973526829.log",
     "bytes": 0,
-    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/expired-log-downloads.tar.gz",
+    "archive_member": "javascript-25973526829.log",
+    "stderr_archive_member": "javascript-25973526829.stderr",
+    "download_error": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/link-foundation/lino-i18n/actions/runs/25973526829/logs)\n",
+    "stderr_sha256": "f6354abbbc805f612738803ebbdf527219f2ae3d9722379918bf6af13c3424fc"
   },
   {
     "conclusion": "success",
@@ -205,7 +265,12 @@
     "download_exit_code": 1,
     "log": "dev/log/issues/23/pulls/24/ci-logs/rust-25973526836.log",
     "bytes": 0,
-    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/expired-log-downloads.tar.gz",
+    "archive_member": "rust-25973526836.log",
+    "stderr_archive_member": "rust-25973526836.stderr",
+    "download_error": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/link-foundation/lino-i18n/actions/runs/25973526836/logs)\n",
+    "stderr_sha256": "3d2ce5a35e26817edb8a56a97fc1fc3f894377e3f86b2a975abef219e55711e0"
   },
   {
     "conclusion": "failure",
@@ -218,7 +283,12 @@
     "download_exit_code": 1,
     "log": "dev/log/issues/23/pulls/24/ci-logs/javascript-25972666215.log",
     "bytes": 0,
-    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/expired-log-downloads.tar.gz",
+    "archive_member": "javascript-25972666215.log",
+    "stderr_archive_member": "javascript-25972666215.stderr",
+    "download_error": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/link-foundation/lino-i18n/actions/runs/25972666215/logs)\n",
+    "stderr_sha256": "8a6b602161e9181e7aab50a0787c8cb3a90137b7ee562f79eae5e29a63208bb8"
   },
   {
     "conclusion": "failure",
@@ -231,7 +301,12 @@
     "download_exit_code": 1,
     "log": "dev/log/issues/23/pulls/24/ci-logs/rust-25972666223.log",
     "bytes": 0,
-    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/expired-log-downloads.tar.gz",
+    "archive_member": "rust-25972666223.log",
+    "stderr_archive_member": "rust-25972666223.stderr",
+    "download_error": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/link-foundation/lino-i18n/actions/runs/25972666223/logs)\n",
+    "stderr_sha256": "420ee7d69b68c33b8527ee0be3795bf8f23297e0e1d8f21e2fe4c583aebf7c25"
   },
   {
     "conclusion": "success",
@@ -244,7 +319,12 @@
     "download_exit_code": 1,
     "log": "dev/log/issues/23/pulls/24/ci-logs/javascript-25971710347.log",
     "bytes": 0,
-    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/expired-log-downloads.tar.gz",
+    "archive_member": "javascript-25971710347.log",
+    "stderr_archive_member": "javascript-25971710347.stderr",
+    "download_error": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/link-foundation/lino-i18n/actions/runs/25971710347/logs)\n",
+    "stderr_sha256": "cb702210d45ad9df4685ba4e29b941383befd387013e3676b14ce68fce3c695e"
   },
   {
     "conclusion": "success",
@@ -257,7 +337,12 @@
     "download_exit_code": 1,
     "log": "dev/log/issues/23/pulls/24/ci-logs/rust-25971710351.log",
     "bytes": 0,
-    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/expired-log-downloads.tar.gz",
+    "archive_member": "rust-25971710351.log",
+    "stderr_archive_member": "rust-25971710351.stderr",
+    "download_error": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/link-foundation/lino-i18n/actions/runs/25971710351/logs)\n",
+    "stderr_sha256": "0797eb063c4bf4e9f53abdfef5323f6088552ce759fbbb5db03abd0dec77d1ee"
   },
   {
     "conclusion": "success",
@@ -270,7 +355,12 @@
     "download_exit_code": 1,
     "log": "dev/log/issues/23/pulls/24/ci-logs/javascript-25969413865.log",
     "bytes": 0,
-    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/expired-log-downloads.tar.gz",
+    "archive_member": "javascript-25969413865.log",
+    "stderr_archive_member": "javascript-25969413865.stderr",
+    "download_error": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/link-foundation/lino-i18n/actions/runs/25969413865/logs)\n",
+    "stderr_sha256": "fd229e6ad787b12d0227e3f0c71736210741c81c94d248c053a437e224c41e26"
   },
   {
     "conclusion": "success",
@@ -283,7 +373,12 @@
     "download_exit_code": 1,
     "log": "dev/log/issues/23/pulls/24/ci-logs/rust-25969413863.log",
     "bytes": 0,
-    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/expired-log-downloads.tar.gz",
+    "archive_member": "rust-25969413863.log",
+    "stderr_archive_member": "rust-25969413863.stderr",
+    "download_error": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/link-foundation/lino-i18n/actions/runs/25969413863/logs)\n",
+    "stderr_sha256": "840bd39728880dcb757e420717b6073a2f0fcac6053874267b7e72efcdd46349"
   },
   {
     "conclusion": "success",
@@ -296,7 +391,12 @@
     "download_exit_code": 1,
     "log": "dev/log/issues/23/pulls/24/ci-logs/rust-25968707505.log",
     "bytes": 0,
-    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/expired-log-downloads.tar.gz",
+    "archive_member": "rust-25968707505.log",
+    "stderr_archive_member": "rust-25968707505.stderr",
+    "download_error": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/link-foundation/lino-i18n/actions/runs/25968707505/logs)\n",
+    "stderr_sha256": "739075e6e612dd3ebb7bc1988444f8d0e3262588411bebf6b03642b3f5195dbb"
   },
   {
     "conclusion": "success",
@@ -309,7 +409,12 @@
     "download_exit_code": 1,
     "log": "dev/log/issues/23/pulls/24/ci-logs/javascript-25968707531.log",
     "bytes": 0,
-    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/expired-log-downloads.tar.gz",
+    "archive_member": "javascript-25968707531.log",
+    "stderr_archive_member": "javascript-25968707531.stderr",
+    "download_error": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/link-foundation/lino-i18n/actions/runs/25968707531/logs)\n",
+    "stderr_sha256": "391d9d740bf0f43ba92aebba7046167e96b3c8772cf37cf7131d97cc0f528f8d"
   },
   {
     "conclusion": "success",
@@ -322,7 +427,12 @@
     "download_exit_code": 1,
     "log": "dev/log/issues/23/pulls/24/ci-logs/broken-link-checker-25966936239.log",
     "bytes": 0,
-    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/expired-log-downloads.tar.gz",
+    "archive_member": "broken-link-checker-25966936239.log",
+    "stderr_archive_member": "broken-link-checker-25966936239.stderr",
+    "download_error": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/link-foundation/lino-i18n/actions/runs/25966936239/logs)\n",
+    "stderr_sha256": "04c238ddfd570d9f123dc07f13e6211cb835cb4de3f45e5d8e4c588810941c83"
   },
   {
     "conclusion": "failure",
@@ -335,7 +445,12 @@
     "download_exit_code": 1,
     "log": "dev/log/issues/23/pulls/24/ci-logs/example-app-25966936251.log",
     "bytes": 0,
-    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/expired-log-downloads.tar.gz",
+    "archive_member": "example-app-25966936251.log",
+    "stderr_archive_member": "example-app-25966936251.stderr",
+    "download_error": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/link-foundation/lino-i18n/actions/runs/25966936251/logs)\n",
+    "stderr_sha256": "b2b221fb00ce9d5e4bcb7301279f1151e0e62262e1795968296502b0fc3b110a"
   },
   {
     "conclusion": "failure",
@@ -348,7 +463,12 @@
     "download_exit_code": 1,
     "log": "dev/log/issues/23/pulls/24/ci-logs/javascript-25966936229.log",
     "bytes": 0,
-    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/expired-log-downloads.tar.gz",
+    "archive_member": "javascript-25966936229.log",
+    "stderr_archive_member": "javascript-25966936229.stderr",
+    "download_error": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/link-foundation/lino-i18n/actions/runs/25966936229/logs)\n",
+    "stderr_sha256": "559e547c7ee60e2e3d9d2942b19928ba732205799a51f5f47644252173d49eba"
   },
   {
     "conclusion": "failure",

@@ -2,6 +2,8 @@
 
 Start with [ANALYSIS.md](ANALYSIS.md), [TEMPLATE-COMPARISON.md](TEMPLATE-COMPARISON.md) and [SOURCES.md](SOURCES.md). Historical and fresh CI logs remain directly readable in `ci-logs/`; their download manifest distinguishes successful retrieval from expired logs.
 
+The 24 expired historical downloads (empty log files and GitHub's error messages) are bundled in `ci-logs/expired-log-downloads.tar.gz`. Each manifest entry retains its original path/checksum and identifies its archive member, error text and stderr checksum. Read an error directly with `tar -xOf ci-logs/expired-log-downloads.tar.gz javascript-26050991046.stderr`.
+
 The complete preserved template sources are in `templates/js-source.tar.gz` and `templates/rust-source.tar.gz`. Full tree JSON/text files, the 599-file comparison and `preserved-files.json` identify every path and checksum. The snapshots include workflows, actions, CI helpers/configuration and relevant regression tests. To inspect them locally, from this folder:
 
 ```bash

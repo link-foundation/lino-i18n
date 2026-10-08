@@ -169,3 +169,4 @@ __pycache__/
 dev/log/issues/23/pulls/24/templates/js/
 dev/log/issues/23/pulls/24/templates/rust/
 dev/log/issues/23/pulls/24/verification/local-history/
+dev/log/issues/23/pulls/24/ci-logs/expired/
