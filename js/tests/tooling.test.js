@@ -200,3 +200,31 @@ test('translation providers produce validated incremental candidates without ove
     /variables/
   );
 });
+
+test('extraction follows Next factory accessors, server content and client source hooks', () => {
+  const result = extractMessages(`
+    import { createNextI18n } from 'lino-i18n/next/server';
+    import { useGT, T } from 'lino-i18n/next/client';
+    const next = createNextI18n({});
+    const gt = await next.getGT(); gt('Server source');
+    const messages = await next.getMessages(); messages('Server message');
+    const translator = await next.getTranslator(); translator.gt('Server instance');
+    const { T: ServerT, getGT } = createNextI18n({});
+    const scoped = await getGT('fr'); scoped('Explicit static locale');
+    const content = <ServerT>Hello server</ServerT>;
+    function Client() { const gt = useGT(); gt('Client source'); return <T>Hello client</T>; }
+  `);
+  assert.deepEqual(result.diagnostics, []);
+  assert.deepEqual(
+    result.messages.map(({ source }) => source),
+    [
+      'Server source',
+      'Server message',
+      'Server instance',
+      'Explicit static locale',
+      'Hello server',
+      'Client source',
+      'Hello client',
+    ]
+  );
+});

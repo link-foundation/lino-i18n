@@ -379,3 +379,5 @@ catalog syntax, not a byte-identical ICU rendering guarantee.
 The native `lino-i18n/browser` entry remains dependency-free. It exposes the
 existing translator and pure Intl helpers; source ICU, extraction and React
 entries require a bundler or an environment that resolves npm packages.
+
+For Next 16 App Router, the optional [Next adapter](next.md) provides server accessors, proxy cookies, snapshot hydration, localized navigation, static params and metadata.

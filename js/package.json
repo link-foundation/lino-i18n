@@ -62,12 +62,24 @@
     "./providers/gt": {
       "types": "./src/providers/gt.d.ts",
       "import": "./src/providers/gt.js"
+    },
+    "./next/server": {
+      "types": "./src/next/server.d.ts",
+      "import": "./src/next/server.js"
+    },
+    "./next/client": {
+      "types": "./src/next/client.d.ts",
+      "import": "./src/next/client.js"
+    },
+    "./next/proxy": {
+      "types": "./src/next/proxy.d.ts",
+      "import": "./src/next/proxy.js"
     }
   },
   "scripts": {
     "test": "node --throw-deprecation --test --test-timeout=30000 tests/*.test.js",
     "test:browser": "playwright test",
-    "test:types": "tsc --project tests/types/tsconfig.json",
+    "test:types": "tsc --project tests/types/tsconfig.json && tsc --project tests/types/tsconfig.next.json",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
@@ -78,7 +90,9 @@
     "changeset:version": "node scripts/changeset-version.mjs",
     "changeset:publish": "changeset publish",
     "pack:dry-run": "npm pack --dry-run",
-    "lint:secrets": "secretlint \"bin/**\" \"src/**\" \"scripts/**\" \"tests/**\" \"../scripts/**\" \"../rust/scripts/**\" \"../rust/lino-i18n/src/**\" \"../rust/lino-i18n/tests/**\" \"../rust/lino-i18n-macros/src/**\" \"../.github/**\" \"../.githooks/**\""
+    "lint:secrets": "secretlint \"bin/**\" \"src/**\" \"scripts/**\" \"tests/**\" \"../scripts/**\" \"../rust/scripts/**\" \"../rust/lino-i18n/src/**\" \"../rust/lino-i18n/tests/**\" \"../rust/lino-i18n-macros/src/**\" \"../.github/**\" \"../.githooks/**\"",
+    "test:next": "playwright test --config playwright-next.config.js",
+    "build:next": "next build examples/next-usage --webpack"
   },
   "keywords": [
     "i18n",
@@ -131,6 +145,7 @@
     "generaltranslation": "9.5.5",
     "jscpd": "^5.4.0",
     "jsdom": "^30.1.2",
+    "next": "16.4.0",
     "prettier": "^3.9.9",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
@@ -141,9 +156,13 @@
   },
   "peerDependencies": {
     "generaltranslation": ">=9.5.5 <10",
+    "next": ">=16 <17",
     "react": ">=18.0.0"
   },
   "peerDependenciesMeta": {
+    "next": {
+      "optional": true
+    },
     "generaltranslation": {
       "optional": true
     },

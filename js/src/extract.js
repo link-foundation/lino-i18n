@@ -33,7 +33,9 @@ function memberApi(path, node, seen) {
   const object = apiName(path, node.object, seen);
   const property = node.computed ? literal(node.property) : node.property.name;
   return object === '*' ||
-    (object === 'translator' && ['gt', 'm', 'tx'].includes(property))
+    (object === 'translator' && ['gt', 'm', 'tx'].includes(property)) ||
+    (object === 'next' &&
+      ['getGT', 'getMessages', 'getTranslator', 'T', 'Tx'].includes(property))
     ? property
     : undefined;
 }
@@ -45,7 +47,7 @@ function bindingApi(binding, localName, seen) {
   ) {
     const source = binding.path.parent.source.value;
     if (
-      !/^lino-i18n(?:\/(?:messages|react|react-server|server|node))?$/.test(
+      !/^lino-i18n(?:\/(?:messages|react|react-server|server|node|next\/(?:server|client)))?$/.test(
         source
       )
     ) {
@@ -66,22 +68,30 @@ function bindingApi(binding, localName, seen) {
       if (['useGT', 'useMessages', 'getGT', 'getMessages'].includes(name)) {
         return 'gt';
       }
+      if (name === 'createNextI18n') {
+        return factoryBinding(id, localName, 'next');
+      }
       if (
         [
           'createTranslator',
           'createDictionaryTranslator',
           'createRequestTranslator',
+          'getTranslator',
         ].includes(name)
       ) {
-        return id.type === 'ObjectPattern'
-          ? id.properties.find((property) => property.value?.name === localName)
-              ?.key?.name
-          : 'translator';
+        return factoryBinding(id, localName, 'translator');
       }
     }
     return apiName(binding.path, init, seen);
   }
   return undefined;
+}
+
+function factoryBinding(id, localName, kind) {
+  return id.type === 'ObjectPattern'
+    ? id.properties.find((property) => property.value?.name === localName)?.key
+        ?.name
+    : kind;
 }
 
 function staticOptions(node) {

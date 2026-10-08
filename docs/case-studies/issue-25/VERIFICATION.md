@@ -29,11 +29,13 @@ Run JavaScript commands from `js/` and other commands from the repository root.
 
 | Command | Result |
 | --- | --- |
-| `npm test` | 98 tests pass with a 30-second per-test timeout. |
-| `bun test --timeout 30000` | 98 tests pass. |
-| `deno test --no-check --allow-read --allow-write --allow-env --allow-run` | 98 tests pass. Node subprocesses run CLI/Rollup build integration fixtures. |
-| `npm run test:types` | Public source, React, browser, server and tooling declarations compile. |
-| `npm run test:browser` | Three Chromium tests pass, including React source content switching and native browser export/tree shaking. |
+| `npm test` | 127 tests pass with a 30-second per-test timeout. |
+| `bun test --timeout 30000` | 127 tests pass. |
+| `deno test --no-check --allow-read --allow-write --allow-env --allow-run` | 127 tests pass. Node subprocesses run CLI/Rollup build integration fixtures. |
+| `npm run test:types` | Core declarations compile with the existing strict check; optional Next usage compiles with the framework type configuration. |
+| `npm run test:browser` | Four Chromium tests pass, including React source content switching and native browser export/tree shaking. |
+| `npm run build:next` and `LINO_NEXT_PRODUCTION=1 npm run test:next` | Production Next 16.4.0 build generates both locale static pages; four Chromium tests cover hydration, request/cache isolation, cookies, navigation, metadata and document language/direction. |
+| `node experiments/gt-sdk-contract.mjs` | Published GT 9.5.5 SDK sends real HTTP runtime, upload and versioned-download contracts to an isolated loopback fixture. |
 | `npm run check` | ESLint, Prettier and duplication checks pass. |
 | `npm run lint:secrets` | Pass. |
 | `npm audit --package-lock-only --audit-level=high` | Zero vulnerabilities reported. |
@@ -82,10 +84,13 @@ downloaded before making corrections.
 
 ## Limits of the evidence
 
-Framework deployment, real translation providers and full GT services were not
-exercised. Generic request helpers and mocked provider contracts do not prove
-dedicated Next/TanStack/Native/Vue/Sanity compatibility or hosted-service parity.
-Those requirements remain in the capability matrix. Minor release fragments
+Next App Router is exercised with a production build and real browser/HTTP
+requests. The published GT SDK is exercised against a loopback HTTP fixture,
+including opaque ids and versioned uploads/downloads. No GT project id or API
+key is configured, so live translation jobs, publication, billing and hosted
+deployment remain unverified. TanStack/Native/Vue/Sanity and other ecosystem
+requirements remain in the capability matrix; local checks do not establish
+full ecosystem or hosted-service parity. Minor release fragments
 prepare the existing release automation; no release was published directly.
 
 ## Currency visual regression
@@ -99,3 +104,27 @@ totals; the unit regression also checks an explicit locale and zero value.
 ![Currency children before correction](../../screenshots/issue-25-currency-before.png)
 
 ![Currency children after correction](../../screenshots/issue-25-currency-after.png)
+
+## Additional conformance regressions
+
+| Reproduction | Before / after | Regression coverage |
+| --- | --- | --- |
+| Use a custom Arabic catalog identity for keyed or server plural selection | Selected the wrong plural category; now uses the canonical locale without changing catalog identity. | `locale-config.test.js`, `react-server.test.js` |
+| Extract Node scoped helpers and async server factories | Sources were omitted; now follow the recognized imported APIs and await expressions. | `tooling.test.js` |
+| Compile an automatic variable beside an explicit `auto0` variable | Compiler names collided; automatic names now reserve existing explicit names. | `compiler.test.js` |
+| Pass `__proto__` to the real GT SDK record input | SDK's ordinary-object conversion omitted the id; array input safely preserves it. | `gt-provider.test.js`, `experiments/gt-sdk-contract.mjs` |
+| Call Next `getTranslator()` and `getGT()` in one server render | React's omitted/undefined argument keys created different instances; normalized keys share one instance. | `tests/next-browser/app.pw.js` |
+| Build a Next client entry with `export *` | Next rejects wildcard exports at the client boundary; named exports build successfully. | Production Next fixture in CI |
+| Prefetch a link targeting another locale | Next strips prefetch headers before Proxy; background fetches now only forward the payload locale, and actual link navigation persists the preference while respecting cancellation. | `next.test.js` and `tests/next-browser/app.pw.js` |
+| Request an unknown asset path in the Next fixture | Filename became a locale and returned 500; route validation now returns 404. | `tests/next-browser/app.pw.js` |
+| Navigate Next locale pages without document language attributes | `html.lang` was absent; the localized root layout supplies canonical language and direction, including static pages. | `tests/next-browser/app.pw.js` |
+
+## Compiler and Next visual evidence
+
+![Compiler example in English](../../screenshots/issue-25-compiler-en.png)
+
+![Compiler example in French](../../screenshots/issue-25-compiler-fr.png)
+
+![Next App Router in English](../../screenshots/issue-25-next-en.png)
+
+![Next App Router in French](../../screenshots/issue-25-next-fr.png)

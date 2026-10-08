@@ -371,6 +371,15 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: npm run test:types
       - run: npm run test:browser
+      - name: Build the Next App Router fixture
+        run: npm run build:next
+        env:
+          NEXT_TELEMETRY_DISABLED: '1'
+      - name: Check production Next navigation and request isolation
+        run: npm run test:next
+        env:
+          LINO_NEXT_PRODUCTION: '1'
+          NEXT_TELEMETRY_DISABLED: '1'
       - uses: actions/upload-artifact@v7
         if: failure()
         with:

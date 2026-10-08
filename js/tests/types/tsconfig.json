@@ -8,5 +8,6 @@
     "lib": ["ES2022", "DOM"],
     "types": ["node", "react"]
   },
-  "include": ["*.ts", "*.tsx"]
+  "include": ["*.ts", "*.tsx"],
+  "exclude": ["next.tsx"]
 }

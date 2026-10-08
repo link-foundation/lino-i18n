@@ -51,6 +51,9 @@ test('npm package dry-run contains the publishable runtime surface', () => {
     'tooling',
     'compiler',
     'providers/gt',
+    'next/server',
+    'next/client',
+    'next/proxy',
   ]) {
     const entry = packageJson.exports[`./${subpath}`];
     assert.ok(

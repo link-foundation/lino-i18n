@@ -18,6 +18,8 @@ export default [
         console: 'readonly',
         process: 'readonly',
         Buffer: 'readonly',
+        Headers: 'readonly',
+        setImmediate: 'readonly',
         __dirname: 'readonly',
         __filename: 'readonly',
         require: 'readonly',
@@ -83,6 +85,7 @@ export default [
       'examples/universal-app/src/**/*.js',
       'examples/browser-usage/*.js',
       'examples/react-usage/*.js',
+      'src/next/client.js',
     ],
     languageOptions: {
       globals: {
@@ -108,6 +111,8 @@ export default [
     ignores: [
       // JSX examples are parsed and exercised by the compiler and browser suite.
       'examples/compiler-usage/*.jsx',
+      'examples/next-usage/**/*.jsx',
+      '**/.next/**',
       'node_modules/**',
       '**/node_modules/**',
       'coverage/**',

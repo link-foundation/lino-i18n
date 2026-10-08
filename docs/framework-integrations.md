@@ -2,24 +2,18 @@
 
 The source runtime is instance-based. Frameworks can share immutable catalogs
 but should create a translator for each server request and each independent
-client application. The examples below describe integration points, not shipped
-framework plugins. The tested surfaces are Web Request/Response helpers, React
-server rendering and hydration, and the Vite/Rollup extraction plugin.
+client application. The tested framework adapter is Next 16 App Router; Web Request/Response,
+React server rendering/hydration and Vite/Rollup extraction are also tested.
+Other framework sections describe integration points and their remaining limits.
 
 ## Next.js and React server components
 
-Call `createRequestTranslator(request, options)` in the request boundary, then
-pass the result explicitly to `T`/`Tx` from `lino-i18n/react-server`. Pass its
-snapshot as serializable data to a client component which creates a translator
-and wraps children in `I18nProvider` from `lino-i18n/react`.
-
-Use `localizePath`/`stripLocale` for supported path prefixes. Convert the optional
-Web `Response` returned by `createLocaleMiddleware` to the framework's expected
-response at its middleware boundary. Apply the application's caching rules to
-localized pages; include locale/version in application cache keys. Generate
-static paths and alternate-language SEO links using the supported locale list.
-There is no built-in Next middleware matcher, Next cookie writer, link component
-or SSG plugin. Those integrations require framework-specific tests.
+The optional `lino-i18n/next/server`, `/next/client` and `/next/proxy` entries
+provide request-scoped server helpers, snapshot hydration, locale cookies,
+localized links/navigation, static params and alternate-language metadata.
+The [Next guide](next.md) documents the API, production App Router fixture,
+concurrent request and hydration checks, and application-specific boundaries.
+See `js/examples/next-usage`. Next remains an optional peer dependency.
 
 ## TanStack Start, React Router and Node servers
 

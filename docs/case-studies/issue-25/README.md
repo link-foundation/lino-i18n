@@ -5,7 +5,8 @@ React support, a similarly simple code-only API, comparison with General
 Translation (GT), collected evidence, and a plan covering every requirement in
 one pull request. [PR 28](https://github.com/link-foundation/lino-i18n/pull/28)
 implements source messages, rich React translation, optional ICU in Rust,
-request isolation, locale utilities and a local extraction/translation workflow.
+request isolation, typed dictionaries, locale configuration, a JSX compiler,
+Next App Router integration, optional GT SDK services and local extraction/translation workflows.
 
 **This is substantial runtime and tooling coverage, not complete feature parity
 with the entire GT monorepo.** GT also includes hosted services, framework
@@ -79,7 +80,7 @@ so a slow previous locale selection cannot overwrite the latest selection.
 | Derivation | Execute application functions; unlimited enumeration; bounded static analysis | Enumerate local static returns/dictionaries/conditionals; fail with diagnostics at 100 variants or 20 levels. |
 | Framework state | Global mutable singleton; per-request explicit instance | Explicit instances and JSON snapshots make concurrency and hydration testable without framework dependencies. |
 | Translation services | Embed one vendor SDK; use a provider interface | Providers return validated candidates; approved entries are preserved and catalog format stays portable. |
-| Compiler integration | Rewrite all JSX immediately; build-time asset extraction | Vite/Rollup plugin emits a catalog and manifest. Automatic wrapping and attribute rewriting require a separate semantic design. |
+| Compiler integration | Regex wrapping; unbounded evaluation; AST transformation | Opt-in Babel transform wraps JSX text/variables and configured attributes, retains source maps and explicit boundaries, and emits matching manifests through Vite/Rollup. |
 | Native browser | Add npm imports to the browser entry; optional bundled features | Native browser API remains dependency-free; source ICU and React use separate bundled entries. |
 
 Known alternatives include GT itself for its hosted/framework workflows,
@@ -102,8 +103,7 @@ No service provider is selected on behalf of applications.
 
 The [source-message guide](../../source-messages.md) documents actual signatures,
 examples and limits. The [framework guide](../../framework-integrations.md)
-distinguishes portable primitives from dedicated integrations that do not yet
-exist. The branch supplies minor release fragments for both JS and Rust.
+documents the tested Next adapter and remaining ecosystem boundaries. The branch supplies minor release fragments for both JS and Rust.
 
 ## Reproduction and verification
 

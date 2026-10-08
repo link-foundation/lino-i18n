@@ -11,3 +11,5 @@ Add typed dictionary schemas, canonical/custom locale configuration, scoped Node
 request access, automatic JSX/attribute compilation and an optional GT SDK bridge.
 Round-trip quoted source keys without interpreting prototype property names.
 Preserve complete ICU semantics when converting compiled FormatJS catalogs.
+
+Add an optional Next 16 App Router adapter for request-scoped server access, hydration, locale proxy/cookies, localized navigation, static params and SEO, verified with a production build and browser tests.
