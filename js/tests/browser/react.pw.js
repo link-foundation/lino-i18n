@@ -8,6 +8,7 @@ test('React source content, nested nodes, plural and currency update in Chromium
   await page.goto('/examples/react-usage/');
   await expect(page.getByRole('heading')).toHaveText('Welcome, Ada!');
   await expect(page.locator('#items')).toHaveText('2 items in your cart');
+  await expect(page.locator('#total')).toHaveText('Total: €25.00');
   await page.getByRole('combobox', { name: 'Language' }).selectOption('fr');
   await expect(page.getByRole('heading')).toHaveText('Ada, bienvenue !');
   await expect(page.locator('h1 strong')).toHaveText('Ada');

@@ -17,6 +17,7 @@ import {
   T,
   Var,
   Currency,
+  CurrencyFormat,
 } from '../src/react.js';
 
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
@@ -93,6 +94,27 @@ test('hooks fail clearly outside I18nProvider', () => {
     () => renderToString(h(Invalid)),
     /must be used inside an I18nProvider/
   );
+});
+
+test('currency children, locale overrides and legacy values format correctly', async () => {
+  const i18n = createTranslator({ defaultLocale: 'fr', region: 'CA' });
+  const root = render(
+    h(
+      I18nProvider,
+      { i18n },
+      h(Currency, { currency: 'USD', locale: 'en-US' }, 2),
+      ' / ',
+      h(CurrencyFormat, { currency: 'USD', value: 0 })
+    )
+  );
+  const expected = (locale) =>
+    `$2.00 / ${new Intl.NumberFormat(locale, {
+      style: 'currency',
+      currency: 'USD',
+    }).format(0)}`;
+  assert.equal(root.container.textContent, expected('fr-CA'));
+  await act(() => i18n.setRegion('GB'));
+  assert.equal(root.container.textContent, expected('fr-GB'));
 });
 
 test('source-message snapshots hydrate and receive catalog and region updates', async () => {

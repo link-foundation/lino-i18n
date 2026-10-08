@@ -70,7 +70,7 @@ function App() {
           h(
             Var,
             { name: 'amount' },
-            h(Currency, { value: count * 12.5, currency: 'EUR' })
+            h(Currency, { currency: 'EUR' }, count * 12.5)
           )
         )
       )

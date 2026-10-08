@@ -128,9 +128,9 @@ export function RelativeTimeFormat({ value, unit, options }) {
   return new Intl.RelativeTimeFormat(locale, options).format(value, unit);
 }
 
-export function CurrencyFormat({ value, currency, options }) {
+export function CurrencyFormat({ currency, options, ...props }) {
   return createElement(NumberFormat, {
-    value,
+    ...props,
     options: { style: 'currency', currency, ...options },
   });
 }

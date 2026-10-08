@@ -21,6 +21,7 @@ See PR 28's checks for the final pushed revision and platform matrix.
 | Derive a boolean JSX child | Extracted `Hello false` where React renders `Hello `. | `derivation.test.js` |
 | Follow inherited case-study links after moving their files | Three links target missing files. | `experiments/issue-25-ci-regressions.py` |
 | Run PR checks with the release preflight intentionally skipped | Changeset, changelog, browser and CLI jobs skip despite detected code changes. | Workflow policy and `experiments/issue-25-ci-regressions.py` |
+| Pass a currency value as React children with a locale override | The component displayed `NaN` in the provider locale instead of `$2.00`. | `react.test.js`, browser React example and before/after screenshots |
 
 ## Local checks
 
@@ -28,9 +29,9 @@ Run JavaScript commands from `js/` and other commands from the repository root.
 
 | Command | Result |
 | --- | --- |
-| `npm test` | 97 tests pass with a 30-second per-test timeout. |
-| `bun test --timeout 30000` | 97 tests pass. |
-| `deno test --no-check --allow-read --allow-write --allow-env --allow-run` | 97 tests pass. Node subprocesses run CLI/Rollup build integration fixtures. |
+| `npm test` | 98 tests pass with a 30-second per-test timeout. |
+| `bun test --timeout 30000` | 98 tests pass. |
+| `deno test --no-check --allow-read --allow-write --allow-env --allow-run` | 98 tests pass. Node subprocesses run CLI/Rollup build integration fixtures. |
 | `npm run test:types` | Public source, React, browser, server and tooling declarations compile. |
 | `npm run test:browser` | Three Chromium tests pass, including React source content switching and native browser export/tree shaking. |
 | `npm run check` | ESLint, Prettier and duplication checks pass. |
@@ -38,6 +39,7 @@ Run JavaScript commands from `js/` and other commands from the repository root.
 | `npm audit --package-lock-only --audit-level=high` | Zero vulnerabilities reported. |
 | `bash scripts/check-mjs-syntax.sh` | Pass. |
 | `node examples/source-messages.mjs` | Source/deferred/context/derived example runs. |
+| `node experiments/currency-props.mjs` | Generates before/after browser fixtures using the archived adapter and current adapter with identical source children. |
 | `node bin/lino-i18n.js extract --in examples/source-messages.mjs --out ../ci-logs/example-catalogs` | Example sources extract without executing application code. |
 | `cargo test --locked --manifest-path rust/Cargo.toml --workspace --all-features` | Pass, including optional ICU and doctests. |
 | `cargo +1.87.0 test --locked --manifest-path rust/Cargo.toml --workspace --all-targets` | Default-feature MSRV tests pass. |
@@ -85,3 +87,15 @@ exercised. Generic request helpers and mocked provider contracts do not prove
 dedicated Next/TanStack/Native/Vue/Sanity compatibility or hosted-service parity.
 Those requirements remain in the capability matrix. Minor release fragments
 prepare the existing release automation; no release was published directly.
+
+## Currency visual regression
+
+The children-based example against the adapter in commit `0d70b71` displays
+`Total: €NaN`. The corrected adapter forwards children and locale overrides,
+while retaining legacy value props and region subscriptions. The same example
+then displays `Total: €25.00`. The browser regression checks English and French
+totals; the unit regression also checks an explicit locale and zero value.
+
+![Currency children before correction](../../screenshots/issue-25-currency-before.png)
+
+![Currency children after correction](../../screenshots/issue-25-currency-after.png)
