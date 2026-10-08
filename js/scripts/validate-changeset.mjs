@@ -10,7 +10,7 @@
  * - Falls back to checking all changesets for local development
  */
 
-import { execSync } from 'child_process';
+import { getPrChanges, getPrComparison, git } from './pr-comparison.mjs';
 import { readFileSync, readdirSync, existsSync } from 'fs';
 import { join } from 'path';
 
@@ -20,152 +20,30 @@ import {
   readPackageInfo,
 } from './package-info.mjs';
 
-/**
- * Ensure a git commit is available locally, fetching if necessary
- * @param {string} sha The commit SHA to check
- */
-function ensureCommitAvailable(sha) {
-  try {
-    execSync(`git cat-file -e ${sha}`, { stdio: 'ignore' });
-  } catch {
-    console.log('Base commit not available locally, attempting fetch...');
-    try {
-      execSync(`git fetch origin ${sha}`, { stdio: 'inherit' });
-    } catch {
-      execSync(`git fetch origin`, { stdio: 'inherit' });
-    }
-  }
-}
-
-function gitPathForCurrentDirectory(relativePath) {
-  const normalized = relativePath.replace(/\\/g, '/').replace(/^\.\//, '');
-  const prefix = execSync('git rev-parse --show-prefix', {
-    encoding: 'utf-8',
-  })
-    .trim()
-    .replace(/\/$/, '');
-
-  return [prefix, normalized].filter(Boolean).join('/');
-}
-
-/**
- * Parse git diff output and extract added changeset files
- * @param {string} diffOutput Output from git diff --name-status
- * @param {string} changesetDir Path to the changeset directory
- * @returns {string[]} Array of added changeset file names
- */
-function parseAddedChangesets(diffOutput, changesetDir) {
-  const addedChangesets = [];
-  const changesetGitPath = gitPathForCurrentDirectory(changesetDir);
-  for (const line of diffOutput.trim().split('\n')) {
-    if (!line) {
-      continue;
-    }
-    const [status, filePath] = line.split('\t');
-    if (
-      status === 'A' &&
-      filePath.startsWith(`${changesetGitPath}/`) &&
-      filePath.endsWith('.md') &&
-      !filePath.endsWith('README.md')
-    ) {
-      addedChangesets.push(filePath.replace(`${changesetGitPath}/`, ''));
-    }
-  }
-  return addedChangesets;
-}
-
-/**
- * Try to get changesets using explicit SHA comparison
- * @param {string} baseSha Base commit SHA
- * @param {string} headSha Head commit SHA
- * @param {string} changesetDir Path to the changeset directory
- * @returns {string[] | null} Array of changeset files or null if failed
- */
-function tryExplicitShaComparison(baseSha, headSha, changesetDir) {
-  console.log(`Comparing ${baseSha}...${headSha}`);
-  try {
-    ensureCommitAvailable(baseSha);
-    const diffOutput = execSync(
-      `git diff --name-status ${baseSha} ${headSha}`,
-      { encoding: 'utf-8' }
-    );
-    return parseAddedChangesets(diffOutput, changesetDir);
-  } catch (error) {
-    console.log(`Git diff with explicit SHAs failed: ${error.message}`);
-    return null;
-  }
-}
-
-/**
- * Try to get changesets using base branch comparison
- * @param {string} prBase Base branch name
- * @param {string} changesetDir Path to the changeset directory
- * @returns {string[] | null} Array of changeset files or null if failed
- */
-function tryBaseBranchComparison(prBase, changesetDir) {
-  console.log(`Comparing against base branch: ${prBase}`);
-  try {
-    try {
-      execSync(`git fetch origin ${prBase}`, { stdio: 'inherit' });
-    } catch {
-      // Ignore fetch errors, we might already have it
-    }
-    const diffOutput = execSync(
-      `git diff --name-status origin/${prBase}...HEAD`,
-      { encoding: 'utf-8' }
-    );
-    return parseAddedChangesets(diffOutput, changesetDir);
-  } catch (error) {
-    console.log(`Git diff with base ref failed: ${error.message}`);
-    return null;
-  }
-}
-
-/**
- * Fallback: get all changesets in directory
- * @param {string} changesetDir Path to the changeset directory
- * @returns {string[]} Array of all changeset file names
- */
-function getAllChangesets(changesetDir) {
-  console.log(
-    'Warning: Could not determine PR diff, checking all changesets in directory'
-  );
-  if (!existsSync(changesetDir)) {
-    return [];
-  }
-  return readdirSync(changesetDir).filter(
-    (file) => file.endsWith('.md') && file !== 'README.md'
-  );
-}
-
-/**
- * Get changeset files added in the current PR using git diff
- * @param {string} changesetDir Path to the changeset directory
- * @returns {string[]} Array of added changeset file names
- */
+/** Only genuinely added fragments from the complete PR can satisfy CI. */
 function getAddedChangesetFiles(changesetDir) {
-  const baseSha = process.env.GITHUB_BASE_SHA || process.env.BASE_SHA;
-  const headSha = process.env.GITHUB_HEAD_SHA || process.env.HEAD_SHA;
-
-  // Try explicit SHAs first
-  if (baseSha && headSha) {
-    const result = tryExplicitShaComparison(baseSha, headSha, changesetDir);
-    if (result !== null) {
-      return result;
-    }
+  const hasContext =
+    process.env.GITHUB_EVENT_NAME === 'pull_request' ||
+    process.env.GITHUB_BASE_SHA ||
+    process.env.GITHUB_BASE_REF;
+  if (!hasContext) {
+    return existsSync(changesetDir)
+      ? readdirSync(changesetDir).filter(
+          (file) => file.endsWith('.md') && file !== 'README.md'
+        )
+      : [];
   }
-
-  // Try base branch comparison
-  const prBase = process.env.GITHUB_BASE_REF;
-  if (prBase) {
-    const result = tryBaseBranchComparison(prBase, changesetDir);
-    if (result !== null) {
-      return result;
-    }
-  }
-
-  // Fallback to checking all changesets
-  return getAllChangesets(changesetDir);
+  const prefix = git(['rev-parse', '--show-prefix']);
+  const directory = `${prefix}${changesetDir.replace(/^\.\//, '')}/`;
+  return getPrChanges(getPrComparison())
+    .filter(
+      ({ status, path }) =>
+        status === 'A' &&
+        path.startsWith(directory) &&
+        path.endsWith('.md') &&
+        !path.endsWith('/README.md')
+    )
+    .map(({ path }) => path.slice(directory.length));
 }
 
 /**

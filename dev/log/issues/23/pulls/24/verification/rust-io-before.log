@@ -1,0 +1,22 @@
+get-bump-type: exit=0
+No changelog fragments found
+
+Determined bump type: patch (from 0 fragment(s))
+Output: bump_type=patch
+Output: fragment_count=0
+Output: has_fragments=false
+Detected single-language repository (Cargo.toml in root)
+
+check-file-size: exit=0
+
+Checking Rust files for maximum 1000 lines (warning above 900)...
+
+All files are within the line limit
+
+Warning: Could not read /tmp/lino-rust-io-2klmis9k/invalid.rs: stream did not contain valid UTF-8
+
+Traceback (most recent call last):
+  File "/tmp/gh-issue-solver-1791452293811/experiments/issue-23-rust-io.py", line 26, in <module>
+    assert not failures, f"Helpers passed without checking their inputs: {failures}"
+           ^^^^^^^^^^^^
+AssertionError: Helpers passed without checking their inputs: ['get-bump-type', 'check-file-size']

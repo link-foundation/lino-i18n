@@ -1,0 +1,690 @@
+
+> lino-i18n@0.3.0 lint:secrets
+> secretlint "bin/**" "src/**" "scripts/**" "tests/**" "../scripts/**" "../rust/scripts/**" "../rust/lino-i18n/src/**" "../rust/lino-i18n/tests/**" "../rust/lino-i18n-macros/src/**" "../.github/**" "../.githooks/**"
+
+
+> lino-i18n@0.3.0 check
+> npm run lint && npm run format:check && npm run check:duplication
+
+
+> lino-i18n@0.3.0 lint
+> eslint . --max-warnings 0
+
+
+> lino-i18n@0.3.0 format:check
+> prettier --check .
+
+Checking formatting...
+All matched files use Prettier code style!
+
+> lino-i18n@0.3.0 check:duplication
+> jscpd --fail-on-empty .
+
+Using config from .jscpd.json
+[1mClone found (javascript)[22m
+ - [1m[32mbin/lino-i18n.js[39m[22m [159:17 - 164:30] (6 lines, 31 tokens)
+   src/loaders.js [41:24 - 46:30]
+[1mClone found (javascript)[22m
+ - [1m[32mexamples/basic-usage.mjs[39m[22m [8:47 - 13:6] (6 lines, 35 tokens)
+   tests/i18n.test.js [17:1 - 22:5]
+[1mClone found (javascript)[22m
+ - [1m[32mexamples/basic-usage.mjs[39m[22m [13:1 - 18:4] (6 lines, 32 tokens)
+   tests/i18n.test.js [278:3 - 283:6]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/changeset-version.mjs[39m[22m [18:44 - 23:17] (6 lines, 36 tokens)
+   scripts/version-and-commit.mjs [96:50 - 101:19]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/check-changesets.mjs[39m[22m [19:35 - 31:15] (13 lines, 39 tokens)
+   scripts/check-release-needed.mjs [50:66 - 62:15]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/check-changesets.mjs[39m[22m [19:35 - 38:9] (20 lines, 48 tokens)
+   scripts/check-web-archive.mjs [28:65 - 51:9]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/check-changesets.mjs[39m[22m [26:1 - 31:15] (6 lines, 38 tokens)
+   scripts/check-docker-publish.mjs [99:1 - 104:15]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/check-docker-publish.mjs[39m[22m [96:4 - 105:2] (10 lines, 48 tokens)
+   scripts/wait-for-npm.mjs [87:4 - 96:2]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/check-docker-publish.mjs[39m[22m [100:9 - 107:9] (8 lines, 38 tokens)
+   scripts/check-release-needed.mjs [58:9 - 69:9]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/check-docker-publish.mjs[39m[22m [104:42 - 115:7] (12 lines, 46 tokens)
+   scripts/wait-for-npm.mjs [121:15 - 132:7]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/check-docker-publish.mjs[39m[22m [105:1 - 113:2] (9 lines, 44 tokens)
+   scripts/create-github-release.mjs [290:1 - 298:2]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/create-manual-changeset.mjs[39m[22m [16:76 - 25:15] (10 lines, 35 tokens)
+   scripts/format-release-notes.mjs [27:44 - 37:15]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/create-manual-changeset.mjs[39m[22m [16:76 - 34:18] (19 lines, 88 tokens)
+   scripts/instant-version-bump.mjs [29:24 - 47:18]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/create-manual-changeset.mjs[39m[22m [34:50 - 42:4] (9 lines, 32 tokens)
+   scripts/format-release-notes.mjs [55:48 - 63:4]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/create-manual-changeset.mjs[39m[22m [34:50 - 42:4] (9 lines, 32 tokens)
+   scripts/instant-version-bump.mjs [47:53 - 55:4]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/create-manual-changeset.mjs[39m[22m [87:44 - 92:2] (6 lines, 35 tokens)
+   scripts/instant-version-bump.mjs [142:53 - 147:2]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/create-manual-changeset.mjs[39m[22m [87:44 - 92:2] (6 lines, 35 tokens)
+   scripts/validate-changeset.mjs [158:53 - 163:2]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/format-github-release.mjs[39m[22m [17:41 - 27:18] (11 lines, 39 tokens)
+   scripts/format-release-notes.mjs [30:46 - 40:18]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/format-github-release.mjs[39m[22m [27:49 - 39:15] (13 lines, 56 tokens)
+   scripts/format-release-notes.mjs [45:38 - 57:15]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/format-release-notes.mjs[39m[22m [57:7 - 65:6] (9 lines, 30 tokens)
+   scripts/instant-version-bump.mjs [49:7 - 59:6]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/merge-changesets.mjs[39m[22m [186:61 - 194:8] (9 lines, 59 tokens)
+   scripts/validate-changeset.mjs [102:58 - 110:8]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/publish-to-npm.mjs[39m[22m [7:21 - 18:8] (12 lines, 41 tokens)
+   scripts/version-and-commit.mjs [13:20 - 22:8]
+[1mClone found (javascript)[22m
+ - [1m[32msrc/converters/detect.js[39m[22m [17:28 - 22:44] (6 lines, 36 tokens)
+   src/converters/detect.js [26:33 - 31:44]
+[1mClone found (javascript)[22m
+ - [1m[32msrc/converters/detect.js[39m[22m [17:28 - 22:44] (6 lines, 36 tokens)
+   src/converters/detect.js [35:32 - 40:44]
+[1mClone found (javascript)[22m
+ - [1m[32msrc/converters/i18n-js.js[39m[22m [19:46 - 27:25] (9 lines, 47 tokens)
+   src/converters/i18next.js [19:24 - 27:25]
+[1mClone found (javascript)[22m
+ - [1m[32msrc/converters/i18n-js.js[39m[22m [27:50 - 52:2] (26 lines, 143 tokens)
+   src/converters/i18next.js [27:24 - 52:2]
+[1mClone found (javascript)[22m
+ - [1m[32msrc/converters/i18n-js.js[39m[22m [44:28 - 51:29] (8 lines, 38 tokens)
+   src/converters/react-intl.js [69:42 - 76:29]
+[1mClone found (javascript)[22m
+ - [1m[32msrc/converters/i18n-js.js[39m[22m [54:27 - 60:57] (7 lines, 57 tokens)
+   src/converters/i18next.js [85:28 - 91:57]
+[1mClone found (typescript)[22m
+ - [1m[32msrc/index.d.ts[39m[22m [151:36 - 156:24] (6 lines, 36 tokens)
+   src/index.d.ts [156:35 - 161:24]
+[1mClone found (javascript)[22m
+ - [1m[32mtests/ci-change-detection.test.js[39m[22m [3:56 - 9:6] (7 lines, 32 tokens)
+   tests/release-metadata.test.js [11:1 - 16:7]
+[1mClone found (javascript)[22m
+ - [1m[32mtests/cli.test.js[39m[22m [27:53 - 37:5] (11 lines, 79 tokens)
+   tests/cli.test.js [56:60 - 66:5]
+[1mClone found (javascript)[22m
+ - [1m[32mtests/cli.test.js[39m[22m [27:53 - 34:34] (8 lines, 62 tokens)
+   tests/cli.test.js [107:60 - 113:49]
+[1mClone found (javascript)[22m
+ - [1m[32mtests/cli.test.js[39m[22m [35:75 - 41:68] (7 lines, 37 tokens)
+   tests/cli.test.js [76:7 - 89:16]
+[1mClone found (javascript)[22m
+ - [1m[32mtests/cli.test.js[39m[22m [92:5 - 97:51] (6 lines, 35 tokens)
+   tests/cli.test.js [129:63 - 132:51]
+[1mClone found (javascript)[22m
+ - [1m[32mtests/i18n.test.js[39m[22m [81:20 - 90:6] (10 lines, 36 tokens)
+   tests/i18n.test.js [171:33 - 180:6]
+[1mClone found (javascript)[22m
+ - [1m[32mtests/i18n.test.js[39m[22m [203:39 - 212:6] (10 lines, 48 tokens)
+   tests/i18n.test.js [221:3 - 231:6]
+[1mClone found (javascript)[22m
+ - [1m[32mtests/publish-retry.test.js[39m[22m [12:24 - 18:24] (7 lines, 31 tokens)
+   tests/publish-retry.test.js [46:5 - 52:26]
+[90m┌────────────┬────────────────┬─────────────┬──────────────┬──────────────┬──────────────────┬───────────────────┐[39m
+[90m│[39m[31m Format     [39m[90m│[39m[31m Files analyzed [39m[90m│[39m[31m Total lines [39m[90m│[39m[31m Total tokens [39m[90m│[39m[31m Clones found [39m[90m│[39m[31m Duplicated lines [39m[90m│[39m[31m Duplicated tokens [39m[90m│[39m
+[90m├────────────┼────────────────┼─────────────┼──────────────┼──────────────┼──────────────────┼───────────────────┤[39m
+[90m│[39m bash       [90m│[39m 2              [90m│[39m 16          [90m│[39m 128          [90m│[39m 0            [90m│[39m 0 (0.00%)        [90m│[39m 0 (0.00%)         [90m│[39m
+[90m├────────────┼────────────────┼─────────────┼──────────────┼──────────────┼──────────────────┼───────────────────┤[39m
+[90m│[39m javascript [90m│[39m 59             [90m│[39m 7766        [90m│[39m 37888        [90m│[39m 36           [90m│[39m 343 (4.42%)      [90m│[39m 1634 (4.31%)      [90m│[39m
+[90m├────────────┼────────────────┼─────────────┼──────────────┼──────────────┼──────────────────┼───────────────────┤[39m
+[90m│[39m typescript [90m│[39m 4              [90m│[39m 312         [90m│[39m 1651         [90m│[39m 1            [90m│[39m 6 (1.92%)        [90m│[39m 36 (2.18%)        [90m│[39m
+[90m├────────────┼────────────────┼─────────────┼──────────────┼──────────────┼──────────────────┼───────────────────┤[39m
+[90m│[39m [1mTotal:[22m     [90m│[39m 65             [90m│[39m 8094        [90m│[39m 39667        [90m│[39m 37           [90m│[39m 349 (4.31%)      [90m│[39m 1670 (4.21%)      [90m│[39m
+[90m└────────────┴────────────────┴─────────────┴──────────────┴──────────────┴──────────────────┴───────────────────┘[39m
+[90mFound 37 clones.[39m
+[32mHTML report saved to ./reports/jscpd/jscpd-report.html[39m
+[90mtime: 34.534ms[39m
+
+> lino-i18n@0.3.0 test:types
+> tsc --project tests/types/tsconfig.json
+
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.07s
+[issue-23-bc288e2f1144 126f834] fix: Repair release races and enforce CI checks across both languages
+ 578 files changed, 114516 insertions(+), 4595 deletions(-)
+ create mode 100755 .githooks/pre-commit
+ create mode 100644 .github/codeql/codeql-config.yml
+ create mode 100644 .github/workflows/docs.yml
+ create mode 100644 .github/workflows/security.yml
+ create mode 100644 .github/workflows/workflows.yml
+ create mode 100644 .github/zizmor.yml
+ create mode 100644 dev/log/issues/23/pulls/24/ANALYSIS.md
+ create mode 100644 dev/log/issues/23/pulls/24/PLAN.md
+ create mode 100644 dev/log/issues/23/pulls/24/SOURCES.md
+ create mode 100644 dev/log/issues/23/pulls/24/TEMPLATE-COMPARISON.md
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/broken-link-checker-25966936239.log
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/broken-link-checker-25966936239.stderr
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/example-app-25966936251.log
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/example-app-25966936251.stderr
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/javascript-25966936229.log
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/javascript-25966936229.stderr
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/javascript-25968707531.log
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/javascript-25968707531.stderr
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/javascript-25969413865.log
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/javascript-25969413865.stderr
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/javascript-25971710347.log
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/javascript-25971710347.stderr
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/javascript-25972666215.log
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/javascript-25972666215.stderr
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/javascript-25973526829.log
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/javascript-25973526829.stderr
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/javascript-25974542960.log
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/javascript-25974542960.stderr
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/javascript-25998782274.log
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/javascript-25998782274.stderr
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/javascript-26006426871.log
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/javascript-26006426871.stderr
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/javascript-26036984249.log
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/javascript-26036984249.stderr
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/javascript-26048385125.log
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/javascript-26048385125.stderr
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/javascript-26050991046.log
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/javascript-26050991046.stderr
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/javascript-29192577200.log
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/javascript-29192577200.stderr
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/javascript-37561074975.log
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/javascript-37561074975.stderr
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/js-37561074975-download.stderr
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/js-37561074975.log
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/manifest.json
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/rust-25968707505.log
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/rust-25968707505.stderr
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/rust-25969413863.log
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/rust-25969413863.stderr
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/rust-25971710351.log
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/rust-25971710351.stderr
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/rust-25972666223.log
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/rust-25972666223.stderr
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/rust-25973526836.log
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/rust-25973526836.stderr
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/rust-25998782281.log
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/rust-25998782281.stderr
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/rust-26006426861.log
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/rust-26006426861.stderr
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/rust-26036984313.log
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/rust-26036984313.stderr
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/rust-26048388072.log
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/rust-26048388072.stderr
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/rust-26050991084.log
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/rust-26050991084.stderr
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/rust-29192577217-download.stderr
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/rust-29192577217.log
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/rust-29192577217.stderr
+ create mode 100644 dev/log/issues/23/pulls/24/github/attachment-inventory.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/branch-runs-initial.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/broken-link-checker-25966936239.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/current-ci-file-tree.txt
+ create mode 100644 dev/log/issues/23/pulls/24/github/example-app-25966936251.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/issue-comments-final.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/issue-comments.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/issue.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/javascript-25966936229.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/javascript-25968707531.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/javascript-25969413865.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/javascript-25971710347.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/javascript-25972666215.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/javascript-25973526829.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/javascript-25974542960.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/javascript-25998782274.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/javascript-26006426871.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/javascript-26036984249.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/javascript-26048385125.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/javascript-26050991046.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/javascript-29192577200.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/javascript-37561074975.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/js-37561074975.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/local-file-tree.txt
+ create mode 100644 dev/log/issues/23/pulls/24/github/main-runs-initial.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/merged-prs.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/pr-18-conversation.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/pr-18-review-comments.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/pr-18-reviews.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/pr-18.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/pr-20-conversation.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/pr-20-review-comments.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/pr-20-reviews.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/pr-20.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/pr-22-conversation.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/pr-22-review-comments.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/pr-22-reviews.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/pr-22.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/pr-conversation-comments-final.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/pr-conversation-comments.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/pr-initial.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/pr-review-comments-final.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/pr-review-comments.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/pr-reviews-final.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/pr-reviews.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/rust-25968707505.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/rust-25969413863.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/rust-25971710351.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/rust-25972666223.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/rust-25973526836.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/rust-25998782281.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/rust-26006426861.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/rust-26036984313.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/rust-26048388072.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/rust-26050991084.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/rust-29192577217.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/template-issue-158-comments.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/template-issue-158.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/upstream-changeset-search.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/upstream-output-issue.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/upstream-output-issue.txt
+ create mode 100644 dev/log/issues/23/pulls/24/github/upstream-output-search.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/upstream-staged-search.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/upstream-staging-comment.txt
+ create mode 100644 dev/log/issues/23/pulls/24/research/CI-CD-BEST-PRACTICES.md
+ create mode 100644 dev/log/issues/23/pulls/24/research/action-pins.json
+ create mode 100644 dev/log/issues/23/pulls/24/research/upstream-output-report.md
+ create mode 100644 dev/log/issues/23/pulls/24/research/upstream-staging-report.md
+ create mode 100644 dev/log/issues/23/pulls/24/research/zizmor-auditor-review.md
+ create mode 100644 dev/log/issues/23/pulls/24/research/zizmor-help.txt
+ create mode 100644 dev/log/issues/23/pulls/24/templates/full-tree-comparison.csv
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js-file-tree.txt
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js-repository.json
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js-tree.json
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/.changeset/config.json
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/.github/actions/publish-dockerhub/action.yml
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/.github/actions/setup-buildx-resilient/action.yml
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/.github/codeql/codeql-config.yml
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/.github/workflows/example-app.yml
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/.github/workflows/links.yml
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/.github/workflows/release.yml
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/.github/workflows/security.yml
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/.github/workflows/workflows.yml
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/.github/zizmor.yml
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/.husky/pre-commit
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/.jscpd.json
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/.lycheeignore
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/.prettierignore
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/.prettierrc
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/.secretlintrc.json
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/bunfig.toml
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/deno.json
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/deno.lock
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/eslint.config.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/package-lock.json
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/package.json
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/bootstrap-dependencies.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/changeset-version.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/check-changesets.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/check-ci-workflows.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/check-docker-build.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/check-docker-publish.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/check-file-line-limits.sh
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/check-mjs-syntax.sh
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/check-package-manager.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/check-pipeline-status.sh
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/check-release-needed.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/check-required-docs.sh
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/check-staged-formatting.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/check-status-gate-covers-all-jobs.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/check-version.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/check-web-archive.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/create-github-release.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/create-manual-changeset.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/debug-print.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/detect-code-changes.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/format-github-release.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/format-release-notes-helpers.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/format-release-notes.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/github-actions-log.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/github-release-state.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/install-git-hooks.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/instant-version-bump.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/js-paths.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/land-via-pull-request.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/lint-changed-lines.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/lint.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/merge-changesets.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/npm-registry.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/package-info.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/pr-comparison.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/preflight-credentials.sh
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/publish-failure-classifier.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/publish-retry.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/publish-to-npm.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/push-failure-classifier.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/push-main-with-rebase-retry.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/read-job-cancel-in-progress.sh
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/recheck-broken-links.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/release-metadata.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/release-naming.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/run-command.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/run-with-budget-warning.sh
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/sanitize-npm-userconfig.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/setup-npm.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/simulate-fresh-merge.sh
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/smoke-test-package.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/update-preview-images.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/use-module.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/validate-changeset.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/version-and-commit.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/wait-for-npm.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/bootstrap-dependencies.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/bot-commit-attribution.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/changeset-config.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/check-changesets.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/check-file-line-limits.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/check-release-needed.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/check-staged-formatting.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/check-web-archive.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/checkout-credentials.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/ci-timeouts.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/ci-workflow-policy.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/commit-message.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/create-github-release.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/debug-print.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/detect-code-changes.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/docker-build.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/docker-publish.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/fixtures/lychee-report.md
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/fixtures/preflight-stub/curl
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/github-actions-log.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/index.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/install-git-hooks.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/land-via-pull-request.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/links-workflow.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/lint-changed-lines.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/merge-changesets.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/no-changelog-comments.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/npm-registry.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/package-info.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/package-manager.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/package-metadata.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/pipeline-status.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/pr-guards.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/publish-failure-classifier.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/publish-retry.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/push-failure-classifier.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/push-main-with-rebase-retry.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/recheck-broken-links.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/release-badge.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/release-metadata.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/release-naming.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/release-preflight.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/required-docs.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/run-with-budget-warning.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/sanitize-npm-userconfig.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/scripts-use-module-adoption.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/security-workflow.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/setup-buildx-resilient.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/setup-npm.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/simulate-fresh-merge.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/smoke-test-package.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/status-gate-coverage.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/tag-prefix.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/transient-links.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/universal-app.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/use-module-integration.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/use-module.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/version-and-commit.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/wait-for-npm.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/workflow-permissions.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/workflow-reliability.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/workflows-lint.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/manifest.json
+ create mode 100644 dev/log/issues/23/pulls/24/templates/preserved-files.json
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust-file-tree.txt
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust-repository.json
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust-tree.json
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/.github/actions/setup-buildx-resilient/action.yml
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/.github/codeql/codeql-config.yml
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/.github/workflows/desktop-release.yml
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/.github/workflows/links.yml
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/.github/workflows/release.yml
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/.github/workflows/security.yml
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/.github/workflows/workflows.yml
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/.github/zizmor.yml
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/.lycheeignore
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/.pre-commit-config.yaml
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/.secretlintrc.json
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/Cargo.lock
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/Cargo.toml
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/lychee.toml
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/bump-version.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/check-cargo-lock.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/check-cargo-warnings.sh
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/check-changelog-fragment.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/check-crate-size.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/check-file-size.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/check-pipeline-status.sh
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/check-release-needed.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/check-required-docs.sh
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/check-version-modification.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/check-web-archive.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/check-web-archive.test.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/check-workflow-tools.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/collect-changelog.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/crates-publish-preflight.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/crates-publish-preflight.test.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/create-changelog-fragment.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/create-github-release.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/desktop-release-resolve.sh
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/detect-code-changes.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/fixtures/lychee-report.md
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/get-bump-type.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/get-version.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/git-config.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/install-rust-script.sh
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/package-desktop.sh
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/preflight-credentials.sh
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/publish-crate.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/read-job-cancel-in-progress.sh
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/recheck-broken-links.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/recheck-broken-links.test.mjs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/release-index.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/release-naming.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/run-with-budget-warning.sh
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/rust-paths.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/simulate-fresh-merge.sh
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/smoke-test-published-crate.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/test-scripts.sh
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/version-and-commit.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/wait-for-crate.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/integration/mod.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/integration/sum.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/changelog_parsing.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/desktop_release_resolve.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/issue_119.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/issue_127.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/issue_135.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/issue_141.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/issue_143.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/issue_147.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/issue_149.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/issue_150.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/issue_156.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/issue_157.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/issue_160.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/issue_161.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/issue_163.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/issue_168.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/issue_171.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/issue_172.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/issue_188.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/mod.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/release_naming_tests.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/version_and_commit_behind_check.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/version_and_commit_tag_order.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/workflow_desktop_release.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/workflow_release.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/workflow_security.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/workspace_manifest_resolution.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/mod.rs
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/sum.rs
+ create mode 100644 dev/log/issues/23/pulls/24/verification/actionlint-complete.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/actionlint-final.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/actionlint-first.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/actionlint-install.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/bun-tests-complete.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/bun-tests.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/cargo-audit-final.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/cargo-audit-install.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/cargo-audit-summary.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/change-detection-after.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/change-detection-before.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/changeset-merge-before.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/ci-policy-complete.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/ci-policy-final.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/ci-policy.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/ci-tools-install.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/crates-preflight-tests.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/deno-tests-complete.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/deno-tests.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/dependency-updates.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/diff-whitespace.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/docs-build.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/docs-validation.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/duplication-after.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/evidence-collection.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/final-script-format.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/format-fixes.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/git-fixture-main-after.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/git-fixture-main-before.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/hook-after.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/hook-before.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/js-browser-complete.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/js-browser.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/js-checks-complete.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/js-checks-final.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/js-checks-first.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/js-checks-latest.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/js-checks-second.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/js-checks-validated.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/js-format-final.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/js-format-latest.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/js-format.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/js-lint-first.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/js-lint-fixes.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/js-lint-format.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/js-release-regression.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/js-tests-complete.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/js-tests-latest.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/js-tests.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/js-types-complete.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/js-types.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/link-recheck-tests.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/metadata-io-format.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/npm-audit-after.json
+ create mode 100644 dev/log/issues/23/pulls/24/verification/npm-audit-before.json
+ create mode 100644 dev/log/issues/23/pulls/24/verification/npm-audit-complete.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/npm-audit-final.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/npm-audit-fix.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/npm-ci.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/npm-command-stream-rejected.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/npm-command-stream.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/npm-dependency-tree.txt
+ create mode 100644 dev/log/issues/23/pulls/24/verification/npm-script-approval.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/playwright-install.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/pre-commit-final.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/product-links-report.md
+ create mode 100644 dev/log/issues/23/pulls/24/verification/product-links.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/publish-after.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/publish-baseline-replay.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/publish-before.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/react-testing-update.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/release-test-format.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/rust-clippy-final.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/rust-clippy.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/rust-format.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/rust-guards-after.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/rust-guards-complete.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/rust-io-after.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/rust-io-before.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/rust-output-after.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/rust-output-before.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/rust-output-strict.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/rust-package.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/rust-release-after.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/rust-release-before.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/rust-release-complete.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/rust-release-final.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/rust-release-strict.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/rust-script-checks-complete.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/rust-script-checks-final.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/rust-script-checks-strict.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/rust-script-checks-validated.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/rust-script-checks.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/rust-script-install.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/rust-tests-final.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/rust-tests.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/secretlint-install.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/secrets-complete.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/secrets-final.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/secrets.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/shared-guards-final.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/shared-guards.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/shared-node-tests.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/staged-stat.txt
+ create mode 100644 dev/log/issues/23/pulls/24/verification/template-npm-audit.json
+ create mode 100644 dev/log/issues/23/pulls/24/verification/template-output-reproduction.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/template-staging-reproduction.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/workflow-generation.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/zizmor-auditor-final.json
+ create mode 100644 dev/log/issues/23/pulls/24/verification/zizmor-auditor-final.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/zizmor-auditor-findings.json
+ create mode 100644 dev/log/issues/23/pulls/24/verification/zizmor-auditor-review.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/zizmor-auditor-summary.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/zizmor-complete.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/zizmor-final.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/zizmor-first.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/zizmor-pedantic-complete.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/zizmor-pedantic-final.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/zizmor-pedantic.log
+ create mode 100644 experiments/collect-issue-23.py
+ create mode 100644 experiments/complete-issue-23-workflows.py
+ create mode 100644 experiments/finalize-issue-23-workflows.py
+ create mode 100644 experiments/issue-23-evidence-index.py
+ create mode 100644 experiments/issue-23-hook.py
+ create mode 100644 experiments/issue-23-publish-baseline.mjs
+ create mode 100644 experiments/issue-23-rust-guards.py
+ create mode 100644 experiments/issue-23-rust-io.py
+ create mode 100644 experiments/issue-23-rust-output.py
+ create mode 100644 experiments/issue-23-rust-release.py
+ create mode 100644 experiments/issue-23-shared-guards.py
+ create mode 100644 experiments/issue-23-template-output.py
+ create mode 100644 experiments/issue-23-template-staging.mjs
+ create mode 100644 experiments/tighten-issue-23-workflows.py
+ create mode 100644 experiments/update-issue-23-workflows.py
+ create mode 100644 js/.changeset/issue-23-ci.md
+ create mode 100644 js/scripts/npm-registry.mjs
+ create mode 100644 js/scripts/pr-comparison.mjs
+ create mode 100644 js/scripts/publish-retry.mjs
+ create mode 100644 js/scripts/run-command.mjs
+ create mode 100644 js/tests/ci-change-detection.test.js
+ create mode 100644 js/tests/publish-retry.test.js
+ create mode 100644 js/tests/release-metadata.test.js
+ create mode 100644 rust/changelog.d/20261008-ci-reliability.md
+ create mode 100644 rust/scripts/check-scripts.sh
+ create mode 100644 rust/scripts/git-changes.rs
+ create mode 100644 rust/scripts/github-output.rs
+ create mode 100644 rust/scripts/registry-state.rs
+ create mode 100644 scripts/assemble-docs.py
+ create mode 100644 scripts/check-ci-policy.py
+ create mode 100644 scripts/check-docs.py
+ create mode 100644 scripts/check-file-line-limits.py
+ create mode 100644 scripts/check-pipeline-status.py
+ create mode 100644 scripts/check-release-metadata.py
+ create mode 100644 scripts/check-web-archive.mjs
+ create mode 100644 scripts/check-web-archive.test.mjs
+ create mode 100644 scripts/crates-publish-preflight.mjs
+ create mode 100644 scripts/crates-publish-preflight.test.mjs
+ create mode 100644 scripts/fixtures/lychee-report.md
+ create mode 100644 scripts/preflight-publish.sh
+ create mode 100644 scripts/recheck-broken-links.mjs
+ create mode 100644 scripts/recheck-broken-links.test.mjs
+ create mode 100644 scripts/requirements-ci.txt
+ create mode 100644 scripts/simulate-fresh-merge.sh

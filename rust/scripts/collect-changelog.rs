@@ -111,21 +111,22 @@ fn collect_fragments(changelog_dir: &str) -> String {
 
     let mut files: Vec<_> = match fs::read_dir(dir_path) {
         Ok(entries) => entries
-            .filter_map(|e| e.ok())
+            .map(|e| e.expect("Cannot read changelog directory entry"))
             .map(|e| e.path())
             .filter(|p| {
                 p.extension().map_or(false, |ext| ext == "md")
                     && p.file_name().map_or(false, |name| name != "README.md")
             })
             .collect(),
-        Err(_) => return String::new(),
+        Err(e) => panic!("Cannot read changelog directory: {e}"),
     };
 
     files.sort();
 
     let mut fragments = Vec::new();
     for file in &files {
-        if let Ok(raw_content) = fs::read_to_string(file) {
+        {
+            let raw_content = fs::read_to_string(file).expect("Cannot read changelog fragment");
             let content = strip_frontmatter(&raw_content);
             if !content.is_empty() {
                 fragments.push(content);
@@ -141,7 +142,8 @@ fn update_changelog(changelog_file: &str, version: &str, fragments: &str) {
     let new_entry = format!("\n## [{}] - {}\n\n{}\n", version, date_str, fragments);
 
     if Path::new(changelog_file).exists() {
-        let mut content = fs::read_to_string(changelog_file).unwrap_or_default();
+        let mut content =
+            fs::read_to_string(changelog_file).expect("Cannot read existing changelog");
 
         if content.contains(INSERT_MARKER) {
             content = content.replace(INSERT_MARKER, &format!("{}{}", INSERT_MARKER, new_entry));
@@ -191,15 +193,17 @@ fn remove_fragments(changelog_dir: &str) {
         return;
     }
 
-    if let Ok(entries) = fs::read_dir(dir_path) {
-        for entry in entries.filter_map(|e| e.ok()) {
+    {
+        let entries = fs::read_dir(dir_path).expect("Cannot inspect fragments for removal");
+        for entry in entries.map(|e| e.expect("Cannot read changelog directory entry")) {
             let path = entry.path();
             if path.extension().map_or(false, |ext| ext == "md")
                 && path.file_name().map_or(false, |name| name != "README.md")
             {
-                if fs::remove_file(&path).is_ok() {
-                    println!("Removed {}", path.display());
-                }
+                fs::remove_file(&path).unwrap_or_else(|error| {
+                    panic!("Cannot remove fragment {}: {error}", path.display())
+                });
+                println!("Removed {}", path.display());
             }
         }
     }
@@ -232,4 +236,30 @@ fn main() {
     remove_fragments(&changelog_dir);
 
     println!("Changelog collection complete");
+}
+
+#[cfg(test)]
+mod tests {
+    use super::{fs, remove_fragments};
+
+    #[test]
+    fn fragment_cleanup_does_not_hide_filesystem_errors() {
+        let root = std::env::temp_dir().join(format!(
+            "lino-fragment-cleanup-{}-{}",
+            std::process::id(),
+            std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap()
+                .as_nanos()
+        ));
+        fs::create_dir(&root).unwrap();
+        // A fragment replaced by a directory cannot be removed as a file.
+        fs::create_dir(root.join("fragment.md")).unwrap();
+        let result = std::panic::catch_unwind(|| remove_fragments(root.to_str().unwrap()));
+        fs::remove_dir_all(root).unwrap();
+        assert!(
+            result.is_err(),
+            "Fragment removal failed without reporting it"
+        );
+    }
 }

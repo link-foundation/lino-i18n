@@ -1,0 +1,144 @@
+
+> lino-i18n@0.3.0 check
+> npm run lint && npm run format:check && npm run check:duplication
+
+
+> lino-i18n@0.3.0 lint
+> eslint . --max-warnings 0
+
+
+> lino-i18n@0.3.0 format:check
+> prettier --check .
+
+Checking formatting...
+All matched files use Prettier code style!
+
+> lino-i18n@0.3.0 check:duplication
+> jscpd --fail-on-empty .
+
+Using config from .jscpd.json
+[1mClone found (javascript)[22m
+ - [1m[32mbin/lino-i18n.js[39m[22m [159:17 - 164:30] (6 lines, 31 tokens)
+   src/loaders.js [41:24 - 46:30]
+[1mClone found (javascript)[22m
+ - [1m[32mexamples/basic-usage.mjs[39m[22m [8:47 - 13:6] (6 lines, 35 tokens)
+   tests/i18n.test.js [17:1 - 22:5]
+[1mClone found (javascript)[22m
+ - [1m[32mexamples/basic-usage.mjs[39m[22m [13:1 - 18:4] (6 lines, 32 tokens)
+   tests/i18n.test.js [278:3 - 283:6]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/changeset-version.mjs[39m[22m [18:44 - 23:17] (6 lines, 36 tokens)
+   scripts/version-and-commit.mjs [96:50 - 101:19]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/check-changesets.mjs[39m[22m [19:35 - 31:15] (13 lines, 39 tokens)
+   scripts/check-release-needed.mjs [50:66 - 62:15]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/check-changesets.mjs[39m[22m [19:35 - 38:9] (20 lines, 48 tokens)
+   scripts/check-web-archive.mjs [28:65 - 51:9]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/check-changesets.mjs[39m[22m [26:1 - 31:15] (6 lines, 38 tokens)
+   scripts/check-docker-publish.mjs [99:1 - 104:15]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/check-docker-publish.mjs[39m[22m [96:4 - 105:2] (10 lines, 48 tokens)
+   scripts/wait-for-npm.mjs [87:4 - 96:2]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/check-docker-publish.mjs[39m[22m [100:9 - 107:9] (8 lines, 38 tokens)
+   scripts/check-release-needed.mjs [58:9 - 69:9]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/check-docker-publish.mjs[39m[22m [104:42 - 115:7] (12 lines, 46 tokens)
+   scripts/wait-for-npm.mjs [121:15 - 132:7]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/check-docker-publish.mjs[39m[22m [105:1 - 113:2] (9 lines, 44 tokens)
+   scripts/create-github-release.mjs [290:1 - 298:2]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/create-manual-changeset.mjs[39m[22m [16:76 - 25:15] (10 lines, 35 tokens)
+   scripts/format-release-notes.mjs [27:44 - 37:15]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/create-manual-changeset.mjs[39m[22m [16:76 - 34:18] (19 lines, 88 tokens)
+   scripts/instant-version-bump.mjs [29:24 - 47:18]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/create-manual-changeset.mjs[39m[22m [34:50 - 42:4] (9 lines, 32 tokens)
+   scripts/format-release-notes.mjs [55:48 - 63:4]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/create-manual-changeset.mjs[39m[22m [34:50 - 42:4] (9 lines, 32 tokens)
+   scripts/instant-version-bump.mjs [47:53 - 55:4]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/create-manual-changeset.mjs[39m[22m [87:44 - 92:2] (6 lines, 35 tokens)
+   scripts/instant-version-bump.mjs [142:53 - 147:2]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/create-manual-changeset.mjs[39m[22m [87:44 - 92:2] (6 lines, 35 tokens)
+   scripts/validate-changeset.mjs [158:53 - 163:2]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/format-github-release.mjs[39m[22m [17:41 - 27:18] (11 lines, 39 tokens)
+   scripts/format-release-notes.mjs [30:46 - 40:18]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/format-github-release.mjs[39m[22m [27:49 - 39:15] (13 lines, 56 tokens)
+   scripts/format-release-notes.mjs [45:38 - 57:15]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/format-release-notes.mjs[39m[22m [57:7 - 65:6] (9 lines, 30 tokens)
+   scripts/instant-version-bump.mjs [49:7 - 59:6]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/merge-changesets.mjs[39m[22m [186:61 - 194:8] (9 lines, 59 tokens)
+   scripts/validate-changeset.mjs [102:58 - 110:8]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/publish-to-npm.mjs[39m[22m [7:21 - 18:8] (12 lines, 41 tokens)
+   scripts/version-and-commit.mjs [13:20 - 22:8]
+[1mClone found (javascript)[22m
+ - [1m[32msrc/converters/detect.js[39m[22m [17:28 - 22:44] (6 lines, 36 tokens)
+   src/converters/detect.js [26:33 - 31:44]
+[1mClone found (javascript)[22m
+ - [1m[32msrc/converters/detect.js[39m[22m [17:28 - 22:44] (6 lines, 36 tokens)
+   src/converters/detect.js [35:32 - 40:44]
+[1mClone found (javascript)[22m
+ - [1m[32msrc/converters/i18n-js.js[39m[22m [19:46 - 27:25] (9 lines, 47 tokens)
+   src/converters/i18next.js [19:24 - 27:25]
+[1mClone found (javascript)[22m
+ - [1m[32msrc/converters/i18n-js.js[39m[22m [27:50 - 52:2] (26 lines, 143 tokens)
+   src/converters/i18next.js [27:24 - 52:2]
+[1mClone found (javascript)[22m
+ - [1m[32msrc/converters/i18n-js.js[39m[22m [44:28 - 51:29] (8 lines, 38 tokens)
+   src/converters/react-intl.js [69:42 - 76:29]
+[1mClone found (javascript)[22m
+ - [1m[32msrc/converters/i18n-js.js[39m[22m [54:27 - 60:57] (7 lines, 57 tokens)
+   src/converters/i18next.js [85:28 - 91:57]
+[1mClone found (typescript)[22m
+ - [1m[32msrc/index.d.ts[39m[22m [151:36 - 156:24] (6 lines, 36 tokens)
+   src/index.d.ts [156:35 - 161:24]
+[1mClone found (javascript)[22m
+ - [1m[32mtests/ci-change-detection.test.js[39m[22m [3:56 - 9:6] (7 lines, 32 tokens)
+   tests/release-metadata.test.js [11:1 - 16:7]
+[1mClone found (javascript)[22m
+ - [1m[32mtests/cli.test.js[39m[22m [27:53 - 37:5] (11 lines, 79 tokens)
+   tests/cli.test.js [56:60 - 66:5]
+[1mClone found (javascript)[22m
+ - [1m[32mtests/cli.test.js[39m[22m [27:53 - 34:34] (8 lines, 62 tokens)
+   tests/cli.test.js [107:60 - 113:49]
+[1mClone found (javascript)[22m
+ - [1m[32mtests/cli.test.js[39m[22m [35:75 - 41:68] (7 lines, 37 tokens)
+   tests/cli.test.js [76:7 - 89:16]
+[1mClone found (javascript)[22m
+ - [1m[32mtests/cli.test.js[39m[22m [92:5 - 97:51] (6 lines, 35 tokens)
+   tests/cli.test.js [129:63 - 132:51]
+[1mClone found (javascript)[22m
+ - [1m[32mtests/i18n.test.js[39m[22m [81:20 - 90:6] (10 lines, 36 tokens)
+   tests/i18n.test.js [171:33 - 180:6]
+[1mClone found (javascript)[22m
+ - [1m[32mtests/i18n.test.js[39m[22m [203:39 - 212:6] (10 lines, 48 tokens)
+   tests/i18n.test.js [221:3 - 231:6]
+[1mClone found (javascript)[22m
+ - [1m[32mtests/publish-retry.test.js[39m[22m [12:24 - 18:24] (7 lines, 31 tokens)
+   tests/publish-retry.test.js [46:5 - 52:26]
+[90m┌────────────┬────────────────┬─────────────┬──────────────┬──────────────┬──────────────────┬───────────────────┐[39m
+[90m│[39m[31m Format     [39m[90m│[39m[31m Files analyzed [39m[90m│[39m[31m Total lines [39m[90m│[39m[31m Total tokens [39m[90m│[39m[31m Clones found [39m[90m│[39m[31m Duplicated lines [39m[90m│[39m[31m Duplicated tokens [39m[90m│[39m
+[90m├────────────┼────────────────┼─────────────┼──────────────┼──────────────┼──────────────────┼───────────────────┤[39m
+[90m│[39m bash       [90m│[39m 2              [90m│[39m 16          [90m│[39m 128          [90m│[39m 0            [90m│[39m 0 (0.00%)        [90m│[39m 0 (0.00%)         [90m│[39m
+[90m├────────────┼────────────────┼─────────────┼──────────────┼──────────────┼──────────────────┼───────────────────┤[39m
+[90m│[39m javascript [90m│[39m 59             [90m│[39m 7765        [90m│[39m 37884        [90m│[39m 36           [90m│[39m 343 (4.42%)      [90m│[39m 1634 (4.31%)      [90m│[39m
+[90m├────────────┼────────────────┼─────────────┼──────────────┼──────────────┼──────────────────┼───────────────────┤[39m
+[90m│[39m typescript [90m│[39m 4              [90m│[39m 312         [90m│[39m 1651         [90m│[39m 1            [90m│[39m 6 (1.92%)        [90m│[39m 36 (2.18%)        [90m│[39m
+[90m├────────────┼────────────────┼─────────────┼──────────────┼──────────────┼──────────────────┼───────────────────┤[39m
+[90m│[39m [1mTotal:[22m     [90m│[39m 65             [90m│[39m 8093        [90m│[39m 39663        [90m│[39m 37           [90m│[39m 349 (4.31%)      [90m│[39m 1670 (4.21%)      [90m│[39m
+[90m└────────────┴────────────────┴─────────────┴──────────────┴──────────────┴──────────────────┴───────────────────┘[39m
+[90mFound 37 clones.[39m
+[32mHTML report saved to ./reports/jscpd/jscpd-report.html[39m
+[90mtime: 52.846ms[39m

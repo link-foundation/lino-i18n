@@ -33,19 +33,20 @@
     }
   },
   "scripts": {
-    "test": "node --test --test-timeout=30000 tests/*.test.js",
+    "test": "node --throw-deprecation --test --test-timeout=30000 tests/*.test.js",
     "test:browser": "playwright test",
     "test:types": "tsc --project tests/types/tsconfig.json",
-    "lint": "eslint .",
+    "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "check:duplication": "jscpd .",
+    "check:duplication": "jscpd --fail-on-empty .",
     "check": "npm run lint && npm run format:check && npm run check:duplication",
     "changeset": "changeset",
-    "changeset:version": "changeset version",
+    "changeset:version": "node scripts/changeset-version.mjs",
     "changeset:publish": "changeset publish",
-    "pack:dry-run": "npm pack --dry-run"
+    "pack:dry-run": "npm pack --dry-run",
+    "lint:secrets": "secretlint \"bin/**\" \"src/**\" \"scripts/**\" \"tests/**\" \"../scripts/**\" \"../rust/scripts/**\" \"../rust/lino-i18n/src/**\" \"../rust/lino-i18n/tests/**\" \"../rust/lino-i18n-macros/src/**\" \"../.github/**\" \"../.githooks/**\""
   },
   "keywords": [
     "i18n",
@@ -78,19 +79,22 @@
     "lino-objects-codec": "^0.4.0"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.31.0",
+    "@changesets/cli": "^3.0.3",
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.63.0",
+    "@secretlint/secretlint-rule-preset-recommend": "^13.0.7",
+    "@testing-library/react": "^16.3.3",
     "@types/node": "^26.1.1",
     "@types/react": "^19.2.17",
     "esbuild": "^0.28.2",
     "eslint": "^10.4.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.5",
-    "jscpd": "^4.2.2",
+    "jscpd": "^5.4.0",
+    "jsdom": "^30.1.2",
     "prettier": "^3.8.3",
     "react": "^19.1.1",
-    "react-test-renderer": "^19.1.1",
+    "secretlint": "^13.0.7",
     "test-anywhere": "^0.9.1",
     "typescript": "^7.0.2"
   },
@@ -101,5 +105,8 @@
     "react": {
       "optional": true
     }
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true
   }
 }

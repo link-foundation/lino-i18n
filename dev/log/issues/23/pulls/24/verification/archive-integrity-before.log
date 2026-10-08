@@ -1,0 +1,12 @@
+historical-run-details: 24 members verified
+Traceback (most recent call last):
+  File "/tmp/gh-issue-solver-1791452293811/experiments/issue-23-archive-integrity.py", line 12, in <module>
+    entries = json.loads((evidence / parent / f"{stem}-index.json").read_text())
+                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/box/.pyenv/versions/3.14.7/lib/python3.14/pathlib/__init__.py", line 787, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/box/.pyenv/versions/3.14.7/lib/python3.14/pathlib/__init__.py", line 771, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/gh-issue-solver-1791452293811/dev/log/issues/23/pulls/24/github/pr-run-details-index.json'

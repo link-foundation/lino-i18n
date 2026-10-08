@@ -24,6 +24,7 @@ export default [
         module: 'readonly',
         // Node.js 18+ globals
         fetch: 'readonly',
+        URL: 'readonly',
         AbortController: 'readonly',
         // Runtime-specific globals
         Bun: 'readonly',

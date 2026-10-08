@@ -23,10 +23,12 @@
 //! regex = "1"
 //! ```
 
+#[path = "github-output.rs"]
+mod github_output;
+
 use regex::Regex;
 use std::env;
 use std::fs;
-use std::io::Write;
 use std::path::Path;
 use std::process::exit;
 
@@ -70,19 +72,6 @@ fn get_changelog_dir(rust_root: &str) -> String {
     }
 }
 
-fn set_output(key: &str, value: &str) {
-    if let Ok(output_file) = env::var("GITHUB_OUTPUT") {
-        if let Ok(mut file) = fs::OpenOptions::new()
-            .create(true)
-            .append(true)
-            .open(&output_file)
-        {
-            let _ = writeln!(file, "{}={}", key, value);
-        }
-    }
-    println!("Output: {}={}", key, value);
-}
-
 fn bump_priority(bump_type: &str) -> u8 {
     match bump_type {
         "patch" => 1,
@@ -119,17 +108,14 @@ fn determine_bump_type(changelog_dir: &str, default_bump: &str) -> (String, usiz
 
     let mut files: Vec<_> = match fs::read_dir(dir_path) {
         Ok(entries) => entries
-            .filter_map(|e| e.ok())
+            .map(|e| e.expect("Cannot read changelog directory entry"))
             .map(|e| e.path())
             .filter(|p| {
                 p.extension().map_or(false, |ext| ext == "md")
                     && p.file_name().map_or(false, |name| name != "README.md")
             })
             .collect(),
-        Err(_) => {
-            println!("No changelog fragments found");
-            return (default_bump.to_string(), 0);
-        }
+        Err(error) => panic!("Cannot inspect changelog directory: {error}"),
     };
 
     if files.is_empty() {
@@ -143,7 +129,8 @@ fn determine_bump_type(changelog_dir: &str, default_bump: &str) -> (String, usiz
     let mut highest_bump_type = default_bump.to_string();
 
     for file in &files {
-        if let Ok(content) = fs::read_to_string(file) {
+        {
+            let content = fs::read_to_string(file).expect("Cannot read changelog fragment");
             if let Some(bump) = parse_frontmatter(&content) {
                 let priority = bump_priority(&bump);
                 if priority > highest_priority {
@@ -179,9 +166,9 @@ fn main() {
         bump_type, fragment_count
     );
 
-    set_output("bump_type", &bump_type);
-    set_output("fragment_count", &fragment_count.to_string());
-    set_output(
+    github_output::set_output("bump_type", &bump_type);
+    github_output::set_output("fragment_count", &fragment_count.to_string());
+    github_output::set_output(
         "has_fragments",
         if fragment_count > 0 { "true" } else { "false" },
     );

@@ -1,0 +1,8 @@
+Current version: 0.2.0
+Detected multi-language repository (Cargo.toml in rust/)
+
+thread 'main' (45872) panicked at /tmp/gh-issue-solver-1791452293811/rust/scripts/github-output.rs:15:14:
+GITHUB_OUTPUT must be writable: Os { code: 21, kind: IsADirectory, message: "Is a directory" }
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+Unwritable Actions output correctly fails the step.

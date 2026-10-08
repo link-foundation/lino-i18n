@@ -1,0 +1,22 @@
+   Compiling collect-changelog_e2d562343a8be1287efdfd04 v0.1.0 (/home/box/.cache/rust-script/projects/e2d562343a8be1287efdfd04)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.65s
+     Running unittests /tmp/gh-issue-solver-1791452293811/rust/scripts/collect-changelog.rs (rust/target/ci-scripts/debug/deps/collect_changelog_e2d562343a8be1287efdfd04-0f997c0a55dfd227)
+
+running 1 test
+test tests::fragment_cleanup_does_not_hide_filesystem_errors ... FAILED
+
+failures:
+
+---- tests::fragment_cleanup_does_not_hide_filesystem_errors stdout ----
+
+thread 'tests::fragment_cleanup_does_not_hide_filesystem_errors' (61410) panicked at /tmp/gh-issue-solver-1791452293811/rust/scripts/collect-changelog.rs:258:9:
+Fragment removal failed without reporting it
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    tests::fragment_cleanup_does_not_hide_filesystem_errors
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--bin collect-changelog_e2d562343a8be1287efdfd04`

@@ -22,6 +22,10 @@ inputs:
   version:
     description: Published npm package version used for the Docker tag.
     required: true
+  platforms:
+    description: Optional platform matching the caller's native runner architecture.
+    required: false
+    default: ''
 
 runs:
   using: composite
@@ -52,6 +56,9 @@ runs:
         context: ${{ inputs.context }}
         file: ${{ inputs.file }}
         push: true
+        platforms: ${{ inputs.platforms }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
         tags: ${{ steps.metadata.outputs.tags }}
         labels: ${{ steps.metadata.outputs.labels }}
         build-args: |

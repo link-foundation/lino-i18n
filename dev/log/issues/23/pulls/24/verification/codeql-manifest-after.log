@@ -1,0 +1,3 @@
+Prepared 17 Cargo targets for standalone helper analysis
+Executable helpers: 17; included as Cargo targets: 17
+Every executable helper is included in the semantic-analysis manifest.

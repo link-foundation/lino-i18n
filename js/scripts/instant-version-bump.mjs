@@ -11,8 +11,6 @@
  * - Environment: JS_ROOT=<path>
  *
  * Uses link-foundation libraries:
- * - use-m: Dynamic package loading without package.json dependencies
- * - command-stream: Modern shell command execution with streaming support
  * - lino-arguments: Unified configuration from CLI args, env vars, and .lenv files
  *
  * Addresses issues documented in:
@@ -27,18 +25,11 @@ import { join } from 'path';
 import {
   getJsRoot,
   getPackageJsonPath,
-  needsCd,
   parseJsRootConfig,
 } from './js-paths.mjs';
 
-// Load use-m dynamically
-const { use } = eval(
-  await (await fetch('https://unpkg.com/use-m/use.js')).text()
-);
-
-// Import link-foundation libraries
-const { $ } = await use('command-stream');
-const { makeConfig } = await use('lino-arguments');
+import { makeConfig } from 'lino-arguments';
+import { runStrict } from './run-command.mjs';
 
 // Parse CLI arguments using lino-arguments
 const config = makeConfig({
@@ -91,14 +82,11 @@ try {
   const oldVersion = packageJson.version;
   console.log(`Current version: ${oldVersion}`);
 
-  // Bump version using npm version (doesn't create git tag)
-  // IMPORTANT: cd is a virtual command that calls process.chdir(), so we restore after
-  if (needsCd({ jsRoot })) {
-    await $`cd ${jsRoot} && npm version ${bumpType} --no-git-tag-version`;
-    process.chdir(originalCwd);
-  } else {
-    await $`npm version ${bumpType} --no-git-tag-version`;
-  }
+  await runStrict(
+    'npm',
+    ['version', bumpType, '--no-git-tag-version', '--ignore-scripts'],
+    { cwd: jsRoot }
+  );
 
   // Get new version
   const updatedPackageJson = JSON.parse(readFileSync(packageJsonPath, 'utf-8'));
@@ -145,19 +133,6 @@ try {
 
   writeFileSync(changelogPath, changelog, 'utf-8');
   console.log('✅ CHANGELOG.md updated');
-
-  // Synchronize package-lock.json
-  console.log('\nSynchronizing package-lock.json...');
-
-  // Use --legacy-peer-deps to handle peer dependency conflicts
-  // This addresses npm ERESOLVE errors documented in issue #111 / PR #112
-  // IMPORTANT: cd is a virtual command that calls process.chdir(), so we restore after
-  if (needsCd({ jsRoot })) {
-    await $`cd ${jsRoot} && npm install --package-lock-only --legacy-peer-deps`;
-    process.chdir(originalCwd);
-  } else {
-    await $`npm install --package-lock-only --legacy-peer-deps`;
-  }
 
   console.log('\n✅ Instant version bump complete');
   console.log(`Version: ${oldVersion} → ${newVersion}`);

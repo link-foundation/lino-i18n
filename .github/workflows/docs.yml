@@ -1,0 +1,118 @@
+name: Documentation
+'on':
+  push:
+    branches:
+      - main
+    paths:
+      - README.md
+      - js/**
+      - rust/**
+      - docs/**
+      - scripts/**
+      - .github/workflows/docs.yml
+  pull_request:
+    paths:
+      - README.md
+      - js/**
+      - rust/**
+      - docs/**
+      - scripts/**
+      - .github/workflows/docs.yml
+  workflow_dispatch: null
+permissions:
+  contents: read
+env:
+  GIT_CONFIG_COUNT: '1'
+  GIT_CONFIG_KEY_0: init.defaultBranch
+  GIT_CONFIG_VALUE_0: main
+jobs:
+  validate-docs:
+    name: Validate docs
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    concurrency:
+      group: check-${{ github.workflow }}-${{ github.ref }}-Validate docs
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - run: python3 scripts/check-docs.py
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24.x
+      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d
+        with:
+          toolchain: stable
+      - run: cargo install rust-script --version 0.36.0 --locked
+      - run: |-
+          node js/scripts/build-docs-site.mjs
+          cargo doc --locked --manifest-path rust/Cargo.toml --workspace --no-deps
+          rust-script rust/scripts/build-docs-site.rs
+          python3 scripts/assemble-docs.py
+  links:
+    name: Product links
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    concurrency:
+      group: check-${{ github.workflow }}-${{ github.ref }}-Product links
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24.x
+      - run: node --test --test-timeout=30000 scripts/*.test.mjs
+      - uses: lycheeverse/lychee-action@v2
+        with:
+          args: --verbose --no-progress --max-retries 3 --timeout 30 --exclude-path docs/case-studies --exclude-path dev --exclude-path node_modules
+            --exclude-path target --exclude-path experiments --exclude-path js/site --exclude-path rust/site --exclude-path site --exclude-path
+            js/reports './README.md' './js/README.md' './rust/lino-i18n/README.md' './docs/**/*.md'
+          fail: false
+          output: lychee/out.md
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        id: lychee
+      - uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: product-links
+          path: lychee/out.md
+          if-no-files-found: error
+      - name: Recheck transient link failures
+        if: steps.lychee.outputs.exit_code != '0'
+        id: recheck
+        run: node scripts/recheck-broken-links.mjs
+      - name: Report unresolved links
+        if: always() && steps.lychee.outputs.exit_code != '0' && steps.recheck.outputs.all_recovered != 'true'
+        env:
+          IS_PR: ${{ github.event_name == 'pull_request' }}
+        run: |-
+          if [ "$IS_PR" = "true" ]; then
+            echo "::error::Live links failed verification; see the product-links artifact."
+            exit 1
+          fi
+          echo "::warning::External links could not be verified; see the product-links artifact."
+  pipeline-status:
+    name: Pipeline Status
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    concurrency:
+      group: check-${{ github.workflow }}-${{ github.ref }}-Pipeline Status
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - env:
+          NEEDS_JSON: ${{ toJSON(needs) }}
+          CANCELLABLE_JOBS: '["validate-docs", "links"]'
+          RUN_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+        run: python3 scripts/check-pipeline-status.py
+    if: always()
+    needs:
+      - validate-docs
+      - links

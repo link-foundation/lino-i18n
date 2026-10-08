@@ -89,7 +89,8 @@ fn check_directory(cwd: &Path) -> CheckResult {
 
     for entry in WalkDir::new(cwd)
         .into_iter()
-        .filter_map(std::result::Result::ok)
+        .filter_entry(|entry| !should_exclude(entry.path()))
+        .map(|entry| entry.expect("Cannot inspect source directory"))
         .filter(|e| e.file_type().is_file())
     {
         let path = entry.path();
@@ -116,7 +117,7 @@ fn check_directory(cwd: &Path) -> CheckResult {
                 }
             }
             Err(error) => {
-                eprintln!("Warning: Could not read {}: {error}", path.display());
+                panic!("Cannot check {}: {error}", path.display());
             }
         }
     }

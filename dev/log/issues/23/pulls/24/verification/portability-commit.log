@@ -1,0 +1,501 @@
+
+> lino-i18n@0.3.0 lint:secrets
+> secretlint "bin/**" "src/**" "scripts/**" "tests/**" "../scripts/**" "../rust/scripts/**" "../rust/lino-i18n/src/**" "../rust/lino-i18n/tests/**" "../rust/lino-i18n-macros/src/**" "../.github/**" "../.githooks/**"
+
+
+> lino-i18n@0.3.0 check
+> npm run lint && npm run format:check && npm run check:duplication
+
+
+> lino-i18n@0.3.0 lint
+> eslint . --max-warnings 0
+
+
+> lino-i18n@0.3.0 format:check
+> prettier --check .
+
+Checking formatting...
+All matched files use Prettier code style!
+
+> lino-i18n@0.3.0 check:duplication
+> jscpd --fail-on-empty .
+
+Using config from .jscpd.json
+[1mClone found (javascript)[22m
+ - [1m[32mbin/lino-i18n.js[39m[22m [159:17 - 164:30] (6 lines, 31 tokens)
+   src/loaders.js [41:24 - 46:30]
+[1mClone found (javascript)[22m
+ - [1m[32mexamples/basic-usage.mjs[39m[22m [8:47 - 13:6] (6 lines, 35 tokens)
+   tests/i18n.test.js [17:1 - 22:5]
+[1mClone found (javascript)[22m
+ - [1m[32mexamples/basic-usage.mjs[39m[22m [13:1 - 18:4] (6 lines, 32 tokens)
+   tests/i18n.test.js [278:3 - 283:6]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/changeset-version.mjs[39m[22m [18:44 - 23:17] (6 lines, 36 tokens)
+   scripts/version-and-commit.mjs [97:50 - 102:19]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/check-changesets.mjs[39m[22m [19:35 - 31:15] (13 lines, 39 tokens)
+   scripts/check-release-needed.mjs [50:66 - 62:15]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/check-changesets.mjs[39m[22m [19:35 - 38:9] (20 lines, 48 tokens)
+   scripts/check-web-archive.mjs [28:65 - 51:9]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/check-changesets.mjs[39m[22m [26:1 - 31:15] (6 lines, 38 tokens)
+   scripts/check-docker-publish.mjs [99:1 - 104:15]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/check-docker-publish.mjs[39m[22m [96:4 - 105:2] (10 lines, 48 tokens)
+   scripts/wait-for-npm.mjs [87:4 - 96:2]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/check-docker-publish.mjs[39m[22m [100:9 - 107:9] (8 lines, 38 tokens)
+   scripts/check-release-needed.mjs [58:9 - 69:9]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/check-docker-publish.mjs[39m[22m [104:42 - 115:7] (12 lines, 46 tokens)
+   scripts/wait-for-npm.mjs [121:15 - 132:7]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/check-docker-publish.mjs[39m[22m [105:1 - 113:2] (9 lines, 44 tokens)
+   scripts/create-github-release.mjs [290:1 - 298:2]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/create-manual-changeset.mjs[39m[22m [16:76 - 25:15] (10 lines, 35 tokens)
+   scripts/format-release-notes.mjs [27:44 - 37:15]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/create-manual-changeset.mjs[39m[22m [16:76 - 34:18] (19 lines, 88 tokens)
+   scripts/instant-version-bump.mjs [29:24 - 47:18]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/create-manual-changeset.mjs[39m[22m [34:50 - 42:4] (9 lines, 32 tokens)
+   scripts/format-release-notes.mjs [55:48 - 63:4]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/create-manual-changeset.mjs[39m[22m [34:50 - 42:4] (9 lines, 32 tokens)
+   scripts/instant-version-bump.mjs [47:53 - 55:4]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/create-manual-changeset.mjs[39m[22m [87:44 - 92:2] (6 lines, 35 tokens)
+   scripts/instant-version-bump.mjs [142:53 - 147:2]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/create-manual-changeset.mjs[39m[22m [87:44 - 92:2] (6 lines, 35 tokens)
+   scripts/validate-changeset.mjs [158:53 - 163:2]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/format-github-release.mjs[39m[22m [17:41 - 27:18] (11 lines, 39 tokens)
+   scripts/format-release-notes.mjs [30:46 - 40:18]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/format-github-release.mjs[39m[22m [27:49 - 39:15] (13 lines, 56 tokens)
+   scripts/format-release-notes.mjs [45:38 - 57:15]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/format-release-notes.mjs[39m[22m [57:7 - 65:6] (9 lines, 30 tokens)
+   scripts/instant-version-bump.mjs [49:7 - 59:6]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/merge-changesets.mjs[39m[22m [186:61 - 194:8] (9 lines, 59 tokens)
+   scripts/validate-changeset.mjs [102:58 - 110:8]
+[1mClone found (javascript)[22m
+ - [1m[32mscripts/publish-to-npm.mjs[39m[22m [7:21 - 18:8] (12 lines, 41 tokens)
+   scripts/version-and-commit.mjs [14:20 - 23:8]
+[1mClone found (javascript)[22m
+ - [1m[32msrc/converters/detect.js[39m[22m [17:28 - 22:44] (6 lines, 36 tokens)
+   src/converters/detect.js [26:33 - 31:44]
+[1mClone found (javascript)[22m
+ - [1m[32msrc/converters/detect.js[39m[22m [17:28 - 22:44] (6 lines, 36 tokens)
+   src/converters/detect.js [35:32 - 40:44]
+[1mClone found (javascript)[22m
+ - [1m[32msrc/converters/i18n-js.js[39m[22m [19:46 - 27:25] (9 lines, 47 tokens)
+   src/converters/i18next.js [19:24 - 27:25]
+[1mClone found (javascript)[22m
+ - [1m[32msrc/converters/i18n-js.js[39m[22m [27:50 - 52:2] (26 lines, 143 tokens)
+   src/converters/i18next.js [27:24 - 52:2]
+[1mClone found (javascript)[22m
+ - [1m[32msrc/converters/i18n-js.js[39m[22m [44:28 - 51:29] (8 lines, 38 tokens)
+   src/converters/react-intl.js [69:42 - 76:29]
+[1mClone found (javascript)[22m
+ - [1m[32msrc/converters/i18n-js.js[39m[22m [54:27 - 60:57] (7 lines, 57 tokens)
+   src/converters/i18next.js [85:28 - 91:57]
+[1mClone found (typescript)[22m
+ - [1m[32msrc/index.d.ts[39m[22m [151:36 - 156:24] (6 lines, 36 tokens)
+   src/index.d.ts [156:35 - 161:24]
+[1mClone found (javascript)[22m
+ - [1m[32mtests/ci-change-detection.test.js[39m[22m [8:14 - 13:30] (6 lines, 33 tokens)
+   tests/release-metadata.test.js [10:16 - 15:30]
+[1mClone found (javascript)[22m
+ - [1m[32mtests/cli.test.js[39m[22m [27:53 - 37:5] (11 lines, 79 tokens)
+   tests/cli.test.js [56:60 - 66:5]
+[1mClone found (javascript)[22m
+ - [1m[32mtests/cli.test.js[39m[22m [27:53 - 34:34] (8 lines, 62 tokens)
+   tests/cli.test.js [107:60 - 113:49]
+[1mClone found (javascript)[22m
+ - [1m[32mtests/cli.test.js[39m[22m [35:75 - 41:68] (7 lines, 37 tokens)
+   tests/cli.test.js [76:7 - 89:16]
+[1mClone found (javascript)[22m
+ - [1m[32mtests/cli.test.js[39m[22m [92:5 - 97:51] (6 lines, 35 tokens)
+   tests/cli.test.js [129:63 - 132:51]
+[1mClone found (javascript)[22m
+ - [1m[32mtests/i18n.test.js[39m[22m [81:20 - 90:6] (10 lines, 36 tokens)
+   tests/i18n.test.js [171:33 - 180:6]
+[1mClone found (javascript)[22m
+ - [1m[32mtests/i18n.test.js[39m[22m [203:39 - 212:6] (10 lines, 48 tokens)
+   tests/i18n.test.js [221:3 - 231:6]
+[1mClone found (javascript)[22m
+ - [1m[32mtests/publish-retry.test.js[39m[22m [12:24 - 18:24] (7 lines, 31 tokens)
+   tests/publish-retry.test.js [46:5 - 52:26]
+[90m┌────────────┬────────────────┬─────────────┬──────────────┬──────────────┬──────────────────┬───────────────────┐[39m
+[90m│[39m[31m Format     [39m[90m│[39m[31m Files analyzed [39m[90m│[39m[31m Total lines [39m[90m│[39m[31m Total tokens [39m[90m│[39m[31m Clones found [39m[90m│[39m[31m Duplicated lines [39m[90m│[39m[31m Duplicated tokens [39m[90m│[39m
+[90m├────────────┼────────────────┼─────────────┼──────────────┼──────────────┼──────────────────┼───────────────────┤[39m
+[90m│[39m bash       [90m│[39m 2              [90m│[39m 16          [90m│[39m 128          [90m│[39m 0            [90m│[39m 0 (0.00%)        [90m│[39m 0 (0.00%)         [90m│[39m
+[90m├────────────┼────────────────┼─────────────┼──────────────┼──────────────┼──────────────────┼───────────────────┤[39m
+[90m│[39m javascript [90m│[39m 59             [90m│[39m 7783        [90m│[39m 37991        [90m│[39m 36           [90m│[39m 342 (4.39%)      [90m│[39m 1635 (4.30%)      [90m│[39m
+[90m├────────────┼────────────────┼─────────────┼──────────────┼──────────────┼──────────────────┼───────────────────┤[39m
+[90m│[39m typescript [90m│[39m 4              [90m│[39m 312         [90m│[39m 1651         [90m│[39m 1            [90m│[39m 6 (1.92%)        [90m│[39m 36 (2.18%)        [90m│[39m
+[90m├────────────┼────────────────┼─────────────┼──────────────┼──────────────┼──────────────────┼───────────────────┤[39m
+[90m│[39m [1mTotal:[22m     [90m│[39m 65             [90m│[39m 8111        [90m│[39m 39770        [90m│[39m 37           [90m│[39m 348 (4.29%)      [90m│[39m 1671 (4.20%)      [90m│[39m
+[90m└────────────┴────────────────┴─────────────┴──────────────┴──────────────┴──────────────────┴───────────────────┘[39m
+[90mFound 37 clones.[39m
+[32mHTML report saved to ./reports/jscpd/jscpd-report.html[39m
+[90mtime: 58.948ms[39m
+
+> lino-i18n@0.3.0 test:types
+> tsc --project tests/types/tsconfig.json
+
+[issue-23-bc288e2f1144 e0f7b21] fix: Make release paths portable and preserve reviewable CI evidence
+ 359 files changed, 22183 insertions(+), 69579 deletions(-)
+ create mode 100644 dev/log/issues/23/pulls/24/FINAL-VERIFICATION.md
+ create mode 100644 dev/log/issues/23/pulls/24/PR-DESCRIPTION.md
+ create mode 100644 dev/log/issues/23/pulls/24/README.md
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/documentation-37767930240.log
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/javascript-37767930114.log
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/rust-37767930096.log
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/security-37767930346.log
+ create mode 100644 dev/log/issues/23/pulls/24/ci-logs/workflows-37767930202.log
+ create mode 100644 dev/log/issues/23/pulls/24/github/branch-runs-implementation.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/dependency-graph-enabled.txt
+ create mode 100644 dev/log/issues/23/pulls/24/github/enable-dependency-graph.txt
+ create mode 100644 dev/log/issues/23/pulls/24/github/pr-run-37767930096.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/pr-run-37767930114.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/pr-run-37767930202.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/pr-run-37767930240.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/pr-run-37767930346.json
+ create mode 100644 dev/log/issues/23/pulls/24/github/repository-security.json
+ create mode 100644 dev/log/issues/23/pulls/24/templates/js-source.tar.gz
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/.changeset/config.json
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/.github/actions/publish-dockerhub/action.yml
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/.github/actions/setup-buildx-resilient/action.yml
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/.github/codeql/codeql-config.yml
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/.github/workflows/example-app.yml
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/.github/workflows/links.yml
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/.github/workflows/release.yml
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/.github/workflows/security.yml
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/.github/workflows/workflows.yml
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/.github/zizmor.yml
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/.husky/pre-commit
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/.jscpd.json
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/.lycheeignore
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/.prettierignore
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/.prettierrc
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/.secretlintrc.json
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/bunfig.toml
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/deno.json
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/deno.lock
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/eslint.config.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/package-lock.json
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/package.json
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/bootstrap-dependencies.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/changeset-version.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/check-changesets.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/check-ci-workflows.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/check-docker-build.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/check-docker-publish.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/check-file-line-limits.sh
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/check-mjs-syntax.sh
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/check-package-manager.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/check-pipeline-status.sh
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/check-release-needed.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/check-required-docs.sh
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/check-staged-formatting.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/check-status-gate-covers-all-jobs.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/check-version.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/check-web-archive.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/create-github-release.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/create-manual-changeset.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/debug-print.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/detect-code-changes.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/format-github-release.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/format-release-notes-helpers.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/format-release-notes.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/github-actions-log.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/github-release-state.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/install-git-hooks.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/instant-version-bump.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/js-paths.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/land-via-pull-request.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/lint-changed-lines.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/lint.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/merge-changesets.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/npm-registry.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/package-info.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/pr-comparison.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/preflight-credentials.sh
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/publish-failure-classifier.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/publish-retry.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/publish-to-npm.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/push-failure-classifier.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/push-main-with-rebase-retry.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/read-job-cancel-in-progress.sh
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/recheck-broken-links.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/release-metadata.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/release-naming.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/run-command.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/run-with-budget-warning.sh
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/sanitize-npm-userconfig.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/setup-npm.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/simulate-fresh-merge.sh
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/smoke-test-package.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/update-preview-images.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/use-module.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/validate-changeset.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/version-and-commit.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/scripts/wait-for-npm.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/bootstrap-dependencies.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/bot-commit-attribution.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/changeset-config.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/check-changesets.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/check-file-line-limits.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/check-release-needed.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/check-staged-formatting.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/check-web-archive.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/checkout-credentials.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/ci-timeouts.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/ci-workflow-policy.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/commit-message.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/create-github-release.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/debug-print.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/detect-code-changes.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/docker-build.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/docker-publish.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/fixtures/lychee-report.md
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/fixtures/preflight-stub/curl
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/github-actions-log.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/index.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/install-git-hooks.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/land-via-pull-request.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/links-workflow.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/lint-changed-lines.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/merge-changesets.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/no-changelog-comments.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/npm-registry.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/package-info.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/package-manager.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/package-metadata.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/pipeline-status.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/pr-guards.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/publish-failure-classifier.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/publish-retry.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/push-failure-classifier.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/push-main-with-rebase-retry.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/recheck-broken-links.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/release-badge.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/release-metadata.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/release-naming.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/release-preflight.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/required-docs.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/run-with-budget-warning.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/sanitize-npm-userconfig.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/scripts-use-module-adoption.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/security-workflow.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/setup-buildx-resilient.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/setup-npm.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/simulate-fresh-merge.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/smoke-test-package.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/status-gate-coverage.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/tag-prefix.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/transient-links.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/universal-app.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/use-module-integration.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/use-module.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/version-and-commit.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/wait-for-npm.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/workflow-permissions.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/workflow-reliability.test.js
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/js/tests/workflows-lint.test.js
+ create mode 100644 dev/log/issues/23/pulls/24/templates/rust-source.tar.gz
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/.github/actions/setup-buildx-resilient/action.yml
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/.github/codeql/codeql-config.yml
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/.github/workflows/desktop-release.yml
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/.github/workflows/links.yml
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/.github/workflows/release.yml
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/.github/workflows/security.yml
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/.github/workflows/workflows.yml
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/.github/zizmor.yml
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/.lycheeignore
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/.pre-commit-config.yaml
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/.secretlintrc.json
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/Cargo.lock
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/Cargo.toml
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/lychee.toml
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/bump-version.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/check-cargo-lock.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/check-cargo-warnings.sh
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/check-changelog-fragment.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/check-crate-size.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/check-file-size.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/check-pipeline-status.sh
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/check-release-needed.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/check-required-docs.sh
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/check-version-modification.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/check-web-archive.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/check-web-archive.test.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/check-workflow-tools.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/collect-changelog.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/crates-publish-preflight.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/crates-publish-preflight.test.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/create-changelog-fragment.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/create-github-release.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/desktop-release-resolve.sh
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/detect-code-changes.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/fixtures/lychee-report.md
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/get-bump-type.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/get-version.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/git-config.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/install-rust-script.sh
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/package-desktop.sh
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/preflight-credentials.sh
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/publish-crate.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/read-job-cancel-in-progress.sh
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/recheck-broken-links.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/recheck-broken-links.test.mjs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/release-index.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/release-naming.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/run-with-budget-warning.sh
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/rust-paths.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/simulate-fresh-merge.sh
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/smoke-test-published-crate.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/test-scripts.sh
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/version-and-commit.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/scripts/wait-for-crate.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/integration/mod.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/integration/sum.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/changelog_parsing.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/desktop_release_resolve.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/issue_119.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/issue_127.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/issue_135.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/issue_141.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/issue_143.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/issue_147.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/issue_149.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/issue_150.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/issue_156.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/issue_157.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/issue_160.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/issue_161.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/issue_163.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/issue_168.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/issue_171.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/issue_172.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/issue_188.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/mod.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/release_naming_tests.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/version_and_commit_behind_check.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/version_and_commit_tag_order.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/workflow_desktop_release.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/workflow_release.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/workflow_security.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/ci-cd/workspace_manifest_resolution.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/mod.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/templates/rust/tests/unit/sum.rs
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/actionlint-complete.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/actionlint-install.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/cargo-audit-final.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/cargo-audit-install.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/change-detection-after.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/change-detection-before.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/ci-policy.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/ci-tools-install.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/crates-preflight-tests.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/dependency-updates.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/diff-whitespace.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/docs-build.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/docs-validation.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/duplication-after.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/evidence-collection.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/evidence-index-final.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/final-main-fetch.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/final-script-format.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/format-fixes.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/hook-after.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/hook-before.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/hook-portability-after.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/hook-portability-before.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/implementation-ci-collection.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/implementation-commit.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/implementation-push.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/js-browser.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/js-checks-final.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/js-checks-first.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/js-checks-latest.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/js-checks-second.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/js-format-final.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/js-format-latest.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/js-format.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/js-lint-first.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/js-lint-fixes.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/js-lint-format.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/js-release-regression.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/js-tests-latest.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/js-tests.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/link-recheck-tests.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/local-history-index.json
+ create mode 100644 dev/log/issues/23/pulls/24/verification/local-history.tar.gz
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/metadata-io-format.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/npm-audit-after.json
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/npm-audit-before.json
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/npm-audit-final.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/npm-audit-fix.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/npm-ci.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/npm-command-stream-rejected.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/npm-command-stream.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/npm-dependency-tree.txt
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/npm-script-approval.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/path-alias-after.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/path-alias-before.log
+ create mode 100644 dev/log/issues/23/pulls/24/verification/path-alias-format.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/playwright-install.log
+ rename dev/log/issues/23/pulls/24/verification/{actionlint-first.log => portable-actionlint.log} (100%)
+ rename dev/log/issues/23/pulls/24/verification/{bun-tests.log => portable-bun-tests.log} (55%)
+ rename dev/log/issues/23/pulls/24/verification/{ci-policy-complete.log => portable-ci-policy.log} (100%)
+ rename dev/log/issues/23/pulls/24/verification/{deno-tests.log => portable-deno-tests.log} (58%)
+ create mode 100644 dev/log/issues/23/pulls/24/verification/portable-hook.log
+ rename dev/log/issues/23/pulls/24/verification/{js-checks-validated.log => portable-js-checks.log} (91%)
+ rename dev/log/issues/23/pulls/24/verification/{js-types.log => portable-js-types.log} (100%)
+ create mode 100644 dev/log/issues/23/pulls/24/verification/portable-node-tests.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/product-links-report.md
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/product-links.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/publish-after.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/publish-before.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/react-testing-update.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/release-test-format.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/rust-clippy.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/rust-format.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/rust-guards-after.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/rust-output-after.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/rust-output-before.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/rust-package.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/rust-release-after.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/rust-release-before.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/rust-release-complete.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/rust-release-final.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/rust-script-checks-complete.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/rust-script-checks-strict.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/rust-script-checks-validated.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/rust-script-checks.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/rust-script-install.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/rust-tests.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/secretlint-install.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/secrets-final.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/secrets.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/shared-guards-final.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/shared-guards.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/staged-stat.txt
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/template-npm-audit.json
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/workflow-generation.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/zizmor-auditor-findings.json
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/zizmor-auditor-review.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/zizmor-auditor-summary.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/zizmor-complete.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/zizmor-first.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/zizmor-pedantic-complete.log
+ delete mode 100644 dev/log/issues/23/pulls/24/verification/zizmor-pedantic.log
+ create mode 100644 experiments/issue-23-pr-ci.py

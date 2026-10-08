@@ -9,19 +9,12 @@
  *   tag-prefix: Prefix for the git tag (default: "v", use "js-v" for multi-language repos)
  *
  * Uses link-foundation libraries:
- * - use-m: Dynamic package loading without package.json dependencies
- * - command-stream: Modern shell command execution with streaming support
  * - lino-arguments: Unified configuration from CLI args, env vars, and .lenv files
  */
 
-// Load use-m dynamically
-const { use } = eval(
-  await (await fetch('https://unpkg.com/use-m/use.js')).text()
-);
-
-// Import link-foundation libraries
-const { $ } = await use('command-stream');
-const { makeConfig } = await use('lino-arguments');
+import { makeConfig } from 'lino-arguments';
+import { runStrict } from './run-command.mjs';
+import { fileURLToPath } from 'node:url';
 
 // Parse CLI arguments using lino-arguments
 // Note: Using --release-version instead of --version to avoid conflict with yargs' built-in --version flag
@@ -67,12 +60,17 @@ try {
   // Get the release ID for this version
   let releaseId = '';
   try {
-    const result =
-      await $`gh api "repos/${repository}/releases/tags/${tag}" --jq '.id'`.run(
-        { capture: true }
-      );
+    const result = await runStrict('gh', [
+      'api',
+      `repos/${repository}/releases/tags/${tag}`,
+      '--jq',
+      '.id',
+    ]);
     releaseId = result.stdout.trim();
-  } catch {
+  } catch (error) {
+    if (!/HTTP 404/.test(error.message)) {
+      throw error;
+    }
     console.log(`\u26A0\uFE0F Could not find release for ${tag}`);
     process.exit(0);
   }
@@ -81,7 +79,17 @@ try {
     console.log(`Formatting release notes for ${tag}...`);
     // Pass the trigger commit SHA for PR detection
     // This allows proper PR lookup even if the changelog doesn't have a commit hash
-    await $`node scripts/format-release-notes.mjs --release-id "${releaseId}" --release-version "${tag}" --repository "${repository}" --commit-sha "${commitSha}"`;
+    await runStrict(process.execPath, [
+      fileURLToPath(new URL('./format-release-notes.mjs', import.meta.url)),
+      '--release-id',
+      releaseId,
+      '--release-version',
+      tag,
+      '--repository',
+      repository,
+      '--commit-sha',
+      commitSha,
+    ]);
     console.log(`\u2705 Formatted release notes for ${tag}`);
   }
 } catch (error) {

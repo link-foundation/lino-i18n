@@ -23,16 +23,20 @@
 //! serde_json = "1"
 //! ```
 
+#[path = "github-output.rs"]
+mod github_output;
+
 use chrono::Utc;
 use regex::Regex;
 use serde::Deserialize;
 use std::collections::HashSet;
 use std::env;
 use std::fs;
-use std::io::Write;
 use std::path::{Path, PathBuf};
 use std::process::{exit, Command};
 
+#[path = "registry-state.rs"]
+mod registry_state;
 #[path = "rust-paths.rs"]
 mod rust_paths;
 
@@ -62,20 +66,6 @@ fn get_changelog_path(rust_root: &str) -> String {
     } else {
         format!("{}/CHANGELOG.md", rust_root)
     }
-}
-
-fn set_output(key: &str, value: &str) {
-    if let Ok(output_file) = env::var("GITHUB_OUTPUT") {
-        if let Err(e) = fs::OpenOptions::new()
-            .create(true)
-            .append(true)
-            .open(&output_file)
-            .and_then(|mut f| writeln!(f, "{}={}", key, value))
-        {
-            eprintln!("Warning: Could not write to GITHUB_OUTPUT: {}", e);
-        }
-    }
-    println!("Output: {}={}", key, value);
 }
 
 fn exec(command: &str, args: &[&str]) -> Result<String, String> {
@@ -287,19 +277,13 @@ fn check_tag_exists(tag_prefix: &str, version: &str) -> bool {
 }
 
 fn check_version_on_crates_io(crate_name: &str, version: &str) -> bool {
-    let url = format!("https://crates.io/api/v1/crates/{}/{}", crate_name, version);
-    match ureq::get(&url)
-        .set("User-Agent", "rust-script-version-and-commit")
-        .call()
-    {
-        Ok(response) => response.status() == 200,
-        Err(_) => false,
-    }
+    registry_state::version_exists(crate_name, version)
 }
 
 fn get_max_published_version(crate_name: &str) -> Option<(u32, u32, u32)> {
     let url = format!("https://crates.io/api/v1/crates/{}", crate_name);
     match ureq::get(&url)
+        .timeout(std::time::Duration::from_secs(15))
         .set("User-Agent", "rust-script-version-and-commit")
         .call()
     {
@@ -336,9 +320,14 @@ fn get_max_published_version(crate_name: &str) -> Option<(u32, u32, u32)> {
                     }
                 }
             }
-            None
+            eprintln!("::error::Crates.io version list metadata is unreadable or malformed");
+            exit(1)
         }
-        Err(_) => None,
+        Err(ureq::Error::Status(404, _)) => None,
+        Err(error) => {
+            eprintln!("::error::Crates.io state is unknown: {error}");
+            exit(1);
+        }
     }
 }
 
@@ -416,14 +405,14 @@ fn collect_changelog(changelog_dir: &str, changelog_file: &str, version: &str) {
 
     let mut files: Vec<_> = match fs::read_dir(dir_path) {
         Ok(entries) => entries
-            .filter_map(|e| e.ok())
+            .map(|e| e.expect("Cannot read changelog directory entry"))
             .map(|e| e.path())
             .filter(|p| {
                 p.extension().map_or(false, |ext| ext == "md")
                     && p.file_name().map_or(false, |name| name != "README.md")
             })
             .collect(),
-        Err(_) => return,
+        Err(e) => panic!("Cannot read changelog directory: {e}"),
     };
 
     if files.is_empty() {
@@ -434,7 +423,7 @@ fn collect_changelog(changelog_dir: &str, changelog_file: &str, version: &str) {
 
     let fragments: Vec<String> = files
         .iter()
-        .filter_map(|f| fs::read_to_string(f).ok())
+        .map(|f| fs::read_to_string(f).expect("Cannot read changelog fragment"))
         .map(|c| strip_frontmatter(&c))
         .filter(|c| !c.is_empty())
         .collect();
@@ -452,7 +441,8 @@ fn collect_changelog(changelog_dir: &str, changelog_file: &str, version: &str) {
     );
 
     if Path::new(changelog_file).exists() {
-        let mut content = fs::read_to_string(changelog_file).unwrap_or_default();
+        let mut content =
+            fs::read_to_string(changelog_file).expect("Cannot read existing changelog");
         let lines: Vec<&str> = content.lines().collect();
         let mut insert_index = None;
 
@@ -475,10 +465,56 @@ fn collect_changelog(changelog_dir: &str, changelog_file: &str, version: &str) {
         fs::write(changelog_file, content).expect("Failed to write changelog");
     }
 
-    println!("Collected {} changelog fragment(s)", files.len());
+    if !Path::new(changelog_file).exists() {
+        fs::write(changelog_file, format!("# Changelog\n{new_entry}"))
+            .expect("Cannot create changelog");
+    }
+    for file in &files {
+        fs::remove_file(file).expect("Cannot consume changelog fragment");
+    }
+    println!(
+        "Collected and consumed {} changelog fragment(s)",
+        files.len()
+    );
+}
+
+fn synchronize_clean_checkout() -> Result<String, String> {
+    if !exec("git", &["status", "--porcelain"])?.is_empty() {
+        return Err("Release requires a clean checkout before synchronization".into());
+    }
+    let mut branch = exec("git", &["branch", "--show-current"])?;
+    if branch.is_empty() && env::var("GITHUB_REF").as_deref() == Ok("refs/heads/main") {
+        exec("git", &["switch", "-C", "main", "HEAD"])?;
+        branch = "main".into();
+    }
+    if branch != "main" {
+        return Err("Release requires the main branch".into());
+    }
+    let validated = env::var("GITHUB_SHA")
+        .ok()
+        .filter(|v| !v.is_empty())
+        .unwrap_or(exec("git", &["rev-parse", "HEAD"])?);
+    exec("git", &["fetch", "origin", "main"])?;
+    exec(
+        "python3",
+        &[
+            "scripts/check-release-metadata.py",
+            &validated,
+            "origin/main",
+        ],
+    )?;
+    exec("git", &["rebase", "origin/main"])?;
+    Ok(branch)
 }
 
 fn main() {
+    if env::args().any(|argument| argument == "--sync-only") {
+        synchronize_clean_checkout().unwrap_or_else(|error| {
+            eprintln!("::error::{error}");
+            exit(1);
+        });
+        return;
+    }
     let bump_type = match get_arg("bump-type") {
         Some(bt) => bt,
         None => {
@@ -495,6 +531,10 @@ fn main() {
         exit(1);
     }
 
+    let current_branch = synchronize_clean_checkout().unwrap_or_else(|error| {
+        eprintln!("::error::{error}");
+        exit(1);
+    });
     let description = get_arg("description");
     let tag_prefix = get_arg("tag-prefix").unwrap_or_else(|| "v".to_string());
     let release_label = get_arg("release-label");
@@ -597,18 +637,17 @@ fn main() {
         exit(1);
     }
 
-    let updated_dependency_manifests =
-        match update_workspace_path_dependency_versions(
-            &package_manifests,
-            &package_names,
-            &new_version,
-        ) {
-            Ok(manifests) => manifests,
-            Err(e) => {
-                eprintln!("Error: {}", e);
-                exit(1);
-            }
-        };
+    let updated_dependency_manifests = match update_workspace_path_dependency_versions(
+        &package_manifests,
+        &package_names,
+        &new_version,
+    ) {
+        Ok(manifests) => manifests,
+        Err(e) => {
+            eprintln!("Error: {}", e);
+            exit(1);
+        }
+    };
     let cargo_lock_path = rust_paths::get_cargo_lock_path(&rust_root);
     let updated_cargo_lock =
         match update_cargo_lock_package_versions(&cargo_lock_path, &package_names, &new_version) {
@@ -624,42 +663,45 @@ fn main() {
 
     // Stage Cargo.toml and CHANGELOG.md
     let version_manifest_str = version_manifest.to_string_lossy().to_string();
-    let _ = exec("git", &["add", &version_manifest_str, &changelog_file]);
+    exec(
+        "git",
+        &[
+            "add",
+            &version_manifest_str,
+            &changelog_file,
+            &changelog_dir,
+        ],
+    )
+    .expect("Cannot stage release metadata");
     for manifest in &updated_dependency_manifests {
         let manifest_str = manifest.to_string_lossy().to_string();
-        let _ = exec("git", &["add", &manifest_str]);
+        exec("git", &["add", &manifest_str]).expect("Cannot stage dependency version");
     }
     if let Some(cargo_lock) = &updated_cargo_lock {
         let cargo_lock_str = cargo_lock.to_string_lossy().to_string();
-        let _ = exec("git", &["add", &cargo_lock_str]);
+        exec("git", &["add", &cargo_lock_str]).expect("Cannot stage lockfile version");
     }
 
     // Check if there are changes to commit
     if exec_check("git", &["diff", "--cached", "--quiet"]) {
         println!("No changes to commit");
-        set_output("version_committed", "false");
-        set_output("new_version", &new_version);
+        github_output::set_output("version_committed", "false");
+        github_output::set_output("new_version", &new_version);
         return;
     }
 
-    // Fetch latest remote state before committing (supports concurrent release workflows)
-    let current_branch =
-        exec("git", &["rev-parse", "--abbrev-ref", "HEAD"]).unwrap_or_else(|_| "main".to_string());
-    if let Err(e) = exec("git", &["fetch", "origin", &current_branch]) {
-        eprintln!("Warning: Could not fetch origin/{}: {}", current_branch, e);
-    } else {
-        let local = exec("git", &["rev-parse", "HEAD"]).unwrap_or_default();
-        let remote =
-            exec("git", &["rev-parse", &format!("origin/{}", current_branch)]).unwrap_or_default();
-        if !local.is_empty() && !remote.is_empty() && local != remote {
-            println!("Local branch is behind remote, rebasing...");
-            if let Err(e) = exec("git", &["rebase", &format!("origin/{}", current_branch)]) {
-                eprintln!("Error rebasing onto origin/{}: {}", current_branch, e);
-                let _ = exec("git", &["rebase", "--abort"]);
-                exit(1);
-            }
-        }
-    }
+    // Generated changes must contain only release metadata, too.
+    let parent = exec("git", &["rev-parse", "HEAD"]).expect("Missing release parent");
+    exec(
+        "python3",
+        &[
+            "scripts/check-release-metadata.py",
+            &parent,
+            "--",
+            "--cached",
+        ],
+    )
+    .expect("Generated release changed non-version metadata");
 
     // Commit changes
     let label_suffix = release_label
@@ -683,52 +725,66 @@ fn main() {
     }
     println!("Committed version {}", new_version);
 
-    // Create tag
-    let tag_name = format!("{}{}", tag_prefix, new_version);
-    let tag_msg = match &description {
-        Some(desc) => format!("Release {}{}\n\n{}", tag_name, label_suffix, desc),
-        None => format!("Release {}{}", tag_name, label_suffix),
-    };
-
-    if let Err(e) = exec("git", &["tag", "-a", &tag_name, "-m", &tag_msg]) {
-        eprintln!("Error creating tag: {}", e);
-        exit(1);
-    }
-    println!("Created tag {}", tag_name);
-
-    // Push changes and tag with retry (handles concurrent pushes in multi-workflow repos)
-    let max_push_attempts = 3;
-    for attempt in 1..=max_push_attempts {
-        match exec("git", &["push"]) {
+    // Commit before any retry rebase. A tag is created only after the push lands.
+    let release_parent = exec("git", &["rev-parse", "HEAD^"]).expect("Missing release parent");
+    for attempt in 1..=3 {
+        match exec(
+            "git",
+            &[
+                "push",
+                "origin",
+                &format!("HEAD:refs/heads/{current_branch}"),
+            ],
+        ) {
             Ok(_) => break,
-            Err(e) => {
-                if attempt < max_push_attempts {
-                    eprintln!(
-                        "Push failed (attempt {}/{}): {}",
-                        attempt, max_push_attempts, e
-                    );
-                    eprintln!("Pulling with rebase and retrying...");
-                    if let Err(rebase_err) =
-                        exec("git", &["pull", "--rebase", "origin", &current_branch])
-                    {
-                        eprintln!("Error during pull --rebase: {}", rebase_err);
-                        let _ = exec("git", &["rebase", "--abort"]);
-                        exit(1);
-                    }
-                } else {
-                    eprintln!("Error pushing after {} attempts: {}", max_push_attempts, e);
+            Err(error) => {
+                let lower = error.to_lowercase();
+                if lower.contains("gh006")
+                    || lower.contains("gh013")
+                    || lower.contains("protected branch")
+                    || lower.contains("repository rule")
+                {
+                    eprintln!("::error::Branch rules rejected the release metadata push: {error}. Configure the approved bot bypass; no PR fallback is attempted.");
+                    exit(1);
+                }
+                if attempt == 3
+                    || !(lower.contains("non-fast-forward") || lower.contains("fetch first"))
+                {
+                    eprintln!("::error::Release push failed: {error}");
+                    exit(1);
+                }
+                exec("git", &["fetch", "origin", &current_branch]).expect("Cannot refresh remote");
+                let remote = format!("origin/{current_branch}");
+                exec(
+                    "python3",
+                    &[
+                        "scripts/check-release-metadata.py",
+                        &release_parent,
+                        &remote,
+                    ],
+                )
+                .unwrap_or_else(|error| {
+                    eprintln!("::error::{error}");
+                    exit(1);
+                });
+                if let Err(error) = exec("git", &["rebase", &remote]) {
+                    let _ = exec("git", &["rebase", "--abort"]);
+                    eprintln!("::error::Release metadata conflict: {error}");
                     exit(1);
                 }
             }
         }
     }
+    let tag_name = format!("{tag_prefix}{new_version}");
+    let tag_msg = match &description {
+        Some(desc) => format!("Release {tag_name}{label_suffix}\n\n{desc}"),
+        None => format!("Release {tag_name}{label_suffix}"),
+    };
+    exec("git", &["tag", "-a", &tag_name, "-m", &tag_msg]).expect("Cannot tag landed release");
+    exec("git", &["push", "origin", &format!("refs/tags/{tag_name}")])
+        .expect("Cannot push release tag");
+    println!("Pushed release commit and {tag_name}");
 
-    if let Err(e) = exec("git", &["push", "--tags"]) {
-        eprintln!("Error pushing tags: {}", e);
-        exit(1);
-    }
-    println!("Pushed changes and tags");
-
-    set_output("version_committed", "true");
-    set_output("new_version", &new_version);
+    github_output::set_output("version_committed", "true");
+    github_output::set_output("new_version", &new_version);
 }

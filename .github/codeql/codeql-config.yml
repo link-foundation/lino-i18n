@@ -1,0 +1,12 @@
+name: Product and pipeline code
+paths:
+  - js/src
+  - js/bin
+  - js/scripts
+  - rust
+  - scripts
+  - .github
+paths-ignore:
+  - dev
+  - '**/node_modules/**'
+  - '**/target/**'

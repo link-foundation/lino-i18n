@@ -1,0 +1,121 @@
+name: Security
+'on':
+  push:
+    branches:
+      - main
+  pull_request: null
+  schedule:
+    - cron: 0 6 * * 1
+  workflow_dispatch: null
+permissions:
+  contents: read
+env:
+  GIT_CONFIG_COUNT: '1'
+  GIT_CONFIG_KEY_0: init.defaultBranch
+  GIT_CONFIG_VALUE_0: main
+jobs:
+  npm-audit:
+    name: npm audit
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    concurrency:
+      group: check-${{ github.workflow }}-${{ github.ref }}-npm audit
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24.x
+      - run: npm audit --package-lock-only --audit-level=high
+        working-directory: js
+  cargo-audit:
+    name: Cargo audit
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    concurrency:
+      group: check-${{ github.workflow }}-${{ github.ref }}-Cargo audit
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: taiki-e/install-action@e67fa11c4b9316fa714ddf0abed07a0c3143b95b
+        with:
+          tool: cargo-audit@0.22.2
+      - run: cargo audit --file rust/Cargo.lock --deny warnings
+  codeql:
+    name: CodeQL
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    concurrency:
+      group: check-${{ github.workflow }}-${{ github.ref }}-CodeQL-${{ matrix.language }}
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Include standalone Rust helpers in semantic analysis
+        if: matrix.language == 'rust'
+        run: python3 scripts/prepare-codeql-rust.py
+      - uses: github/codeql-action/init@v4
+        with:
+          languages: ${{ matrix.language }}
+          build-mode: none
+          config-file: ./.github/codeql/codeql-config.yml
+      - uses: github/codeql-action/analyze@v4
+    permissions:
+      contents: read
+      # Read workflow metadata for CodeQL analysis.
+      actions: read # Read workflow metadata for CodeQL analysis.
+      # Upload CodeQL findings to code scanning.
+      security-events: write # Upload CodeQL findings to code scanning.
+    strategy:
+      fail-fast: false
+      matrix:
+        language:
+          - javascript-typescript
+          - rust
+          - actions
+  dependency-review:
+    name: Dependency review
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    concurrency:
+      group: check-${{ github.workflow }}-${{ github.ref }}-Dependency review
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/dependency-review-action@v5
+        with:
+          fail-on-severity: high
+          # Aggregate upstream repository-health scores are optional heuristics.
+          # Vulnerability review and both lockfile audits remain required.
+          show-openssf-scorecard: false
+    if: github.event_name == 'pull_request'
+  pipeline-status:
+    name: Pipeline Status
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    concurrency:
+      group: check-${{ github.workflow }}-${{ github.ref }}-Pipeline Status
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - env:
+          NEEDS_JSON: ${{ toJSON(needs) }}
+          CANCELLABLE_JOBS: '["npm-audit", "cargo-audit", "codeql", "dependency-review"]'
+          RUN_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+        run: python3 scripts/check-pipeline-status.py
+    if: always()
+    needs:
+      - npm-audit
+      - cargo-audit
+      - codeql
+      - dependency-review

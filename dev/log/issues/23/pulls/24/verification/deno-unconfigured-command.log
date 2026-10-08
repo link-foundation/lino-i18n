@@ -1,0 +1,61 @@
+Check tests/browser.test.js
+Check tests/ci-change-detection.test.js
+Check tests/cli.test.js
+Check tests/converters.test.js
+Check tests/i18n.test.js
+Check tests/package-metadata.test.js
+Check tests/publish-retry.test.js
+Check tests/react.test.js
+Check tests/release-delivery.test.js
+Check tests/release-metadata.test.js
+TS2305 [ERROR]: Module '"file:///tmp/gh-issue-solver-1791452293811/js/src/index.js"' has no exported member 'CompatibilityAliasOptions'.
+  CompatibilityAliasOptions,
+  ~~~~~~~~~~~~~~~~~~~~~~~~~
+    at file:///tmp/gh-issue-solver-1791452293811/js/src/browser.d.ts:2:3
+
+TS2305 [ERROR]: Module '"file:///tmp/gh-issue-solver-1791452293811/js/src/index.js"' has no exported member 'I18nCoreInstance'.
+  I18nCoreInstance,
+  ~~~~~~~~~~~~~~~~
+    at file:///tmp/gh-issue-solver-1791452293811/js/src/browser.d.ts:3:3
+
+TS2305 [ERROR]: Module '"file:///tmp/gh-issue-solver-1791452293811/js/src/index.js"' has no exported member 'I18nOptions'.
+  I18nOptions,
+  ~~~~~~~~~~~
+    at file:///tmp/gh-issue-solver-1791452293811/js/src/browser.d.ts:4:3
+
+TS2305 [ERROR]: Module '"file:///tmp/gh-issue-solver-1791452293811/js/src/index.js"' has no exported member 'CompatibilityAlias'.
+  CompatibilityAlias,
+  ~~~~~~~~~~~~~~~~~~
+    at file:///tmp/gh-issue-solver-1791452293811/js/src/browser.d.ts:8:3
+
+TS2305 [ERROR]: Module '"file:///tmp/gh-issue-solver-1791452293811/js/src/index.js"' has no exported member 'CompatibilityAliasOptions'.
+  CompatibilityAliasOptions,
+  ~~~~~~~~~~~~~~~~~~~~~~~~~
+    at file:///tmp/gh-issue-solver-1791452293811/js/src/browser.d.ts:9:3
+
+TS2305 [ERROR]: Module '"file:///tmp/gh-issue-solver-1791452293811/js/src/index.js"' has no exported member 'I18nCoreInstance'.
+  I18nCoreInstance,
+  ~~~~~~~~~~~~~~~~
+    at file:///tmp/gh-issue-solver-1791452293811/js/src/browser.d.ts:10:3
+
+TS2305 [ERROR]: Module '"file:///tmp/gh-issue-solver-1791452293811/js/src/index.js"' has no exported member 'I18nOptions'.
+  I18nOptions,
+  ~~~~~~~~~~~
+    at file:///tmp/gh-issue-solver-1791452293811/js/src/browser.d.ts:11:3
+
+TS2305 [ERROR]: Module '"file:///tmp/gh-issue-solver-1791452293811/js/src/index.js"' has no exported member 'TOptions'.
+  TOptions,
+  ~~~~~~~~
+    at file:///tmp/gh-issue-solver-1791452293811/js/src/browser.d.ts:12:3
+
+TS2305 [ERROR]: Module '"file:///tmp/gh-issue-solver-1791452293811/js/src/index.js"' has no exported member 'TParams'.
+  TParams,
+  ~~~~~~~
+    at file:///tmp/gh-issue-solver-1791452293811/js/src/browser.d.ts:13:3
+
+Found 9 errors.
+
+error: Type checking failed.
+
+  [33minfo:[39m The program failed type-checking, but it still might work correctly.
+  [36mhint:[39m Re-run with [4m--no-check[24m to skip type-checking.

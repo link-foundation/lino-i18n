@@ -1,0 +1,114 @@
+rust-release: exit 0
+No versions published on crates.io yet (or crate not found)
+Initial bump (patch) from 1.0.0: 1.0.1
+Final release version: 1.0.1
+Updated rust/Cargo.toml to version 1.0.1
+Updated local path dependency versions in rust/fixture/Cargo.toml to 1.0.1
+Updated workspace package versions in rust/Cargo.lock to 1.0.1
+Collected and consumed 1 changelog fragment(s)
+Committed version 1.0.1
+Pushed release commit and rust-v1.0.1
+Output: version_committed=true
+Output: new_version=1.0.1
+Using CLI configured Rust root: rust
+
+Rust release synchronized, consumed fragments, committed metadata and pushed the correct tag.
+
+rust-guards: exit 0
+detect-code-changes.rs: exit 0
+Changed files: [".githooks/pre-commit"]
+rs-changed=false
+toml-changed=false
+docs-changed=false
+workflow-changed=true
+any-code-changed=false
+
+detect-code-changes.rs: exit 0
+Changed files: ["experiments/issue-23-hook.py"]
+rs-changed=false
+toml-changed=false
+docs-changed=false
+workflow-changed=true
+any-code-changed=false
+
+detect-code-changes.rs: exit 0
+Changed files: [".githooks/pre-commit", "docs/example.md", "experiments/issue-23-hook.py", "rust/member/src/lib.rs"]
+rs-changed=true
+toml-changed=false
+docs-changed=true
+workflow-changed=true
+any-code-changed=true
+
+check-changelog-fragment.rs: exit 1
+: :error: :No new changelog fragment; add a file in rust/changelog.d/
+
+check-changelog-fragment.rs: exit 1
+: :error: :No new changelog fragment; add a file in rust/changelog.d/
+
+check-changelog-fragment.rs: exit 0
+Changelog fragment check passed.
+
+check-version-modification.rs: exit 0
+Package and workspace versions are unchanged.
+
+check-version-modification.rs: exit 1
+: :error: :Manual package version change in rust/member/Cargo.toml; add a changelog fragment instead.
+
+detect-code-changes.rs: exit 1
+: :error: :Change detection failed: fatal: Needed a single revision
+
+check-changelog-fragment.rs: exit 1
+: :error: :fatal: Needed a single revision
+
+check-version-modification.rs: exit 1
+: :error: :fatal: Needed a single revision
+
+detect-code-changes.rs: exit 0
+Changed files: ["docs/example.md", "rust/changelog.d/new.md", "rust/changelog.d/old.md", "rust/changelog.d/renamed.md", "rust/member/Cargo.toml", "rust/member/src/lib.rs"]
+rs-changed=true
+toml-changed=true
+docs-changed=true
+workflow-changed=false
+any-code-changed=true
+
+Whole-PR/merge, workspace member, formatting, spoofed branch, fragment rename and invalid-ref checks passed.
+
+rust-output: exit 0
+Current version: 0.2.0
+Detected multi-language repository (Cargo.toml in rust/)
+
+thread 'main' (71044) panicked at /tmp/gh-issue-solver-1791452293811/rust/scripts/github-output.rs:15:14:
+GITHUB_OUTPUT must be writable: Os { code: 21, kind: IsADirectory, message: "Is a directory" }
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+Unwritable Actions output correctly fails the step.
+
+rust-io: exit 0
+get-bump-type: exit=101
+Detected single-language repository (Cargo.toml in root)
+
+thread 'main' (71046) panicked at /tmp/gh-issue-solver-1791452293811/rust/scripts/get-bump-type.rs:118:23:
+Cannot inspect changelog directory: Not a directory (os error 20)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+check-file-size: exit=101
+
+Checking Rust files for maximum 1000 lines (warning above 900)...
+
+
+thread 'main' (71047) panicked at /tmp/gh-issue-solver-1791452293811/rust/scripts/check-file-size.rs:120:17:
+Cannot check /tmp/lino-rust-io-5rukx9bq/invalid.rs: stream did not contain valid UTF-8
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+Rust input read failures are fatal.
+
+shared-guards: exit 0
+Allowed release metadata: js/package.json
+
+Release validation failed: Non-version change in js/package.json; rerun CI on the new main commit
+
+Release validation failed: Untested change A js/source.js; rerun CI on the new main commit
+
+Metadata-only synchronization and failed/cancelled/unknown terminal statuses verified.
+
+All CI fixtures passed without emitting live workflow commands.

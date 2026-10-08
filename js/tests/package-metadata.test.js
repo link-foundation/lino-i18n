@@ -9,13 +9,12 @@ const packageRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const packageJson = JSON.parse(
   readFileSync(resolve(packageRoot, 'package.json'), 'utf8')
 );
-const isWindows = process.platform === 'win32';
-
 test('npm package dry-run contains the publishable runtime surface', () => {
-  const result = spawnSync('npm', ['pack', '--dry-run', '--json'], {
+  // npm is a .cmd shim on Windows. A fixed command needs no unescaped args.
+  const result = spawnSync('npm pack --dry-run --json', {
     cwd: packageRoot,
     encoding: 'utf8',
-    shell: isWindows,
+    shell: true,
   });
 
   assert.ifError(result.error);

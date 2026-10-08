@@ -1,0 +1,6 @@
+Current version: 1.0.0
+Output: version=1.0.0
+Detected single-language repository (Cargo.toml in root)
+Warning: Could not write to GITHUB_OUTPUT: Is a directory (os error 21)
+
+Confirmed: upstream returns success without supplying the required version output.

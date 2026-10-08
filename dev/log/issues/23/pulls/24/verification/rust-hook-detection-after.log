@@ -1,0 +1,57 @@
+detect-code-changes.rs: exit 0
+Changed files: [".githooks/pre-commit"]
+rs-changed=false
+toml-changed=false
+docs-changed=false
+workflow-changed=true
+any-code-changed=false
+
+detect-code-changes.rs: exit 0
+Changed files: ["experiments/issue-23-hook.py"]
+rs-changed=false
+toml-changed=false
+docs-changed=false
+workflow-changed=true
+any-code-changed=false
+
+detect-code-changes.rs: exit 0
+Changed files: [".githooks/pre-commit", "docs/example.md", "experiments/issue-23-hook.py", "rust/member/src/lib.rs"]
+rs-changed=true
+toml-changed=false
+docs-changed=true
+workflow-changed=true
+any-code-changed=true
+
+check-changelog-fragment.rs: exit 1
+::error::No new changelog fragment; add a file in rust/changelog.d/
+
+check-changelog-fragment.rs: exit 1
+::error::No new changelog fragment; add a file in rust/changelog.d/
+
+check-changelog-fragment.rs: exit 0
+Changelog fragment check passed.
+
+check-version-modification.rs: exit 0
+Package and workspace versions are unchanged.
+
+check-version-modification.rs: exit 1
+::error::Manual package version change in rust/member/Cargo.toml; add a changelog fragment instead.
+
+detect-code-changes.rs: exit 1
+::error::Change detection failed: fatal: Needed a single revision
+
+check-changelog-fragment.rs: exit 1
+::error::fatal: Needed a single revision
+
+check-version-modification.rs: exit 1
+::error::fatal: Needed a single revision
+
+detect-code-changes.rs: exit 0
+Changed files: ["docs/example.md", "rust/changelog.d/new.md", "rust/changelog.d/old.md", "rust/changelog.d/renamed.md", "rust/member/Cargo.toml", "rust/member/src/lib.rs"]
+rs-changed=true
+toml-changed=true
+docs-changed=true
+workflow-changed=false
+any-code-changed=true
+
+Whole-PR/merge, workspace member, formatting, spoofed branch, fragment rename and invalid-ref checks passed.

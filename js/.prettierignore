@@ -8,6 +8,7 @@ package-lock.json
 site/
 test-results/
 playwright-report/
+reports/
 CLAUDE.md
 # Case study raw data files (downloaded from external sources)
 docs/case-studies/*/data/

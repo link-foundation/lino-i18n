@@ -1,0 +1,9 @@
+Publish attempt 1 of 3...
+Publish reported the version is already published or staged, verifying registry.
+Verification attempt 1 of 2: version not visible yet
+Verification attempt 2 of 2: version not visible yet
+{
+  success: false,
+  publishAttempts: 1,
+  diagnostic: 'Package not found on npm after publish; verification polling exhausted'
+}
