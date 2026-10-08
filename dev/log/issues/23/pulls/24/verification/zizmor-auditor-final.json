@@ -1,0 +1,2690 @@
+[
+  {
+    "ident": "superfluous-actions",
+    "desc": "action functionality is already included by the runner",
+    "url": "https://docs.zizmor.sh/audits/#superfluous-actions",
+    "determinations": {
+      "confidence": "Medium",
+      "severity": "Informational",
+      "persona": "Pedantic"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/docs.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "validate-docs"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 3
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Related"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 43,
+              "column": 8
+            },
+            "end_point": {
+              "row": 45,
+              "column": 27
+            },
+            "offset_span": {
+              "start": 931,
+              "end": 1042
+            }
+          },
+          "feature": "uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\n        with:\n          toolchain: stable",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/docs.yml"
+            }
+          },
+          "annotation": "use `rustup` and/or `cargo` in a script step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "validate-docs"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 3
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 43,
+              "column": 14
+            },
+            "end_point": {
+              "row": 43,
+              "column": 77
+            },
+            "offset_span": {
+              "start": 937,
+              "end": 1000
+            }
+          },
+          "feature": "dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/docs.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "validate-docs"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 3
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 43,
+              "column": 8
+            },
+            "end_point": {
+              "row": 45,
+              "column": 27
+            },
+            "offset_span": {
+              "start": 931,
+              "end": 1042
+            }
+          },
+          "feature": "uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\n        with:\n          toolchain: stable",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "artipacked",
+    "desc": "credential persistence through GitHub Actions artifacts",
+    "url": "https://docs.zizmor.sh/audits/#artipacked",
+    "determinations": {
+      "confidence": "Low",
+      "severity": "Low",
+      "persona": "Auditor"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/js.yml"
+            }
+          },
+          "annotation": "does not set persist-credentials: false",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "auto-release"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 459,
+              "column": 8
+            },
+            "end_point": {
+              "row": 462,
+              "column": 24
+            },
+            "offset_span": {
+              "start": 14330,
+              "end": 14430
+            }
+          },
+          "feature": "uses: actions/checkout@v6\n        with:\n          persist-credentials: true\n          fetch-depth: 0",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": [
+      {
+        "title": "set persist-credentials: false",
+        "key": {
+          "Local": {
+            "verbatim_path": ".github/workflows/js.yml"
+          }
+        },
+        "disposition": "unsafe"
+      }
+    ]
+  },
+  {
+    "ident": "artipacked",
+    "desc": "credential persistence through GitHub Actions artifacts",
+    "url": "https://docs.zizmor.sh/audits/#artipacked",
+    "determinations": {
+      "confidence": "Low",
+      "severity": "Low",
+      "persona": "Auditor"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/js.yml"
+            }
+          },
+          "annotation": "does not set persist-credentials: false",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "manual-release"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 524,
+              "column": 8
+            },
+            "end_point": {
+              "row": 527,
+              "column": 24
+            },
+            "offset_span": {
+              "start": 17257,
+              "end": 17357
+            }
+          },
+          "feature": "uses: actions/checkout@v6\n        with:\n          persist-credentials: true\n          fetch-depth: 0",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": [
+      {
+        "title": "set persist-credentials: false",
+        "key": {
+          "Local": {
+            "verbatim_path": ".github/workflows/js.yml"
+          }
+        },
+        "disposition": "unsafe"
+      }
+    ]
+  },
+  {
+    "ident": "artipacked",
+    "desc": "credential persistence through GitHub Actions artifacts",
+    "url": "https://docs.zizmor.sh/audits/#artipacked",
+    "determinations": {
+      "confidence": "Low",
+      "severity": "Low",
+      "persona": "Auditor"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/js.yml"
+            }
+          },
+          "annotation": "does not set persist-credentials: false",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "changeset-pr"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 577,
+              "column": 8
+            },
+            "end_point": {
+              "row": 580,
+              "column": 24
+            },
+            "offset_span": {
+              "start": 19492,
+              "end": 19592
+            }
+          },
+          "feature": "uses: actions/checkout@v6\n        with:\n          persist-credentials: true\n          fetch-depth: 0",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": [
+      {
+        "title": "set persist-credentials: false",
+        "key": {
+          "Local": {
+            "verbatim_path": ".github/workflows/js.yml"
+          }
+        },
+        "disposition": "unsafe"
+      }
+    ]
+  },
+  {
+    "ident": "superfluous-actions",
+    "desc": "action functionality is already included by the runner",
+    "url": "https://docs.zizmor.sh/audits/#superfluous-actions",
+    "determinations": {
+      "confidence": "Low",
+      "severity": "Informational",
+      "persona": "Pedantic"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/js.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "changeset-pr"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 4
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Related"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 592,
+              "column": 8
+            },
+            "end_point": {
+              "row": 601,
+              "column": 85
+            },
+            "offset_span": {
+              "start": 20056,
+              "end": 20661
+            }
+          },
+          "feature": "uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1\n        with:\n          commit-message: 'chore: add changeset for manual ${{ github.event.inputs.bump_type }} release'\n          branch: changeset-manual-release-${{ github.run_id }}\n          title: 'chore: manual ${{ github.event.inputs.bump_type }} release'\n          body: |\n            This PR was created by a manual workflow trigger to prepare a JavaScript release.\n\n            - Release type: `${{ github.event.inputs.bump_type }}`\n            - Description: ${{ github.event.inputs.description || 'Manual release' }}",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/js.yml"
+            }
+          },
+          "annotation": "use `gh pr create` in a script step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "changeset-pr"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 4
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 592,
+              "column": 14
+            },
+            "end_point": {
+              "row": 592,
+              "column": 86
+            },
+            "offset_span": {
+              "start": 20062,
+              "end": 20134
+            }
+          },
+          "feature": "peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/js.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "changeset-pr"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 4
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 592,
+              "column": 8
+            },
+            "end_point": {
+              "row": 601,
+              "column": 85
+            },
+            "offset_span": {
+              "start": 20056,
+              "end": 20661
+            }
+          },
+          "feature": "uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1\n        with:\n          commit-message: 'chore: add changeset for manual ${{ github.event.inputs.bump_type }} release'\n          branch: changeset-manual-release-${{ github.run_id }}\n          title: 'chore: manual ${{ github.event.inputs.bump_type }} release'\n          body: |\n            This PR was created by a manual workflow trigger to prepare a JavaScript release.\n\n            - Release type: `${{ github.event.inputs.bump_type }}`\n            - Description: ${{ github.event.inputs.description || 'Manual release' }}",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "superfluous-actions",
+    "desc": "action functionality is already included by the runner",
+    "url": "https://docs.zizmor.sh/audits/#superfluous-actions",
+    "determinations": {
+      "confidence": "Medium",
+      "severity": "Informational",
+      "persona": "Pedantic"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/js.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "deploy-docs"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 2
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Related"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 634,
+              "column": 8
+            },
+            "end_point": {
+              "row": 636,
+              "column": 27
+            },
+            "offset_span": {
+              "start": 21693,
+              "end": 21804
+            }
+          },
+          "feature": "uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\n        with:\n          toolchain: stable",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/js.yml"
+            }
+          },
+          "annotation": "use `rustup` and/or `cargo` in a script step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "deploy-docs"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 2
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 634,
+              "column": 14
+            },
+            "end_point": {
+              "row": 634,
+              "column": 77
+            },
+            "offset_span": {
+              "start": 21699,
+              "end": 21762
+            }
+          },
+          "feature": "dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/js.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "deploy-docs"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 2
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 634,
+              "column": 8
+            },
+            "end_point": {
+              "row": 636,
+              "column": 27
+            },
+            "offset_span": {
+              "start": 21693,
+              "end": 21804
+            }
+          },
+          "feature": "uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\n        with:\n          toolchain: stable",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "artipacked",
+    "desc": "credential persistence through GitHub Actions artifacts",
+    "url": "https://docs.zizmor.sh/audits/#artipacked",
+    "determinations": {
+      "confidence": "Low",
+      "severity": "Low",
+      "persona": "Auditor"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "does not set persist-credentials: false",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "auto-release"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 275,
+              "column": 8
+            },
+            "end_point": {
+              "row": 278,
+              "column": 24
+            },
+            "offset_span": {
+              "start": 9173,
+              "end": 9273
+            }
+          },
+          "feature": "uses: actions/checkout@v6\n        with:\n          persist-credentials: true\n          fetch-depth: 0",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": [
+      {
+        "title": "set persist-credentials: false",
+        "key": {
+          "Local": {
+            "verbatim_path": ".github/workflows/rust.yml"
+          }
+        },
+        "disposition": "unsafe"
+      }
+    ]
+  },
+  {
+    "ident": "artipacked",
+    "desc": "credential persistence through GitHub Actions artifacts",
+    "url": "https://docs.zizmor.sh/audits/#artipacked",
+    "determinations": {
+      "confidence": "Low",
+      "severity": "Low",
+      "persona": "Auditor"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "does not set persist-credentials: false",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "manual-release"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 359,
+              "column": 8
+            },
+            "end_point": {
+              "row": 362,
+              "column": 24
+            },
+            "offset_span": {
+              "start": 13444,
+              "end": 13544
+            }
+          },
+          "feature": "uses: actions/checkout@v6\n        with:\n          persist-credentials: true\n          fetch-depth: 0",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": [
+      {
+        "title": "set persist-credentials: false",
+        "key": {
+          "Local": {
+            "verbatim_path": ".github/workflows/rust.yml"
+          }
+        },
+        "disposition": "unsafe"
+      }
+    ]
+  },
+  {
+    "ident": "artipacked",
+    "desc": "credential persistence through GitHub Actions artifacts",
+    "url": "https://docs.zizmor.sh/audits/#artipacked",
+    "determinations": {
+      "confidence": "Low",
+      "severity": "Low",
+      "persona": "Auditor"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "does not set persist-credentials: false",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "changelog-pr"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 421,
+              "column": 8
+            },
+            "end_point": {
+              "row": 424,
+              "column": 24
+            },
+            "offset_span": {
+              "start": 16386,
+              "end": 16486
+            }
+          },
+          "feature": "uses: actions/checkout@v6\n        with:\n          persist-credentials: true\n          fetch-depth: 0",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": [
+      {
+        "title": "set persist-credentials: false",
+        "key": {
+          "Local": {
+            "verbatim_path": ".github/workflows/rust.yml"
+          }
+        },
+        "disposition": "unsafe"
+      }
+    ]
+  },
+  {
+    "ident": "superfluous-actions",
+    "desc": "action functionality is already included by the runner",
+    "url": "https://docs.zizmor.sh/audits/#superfluous-actions",
+    "determinations": {
+      "confidence": "Medium",
+      "severity": "Informational",
+      "persona": "Pedantic"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "detect-changes"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 1
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Related"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 78,
+              "column": 8
+            },
+            "end_point": {
+              "row": 80,
+              "column": 27
+            },
+            "offset_span": {
+              "start": 2002,
+              "end": 2113
+            }
+          },
+          "feature": "uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\n        with:\n          toolchain: stable",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "use `rustup` and/or `cargo` in a script step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "detect-changes"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 1
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 78,
+              "column": 14
+            },
+            "end_point": {
+              "row": 78,
+              "column": 77
+            },
+            "offset_span": {
+              "start": 2008,
+              "end": 2071
+            }
+          },
+          "feature": "dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "detect-changes"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 1
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 78,
+              "column": 8
+            },
+            "end_point": {
+              "row": 80,
+              "column": 27
+            },
+            "offset_span": {
+              "start": 2002,
+              "end": 2113
+            }
+          },
+          "feature": "uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\n        with:\n          toolchain: stable",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "superfluous-actions",
+    "desc": "action functionality is already included by the runner",
+    "url": "https://docs.zizmor.sh/audits/#superfluous-actions",
+    "determinations": {
+      "confidence": "Medium",
+      "severity": "Informational",
+      "persona": "Pedantic"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "changelog"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 1
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Related"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 105,
+              "column": 8
+            },
+            "end_point": {
+              "row": 107,
+              "column": 27
+            },
+            "offset_span": {
+              "start": 2902,
+              "end": 3013
+            }
+          },
+          "feature": "uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\n        with:\n          toolchain: stable",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "use `rustup` and/or `cargo` in a script step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "changelog"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 1
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 105,
+              "column": 14
+            },
+            "end_point": {
+              "row": 105,
+              "column": 77
+            },
+            "offset_span": {
+              "start": 2908,
+              "end": 2971
+            }
+          },
+          "feature": "dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "changelog"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 1
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 105,
+              "column": 8
+            },
+            "end_point": {
+              "row": 107,
+              "column": 27
+            },
+            "offset_span": {
+              "start": 2902,
+              "end": 3013
+            }
+          },
+          "feature": "uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\n        with:\n          toolchain: stable",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "superfluous-actions",
+    "desc": "action functionality is already included by the runner",
+    "url": "https://docs.zizmor.sh/audits/#superfluous-actions",
+    "determinations": {
+      "confidence": "Medium",
+      "severity": "Informational",
+      "persona": "Pedantic"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "version-check"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 1
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Related"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 127,
+              "column": 8
+            },
+            "end_point": {
+              "row": 129,
+              "column": 27
+            },
+            "offset_span": {
+              "start": 3659,
+              "end": 3770
+            }
+          },
+          "feature": "uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\n        with:\n          toolchain: stable",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "use `rustup` and/or `cargo` in a script step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "version-check"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 1
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 127,
+              "column": 14
+            },
+            "end_point": {
+              "row": 127,
+              "column": 77
+            },
+            "offset_span": {
+              "start": 3665,
+              "end": 3728
+            }
+          },
+          "feature": "dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "version-check"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 1
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 127,
+              "column": 8
+            },
+            "end_point": {
+              "row": 129,
+              "column": 27
+            },
+            "offset_span": {
+              "start": 3659,
+              "end": 3770
+            }
+          },
+          "feature": "uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\n        with:\n          toolchain: stable",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "superfluous-actions",
+    "desc": "action functionality is already included by the runner",
+    "url": "https://docs.zizmor.sh/audits/#superfluous-actions",
+    "determinations": {
+      "confidence": "Medium",
+      "severity": "Informational",
+      "persona": "Pedantic"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "lint"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 2
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Related"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 168,
+              "column": 8
+            },
+            "end_point": {
+              "row": 171,
+              "column": 27
+            },
+            "offset_span": {
+              "start": 5211,
+              "end": 5360
+            }
+          },
+          "feature": "uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\n        with:\n          components: rustfmt, clippy\n          toolchain: stable",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "use `rustup` and/or `cargo` in a script step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "lint"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 2
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 168,
+              "column": 14
+            },
+            "end_point": {
+              "row": 168,
+              "column": 77
+            },
+            "offset_span": {
+              "start": 5217,
+              "end": 5280
+            }
+          },
+          "feature": "dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "lint"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 2
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 168,
+              "column": 8
+            },
+            "end_point": {
+              "row": 171,
+              "column": 27
+            },
+            "offset_span": {
+              "start": 5211,
+              "end": 5360
+            }
+          },
+          "feature": "uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\n        with:\n          components: rustfmt, clippy\n          toolchain: stable",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "superfluous-actions",
+    "desc": "action functionality is already included by the runner",
+    "url": "https://docs.zizmor.sh/audits/#superfluous-actions",
+    "determinations": {
+      "confidence": "Medium",
+      "severity": "Informational",
+      "persona": "Pedantic"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "test"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 2
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Related"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 214,
+              "column": 8
+            },
+            "end_point": {
+              "row": 216,
+              "column": 27
+            },
+            "offset_span": {
+              "start": 6961,
+              "end": 7072
+            }
+          },
+          "feature": "uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\n        with:\n          toolchain: stable",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "use `rustup` and/or `cargo` in a script step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "test"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 2
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 214,
+              "column": 14
+            },
+            "end_point": {
+              "row": 214,
+              "column": 77
+            },
+            "offset_span": {
+              "start": 6967,
+              "end": 7030
+            }
+          },
+          "feature": "dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "test"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 2
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 214,
+              "column": 8
+            },
+            "end_point": {
+              "row": 216,
+              "column": 27
+            },
+            "offset_span": {
+              "start": 6961,
+              "end": 7072
+            }
+          },
+          "feature": "uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\n        with:\n          toolchain: stable",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "superfluous-actions",
+    "desc": "action functionality is already included by the runner",
+    "url": "https://docs.zizmor.sh/audits/#superfluous-actions",
+    "determinations": {
+      "confidence": "Medium",
+      "severity": "Informational",
+      "persona": "Pedantic"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "package"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 2
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Related"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 247,
+              "column": 8
+            },
+            "end_point": {
+              "row": 249,
+              "column": 27
+            },
+            "offset_span": {
+              "start": 8139,
+              "end": 8250
+            }
+          },
+          "feature": "uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\n        with:\n          toolchain: stable",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "use `rustup` and/or `cargo` in a script step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "package"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 2
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 247,
+              "column": 14
+            },
+            "end_point": {
+              "row": 247,
+              "column": 77
+            },
+            "offset_span": {
+              "start": 8145,
+              "end": 8208
+            }
+          },
+          "feature": "dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "package"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 2
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 247,
+              "column": 8
+            },
+            "end_point": {
+              "row": 249,
+              "column": 27
+            },
+            "offset_span": {
+              "start": 8139,
+              "end": 8250
+            }
+          },
+          "feature": "uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\n        with:\n          toolchain: stable",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "superfluous-actions",
+    "desc": "action functionality is already included by the runner",
+    "url": "https://docs.zizmor.sh/audits/#superfluous-actions",
+    "determinations": {
+      "confidence": "Medium",
+      "severity": "Informational",
+      "persona": "Pedantic"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "auto-release"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 2
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Related"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 282,
+              "column": 8
+            },
+            "end_point": {
+              "row": 284,
+              "column": 27
+            },
+            "offset_span": {
+              "start": 9361,
+              "end": 9472
+            }
+          },
+          "feature": "uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\n        with:\n          toolchain: stable",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "use `rustup` and/or `cargo` in a script step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "auto-release"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 2
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 282,
+              "column": 14
+            },
+            "end_point": {
+              "row": 282,
+              "column": 77
+            },
+            "offset_span": {
+              "start": 9367,
+              "end": 9430
+            }
+          },
+          "feature": "dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "auto-release"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 2
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 282,
+              "column": 8
+            },
+            "end_point": {
+              "row": 284,
+              "column": 27
+            },
+            "offset_span": {
+              "start": 9361,
+              "end": 9472
+            }
+          },
+          "feature": "uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\n        with:\n          toolchain: stable",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "superfluous-actions",
+    "desc": "action functionality is already included by the runner",
+    "url": "https://docs.zizmor.sh/audits/#superfluous-actions",
+    "determinations": {
+      "confidence": "Medium",
+      "severity": "Informational",
+      "persona": "Pedantic"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "manual-release"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 2
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Related"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 366,
+              "column": 8
+            },
+            "end_point": {
+              "row": 368,
+              "column": 27
+            },
+            "offset_span": {
+              "start": 13632,
+              "end": 13743
+            }
+          },
+          "feature": "uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\n        with:\n          toolchain: stable",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "use `rustup` and/or `cargo` in a script step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "manual-release"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 2
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 366,
+              "column": 14
+            },
+            "end_point": {
+              "row": 366,
+              "column": 77
+            },
+            "offset_span": {
+              "start": 13638,
+              "end": 13701
+            }
+          },
+          "feature": "dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "manual-release"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 2
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 366,
+              "column": 8
+            },
+            "end_point": {
+              "row": 368,
+              "column": 27
+            },
+            "offset_span": {
+              "start": 13632,
+              "end": 13743
+            }
+          },
+          "feature": "uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\n        with:\n          toolchain: stable",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "superfluous-actions",
+    "desc": "action functionality is already included by the runner",
+    "url": "https://docs.zizmor.sh/audits/#superfluous-actions",
+    "determinations": {
+      "confidence": "Medium",
+      "severity": "Informational",
+      "persona": "Pedantic"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "changelog-pr"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 1
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Related"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 425,
+              "column": 8
+            },
+            "end_point": {
+              "row": 427,
+              "column": 27
+            },
+            "offset_span": {
+              "start": 16495,
+              "end": 16606
+            }
+          },
+          "feature": "uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\n        with:\n          toolchain: stable",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "use `rustup` and/or `cargo` in a script step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "changelog-pr"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 1
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 425,
+              "column": 14
+            },
+            "end_point": {
+              "row": 425,
+              "column": 77
+            },
+            "offset_span": {
+              "start": 16501,
+              "end": 16564
+            }
+          },
+          "feature": "dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "changelog-pr"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 1
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 425,
+              "column": 8
+            },
+            "end_point": {
+              "row": 427,
+              "column": 27
+            },
+            "offset_span": {
+              "start": 16495,
+              "end": 16606
+            }
+          },
+          "feature": "uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\n        with:\n          toolchain: stable",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "superfluous-actions",
+    "desc": "action functionality is already included by the runner",
+    "url": "https://docs.zizmor.sh/audits/#superfluous-actions",
+    "determinations": {
+      "confidence": "Low",
+      "severity": "Informational",
+      "persona": "Pedantic"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "changelog-pr"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 4
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Related"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 435,
+              "column": 8
+            },
+            "end_point": {
+              "row": 444,
+              "column": 85
+            },
+            "offset_span": {
+              "start": 17015,
+              "end": 17614
+            }
+          },
+          "feature": "uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1\n        with:\n          commit-message: 'chore: add changelog for manual ${{ github.event.inputs.bump_type }} release'\n          branch: changelog-manual-release-${{ github.run_id }}\n          title: 'chore: manual ${{ github.event.inputs.bump_type }} release'\n          body: |\n            This PR was created by a manual workflow trigger to prepare a Rust release.\n\n            - Release type: `${{ github.event.inputs.bump_type }}`\n            - Description: ${{ github.event.inputs.description || 'Manual release' }}",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "use `gh pr create` in a script step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "changelog-pr"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 4
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 435,
+              "column": 14
+            },
+            "end_point": {
+              "row": 435,
+              "column": 86
+            },
+            "offset_span": {
+              "start": 17021,
+              "end": 17093
+            }
+          },
+          "feature": "peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "changelog-pr"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 4
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 435,
+              "column": 8
+            },
+            "end_point": {
+              "row": 444,
+              "column": 85
+            },
+            "offset_span": {
+              "start": 17015,
+              "end": 17614
+            }
+          },
+          "feature": "uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1\n        with:\n          commit-message: 'chore: add changelog for manual ${{ github.event.inputs.bump_type }} release'\n          branch: changelog-manual-release-${{ github.run_id }}\n          title: 'chore: manual ${{ github.event.inputs.bump_type }} release'\n          body: |\n            This PR was created by a manual workflow trigger to prepare a Rust release.\n\n            - Release type: `${{ github.event.inputs.bump_type }}`\n            - Description: ${{ github.event.inputs.description || 'Manual release' }}",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "superfluous-actions",
+    "desc": "action functionality is already included by the runner",
+    "url": "https://docs.zizmor.sh/audits/#superfluous-actions",
+    "determinations": {
+      "confidence": "Medium",
+      "severity": "Informational",
+      "persona": "Pedantic"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "deploy-docs"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 2
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Related"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 480,
+              "column": 8
+            },
+            "end_point": {
+              "row": 482,
+              "column": 27
+            },
+            "offset_span": {
+              "start": 18924,
+              "end": 19035
+            }
+          },
+          "feature": "uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\n        with:\n          toolchain: stable",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "use `rustup` and/or `cargo` in a script step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "deploy-docs"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 2
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 480,
+              "column": 14
+            },
+            "end_point": {
+              "row": 480,
+              "column": 77
+            },
+            "offset_span": {
+              "start": 18930,
+              "end": 18993
+            }
+          },
+          "feature": "dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "deploy-docs"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 2
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 480,
+              "column": 8
+            },
+            "end_point": {
+              "row": 482,
+              "column": 27
+            },
+            "offset_span": {
+              "start": 18924,
+              "end": 19035
+            }
+          },
+          "feature": "uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\n        with:\n          toolchain: stable",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  }
+]

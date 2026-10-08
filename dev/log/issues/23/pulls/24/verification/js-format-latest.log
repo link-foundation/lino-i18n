@@ -1,0 +1,7 @@
+scripts/setup-npm.mjs 181ms
+scripts/version-and-commit.mjs 39ms
+scripts/format-release-notes.mjs 54ms (unchanged)
+tests/react.test.js 18ms
+.changeset/issue-23-ci.md 43ms
+package.json 10ms (unchanged)
+.jscpd.json 4ms (unchanged)

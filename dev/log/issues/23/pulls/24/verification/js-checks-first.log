@@ -1,0 +1,17 @@
+
+> lino-i18n@0.3.0 check
+> npm run lint && npm run format:check && npm run check:duplication
+
+
+> lino-i18n@0.3.0 lint
+> eslint . --max-warnings 0
+
+
+/tmp/gh-issue-solver-1791452293811/js/scripts/check-release-needed.mjs
+  97:5  error  There is no `cause` attached to the symptom error being thrown  preserve-caught-error
+
+/tmp/gh-issue-solver-1791452293811/js/scripts/update-preview-images.mjs
+  25:29  error  'URL' is already defined as a built-in global variable  no-redeclare
+
+✖ 2 problems (2 errors, 0 warnings)
+

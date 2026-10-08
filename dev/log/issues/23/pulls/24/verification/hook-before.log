@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "/tmp/lino-hook-4prz42y6/bin/git", line 4, in <module>
+    else: print("js/src/index.js\nrust/src/lib.rs\n" + "archive/evidence-file\n" * 10000)
+          ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "/tmp/lino-hook-4prz42y6/bin/git", line 4, in <module>
+    else: print("js/src/index.js\nrust/src/lib.rs\n" + "archive/evidence-file\n" * 10000)
+          ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [Errno 32] Broken pipe
+
+/tmp/lino-hook-4prz42y6/bin/npm run lint:secrets
+
+Traceback (most recent call last):
+  File "/tmp/gh-issue-solver-1791452293811/experiments/issue-23-hook.py", line 37, in <module>
+    assert expected in recorded, f"Hook skipped {expected} for a large staged list"
+           ^^^^^^^^^^^^^^^^^^^^
+AssertionError: Hook skipped run check for a large staged list

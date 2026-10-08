@@ -56,6 +56,26 @@ function lookup(table, key) {
   return undefined;
 }
 
+function resolvePlural(table, target, count, locale) {
+  if (
+    count === undefined ||
+    count === null ||
+    !Number.isFinite(Number(count))
+  ) {
+    return undefined;
+  }
+  const numeric = Number(count);
+  if (numeric === 0) {
+    const zero = lookup(table, `${target}_zero`);
+    if (zero !== undefined) {
+      return zero;
+    }
+  }
+  const suffix = pluralSuffix(locale, numeric);
+  const value = suffix ? lookup(table, `${target}_${suffix}`) : undefined;
+  return value !== undefined ? value : lookup(table, `${target}_other`);
+}
+
 // Resolve a key inside a flat translation table that may contain dotted
 // keys (e.g., `cart.items`) or namespaced keys (`navigation:home`).
 // Plural-aware: when `count` is present, the function looks up the
@@ -72,29 +92,9 @@ export function resolveKey(table, key, { count, context, locale } = {}) {
   const targets = context ? [withContext, key] : [withContext];
 
   for (const target of targets) {
-    if (
-      count !== undefined &&
-      count !== null &&
-      Number.isFinite(Number(count))
-    ) {
-      const numeric = Number(count);
-      if (numeric === 0) {
-        const zeroCandidate = lookup(table, `${target}_zero`);
-        if (zeroCandidate !== undefined) {
-          return zeroCandidate;
-        }
-      }
-      const suffix = pluralSuffix(locale, numeric);
-      if (suffix) {
-        const candidate = lookup(table, `${target}_${suffix}`);
-        if (candidate !== undefined) {
-          return candidate;
-        }
-      }
-      const otherCandidate = lookup(table, `${target}_other`);
-      if (otherCandidate !== undefined) {
-        return otherCandidate;
-      }
+    const plural = resolvePlural(table, target, count, locale);
+    if (plural !== undefined) {
+      return plural;
     }
 
     const direct = lookup(table, target);

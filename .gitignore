@@ -154,3 +154,13 @@ rust/target/
 
 # CI log captures (local debug only)
 ci-logs/
+
+# The issue investigation is an intentional, versioned evidence archive.
+!dev/log/issues/23/pulls/24/**
+/site/
+/.lycheecache
+/lychee/
+
+# Python verification caches
+__pycache__/
+*.py[cod]

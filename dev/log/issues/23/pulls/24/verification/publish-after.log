@@ -1,0 +1,13 @@
+✔ accepted publish polls through delayed visibility without another write (1.973103ms)
+✔ staged conflict polls once and fails with approval guidance when not public (2.80793ms)
+✔ registry outages stay unknown instead of claiming a missing package (1.112676ms)
+✔ transient command failure retries, permanent authentication failure does not (0.593949ms)
+✔ fresh exact-version metadata distinguishes 404, errors, and malformed responses (2.939895ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 171.99663

@@ -1,0 +1,26 @@
+# Primary research and reusable components
+
+Reviewed on 2026-10-08. Repository sources are pinned in the template archive; live documentation may change afterward.
+
+| Source | Fact or component used | Application and limit |
+| --- | --- | --- |
+| [npm staged publishing](https://docs.npmjs.com/staged-publishing/) | Staged versions are invisible until approval; approval uses 2FA and cannot be performed by OIDC | Do not infer ordinary propagation from E409; poll visibility once a write is accepted and fail with approval guidance |
+| [npm trusted publishers](https://docs.npmjs.com/trusted-publishers/) | OIDC requires supported npm/Node versions and an exact workflow identity; newer publisher configurations can restrict direct publishing | Keep `js.yml`; use Node 24/current npm; token presence is not full publish proof |
+| [npm stage command](https://docs.npmjs.com/cli/v11/commands/npm-stage/) | Separate stage inspection/approval/rejection operations | Document explicit account-side recovery instead of blindly writing again |
+| [npm install scripts](https://docs.npmjs.com/cli/v11/commands/npm-install-scripts/) | Dependency lifecycle execution can require exact approval | Commit the approved esbuild version; use reproducible npm ci |
+| [GitHub concurrency](https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency) | Job groups, cancel policy, pending replacement and optional queue limits | One noncancellable writer group, distinct cancellable check groups; synchronization still required |
+| [Cargo publish](https://doc.rust-lang.org/cargo/commands/cargo-publish.html) | Locked publication and validation behavior | Preserve lock state and publish macros before dependent runtime |
+| [actionlint usage](https://github.com/rhysd/actionlint/blob/main/docs/usage.md) | Docker image bundles shell/python checks that a bare executable may skip | Digest-pinned Docker actionlint in CI; local ShellCheck provided explicitly |
+| [zizmor usage](https://docs.zizmor.sh/usage/) | Confidence/persona settings and GitHub annotation format | Standard checks plus high-confidence/high-severity pedantic policy; full auditor evidence reviewed separately |
+| [zizmor audit rules](https://docs.zizmor.sh/audits/) | Environment-secret and artifact findings require contextual review | Scope token-consuming preflights to the existing crates.io environment; keep checkout credentials only in Git writers |
+| [CodeQL compiled languages](https://docs.github.com/en/code-security/concepts/code-scanning/codeql/codeql-for-compiled-languages) and [CodeQL action](https://github.com/github/codeql-action/blob/main/README.md) | Current Rust, JavaScript and Actions analysis support | Separate security workflow and scoped analysis config |
+| [Changesets CLI 3.0.3](https://github.com/changesets/changesets/releases/tag/%40changesets%2Fcli%403.0.3) | Existing version/changelog component, supported development Node releases | Upgrade audited development dependency, keep package runtime engines unchanged |
+| [jscpd 5.4.0](https://github.com/kucherenko/jscpd/releases/tag/v5.4.0) and [scanner modes](https://github.com/kucherenko/jscpd/blob/master/docs/rust.md) | Existing duplication tool; valid language formats, weak mode and empty-scan failure | Repair an ineffective check rather than add a new duplication framework |
+| [GitHub runner images](https://github.com/actions/runner-images) | Supported explicit runner image labels | Pin Ubuntu 24.04, macOS 15 and Windows 2025 rather than mutable latest |
+| [lychee connection-reset issue 2297](https://github.com/lycheeverse/lychee/issues/2297) | Some unanswered failures are not resolved by max-retries alone | Reuse the templates' bounded tested recheck; do not excuse final HTTP errors |
+| [Rust template](https://github.com/link-foundation/rust-ai-driven-development-pipeline-template/tree/cece347b3cd3a0b715583d7294e1fd93ad2d4c56) | Crates credential probe and link recheck with tests | Reuse stdlib Node helpers; adjust paths and complete-report gating for this multi-language repository |
+| [JavaScript template](https://github.com/link-foundation/js-ai-driven-development-pipeline-template/tree/4973fc4cedd4a1b5cf51fa6a3b2ddd56e6741549) | Release state classifiers, comparison/metadata patterns and workflow validation | Adapt patterns to existing JS subdirectory and Rust workspace rather than import template product/demo code |
+
+Existing tools retained or adopted: Changesets, Cargo/rust-script, ESLint, Prettier, jscpd, Testing Library/JSDOM, Playwright, secretlint, cargo-audit, actionlint, ShellCheck, Pyflakes, zizmor, CodeQL and lychee. Built-in Node fetch/spawn and Python json/tomllib handle the small shared helpers; introducing another release framework would add migration risk without resolving the historical root causes.
+
+Upstream reports: [Rust output failure issue 192](https://github.com/link-foundation/rust-ai-driven-development-pipeline-template/issues/192); [supplemental staging evidence on JavaScript issue 158](https://github.com/link-foundation/js-ai-driven-development-pipeline-template/issues/158#issuecomment-6057901896). The latest JS template already rejects malformed changesets, so a duplicate bug report was unnecessary.

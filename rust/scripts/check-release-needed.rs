@@ -42,12 +42,16 @@
 //! serde_json = "1"
 //! ```
 
+#[path = "github-output.rs"]
+mod github_output;
+
 use serde::Deserialize;
 use std::env;
-use std::fs;
 use std::path::Path;
 use std::process::exit;
 
+#[path = "registry-state.rs"]
+mod registry_state;
 #[path = "rust-paths.rs"]
 mod rust_paths;
 
@@ -63,34 +67,6 @@ fn get_arg(name: &str) -> Option<String> {
     env::var(&env_name).ok().filter(|s| !s.is_empty())
 }
 
-fn set_output(key: &str, value: &str) {
-    if let Ok(output_file) = env::var("GITHUB_OUTPUT") {
-        if let Err(e) = fs::OpenOptions::new()
-            .create(true)
-            .append(true)
-            .open(&output_file)
-            .and_then(|mut f| {
-                use std::io::Write;
-                writeln!(f, "{}={}", key, value)
-            })
-        {
-            eprintln!("Warning: Could not write to GITHUB_OUTPUT: {}", e);
-        }
-    }
-    println!("Output: {}={}", key, value);
-}
-
-#[derive(Deserialize)]
-struct CratesIoVersion {
-    version: Option<CratesIoVersionInfo>,
-}
-
-#[derive(Deserialize)]
-struct CratesIoVersionInfo {
-    #[allow(dead_code)]
-    num: String,
-}
-
 #[derive(Deserialize)]
 struct CratesIoCrate {
     versions: Option<Vec<CratesIoVersionEntry>>,
@@ -103,28 +79,7 @@ struct CratesIoVersionEntry {
 }
 
 fn check_version_on_crates_io(crate_name: &str, version: &str) -> bool {
-    let url = format!("https://crates.io/api/v1/crates/{}/{}", crate_name, version);
-
-    match ureq::get(&url)
-        .set("User-Agent", "rust-script-check-release")
-        .call()
-    {
-        Ok(response) => {
-            if response.status() == 200 {
-                if let Ok(body) = response.into_string() {
-                    if let Ok(data) = serde_json::from_str::<CratesIoVersion>(&body) {
-                        return data.version.is_some();
-                    }
-                }
-            }
-            false
-        }
-        Err(ureq::Error::Status(404, _)) => false,
-        Err(e) => {
-            eprintln!("Warning: Could not check crates.io: {}", e);
-            false
-        }
-    }
+    registry_state::version_exists(crate_name, version)
 }
 
 fn split_docker_image(image: &str) -> Option<(&str, &str)> {
@@ -154,14 +109,15 @@ fn check_docker_hub_tag(image: &str, version: &str) -> bool {
     );
 
     match ureq::get(&url)
+        .timeout(std::time::Duration::from_secs(15))
         .set("User-Agent", "rust-script-check-release")
         .call()
     {
         Ok(response) => response.status() == 200,
         Err(ureq::Error::Status(404, _)) => false,
         Err(e) => {
-            eprintln!("Warning: Could not check Docker Hub tag: {}", e);
-            false
+            eprintln!("::error::Docker Hub state is unknown: {e}");
+            exit(1)
         }
     }
 }
@@ -173,6 +129,7 @@ fn check_github_release(repository: &str, tag_prefix: &str, version: &str) -> bo
     );
 
     let mut request = ureq::get(&url)
+        .timeout(std::time::Duration::from_secs(15))
         .set("User-Agent", "rust-script-check-release")
         .set("Accept", "application/vnd.github+json");
 
@@ -187,8 +144,8 @@ fn check_github_release(repository: &str, tag_prefix: &str, version: &str) -> bo
         Ok(response) => response.status() == 200,
         Err(ureq::Error::Status(404, _)) => false,
         Err(e) => {
-            eprintln!("Warning: Could not check GitHub release: {}", e);
-            false
+            eprintln!("::error::GitHub release state is unknown: {e}");
+            exit(1)
         }
     }
 }
@@ -225,6 +182,7 @@ fn get_max_published_version(crate_name: &str) -> Option<String> {
     let url = format!("https://crates.io/api/v1/crates/{}", crate_name);
 
     match ureq::get(&url)
+        .timeout(std::time::Duration::from_secs(15))
         .set("User-Agent", "rust-script-check-release")
         .call()
     {
@@ -262,12 +220,13 @@ fn get_max_published_version(crate_name: &str) -> Option<String> {
                     }
                 }
             }
-            None
+            eprintln!("::error::Crates.io version list metadata is unreadable or malformed");
+            exit(1)
         }
         Err(ureq::Error::Status(404, _)) => None,
         Err(e) => {
-            eprintln!("Warning: Could not query crates.io for versions: {}", e);
-            None
+            eprintln!("::error::Crates.io version state is unknown: {e}");
+            exit(1)
         }
     }
 }
@@ -319,13 +278,13 @@ fn main() {
             "Max published version on crates.io for {}: {}",
             primary_info.name, max_ver
         );
-        set_output("max_published_version", max_ver);
+        github_output::set_output("max_published_version", max_ver);
     } else {
         println!(
             "No versions published on crates.io yet for {} (or crate not found)",
             primary_info.name
         );
-        set_output("max_published_version", "");
+        github_output::set_output("max_published_version", "");
     }
 
     if !has_fragments {
@@ -359,21 +318,21 @@ fn main() {
                 false
             });
 
-        set_output(
+        github_output::set_output(
             "crate_published",
             if crates_published { "true" } else { "false" },
         );
-        set_output("published_crates", &published_crates.join(","));
-        set_output("missing_crates", &missing_crates.join(","));
-        set_output(
+        github_output::set_output("published_crates", &published_crates.join(","));
+        github_output::set_output("missing_crates", &missing_crates.join(","));
+        github_output::set_output(
             "dockerhub_required",
             if dockerhub_required { "true" } else { "false" },
         );
-        set_output(
+        github_output::set_output(
             "dockerhub_published",
             if dockerhub_published { "true" } else { "false" },
         );
-        set_output(
+        github_output::set_output(
             "github_release_published",
             if github_release_published {
                 "true"
@@ -417,18 +376,18 @@ fn main() {
                 "No changelog fragments and v{} is fully published",
                 current_version
             );
-            set_output("should_release", "false");
+            github_output::set_output("should_release", "false");
         } else {
             println!(
                 "No changelog fragments but v{} is missing at least one release artifact",
                 current_version
             );
-            set_output("should_release", "true");
-            set_output("skip_bump", "true");
+            github_output::set_output("should_release", "true");
+            github_output::set_output("skip_bump", "true");
         }
     } else {
         println!("Found changelog fragments, proceeding with release");
-        set_output("should_release", "true");
-        set_output("skip_bump", "false");
+        github_output::set_output("should_release", "true");
+        github_output::set_output("skip_bump", "false");
     }
 }

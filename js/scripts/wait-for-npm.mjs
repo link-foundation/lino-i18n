@@ -8,7 +8,7 @@
  * version.
  */
 
-import { execFileSync } from 'node:child_process';
+import { isPackageVersionPublished } from './npm-registry.mjs';
 import { appendFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -79,19 +79,7 @@ export function parseArgs(argv, env = process.env) {
   return config;
 }
 
-export function checkNpmVersion(packageName, version) {
-  try {
-    const publishedVersion = execFileSync(
-      'npm',
-      ['view', formatNpmPackageVersion(packageName, version), 'version'],
-      { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }
-    ).trim();
-
-    return publishedVersion === version;
-  } catch {
-    return false;
-  }
-}
+export const checkNpmVersion = isPackageVersionPublished;
 
 function sleep(seconds) {
   return new Promise((resolve) =>
@@ -121,7 +109,7 @@ export async function waitForNpmVersion({
       `Checking npm for ${formatNpmPackageVersion(packageName, version)} (attempt ${attempt}/${maxAttempts})`
     );
 
-    if (checkAvailability(packageName, version)) {
+    if (await checkAvailability(packageName, version)) {
       return true;
     }
 

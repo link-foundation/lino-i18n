@@ -18,29 +18,13 @@
 //! regex = "1"
 //! ```
 
-use std::env;
-use std::fs;
+#[path = "github-output.rs"]
+mod github_output;
+
 use std::process::exit;
 
 #[path = "rust-paths.rs"]
 mod rust_paths;
-
-fn set_output(key: &str, value: &str) {
-    if let Ok(output_file) = env::var("GITHUB_OUTPUT") {
-        if let Err(e) = fs::OpenOptions::new()
-            .create(true)
-            .append(true)
-            .open(&output_file)
-            .and_then(|mut f| {
-                use std::io::Write;
-                writeln!(f, "{}={}", key, value)
-            })
-        {
-            eprintln!("Warning: Could not write to GITHUB_OUTPUT: {}", e);
-        }
-    }
-    println!("Output: {}={}", key, value);
-}
 
 fn main() {
     let rust_root = match rust_paths::get_rust_root(None, true) {
@@ -62,7 +46,7 @@ fn main() {
     match rust_paths::read_package_info(&package_manifest) {
         Ok(info) => {
             println!("Current version: {}", info.version);
-            set_output("version", &info.version);
+            github_output::set_output("version", &info.version);
         }
         Err(e) => {
             eprintln!("Error: {}", e);

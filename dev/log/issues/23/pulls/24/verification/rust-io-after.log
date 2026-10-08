@@ -1,0 +1,17 @@
+get-bump-type: exit=101
+Detected single-language repository (Cargo.toml in root)
+
+thread 'main' (47114) panicked at /tmp/gh-issue-solver-1791452293811/rust/scripts/get-bump-type.rs:118:23:
+Cannot inspect changelog directory: Not a directory (os error 20)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+check-file-size: exit=101
+
+Checking Rust files for maximum 1000 lines (warning above 900)...
+
+
+thread 'main' (47150) panicked at /tmp/gh-issue-solver-1791452293811/rust/scripts/check-file-size.rs:120:17:
+Cannot check /tmp/lino-rust-io-ibsb_pg4/invalid.rs: stream did not contain valid UTF-8
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+Rust input read failures are fatal.

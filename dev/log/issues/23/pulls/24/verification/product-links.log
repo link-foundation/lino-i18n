@@ -1,0 +1,314 @@
+ [DEBUG] add_parsable_certificates processed 121 valid and 0 invalid certs
+ [DEBUG] Loaded 121 CA root certificates from the system
+ [DEBUG] add_parsable_certificates processed 121 valid and 0 invalid certs
+ [DEBUG] Loaded 121 CA root certificates from the system
+ [DEBUG] starting new connection 'Some("github.com")'
+ [DEBUG] starting new connection 'Some("img.shields.io")'
+[EXCLUDED] https://www.npmjs.com/package/lino-i18n (at 5:1) | This is due to your 'exclude' values
+ [DEBUG] Applied quirk 'add accept header for crates.io' to https://crates.io/crates/lino-i18n
+ [DEBUG] starting new connection 'Some("crates.io")'
+ [DEBUG] starting new connection 'Some("docs.rs")'
+ [DEBUG] Applied quirk 'add accept header for crates.io' to https://crates.io/crates/lino-i18n
+ [DEBUG] starting new connection 'Some("unlicense.org")'
+ [DEBUG] connecting to 140.82.121.3:443
+[EXCLUDED] https://www.npmjs.com/package/lino-i18n (at 4:1) | This is due to your 'exclude' values
+ [DEBUG] connected to 140.82.121.3:443
+ [DEBUG] No cached session for DnsName("github.com")
+ [DEBUG] Not resuming any session
+ [DEBUG] connecting to 151.101.193.91:443
+ [DEBUG] connecting to 151.101.194.137:443
+ [DEBUG] connecting to 104.21.80.27:443
+ [DEBUG] starting new connection 'Some("github.com")'
+ [DEBUG] starting new connection 'Some("img.shields.io")'
+ [DEBUG] starting new connection 'Some("docs.rs")'
+ [DEBUG] connecting to 140.82.121.3:443
+ [DEBUG] Using ciphersuite TLS13_AES_128_GCM_SHA256
+ [DEBUG] Not resuming
+ [DEBUG] TLS1.3 encrypted extensions: ServerExtensions { server_name_ack: (), selected_protocol: SingleProtocolName(ProtocolName(6832)), unknown_extensions: {}, .. }
+ [DEBUG] ALPN protocol is Some(b"h2")
+ [DEBUG] binding client connection
+ [DEBUG] client connection bound
+ [DEBUG] send frame=Settings { flags: (0x0), enable_push: 0, initial_window_size: 2097152, max_frame_size: 16384, max_header_list_size: 16384 }
+ [DEBUG] Connection; peer=Client
+ [DEBUG] pooling idle connection for ("https", github.com)
+ [DEBUG] connected to 151.101.193.91:443
+ [DEBUG] No cached session for DnsName("docs.rs")
+ [DEBUG] Not resuming any session
+ [DEBUG] connected to 151.101.194.137:443
+ [DEBUG] No cached session for DnsName("crates.io")
+ [DEBUG] Not resuming any session
+ [DEBUG] connected to 104.21.80.27:443
+ [DEBUG] No cached session for DnsName("img.shields.io")
+ [DEBUG] Not resuming any session
+ [DEBUG] connecting to 104.21.80.27:443
+ [DEBUG] reuse idle connection for ("https", github.com)
+ [DEBUG] send frame=WindowUpdate { stream_id: StreamId(0), size_increment: 5177345 }
+ [DEBUG] send frame=Headers { stream_id: StreamId(1), flags: (0x5: END_HEADERS | END_STREAM) }
+ [DEBUG] send frame=Headers { stream_id: StreamId(3), flags: (0x5: END_HEADERS | END_STREAM) }
+ [DEBUG] connected to 140.82.121.3:443
+ [DEBUG] No cached session for DnsName("github.com")
+ [DEBUG] Not resuming any session
+ [DEBUG] received frame=Settings { flags: (0x0), max_concurrent_streams: 100, initial_window_size: 67108864, max_frame_size: 68608, enable_connect_protocol: 1 }
+ [DEBUG] send frame=Settings { flags: (0x1: ACK) }
+ [DEBUG] received frame=Settings { flags: (0x1: ACK) }
+ [DEBUG] received settings ACK; applying Settings { flags: (0x0), enable_push: 0, initial_window_size: 2097152, max_frame_size: 16384, max_header_list_size: 16384 }
+ [DEBUG] connected to 104.21.80.27:443
+ [DEBUG] No cached session for DnsName("img.shields.io")
+ [DEBUG] Not resuming any session
+ [DEBUG] Using ciphersuite TLS13_AES_128_GCM_SHA256
+ [DEBUG] Not resuming
+ [DEBUG] TLS1.3 encrypted extensions: ServerExtensions { server_name_ack: (), selected_protocol: SingleProtocolName(ProtocolName(6832)), unknown_extensions: {}, .. }
+ [DEBUG] ALPN protocol is Some(b"h2")
+ [DEBUG] binding client connection
+ [DEBUG] client connection bound
+ [DEBUG] send frame=Settings { flags: (0x0), enable_push: 0, initial_window_size: 2097152, max_frame_size: 16384, max_header_list_size: 16384 }
+ [DEBUG] Connection; peer=Client
+ [DEBUG] pooling idle connection for ("https", docs.rs)
+ [DEBUG] send frame=WindowUpdate { stream_id: StreamId(0), size_increment: 5177345 }
+ [DEBUG] send frame=Headers { stream_id: StreamId(1), flags: (0x5: END_HEADERS | END_STREAM) }
+ [DEBUG] Using ciphersuite TLS13_AES_128_GCM_SHA256
+ [DEBUG] Not resuming
+ [DEBUG] TLS1.3 encrypted extensions: ServerExtensions { server_name_ack: (), selected_protocol: SingleProtocolName(ProtocolName(6832)), unknown_extensions: {}, .. }
+ [DEBUG] ALPN protocol is Some(b"h2")
+ [DEBUG] binding client connection
+ [DEBUG] client connection bound
+ [DEBUG] send frame=Settings { flags: (0x0), enable_push: 0, initial_window_size: 2097152, max_frame_size: 16384, max_header_list_size: 16384 }
+ [DEBUG] Connection; peer=Client
+ [DEBUG] send frame=WindowUpdate { stream_id: StreamId(0), size_increment: 5177345 }
+ [DEBUG] pooling idle connection for ("https", crates.io)
+ [DEBUG] reuse idle connection for ("https", docs.rs)
+ [DEBUG] send frame=Headers { stream_id: StreamId(1), flags: (0x5: END_HEADERS | END_STREAM) }
+ [DEBUG] connecting to 151.101.193.91:443
+ [DEBUG] send frame=Headers { stream_id: StreamId(3), flags: (0x5: END_HEADERS | END_STREAM) }
+ [DEBUG] Using ciphersuite TLS13_AES_128_GCM_SHA256
+ [DEBUG] Not resuming
+ [DEBUG] TLS1.3 encrypted extensions: ServerExtensions { server_name_ack: (), selected_protocol: SingleProtocolName(ProtocolName(6832)), unknown_extensions: {}, .. }
+ [DEBUG] ALPN protocol is Some(b"h2")
+ [DEBUG] binding client connection
+ [DEBUG] client connection bound
+ [DEBUG] send frame=Settings { flags: (0x0), enable_push: 0, initial_window_size: 2097152, max_frame_size: 16384, max_header_list_size: 16384 }
+ [DEBUG] Connection; peer=Client
+ [DEBUG] send frame=GoAway { error_code: NO_ERROR, last_stream_id: StreamId(0) }
+ [DEBUG] Connection::poll; connection error error=GoAway(b"", NO_ERROR, Library)
+ [DEBUG] Sending warning alert CloseNotify
+ [DEBUG] received frame=Settings { flags: (0x0), header_table_size: 8192, max_concurrent_streams: 100 }
+ [DEBUG] send frame=Settings { flags: (0x1: ACK) }
+ [DEBUG] received frame=WindowUpdate { stream_id: StreamId(0), size_increment: 16711681 }
+ [DEBUG] received frame=Settings { flags: (0x0), header_table_size: 8192, max_concurrent_streams: 100 }
+ [DEBUG] send frame=Settings { flags: (0x1: ACK) }
+ [DEBUG] received frame=Settings { flags: (0x1: ACK) }
+ [DEBUG] received settings ACK; applying Settings { flags: (0x0), enable_push: 0, initial_window_size: 2097152, max_frame_size: 16384, max_header_list_size: 16384 }
+ [DEBUG] received frame=WindowUpdate { stream_id: StreamId(0), size_increment: 16711681 }
+ [DEBUG] received frame=Settings { flags: (0x1: ACK) }
+ [DEBUG] received settings ACK; applying Settings { flags: (0x0), enable_push: 0, initial_window_size: 2097152, max_frame_size: 16384, max_header_list_size: 16384 }
+ [DEBUG] Using ciphersuite TLS13_AES_256_GCM_SHA384
+ [DEBUG] Not resuming
+ [DEBUG] connected to 151.101.193.91:443
+ [DEBUG] Resuming session
+ [DEBUG] TLS1.3 encrypted extensions: ServerExtensions { server_name_ack: (), selected_protocol: SingleProtocolName(ProtocolName(6832)), unknown_extensions: {}, .. }
+ [DEBUG] ALPN protocol is Some(b"h2")
+ [DEBUG] binding client connection
+ [DEBUG] client connection bound
+ [DEBUG] send frame=Settings { flags: (0x0), enable_push: 0, initial_window_size: 2097152, max_frame_size: 16384, max_header_list_size: 16384 }
+ [DEBUG] Connection; peer=Client
+ [DEBUG] pooling idle connection for ("https", img.shields.io)
+ [DEBUG] reuse idle connection for ("https", img.shields.io)
+ [DEBUG] send frame=WindowUpdate { stream_id: StreamId(0), size_increment: 5177345 }
+ [DEBUG] send frame=Headers { stream_id: StreamId(1), flags: (0x5: END_HEADERS | END_STREAM) }
+ [DEBUG] send frame=Headers { stream_id: StreamId(3), flags: (0x5: END_HEADERS | END_STREAM) }
+ [DEBUG] Using ciphersuite TLS13_AES_256_GCM_SHA384
+ [DEBUG] Not resuming
+ [DEBUG] TLS1.3 encrypted extensions: ServerExtensions { server_name_ack: (), selected_protocol: SingleProtocolName(ProtocolName(6832)), unknown_extensions: {}, .. }
+ [DEBUG] ALPN protocol is Some(b"h2")
+ [DEBUG] binding client connection
+ [DEBUG] client connection bound
+ [DEBUG] send frame=Settings { flags: (0x0), enable_push: 0, initial_window_size: 2097152, max_frame_size: 16384, max_header_list_size: 16384 }
+ [DEBUG] Connection; peer=Client
+ [DEBUG] send frame=GoAway { error_code: NO_ERROR, last_stream_id: StreamId(0) }
+ [DEBUG] Connection::poll; connection error error=GoAway(b"", NO_ERROR, Library)
+ [DEBUG] Sending warning alert CloseNotify
+ [DEBUG] received frame=Settings { flags: (0x0), max_concurrent_streams: 100, initial_window_size: 65536, max_frame_size: 16777215 }
+ [DEBUG] send frame=Settings { flags: (0x1: ACK) }
+ [DEBUG] received frame=WindowUpdate { stream_id: StreamId(0), size_increment: 2147418112 }
+ [DEBUG] received frame=Settings { flags: (0x1: ACK) }
+ [DEBUG] received settings ACK; applying Settings { flags: (0x0), enable_push: 0, initial_window_size: 2097152, max_frame_size: 16384, max_header_list_size: 16384 }
+ [DEBUG] Using ciphersuite TLS13_AES_128_GCM_SHA256
+ [DEBUG] Resuming using PSK
+ [DEBUG] TLS1.3 encrypted extensions: ServerExtensions { server_name_ack: (), selected_protocol: SingleProtocolName(ProtocolName(6832)), unknown_extensions: {}, .. }
+ [DEBUG] ALPN protocol is Some(b"h2")
+ [DEBUG] binding client connection
+ [DEBUG] client connection bound
+ [DEBUG] send frame=Settings { flags: (0x0), enable_push: 0, initial_window_size: 2097152, max_frame_size: 16384, max_header_list_size: 16384 }
+ [DEBUG] Connection; peer=Client
+ [DEBUG] send frame=GoAway { error_code: NO_ERROR, last_stream_id: StreamId(0) }
+ [DEBUG] Connection::poll; connection error error=GoAway(b"", NO_ERROR, Library)
+ [DEBUG] Sending warning alert CloseNotify
+ [DEBUG] reuse idle connection for ("https", github.com)
+ [DEBUG] send frame=Headers { stream_id: StreamId(5), flags: (0x5: END_HEADERS | END_STREAM) }
+ [DEBUG] reuse idle connection for ("https", img.shields.io)
+ [DEBUG] send frame=Headers { stream_id: StreamId(5), flags: (0x5: END_HEADERS | END_STREAM) }
+ [DEBUG] reuse idle connection for ("https", github.com)
+ [DEBUG] send frame=Headers { stream_id: StreamId(7), flags: (0x5: END_HEADERS | END_STREAM) }
+ [DEBUG] received frame=Headers { stream_id: StreamId(1), flags: (0x4: END_HEADERS) }
+ [DEBUG] received frame=Data { stream_id: StreamId(1), flags: (0x1: END_STREAM) }
+ [DEBUG] reuse idle connection for ("https", github.com)
+ [DEBUG] send frame=Headers { stream_id: StreamId(9), flags: (0x5: END_HEADERS | END_STREAM) }
+ [DEBUG] received frame=Headers { stream_id: StreamId(5), flags: (0x4: END_HEADERS) }
+ [DEBUG] received frame=Data { stream_id: StreamId(5) }
+ [DEBUG] received frame=Data { stream_id: StreamId(5), flags: (0x1: END_STREAM) }
+ [DEBUG] received frame=Headers { stream_id: StreamId(3), flags: (0x5: END_HEADERS | END_STREAM) }
+ [DEBUG] Following redirect to https://img.shields.io/docsrs/lino-i18n/latest
+ [DEBUG] reuse idle connection for ("https", img.shields.io)
+ [DEBUG] send frame=Headers { stream_id: StreamId(7), flags: (0x5: END_HEADERS | END_STREAM) }
+ [DEBUG] reuse idle connection for ("https", github.com)
+ [DEBUG] send frame=Headers { stream_id: StreamId(11), flags: (0x5: END_HEADERS | END_STREAM) }
+ [DEBUG] received frame=Headers { stream_id: StreamId(1), flags: (0x5: END_HEADERS | END_STREAM) }
+ [DEBUG] Following redirect to https://docs.rs/lino-i18n/latest/lino_i18n/
+ [DEBUG] reuse idle connection for ("https", docs.rs)
+ [DEBUG] send frame=Headers { stream_id: StreamId(5), flags: (0x5: END_HEADERS | END_STREAM) }
+ [DEBUG] connecting to 188.114.97.2:443
+ [DEBUG] connected to 188.114.97.2:443
+ [DEBUG] No cached session for DnsName("unlicense.org")
+ [DEBUG] Not resuming any session
+ [DEBUG] received frame=Headers { stream_id: StreamId(5), flags: (0x4: END_HEADERS) }
+ [DEBUG] received frame=Data { stream_id: StreamId(5), flags: (0x1: END_STREAM) }
+ [DEBUG] Using ciphersuite TLS13_AES_256_GCM_SHA384
+ [DEBUG] Not resuming
+ [DEBUG] TLS1.3 encrypted extensions: ServerExtensions { server_name_ack: (), selected_protocol: SingleProtocolName(ProtocolName(6832)), unknown_extensions: {}, .. }
+ [DEBUG] ALPN protocol is Some(b"h2")
+ [DEBUG] binding client connection
+ [DEBUG] client connection bound
+ [DEBUG] send frame=Settings { flags: (0x0), enable_push: 0, initial_window_size: 2097152, max_frame_size: 16384, max_header_list_size: 16384 }
+ [DEBUG] Connection; peer=Client
+ [DEBUG] pooling idle connection for ("https", unlicense.org)
+ [DEBUG] send frame=WindowUpdate { stream_id: StreamId(0), size_increment: 5177345 }
+ [DEBUG] send frame=Headers { stream_id: StreamId(1), flags: (0x5: END_HEADERS | END_STREAM) }
+ [DEBUG] received frame=Settings { flags: (0x0), max_concurrent_streams: 100, initial_window_size: 65536, max_frame_size: 16777215 }
+ [DEBUG] send frame=Settings { flags: (0x1: ACK) }
+ [DEBUG] received frame=WindowUpdate { stream_id: StreamId(0), size_increment: 2147418112 }
+ [DEBUG] received frame=Settings { flags: (0x1: ACK) }
+ [DEBUG] received settings ACK; applying Settings { flags: (0x0), enable_push: 0, initial_window_size: 2097152, max_frame_size: 16384, max_header_list_size: 16384 }
+ [DEBUG] received frame=Headers { stream_id: StreamId(1), flags: (0x4: END_HEADERS) }
+ [DEBUG] received frame=Data { stream_id: StreamId(1) }
+ [DEBUG] received frame=Data { stream_id: StreamId(1), flags: (0x1: END_STREAM) }
+ [DEBUG] reuse idle connection for ("https", github.com)
+ [DEBUG] send frame=Headers { stream_id: StreamId(13), flags: (0x5: END_HEADERS | END_STREAM) }
+ [DEBUG] received frame=Headers { stream_id: StreamId(7), flags: (0x5: END_HEADERS | END_STREAM) }
+ [DEBUG] Following redirect to https://github.com/link-foundation/links-notation
+ [DEBUG] reuse idle connection for ("https", github.com)
+ [DEBUG] send frame=Headers { stream_id: StreamId(15), flags: (0x5: END_HEADERS | END_STREAM) }
+ [DEBUG] received frame=Headers { stream_id: StreamId(1), flags: (0x4: END_HEADERS) }
+ [DEBUG] received frame=Data { stream_id: StreamId(1) }
+ [DEBUG] received frame=Data { stream_id: StreamId(1) }
+ [DEBUG] received frame=Data { stream_id: StreamId(1), flags: (0x1: END_STREAM) }
+ [DEBUG] send frame=Reset { stream_id: StreamId(1), error_code: CANCEL }
+ [DEBUG] reuse idle connection for ("https", github.com)
+ [DEBUG] send frame=Headers { stream_id: StreamId(17), flags: (0x5: END_HEADERS | END_STREAM) }
+ [DEBUG] reuse idle connection for ("https", github.com)
+ [DEBUG] send frame=Headers { stream_id: StreamId(19), flags: (0x5: END_HEADERS | END_STREAM) }
+ [DEBUG] reuse idle connection for ("https", github.com)
+ [DEBUG] send frame=Headers { stream_id: StreamId(21), flags: (0x5: END_HEADERS | END_STREAM) }
+ [DEBUG] received frame=Headers { stream_id: StreamId(3), flags: (0x4: END_HEADERS) }
+ [DEBUG] received frame=Data { stream_id: StreamId(3) }
+ [DEBUG] received frame=Data { stream_id: StreamId(3), flags: (0x1: END_STREAM) }
+ [DEBUG] received frame=Headers { stream_id: StreamId(7), flags: (0x4: END_HEADERS) }
+ [DEBUG] received frame=Data { stream_id: StreamId(7) }
+ [DEBUG] received frame=Data { stream_id: StreamId(7), flags: (0x1: END_STREAM) }
+ [DEBUG] received frame=Headers { stream_id: StreamId(11), flags: (0x4: END_HEADERS) }
+ [DEBUG] received frame=Data { stream_id: StreamId(11), flags: (0x1: END_STREAM) }
+ [DEBUG] reuse idle connection for ("https", github.com)
+ [DEBUG] send frame=Headers { stream_id: StreamId(23), flags: (0x5: END_HEADERS | END_STREAM) }
+ [DEBUG] received frame=Headers { stream_id: StreamId(5), flags: (0x4: END_HEADERS) }
+ [DEBUG] received frame=Data { stream_id: StreamId(5) }
+ [DEBUG] received frame=Data { stream_id: StreamId(5) }
+ [DEBUG] send frame=Reset { stream_id: StreamId(5), error_code: CANCEL }
+ [DEBUG] received frame=Data { stream_id: StreamId(5) }
+ [DEBUG] received frame=Data { stream_id: StreamId(5) }
+ [DEBUG] reuse idle connection for ("https", github.com)
+ [DEBUG] send frame=Headers { stream_id: StreamId(25), flags: (0x5: END_HEADERS | END_STREAM) }
+ [DEBUG] received frame=Data { stream_id: StreamId(5) }
+ [DEBUG] received frame=Data { stream_id: StreamId(5) }
+ [DEBUG] received frame=Data { stream_id: StreamId(5) }
+ [DEBUG] received frame=Data { stream_id: StreamId(5) }
+ [DEBUG] received frame=Data { stream_id: StreamId(5), flags: (0x1: END_STREAM) }
+ [DEBUG] received frame=Headers { stream_id: StreamId(17), flags: (0x4: END_HEADERS) }
+ [DEBUG] received frame=Data { stream_id: StreamId(17), flags: (0x1: END_STREAM) }
+ [DEBUG] reuse idle connection for ("https", github.com)
+ [DEBUG] send frame=Headers { stream_id: StreamId(27), flags: (0x5: END_HEADERS | END_STREAM) }
+ [DEBUG] received frame=Headers { stream_id: StreamId(3), flags: (0x4: END_HEADERS) }
+ [DEBUG] received frame=Data { stream_id: StreamId(3) }
+ [DEBUG] received frame=Data { stream_id: StreamId(3) }
+ [DEBUG] received frame=Data { stream_id: StreamId(3) }
+ [DEBUG] received frame=Data { stream_id: StreamId(3), flags: (0x1: END_STREAM) }
+ [DEBUG] received frame=Headers { stream_id: StreamId(13), flags: (0x4: END_HEADERS) }
+ [DEBUG] received frame=Data { stream_id: StreamId(13) }
+ [DEBUG] received frame=Data { stream_id: StreamId(13) }
+ [DEBUG] received frame=Data { stream_id: StreamId(13) }
+ [DEBUG] send frame=Reset { stream_id: StreamId(13), error_code: CANCEL }
+ [DEBUG] received frame=Data { stream_id: StreamId(13) }
+ [DEBUG] received frame=Data { stream_id: StreamId(13) }
+ [DEBUG] received frame=Data { stream_id: StreamId(13) }
+ [DEBUG] received frame=Data { stream_id: StreamId(13), flags: (0x1: END_STREAM) }
+ [DEBUG] received frame=Headers { stream_id: StreamId(1), flags: (0x4: END_HEADERS) }
+ [DEBUG] received frame=Data { stream_id: StreamId(1) }
+ [DEBUG] received frame=Data { stream_id: StreamId(1) }
+ [DEBUG] received frame=Data { stream_id: StreamId(1) }
+ [DEBUG] received frame=Data { stream_id: StreamId(1) }
+ [DEBUG] send frame=Reset { stream_id: StreamId(1), error_code: CANCEL }
+ [DEBUG] received frame=Data { stream_id: StreamId(1) }
+ [DEBUG] received frame=Data { stream_id: StreamId(1) }
+ [DEBUG] received frame=Data { stream_id: StreamId(1), flags: (0x1: END_STREAM) }
+ [DEBUG] received frame=Headers { stream_id: StreamId(9), flags: (0x4: END_HEADERS) }
+ [DEBUG] received frame=Data { stream_id: StreamId(9) }
+ [DEBUG] send frame=Reset { stream_id: StreamId(9), error_code: CANCEL }
+ [DEBUG] received frame=Data { stream_id: StreamId(9) }
+ [DEBUG] received frame=Data { stream_id: StreamId(9) }
+ [DEBUG] received frame=Data { stream_id: StreamId(9) }
+ [DEBUG] received frame=Data { stream_id: StreamId(9) }
+ [DEBUG] received frame=Data { stream_id: StreamId(9), flags: (0x1: END_STREAM) }
+ [DEBUG] received frame=Headers { stream_id: StreamId(21), flags: (0x4: END_HEADERS) }
+ [DEBUG] received frame=Data { stream_id: StreamId(21) }
+ [DEBUG] received frame=Data { stream_id: StreamId(21) }
+ [DEBUG] send frame=Reset { stream_id: StreamId(21), error_code: CANCEL }
+ [DEBUG] received frame=Data { stream_id: StreamId(21) }
+ [DEBUG] received frame=Data { stream_id: StreamId(21) }
+ [DEBUG] received frame=Data { stream_id: StreamId(21) }
+ [DEBUG] received frame=Data { stream_id: StreamId(21) }
+ [DEBUG] received frame=Data { stream_id: StreamId(21) }
+ [DEBUG] received frame=Data { stream_id: StreamId(21), flags: (0x1: END_STREAM) }
+ [DEBUG] received frame=Headers { stream_id: StreamId(15), flags: (0x4: END_HEADERS) }
+ [DEBUG] received frame=Data { stream_id: StreamId(15) }
+ [DEBUG] received frame=Data { stream_id: StreamId(15) }
+ [DEBUG] received frame=Data { stream_id: StreamId(15) }
+ [DEBUG] received frame=Data { stream_id: StreamId(15) }
+ [DEBUG] received frame=Data { stream_id: StreamId(15), flags: (0x1: END_STREAM) }
+ [DEBUG] received frame=Headers { stream_id: StreamId(25), flags: (0x4: END_HEADERS) }
+ [DEBUG] received frame=Data { stream_id: StreamId(25) }
+ [DEBUG] received frame=Data { stream_id: StreamId(25) }
+ [DEBUG] received frame=Data { stream_id: StreamId(25) }
+ [DEBUG] received frame=Data { stream_id: StreamId(25) }
+ [DEBUG] received frame=Data { stream_id: StreamId(25) }
+ [DEBUG] received frame=Data { stream_id: StreamId(25), flags: (0x1: END_STREAM) }
+ [DEBUG] received frame=Headers { stream_id: StreamId(23), flags: (0x4: END_HEADERS) }
+ [DEBUG] received frame=Data { stream_id: StreamId(23) }
+ [DEBUG] received frame=Data { stream_id: StreamId(23) }
+ [DEBUG] received frame=Data { stream_id: StreamId(23) }
+ [DEBUG] send frame=Reset { stream_id: StreamId(23), error_code: CANCEL }
+ [DEBUG] received frame=Data { stream_id: StreamId(23) }
+ [DEBUG] received frame=Data { stream_id: StreamId(23), flags: (0x1: END_STREAM) }
+ [DEBUG] received frame=Headers { stream_id: StreamId(19), flags: (0x4: END_HEADERS) }
+ [DEBUG] received frame=Data { stream_id: StreamId(19) }
+ [DEBUG] received frame=Data { stream_id: StreamId(19) }
+ [DEBUG] received frame=Data { stream_id: StreamId(19) }
+ [DEBUG] send frame=Reset { stream_id: StreamId(19), error_code: CANCEL }
+ [DEBUG] received frame=Data { stream_id: StreamId(19) }
+ [DEBUG] received frame=Data { stream_id: StreamId(19), flags: (0x1: END_STREAM) }
+ [DEBUG] received frame=Headers { stream_id: StreamId(27), flags: (0x4: END_HEADERS) }
+ [DEBUG] received frame=Data { stream_id: StreamId(27) }
+ [DEBUG] received frame=Data { stream_id: StreamId(27) }
+ [DEBUG] received frame=Data { stream_id: StreamId(27) }
+ [DEBUG] send frame=Reset { stream_id: StreamId(27), error_code: CANCEL }
+ [DEBUG] received frame=Data { stream_id: StreamId(27) }
+ [DEBUG] received frame=Data { stream_id: StreamId(27) }
+ [DEBUG] received frame=Data { stream_id: StreamId(27) }
+ [DEBUG] received frame=Data { stream_id: StreamId(27), flags: (0x1: END_STREAM) }

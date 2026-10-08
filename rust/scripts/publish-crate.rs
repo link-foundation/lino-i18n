@@ -21,16 +21,20 @@
 //! [dependencies]
 //! regex = "1"
 //! ureq = "2"
+//! serde_json = "1"
 //! ```
 
+#[path = "github-output.rs"]
+mod github_output;
+
 use std::env;
-use std::fs;
-use std::io::Write;
 use std::path::PathBuf;
 use std::process::{exit, Command};
 use std::thread;
 use std::time::Duration;
 
+#[path = "registry-state.rs"]
+mod registry_state;
 #[path = "rust-paths.rs"]
 mod rust_paths;
 
@@ -49,19 +53,6 @@ fn needs_cd(rust_root: &str) -> bool {
     rust_root != "."
 }
 
-fn set_output(key: &str, value: &str) {
-    if let Ok(output_file) = env::var("GITHUB_OUTPUT") {
-        if let Ok(mut file) = fs::OpenOptions::new()
-            .create(true)
-            .append(true)
-            .open(&output_file)
-        {
-            let _ = writeln!(file, "{}={}", key, value);
-        }
-    }
-    println!("Output: {}={}", key, value);
-}
-
 fn publish_order_key(manifest: &PathBuf) -> String {
     let package = rust_paths::read_package_info(manifest).ok();
     let name = package.map_or_else(String::new, |info| info.name);
@@ -74,19 +65,7 @@ fn publish_order_key(manifest: &PathBuf) -> String {
 }
 
 fn crate_version_exists(crate_name: &str, version: &str) -> bool {
-    let url = format!("https://crates.io/api/v1/crates/{}/{}", crate_name, version);
-
-    match ureq::get(&url)
-        .set("User-Agent", "rust-script-publish-crate")
-        .call()
-    {
-        Ok(response) => response.status() == 200,
-        Err(ureq::Error::Status(404, _)) => false,
-        Err(e) => {
-            eprintln!("Warning: Could not check crates.io: {}", e);
-            false
-        }
-    }
+    registry_state::version_exists(crate_name, version)
 }
 
 fn wait_for_crate_version(crate_name: &str, version: &str) -> Result<(), i32> {
@@ -147,7 +126,7 @@ fn publish_one(manifest: &PathBuf, rust_root: &str, token: Option<&String>) -> R
     }
 
     let mut cmd = Command::new("cargo");
-    cmd.arg("publish").arg("--allow-dirty").arg("-p").arg(&name);
+    cmd.arg("publish").arg("--locked").arg("-p").arg(&name);
 
     if let Some(t) = token {
         cmd.arg("--token").arg(t);
@@ -161,9 +140,7 @@ fn publish_one(manifest: &PathBuf, rust_root: &str, token: Option<&String>) -> R
 
     if output.status.success() {
         println!("Successfully published {}@{} to crates.io", name, version);
-        if name.ends_with("-macros") {
-            wait_for_crate_version(&name, &version)?;
-        }
+        wait_for_crate_version(&name, &version)?;
         return Ok(name);
     }
 
@@ -178,6 +155,7 @@ fn publish_one(manifest: &PathBuf, rust_root: &str, token: Option<&String>) -> R
             "Version {} of {} already exists on crates.io.",
             version, name
         );
+        wait_for_crate_version(&name, &version)?;
         return Ok(name);
     }
 
@@ -247,12 +225,12 @@ fn main() {
         match publish_one(manifest, &rust_root, token.as_ref()) {
             Ok(name) => published.push(name),
             Err(code) => {
-                set_output("publish_result", "failed");
+                github_output::set_output("publish_result", "failed");
                 exit(code);
             }
         }
     }
 
-    set_output("publish_result", "success");
-    set_output("published_crates", &published.join(","));
+    github_output::set_output("publish_result", "success");
+    github_output::set_output("published_crates", &published.join(","));
 }

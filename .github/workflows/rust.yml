@@ -1,63 +1,70 @@
 name: Rust
-
-on:
+'on':
   push:
-    branches: [main]
+    branches:
+      - main
     paths:
-      - "rust/**"
-      - "docs/**"
-      - ".github/workflows/rust.yml"
+      - rust/**
+      - docs/**
+      - scripts/**
+      - experiments/issue-23-*
+      - README.md
+      - .github/**
+      - .githooks/**
   pull_request:
-    types: [opened, synchronize, reopened]
+    types:
+      - opened
+      - synchronize
+      - reopened
     paths:
-      - "rust/**"
-      - "docs/**"
-      - ".github/workflows/rust.yml"
+      - rust/**
+      - docs/**
+      - scripts/**
+      - experiments/issue-23-*
+      - README.md
+      - .github/**
+      - .githooks/**
   workflow_dispatch:
     inputs:
       release_mode:
-        description: "Manual release mode"
+        description: Manual release mode
         required: true
         type: choice
-        default: "instant"
+        default: instant
         options:
           - instant
           - changelog-pr
       bump_type:
-        description: "Version bump type"
+        description: Version bump type
         required: true
         type: choice
         options:
           - patch
           - minor
           - major
+        default: patch
       description:
-        description: "Release description"
+        description: Release description
         required: false
         type: string
-
 permissions:
-  contents: write
-  pages: write
-  pull-requests: write
-
-concurrency:
-  group: rust-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: ${{ github.ref == 'refs/heads/main' }}
-
+  contents: read
 env:
   CARGO_TERM_COLOR: always
   RUST_BACKTRACE: 1
   RUSTFLAGS: -Dwarnings
-  CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN || secrets.CARGO_TOKEN }}
-  CARGO_TOKEN: ${{ secrets.CARGO_TOKEN }}
-
+  GITHUB_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+  GITHUB_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+  GITHUB_BEFORE_SHA: ${{ github.event.before }}
+  GIT_CONFIG_COUNT: '1'
+  GIT_CONFIG_KEY_0: init.defaultBranch
+  GIT_CONFIG_VALUE_0: main
 jobs:
   detect-changes:
     name: Detect Changes
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 5
-    if: github.event_name != 'workflow_dispatch'
+    if: always() && !cancelled() && !contains(needs.*.result, 'failure') && github.event_name != 'workflow_dispatch'
     outputs:
       rs-changed: ${{ steps.changes.outputs.rs-changed }}
       toml-changed: ${{ steps.changes.outputs.toml-changed }}
@@ -67,59 +74,81 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
+          persist-credentials: false
           fetch-depth: 0
-      - uses: dtolnay/rust-toolchain@stable
+      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d
+        with:
+          toolchain: stable
       - name: Install rust-script
-        run: cargo install rust-script
+        run: cargo install rust-script --version 0.36.0 --locked
       - name: Detect Rust changes
         id: changes
         env:
           GITHUB_EVENT_NAME: ${{ github.event_name }}
         run: rust-script rust/scripts/detect-code-changes.rs
-
+    concurrency:
+      group: check-rust-${{ github.ref }}-detect-changes-
+      cancel-in-progress: true
+    needs:
+      - release-preflight
   changelog:
     name: Changelog Fragment Check
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
-    needs: [detect-changes]
+    needs:
+      - detect-changes
     if: github.event_name == 'pull_request' && needs.detect-changes.outputs.any-code-changed == 'true'
     steps:
       - uses: actions/checkout@v6
         with:
+          persist-credentials: false
           fetch-depth: 0
-      - uses: dtolnay/rust-toolchain@stable
+      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d
+        with:
+          toolchain: stable
       - name: Install rust-script
-        run: cargo install rust-script
+        run: cargo install rust-script --version 0.36.0 --locked
       - name: Check changelog fragments
         env:
           GITHUB_BASE_REF: ${{ github.base_ref }}
         run: rust-script rust/scripts/check-changelog-fragment.rs
-
+    concurrency:
+      group: check-rust-${{ github.ref }}-changelog-
+      cancel-in-progress: true
   version-check:
     name: Version Modification Check
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 5
     if: github.event_name == 'pull_request'
     steps:
       - uses: actions/checkout@v6
         with:
+          persist-credentials: false
           fetch-depth: 0
-      - uses: dtolnay/rust-toolchain@stable
+      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d
+        with:
+          toolchain: stable
       - name: Install rust-script
-        run: cargo install rust-script
+        run: cargo install rust-script --version 0.36.0 --locked
       - name: Check manual version changes
         env:
           GITHUB_HEAD_REF: ${{ github.head_ref }}
           GITHUB_BASE_REF: ${{ github.base_ref }}
         run: rust-script rust/scripts/check-version-modification.rs
-
+    concurrency:
+      group: check-rust-${{ github.ref }}-version-check-
+      cancel-in-progress: true
   lint:
     name: Lint and Format Check
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
-    needs: [detect-changes]
+    needs:
+      - detect-changes
+      - version-check
+      - changelog
+      - release-preflight
     if: |
-      always() && !cancelled() && (
+      always() && !cancelled() && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled') && (
         github.event_name == 'workflow_dispatch' ||
         github.event_name == 'push' ||
         needs.detect-changes.outputs.rs-changed == 'true' ||
@@ -129,96 +158,138 @@ jobs:
       )
     steps:
       - uses: actions/checkout@v6
-      - uses: dtolnay/rust-toolchain@stable
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Validate the latest merge with the base branch
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: bash scripts/simulate-fresh-merge.sh
+      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d
         with:
           components: rustfmt, clippy
-      - uses: Swatinem/rust-cache@v2
+          toolchain: stable
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6
         with:
           workspaces: rust
       - name: Install rust-script
-        run: cargo install rust-script
+        run: cargo install rust-script --version 0.36.0 --locked
       - name: Check Rust scripts compile
-        run: |
-          set -euo pipefail
-          for script in rust/scripts/*.rs; do
-            if [ "$(basename "$script")" = "rust-paths.rs" ]; then
-              continue
-            fi
-
-            echo "Checking $script"
-            package_path=$(RUST_LOG=error rust-script --package "$script" | grep "^/" | tail -n 1)
-            cargo check --manifest-path "$package_path/Cargo.toml"
-          done
+        run: bash rust/scripts/check-scripts.sh
       - run: cargo fmt --manifest-path rust/Cargo.toml --all -- --check
-      - run: cargo clippy --manifest-path rust/Cargo.toml --all-targets --all-features -- -D warnings
+      - run: cargo clippy --locked --manifest-path rust/Cargo.toml --all-targets --all-features -- -D warnings
       - name: Check file size limit
         working-directory: rust
         run: rust-script scripts/check-file-size.rs
-
+      - name: Exercise release and CI script regressions
+        run: python3 experiments/issue-23-rust-release.py && python3 experiments/issue-23-rust-guards.py && python3 experiments/issue-23-rust-output.py && python3 experiments/issue-23-rust-io.py
+    concurrency:
+      group: check-rust-${{ github.ref }}-lint-
+      cancel-in-progress: true
   test:
     name: Test (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
     timeout-minutes: 20
-    needs: [detect-changes, changelog]
-    if: |
-      always() && !cancelled() &&
-      (github.event_name == 'workflow_dispatch' || github.event_name == 'push' || needs.changelog.result == 'success' || needs.changelog.result == 'skipped')
+    needs:
+      - detect-changes
+      - lint
+    if: always() && !cancelled() && needs.lint.result == 'success'
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os:
+          - ubuntu-24.04
+          - macos-15
+          - windows-2025
     steps:
       - uses: actions/checkout@v6
-      - uses: dtolnay/rust-toolchain@stable
-      - uses: Swatinem/rust-cache@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Validate the latest merge with the base branch
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: bash scripts/simulate-fresh-merge.sh
+      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d
+        with:
+          toolchain: stable
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6
         with:
           workspaces: rust
-      - run: cargo build --manifest-path rust/Cargo.toml --all-targets
-      - run: cargo test --manifest-path rust/Cargo.toml --all-targets
-      - run: cargo run --manifest-path rust/lino-i18n/Cargo.toml --example basic
-
+      - run: cargo build --locked --manifest-path rust/Cargo.toml --all-targets
+      - run: cargo test --locked --manifest-path rust/Cargo.toml --all-targets
+      - run: cargo run --locked --manifest-path rust/lino-i18n/Cargo.toml --example basic
+    concurrency:
+      group: check-rust-${{ github.ref }}-test-${{ matrix.os }}
+      cancel-in-progress: true
   package:
     name: Package Dry Run
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
-    needs: [lint, test]
+    needs:
+      - lint
+      - test
     if: |
       always() && !cancelled() &&
       needs.lint.result == 'success' &&
       needs.test.result == 'success'
     steps:
       - uses: actions/checkout@v6
-      - uses: dtolnay/rust-toolchain@stable
-      - uses: Swatinem/rust-cache@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Validate the latest merge with the base branch
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: bash scripts/simulate-fresh-merge.sh
+      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d
+        with:
+          toolchain: stable
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6
         with:
           workspaces: rust
       - run: cargo package --manifest-path rust/lino-i18n-macros/Cargo.toml --allow-dirty
       - name: List runtime crate package contents
         run: cargo package --manifest-path rust/lino-i18n/Cargo.toml --allow-dirty --list
-
+    concurrency:
+      group: check-rust-${{ github.ref }}-package-
+      cancel-in-progress: true
   auto-release:
     name: Publish Crates and GitHub Release
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
-    needs: [package]
-    if: |
+    needs:
+      - package
+      - release-preflight
+    if: |-
       always() && !cancelled() &&
       github.event_name == 'push' &&
       github.ref == 'refs/heads/main' &&
-      needs.package.result == 'success'
+      needs.package.result == 'success' && needs.release-preflight.result == 'success'
     environment:
       name: crates.io
       url: https://crates.io/crates/lino-i18n
     steps:
       - uses: actions/checkout@v6
         with:
+          persist-credentials: true
           fetch-depth: 0
-      - uses: dtolnay/rust-toolchain@stable
-      - uses: Swatinem/rust-cache@v2
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24.x
+      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d
+        with:
+          toolchain: stable
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6
         with:
           workspaces: rust
       - name: Install rust-script
-        run: cargo install rust-script
+        run: cargo install rust-script --version 0.36.0 --locked
+      - name: Synchronize only validated release metadata
+        run: rust-script rust/scripts/version-and-commit.rs --sync-only
       - name: Determine bump type
         id: bump
         run: rust-script rust/scripts/get-bump-type.rs --rust-root rust
@@ -229,107 +300,168 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: rust-script rust/scripts/check-release-needed.rs --rust-root rust --tag-prefix rust-v
+      - name: Check publish credentials before versioning
+        run: bash scripts/preflight-publish.sh crates
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN || secrets.CARGO_TOKEN }}
+        if: steps.check.outputs.should_release == 'true' && steps.check.outputs.crate_published != 'true'
       - name: Version and commit
         if: steps.check.outputs.should_release == 'true' && steps.check.outputs.skip_bump != 'true'
-        run: rust-script rust/scripts/version-and-commit.rs --rust-root rust --tag-prefix rust-v --bump-type "${{ steps.bump.outputs.bump_type }}"
+        run: rust-script rust/scripts/version-and-commit.rs --rust-root rust --tag-prefix rust-v --bump-type "${BUMP_TYPE}"
+        env:
+          BUMP_TYPE: ${{ steps.bump.outputs.bump_type }}
       - name: Read release version
         if: steps.check.outputs.should_release == 'true'
         id: version
         run: rust-script rust/scripts/get-version.rs --rust-root rust
       - name: Build release
         if: steps.check.outputs.should_release == 'true'
-        run: cargo build --manifest-path rust/Cargo.toml --release
+        run: cargo build --locked --manifest-path rust/Cargo.toml --release
       - name: Publish crates
         if: steps.check.outputs.should_release == 'true' && steps.check.outputs.crate_published != 'true'
         id: publish
         run: rust-script rust/scripts/publish-crate.rs --rust-root rust
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN || secrets.CARGO_TOKEN }}
       - name: Wait for macro crate
         if: steps.check.outputs.should_release == 'true' && steps.check.outputs.crate_published != 'true'
-        run: rust-script rust/scripts/wait-for-crate.rs --rust-root rust --crate-name lino-i18n-macros --release-version "${{ steps.version.outputs.version }}"
+        run: rust-script rust/scripts/wait-for-crate.rs --rust-root rust --crate-name lino-i18n-macros --release-version "${VERSION}"
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
       - name: Wait for runtime crate
         if: steps.check.outputs.should_release == 'true' && steps.check.outputs.crate_published != 'true'
-        run: rust-script rust/scripts/wait-for-crate.rs --rust-root rust --crate-name lino-i18n --release-version "${{ steps.version.outputs.version }}"
+        run: rust-script rust/scripts/wait-for-crate.rs --rust-root rust --crate-name lino-i18n --release-version "${VERSION}"
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
       - name: Create GitHub release
         if: steps.check.outputs.should_release == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
-        run: rust-script rust/scripts/create-github-release.rs --rust-root rust --release-version "${{ steps.version.outputs.version }}" --repository "${{ github.repository }}" --tag-prefix rust-v --language Rust
-
+          VERSION: ${{ steps.version.outputs.version }}
+          REPOSITORY: ${{ github.repository }}
+        run: rust-script rust/scripts/create-github-release.rs --rust-root rust --release-version "${VERSION}" --repository "${REPOSITORY}" --tag-prefix
+          rust-v --language Rust
+    permissions:
+      # Push release metadata or create the manual release PR.
+      contents: write # Push validated release metadata and tags or create the release PR.
+    concurrency:
+      group: main-writer-${{ github.repository }}-main
+      cancel-in-progress: false
   manual-release:
     name: Manual Rust Release
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
-    if: github.event_name == 'workflow_dispatch' && github.event.inputs.release_mode == 'instant'
+    if: always() && !cancelled() && needs.package.result == 'success' && github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'
+      && inputs.release_mode == 'instant' && needs.release-preflight.result == 'success'
     environment:
       name: crates.io
       url: https://crates.io/crates/lino-i18n
     steps:
       - uses: actions/checkout@v6
         with:
+          persist-credentials: true
           fetch-depth: 0
-      - uses: dtolnay/rust-toolchain@stable
-      - uses: Swatinem/rust-cache@v2
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24.x
+      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d
+        with:
+          toolchain: stable
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6
         with:
           workspaces: rust
       - name: Install rust-script
-        run: cargo install rust-script
+        run: cargo install rust-script --version 0.36.0 --locked
+      - name: Synchronize only validated release metadata
+        run: rust-script rust/scripts/version-and-commit.rs --sync-only
+      - name: Check publish credentials before versioning
+        run: bash scripts/preflight-publish.sh crates
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN || secrets.CARGO_TOKEN }}
       - name: Version and commit
         id: version
-        run: rust-script rust/scripts/version-and-commit.rs --rust-root rust --tag-prefix rust-v --bump-type "${{ github.event.inputs.bump_type }}" --description "${{ github.event.inputs.description }}"
-      - run: cargo build --manifest-path rust/Cargo.toml --release
+        run: rust-script rust/scripts/version-and-commit.rs --rust-root rust --tag-prefix rust-v --bump-type "$BUMP_TYPE" --description "$RELEASE_DESCRIPTION"
+        env:
+          RELEASE_DESCRIPTION: ${{ inputs.description }}
+          BUMP_TYPE: ${{ inputs.bump_type }}
+      - run: cargo build --locked --manifest-path rust/Cargo.toml --release
       - name: Publish crates
         run: rust-script rust/scripts/publish-crate.rs --rust-root rust
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN || secrets.CARGO_TOKEN }}
       - name: Wait for macro crate
-        run: rust-script rust/scripts/wait-for-crate.rs --rust-root rust --crate-name lino-i18n-macros --release-version "${{ steps.version.outputs.new_version }}"
+        run: rust-script rust/scripts/wait-for-crate.rs --rust-root rust --crate-name lino-i18n-macros --release-version "${NEW_VERSION}"
+        env:
+          NEW_VERSION: ${{ steps.version.outputs.new_version }}
       - name: Wait for runtime crate
-        run: rust-script rust/scripts/wait-for-crate.rs --rust-root rust --crate-name lino-i18n --release-version "${{ steps.version.outputs.new_version }}"
+        run: rust-script rust/scripts/wait-for-crate.rs --rust-root rust --crate-name lino-i18n --release-version "${NEW_VERSION}"
+        env:
+          NEW_VERSION: ${{ steps.version.outputs.new_version }}
       - name: Create GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: rust-script rust/scripts/create-github-release.rs --rust-root rust --release-version "${{ steps.version.outputs.new_version }}" --repository "${{ github.repository }}" --tag-prefix rust-v --language Rust
-
+          NEW_VERSION: ${{ steps.version.outputs.new_version }}
+          REPOSITORY: ${{ github.repository }}
+        run: rust-script rust/scripts/create-github-release.rs --rust-root rust --release-version "${NEW_VERSION}" --repository "${REPOSITORY}"
+          --tag-prefix rust-v --language Rust
+    permissions:
+      # Push release metadata or create the manual release PR.
+      contents: write # Push validated release metadata and tags or create the release PR.
+    needs:
+      - package
+      - release-preflight
+    concurrency:
+      group: main-writer-${{ github.repository }}-main
+      cancel-in-progress: false
   changelog-pr:
     name: Create Manual Changelog PR
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
-    if: github.event_name == 'workflow_dispatch' && github.event.inputs.release_mode == 'changelog-pr'
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.release_mode == 'changelog-pr' && github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v6
-      - uses: dtolnay/rust-toolchain@stable
-      - name: Install rust-script
-        run: cargo install rust-script
-      - name: Create changelog fragment
-        run: rust-script rust/scripts/create-changelog-fragment.rs --rust-root rust --bump-type "${{ github.event.inputs.bump_type }}" --description "${{ github.event.inputs.description }}"
-      - uses: peter-evans/create-pull-request@v8
         with:
-          commit-message: "chore: add changelog for manual ${{ github.event.inputs.bump_type }} release"
+          persist-credentials: true
+          fetch-depth: 0
+      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d
+        with:
+          toolchain: stable
+      - name: Install rust-script
+        run: cargo install rust-script --version 0.36.0 --locked
+      - name: Create changelog fragment
+        run: rust-script rust/scripts/create-changelog-fragment.rs --rust-root rust --bump-type "$BUMP_TYPE" --description "$RELEASE_DESCRIPTION"
+        env:
+          RELEASE_DESCRIPTION: ${{ inputs.description }}
+          BUMP_TYPE: ${{ inputs.bump_type }}
+      - uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1
+        with:
+          commit-message: 'chore: add changelog for manual ${{ github.event.inputs.bump_type }} release'
           branch: changelog-manual-release-${{ github.run_id }}
-          title: "chore: manual ${{ github.event.inputs.bump_type }} release"
+          title: 'chore: manual ${{ github.event.inputs.bump_type }} release'
           body: |
             This PR was created by a manual workflow trigger to prepare a Rust release.
 
             - Release type: `${{ github.event.inputs.bump_type }}`
             - Description: ${{ github.event.inputs.description || 'Manual release' }}
-
-  # === DEPLOY DOCUMENTATION ===
-  # actions/deploy-pages requires id-token: write to mint the OIDC token
-  # used by GitHub Pages. Without it the deploy step fails with
-  # "Ensure GITHUB_TOKEN has permission 'id-token: write'." (issue #8).
-  # The top-level permissions block intentionally omits id-token: write so
-  # only this job can mint OIDC tokens.
-  #
-  # One-time setup: in the repository's Settings -> Pages, set Source to
-  # "GitHub Actions". Otherwise the first run fails on actions/deploy-pages
-  # with "Get Pages site failed" / "Failed to create deployment".
+    permissions:
+      # Push release metadata or create the manual release PR.
+      contents: write # Push validated release metadata and tags or create the release PR.
+      pull-requests: write # Open the manual release pull request.
+    concurrency:
+      group: main-writer-${{ github.repository }}-main
+      cancel-in-progress: false
   deploy-docs:
     name: Deploy Rust Docs
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
-    needs: [package]
+    needs:
+      - package
     permissions:
       contents: read
-      pages: write
-      id-token: write
+      # Deploy the combined documentation artifact to GitHub Pages.
+      pages: write # Deploy the combined JavaScript and Rust documentation site.
+      # Request npm provenance/trusted publishing or Pages deployment identity.
+      id-token: write # Obtain the job-scoped npm or Pages OIDC token.
     if: |
       always() && !cancelled() &&
       needs.package.result == 'success' &&
@@ -340,14 +472,83 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v6
-      - uses: dtolnay/rust-toolchain@stable
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24.x
+      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d
+        with:
+          toolchain: stable
       - name: Install rust-script
-        run: cargo install rust-script
+        run: cargo install rust-script --version 0.36.0 --locked
       - uses: actions/configure-pages@v6
-      - run: cargo doc --manifest-path rust/Cargo.toml --workspace --no-deps
-      - run: rust-script rust/scripts/build-docs-site.rs
+      - run: |-
+          node js/scripts/build-docs-site.mjs
+          cargo doc --locked --manifest-path rust/Cargo.toml --workspace --no-deps
+          rust-script rust/scripts/build-docs-site.rs
+          python3 scripts/assemble-docs.py
       - uses: actions/upload-pages-artifact@v5
         with:
-          path: rust/site
+          path: site
       - id: deployment
         uses: actions/deploy-pages@v5
+    concurrency:
+      group: main-writer-${{ github.repository }}-main
+      cancel-in-progress: false
+    defaults:
+      run:
+        working-directory: .
+  release-preflight:
+    name: Release credential preflight
+    environment:
+      name: crates.io
+      url: https://crates.io/crates/lino-i18n
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    concurrency:
+      group: check-${{ github.workflow }}-${{ github.ref }}-Release credential preflight
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24.x
+      - run: bash scripts/preflight-publish.sh crates
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN || secrets.CARGO_TOKEN }}
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.release_mode ==
+      'instant'))
+  pipeline-status:
+    name: Pipeline Status
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    concurrency:
+      group: check-${{ github.workflow }}-${{ github.ref }}-Pipeline Status
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - env:
+          NEEDS_JSON: ${{ toJSON(needs) }}
+          CANCELLABLE_JOBS: '["detect-changes", "changelog", "version-check", "lint", "test", "package", "release-preflight"]'
+          RUN_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+        run: python3 scripts/check-pipeline-status.py
+    if: always()
+    needs:
+      - detect-changes
+      - changelog
+      - version-check
+      - lint
+      - test
+      - package
+      - auto-release
+      - manual-release
+      - changelog-pr
+      - deploy-docs
+      - release-preflight

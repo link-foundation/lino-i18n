@@ -1,0 +1,22 @@
+✔ publish body has valid metadata and no archive length or archive bytes (18.985067ms)
+✔ only the exact missing tarball response proves scoped API credentials (1.259228ms)
+✔ HTTP 200 cannot pass credential preflight (0.550427ms)
+✔ HTTP 401 cannot pass credential preflight (0.292065ms)
+✔ HTTP 403 cannot pass credential preflight (0.637109ms)
+✔ HTTP 404 cannot pass credential preflight (0.304668ms)
+✔ HTTP 429 cannot pass credential preflight (0.594649ms)
+✔ HTTP 500 cannot pass credential preflight (7.177766ms)
+✔ HTTP 503 cannot pass credential preflight (1.294623ms)
+✔ an unrelated HTTP 400 is unverified: [{"detail":"invalid metadata length"}] (3.446156ms)
+✔ an unrelated HTTP 400 is unverified: [{"detail":"invalid tarball length for remaining payload"}] (8.665981ms)
+✔ an unrelated HTTP 400 is unverified: [] (0.32778ms)
+✔ an unrelated HTTP 400 is unverified: [{"detail":"invalid tarball length"},{"detail":"denied"}] (0.316251ms)
+✔ network and malformed JSON errors stay unknown without leaking secrets (4.027802ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 492.905612

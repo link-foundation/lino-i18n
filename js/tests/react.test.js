@@ -1,7 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import React from 'react';
-import TestRenderer, { act } from 'react-test-renderer';
+import React, { act } from 'react';
+import { JSDOM } from 'jsdom';
+import { cleanup, fireEvent, render } from '@testing-library/react';
+import { renderToString } from 'react-dom/server';
 
 import { createI18n } from '../src/index.js';
 import {
@@ -14,18 +16,14 @@ import {
 } from '../src/react.js';
 
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
+const dom = new JSDOM('<!doctype html><html><body></body></html>');
+globalThis.window = dom.window;
+globalThis.document = dom.window.document;
+globalThis.HTMLElement = dom.window.HTMLElement;
+test.afterEach(cleanup);
+test.after(() => dom.window.close());
 
 const h = React.createElement;
-
-function renderedText(node) {
-  if (typeof node === 'string') {
-    return node;
-  }
-  if (Array.isArray(node)) {
-    return node.map(renderedText).join('');
-  }
-  return renderedText(node?.children || []);
-}
 
 test('provider hooks react to locale changes and support key prefixes', async () => {
   const i18n = createI18n({
@@ -41,14 +39,11 @@ test('provider hooks react to locale changes and support key prefixes', async ()
     return h('p', null, `${locale}: ${t('greeting', { name: 'Ada' })}`);
   }
 
-  let root;
-  await act(() => {
-    root = TestRenderer.create(h(I18nProvider, { i18n }, h(Greeting)));
-  });
-  assert.equal(root.toJSON().children[0], 'en: Hello, Ada!');
+  const root = render(h(I18nProvider, { i18n }, h(Greeting)));
+  assert.equal(root.container.textContent, 'en: Hello, Ada!');
 
   await act(() => i18n.setLocale('fr'));
-  assert.equal(root.toJSON().children[0], 'fr: Bonjour, Ada !');
+  assert.equal(root.container.textContent, 'fr: Bonjour, Ada !');
 });
 
 test('Trans, locale selector, and locale-aware format components compose', async () => {
@@ -59,42 +54,39 @@ test('Trans, locale selector, and locale-aware format components compose', async
     },
   });
 
-  let root;
-  await act(() => {
-    root = TestRenderer.create(
-      h(
-        I18nProvider,
-        { i18n },
-        h(Trans, {
-          id: 'total',
-          values: {
-            name: 'Ada',
-            amount: h(NumberFormat, {
-              value: 1234.5,
-              options: { minimumFractionDigits: 1 },
-            }),
-          },
-        }),
-        h(LocaleSelector)
-      )
-    );
-  });
-  assert.equal(renderedText(root.toJSON()), 'Ada, total: 1,234.5ende');
+  const root = render(
+    h(
+      I18nProvider,
+      { i18n },
+      h(Trans, {
+        id: 'total',
+        values: {
+          name: 'Ada',
+          amount: h(NumberFormat, {
+            value: 1234.5,
+            options: { minimumFractionDigits: 1 },
+          }),
+        },
+      }),
+      h(LocaleSelector)
+    )
+  );
+  assert.equal(root.container.textContent, 'Ada, total: 1,234.5ende');
 
-  const select = root.root.findByType('select');
-  await act(() => select.props.onChange({ target: { value: 'de' } }));
-  assert.equal(renderedText(root.toJSON()), 'Ada, Summe: 1.234,5ende');
+  const select = root.container.querySelector('select');
+  fireEvent.change(select, { target: { value: 'de' } });
+  assert.equal(root.container.textContent, 'Ada, Summe: 1.234,5ende');
   assert.equal(i18n.getLocale(), 'de');
 });
 
-test('hooks fail clearly outside I18nProvider', async () => {
+test('hooks fail clearly outside I18nProvider', () => {
   function Invalid() {
     useLocale();
     return null;
   }
 
   assert.throws(
-    () => act(() => TestRenderer.create(h(Invalid))),
+    () => renderToString(h(Invalid)),
     /must be used inside an I18nProvider/
   );
 });

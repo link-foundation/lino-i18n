@@ -1,0 +1,11 @@
+# Official action publishers are trusted at tag granularity. Other actions and
+# container images use immutable commits/digests; review pins when upgrading.
+rules:
+  unpinned-uses:
+    config:
+      policies:
+        actions/*: ref-pin
+        github/*: ref-pin
+        docker/*: ref-pin
+        lycheeverse/*: ref-pin
+        '*': hash-pin

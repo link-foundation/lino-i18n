@@ -5,8 +5,6 @@
  * Usage: node scripts/create-manual-changeset.mjs --bump-type <major|minor|patch> [--description <description>] [--js-root <path>]
  *
  * Uses link-foundation libraries:
- * - use-m: Dynamic package loading without package.json dependencies
- * - command-stream: Modern shell command execution with streaming support
  * - lino-arguments: Unified configuration from CLI args, env vars, and .lenv files
  */
 
@@ -17,14 +15,8 @@ import { join } from 'path';
 import { getChangesetDir, getJsRoot, parseJsRootConfig } from './js-paths.mjs';
 import { formatChangesetHeader, readPackageInfo } from './package-info.mjs';
 
-// Load use-m dynamically
-const { use } = eval(
-  await (await fetch('https://unpkg.com/use-m/use.js')).text()
-);
-
-// Import link-foundation libraries
-const { $ } = await use('command-stream');
-const { makeConfig } = await use('lino-arguments');
+import { makeConfig } from 'lino-arguments';
+import { runStrict } from './run-command.mjs';
 
 // Parse CLI arguments using lino-arguments
 const config = makeConfig({
@@ -88,7 +80,7 @@ ${description}
 
   // Format with Prettier
   console.log('\nFormatting with Prettier...');
-  await $`npx prettier --write "${changesetFile}"`;
+  await runStrict('npm', ['exec', '--', 'prettier', '--write', changesetFile]);
 
   console.log('\n✅ Changeset created and formatted successfully');
 } catch (error) {

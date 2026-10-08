@@ -40,7 +40,8 @@
  */
 
 import { appendFileSync } from 'fs';
-import { execSync } from 'child_process';
+import { execFileSync } from 'node:child_process';
+import { isPackageVersionPublished } from './npm-registry.mjs';
 
 import { getJsRoot, parseJsRootConfig } from './js-paths.mjs';
 import { readPackageInfo } from './package-info.mjs';
@@ -69,24 +70,6 @@ function getPackageInfo() {
   return readPackageInfo({ jsRoot });
 }
 
-/**
- * Check if a specific version is published on npm
- * @param {string} packageName
- * @param {string} version
- * @returns {boolean}
- */
-function checkVersionOnNpm(packageName, version) {
-  try {
-    const result = execSync(`npm view "${packageName}@${version}" version`, {
-      encoding: 'utf-8',
-      stdio: ['pipe', 'pipe', 'pipe'],
-    });
-    return result.trim().includes(version);
-  } catch {
-    return false;
-  }
-}
-
 function checkGithubRelease(repository, tagPrefix, version) {
   if (!repository) {
     console.log(
@@ -98,17 +81,26 @@ function checkGithubRelease(repository, tagPrefix, version) {
   const tag = `${tagPrefix}${version}`;
 
   try {
-    execSync(`gh release view "${tag}" --repo "${repository}" --json tagName`, {
-      encoding: 'utf-8',
-      stdio: ['pipe', 'pipe', 'pipe'],
-    });
+    execFileSync(
+      'gh',
+      ['release', 'view', tag, '--repo', repository, '--json', 'tagName'],
+      {
+        encoding: 'utf-8',
+        stdio: ['pipe', 'pipe', 'pipe'],
+      }
+    );
     return true;
-  } catch {
-    return false;
+  } catch (error) {
+    if (/release not found|HTTP 404/i.test(String(error.stderr))) {
+      return false;
+    }
+    throw new Error(`GitHub release state is unknown: ${error.message}`, {
+      cause: error,
+    });
   }
 }
 
-function main() {
+async function main() {
   const hasChangesets = process.env.HAS_CHANGESETS === 'true';
   const repository =
     process.env.GITHUB_REPOSITORY || process.env.REPOSITORY || '';
@@ -130,7 +122,10 @@ function main() {
   console.log(
     `Checking if ${packageName}@${currentVersion} is published on npm...`
   );
-  const isPublished = checkVersionOnNpm(packageName, currentVersion);
+  const isPublished = await isPackageVersionPublished(
+    packageName,
+    currentVersion
+  );
   console.log(`Published on npm: ${isPublished}`);
   setOutput('npm_published', isPublished ? 'true' : 'false');
 
@@ -163,4 +158,7 @@ function main() {
   }
 }
 
-main();
+main().catch((error) => {
+  console.error(`::error::${error.message}`);
+  process.exitCode = 1;
+});

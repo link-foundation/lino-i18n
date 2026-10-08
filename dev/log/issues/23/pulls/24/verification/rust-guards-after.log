@@ -1,0 +1,348 @@
+detect-code-changes.rs: exit 0
+Changed files: ["docs/example.md", "rust/member/src/lib.rs"]
+rs-changed=true
+toml-changed=false
+docs-changed=true
+workflow-changed=false
+any-code-changed=true
+[2026-10-08T10:16:09Z INFO  rust_script] Arguments: Args { script: Some("/tmp/gh-issue-solver-1791452293811/rust/scripts/detect-code-changes.rs"), script_args: [], expr: false, loop_: false, count: false, base_path: None, pkg_path: None, gen_pkg_only: false, cargo_output: false, clear_cache: false, debug: false, dep: [], extern_: [], force: false, unstable_features: [], build_kind: Normal, toolchain_version: None, wrapper: None }
+[2026-10-08T10:16:09Z INFO  rust_script] input: File("detect-code-changes", "/tmp/gh-issue-solver-1791452293811/rust/scripts/detect-code-changes.rs", "#!/usr/bin/env rust-script\n//! Detect all changed package files, with full PR and push comparisons.\nuse std::{env, fs, io::Write, process::exit};\n#[path = \"git-changes.rs\"]\n#[allow(dead_code)]\nmod git_changes;\n\nfn main() {\n    let files = git_changes::changed_files().unwrap_or_else(|error| {\n        eprintln!(\"::error::Change detection failed: {error}\");\n        exit(1);\n    });\n    println!(\"Changed files: {files:?}\");\n    let rust_files: Vec<_> = files\n        .iter()\n        .filter(|f| f.starts_with(git_changes::rust_root()))\n        .collect();\n    let flags = [\n        (\"rs-changed\", rust_files.iter().any(|f| f.ends_with(\".rs\"))),\n        (\n            \"toml-changed\",\n            rust_files\n                .iter()\n                .any(|f| f.ends_with(\".toml\") || f.ends_with(\"Cargo.lock\")),\n        ),\n        (\n            \"docs-changed\",\n            files\n                .iter()\n                .any(|f| (f.starts_with(\"docs/\") || f.starts_with(\"rust/\")) && f.ends_with(\".md\")),\n        ),\n        (\n            \"workflow-changed\",\n            files\n                .iter()\n                .any(|f| f.starts_with(\".github/\") || f.starts_with(\"scripts/\")),\n        ),\n        (\n            \"any-code-changed\",\n            files.iter().any(|f| git_changes::release_source(f)),\n        ),\n    ];\n    for (name, value) in flags {\n        println!(\"{name}={value}\");\n        if let Some(path) = env::var(\"GITHUB_OUTPUT\").ok().filter(|v| !v.is_empty()) {\n            let mut file = fs::OpenOptions::new()\n                .create(true)\n                .append(true)\n                .open(path)\n                .expect(\"GITHUB_OUTPUT must be writable\");\n            writeln!(file, \"{name}={value}\").expect(\"GITHUB_OUTPUT write failed\");\n        }\n    }\n}\n", "/tmp/gh-issue-solver-1791452293811/rust/scripts")
+[2026-10-08T10:16:09Z INFO  rust_script] prelude_items: []
+[2026-10-08T10:16:09Z INFO  rust_script] id: "ea36118d28cfe3f6a691ea32"
+[2026-10-08T10:16:09Z INFO  rust_script] pkg_path: "/home/box/.cache/rust-script/projects/ea36118d28cfe3f6a691ea32"
+[2026-10-08T10:16:09Z INFO  rust_script] using_cache: true
+[2026-10-08T10:16:10Z INFO  rust_script::manifest] part_mani: {}
+[2026-10-08T10:16:10Z INFO  rust_script::manifest] source: None
+[2026-10-08T10:16:10Z INFO  rust_script::manifest] manifest: [[bin]]
+    name = "detect-code-changes_ea36118d28cfe3f6a691ea32"
+    path = "/tmp/gh-issue-solver-1791452293811/rust/scripts/detect-code-changes.rs"
+    
+    [dependencies]
+    
+    [package]
+    authors = ["Anonymous"]
+    edition = "2021"
+    name = "detect-code-changes_ea36118d28cfe3f6a691ea32"
+    version = "0.1.0"
+    
+    [profile.release]
+    strip = true
+    
+[2026-10-08T10:16:10Z INFO  rust_script] action: InputAction { cargo_output: false, force_compile: false, execute: true, pkg_path: "/home/box/.cache/rust-script/projects/ea36118d28cfe3f6a691ea32", script_path: "/tmp/gh-issue-solver-1791452293811/rust/scripts/detect-code-changes.rs", using_cache: true, toolchain_version: None, debug: false, manifest: "[[bin]]\nname = \"detect-code-changes_ea36118d28cfe3f6a691ea32\"\npath = \"/tmp/gh-issue-solver-1791452293811/rust/scripts/detect-code-changes.rs\"\n\n[dependencies]\n\n[package]\nauthors = [\"Anonymous\"]\nedition = \"2021\"\nname = \"detect-code-changes_ea36118d28cfe3f6a691ea32\"\nversion = \"0.1.0\"\n\n[profile.release]\nstrip = true\n", script: None, build_kind: Normal, bin_name: "detect-code-changes_ea36118d28cfe3f6a691ea32", original_script_path: Some("/tmp/gh-issue-solver-1791452293811/rust/scripts/detect-code-changes.rs") }
+[2026-10-08T10:16:10Z INFO  rust_script] creating pkg dir...
+[2026-10-08T10:16:10Z INFO  rust_script] generating Cargo package...
+[2026-10-08T10:16:10Z DEBUG rust_script] overwrite_file("/home/box/.cache/rust-script/projects/ea36118d28cfe3f6a691ea32/Cargo.toml", _)
+[2026-10-08T10:16:10Z DEBUG rust_script] .. files differ
+[2026-10-08T10:16:10Z INFO  rust_script] disarming pkg dir cleanup...
+[2026-10-08T10:16:10Z DEBUG rust_script] No old binary found
+
+check-changelog-fragment.rs: exit 1
+[2026-10-08T10:16:11Z INFO  rust_script] Arguments: Args { script: Some("/tmp/gh-issue-solver-1791452293811/rust/scripts/check-changelog-fragment.rs"), script_args: [], expr: false, loop_: false, count: false, base_path: None, pkg_path: None, gen_pkg_only: false, cargo_output: false, clear_cache: false, debug: false, dep: [], extern_: [], force: false, unstable_features: [], build_kind: Normal, toolchain_version: None, wrapper: None }
+[2026-10-08T10:16:11Z INFO  rust_script] input: File("check-changelog-fragment", "/tmp/gh-issue-solver-1791452293811/rust/scripts/check-changelog-fragment.rs", "#!/usr/bin/env rust-script\n//! Require a new, valid fragment for every published Rust package change.\n//! ```cargo\n//! [dependencies]\n//! regex = \"1\"\n//! ```\nuse std::process::exit;\n#[path = \"git-changes.rs\"]\n#[allow(dead_code)]\nmod git_changes;\n\nfn check() -> Result<(), String> {\n    let (base, head) = git_changes::comparison()?;\n    let files = git_changes::changes(&base, &head, \"ACDMRT\")?;\n    if !files.iter().any(|f| git_changes::release_source(f)) {\n        return Ok(());\n    }\n    let prefix = format!(\"{}changelog.d/\", git_changes::rust_root());\n    let added = git_changes::additions(&base, &head)?;\n    let fragments: Vec<_> = added\n        .iter()\n        .filter(|f| f.starts_with(&prefix) && f.ends_with(\".md\") && !f.ends_with(\"README.md\"))\n        .collect();\n    if fragments.is_empty() {\n        return Err(format!(\"No new changelog fragment; add a file in {prefix}\"));\n    }\n    let pattern =\n        regex::Regex::new(r\"\\A---\\r?\\n(?:bump: (?:patch|minor|major))\\r?\\n---\\r?\\n\\s*\\S\").unwrap();\n    for file in fragments {\n        let text = git_changes::git(&[\"show\", &format!(\"{head}:{file}\")])?;\n        if !pattern.is_match(&text) {\n            return Err(format!(\n                \"Invalid fragment {file}: specify bump: patch|minor|major and a description.\"\n            ));\n        }\n    }\n    Ok(())\n}\n\nfn main() {\n    if let Err(error) = check() {\n        eprintln!(\"::error::{error}\");\n        exit(1);\n    }\n    println!(\"Changelog fragment check passed.\");\n}\n", "/tmp/gh-issue-solver-1791452293811/rust/scripts")
+[2026-10-08T10:16:11Z INFO  rust_script] prelude_items: []
+[2026-10-08T10:16:11Z INFO  rust_script] id: "30ee0b634e9db3166c8ac5e4"
+[2026-10-08T10:16:11Z INFO  rust_script] pkg_path: "/home/box/.cache/rust-script/projects/30ee0b634e9db3166c8ac5e4"
+[2026-10-08T10:16:11Z INFO  rust_script] using_cache: true
+[2026-10-08T10:16:11Z INFO  rust_script::manifest] part_mani: {"dependencies": Table({"regex": String("1")})}
+[2026-10-08T10:16:11Z INFO  rust_script::manifest] source: None
+[2026-10-08T10:16:11Z INFO  rust_script::manifest] manifest: [[bin]]
+    name = "check-changelog-fragment_30ee0b634e9db3166c8ac5e4"
+    path = "/tmp/gh-issue-solver-1791452293811/rust/scripts/check-changelog-fragment.rs"
+    
+    [dependencies]
+    regex = "1"
+    
+    [package]
+    authors = ["Anonymous"]
+    edition = "2021"
+    name = "check-changelog-fragment_30ee0b634e9db3166c8ac5e4"
+    version = "0.1.0"
+    
+    [profile.release]
+    strip = true
+    
+[2026-10-08T10:16:11Z INFO  rust_script] action: InputAction { cargo_output: false, force_compile: false, execute: true, pkg_path: "/home/box/.cache/rust-script/projects/30ee0b634e9db3166c8ac5e4", script_path: "/tmp/gh-issue-solver-1791452293811/rust/scripts/check-changelog-fragment.rs", using_cache: true, toolchain_version: None, debug: false, manifest: "[[bin]]\nname = \"check-changelog-fragment_30ee0b634e9db3166c8ac5e4\"\npath = \"/tmp/gh-issue-solver-1791452293811/rust/scripts/check-changelog-fragment.rs\"\n\n[dependencies]\nregex = \"1\"\n\n[package]\nauthors = [\"Anonymous\"]\nedition = \"2021\"\nname = \"check-changelog-fragment_30ee0b634e9db3166c8ac5e4\"\nversion = \"0.1.0\"\n\n[profile.release]\nstrip = true\n", script: None, build_kind: Normal, bin_name: "check-changelog-fragment_30ee0b634e9db3166c8ac5e4", original_script_path: Some("/tmp/gh-issue-solver-1791452293811/rust/scripts/check-changelog-fragment.rs") }
+[2026-10-08T10:16:11Z INFO  rust_script] creating pkg dir...
+[2026-10-08T10:16:11Z INFO  rust_script] generating Cargo package...
+[2026-10-08T10:16:11Z DEBUG rust_script] overwrite_file("/home/box/.cache/rust-script/projects/30ee0b634e9db3166c8ac5e4/Cargo.toml", _)
+[2026-10-08T10:16:11Z DEBUG rust_script] .. files differ
+[2026-10-08T10:16:11Z INFO  rust_script] disarming pkg dir cleanup...
+[2026-10-08T10:16:11Z DEBUG rust_script] No old binary found
+::error::No new changelog fragment; add a file in rust/changelog.d/
+
+check-changelog-fragment.rs: exit 1
+[2026-10-08T10:16:12Z INFO  rust_script] Arguments: Args { script: Some("/tmp/gh-issue-solver-1791452293811/rust/scripts/check-changelog-fragment.rs"), script_args: [], expr: false, loop_: false, count: false, base_path: None, pkg_path: None, gen_pkg_only: false, cargo_output: false, clear_cache: false, debug: false, dep: [], extern_: [], force: false, unstable_features: [], build_kind: Normal, toolchain_version: None, wrapper: None }
+[2026-10-08T10:16:12Z INFO  rust_script] input: File("check-changelog-fragment", "/tmp/gh-issue-solver-1791452293811/rust/scripts/check-changelog-fragment.rs", "#!/usr/bin/env rust-script\n//! Require a new, valid fragment for every published Rust package change.\n//! ```cargo\n//! [dependencies]\n//! regex = \"1\"\n//! ```\nuse std::process::exit;\n#[path = \"git-changes.rs\"]\n#[allow(dead_code)]\nmod git_changes;\n\nfn check() -> Result<(), String> {\n    let (base, head) = git_changes::comparison()?;\n    let files = git_changes::changes(&base, &head, \"ACDMRT\")?;\n    if !files.iter().any(|f| git_changes::release_source(f)) {\n        return Ok(());\n    }\n    let prefix = format!(\"{}changelog.d/\", git_changes::rust_root());\n    let added = git_changes::additions(&base, &head)?;\n    let fragments: Vec<_> = added\n        .iter()\n        .filter(|f| f.starts_with(&prefix) && f.ends_with(\".md\") && !f.ends_with(\"README.md\"))\n        .collect();\n    if fragments.is_empty() {\n        return Err(format!(\"No new changelog fragment; add a file in {prefix}\"));\n    }\n    let pattern =\n        regex::Regex::new(r\"\\A---\\r?\\n(?:bump: (?:patch|minor|major))\\r?\\n---\\r?\\n\\s*\\S\").unwrap();\n    for file in fragments {\n        let text = git_changes::git(&[\"show\", &format!(\"{head}:{file}\")])?;\n        if !pattern.is_match(&text) {\n            return Err(format!(\n                \"Invalid fragment {file}: specify bump: patch|minor|major and a description.\"\n            ));\n        }\n    }\n    Ok(())\n}\n\nfn main() {\n    if let Err(error) = check() {\n        eprintln!(\"::error::{error}\");\n        exit(1);\n    }\n    println!(\"Changelog fragment check passed.\");\n}\n", "/tmp/gh-issue-solver-1791452293811/rust/scripts")
+[2026-10-08T10:16:12Z INFO  rust_script] prelude_items: []
+[2026-10-08T10:16:12Z INFO  rust_script] id: "30ee0b634e9db3166c8ac5e4"
+[2026-10-08T10:16:12Z INFO  rust_script] pkg_path: "/home/box/.cache/rust-script/projects/30ee0b634e9db3166c8ac5e4"
+[2026-10-08T10:16:12Z INFO  rust_script] using_cache: true
+[2026-10-08T10:16:12Z INFO  rust_script::manifest] part_mani: {"dependencies": Table({"regex": String("1")})}
+[2026-10-08T10:16:12Z INFO  rust_script::manifest] source: None
+[2026-10-08T10:16:12Z INFO  rust_script::manifest] manifest: [[bin]]
+    name = "check-changelog-fragment_30ee0b634e9db3166c8ac5e4"
+    path = "/tmp/gh-issue-solver-1791452293811/rust/scripts/check-changelog-fragment.rs"
+    
+    [dependencies]
+    regex = "1"
+    
+    [package]
+    authors = ["Anonymous"]
+    edition = "2021"
+    name = "check-changelog-fragment_30ee0b634e9db3166c8ac5e4"
+    version = "0.1.0"
+    
+    [profile.release]
+    strip = true
+    
+[2026-10-08T10:16:12Z INFO  rust_script] action: InputAction { cargo_output: false, force_compile: false, execute: true, pkg_path: "/home/box/.cache/rust-script/projects/30ee0b634e9db3166c8ac5e4", script_path: "/tmp/gh-issue-solver-1791452293811/rust/scripts/check-changelog-fragment.rs", using_cache: true, toolchain_version: None, debug: false, manifest: "[[bin]]\nname = \"check-changelog-fragment_30ee0b634e9db3166c8ac5e4\"\npath = \"/tmp/gh-issue-solver-1791452293811/rust/scripts/check-changelog-fragment.rs\"\n\n[dependencies]\nregex = \"1\"\n\n[package]\nauthors = [\"Anonymous\"]\nedition = \"2021\"\nname = \"check-changelog-fragment_30ee0b634e9db3166c8ac5e4\"\nversion = \"0.1.0\"\n\n[profile.release]\nstrip = true\n", script: None, build_kind: Normal, bin_name: "check-changelog-fragment_30ee0b634e9db3166c8ac5e4", original_script_path: Some("/tmp/gh-issue-solver-1791452293811/rust/scripts/check-changelog-fragment.rs") }
+[2026-10-08T10:16:12Z INFO  rust_script] creating pkg dir...
+[2026-10-08T10:16:12Z INFO  rust_script] generating Cargo package...
+[2026-10-08T10:16:12Z DEBUG rust_script] overwrite_file("/home/box/.cache/rust-script/projects/30ee0b634e9db3166c8ac5e4/Cargo.toml", _)
+[2026-10-08T10:16:12Z DEBUG rust_script] Equal content
+[2026-10-08T10:16:12Z INFO  rust_script] disarming pkg dir cleanup...
+[2026-10-08T10:16:12Z DEBUG rust_script] Keeping old binary
+::error::No new changelog fragment; add a file in rust/changelog.d/
+
+check-changelog-fragment.rs: exit 0
+Changelog fragment check passed.
+[2026-10-08T10:16:12Z INFO  rust_script] Arguments: Args { script: Some("/tmp/gh-issue-solver-1791452293811/rust/scripts/check-changelog-fragment.rs"), script_args: [], expr: false, loop_: false, count: false, base_path: None, pkg_path: None, gen_pkg_only: false, cargo_output: false, clear_cache: false, debug: false, dep: [], extern_: [], force: false, unstable_features: [], build_kind: Normal, toolchain_version: None, wrapper: None }
+[2026-10-08T10:16:12Z INFO  rust_script] input: File("check-changelog-fragment", "/tmp/gh-issue-solver-1791452293811/rust/scripts/check-changelog-fragment.rs", "#!/usr/bin/env rust-script\n//! Require a new, valid fragment for every published Rust package change.\n//! ```cargo\n//! [dependencies]\n//! regex = \"1\"\n//! ```\nuse std::process::exit;\n#[path = \"git-changes.rs\"]\n#[allow(dead_code)]\nmod git_changes;\n\nfn check() -> Result<(), String> {\n    let (base, head) = git_changes::comparison()?;\n    let files = git_changes::changes(&base, &head, \"ACDMRT\")?;\n    if !files.iter().any(|f| git_changes::release_source(f)) {\n        return Ok(());\n    }\n    let prefix = format!(\"{}changelog.d/\", git_changes::rust_root());\n    let added = git_changes::additions(&base, &head)?;\n    let fragments: Vec<_> = added\n        .iter()\n        .filter(|f| f.starts_with(&prefix) && f.ends_with(\".md\") && !f.ends_with(\"README.md\"))\n        .collect();\n    if fragments.is_empty() {\n        return Err(format!(\"No new changelog fragment; add a file in {prefix}\"));\n    }\n    let pattern =\n        regex::Regex::new(r\"\\A---\\r?\\n(?:bump: (?:patch|minor|major))\\r?\\n---\\r?\\n\\s*\\S\").unwrap();\n    for file in fragments {\n        let text = git_changes::git(&[\"show\", &format!(\"{head}:{file}\")])?;\n        if !pattern.is_match(&text) {\n            return Err(format!(\n                \"Invalid fragment {file}: specify bump: patch|minor|major and a description.\"\n            ));\n        }\n    }\n    Ok(())\n}\n\nfn main() {\n    if let Err(error) = check() {\n        eprintln!(\"::error::{error}\");\n        exit(1);\n    }\n    println!(\"Changelog fragment check passed.\");\n}\n", "/tmp/gh-issue-solver-1791452293811/rust/scripts")
+[2026-10-08T10:16:12Z INFO  rust_script] prelude_items: []
+[2026-10-08T10:16:12Z INFO  rust_script] id: "30ee0b634e9db3166c8ac5e4"
+[2026-10-08T10:16:12Z INFO  rust_script] pkg_path: "/home/box/.cache/rust-script/projects/30ee0b634e9db3166c8ac5e4"
+[2026-10-08T10:16:12Z INFO  rust_script] using_cache: true
+[2026-10-08T10:16:12Z INFO  rust_script::manifest] part_mani: {"dependencies": Table({"regex": String("1")})}
+[2026-10-08T10:16:12Z INFO  rust_script::manifest] source: None
+[2026-10-08T10:16:12Z INFO  rust_script::manifest] manifest: [[bin]]
+    name = "check-changelog-fragment_30ee0b634e9db3166c8ac5e4"
+    path = "/tmp/gh-issue-solver-1791452293811/rust/scripts/check-changelog-fragment.rs"
+    
+    [dependencies]
+    regex = "1"
+    
+    [package]
+    authors = ["Anonymous"]
+    edition = "2021"
+    name = "check-changelog-fragment_30ee0b634e9db3166c8ac5e4"
+    version = "0.1.0"
+    
+    [profile.release]
+    strip = true
+    
+[2026-10-08T10:16:12Z INFO  rust_script] action: InputAction { cargo_output: false, force_compile: false, execute: true, pkg_path: "/home/box/.cache/rust-script/projects/30ee0b634e9db3166c8ac5e4", script_path: "/tmp/gh-issue-solver-1791452293811/rust/scripts/check-changelog-fragment.rs", using_cache: true, toolchain_version: None, debug: false, manifest: "[[bin]]\nname = \"check-changelog-fragment_30ee0b634e9db3166c8ac5e4\"\npath = \"/tmp/gh-issue-solver-1791452293811/rust/scripts/check-changelog-fragment.rs\"\n\n[dependencies]\nregex = \"1\"\n\n[package]\nauthors = [\"Anonymous\"]\nedition = \"2021\"\nname = \"check-changelog-fragment_30ee0b634e9db3166c8ac5e4\"\nversion = \"0.1.0\"\n\n[profile.release]\nstrip = true\n", script: None, build_kind: Normal, bin_name: "check-changelog-fragment_30ee0b634e9db3166c8ac5e4", original_script_path: Some("/tmp/gh-issue-solver-1791452293811/rust/scripts/check-changelog-fragment.rs") }
+[2026-10-08T10:16:12Z INFO  rust_script] creating pkg dir...
+[2026-10-08T10:16:12Z INFO  rust_script] generating Cargo package...
+[2026-10-08T10:16:12Z DEBUG rust_script] overwrite_file("/home/box/.cache/rust-script/projects/30ee0b634e9db3166c8ac5e4/Cargo.toml", _)
+[2026-10-08T10:16:12Z DEBUG rust_script] Equal content
+[2026-10-08T10:16:12Z INFO  rust_script] disarming pkg dir cleanup...
+[2026-10-08T10:16:12Z DEBUG rust_script] Keeping old binary
+
+check-version-modification.rs: exit 0
+Package and workspace versions are unchanged.
+[2026-10-08T10:16:12Z INFO  rust_script] Arguments: Args { script: Some("/tmp/gh-issue-solver-1791452293811/rust/scripts/check-version-modification.rs"), script_args: [], expr: false, loop_: false, count: false, base_path: None, pkg_path: None, gen_pkg_only: false, cargo_output: false, clear_cache: false, debug: false, dep: [], extern_: [], force: false, unstable_features: [], build_kind: Normal, toolchain_version: None, wrapper: None }
+[2026-10-08T10:16:12Z INFO  rust_script] input: File("check-version-modification", "/tmp/gh-issue-solver-1791452293811/rust/scripts/check-version-modification.rs", "#!/usr/bin/env rust-script\n//! Compare package/workspace versions semantically, including member manifests.\n//! ```cargo\n//! [dependencies]\n//! toml = \"0.8\"\n//! ```\nuse std::{env, process::exit};\n#[path = \"git-changes.rs\"]\n#[allow(dead_code)]\nmod git_changes;\n\nfn versions(text: &str) -> Result<(Option<toml::Value>, Option<toml::Value>), String> {\n    let document: toml::Value = text.parse::<toml::Value>().map_err(|e| e.to_string())?;\n    let package = document\n        .get(\"package\")\n        .and_then(|v| v.get(\"version\"))\n        .cloned();\n    let workspace = document\n        .get(\"workspace\")\n        .and_then(|v| v.get(\"package\"))\n        .and_then(|v| v.get(\"version\"))\n        .cloned();\n    Ok((package, workspace))\n}\n\nfn check() -> Result<(), String> {\n    let (base, head) = git_changes::comparison()?;\n    for file in git_changes::changes(&base, &head, \"M\")? {\n        if !file.starts_with(git_changes::rust_root()) || !file.ends_with(\"Cargo.toml\") {\n            continue;\n        }\n        let old = versions(&git_changes::git(&[\"show\", &format!(\"{base}:{file}\")])?)?;\n        let new = versions(&git_changes::git(&[\"show\", &format!(\"{head}:{file}\")])?)?;\n        if old != new {\n            return Err(format!(\n                \"Manual package version change in {file}; add a changelog fragment instead.\"\n            ));\n        }\n    }\n    Ok(())\n}\n\nfn main() {\n    if env::var(\"GITHUB_EVENT_NAME\").as_deref() != Ok(\"pull_request\") {\n        return;\n    }\n    if let Err(error) = check() {\n        eprintln!(\"::error::{error}\");\n        exit(1);\n    }\n    println!(\"Package and workspace versions are unchanged.\");\n}\n", "/tmp/gh-issue-solver-1791452293811/rust/scripts")
+[2026-10-08T10:16:12Z INFO  rust_script] prelude_items: []
+[2026-10-08T10:16:12Z INFO  rust_script] id: "0e024cd2b96005025aea5982"
+[2026-10-08T10:16:12Z INFO  rust_script] pkg_path: "/home/box/.cache/rust-script/projects/0e024cd2b96005025aea5982"
+[2026-10-08T10:16:12Z INFO  rust_script] using_cache: true
+[2026-10-08T10:16:12Z INFO  rust_script::manifest] part_mani: {"dependencies": Table({"toml": String("0.8")})}
+[2026-10-08T10:16:12Z INFO  rust_script::manifest] source: None
+[2026-10-08T10:16:12Z INFO  rust_script::manifest] manifest: [[bin]]
+    name = "check-version-modification_0e024cd2b96005025aea5982"
+    path = "/tmp/gh-issue-solver-1791452293811/rust/scripts/check-version-modification.rs"
+    
+    [dependencies]
+    toml = "0.8"
+    
+    [package]
+    authors = ["Anonymous"]
+    edition = "2021"
+    name = "check-version-modification_0e024cd2b96005025aea5982"
+    version = "0.1.0"
+    
+    [profile.release]
+    strip = true
+    
+[2026-10-08T10:16:12Z INFO  rust_script] action: InputAction { cargo_output: false, force_compile: false, execute: true, pkg_path: "/home/box/.cache/rust-script/projects/0e024cd2b96005025aea5982", script_path: "/tmp/gh-issue-solver-1791452293811/rust/scripts/check-version-modification.rs", using_cache: true, toolchain_version: None, debug: false, manifest: "[[bin]]\nname = \"check-version-modification_0e024cd2b96005025aea5982\"\npath = \"/tmp/gh-issue-solver-1791452293811/rust/scripts/check-version-modification.rs\"\n\n[dependencies]\ntoml = \"0.8\"\n\n[package]\nauthors = [\"Anonymous\"]\nedition = \"2021\"\nname = \"check-version-modification_0e024cd2b96005025aea5982\"\nversion = \"0.1.0\"\n\n[profile.release]\nstrip = true\n", script: None, build_kind: Normal, bin_name: "check-version-modification_0e024cd2b96005025aea5982", original_script_path: Some("/tmp/gh-issue-solver-1791452293811/rust/scripts/check-version-modification.rs") }
+[2026-10-08T10:16:12Z INFO  rust_script] creating pkg dir...
+[2026-10-08T10:16:12Z INFO  rust_script] generating Cargo package...
+[2026-10-08T10:16:12Z DEBUG rust_script] overwrite_file("/home/box/.cache/rust-script/projects/0e024cd2b96005025aea5982/Cargo.toml", _)
+[2026-10-08T10:16:12Z DEBUG rust_script] .. files differ
+[2026-10-08T10:16:12Z INFO  rust_script] disarming pkg dir cleanup...
+[2026-10-08T10:16:12Z DEBUG rust_script] No old binary found
+
+check-version-modification.rs: exit 1
+[2026-10-08T10:16:25Z INFO  rust_script] Arguments: Args { script: Some("/tmp/gh-issue-solver-1791452293811/rust/scripts/check-version-modification.rs"), script_args: [], expr: false, loop_: false, count: false, base_path: None, pkg_path: None, gen_pkg_only: false, cargo_output: false, clear_cache: false, debug: false, dep: [], extern_: [], force: false, unstable_features: [], build_kind: Normal, toolchain_version: None, wrapper: None }
+[2026-10-08T10:16:25Z INFO  rust_script] input: File("check-version-modification", "/tmp/gh-issue-solver-1791452293811/rust/scripts/check-version-modification.rs", "#!/usr/bin/env rust-script\n//! Compare package/workspace versions semantically, including member manifests.\n//! ```cargo\n//! [dependencies]\n//! toml = \"0.8\"\n//! ```\nuse std::{env, process::exit};\n#[path = \"git-changes.rs\"]\n#[allow(dead_code)]\nmod git_changes;\n\nfn versions(text: &str) -> Result<(Option<toml::Value>, Option<toml::Value>), String> {\n    let document: toml::Value = text.parse::<toml::Value>().map_err(|e| e.to_string())?;\n    let package = document\n        .get(\"package\")\n        .and_then(|v| v.get(\"version\"))\n        .cloned();\n    let workspace = document\n        .get(\"workspace\")\n        .and_then(|v| v.get(\"package\"))\n        .and_then(|v| v.get(\"version\"))\n        .cloned();\n    Ok((package, workspace))\n}\n\nfn check() -> Result<(), String> {\n    let (base, head) = git_changes::comparison()?;\n    for file in git_changes::changes(&base, &head, \"M\")? {\n        if !file.starts_with(git_changes::rust_root()) || !file.ends_with(\"Cargo.toml\") {\n            continue;\n        }\n        let old = versions(&git_changes::git(&[\"show\", &format!(\"{base}:{file}\")])?)?;\n        let new = versions(&git_changes::git(&[\"show\", &format!(\"{head}:{file}\")])?)?;\n        if old != new {\n            return Err(format!(\n                \"Manual package version change in {file}; add a changelog fragment instead.\"\n            ));\n        }\n    }\n    Ok(())\n}\n\nfn main() {\n    if env::var(\"GITHUB_EVENT_NAME\").as_deref() != Ok(\"pull_request\") {\n        return;\n    }\n    if let Err(error) = check() {\n        eprintln!(\"::error::{error}\");\n        exit(1);\n    }\n    println!(\"Package and workspace versions are unchanged.\");\n}\n", "/tmp/gh-issue-solver-1791452293811/rust/scripts")
+[2026-10-08T10:16:25Z INFO  rust_script] prelude_items: []
+[2026-10-08T10:16:25Z INFO  rust_script] id: "0e024cd2b96005025aea5982"
+[2026-10-08T10:16:25Z INFO  rust_script] pkg_path: "/home/box/.cache/rust-script/projects/0e024cd2b96005025aea5982"
+[2026-10-08T10:16:25Z INFO  rust_script] using_cache: true
+[2026-10-08T10:16:25Z INFO  rust_script::manifest] part_mani: {"dependencies": Table({"toml": String("0.8")})}
+[2026-10-08T10:16:25Z INFO  rust_script::manifest] source: None
+[2026-10-08T10:16:25Z INFO  rust_script::manifest] manifest: [[bin]]
+    name = "check-version-modification_0e024cd2b96005025aea5982"
+    path = "/tmp/gh-issue-solver-1791452293811/rust/scripts/check-version-modification.rs"
+    
+    [dependencies]
+    toml = "0.8"
+    
+    [package]
+    authors = ["Anonymous"]
+    edition = "2021"
+    name = "check-version-modification_0e024cd2b96005025aea5982"
+    version = "0.1.0"
+    
+    [profile.release]
+    strip = true
+    
+[2026-10-08T10:16:25Z INFO  rust_script] action: InputAction { cargo_output: false, force_compile: false, execute: true, pkg_path: "/home/box/.cache/rust-script/projects/0e024cd2b96005025aea5982", script_path: "/tmp/gh-issue-solver-1791452293811/rust/scripts/check-version-modification.rs", using_cache: true, toolchain_version: None, debug: false, manifest: "[[bin]]\nname = \"check-version-modification_0e024cd2b96005025aea5982\"\npath = \"/tmp/gh-issue-solver-1791452293811/rust/scripts/check-version-modification.rs\"\n\n[dependencies]\ntoml = \"0.8\"\n\n[package]\nauthors = [\"Anonymous\"]\nedition = \"2021\"\nname = \"check-version-modification_0e024cd2b96005025aea5982\"\nversion = \"0.1.0\"\n\n[profile.release]\nstrip = true\n", script: None, build_kind: Normal, bin_name: "check-version-modification_0e024cd2b96005025aea5982", original_script_path: Some("/tmp/gh-issue-solver-1791452293811/rust/scripts/check-version-modification.rs") }
+[2026-10-08T10:16:25Z INFO  rust_script] creating pkg dir...
+[2026-10-08T10:16:25Z INFO  rust_script] generating Cargo package...
+[2026-10-08T10:16:25Z DEBUG rust_script] overwrite_file("/home/box/.cache/rust-script/projects/0e024cd2b96005025aea5982/Cargo.toml", _)
+[2026-10-08T10:16:25Z DEBUG rust_script] Equal content
+[2026-10-08T10:16:25Z INFO  rust_script] disarming pkg dir cleanup...
+[2026-10-08T10:16:25Z DEBUG rust_script] Keeping old binary
+::error::Manual package version change in rust/member/Cargo.toml; add a changelog fragment instead.
+
+detect-code-changes.rs: exit 1
+[2026-10-08T10:16:25Z INFO  rust_script] Arguments: Args { script: Some("/tmp/gh-issue-solver-1791452293811/rust/scripts/detect-code-changes.rs"), script_args: [], expr: false, loop_: false, count: false, base_path: None, pkg_path: None, gen_pkg_only: false, cargo_output: false, clear_cache: false, debug: false, dep: [], extern_: [], force: false, unstable_features: [], build_kind: Normal, toolchain_version: None, wrapper: None }
+[2026-10-08T10:16:25Z INFO  rust_script] input: File("detect-code-changes", "/tmp/gh-issue-solver-1791452293811/rust/scripts/detect-code-changes.rs", "#!/usr/bin/env rust-script\n//! Detect all changed package files, with full PR and push comparisons.\nuse std::{env, fs, io::Write, process::exit};\n#[path = \"git-changes.rs\"]\n#[allow(dead_code)]\nmod git_changes;\n\nfn main() {\n    let files = git_changes::changed_files().unwrap_or_else(|error| {\n        eprintln!(\"::error::Change detection failed: {error}\");\n        exit(1);\n    });\n    println!(\"Changed files: {files:?}\");\n    let rust_files: Vec<_> = files\n        .iter()\n        .filter(|f| f.starts_with(git_changes::rust_root()))\n        .collect();\n    let flags = [\n        (\"rs-changed\", rust_files.iter().any(|f| f.ends_with(\".rs\"))),\n        (\n            \"toml-changed\",\n            rust_files\n                .iter()\n                .any(|f| f.ends_with(\".toml\") || f.ends_with(\"Cargo.lock\")),\n        ),\n        (\n            \"docs-changed\",\n            files\n                .iter()\n                .any(|f| (f.starts_with(\"docs/\") || f.starts_with(\"rust/\")) && f.ends_with(\".md\")),\n        ),\n        (\n            \"workflow-changed\",\n            files\n                .iter()\n                .any(|f| f.starts_with(\".github/\") || f.starts_with(\"scripts/\")),\n        ),\n        (\n            \"any-code-changed\",\n            files.iter().any(|f| git_changes::release_source(f)),\n        ),\n    ];\n    for (name, value) in flags {\n        println!(\"{name}={value}\");\n        if let Some(path) = env::var(\"GITHUB_OUTPUT\").ok().filter(|v| !v.is_empty()) {\n            let mut file = fs::OpenOptions::new()\n                .create(true)\n                .append(true)\n                .open(path)\n                .expect(\"GITHUB_OUTPUT must be writable\");\n            writeln!(file, \"{name}={value}\").expect(\"GITHUB_OUTPUT write failed\");\n        }\n    }\n}\n", "/tmp/gh-issue-solver-1791452293811/rust/scripts")
+[2026-10-08T10:16:25Z INFO  rust_script] prelude_items: []
+[2026-10-08T10:16:25Z INFO  rust_script] id: "ea36118d28cfe3f6a691ea32"
+[2026-10-08T10:16:25Z INFO  rust_script] pkg_path: "/home/box/.cache/rust-script/projects/ea36118d28cfe3f6a691ea32"
+[2026-10-08T10:16:25Z INFO  rust_script] using_cache: true
+[2026-10-08T10:16:25Z INFO  rust_script::manifest] part_mani: {}
+[2026-10-08T10:16:25Z INFO  rust_script::manifest] source: None
+[2026-10-08T10:16:25Z INFO  rust_script::manifest] manifest: [[bin]]
+    name = "detect-code-changes_ea36118d28cfe3f6a691ea32"
+    path = "/tmp/gh-issue-solver-1791452293811/rust/scripts/detect-code-changes.rs"
+    
+    [dependencies]
+    
+    [package]
+    authors = ["Anonymous"]
+    edition = "2021"
+    name = "detect-code-changes_ea36118d28cfe3f6a691ea32"
+    version = "0.1.0"
+    
+    [profile.release]
+    strip = true
+    
+[2026-10-08T10:16:25Z INFO  rust_script] action: InputAction { cargo_output: false, force_compile: false, execute: true, pkg_path: "/home/box/.cache/rust-script/projects/ea36118d28cfe3f6a691ea32", script_path: "/tmp/gh-issue-solver-1791452293811/rust/scripts/detect-code-changes.rs", using_cache: true, toolchain_version: None, debug: false, manifest: "[[bin]]\nname = \"detect-code-changes_ea36118d28cfe3f6a691ea32\"\npath = \"/tmp/gh-issue-solver-1791452293811/rust/scripts/detect-code-changes.rs\"\n\n[dependencies]\n\n[package]\nauthors = [\"Anonymous\"]\nedition = \"2021\"\nname = \"detect-code-changes_ea36118d28cfe3f6a691ea32\"\nversion = \"0.1.0\"\n\n[profile.release]\nstrip = true\n", script: None, build_kind: Normal, bin_name: "detect-code-changes_ea36118d28cfe3f6a691ea32", original_script_path: Some("/tmp/gh-issue-solver-1791452293811/rust/scripts/detect-code-changes.rs") }
+[2026-10-08T10:16:25Z INFO  rust_script] creating pkg dir...
+[2026-10-08T10:16:25Z INFO  rust_script] generating Cargo package...
+[2026-10-08T10:16:25Z DEBUG rust_script] overwrite_file("/home/box/.cache/rust-script/projects/ea36118d28cfe3f6a691ea32/Cargo.toml", _)
+[2026-10-08T10:16:25Z DEBUG rust_script] Equal content
+[2026-10-08T10:16:25Z INFO  rust_script] disarming pkg dir cleanup...
+[2026-10-08T10:16:25Z DEBUG rust_script] Keeping old binary
+::error::Change detection failed: fatal: Needed a single revision
+
+check-changelog-fragment.rs: exit 1
+[2026-10-08T10:16:25Z INFO  rust_script] Arguments: Args { script: Some("/tmp/gh-issue-solver-1791452293811/rust/scripts/check-changelog-fragment.rs"), script_args: [], expr: false, loop_: false, count: false, base_path: None, pkg_path: None, gen_pkg_only: false, cargo_output: false, clear_cache: false, debug: false, dep: [], extern_: [], force: false, unstable_features: [], build_kind: Normal, toolchain_version: None, wrapper: None }
+[2026-10-08T10:16:25Z INFO  rust_script] input: File("check-changelog-fragment", "/tmp/gh-issue-solver-1791452293811/rust/scripts/check-changelog-fragment.rs", "#!/usr/bin/env rust-script\n//! Require a new, valid fragment for every published Rust package change.\n//! ```cargo\n//! [dependencies]\n//! regex = \"1\"\n//! ```\nuse std::process::exit;\n#[path = \"git-changes.rs\"]\n#[allow(dead_code)]\nmod git_changes;\n\nfn check() -> Result<(), String> {\n    let (base, head) = git_changes::comparison()?;\n    let files = git_changes::changes(&base, &head, \"ACDMRT\")?;\n    if !files.iter().any(|f| git_changes::release_source(f)) {\n        return Ok(());\n    }\n    let prefix = format!(\"{}changelog.d/\", git_changes::rust_root());\n    let added = git_changes::additions(&base, &head)?;\n    let fragments: Vec<_> = added\n        .iter()\n        .filter(|f| f.starts_with(&prefix) && f.ends_with(\".md\") && !f.ends_with(\"README.md\"))\n        .collect();\n    if fragments.is_empty() {\n        return Err(format!(\"No new changelog fragment; add a file in {prefix}\"));\n    }\n    let pattern =\n        regex::Regex::new(r\"\\A---\\r?\\n(?:bump: (?:patch|minor|major))\\r?\\n---\\r?\\n\\s*\\S\").unwrap();\n    for file in fragments {\n        let text = git_changes::git(&[\"show\", &format!(\"{head}:{file}\")])?;\n        if !pattern.is_match(&text) {\n            return Err(format!(\n                \"Invalid fragment {file}: specify bump: patch|minor|major and a description.\"\n            ));\n        }\n    }\n    Ok(())\n}\n\nfn main() {\n    if let Err(error) = check() {\n        eprintln!(\"::error::{error}\");\n        exit(1);\n    }\n    println!(\"Changelog fragment check passed.\");\n}\n", "/tmp/gh-issue-solver-1791452293811/rust/scripts")
+[2026-10-08T10:16:25Z INFO  rust_script] prelude_items: []
+[2026-10-08T10:16:25Z INFO  rust_script] id: "30ee0b634e9db3166c8ac5e4"
+[2026-10-08T10:16:25Z INFO  rust_script] pkg_path: "/home/box/.cache/rust-script/projects/30ee0b634e9db3166c8ac5e4"
+[2026-10-08T10:16:25Z INFO  rust_script] using_cache: true
+[2026-10-08T10:16:25Z INFO  rust_script::manifest] part_mani: {"dependencies": Table({"regex": String("1")})}
+[2026-10-08T10:16:25Z INFO  rust_script::manifest] source: None
+[2026-10-08T10:16:25Z INFO  rust_script::manifest] manifest: [[bin]]
+    name = "check-changelog-fragment_30ee0b634e9db3166c8ac5e4"
+    path = "/tmp/gh-issue-solver-1791452293811/rust/scripts/check-changelog-fragment.rs"
+    
+    [dependencies]
+    regex = "1"
+    
+    [package]
+    authors = ["Anonymous"]
+    edition = "2021"
+    name = "check-changelog-fragment_30ee0b634e9db3166c8ac5e4"
+    version = "0.1.0"
+    
+    [profile.release]
+    strip = true
+    
+[2026-10-08T10:16:25Z INFO  rust_script] action: InputAction { cargo_output: false, force_compile: false, execute: true, pkg_path: "/home/box/.cache/rust-script/projects/30ee0b634e9db3166c8ac5e4", script_path: "/tmp/gh-issue-solver-1791452293811/rust/scripts/check-changelog-fragment.rs", using_cache: true, toolchain_version: None, debug: false, manifest: "[[bin]]\nname = \"check-changelog-fragment_30ee0b634e9db3166c8ac5e4\"\npath = \"/tmp/gh-issue-solver-1791452293811/rust/scripts/check-changelog-fragment.rs\"\n\n[dependencies]\nregex = \"1\"\n\n[package]\nauthors = [\"Anonymous\"]\nedition = \"2021\"\nname = \"check-changelog-fragment_30ee0b634e9db3166c8ac5e4\"\nversion = \"0.1.0\"\n\n[profile.release]\nstrip = true\n", script: None, build_kind: Normal, bin_name: "check-changelog-fragment_30ee0b634e9db3166c8ac5e4", original_script_path: Some("/tmp/gh-issue-solver-1791452293811/rust/scripts/check-changelog-fragment.rs") }
+[2026-10-08T10:16:25Z INFO  rust_script] creating pkg dir...
+[2026-10-08T10:16:25Z INFO  rust_script] generating Cargo package...
+[2026-10-08T10:16:25Z DEBUG rust_script] overwrite_file("/home/box/.cache/rust-script/projects/30ee0b634e9db3166c8ac5e4/Cargo.toml", _)
+[2026-10-08T10:16:25Z DEBUG rust_script] Equal content
+[2026-10-08T10:16:25Z INFO  rust_script] disarming pkg dir cleanup...
+[2026-10-08T10:16:25Z DEBUG rust_script] Keeping old binary
+::error::fatal: Needed a single revision
+
+check-version-modification.rs: exit 1
+[2026-10-08T10:16:25Z INFO  rust_script] Arguments: Args { script: Some("/tmp/gh-issue-solver-1791452293811/rust/scripts/check-version-modification.rs"), script_args: [], expr: false, loop_: false, count: false, base_path: None, pkg_path: None, gen_pkg_only: false, cargo_output: false, clear_cache: false, debug: false, dep: [], extern_: [], force: false, unstable_features: [], build_kind: Normal, toolchain_version: None, wrapper: None }
+[2026-10-08T10:16:25Z INFO  rust_script] input: File("check-version-modification", "/tmp/gh-issue-solver-1791452293811/rust/scripts/check-version-modification.rs", "#!/usr/bin/env rust-script\n//! Compare package/workspace versions semantically, including member manifests.\n//! ```cargo\n//! [dependencies]\n//! toml = \"0.8\"\n//! ```\nuse std::{env, process::exit};\n#[path = \"git-changes.rs\"]\n#[allow(dead_code)]\nmod git_changes;\n\nfn versions(text: &str) -> Result<(Option<toml::Value>, Option<toml::Value>), String> {\n    let document: toml::Value = text.parse::<toml::Value>().map_err(|e| e.to_string())?;\n    let package = document\n        .get(\"package\")\n        .and_then(|v| v.get(\"version\"))\n        .cloned();\n    let workspace = document\n        .get(\"workspace\")\n        .and_then(|v| v.get(\"package\"))\n        .and_then(|v| v.get(\"version\"))\n        .cloned();\n    Ok((package, workspace))\n}\n\nfn check() -> Result<(), String> {\n    let (base, head) = git_changes::comparison()?;\n    for file in git_changes::changes(&base, &head, \"M\")? {\n        if !file.starts_with(git_changes::rust_root()) || !file.ends_with(\"Cargo.toml\") {\n            continue;\n        }\n        let old = versions(&git_changes::git(&[\"show\", &format!(\"{base}:{file}\")])?)?;\n        let new = versions(&git_changes::git(&[\"show\", &format!(\"{head}:{file}\")])?)?;\n        if old != new {\n            return Err(format!(\n                \"Manual package version change in {file}; add a changelog fragment instead.\"\n            ));\n        }\n    }\n    Ok(())\n}\n\nfn main() {\n    if env::var(\"GITHUB_EVENT_NAME\").as_deref() != Ok(\"pull_request\") {\n        return;\n    }\n    if let Err(error) = check() {\n        eprintln!(\"::error::{error}\");\n        exit(1);\n    }\n    println!(\"Package and workspace versions are unchanged.\");\n}\n", "/tmp/gh-issue-solver-1791452293811/rust/scripts")
+[2026-10-08T10:16:25Z INFO  rust_script] prelude_items: []
+[2026-10-08T10:16:25Z INFO  rust_script] id: "0e024cd2b96005025aea5982"
+[2026-10-08T10:16:25Z INFO  rust_script] pkg_path: "/home/box/.cache/rust-script/projects/0e024cd2b96005025aea5982"
+[2026-10-08T10:16:25Z INFO  rust_script] using_cache: true
+[2026-10-08T10:16:25Z INFO  rust_script::manifest] part_mani: {"dependencies": Table({"toml": String("0.8")})}
+[2026-10-08T10:16:25Z INFO  rust_script::manifest] source: None
+[2026-10-08T10:16:25Z INFO  rust_script::manifest] manifest: [[bin]]
+    name = "check-version-modification_0e024cd2b96005025aea5982"
+    path = "/tmp/gh-issue-solver-1791452293811/rust/scripts/check-version-modification.rs"
+    
+    [dependencies]
+    toml = "0.8"
+    
+    [package]
+    authors = ["Anonymous"]
+    edition = "2021"
+    name = "check-version-modification_0e024cd2b96005025aea5982"
+    version = "0.1.0"
+    
+    [profile.release]
+    strip = true
+    
+[2026-10-08T10:16:25Z INFO  rust_script] action: InputAction { cargo_output: false, force_compile: false, execute: true, pkg_path: "/home/box/.cache/rust-script/projects/0e024cd2b96005025aea5982", script_path: "/tmp/gh-issue-solver-1791452293811/rust/scripts/check-version-modification.rs", using_cache: true, toolchain_version: None, debug: false, manifest: "[[bin]]\nname = \"check-version-modification_0e024cd2b96005025aea5982\"\npath = \"/tmp/gh-issue-solver-1791452293811/rust/scripts/check-version-modification.rs\"\n\n[dependencies]\ntoml = \"0.8\"\n\n[package]\nauthors = [\"Anonymous\"]\nedition = \"2021\"\nname = \"check-version-modification_0e024cd2b96005025aea5982\"\nversion = \"0.1.0\"\n\n[profile.release]\nstrip = true\n", script: None, build_kind: Normal, bin_name: "check-version-modification_0e024cd2b96005025aea5982", original_script_path: Some("/tmp/gh-issue-solver-1791452293811/rust/scripts/check-version-modification.rs") }
+[2026-10-08T10:16:25Z INFO  rust_script] creating pkg dir...
+[2026-10-08T10:16:25Z INFO  rust_script] generating Cargo package...
+[2026-10-08T10:16:25Z DEBUG rust_script] overwrite_file("/home/box/.cache/rust-script/projects/0e024cd2b96005025aea5982/Cargo.toml", _)
+[2026-10-08T10:16:25Z DEBUG rust_script] Equal content
+[2026-10-08T10:16:25Z INFO  rust_script] disarming pkg dir cleanup...
+[2026-10-08T10:16:25Z DEBUG rust_script] Keeping old binary
+::error::fatal: Needed a single revision
+
+detect-code-changes.rs: exit 0
+Changed files: ["docs/example.md", "rust/changelog.d/new.md", "rust/changelog.d/old.md", "rust/changelog.d/renamed.md", "rust/member/Cargo.toml", "rust/member/src/lib.rs"]
+rs-changed=true
+toml-changed=true
+docs-changed=true
+workflow-changed=false
+any-code-changed=true
+[2026-10-08T10:16:25Z INFO  rust_script] Arguments: Args { script: Some("/tmp/gh-issue-solver-1791452293811/rust/scripts/detect-code-changes.rs"), script_args: [], expr: false, loop_: false, count: false, base_path: None, pkg_path: None, gen_pkg_only: false, cargo_output: false, clear_cache: false, debug: false, dep: [], extern_: [], force: false, unstable_features: [], build_kind: Normal, toolchain_version: None, wrapper: None }
+[2026-10-08T10:16:25Z INFO  rust_script] input: File("detect-code-changes", "/tmp/gh-issue-solver-1791452293811/rust/scripts/detect-code-changes.rs", "#!/usr/bin/env rust-script\n//! Detect all changed package files, with full PR and push comparisons.\nuse std::{env, fs, io::Write, process::exit};\n#[path = \"git-changes.rs\"]\n#[allow(dead_code)]\nmod git_changes;\n\nfn main() {\n    let files = git_changes::changed_files().unwrap_or_else(|error| {\n        eprintln!(\"::error::Change detection failed: {error}\");\n        exit(1);\n    });\n    println!(\"Changed files: {files:?}\");\n    let rust_files: Vec<_> = files\n        .iter()\n        .filter(|f| f.starts_with(git_changes::rust_root()))\n        .collect();\n    let flags = [\n        (\"rs-changed\", rust_files.iter().any(|f| f.ends_with(\".rs\"))),\n        (\n            \"toml-changed\",\n            rust_files\n                .iter()\n                .any(|f| f.ends_with(\".toml\") || f.ends_with(\"Cargo.lock\")),\n        ),\n        (\n            \"docs-changed\",\n            files\n                .iter()\n                .any(|f| (f.starts_with(\"docs/\") || f.starts_with(\"rust/\")) && f.ends_with(\".md\")),\n        ),\n        (\n            \"workflow-changed\",\n            files\n                .iter()\n                .any(|f| f.starts_with(\".github/\") || f.starts_with(\"scripts/\")),\n        ),\n        (\n            \"any-code-changed\",\n            files.iter().any(|f| git_changes::release_source(f)),\n        ),\n    ];\n    for (name, value) in flags {\n        println!(\"{name}={value}\");\n        if let Some(path) = env::var(\"GITHUB_OUTPUT\").ok().filter(|v| !v.is_empty()) {\n            let mut file = fs::OpenOptions::new()\n                .create(true)\n                .append(true)\n                .open(path)\n                .expect(\"GITHUB_OUTPUT must be writable\");\n            writeln!(file, \"{name}={value}\").expect(\"GITHUB_OUTPUT write failed\");\n        }\n    }\n}\n", "/tmp/gh-issue-solver-1791452293811/rust/scripts")
+[2026-10-08T10:16:25Z INFO  rust_script] prelude_items: []
+[2026-10-08T10:16:25Z INFO  rust_script] id: "ea36118d28cfe3f6a691ea32"
+[2026-10-08T10:16:25Z INFO  rust_script] pkg_path: "/home/box/.cache/rust-script/projects/ea36118d28cfe3f6a691ea32"
+[2026-10-08T10:16:25Z INFO  rust_script] using_cache: true
+[2026-10-08T10:16:25Z INFO  rust_script::manifest] part_mani: {}
+[2026-10-08T10:16:25Z INFO  rust_script::manifest] source: None
+[2026-10-08T10:16:25Z INFO  rust_script::manifest] manifest: [[bin]]
+    name = "detect-code-changes_ea36118d28cfe3f6a691ea32"
+    path = "/tmp/gh-issue-solver-1791452293811/rust/scripts/detect-code-changes.rs"
+    
+    [dependencies]
+    
+    [package]
+    authors = ["Anonymous"]
+    edition = "2021"
+    name = "detect-code-changes_ea36118d28cfe3f6a691ea32"
+    version = "0.1.0"
+    
+    [profile.release]
+    strip = true
+    
+[2026-10-08T10:16:25Z INFO  rust_script] action: InputAction { cargo_output: false, force_compile: false, execute: true, pkg_path: "/home/box/.cache/rust-script/projects/ea36118d28cfe3f6a691ea32", script_path: "/tmp/gh-issue-solver-1791452293811/rust/scripts/detect-code-changes.rs", using_cache: true, toolchain_version: None, debug: false, manifest: "[[bin]]\nname = \"detect-code-changes_ea36118d28cfe3f6a691ea32\"\npath = \"/tmp/gh-issue-solver-1791452293811/rust/scripts/detect-code-changes.rs\"\n\n[dependencies]\n\n[package]\nauthors = [\"Anonymous\"]\nedition = \"2021\"\nname = \"detect-code-changes_ea36118d28cfe3f6a691ea32\"\nversion = \"0.1.0\"\n\n[profile.release]\nstrip = true\n", script: None, build_kind: Normal, bin_name: "detect-code-changes_ea36118d28cfe3f6a691ea32", original_script_path: Some("/tmp/gh-issue-solver-1791452293811/rust/scripts/detect-code-changes.rs") }
+[2026-10-08T10:16:25Z INFO  rust_script] creating pkg dir...
+[2026-10-08T10:16:25Z INFO  rust_script] generating Cargo package...
+[2026-10-08T10:16:25Z DEBUG rust_script] overwrite_file("/home/box/.cache/rust-script/projects/ea36118d28cfe3f6a691ea32/Cargo.toml", _)
+[2026-10-08T10:16:25Z DEBUG rust_script] Equal content
+[2026-10-08T10:16:25Z INFO  rust_script] disarming pkg dir cleanup...
+[2026-10-08T10:16:25Z DEBUG rust_script] Keeping old binary
+
+Whole-PR/merge, workspace member, formatting, spoofed branch, fragment rename and invalid-ref checks passed.

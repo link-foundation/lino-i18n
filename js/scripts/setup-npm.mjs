@@ -1,17 +1,17 @@
 #!/usr/bin/env node
 
-import { resolve } from 'node:path';
+import { dirname, join, resolve } from 'node:path';
+import { createHash } from 'node:crypto';
+import { mkdtemp, readFile, rename, rm, writeFile } from 'node:fs/promises';
+import { runStrict } from './run-command.mjs';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 
 /**
  * Update npm for OIDC trusted publishing
  * npm trusted publishing requires npm >= 11.5.1
- * Node.js 20.x ships with npm 10.x, so we need to update
- *
- * Uses link-foundation libraries:
- * - use-m: Dynamic package loading without package.json dependencies
- * - command-stream: Modern shell command execution with streaming support
+ * Keep working npm installations. Recover the missing-module runner-image
+ * failure using a registry tarball whose integrity is verified before use.
  */
 
 export const NPM_MIN_VERSION = '11.5.1';
@@ -101,165 +101,114 @@ export function selectLatestSupportedNpmRelease(metadata) {
   return { version, tarballUrl: release.dist.tarball };
 }
 
-async function fetchNpmRegistryMetadata(fetchFn) {
-  const response = await fetchFn(NPM_REGISTRY_METADATA_URL, {
-    headers: { accept: 'application/json' },
+function validateRecoveryMetadata(metadata) {
+  if (
+    metadata.version !== '11.20.0' ||
+    !metadata.dist?.integrity?.startsWith('sha512-') ||
+    !metadata.dist.tarball.startsWith('https://registry.npmjs.org/npm/-/')
+  ) {
+    throw new Error('Invalid npm recovery metadata');
+  }
+}
+
+export async function recoverNpm({
+  fetchFn = fetch,
+  npmDirectory = resolve(dirname(process.execPath), '../lib/node_modules/npm'),
+  runner = runStrict,
+} = {}) {
+  const response = await fetchFn('https://registry.npmjs.org/npm/11.20.0', {
+    signal: globalThis.AbortSignal.timeout(15000),
   });
-
   if (!response.ok) {
+    throw new Error(`npm recovery metadata returned HTTP ${response.status}`);
+  }
+  const metadata = await response.json();
+  validateRecoveryMetadata(metadata);
+  const archive = await fetchFn(metadata.dist.tarball, {
+    signal: globalThis.AbortSignal.timeout(15000),
+  });
+  if (!archive.ok) {
+    throw new Error(`npm recovery tarball returned HTTP ${archive.status}`);
+  }
+  const bytes = Buffer.from(await archive.arrayBuffer());
+  const integrity = `sha512-${createHash('sha512').update(bytes).digest('base64')}`;
+  if (integrity !== metadata.dist.integrity) {
+    throw new Error('npm recovery tarball integrity mismatch');
+  }
+  const temporary = await mkdtemp(
+    join(dirname(npmDirectory), '.npm-recovery-')
+  );
+  const backup = `${temporary}-backup`;
+  try {
+    await writeFile(join(temporary, 'npm.tgz'), bytes);
+    await runner('tar', ['xzf', join(temporary, 'npm.tgz'), '-C', temporary]);
+    const manifest = JSON.parse(
+      await readFile(join(temporary, 'package/package.json'), 'utf8')
+    );
+    if (manifest.name !== 'npm' || manifest.version !== '11.20.0') {
+      throw new Error('Unexpected npm recovery package');
+    }
+    await rename(npmDirectory, backup);
+    try {
+      await rename(join(temporary, 'package'), npmDirectory);
+      await runner(process.execPath, [
+        join(npmDirectory, 'bin/npm-cli.js'),
+        '--version',
+      ]);
+    } catch (error) {
+      await rm(npmDirectory, { recursive: true, force: true });
+      await rename(backup, npmDirectory);
+      throw error;
+    }
+    await rm(backup, { recursive: true, force: true });
+  } finally {
+    await rm(temporary, { recursive: true, force: true });
+  }
+}
+
+/** Keep supported npm and retain recovery for the known missing-module image. */
+export async function setupNpm() {
+  if (!isSupportedNodeVersion(process.version)) {
     throw new Error(
-      `Failed to fetch npm registry metadata: ${response.status} ${response.statusText}`
+      `Node >= ${NODE_MIN_VERSION} is required for trusted publishing`
     );
   }
-
-  return response.json();
-}
-
-async function resolveLatestSupportedNpmRelease(fetchFn) {
-  const metadata = await fetchNpmRegistryMetadata(fetchFn);
-  return selectLatestSupportedNpmRelease(metadata);
-}
-
-// Update npm for OIDC trusted publishing (requires >= 11.5.1)
-// Pin to npm@11 to avoid breaking changes from future major versions
-//
-// Known issue: Node.js 22.22.2 on GitHub Actions (ubuntu-24.04 image >= 20260329.72.1)
-// ships with a broken npm 10.9.7 that is missing the 'promise-retry' module,
-// causing `npm install -g` to fail with MODULE_NOT_FOUND.
-// See: https://github.com/actions/runner-images/issues/13883
-// See: https://github.com/nodejs/node/issues/62430
-// See: https://github.com/npm/cli/issues/9151
-//
-// Workaround strategies in order of preference:
-// 1. npm install -g npm@11 (standard approach)
-// 2. curl tarball download (bypasses broken npm entirely)
-// 3. npx npm@11 install (uses npx cache, bypasses arborist)
-// 4. corepack as last resort
-
-async function tryStandardInstall($) {
-  await $`npm install -g npm@11`;
-}
-
-async function tryCurlTarball($, fetchFn) {
-  const npmRelease = await resolveLatestSupportedNpmRelease(fetchFn);
-  console.log(`Downloading npm ${npmRelease.version} tarball...`);
-
-  const nodeDir = (
-    await $`dirname $(dirname $(which node))`.run({ capture: true })
-  ).stdout.trim();
-  const globalNpmDir = `${nodeDir}/lib/node_modules/npm`;
-  const tempNpmDir = '/tmp/setup-npm-package';
-
-  await $`rm -rf "${tempNpmDir}" && mkdir -p "${tempNpmDir}"`;
-  await $`curl -fsSL "${npmRelease.tarballUrl}" | tar xz --strip-components=1 -C "${tempNpmDir}" && rm -rf "${globalNpmDir}" && mv "${tempNpmDir}" "${globalNpmDir}"`;
-}
-
-async function tryNpxInstall($) {
-  await $`npx --yes npm@11 install -g npm@11`;
-}
-
-async function tryCorepack($) {
-  await $`corepack enable`;
-  await $`corepack prepare npm@11 --activate`;
-}
-
-async function tryStrategy(name, fn) {
   try {
-    await fn();
-    return true;
+    const current = (await runStrict('npm', ['--version'])).stdout.trim();
+    if (isSupportedNpmVersion(current)) {
+      console.log(`npm ${current} supports trusted publishing`);
+      return;
+    }
+    await runStrict('npm', [
+      'install',
+      '-g',
+      'npm@11.20.0',
+      '--ignore-scripts',
+    ]);
   } catch (error) {
-    console.warn(`Warning: ${name} failed: ${error.message}`);
-    return false;
-  }
-}
-
-function failUnsupportedNodeVersion(nodeVersion) {
-  console.error(
-    `ERROR: Node.js ${NODE_MIN_VERSION} or later is required for npm OIDC trusted publishing setup.`
-  );
-  console.error(`Current Node.js version is ${nodeVersion}.`);
-  process.exit(1);
-}
-
-function failUnsupportedNpmVersion(npmVersion) {
-  console.error(
-    `ERROR: Could not update npm to >= ${NPM_MIN_VERSION} for OIDC trusted publishing.`
-  );
-  console.error(`Current npm version ${npmVersion} does not support OIDC.`);
-  console.error('See: https://github.com/actions/runner-images/issues/13883');
-  process.exit(1);
-}
-
-export async function setupNpm($, fetchFn = fetch) {
-  const nodeVersion = process.version;
-  console.log(`Current Node.js version: ${nodeVersion}`);
-
-  if (!isSupportedNodeVersion(nodeVersion)) {
-    failUnsupportedNodeVersion(nodeVersion);
-  }
-
-  const currentResult = await $`npm --version`.run({ capture: true });
-  const currentVersion = currentResult.stdout.trim();
-  console.log(`Current npm version: ${currentVersion}`);
-
-  const strategies = [
-    ['npm install -g npm@11', () => tryStandardInstall($)],
-    ['curl-based tarball download', () => tryCurlTarball($, fetchFn)],
-    ['npx-based install', () => tryNpxInstall($)],
-    ['corepack', () => tryCorepack($)],
-  ];
-
-  let success = false;
-  for (const [name, fn] of strategies) {
-    console.log(`Trying ${name}...`);
-    success = await tryStrategy(name, fn);
-    if (success) {
-      break;
+    if (
+      !/MODULE_NOT_FOUND|Cannot find module/.test(error.message) ||
+      process.platform === 'win32'
+    ) {
+      throw error;
     }
-    console.warn(
-      'This may be the Node.js 22.22.2 broken npm issue (actions/runner-images#13883).'
+    console.log(
+      'Recovering npm after the known missing-module runner-image failure.'
     );
+    await recoverNpm();
   }
-
-  if (!success) {
-    if (isSupportedNpmVersion(currentVersion)) {
-      console.log(
-        'Current npm version already supports OIDC trusted publishing'
-      );
-    }
-  }
-
-  const updatedResult = await $`npm --version`.run({ capture: true });
-  const updatedVersion = updatedResult.stdout.trim();
-  console.log(`Updated npm version: ${updatedVersion}`);
-
-  if (!isSupportedNpmVersion(updatedVersion)) {
-    failUnsupportedNpmVersion(updatedVersion);
+  const updated = (await runStrict('npm', ['--version'])).stdout.trim();
+  if (!isSupportedNpmVersion(updated)) {
+    throw new Error('npm update did not produce a supported version');
   }
 }
 
-function isMainModule() {
-  return process.argv[1]
-    ? resolve(process.argv[1]) === fileURLToPath(import.meta.url)
-    : false;
-}
-
-if (isMainModule()) {
-  try {
-    if (!isSupportedNodeVersion(process.version)) {
-      failUnsupportedNodeVersion(process.version);
-    }
-
-    // Load use-m dynamically only for CLI execution, so tests can import the
-    // pure version helpers without fetching dependencies or mutating npm.
-    const { use } = eval(
-      await (await fetch('https://unpkg.com/use-m/use.js')).text()
-    );
-    const { $ } = await use('command-stream');
-
-    await setupNpm($);
-  } catch (error) {
-    console.error('Error updating npm:', error.message);
-    process.exit(1);
-  }
+if (
+  process.argv[1] &&
+  resolve(process.argv[1]) === fileURLToPath(import.meta.url)
+) {
+  setupNpm().catch((error) => {
+    console.error(`::error::${error.message}`);
+    process.exitCode = 1;
+  });
 }

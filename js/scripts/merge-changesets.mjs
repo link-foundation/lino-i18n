@@ -129,10 +129,7 @@ function parseChangeset(filePath, packageName) {
     const versionTypeMatch = content.match(versionTypeRegex);
 
     if (!versionTypeMatch) {
-      console.warn(
-        `Warning: Could not parse version type from ${filePath}, skipping`
-      );
-      return null;
+      throw new Error(`Invalid changeset metadata in ${filePath}`);
     }
 
     // Extract description
@@ -146,8 +143,9 @@ function parseChangeset(filePath, packageName) {
       mtime: stats.mtime,
     };
   } catch (error) {
-    console.warn(`Warning: Failed to parse ${filePath}: ${error.message}`);
-    return null;
+    throw new Error(`Failed to parse ${filePath}: ${error.message}`, {
+      cause: error,
+    });
   }
 }
 

@@ -175,6 +175,27 @@ async function readJsonInput(inputPath) {
   return out;
 }
 
+function convertInputs(inputs, requestedFormat, flags, err) {
+  const aggregated = {};
+  for (const { data, baseName } of inputs) {
+    const format = requestedFormat || detectFormat(data);
+    const convert = pickConverter(format);
+    if (!convert) {
+      err(`lino-i18n convert: no converter for format '${format}'`);
+      return null;
+    }
+    const result = convert(data, {
+      locale: flags.locale || baseName,
+      defaultLocale: flags.default || 'en',
+    });
+    for (const [locale, table] of Object.entries(result)) {
+      aggregated[locale] = { ...(aggregated[locale] || {}), ...table };
+    }
+  }
+
+  return aggregated;
+}
+
 async function commandConvert(flags, log = console.log, err = console.error) {
   if (!flags.in || !flags.out) {
     err('lino-i18n convert: --in and --out are required');
@@ -196,21 +217,9 @@ async function commandConvert(flags, log = console.log, err = console.error) {
     return 1;
   }
 
-  const aggregated = {};
-  for (const { data, baseName } of inputs) {
-    const format = requestedFormat || detectFormat(data);
-    const convert = pickConverter(format);
-    if (!convert) {
-      err(`lino-i18n convert: no converter for format '${format}'`);
-      return 1;
-    }
-    const result = convert(data, {
-      locale: flags.locale || baseName,
-      defaultLocale: flags.default || 'en',
-    });
-    for (const [locale, table] of Object.entries(result)) {
-      aggregated[locale] = { ...(aggregated[locale] || {}), ...table };
-    }
+  const aggregated = convertInputs(inputs, requestedFormat, flags, err);
+  if (!aggregated) {
+    return 1;
   }
 
   const singleFile = flagValue(flags, 'single-file', 'singleFile');
@@ -253,18 +262,10 @@ async function commandCheck(flags, log = console.log, err = console.error) {
     if (locale === reference) {
       continue;
     }
-    const missing = [];
-    const unknown = [];
-    for (const key of referenceKeys) {
-      if (!Object.prototype.hasOwnProperty.call(table, key)) {
-        missing.push(key);
-      }
-    }
-    for (const key of Object.keys(table)) {
-      if (!referenceKeys.has(key)) {
-        unknown.push(key);
-      }
-    }
+    const missing = [...referenceKeys].filter(
+      (key) => !Object.prototype.hasOwnProperty.call(table, key)
+    );
+    const unknown = Object.keys(table).filter((key) => !referenceKeys.has(key));
     if (missing.length === 0 && unknown.length === 0) {
       continue;
     }

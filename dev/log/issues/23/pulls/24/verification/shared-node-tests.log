@@ -1,0 +1,68 @@
+✔ the errors section stops at the next top-level heading (2.865005ms)
+✔ redirected links are not reported as broken (1.284065ms)
+✔ every http error is extracted exactly once (1.364436ms)
+✔ errors that the Wayback Machine cannot answer are still reported (0.657086ms)
+✔ the parsed error count matches the count lychee reports (0.570794ms)
+✔ a report whose only errors are non-HTTP is not "all archived" (0.518899ms)
+✔ a report with only redirects yields no broken links (0.428419ms)
+✔ extractBrokenUrls retains full-report parsing for legacy output (0.305179ms)
+✔ publish body has valid metadata and no archive length or archive bytes (14.218674ms)
+✔ only the exact missing tarball response proves scoped API credentials (1.35632ms)
+✔ HTTP 200 cannot pass credential preflight (0.615799ms)
+✔ HTTP 401 cannot pass credential preflight (0.425193ms)
+✔ HTTP 403 cannot pass credential preflight (0.690287ms)
+✔ HTTP 404 cannot pass credential preflight (0.95409ms)
+✔ HTTP 429 cannot pass credential preflight (0.360132ms)
+✔ HTTP 500 cannot pass credential preflight (0.553363ms)
+✔ HTTP 503 cannot pass credential preflight (0.494733ms)
+✔ an unrelated HTTP 400 is unverified: [{"detail":"invalid metadata length"}] (4.577629ms)
+✔ an unrelated HTTP 400 is unverified: [{"detail":"invalid tarball length for remaining payload"}] (0.950774ms)
+✔ an unrelated HTTP 400 is unverified: [] (1.179931ms)
+✔ an unrelated HTTP 400 is unverified: [{"detail":"invalid tarball length"},{"detail":"denied"}] (0.159797ms)
+✔ network and malformed JSON errors stay unknown without leaking secrets (0.618403ms)
+▶ lychee report classification
+  ✔ marks a failure carrying a status code as final (4.150323ms)
+  ✔ marks ERROR, TIMEOUT, and UNKNOWN markers as never answered (1.213535ms)
+  ✔ treats a rejected status code as an answer whatever the marker (0.386739ms)
+  ✔ keeps non-http failures out of the re-check even when unanswered (0.909105ms)
+✔ lychee report classification (9.322771ms)
+▶ lychee request option sharing
+  ✔ reads the same accept list and user agent as the lychee step (9.690256ms)
+  ✔ extracts the flags when the workflow sets them (0.465099ms)
+✔ lychee request option sharing (10.586948ms)
+▶ accept list parsing
+  ✔ honours ranges, singles, and stray spaces (2.238386ms)
+✔ accept list parsing (2.770037ms)
+▶ re-check requests
+  ✔ retries transient HTTP 429 until it recovers (44.004005ms)
+  ✔ retries transient HTTP 500 until it recovers (5.718998ms)
+  ✔ retries transient HTTP 502 until it recovers (1.110331ms)
+  ✔ retries transient HTTP 503 until it recovers (0.723581ms)
+  ✔ retries transient HTTP 504 until it recovers (0.955121ms)
+  ✔ bounds repeated 503 responses and leaves the link failed (16.890457ms)
+  ✔ recovers a URL that answers accepted (2.297305ms)
+  ✔ stops at the first rejected answer and never retries it (0.649121ms)
+  ✔ retries a URL that never answers and takes a later success (15.350235ms)
+  ✔ gives up without an answer once the budget expires (9.001811ms)
+  ✔ asks a duplicated URL only once (0.569203ms)
+  ✔ sends the request the way lychee was configured to (0.301462ms)
+✔ re-check requests (99.675665ms)
+▶ re-check step end to end
+  ✔ recovers numeric 429 and rejected 503 reports after backoff (345.96493ms)
+  ✔ recovers only the URLs that answer healthy and never re-asks a 404 (214.458349ms)
+  ✔ releases the gate only when every unanswered link recovered (186.64696ms)
+  ✔ keeps the gate closed when a recovered transport error accompanies a final 404 (179.032336ms)
+  ✔ exits 0 even when the report is missing entirely (80.896773ms)
+✔ re-check step end to end (1009.941379ms)
+▶ web archive fallback honouring the re-check
+  ✔ drops recovered URLs from the archive lookup (0.575183ms)
+  ✔ skips nothing when the recovered file is missing or empty (0.190766ms)
+✔ web archive fallback honouring the re-check (1.119718ms)
+ℹ tests 48
+ℹ suites 6
+ℹ pass 48
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1391.906463

@@ -229,35 +229,78 @@ comparison including code samples and benchmarks.
 ├── docs/case-studies/issue-1/     # Design rationale + benchmarks
 └── .github/workflows/
     ├── js.yml                     # JS CI/CD, npm release, and docs deployment
-    └── rust.yml                   # Rust fmt+clippy+test matrix
+    ├── rust.yml                   # Rust fmt+clippy+test matrix and release
+    ├── workflows.yml              # Workflow syntax, security, and policy
+    ├── security.yml               # Dependency audits and CodeQL
+    └── docs.yml                   # Documentation and live link validation
 ```
 
 ## CI
 
-Two purpose-built workflows live in `.github/workflows/`:
+Five workflows live in `.github/workflows/`:
 
-- **`js.yml`** runs `node --test`, `bun test`, and `deno test` on Linux,
-  macOS, and Windows whenever anything under `js/**` changes, plus a CLI
-  smoke test that round-trips an `i18next` JSON catalogue to `.lino`. On
-  `main`, it also dry-runs the npm package, publishes missing package versions,
-  creates `js-v*` GitHub releases, and deploys generated JavaScript docs to
-  GitHub Pages. The filename stays aligned with npm Trusted Publisher
-  configuration because npm validates the workflow identity during OIDC
-  publishing.
-- **`rust.yml`** runs `cargo fmt --check`, `cargo clippy -D warnings`, and
-  `cargo test --all-targets` on the same three operating systems whenever
-  anything under `rust/**` changes. On `main`, it also verifies crate package
-  contents, publishes missing crates, creates `rust-v*` GitHub releases, and
-  deploys generated Rust docs to GitHub Pages.
+- **`js.yml`** checks syntax, formatting, lint, duplication, secrets, types,
+  browser behavior, and the Node/Bun/Deno matrix on Linux, macOS, and Windows.
+  It also tests CLI conversion and npm package contents. Main releases use npm
+  Trusted Publishing and `js-v*` GitHub releases. Keep this filename aligned
+  with the npm trusted publisher configuration.
+- **`rust.yml`** checks formatting, Clippy, every executable Rust CI script
+  and its unit tests, the workspace test matrix, and both crate packages.
+  Main releases publish the macros crate before the runtime and create
+  `rust-v*` GitHub releases.
+- **`workflows.yml`** runs actionlint with ShellCheck, zizmor, and repository
+  policy checks, including terminal status coverage and writer cancellation.
+- **`security.yml`** audits the committed npm and Cargo lockfiles on PRs,
+  main, and a weekly schedule; it also runs dependency review and CodeQL.
+- **`docs.yml`** validates required documentation, builds both sites, and
+  verifies product links. Transient failures are rechecked; archived case
+  studies and investigation data are excluded from live-link validation.
+
+Read-only checks cancel superseded work. Release and deployment jobs share one
+repository-wide queue and finish once started. Writers synchronize a clean,
+validated checkout before changing versions and reject untested source drift.
+Both Pages jobs publish the complete site: JavaScript at the root and Rust
+under `/rust/`, so a language deployment cannot erase the other site's docs.
+
+Registry verification is anonymous and separate from publishing. Once npm
+accepts a version, CI polls for visibility rather than publishing it again.
+A staged version can require a maintainer to inspect `npm stage list` and
+approve its stage ID with 2FA. If direct publishing is intended, configure
+that permission in npm's trusted publisher settings. CI reports this state
+and cannot approve a staged version through OIDC.
+
+The JavaScript tooling uses Node 24 and the committed npm lockfile in every
+runtime job; the package's supported runtime range remains Node 20 or newer.
+Duplication scanning uses jscpd's JavaScript/TypeScript/shell formats, fails
+when no files are scanned, and enforces the templates' 10% threshold.
+
+Set `DEBUG=1` when running the change detectors or release helpers to show
+comparison refs and registry lookup states. For terminal cancellation
+classification, use `PIPELINE_STATUS_VERBOSE=1`. Both modes default off.
+The issue 23 [investigation and reproducible evidence](dev/log/issues/23/pulls/24/ANALYSIS.md)
+records the historical failures, template comparison, and verification.
 
 ## Contributing
 
 1. Fork the repository.
 2. Create a feature branch.
-3. Add a changeset (`bun run changeset` or hand-write a file in `.changeset/`).
+3. Add a JavaScript changeset in `js/.changeset/` and/or a Rust fragment in
+   `rust/changelog.d/`; CI owns package version updates.
 4. Make your changes — keep `js/` and `rust/` behaviour consistent.
 5. Open a pull request.
 
+Install the development dependencies and enable the optional local hook:
+
+```bash
+(cd js && npm ci)
+git config core.hooksPath .githooks
+```
+
+Before committing, run `(cd js && npm run check && npm test && npm run test:types)`
+and `cargo test --locked --manifest-path rust/Cargo.toml --workspace --all-targets`.
+The hook also checks secrets, file limits, formatting, and Clippy for changed
+languages. Python 3.11 or newer is required for the shared release checks;
+install `scripts/requirements-ci.txt` to run workflow policy checks locally.
 Both implementations must pass their CI matrix before a PR can land.
 
 ## License

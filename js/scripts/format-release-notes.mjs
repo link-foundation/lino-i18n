@@ -14,8 +14,6 @@
  * 4. If no PR found, simply don't display any PR link (no guessing)
  *
  * Uses link-foundation libraries:
- * - use-m: Dynamic package loading without package.json dependencies
- * - command-stream: Modern shell command execution with streaming support
  * - lino-arguments: Unified configuration from CLI args, env vars, and .lenv files
  *
  * Note: Uses --release-version instead of --version to avoid conflict with yargs' built-in --version flag.
@@ -28,14 +26,8 @@ import {
   normalizeReleaseVersionForBadge,
 } from './format-release-notes-helpers.mjs';
 
-// Load use-m dynamically
-const { use } = eval(
-  await (await fetch('https://unpkg.com/use-m/use.js')).text()
-);
-
-// Import link-foundation libraries
-const { $ } = await use('command-stream');
-const { makeConfig } = await use('lino-arguments');
+import { makeConfig } from 'lino-arguments';
+import { runStrict } from './run-command.mjs';
 
 // Parse CLI arguments using lino-arguments
 // Note: Using --release-version instead of --version to avoid conflict with yargs' built-in --version flag
@@ -87,9 +79,10 @@ if (!releaseId || !version || !repository) {
 
 try {
   // Get current release body
-  const result = await $`gh api repos/${repository}/releases/${releaseId}`.run({
-    capture: true,
-  });
+  const result = await runStrict('gh', [
+    'api',
+    `repos/${repository}/releases/${releaseId}`,
+  ]);
   const releaseData = JSON.parse(result.stdout);
 
   const currentBody = releaseData.body || '';
@@ -164,11 +157,13 @@ try {
     );
 
     try {
-      const prResult =
-        await $`gh api "repos/${repository}/commits/${commitShaToLookup}/pulls"`.run(
-          { capture: true }
-        );
-      const prsData = JSON.parse(prResult.stdout);
+      const prResult = await runStrict('gh', [
+        'api',
+        `repos/${repository}/commits/${commitShaToLookup}/pulls`,
+        '--paginate',
+        '--slurp',
+      ]);
+      const prsData = JSON.parse(prResult.stdout).flat();
 
       // Find the PR that's not the version bump PR (not "chore: version packages")
       const relevantPr = prsData.find(
@@ -214,7 +209,16 @@ try {
 
   // Update the release using JSON input to properly handle special characters
   const updatePayload = JSON.stringify({ body: formattedBody });
-  await $`gh api repos/${repository}/releases/${releaseId} -X PATCH --input -`.run(
+  await runStrict(
+    'gh',
+    [
+      'api',
+      `repos/${repository}/releases/${releaseId}`,
+      '-X',
+      'PATCH',
+      '--input',
+      '-',
+    ],
     { stdin: updatePayload }
   );
 

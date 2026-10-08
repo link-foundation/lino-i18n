@@ -469,6 +469,8 @@ export function formatLinoCatalogs(catalogues, options = {}) {
     .join('\n\n');
 }
 
+// The public async API converts parse errors to Promise rejections.
+// eslint-disable-next-line require-await
 export async function loadLocaleFromString(locale, text, options = {}) {
   const parsedCatalogues = parseLinoCatalogs(text, options);
   const parsed = parsedCatalogues.find(

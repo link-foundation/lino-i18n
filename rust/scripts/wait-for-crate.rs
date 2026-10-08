@@ -21,14 +21,19 @@
 //! [dependencies]
 //! regex = "1"
 //! ureq = "2"
+//! serde_json = "1"
 //! ```
 
+#[path = "github-output.rs"]
+mod github_output;
+
 use std::env;
-use std::fs;
 use std::process::exit;
 use std::thread;
 use std::time::Duration;
 
+#[path = "registry-state.rs"]
+mod registry_state;
 #[path = "rust-paths.rs"]
 mod rust_paths;
 
@@ -42,23 +47,6 @@ fn get_arg(name: &str) -> Option<String> {
 
     let env_name = name.to_uppercase().replace('-', "_");
     env::var(&env_name).ok().filter(|s| !s.is_empty())
-}
-
-fn set_output(key: &str, value: &str) {
-    if let Ok(output_file) = env::var("GITHUB_OUTPUT") {
-        if let Err(e) = fs::OpenOptions::new()
-            .create(true)
-            .append(true)
-            .open(&output_file)
-            .and_then(|mut f| {
-                use std::io::Write;
-                writeln!(f, "{}={}", key, value)
-            })
-        {
-            eprintln!("Warning: Could not write to GITHUB_OUTPUT: {}", e);
-        }
-    }
-    println!("Output: {}={}", key, value);
 }
 
 fn parse_count_arg(name: &str, default: u64) -> u64 {
@@ -79,19 +67,7 @@ fn parse_count_arg(name: &str, default: u64) -> u64 {
 }
 
 fn crate_version_exists(crate_name: &str, version: &str) -> bool {
-    let url = format!("https://crates.io/api/v1/crates/{}/{}", crate_name, version);
-
-    match ureq::get(&url)
-        .set("User-Agent", "rust-script-wait-for-crate")
-        .call()
-    {
-        Ok(response) => response.status() == 200,
-        Err(ureq::Error::Status(404, _)) => false,
-        Err(e) => {
-            eprintln!("Warning: Could not check crates.io: {}", e);
-            false
-        }
-    }
+    registry_state::version_exists(crate_name, version)
 }
 
 fn should_skip_crate_wait(crate_name: &str) -> bool {
@@ -132,7 +108,7 @@ fn main() {
             "Skipping crates.io availability wait: package name is the template default '{}'",
             crate_name
         );
-        set_output("crate_available", "skipped");
+        github_output::set_output("crate_available", "skipped");
         return;
     }
 
@@ -142,7 +118,7 @@ fn main() {
                 "{}@{} is visible on crates.io after attempt {}",
                 crate_name, version, attempt
             );
-            set_output("crate_available", "true");
+            github_output::set_output("crate_available", "true");
             return;
         }
 

@@ -1,0 +1,165 @@
+✖ a main merge detects source changes before the final docs commit (375.883026ms)
+✖ PR detection uses all commits, including when the last commit is docs (351.268974ms)
+✖ invalid explicit PR refs fail instead of reporting no changes (214.273851ms)
+✖ a dependency lock change triggers package validation (252.112467ms)
+✖ version guard catches monorepo changes and ignores manifest formatting (394.809848ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 0
+ℹ fail 5
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1751.198589
+
+✖ failing tests:
+
+test at js/tests/ci-change-detection.test.js:37:1
+✖ a main merge detects source changes before the final docs commit (375.883026ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /any-code-changed=true/. Input:
+  
+  'Detecting file changes for CI/CD...\n' +
+    '\n' +
+    'Merge commit detected (pull_request event)\n' +
+    'Comparing HEAD^2^ to HEAD^2 (per-commit diff of PR head)\n' +
+    'Changed files:\n' +
+    '  docs/example.md\n' +
+    '\n' +
+    'mjs-changed=false\n' +
+    'js-changed=false\n' +
+    'package-changed=false\n' +
+    'docs-changed=true\n' +
+    'workflow-changed=false\n' +
+    '\n' +
+    'Files considered as release-affecting code changes:\n' +
+    '  (none)\n' +
+    '\n' +
+    'any-code-changed=false\n' +
+    '\n' +
+    'Change detection completed.\n'
+  
+      at TestContext.<anonymous> (file:///tmp/gh-issue-solver-1791452293811/js/tests/ci-change-detection.test.js:46:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'Detecting file changes for CI/CD...\n\nMerge commit detected (pull_request event)\nComparing HEAD^2^ to HEAD^2 (per-commit diff of PR head)\nChanged files:\n  docs/example.md\n\nmjs-changed=false\njs-changed=false\npackage-changed=false\ndocs-changed=true\nworkflow-changed=false\n\nFiles considered as release-affecting code changes:\n  (none)\n\nany-code-changed=false\n\nChange detection completed.\n',
+    expected: /any-code-changed=true/,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at js/tests/ci-change-detection.test.js:49:1
+✖ PR detection uses all commits, including when the last commit is docs (351.268974ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /any-code-changed=true/. Input:
+  
+  'Detecting file changes for CI/CD...\n' +
+    '\n' +
+    'Merge commit detected (pull_request event)\n' +
+    'Comparing HEAD^2^ to HEAD^2 (per-commit diff of PR head)\n' +
+    'Changed files:\n' +
+    '  docs/example.md\n' +
+    '\n' +
+    'mjs-changed=false\n' +
+    'js-changed=false\n' +
+    'package-changed=false\n' +
+    'docs-changed=true\n' +
+    'workflow-changed=false\n' +
+    '\n' +
+    'Files considered as release-affecting code changes:\n' +
+    '  (none)\n' +
+    '\n' +
+    'any-code-changed=false\n' +
+    '\n' +
+    'Change detection completed.\n'
+  
+      at TestContext.<anonymous> (file:///tmp/gh-issue-solver-1791452293811/js/tests/ci-change-detection.test.js:60:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'Detecting file changes for CI/CD...\n\nMerge commit detected (pull_request event)\nComparing HEAD^2^ to HEAD^2 (per-commit diff of PR head)\nChanged files:\n  docs/example.md\n\nmjs-changed=false\njs-changed=false\npackage-changed=false\ndocs-changed=true\nworkflow-changed=false\n\nFiles considered as release-affecting code changes:\n  (none)\n\nany-code-changed=false\n\nChange detection completed.\n',
+    expected: /any-code-changed=true/,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at js/tests/ci-change-detection.test.js:64:1
+✖ invalid explicit PR refs fail instead of reporting no changes (214.273851ms)
+  AssertionError [ERR_ASSERTION]: Expected "actual" to be strictly unequal to: 0
+      at TestContext.<anonymous> (file:///tmp/gh-issue-solver-1791452293811/js/tests/ci-change-detection.test.js:69:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 0,
+    operator: 'notStrictEqual',
+    diff: 'simple'
+  }
+
+test at js/tests/ci-change-detection.test.js:72:1
+✖ a dependency lock change triggers package validation (252.112467ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /package-changed=true/. Input:
+  
+  'Detecting file changes for CI/CD...\n' +
+    '\n' +
+    'Comparing HEAD^ to HEAD\n' +
+    'Changed files:\n' +
+    '  js/package-lock.json\n' +
+    '\n' +
+    'mjs-changed=false\n' +
+    'js-changed=false\n' +
+    'package-changed=false\n' +
+    'docs-changed=false\n' +
+    'workflow-changed=false\n' +
+    '\n' +
+    'Files considered as release-affecting code changes:\n' +
+    '  js/package-lock.json\n' +
+    '\n' +
+    'any-code-changed=true\n' +
+    '\n' +
+    'Change detection completed.\n'
+  
+      at TestContext.<anonymous> (file:///tmp/gh-issue-solver-1791452293811/js/tests/ci-change-detection.test.js:76:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'Detecting file changes for CI/CD...\n\nComparing HEAD^ to HEAD\nChanged files:\n  js/package-lock.json\n\nmjs-changed=false\njs-changed=false\npackage-changed=false\ndocs-changed=false\nworkflow-changed=false\n\nFiles considered as release-affecting code changes:\n  js/package-lock.json\n\nany-code-changed=true\n\nChange detection completed.\n',
+    expected: /package-changed=true/,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at js/tests/ci-change-detection.test.js:79:1
+✖ version guard catches monorepo changes and ignores manifest formatting (394.809848ms)
+  AssertionError [ERR_ASSERTION]: Expected "actual" to be strictly unequal to: 0
+      at TestContext.<anonymous> (file:///tmp/gh-issue-solver-1791452293811/js/tests/ci-change-detection.test.js:86:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 0,
+    operator: 'notStrictEqual',
+    diff: 'simple'
+  }

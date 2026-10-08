@@ -1,0 +1,789 @@
+{
+  "auditReportVersion": 2,
+  "vulnerabilities": {
+    "@changesets/apply-release-plan": {
+      "name": "@changesets/apply-release-plan",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@changesets/config",
+        "@changesets/git",
+        "@changesets/should-skip-package",
+        "@manypkg/get-packages"
+      ],
+      "effects": [
+        "@changesets/cli"
+      ],
+      "range": "<=0.0.0-pr1845.eedc603 || 1.0.0 - 8.0.0-next.11",
+      "nodes": [
+        "node_modules/@changesets/apply-release-plan"
+      ],
+      "fixAvailable": {
+        "name": "@changesets/cli",
+        "version": "3.0.3",
+        "isSemVerMajor": true
+      }
+    },
+    "@changesets/assemble-release-plan": {
+      "name": "@changesets/assemble-release-plan",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@changesets/get-dependents-graph",
+        "@changesets/should-skip-package",
+        "@manypkg/get-packages"
+      ],
+      "effects": [
+        "@changesets/cli",
+        "@changesets/get-release-plan"
+      ],
+      "range": "1.0.0 - 7.0.0-next.11",
+      "nodes": [
+        "node_modules/@changesets/assemble-release-plan"
+      ],
+      "fixAvailable": {
+        "name": "@changesets/cli",
+        "version": "3.0.3",
+        "isSemVerMajor": true
+      }
+    },
+    "@changesets/cli": {
+      "name": "@changesets/cli",
+      "severity": "high",
+      "isDirect": true,
+      "via": [
+        "@changesets/apply-release-plan",
+        "@changesets/assemble-release-plan",
+        "@changesets/config",
+        "@changesets/get-dependents-graph",
+        "@changesets/get-release-plan",
+        "@changesets/git",
+        "@changesets/pre",
+        "@changesets/read",
+        "@changesets/should-skip-package",
+        "@manypkg/get-packages"
+      ],
+      "effects": [],
+      "range": "<=0.0.0-pr1845.eedc603 || 2.6.1 - 3.0.0-next.12",
+      "nodes": [
+        "node_modules/@changesets/cli"
+      ],
+      "fixAvailable": {
+        "name": "@changesets/cli",
+        "version": "3.0.3",
+        "isSemVerMajor": true
+      }
+    },
+    "@changesets/config": {
+      "name": "@changesets/config",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@changesets/get-dependents-graph",
+        "@changesets/should-skip-package",
+        "@manypkg/get-packages",
+        "micromatch"
+      ],
+      "effects": [
+        "@changesets/apply-release-plan",
+        "@changesets/cli",
+        "@changesets/get-release-plan"
+      ],
+      "range": "<=0.0.0-pr1845.eedc603 || 1.0.0 - 4.0.0-next.10",
+      "nodes": [
+        "node_modules/@changesets/config"
+      ],
+      "fixAvailable": {
+        "name": "@changesets/cli",
+        "version": "3.0.3",
+        "isSemVerMajor": true
+      }
+    },
+    "@changesets/get-dependents-graph": {
+      "name": "@changesets/get-dependents-graph",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@manypkg/get-packages"
+      ],
+      "effects": [
+        "@changesets/assemble-release-plan",
+        "@changesets/cli",
+        "@changesets/config"
+      ],
+      "range": "<=3.0.0-next.9",
+      "nodes": [
+        "node_modules/@changesets/get-dependents-graph"
+      ],
+      "fixAvailable": {
+        "name": "@changesets/cli",
+        "version": "3.0.3",
+        "isSemVerMajor": true
+      }
+    },
+    "@changesets/get-release-plan": {
+      "name": "@changesets/get-release-plan",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@changesets/assemble-release-plan",
+        "@changesets/config",
+        "@changesets/pre",
+        "@changesets/read",
+        "@manypkg/get-packages"
+      ],
+      "effects": [
+        "@changesets/cli"
+      ],
+      "range": "<=0.0.0-pr1845.eedc603 || 1.0.0 - 5.0.0-next.11",
+      "nodes": [
+        "node_modules/@changesets/get-release-plan"
+      ],
+      "fixAvailable": {
+        "name": "@changesets/cli",
+        "version": "3.0.3",
+        "isSemVerMajor": true
+      }
+    },
+    "@changesets/git": {
+      "name": "@changesets/git",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@manypkg/get-packages",
+        "micromatch"
+      ],
+      "effects": [
+        "@changesets/apply-release-plan",
+        "@changesets/cli",
+        "@changesets/read"
+      ],
+      "range": "1.0.0 - 4.0.0-next.9",
+      "nodes": [
+        "node_modules/@changesets/git"
+      ],
+      "fixAvailable": {
+        "name": "@changesets/cli",
+        "version": "3.0.3",
+        "isSemVerMajor": true
+      }
+    },
+    "@changesets/pre": {
+      "name": "@changesets/pre",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@manypkg/get-packages"
+      ],
+      "effects": [
+        "@changesets/cli",
+        "@changesets/get-release-plan"
+      ],
+      "range": "1.0.0 - 3.0.0-next.9",
+      "nodes": [
+        "node_modules/@changesets/pre"
+      ],
+      "fixAvailable": {
+        "name": "@changesets/cli",
+        "version": "3.0.3",
+        "isSemVerMajor": true
+      }
+    },
+    "@changesets/read": {
+      "name": "@changesets/read",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@changesets/git"
+      ],
+      "effects": [
+        "@changesets/cli",
+        "@changesets/get-release-plan"
+      ],
+      "range": "0.5.9 - 0.6.7",
+      "nodes": [
+        "node_modules/@changesets/read"
+      ],
+      "fixAvailable": {
+        "name": "@changesets/cli",
+        "version": "3.0.3",
+        "isSemVerMajor": true
+      }
+    },
+    "@changesets/should-skip-package": {
+      "name": "@changesets/should-skip-package",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@manypkg/get-packages"
+      ],
+      "effects": [
+        "@changesets/apply-release-plan",
+        "@changesets/assemble-release-plan",
+        "@changesets/cli",
+        "@changesets/config"
+      ],
+      "range": "<=1.0.0-next.9",
+      "nodes": [
+        "node_modules/@changesets/should-skip-package"
+      ],
+      "fixAvailable": {
+        "name": "@changesets/cli",
+        "version": "3.0.3",
+        "isSemVerMajor": true
+      }
+    },
+    "@jscpd/finder": {
+      "name": "@jscpd/finder",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "fast-glob"
+      ],
+      "effects": [
+        "jscpd"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/@jscpd/finder"
+      ],
+      "fixAvailable": {
+        "name": "jscpd",
+        "version": "5.4.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@manypkg/get-packages": {
+      "name": "@manypkg/get-packages",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "globby"
+      ],
+      "effects": [
+        "@changesets/apply-release-plan",
+        "@changesets/assemble-release-plan",
+        "@changesets/cli",
+        "@changesets/config",
+        "@changesets/get-dependents-graph",
+        "@changesets/get-release-plan",
+        "@changesets/git",
+        "@changesets/pre",
+        "@changesets/should-skip-package"
+      ],
+      "range": "<=1.1.3",
+      "nodes": [
+        "node_modules/@manypkg/get-packages"
+      ],
+      "fixAvailable": {
+        "name": "@changesets/cli",
+        "version": "3.0.3",
+        "isSemVerMajor": true
+      }
+    },
+    "@types/shelljs": {
+      "name": "@types/shelljs",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "fast-glob"
+      ],
+      "effects": [
+        "command-stream"
+      ],
+      "range": ">=0.10.0",
+      "nodes": [
+        "node_modules/@types/shelljs"
+      ],
+      "fixAvailable": {
+        "name": "command-stream",
+        "version": "1.6.2",
+        "isSemVerMajor": true
+      }
+    },
+    "argparse": {
+      "name": "argparse",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "sprintf-js"
+      ],
+      "effects": [
+        "js-yaml"
+      ],
+      "range": "1.0.0 - 1.0.10",
+      "nodes": [
+        "node_modules/read-yaml-file/node_modules/argparse"
+      ],
+      "fixAvailable": true
+    },
+    "brace-expansion": {
+      "name": "brace-expansion",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1123898,
+          "name": "brace-expansion",
+          "dependency": "brace-expansion",
+          "title": "brace-expansion: DoS via exponential-time expansion of consecutive non-expanding {} groups",
+          "url": "https://github.com/advisories/GHSA-3jxr-9vmj-r5cp",
+          "severity": "high",
+          "cwe": [
+            "CWE-400",
+            "CWE-407"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": ">=3.0.0 <5.0.7"
+        },
+        {
+          "source": 1130591,
+          "name": "brace-expansion",
+          "dependency": "brace-expansion",
+          "title": "brace-expansion: DoS via unbounded expansion length causing an out-of-memory process crash",
+          "url": "https://github.com/advisories/GHSA-mh99-v99m-4gvg",
+          "severity": "high",
+          "cwe": [
+            "CWE-400",
+            "CWE-770"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=4.0.0 <5.0.8"
+        },
+        {
+          "source": 1130734,
+          "name": "brace-expansion",
+          "dependency": "brace-expansion",
+          "title": "brace-expansion: DoS via unbounded intermediate arrays, bypassing the CVE-2026-14257 mitigation",
+          "url": "https://github.com/advisories/GHSA-rgw5-rvv9-x895",
+          "severity": "high",
+          "cwe": [
+            "CWE-400",
+            "CWE-770"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=4.0.0 <5.0.9"
+        },
+        {
+          "source": 1240103,
+          "name": "brace-expansion",
+          "dependency": "brace-expansion",
+          "title": "brace-expansion: Quadratic-time expansion of the `{a},b}` rewrite causes CPU denial of service",
+          "url": "https://github.com/advisories/GHSA-q2hr-2g5m-vwhr",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-400",
+            "CWE-407"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": ">=4.0.0 <5.0.12"
+        },
+        {
+          "source": 1240107,
+          "name": "brace-expansion",
+          "dependency": "brace-expansion",
+          "title": "brace-expansion: DoS via uncontrolled recursion on nested brace groups causing stack exhaustion",
+          "url": "https://github.com/advisories/GHSA-qhr7-859c-m2p7",
+          "severity": "high",
+          "cwe": [
+            "CWE-400",
+            "CWE-674"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=4.0.0 <5.0.11"
+        },
+        {
+          "source": 1240111,
+          "name": "brace-expansion",
+          "dependency": "brace-expansion",
+          "title": "brace-expansion: DoS via uncontrolled recursion in parseCommaParts causing stack exhaustion",
+          "url": "https://github.com/advisories/GHSA-6j4f-fj2g-mc7p",
+          "severity": "high",
+          "cwe": [
+            "CWE-400",
+            "CWE-674"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=4.0.0 <5.0.10"
+        }
+      ],
+      "effects": [],
+      "range": "3.0.0 - 5.0.11",
+      "nodes": [
+        "node_modules/brace-expansion"
+      ],
+      "fixAvailable": true
+    },
+    "braces": {
+      "name": "braces",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1240992,
+          "name": "braces",
+          "dependency": "braces",
+          "title": "braces vulnerable to stack-exhaustion denial of service through deeply nested patterns",
+          "url": "https://github.com/advisories/GHSA-vfj7-8cjw-p6xm",
+          "severity": "high",
+          "cwe": [
+            "CWE-674"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": "<=3.0.3"
+        }
+      ],
+      "effects": [
+        "micromatch"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/braces"
+      ],
+      "fixAvailable": {
+        "name": "@changesets/cli",
+        "version": "3.0.3",
+        "isSemVerMajor": true
+      }
+    },
+    "command-stream": {
+      "name": "command-stream",
+      "severity": "high",
+      "isDirect": true,
+      "via": [
+        "@types/shelljs",
+        "shelljs"
+      ],
+      "effects": [],
+      "range": ">=1.6.0",
+      "nodes": [
+        "node_modules/command-stream"
+      ],
+      "fixAvailable": {
+        "name": "command-stream",
+        "version": "1.6.2",
+        "isSemVerMajor": true
+      }
+    },
+    "fast-glob": {
+      "name": "fast-glob",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "micromatch"
+      ],
+      "effects": [
+        "@jscpd/finder",
+        "@types/shelljs",
+        "globby",
+        "shelljs"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/fast-glob"
+      ],
+      "fixAvailable": {
+        "name": "jscpd",
+        "version": "5.4.0",
+        "isSemVerMajor": true
+      }
+    },
+    "globby": {
+      "name": "globby",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "fast-glob"
+      ],
+      "effects": [
+        "@manypkg/get-packages"
+      ],
+      "range": ">=8.0.0",
+      "nodes": [
+        "node_modules/globby"
+      ],
+      "fixAvailable": {
+        "name": "@changesets/cli",
+        "version": "3.0.3",
+        "isSemVerMajor": true
+      }
+    },
+    "js-yaml": {
+      "name": "js-yaml",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1121859,
+          "name": "js-yaml",
+          "dependency": "js-yaml",
+          "title": "JS-YAML: Quadratic-complexity DoS in merge key handling via repeated aliases",
+          "url": "https://github.com/advisories/GHSA-h67p-54hq-rp68",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-407"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": "<3.15.0"
+        },
+        {
+          "source": 1121860,
+          "name": "js-yaml",
+          "dependency": "js-yaml",
+          "title": "JS-YAML: Quadratic-complexity DoS in merge key handling via repeated aliases",
+          "url": "https://github.com/advisories/GHSA-h67p-54hq-rp68",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-407"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": ">=4.0.0 <=4.1.1"
+        },
+        {
+          "source": 1123911,
+          "name": "js-yaml",
+          "dependency": "js-yaml",
+          "title": "js-yaml: YAML merge-key chains can force quadratic CPU consumption",
+          "url": "https://github.com/advisories/GHSA-52cp-r559-cp3m",
+          "severity": "high",
+          "cwe": [
+            "CWE-400",
+            "CWE-407"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=4.0.0 <4.3.0"
+        },
+        {
+          "source": 1123912,
+          "name": "js-yaml",
+          "dependency": "js-yaml",
+          "title": "js-yaml: YAML merge-key chains can force quadratic CPU consumption",
+          "url": "https://github.com/advisories/GHSA-52cp-r559-cp3m",
+          "severity": "high",
+          "cwe": [
+            "CWE-400",
+            "CWE-407"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=3.0.0 <3.15.0"
+        },
+        {
+          "source": 1138114,
+          "name": "js-yaml",
+          "dependency": "js-yaml",
+          "title": "JS-YAML: Quadratic CPU consumption in !!omap resolution (3.x and 4.x) — CVE-2026-59870 fix not backported",
+          "url": "https://github.com/advisories/GHSA-5p4m-2wfm-xmqj",
+          "severity": "high",
+          "cwe": [
+            "CWE-407"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=3.0.0 <3.15.1"
+        },
+        {
+          "source": 1138115,
+          "name": "js-yaml",
+          "dependency": "js-yaml",
+          "title": "JS-YAML: Quadratic CPU consumption in !!omap resolution (3.x and 4.x) — CVE-2026-59870 fix not backported",
+          "url": "https://github.com/advisories/GHSA-5p4m-2wfm-xmqj",
+          "severity": "high",
+          "cwe": [
+            "CWE-407"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=4.0.0 <4.3.1"
+        },
+        {
+          "source": 1193726,
+          "name": "js-yaml",
+          "dependency": "js-yaml",
+          "title": "js-yaml: maxTotalMergeKeys does not limit CPU use for empty merge sources",
+          "url": "https://github.com/advisories/GHSA-2883-xcg3-v3hh",
+          "severity": "high",
+          "cwe": [
+            "CWE-400",
+            "CWE-407"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=3.0.0 <3.15.2"
+        },
+        {
+          "source": 1193727,
+          "name": "js-yaml",
+          "dependency": "js-yaml",
+          "title": "js-yaml: maxTotalMergeKeys does not limit CPU use for empty merge sources",
+          "url": "https://github.com/advisories/GHSA-2883-xcg3-v3hh",
+          "severity": "high",
+          "cwe": [
+            "CWE-400",
+            "CWE-407"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=4.0.0 <4.3.2"
+        },
+        "argparse"
+      ],
+      "effects": [],
+      "range": "<=4.3.1",
+      "nodes": [
+        "node_modules/js-yaml",
+        "node_modules/read-yaml-file/node_modules/js-yaml"
+      ],
+      "fixAvailable": true
+    },
+    "jscpd": {
+      "name": "jscpd",
+      "severity": "high",
+      "isDirect": true,
+      "via": [
+        "@jscpd/finder"
+      ],
+      "effects": [],
+      "range": "3.3.0-alpha.2 - 4.3.0",
+      "nodes": [
+        "node_modules/jscpd"
+      ],
+      "fixAvailable": {
+        "name": "jscpd",
+        "version": "5.4.0",
+        "isSemVerMajor": true
+      }
+    },
+    "micromatch": {
+      "name": "micromatch",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "braces"
+      ],
+      "effects": [
+        "@changesets/config",
+        "@changesets/git",
+        "fast-glob"
+      ],
+      "range": ">=0.2.0",
+      "nodes": [
+        "node_modules/micromatch"
+      ],
+      "fixAvailable": {
+        "name": "@changesets/cli",
+        "version": "3.0.3",
+        "isSemVerMajor": true
+      }
+    },
+    "shelljs": {
+      "name": "shelljs",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "fast-glob"
+      ],
+      "effects": [
+        "command-stream"
+      ],
+      "range": ">=0.9.0",
+      "nodes": [
+        "node_modules/shelljs"
+      ],
+      "fixAvailable": {
+        "name": "command-stream",
+        "version": "1.6.2",
+        "isSemVerMajor": true
+      }
+    },
+    "sprintf-js": {
+      "name": "sprintf-js",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1241202,
+          "name": "sprintf-js",
+          "dependency": "sprintf-js",
+          "title": "sprintf-js vulnerable to denial of service through unbounded precision specifiers",
+          "url": "https://github.com/advisories/GHSA-hp3w-g68c-fv3c",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-1284"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": "<=1.1.3"
+        }
+      ],
+      "effects": [
+        "argparse"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/sprintf-js"
+      ],
+      "fixAvailable": true
+    }
+  },
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 2,
+      "high": 22,
+      "critical": 0,
+      "total": 24
+    },
+    "dependencies": {
+      "prod": 25,
+      "dev": 371,
+      "optional": 59,
+      "peer": 0,
+      "peerOptional": 0,
+      "total": 395
+    }
+  }
+}
