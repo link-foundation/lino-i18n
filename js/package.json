@@ -106,12 +106,28 @@
     "./tanstack-start/client": {
       "types": "./src/tanstack-start/client.d.ts",
       "import": "./src/tanstack-start/client.js"
+    },
+    "./rrweb": {
+      "types": "./src/rrweb/index.d.ts",
+      "import": "./src/rrweb/index.js"
+    },
+    "./rrweb/catalog": {
+      "types": "./src/rrweb/catalog.d.ts",
+      "import": "./src/rrweb/catalog.js"
+    },
+    "./rrweb/harvest": {
+      "types": "./src/rrweb/harvest.d.ts",
+      "import": "./src/rrweb/harvest.js"
+    },
+    "./rrweb/replay": {
+      "types": "./src/rrweb/replay.d.ts",
+      "import": "./src/rrweb/replay.js"
     }
   },
   "scripts": {
     "test": "node --throw-deprecation --test --test-timeout=30000 tests/*.test.js",
     "test:browser": "playwright test",
-    "test:types": "tsc --project tests/types/tsconfig.json && tsc --project tests/types/tsconfig.next.json && tsc --project tests/types/tsconfig.native.json && tsc --project tests/types/tsconfig.tanstack.json",
+    "test:types": "tsc --project tests/types/tsconfig.json && tsc --project tests/types/tsconfig.next.json && tsc --project tests/types/tsconfig.native.json && tsc --project tests/types/tsconfig.tanstack.json && tsc --project tests/types/tsconfig.rrweb.json",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
@@ -169,6 +185,9 @@
     "@eslint/js": "^10.0.1",
     "@generaltranslation/supported-locales": "2.1.41",
     "@playwright/test": "^1.64.0",
+    "@rrweb/record": "2.1.7",
+    "@rrweb/replay": "2.1.7",
+    "@rrweb/types": "2.1.7",
     "@secretlint/secretlint-rule-preset-recommend": "^13.0.7",
     "@tanstack/react-router": "1.170.41",
     "@tanstack/react-start": "1.168.60",
@@ -184,6 +203,7 @@
     "eslint-plugin-prettier": "^5.5.6",
     "generaltranslation": "9.5.5",
     "gt-remark": "1.0.12",
+    "gt-rrweb": "0.2.0",
     "jscpd": "^5.4.0",
     "jsdom": "^30.1.2",
     "next": "16.4.0",
@@ -212,7 +232,12 @@
     "gt-remark": ">=1.0.12 <2",
     "next": ">=16 <17",
     "react": ">=18.0.0",
-    "vue": ">=3.5 <4"
+    "vue": ">=3.5 <4",
+    "gt-rrweb": ">=0.2 <0.3",
+    "@rrweb/record": ">=2.1 <3",
+    "@rrweb/replay": ">=2.1 <3",
+    "@rrweb/types": ">=2.1 <3",
+    "react-dom": ">=18"
   },
   "peerDependenciesMeta": {
     "next": {
@@ -240,6 +265,21 @@
       "optional": true
     },
     "@tanstack/react-router": {
+      "optional": true
+    },
+    "gt-rrweb": {
+      "optional": true
+    },
+    "@rrweb/record": {
+      "optional": true
+    },
+    "@rrweb/replay": {
+      "optional": true
+    },
+    "@rrweb/types": {
+      "optional": true
+    },
+    "react-dom": {
       "optional": true
     }
   },

@@ -97,7 +97,7 @@ function importApi(binding, seen) {
     return nativeImport(binding);
   }
   if (
-    !/^lino-i18n(?:\/(?:messages|react|react-native|react-server|server|node|vue|(?:next|tanstack-start)\/(?:server|client)))?$/.test(
+    !/^lino-i18n(?:\/(?:messages|react|rrweb|react-native|react-server|server|node|vue|(?:next|tanstack-start)\/(?:server|client)))?$/.test(
       source
     )
   ) {

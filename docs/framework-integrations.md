@@ -54,3 +54,7 @@ Extract shared `.js`/`.ts` message declarations with the CLI. Vue templates and
 Native Text imports use the shipped extractors; Svelte templates need an adapter.
 See the [requirement matrix](case-studies/issue-25/REQUIREMENTS.md) for the
 implementation plans and explicit remaining gaps.
+
+## Session replay
+
+The [rrweb adapter](rrweb.md) reuses the published GT recorder/player with bounded `.lino` ICU harvesting. Marked source messages preserve recorded variables; real Chromium recording/playback tests cover translated mutations, privacy markers, locale switching and cleanup.

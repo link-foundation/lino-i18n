@@ -30,6 +30,7 @@ export default [
         Response: 'readonly',
         URL: 'readonly',
         AbortController: 'readonly',
+        TextEncoder: 'readonly',
         // Runtime-specific globals
         Bun: 'readonly',
         Deno: 'readonly',
@@ -87,6 +88,7 @@ export default [
       'examples/react-usage/*.js',
       'examples/vue-usage/*.js',
       'examples/native-usage/*.js',
+      'examples/rrweb-usage/*.js',
       'src/next/client.js',
       'src/tanstack-start/client.js',
     ],
@@ -100,7 +102,7 @@ export default [
   {
     files: ['tests/browser/*.pw.js'],
     languageOptions: {
-      globals: { URL: 'readonly', Blob: 'readonly' },
+      globals: { URL: 'readonly', Blob: 'readonly', window: 'readonly' },
     },
   },
   {

@@ -29,6 +29,7 @@ const server = createServer(async (request, response) => {
         '/examples/compiler-usage/bundle.js',
         '/examples/vue-usage/bundle.js',
         '/examples/native-usage/bundle.js',
+        '/examples/rrweb-usage/bundle.js',
       ].includes(url.pathname)
     ) {
       const compiled = url.pathname.includes('compiler-usage');
@@ -100,7 +101,10 @@ const server = createServer(async (request, response) => {
       'Content-Type': types[extname(filePath)] || 'application/octet-stream',
     });
     response.end(body);
-  } catch {
+  } catch (error) {
+    if (process.env.LINO_EXAMPLE_DEBUG) {
+      console.error(error);
+    }
     response.writeHead(404).end();
   }
 });

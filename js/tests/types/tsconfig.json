@@ -9,5 +9,5 @@
     "types": ["node", "react"]
   },
   "include": ["*.ts", "*.tsx"],
-  "exclude": ["next.tsx", "native.tsx", "tanstack.tsx"]
+  "exclude": ["next.tsx", "native.tsx", "tanstack.tsx", "rrweb.tsx"]
 }

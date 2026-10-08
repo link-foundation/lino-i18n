@@ -23,3 +23,5 @@ Add bounded Python AST extraction into shared manifests, optional upstream Markd
 Add an injected React Native Text adapter with rich content, native formatter wrappers, headless selectors, serialized locale persistence and matching JSX extraction.
 
 Add optional TanStack Start request middleware and Router hydration/navigation adapters, verified with actual server functions, a production build and browser tests.
+
+Add optional rrweb recording/replay over `.lino` catalogs using the published GT player/recorder, bounded ICU harvesting, stable variable leaves and protected source values, with an actual browser privacy/playback regression.

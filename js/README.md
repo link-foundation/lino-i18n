@@ -296,3 +296,5 @@ See [Python extraction, Markdown helpers and GT locale data](../docs/ecosystem-t
 
 See [React Native source messages](../docs/react-native.md) for native text,
 formatters, selectors and persisted locale choices.
+
+See [session recording and replay](../docs/rrweb.md) for the optional published GT recorder/player, `.lino` overlays and protected recorded variables.

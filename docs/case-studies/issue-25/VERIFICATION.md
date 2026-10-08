@@ -219,3 +219,36 @@ preserved component count, query/hash navigation, ambient server functions,
 cookies, preloading and cancelled clicks. CI builds and tests that production
 fixture. MCP verified lang/cookie/heading in both locales, recorded no console
 errors, saved the two screenshots and closed the browser/server.
+
+All five workflows for Start commit `b7b21c5` completed successfully, created
+2026-10-08 22:06 UTC: runs 37851328231, 37851328316, 37851328242,
+37851328289 and 37851328233.
+
+## Replay catalog and browser conformance
+
+The initial test failed on the absent replay entry. The actual published
+`gt-rrweb` 0.2.0 harvester then reproduced a variable fallback defect: the recorded
+`{name}` value `Ada` became `Adele` through a separate catalog key. Our automated
+comparison verifies that defect and protects all text nodes beneath a marked
+message from bare-string lookup. ICU conversion checks ordered variable identity,
+branch ambiguity, rich literal boundaries, locale-root selection, prototype-like
+keys and finite byte/node/depth budgets without running application code.
+
+The initial rich fixture retained separate nodes, but plain ICU variables could
+merge into a single React text node. Replay `T` now wraps simple variables while
+retaining code-owned rich elements, matching the recorded leaf structure. Missing
+variables still raise the original formatting error. Actual Chromium capture and
+playback verifies French headings/rich text, count mutations, unchanged `Ada`,
+masked input values, omitted blocked text, locale switching and teardown. The
+bundle's custom overlay event is updated along with its overlay table.
+
+The first manual screenshot exposed a collapsed unsized player container; the
+example now supplies a definite height and the browser test requires a visible
+frame. MCP verified the rendered French count and heading, saved source/French
+1000 × 1201 screenshots, and closed the browser and server. This records the
+published player; it does not establish GT hosted-service or arbitrary replay
+message parity.
+
+![Source replay](../../screenshots/issue-25-rrweb-en.png)
+
+![French replay](../../screenshots/issue-25-rrweb-fr.png)

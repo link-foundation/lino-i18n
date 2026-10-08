@@ -14,7 +14,7 @@ const extensions = [
   '.cts',
 ];
 const library =
-  /^lino-i18n(?:\/(?:messages|react|react-native|react-server|server|node|vue|(?:next|tanstack-start)\/(?:server|client)))?$/;
+  /^lino-i18n(?:\/(?:messages|react|rrweb|react-native|react-server|server|node|vue|(?:next|tanstack-start)\/(?:server|client)))?$/;
 
 export function projectLimits({
   maxFiles = 1000,
