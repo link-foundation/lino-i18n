@@ -13,6 +13,9 @@ const excluded = new Set([
   '.output',
   'dist',
   'coverage',
+  '__pycache__',
+  '.venv',
+  'venv',
 ]);
 
 async function collectDirectory(input, files, budget, depth = 0) {
@@ -107,15 +110,23 @@ async function dependencies(code, file, { parser, extension, includeVue }) {
   return result;
 }
 
+function sourceOptions(options) {
+  return {
+    includeVue: options.includeVue || false,
+    extension: options.includePython
+      ? /\.py$/
+      : options.includeVue
+        ? /(?:\.[cm]?[jt]sx?|\.vue)$/
+        : sourceExtension,
+    parser: options.includePython
+      ? () => ({ program: { body: [] } })
+      : options.parser || parseSource,
+  };
+}
+
 export async function readProjectSources(input, options = {}) {
   const limits = projectLimits(options);
-  const extraction = {
-    includeVue: options.includeVue || false,
-    extension: options.includeVue
-      ? /(?:\.[cm]?[jt]sx?|\.vue)$/
-      : sourceExtension,
-    parser: options.parser || parseSource,
-  };
+  const extraction = sourceOptions(options);
   const absolute = path.resolve(
     input instanceof URL ? fileURLToPath(input) : input
   );

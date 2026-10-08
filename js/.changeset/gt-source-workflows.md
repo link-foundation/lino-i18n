@@ -17,3 +17,5 @@ Add an optional Next 16 App Router adapter for request-scoped server access, hyd
 Resolve shared translator factories, imported finite derivation and dictionary schemas through bounded static module graphs in the CLI and Vite/Rollup plugin.
 
 Add optional Vue 3.5 reactive source components, formatting, lazy initialization and SSR snapshots, plus SFC/module-aware extraction and CLI integration with compiler and browser regression coverage.
+
+Add bounded Python AST extraction into shared manifests, optional upstream Markdown helpers with safe entity serialization, and a GT service locale registry bridge.

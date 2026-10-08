@@ -160,6 +160,16 @@
       "sha256": "699b145f13a4644540541e5e6931745918f0db7cf7d619a37093cc24ad0d7fc2"
     },
     {
+      "path": "packages/python-extractor/src/__tests__/fixtures/declare_cartesian.py",
+      "file": "packages--python-extractor--src--__tests__--fixtures--declare_cartesian.py",
+      "sha256": "1788c5059387bef611c2b3da569855f708947c6576a511e5eb95de46aa596681"
+    },
+    {
+      "path": "packages/python-extractor/src/constants.ts",
+      "file": "packages--python-extractor--src--constants.ts",
+      "sha256": "09f5c491dce1639683b4790d6d16072637b3fdbd26b558351d46c6148a7d2008"
+    },
+    {
       "path": "packages/python-extractor/src/extractCalls.ts",
       "file": "packages--python-extractor--src--extractCalls.ts",
       "sha256": "e122ee094630ede5c819504780814ea583a165bd99fcaea980a4789e263159d1"
@@ -173,6 +183,11 @@
       "path": "packages/python-extractor/src/index.ts",
       "file": "packages--python-extractor--src--index.ts",
       "sha256": "79f153e40f249583a2f8cb1d96438005fb0d63b6fbb9389a01f7d8335462c1d5"
+    },
+    {
+      "path": "packages/python-extractor/src/parseStringExpression.ts",
+      "file": "packages--python-extractor--src--parseStringExpression.ts",
+      "sha256": "5f867b776c2495bcd589fd821634f0cffaf7de820d8d883e84cbcaf6a2e81cb7"
     },
     {
       "path": "packages/react-core-linter/package.json",
@@ -263,6 +278,11 @@
       "path": "packages/supported-locales/package.json",
       "file": "packages--supported-locales--package.json",
       "sha256": "52c8bf2448a63db2b78179b6859c3ea00639c4abff0a92234a749a59ea0b97db"
+    },
+    {
+      "path": "packages/supported-locales/src/index.ts",
+      "file": "packages--supported-locales--src--index.ts",
+      "sha256": "f01567fbe8d929bbbe83fc7b29bf5e20838322df1fb088317254a23bf028b146"
     },
     {
       "path": "packages/tanstack-start/package.json",

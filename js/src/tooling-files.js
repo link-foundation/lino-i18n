@@ -10,8 +10,15 @@ import { formatLinoCatalog, loadLocalesFromDirectory } from './loaders.js';
 import { readProjectSources } from './source-project-files.js';
 
 export async function extractFiles(input, options = {}) {
-  if (options.syntax && !['js', 'vue'].includes(options.syntax)) {
-    throw new Error('Extraction syntax must be js or vue');
+  if (options.syntax && !['js', 'vue', 'python'].includes(options.syntax)) {
+    throw new Error('Extraction syntax must be js, vue or python');
+  }
+  if (options.syntax === 'python' || String(input).endsWith('.py')) {
+    const { extractPythonProject } = await import('./python-extract.js');
+    return extractPythonProject(
+      await readProjectSources(input, { ...options, includePython: true }),
+      options
+    );
   }
   if (options.syntax === 'vue' || String(input).endsWith('.vue')) {
     const { extractVueProject, parseVueSource } =

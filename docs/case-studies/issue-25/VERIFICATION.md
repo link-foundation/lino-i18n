@@ -29,9 +29,9 @@ Run JavaScript commands from `js/` and other commands from the repository root.
 
 | Command                                                                                                              | Result                                                                                                                                                                                        |
 | -------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `npm test`                                                                                                           | 147 tests pass with a 30-second per-test timeout.                                                                                                                                             |
-| `bun test --timeout 30000`                                                                                           | 147 tests pass.                                                                                                                                                                               |
-| `deno test --no-check --allow-read --allow-write --allow-env --allow-run`                                            | 147 tests pass. Node subprocesses run CLI/Rollup build integration fixtures.                                                                                                                  |
+| `npm test`                                                                                                           | 159 tests pass with a 30-second per-test timeout.                                                                                                                                             |
+| `bun test --timeout 30000`                                                                                           | 159 tests pass.                                                                                                                                                                               |
+| `deno test --no-check --allow-read --allow-write --allow-env --allow-run`                                            | 159 tests pass. Node subprocesses run CLI/Rollup build integration fixtures.                                                                                                                  |
 | `npm run test:types`                                                                                                 | Core declarations compile with the existing strict check; optional Vue and Next usage compile with the framework type configuration.                                                          |
 | `npm run test:browser`                                                                                               | Six Chromium tests pass, including React source content switching and native browser export/tree shaking.                                                                                     |
 | `npm run build:next` and `LINO_NEXT_PRODUCTION=1 npm run test:next`                                                  | Production Next 16.4.0 build generates both locale static pages; four Chromium tests cover hydration, request/cache isolation, cookies, navigation, metadata and document language/direction. |
@@ -144,3 +144,22 @@ The absent Vue entry initially raised `ERR_MODULE_NOT_FOUND`. The optional adapt
 ![Vue in English](../../screenshots/issue-25-vue-en.png)
 
 ![Vue in French](../../screenshots/issue-25-vue-fr.png)
+
+## Python, Markdown and locale registry
+
+The initial Python fixture failed because the optional entry did not exist.
+Before implementation, the actual GT 0.2.60 probe collected `Must not extract`
+through a shadowed parameter and accepted the unclosed `t("bad"` call with no
+errors. The new regressions use real Python 3.14.7 parsing and assert that neither
+behavior occurs. Fixtures also cover aliased/namespace calls, lexical class and
+comprehension scopes, decoded literals/Unicode locations, bounded finite
+cross-products, conflicting ids, runtime keyword values and shared CLI output.
+The source example raises at top level yet extracts, proving code is not executed.
+
+Actual unified Markdown/MDX round trips cover every GT helper category. Before
+`preserveEscapedEntities`, the reparsed JSX text contained literal `&#42;` and
+`&#123;`; after the extension it recovers `*` and `{` as text, retaining outside
+Markdown emphasis, code and expressions. Registry tests use the real 2.1.41
+package (133 locales), preserving script/region matches and independent lists.
+Twelve affected tests pass in Node, Bun and Deno. The complete Node suite has
+159 tests, with strict positive/negative TypeScript API fixtures.

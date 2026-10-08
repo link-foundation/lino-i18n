@@ -289,3 +289,5 @@ npm run test:browser # real browser catalog loading and runtime language switchi
 
 Released into the public domain under the
 [Unlicense](https://unlicense.org/).
+
+See [Python extraction, Markdown helpers and GT locale data](../docs/ecosystem-tools.md) for optional source and content tools.

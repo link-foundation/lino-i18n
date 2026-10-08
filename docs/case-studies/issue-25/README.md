@@ -158,3 +158,23 @@ validation plans for them. They cannot be called complete because a generic
 provider or a framework recipe exists. The issue's request for entire-monorepo
 parity remains broader than the implementation, and PR 28 should report that
 boundary rather than automatically close the issue.
+
+## Python and Markdown integration findings
+
+Published `@generaltranslation/python-extractor` 0.2.60 reproduces a false
+translation call inside `def unrelated(t)` and silently returns no errors for
+`from gt_flask import t; t("bad"` with an unclosed call. The finite probe is kept
+in `js/experiments/gt-python-contract.mjs` (install that optional upstream package
+to rerun). Our Python extraction uses the standard-library AST with explicit
+lexical binding and syntax checks, and writes the shared manifest without
+executing source. Imported helper resolution and GT-specific context encodings
+remain explicit gaps rather than speculative equivalence.
+
+`gt-remark` 1.0.12 exports text escaping, GFM and CJK helpers, rather than a
+message-extraction API. The optional entry reuses these implementations. Actual
+MDX parse/stringify/reparse found that remark-stringify escapes the ampersands
+in the helper's generated character references. `preserveEscapedEntities` adds
+a serializer extension so readers recover literal punctuation without affecting
+code or expression nodes. The supported-locale adapter similarly reuses registry
+2.1.41, with regional matches preserved; its 133 service locales do not imply
+available local catalogs. See [usage and limits](../../ecosystem-tools.md).
