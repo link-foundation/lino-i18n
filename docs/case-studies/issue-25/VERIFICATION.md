@@ -278,34 +278,38 @@ ESLint example, lint/format/duplication, secrets, docs and policy/pin checks pas
 The installed development dependency graph has zero reported npm vulnerabilities.
 The final suggestion test also prevents shadowing an existing global identifier.
 
-## Sanity contract and upstream limits
+## Deferred Sanity candidate and security failure
 
-The absent Sanity entry first reproduced `ERR_MODULE_NOT_FOUND`. Actual GT
-4.0.24 decoding then regenerated the Portable Text span key instead of `span1`;
-the document import regression now preserves that key and its strong mark. A
-second regression returned a title-only plan when the target's block array was
-empty, silently losing the translated block. The bridge now rejects missing
-target array keys before calling GT's merger. Tests also preserve excluded
-localized fields, immutable inputs and target metadata, reject stale revisions
-and markup/field injection, and verify a real Sanity client's `ifRevisionID`
-patch against a loopback HTTP server.
+Commit `0e7443a` added an actual GT 4.0.24/Sanity 6.18.0 contract. Seven
+runtime tests and positive/negative consumer types passed locally and in
+JavaScript run 37857389183. The tests reproduced regenerated Portable Text span
+keys and silently skipped target blocks before the candidate fix; they also
+covered excluded fields, immutable inputs, stale catalogs, finite input budgets
+and real revision-guarded client mutations against a loopback server.
 
-The isolated `js/examples/sanity-usage` consumer tests the installed local package,
-actual Sanity/schema 6.18.0 and the published serializer/merger exports. Its
-seven runtime tests and positive/negative consumer type checks run in the
-existing Chromium CI job. Studio declarations require `skipLibCheck` after
-actual upstream GROQ, QuickLRU and type-import errors;
-[saved diagnostics](data/sanity-type-errors.txt) record that limit. Core's five
-type configurations retain strict library checks.
+The same SHA's Security run 37857389186 failed dependency review. Its downloaded
+full log identifies `js/examples/sanity-usage/package-lock.json » braces@3.0.3`
+at line 4360 and `Dependency review detected vulnerable packages` at line 4362.
+The other four workflows passed. Registry checks found no patched braces release;
+current compatible Sanity/CLI/codegen still introduce it through chokidar and
+globby. The candidate's saved audit contains 19 advisories.
 
-A fresh audit reported 19 upstream Studio/CLI advisories (nine high, ten
-moderate); the [saved advisory report](data/sanity-advisories.json) includes
-their exact links and affected ranges. Published braces 3.0.3 and sprintf-js
-1.1.3 remain the registry maxima and have no compatible patched release in
-this graph. Core's separate clean install/audit reports zero vulnerabilities.
-The optional graph's advisories are unresolved; isolation does not repair them.
-No authenticated Studio, hosted translation or document publication was tested.
+The integration, fixture lockfile and optional peers were reverted, preserving
+the candidate in forward-moving Git history and retaining the pinned upstream
+sources, audit and declaration diagnostics. No security exception or weaker
+threshold was introduced. These seven tests describe the historical candidate,
+not the current package or CI. [The investigation](../../sanity.md) links the
+failed job, reproduction commands and resumption plan. Main's existing APIs
+and all other shipped adapters remain covered by their original suites.
 
-See [Sanity usage and bounds](../../sanity.md), including the 1,000-item array
-limit that bounds the upstream keyed merger. The requirement matrix retains
-hosted service, deployment, Python runtime and agent/daemon acceptance limits.
+After reverting, a fresh core install/audit reported zero vulnerabilities. All
+187 tests passed in Node, Bun and Deno; all five type configurations and nine
+Chromium scenarios passed. Lint/format/duplication, secrets, documentation,
+workflow policy, dependency pins and file limits also passed. Rust sources were
+unchanged from the locally passing all-feature/MSRV/fmt/Clippy revision.
+
+GitHub's `gh pr diff 28` exceeded its 300-file response limit (HTTP 406). Review
+used the paginated PR-files API and local base diff, with focused inspection of
+the original runtime/browser/React/catalog/converter paths and new boundaries.
+Existing keyed APIs, CLI translation alias and Rust macros remain covered.
+Final acceptance still requires the latest pushed SHA's actual CI jobs to pass.

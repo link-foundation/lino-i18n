@@ -299,4 +299,6 @@ formatters, selectors and persisted locale choices.
 
 See [session recording and replay](../docs/rrweb.md) for the optional published GT recorder/player, `.lino` overlays and protected recorded variables.
 
-See [source-message lint rules](../docs/eslint.md) for optional ESLint diagnostics and [Sanity document catalogs](../docs/sanity.md) for actual GT Studio exports and revision-guarded catalog transport.
+See [source-message lint rules](../docs/eslint.md) for optional ESLint diagnostics.
+The [Sanity investigation](../docs/sanity.md) records a deferred integration and
+the upstream dependency-review blocker.

@@ -1,0 +1,55 @@
+{
+  "observed_at": "2026-10-08",
+  "status": "deferred; candidate reverted after required dependency-review failure",
+  "candidate_sha": "0e7443aa54814e1e30ea6ca0fdc655372c24bc72",
+  "packages": {
+    "gt-sanity": "4.0.24",
+    "sanity": "6.18.0",
+    "@sanity/cli": "8.16.0",
+    "@sanity/codegen": "8.2.0",
+    "chokidar": "3.6.0",
+    "globby": "11.1.0",
+    "fast-glob": "3.3.3",
+    "micromatch": "4.0.8",
+    "braces": "3.0.3"
+  },
+  "runtime_contract_tests": {
+    "passed": 7,
+    "failed": 0,
+    "local_log": "sanity-contract-final.log",
+    "ci_run": 37857389183
+  },
+  "consumer_types": {
+    "passed": true,
+    "upstream_skipLibCheck_required": true,
+    "diagnostics": "sanity-type-errors.txt"
+  },
+  "security_failure": {
+    "run": 37857389186,
+    "job": 113584744669,
+    "full_log_package_line": 4360,
+    "full_log_error_line": 4362,
+    "advisory": "https://github.com/advisories/GHSA-vfj7-8cjw-p6xm",
+    "patched_versions_at_observation": null
+  },
+  "audit": {
+    "total": 19,
+    "high": 9,
+    "moderate": 10,
+    "report": "sanity-advisories.json"
+  },
+  "attempted_alternatives": [
+    "Upgraded deprecated Sanity 6.9.2 to current 6.18.0; vulnerable glob dependencies remain.",
+    "Checked latest compatible CLI 8.16.0 and codegen 8.2.0; both still introduce braces 3.0.3.",
+    "Isolated the actual consumer fixture from the clean core graph; repository dependency review still fails.",
+    "Sanity major 5 does not satisfy gt-sanity 4.0.24 peers.",
+    "Latest globby 16.2.4 retains the fast-glob/micromatch/braces path; chokidar major 5 removes expected glob support."
+  ],
+  "resolution": "Remove the unshipped integration without changing security gates; preserve candidate history and research for a compatible reviewed upstream fix.",
+  "unverified": [
+    "authenticated Studio permissions",
+    "hosted translations",
+    "document publication",
+    "internationalized-array catalog transport"
+  ]
+}

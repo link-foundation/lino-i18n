@@ -126,10 +126,6 @@
     "./eslint": {
       "types": "./src/eslint.d.ts",
       "import": "./src/eslint.js"
-    },
-    "./sanity": {
-      "types": "./src/sanity.d.ts",
-      "import": "./src/sanity.js"
     }
   },
   "scripts": {
@@ -250,9 +246,7 @@
     "next": ">=16 <17",
     "react": ">=18.0.0",
     "react-dom": ">=18",
-    "vue": ">=3.5 <4",
-    "gt-sanity": ">=4.0.24 <5",
-    "sanity": ">=6.18 <7"
+    "vue": ">=3.5 <4"
   },
   "peerDependenciesMeta": {
     "next": {
@@ -298,12 +292,6 @@
       "optional": true
     },
     "eslint": {
-      "optional": true
-    },
-    "gt-sanity": {
-      "optional": true
-    },
-    "sanity": {
       "optional": true
     }
   },
