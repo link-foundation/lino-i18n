@@ -205,7 +205,7 @@ jobs:
         toolchain:
           - stable
         include:
-          # Must equal `rust-version` in rust/Cargo.toml (scripts/check-dependency-pins.py).
+          # Must equal `rust-version` in rust/Cargo.toml (enforced by scripts/check-dependency-pins.py).
           - os: ubuntu-26.04
             toolchain: '1.87'
     steps:
