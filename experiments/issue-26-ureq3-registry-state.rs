@@ -4,7 +4,7 @@
 //! maps HTTP 404 (`ureq::Error::StatusCode(404)`) to "absent", not "unknown".
 //! ```cargo
 //! [dependencies]
-//! ureq = "3"
+//! ureq = "3.4.2"
 //! serde_json = "1"
 //! ```
 #[path = "../rust/scripts/registry-state.rs"]

@@ -2,7 +2,7 @@
 //! Compare package/workspace versions semantically, including member manifests.
 //! ```cargo
 //! [dependencies]
-//! toml = "1"
+//! toml = "1.1.7"
 //! ```
 use std::{env, process::exit};
 #[path = "git-changes.rs"]

@@ -4,7 +4,7 @@
 //! manifests. `toml::Table` is the document type in toml 1.
 //! ```cargo
 //! [dependencies]
-//! toml = "1"
+//! toml = "1.1.7"
 //! ```
 fn main() {
     let manifest = "[package]\nname = \"a\"\nversion = \"1.2.3\"\n";

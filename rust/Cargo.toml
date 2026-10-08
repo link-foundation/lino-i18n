@@ -8,6 +8,8 @@ members = [
 [workspace.package]
 version = "0.3.0"
 edition = "2024"
+# links-notation 0.23 (via lino-objects-codec 0.8) calls u*::is_multiple_of,
+# stable since 1.87; it does not declare this itself (links-notation#334).
 rust-version = "1.87"
 license = "Unlicense"
 repository = "https://github.com/link-foundation/lino-i18n"

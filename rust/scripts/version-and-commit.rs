@@ -16,11 +16,11 @@
 //!
 //! ```cargo
 //! [dependencies]
-//! regex = "1"
-//! chrono = "0.4"
-//! ureq = "3"
-//! serde = { version = "1", features = ["derive"] }
-//! serde_json = "1"
+//! regex = "1.13.1"
+//! chrono = "0.4.45"
+//! ureq = "3.4.2"
+//! serde = { version = "1.0.229", features = ["derive"] }
+//! serde_json = "1.0.151"
 //! ```
 
 #[path = "github-output.rs"]
