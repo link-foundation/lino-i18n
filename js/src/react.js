@@ -16,7 +16,12 @@ import {
   Plural as PluralMarker,
   selectPlural,
 } from './react-content.js';
-import { getLocaleDirection, getLocaleProperties, formatList } from './intl.js';
+import {
+  getLocaleDirection,
+  getLocaleProperties,
+  formatList,
+  formatRelativeTimeFromDate,
+} from './intl.js';
 
 export { Var, Static, Branch, Derive };
 
@@ -109,10 +114,8 @@ export function LocaleSelector({ locales, labels = {}, ...props }) {
 }
 
 function Format({ value, children, formatter, options, locale }) {
-  const activeLocale = useFormatLocale();
-  return new Intl[formatter](locale || activeLocale, options).format(
-    children ?? value
-  );
+  const activeLocale = useFormatLocale(locale);
+  return new Intl[formatter](activeLocale, options).format(children ?? value);
 }
 
 export function NumberFormat(props) {
@@ -123,9 +126,25 @@ export function DateTimeFormat(props) {
   return createElement(Format, { ...props, formatter: 'DateTimeFormat' });
 }
 
-export function RelativeTimeFormat({ value, unit, options }) {
-  const locale = useFormatLocale();
-  return new Intl.RelativeTimeFormat(locale, options).format(value, unit);
+export function RelativeTimeFormat({ value, children, unit, options, locale }) {
+  const activeLocale = useFormatLocale(locale);
+  return new Intl.RelativeTimeFormat(activeLocale, options).format(
+    children ?? value,
+    unit
+  );
+}
+
+export function RelativeDate({ value, children, now, locale, options }) {
+  const activeLocale = useFormatLocale(locale);
+  if (now === undefined) {
+    throw new TypeError('RelativeDate requires an explicit now');
+  }
+  return formatRelativeTimeFromDate(
+    children ?? value,
+    now,
+    activeLocale,
+    options
+  );
 }
 
 export function CurrencyFormat({ currency, options, ...props }) {
@@ -140,8 +159,7 @@ export function T(props) {
 }
 
 export function Plural(props) {
-  const locale = useLocale();
-  return selectPlural(props.locale || locale, props);
+  return selectPlural(useFormatLocale(props.locale), props);
 }
 // Share the marker identity used by the serializer without invoking hooks there.
 Plural.contentMarker = PluralMarker;
@@ -185,7 +203,11 @@ export function useSetLocale() {
 }
 
 export function useLocaleDirection() {
-  return getLocaleDirection(useLocale());
+  const i18n = useI18nContext();
+  return (
+    i18n.getLocaleConfig?.().getLocaleDirection(i18n.getLocale()) ||
+    getLocaleDirection(i18n.getLocale())
+  );
 }
 
 export function useRegion() {
@@ -196,12 +218,15 @@ export function useEnabled() {
   return useI18nContext().getEnabled?.() ?? true;
 }
 
-export function ListFormat({ values, options }) {
-  return formatList(values, useFormatLocale(), options);
+export function ListFormat({ values, options, locale }) {
+  return formatList(values, useFormatLocale(locale), options);
 }
 
-export function useFormatLocale() {
+export function useFormatLocale(locale) {
   const i18n = useI18nContext();
+  if (locale) {
+    return i18n.getLocaleConfig?.().resolveCanonicalLocale(locale) || locale;
+  }
   return i18n.getFormatLocale?.() || i18n.getLocale();
 }
 
@@ -210,7 +235,11 @@ export function useDefaultLocale() {
 }
 
 export function useLocaleProperties() {
-  return getLocaleProperties(useLocale());
+  const i18n = useI18nContext();
+  return (
+    i18n.getLocaleConfig?.().getLocaleProperties(i18n.getLocale()) ||
+    getLocaleProperties(i18n.getLocale())
+  );
 }
 
 export function useSetRegion() {

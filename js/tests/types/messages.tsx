@@ -13,7 +13,8 @@ import {
 } from 'lino-i18n/server';
 import { extractMessages, translateCatalog } from 'lino-i18n/tooling';
 import { createExtractionPlugin } from 'lino-i18n/compiler';
-import { formatList, getLocaleDirection } from 'lino-i18n/intl';
+import { formatList, getLocaleDirection, LocaleConfig } from 'lino-i18n/intl';
+import { runWithTranslator, getGT } from 'lino-i18n/node';
 const i18n = createTranslator({
   loadCatalog: async () => ({ greeting: 'Hello {name}' }),
 });
@@ -42,6 +43,16 @@ await translateCatalog(
   { locale: 'fr', provider: async () => ({}) }
 );
 createExtractionPlugin({ locale: 'fr' });
+const config = new LocaleConfig({
+  locales: ['company'],
+  customMapping: { company: { code: 'fr-CA' } },
+});
+createTranslator({ localeConfig: config });
+config.formatNum(2, 'company', { locales: 'en' });
+config.formatRelativeTimeFromDate('2026-01-02', 'en', {
+  baseDate: '2026-01-01',
+});
+runWithTranslator(i18n, () => getGT()('Hi'));
 // @ts-expect-error Deferred descriptors require source text.
 msg(123);
 // @ts-expect-error Counts must be numeric.

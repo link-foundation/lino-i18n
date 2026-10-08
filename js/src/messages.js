@@ -4,6 +4,7 @@ import { createI18n } from './i18n.js';
 import { parseLinoCatalogs } from './catalogs.js';
 import { escapeMessageText } from './message-schema.js';
 import { createDictionaryApi } from './dictionary.js';
+import { LocaleConfig } from './intl.js';
 
 const compiled = new Map();
 
@@ -193,14 +194,46 @@ function createCatalogLoader(options, addLocale, tables) {
   return load;
 }
 
-export function createTranslator(options = {}) {
-  const core = createI18n(options);
-  const tables = new Map(
+function translatorSnapshot(core, tables, options, state, localeConfig) {
+  return {
+    locales: Object.fromEntries(
+      Array.from(tables, ([locale, table]) => [locale, { ...table }])
+    ),
+    defaultLocale: core.getLocale(),
+    fallback: core.getFallbacks(),
+    ...state,
+    version: options.version,
+    sourceLocale: options.sourceLocale,
+    localeConfig: localeConfig.snapshot(),
+    compatibilityAliases: options.compatibilityAliases,
+  };
+}
+
+function configuredLocales(options) {
+  return options.localeConfig instanceof LocaleConfig
+    ? options.localeConfig
+    : new LocaleConfig({
+        defaultLocale: options.defaultLocale,
+        ...options.localeConfig,
+      });
+}
+
+function cloneTables(options) {
+  return new Map(
     Object.entries(options.locales || {}).map(([locale, table]) => [
       locale,
       { ...table },
     ])
   );
+}
+
+export function createTranslator(options = {}) {
+  const localeConfig = configuredLocales(options);
+  const core = createI18n({
+    ...options,
+    defaultLocale: options.defaultLocale || localeConfig.defaultLocale,
+  });
+  const tables = cloneTables(options);
   const listeners = new Set();
   let enabled = options.enabled ?? true;
   let region = options.region;
@@ -249,7 +282,11 @@ export function createTranslator(options = {}) {
         )
       : descriptor.source;
     const variables = prepareVariables(descriptor, {});
-    const result = formatMessage(source, variables, locale);
+    const result = formatMessage(
+      source,
+      variables,
+      localeConfig.resolveCanonicalLocale(locale)
+    );
     options.onTrace?.({
       type: 'translation',
       id: descriptor.id,
@@ -319,10 +356,13 @@ export function createTranslator(options = {}) {
     setEnabled,
     getRegion: () => region,
     setRegion,
-    getDefaultLocale: () => options.defaultLocale || 'en',
+    getDefaultLocale: () => options.defaultLocale || localeConfig.defaultLocale,
     getVersion: () => options.version || 'default',
+    getLocaleConfig: () => localeConfig,
     getFormatLocale() {
-      const locale = new Intl.Locale(core.getLocale());
+      const locale = new Intl.Locale(
+        localeConfig.resolveCanonicalLocale(core.getLocale())
+      );
       return region
         ? new Intl.Locale(locale, { region }).toString()
         : locale.toString();
@@ -336,18 +376,13 @@ export function createTranslator(options = {}) {
       return () => listeners.delete(listener);
     },
     snapshot() {
-      return {
-        locales: Object.fromEntries(
-          Array.from(tables, ([locale, table]) => [locale, { ...table }])
-        ),
-        defaultLocale: core.getLocale(),
-        fallback: core.getFallbacks(),
-        enabled,
-        region,
-        version: options.version,
-        sourceLocale: options.sourceLocale,
-        compatibilityAliases: options.compatibilityAliases,
-      };
+      return translatorSnapshot(
+        core,
+        tables,
+        options,
+        { enabled, region },
+        localeConfig
+      );
     },
   };
 }

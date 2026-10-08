@@ -46,6 +46,7 @@ test('npm package dry-run contains the publishable runtime surface', () => {
     'messages',
     'intl',
     'server',
+    'node',
     'react-server',
     'tooling',
     'compiler',

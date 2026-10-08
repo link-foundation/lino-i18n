@@ -1,4 +1,5 @@
 import type { I18nCoreInstance, I18nOptions, TOptions } from './index.js';
+import type { LocaleConfig, LocaleConfigOptions } from './intl.js';
 
 export interface MessageDescriptor {
   readonly source: string;
@@ -30,6 +31,7 @@ export interface MessageTranslator {
   (strings: TemplateStringsArray, ...values: MessageValue[]): string;
 }
 export interface TranslatorOptions extends I18nOptions {
+  localeConfig?: LocaleConfig | LocaleConfigOptions;
   sourceLocale?: string;
   enabled?: boolean;
   region?: string;
@@ -72,6 +74,7 @@ export interface Translator extends I18nCoreInstance {
   getDefaultLocale(): string;
   getVersion(): string;
   getFormatLocale(): string;
+  getLocaleConfig(): LocaleConfig;
   snapshot(): TranslatorOptions;
 }
 export declare function createTranslator(

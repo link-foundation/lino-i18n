@@ -140,7 +140,11 @@ export function renderContent(
   return formatMessage(
     message,
     { ...prepared.values, ...values },
-    locale || i18n.getLocale()
+    i18n
+      .getLocaleConfig?.()
+      .resolveCanonicalLocale(locale || i18n.getLocale()) ||
+      locale ||
+      i18n.getLocale()
   );
 }
 

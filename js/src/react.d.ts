@@ -47,8 +47,17 @@ export declare function DateTimeFormat(props: {
   options?: Intl.DateTimeFormatOptions;
 }): ReactNode;
 export declare function RelativeTimeFormat(props: {
-  value: number;
+  value?: number;
+  children?: number;
+  locale?: string;
   unit: Intl.RelativeTimeFormatUnit;
+  options?: Intl.RelativeTimeFormatOptions;
+}): ReactNode;
+export declare function RelativeDate(props: {
+  value?: Date | number | string;
+  children?: Date | number | string;
+  now: Date | number | string;
+  locale?: string;
   options?: Intl.RelativeTimeFormatOptions;
 }): ReactNode;
 export declare function CurrencyFormat(props: {
@@ -110,7 +119,7 @@ export declare function useSetLocale(): (
 export declare function useLocaleDirection(): 'ltr' | 'rtl';
 export declare function useRegion(): string | undefined;
 export declare function useEnabled(): boolean;
-export declare function useFormatLocale(): string;
+export declare function useFormatLocale(locale?: string): string;
 export declare function useDefaultLocale(): string;
 export declare function useLocaleProperties(): ReturnType<
   typeof import('./intl.js').getLocaleProperties
@@ -121,6 +130,7 @@ export declare function useSetEnabled():
   import('./messages.js').Translator['setEnabled'] | undefined;
 export declare function ListFormat(props: {
   values: string[];
+  locale?: string;
   options?: Intl.ListFormatOptions;
 }): ReactNode;
 export declare function RegionSelector(

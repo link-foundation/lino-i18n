@@ -51,6 +51,9 @@ def collect():
         'packages/core/src/derive/derive.ts',
         'packages/core/src/derive/declareVar.ts',
         'packages/format/src/LocaleConfig.ts',
+        'packages/format/src/types.ts',
+        'packages/format/src/locales/customLocaleMapping.ts',
+        'packages/format/src/locales/isSupersetLocale.ts',
     ]
     existing = [path.name.replace('--', '/') for path in DATA.glob('packages--*')]
     files = []

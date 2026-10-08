@@ -1,6 +1,7 @@
 // Request primitives accept Web Requests: Next, TanStack, Workers and Node.
 import { createTranslator } from './messages.js';
 import { resolveLanguage } from './language.js';
+import { LocaleConfig } from './intl.js';
 
 function acceptedLanguages(header) {
   return (header || '')
@@ -45,15 +46,33 @@ export function getRequestLocale(request, options = {}) {
     request.headers.get('cookie'),
     options.cookieName || 'locale'
   );
-  return resolveLanguage(
+  const candidates = [
     options.locale,
-    [
-      pathLocale,
-      cookie,
-      ...acceptedLanguages(request.headers.get('accept-language')),
-    ],
-    { supportedLanguages, defaultLocale: options.defaultLocale || 'en' }
-  );
+    pathLocale,
+    cookie,
+    ...acceptedLanguages(request.headers.get('accept-language')),
+  ].filter(Boolean);
+  if (options.localeConfig) {
+    const config =
+      options.localeConfig instanceof LocaleConfig
+        ? options.localeConfig
+        : new LocaleConfig({
+            defaultLocale: options.defaultLocale,
+            ...options.localeConfig,
+          });
+    return (
+      config.determineLocale(
+        [...candidates, options.defaultLocale || config.defaultLocale],
+        supportedLanguages
+      ) ||
+      supportedLanguages[0] ||
+      config.defaultLocale
+    );
+  }
+  return resolveLanguage(undefined, candidates, {
+    supportedLanguages,
+    defaultLocale: options.defaultLocale || 'en',
+  });
 }
 
 export async function createRequestTranslator(request, options = {}) {

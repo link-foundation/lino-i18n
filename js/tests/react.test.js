@@ -5,6 +5,7 @@ import { JSDOM } from 'jsdom';
 import { cleanup, fireEvent, render } from '@testing-library/react';
 import { renderToString } from 'react-dom/server';
 import { hydrateRoot } from 'react-dom/client';
+import * as adapters from '../src/react.js';
 
 import { createI18n, createTranslator } from '../src/index.js';
 import {
@@ -155,4 +156,66 @@ test('source-message snapshots hydrate and receive catalog and region updates', 
   } finally {
     await act(() => root?.unmount());
   }
+});
+
+test('relative-date, relative-time and list formats honor deterministic time and locale overrides', async () => {
+  const i18n = createTranslator({ defaultLocale: 'fr' });
+  const root = render(
+    h(
+      I18nProvider,
+      { i18n },
+      h(
+        adapters.RelativeDate,
+        { now: '2026-01-01', locale: 'en' },
+        '2026-01-02'
+      ),
+      ' / ',
+      h(adapters.RelativeTime, { unit: 'day', locale: 'en' }, 0),
+      ' / ',
+      h(adapters.ListFormat, { values: ['Ada', 'Lin'], locale: 'en' })
+    )
+  );
+  assert.equal(
+    root.container.textContent,
+    'in 1 day / in 0 days / Ada and Lin'
+  );
+  await act(() => i18n.setLocale('de'));
+  assert.equal(
+    root.container.textContent,
+    'in 1 day / in 0 days / Ada and Lin'
+  );
+  assert.throws(
+    () =>
+      renderToString(
+        h(
+          I18nProvider,
+          { i18n },
+          h(adapters.RelativeDate, { value: '2026-01-02' })
+        )
+      ),
+    /explicit now/
+  );
+});
+
+test('React source, plural and locale metadata support custom catalog identities', () => {
+  const i18n = createTranslator({
+    defaultLocale: 'company',
+    localeConfig: {
+      customMapping: { company: { code: 'ar', name: 'Company Arabic' } },
+    },
+  });
+  function Metadata() {
+    return `${adapters.useLocaleDirection()}: ${adapters.useLocaleProperties().name}`;
+  }
+  const markup = renderToString(
+    h(
+      I18nProvider,
+      { i18n },
+      h(Metadata),
+      h(T, { source: '{n, number}', values: { n: 2 } }),
+      h(adapters.Plural, { count: 2, two: 'pair', other: 'items' })
+    )
+  );
+  assert.match(markup, /rtl: Company Arabic/);
+  assert.match(markup, /pair/);
 });

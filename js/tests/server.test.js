@@ -102,3 +102,32 @@ test('concurrent request translators and async server content do not share mutab
     'Hello Ada'
   );
 });
+
+test('request negotiation selects custom catalog identities from canonical headers and aliases', async () => {
+  const options = {
+    defaultLocale: 'english',
+    locales: { english: { Hi: 'Hi' }, canadian: { Hi: 'Salut' } },
+    localeConfig: {
+      aliases: { francophone: 'canadian' },
+      customMapping: {
+        english: { code: 'en-US' },
+        canadian: { code: 'fr-CA' },
+      },
+    },
+  };
+  const request = new Request('https://example.org/account', {
+    headers: { 'accept-language': 'fr-CA, en-US;q=0.5' },
+  });
+  assert.equal(getRequestLocale(request, options), 'canadian');
+  assert.equal(
+    (await createRequestTranslator(request, options)).gt('Hi'),
+    'Salut'
+  );
+  assert.equal(
+    getRequestLocale(
+      new Request('https://example.org/francophone/account'),
+      options
+    ),
+    'canadian'
+  );
+});

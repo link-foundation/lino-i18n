@@ -8,22 +8,22 @@ want ICU, lazy loading, snapshots or source extraction.
 ## Plain JavaScript and TypeScript
 
 ```js
-import { createTranslator, msg, bindMessage } from 'lino-i18n/messages';
+import { createTranslator, msg, bindMessage } from "lino-i18n/messages";
 
 const i18n = createTranslator({
-  defaultLocale: 'fr',
-  locales: { fr: { greeting: 'Bonjour {name}', 'Hello {v0}': 'Salut {v0}' } },
+  defaultLocale: "fr",
+  locales: { fr: { greeting: "Bonjour {name}", "Hello {v0}": "Salut {v0}" } },
 });
 const { gt } = i18n;
-gt`Hello ${'Ada'}`; // Salut Ada
-const greeting = msg('Hello {name}', {
-  id: 'greeting',
-  description: 'Greeting shown after login',
+gt`Hello ${"Ada"}`; // Salut Ada
+const greeting = msg("Hello {name}", {
+  id: "greeting",
+  description: "Greeting shown after login",
 });
-gt(greeting, { name: 'Ada' }); // Bonjour Ada
-i18n.m(bindMessage(greeting, { name: 'Lin' })); // Bonjour Lin
-gt('Welcome', {}, { id: 'welcome', locale: 'en' });
-gt('{n, plural, =0 {No files} one {# file} other {# files}}', { n: 2 });
+gt(greeting, { name: "Ada" }); // Bonjour Ada
+i18n.m(bindMessage(greeting, { name: "Lin" })); // Bonjour Lin
+gt("Welcome", {}, { id: "welcome", locale: "en" });
+gt("{n, plural, =0 {No files} one {# file} other {# files}}", { n: 2 });
 ```
 
 `gt` and `m` are bound to their instance and may be destructured. Plain strings
@@ -55,12 +55,12 @@ returns the dotted-key subtree. Keep dictionary sources in the source catalog;
 source extraction discovers source declarations, not arbitrary dictionary files.
 
 ```js
-import { derive, declareStatic } from 'lino-i18n/messages';
-const action = condition ? 'Save' : 'Cancel';
+import { derive, declareStatic } from "lino-i18n/messages";
+const action = condition ? "Save" : "Cancel";
 gt`Click ${derive(action)}`;
-gt('Click {action}', { action: derive(action) });
-gt('{person, select, female {She} other {They}} is {personValue}.', {
-  person: declareStatic('Ada', 'female'),
+gt("Click {action}", { action: derive(action) });
+gt("{person, select, female {She} other {They}} is {personValue}.", {
+  person: declareStatic("Ada", "female"),
 });
 ```
 
@@ -80,18 +80,32 @@ does not perform static derivation.
 ## React
 
 ```jsx
-import { I18nProvider, T, Var, Plural, Currency, useGT } from 'lino-i18n/react';
+import { I18nProvider, T, Var, Plural, Currency, useGT } from "lino-i18n/react";
 
 function Page({ name, count }) {
   const gt = useGT();
-  return <>
-    <T>Hello <strong><Var name="name">{name}</Var></strong>!</T>
-    <T><Plural count={count} one="One file" other="Many files" /></T>
-    <Currency currency="USD">{12.5}</Currency>
-    <input aria-label={gt('Search')} placeholder={gt('Search')} />
-  </>;
+  return (
+    <>
+      <T>
+        Hello{" "}
+        <strong>
+          <Var name="name">{name}</Var>
+        </strong>
+        !
+      </T>
+      <T>
+        <Plural count={count} one="One file" other="Many files" />
+      </T>
+      <Currency currency="USD">{12.5}</Currency>
+      <input aria-label={gt("Search")} placeholder={gt("Search")} />
+    </>
+  );
 }
-const app = <I18nProvider i18n={i18n}><Page name="Ada" count={2} /></I18nProvider>;
+const app = (
+  <I18nProvider i18n={i18n}>
+    <Page name="Ada" count={2} />
+  </I18nProvider>
+);
 ```
 
 `T` serializes code-owned HTML elements as ICU tags (`<c0>...</c0>`) and dynamic
@@ -121,6 +135,15 @@ switching. `RegionSelector` selects an explicit list of regions. Formatting
 components use the region-adjusted locale; ICU messages use the message locale.
 Region codes are uppercase two-letter or three-digit codes.
 
+`Num`, `Currency`, `DateTime`, `RelativeTime`, `RelativeDate` and `ListFormat`
+accept an explicit `locale` override. Numeric/date components accept either a
+`value` prop or children, including zero. `RelativeDate` requires `now` for
+deterministic server rendering and hydration:
+
+```jsx
+<RelativeDate now="2026-01-01T00:00:00Z">2026-01-02T00:00:00Z</RelativeDate>
+```
+
 Run `node js/examples/browser-usage/server.mjs` from the repository root and open
 `http://127.0.0.1:4173/examples/react-usage/`. The example builds with esbuild and demonstrates
 English/French rich content, plurals, currency and locale switching.
@@ -129,15 +152,16 @@ English/French rich content, plurals, currency and locale switching.
 
 ```js
 const remote = createTranslator({
-  version: 'release-42',
+  version: "release-42",
   loadCatalog: async (locale, { version }) => {
     const response = await fetch(`/catalogs/${version}/${locale}.lino`);
-    if (!response.ok) throw new Error(`Catalog load failed: ${response.status}`);
+    if (!response.ok)
+      throw new Error(`Catalog load failed: ${response.status}`);
     return response.text();
   },
 });
-await remote.switchLocale('fr');
-await remote.tx('Hello {name}', { name: 'Ada' }, { locale: 'fr' });
+await remote.switchLocale("fr");
+await remote.tx("Hello {name}", { name: "Ada" }, { locale: "fr" });
 ```
 
 Concurrent loads share one promise per version/locale; failures can be retried.
@@ -148,12 +172,12 @@ instance's current locale. `setEnabled(false)` renders source messages; legacy
 key-based `t` retains its existing behavior.
 
 ```jsx
-import { createRequestTranslator } from 'lino-i18n/server';
-import { T, Tx } from 'lino-i18n/react-server';
+import { createRequestTranslator } from "lino-i18n/server";
+import { T, Tx } from "lino-i18n/react-server";
 
 const requestI18n = await createRequestTranslator(request, {
   locales,
-  supportedLanguages: ['en', 'fr'],
+  supportedLanguages: ["en", "fr"],
 });
 const content = <T i18n={requestI18n}>Welcome</T>;
 const deferred = <Tx i18n={requestI18n}>Welcome</Tx>;
@@ -173,6 +197,23 @@ Request negotiation considers an explicit locale, supported path prefix, locale
 cookie, weighted `Accept-Language`, then the configured default. `localizePath`,
 `stripLocale` and `createLocaleMiddleware` provide Web Request/Response routing
 primitives. See [framework integration boundaries](framework-integrations.md).
+
+Node applications can opt into scoped access through `lino-i18n/node`:
+
+```js
+import { withRequestTranslation, getGT, getLocale } from "lino-i18n/node";
+await withRequestTranslation(request, { locales }, async () => {
+  const greeting = getGT()("Welcome");
+  return { locale: getLocale(), greeting };
+});
+```
+
+`runWithTranslator(instance, callback)` reuses an existing instance.
+`createTranslationContext()` creates an independent scope. AsyncLocalStorage
+isolates overlapping requests and restores outer scopes after errors; helpers
+throw outside a scope. `getTranslations(prefix)`, `getMessages`, `gt`, `tx` and
+locale/version helpers use the active translator. Run
+`node js/examples/request-context.mjs` for an overlapping-request example.
 
 ## Extraction, validation and translation providers
 
@@ -201,7 +242,10 @@ the translation. Source-key changes naturally produce missing/unused entries.
 
 ```js
 // provider.mjs: plug in a service, local model or human-reviewed catalog.
-export default async function provider(messages, { locale, sourceLocale, signal }) {
+export default async function provider(
+  messages,
+  { locale, sourceLocale, signal },
+) {
   return myTranslationService(messages, { locale, sourceLocale, signal });
   // Return { [message.id]: translatedIcuString } for every supplied message.
 }
@@ -215,8 +259,8 @@ AbortSignal. Copy approved candidates into the catalog workflow you maintain.
 
 ```js
 // vite.config.js / Rollup plugin list
-import { createExtractionPlugin } from 'lino-i18n/compiler';
-export default { plugins: [createExtractionPlugin({ locale: 'en' })] };
+import { createExtractionPlugin } from "lino-i18n/compiler";
+export default { plugins: [createExtractionPlugin({ locale: "en" })] };
 ```
 
 The plugin emits `locales/en.lino` and `messages.json`, checks conflicts, and resets its
@@ -230,8 +274,33 @@ list and list-parts formatting, grapheme-safe cutoff, canonicalization, language
 and dialect comparison, locale/region names, direction and flag helpers. A date
 relative formatter takes an explicit `now`; month/year selection uses fixed
 approximate durations rather than calendar arithmetic. Host Intl data controls
-locale coverage and output. Custom locale-name maps and GT format encodings
-are outside this API.
+locale coverage and output.
+
+`LocaleConfig` keeps catalog identities separate from canonical Intl tags:
+
+```js
+import { LocaleConfig } from "lino-i18n/intl";
+const localeConfig = new LocaleConfig({
+  defaultLocale: "company",
+  locales: ["company", "fr"],
+  customMapping: { company: { code: "en-US", name: "Company English" } },
+  aliases: { english: "company" },
+});
+const configured = createTranslator({ localeConfig, locales });
+localeConfig.determineLocale(["en-US", "fr-CA"]); // company
+localeConfig.formatNum(1234.5, "company", { locales: "de" }); // 1.234,5
+```
+
+Mappings may supply `code`, `name`, `emoji` and `direction`; string entries
+override names. Aliases can form chains, and cycles are rejected at construction.
+Configuration is copied/frozen and snapshots contain plain serializable data.
+Negotiation prioritizes exact identities, canonical tags, dialects and broad
+language/script tags without switching writing systems. `isSupersetLocale` and
+`requiresTranslation` expose the same rules. No matching approved target means
+no translation is requested. Formatting methods accept per-call `locales`
+overrides; relative dates require `baseDate`. Translator request negotiation,
+ICU and React metadata/formatting use canonical tags while catalog keys retain
+their custom identities. GT-specific message wire encodings are not decoded.
 
 Rust adds `Message::new(source).id(key)`, `I18n::gt` and `I18n::m` while retaining
 the existing runtime and macros. Enable `lino-i18n/icu` for `format_message` with

@@ -47,6 +47,10 @@
       "types": "./src/react-server.d.ts",
       "import": "./src/react-server.js"
     },
+    "./node": {
+      "types": "./src/node.d.ts",
+      "import": "./src/node.js"
+    },
     "./tooling": {
       "types": "./src/tooling.d.ts",
       "import": "./src/tooling.js"

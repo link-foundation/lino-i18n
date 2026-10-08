@@ -27,8 +27,11 @@ Pass a Web Request from a route loader to `createRequestTranslator`. For Node
 HTTP servers, adapt the URL and headers to a Web Request, and place the instance
 in request context. Supply the same snapshot to the React document renderer
 and hydration entry. Use `localizePath` when constructing router links. Avoid
-sharing a mutable translator between requests; there is no implicit
-AsyncLocalStorage singleton.
+sharing a mutable translator between requests. The optional `lino-i18n/node`
+entry provides `withRequestTranslation` and `runWithTranslator` scopes with
+AsyncLocalStorage, plus scoped source/dictionary and locale helpers. It is
+tested with overlapping, nested and failed requests; it adds no Node imports
+to the browser or Web Request entry. See `js/examples/request-context.mjs`.
 
 ## Workers and other Web Request runtimes
 
