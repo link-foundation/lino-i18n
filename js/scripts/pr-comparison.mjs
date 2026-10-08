@@ -37,7 +37,7 @@ export function getPrChanges({ mergeBase, head }) {
     '--',
   ]).split('\0');
   const changes = [];
-  for (let index = 0; index < fields.length - 1; ) {
+  for (let index = 0; index < fields.length - 1;) {
     const status = fields[index++];
     const path = fields[index++];
     changes.push(

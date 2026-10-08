@@ -1,0 +1,10 @@
+113377025734 notice: Summary report available at: https://github.com/link-foundation/lino-i18n/actions/runs/37796450346#summary-113377025734
+113378667450 notice: Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+113378667450 notice: Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+113385429048 notice: Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+
+Annotation messages (all notice level, latest attempts):
+3x notice: Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+1x notice: Summary report available at: https://github.com/link-foundation/lino-i18n/actions/runs/37796450346#summary-113377025734
+
+Attempt 1 of JavaScript 37796449941 also had a failure-level runner-acquisition annotation; see js-37796449941-attempt1-runner-not-acquired.txt.

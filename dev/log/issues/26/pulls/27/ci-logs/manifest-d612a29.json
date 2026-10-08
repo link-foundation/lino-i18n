@@ -1,0 +1,47 @@
+[
+  {
+    "workflow": "documentation",
+    "run_id": 37795617465,
+    "head_sha": "d612a29",
+    "conclusion": "success",
+    "member": "documentation-37795617465.log",
+    "bytes": 166828,
+    "sha256": "255f610b68194c889132e2c958df761051ed330dbd8f075ca01f8721f8833464"
+  },
+  {
+    "workflow": "javascript",
+    "run_id": 37795617387,
+    "head_sha": "d612a29",
+    "conclusion": "success",
+    "member": "javascript-37795617387.log",
+    "bytes": 830099,
+    "sha256": "3ad0523f3273ff3f6274c19ee6c281da0d50021e032a14c5138283d875254ffd"
+  },
+  {
+    "workflow": "rust",
+    "run_id": 37795617481,
+    "head_sha": "d612a29",
+    "conclusion": "success",
+    "member": "rust-37795617481.log",
+    "bytes": 990834,
+    "sha256": "9db7846d662d66e7739c5d551948e31e34fcac616b1fdc74fb2cb3cd129c27af"
+  },
+  {
+    "workflow": "security",
+    "run_id": 37795617430,
+    "head_sha": "d612a29",
+    "conclusion": "success",
+    "member": "security-37795617430.log",
+    "bytes": 969062,
+    "sha256": "3add9364896e2d7831a95bbc3d34e933d5d0f9dbaa82dc5d065452c14043666e"
+  },
+  {
+    "workflow": "workflows",
+    "run_id": 37795617321,
+    "head_sha": "d612a29",
+    "conclusion": "success",
+    "member": "workflows-37795617321.log",
+    "bytes": 126190,
+    "sha256": "b90083ce0aba7bbf1231d8c97445725fab4540cea8ac7e382b1b3dcccf7ffdd6"
+  }
+]

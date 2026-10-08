@@ -1,0 +1,6 @@
+# GitHub-hosted ubuntu-26.04 is generally available (actions/runner-images#14747),
+# but actionlint 1.7.12, the latest release, predates it (rhysd/actionlint#682).
+# Drop this entry once an actionlint release knows the label.
+self-hosted-runner:
+  labels:
+    - ubuntu-26.04

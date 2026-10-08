@@ -1,0 +1,46 @@
+# Keeps the drift fixed in issue #26 from accumulating again. Dependabot only
+# bumps versions: major migrations still need a deliberate pull request.
+# Not covered: the `//! ```cargo` blocks of rust/scripts/*.rs (rust-script),
+# NPM_RECOVERY_VERSION in js/scripts/setup-npm.mjs and the tool versions
+# passed to install actions (zizmor, cargo-audit, rust-script, Deno, Bun).
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /js
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    groups:
+      npm:
+        patterns: ['*']
+  # The workspace root also fetches both member manifests and Cargo.lock.
+  - package-ecosystem: cargo
+    directory: /rust
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    groups:
+      cargo:
+        patterns: ['*']
+  - package-ecosystem: pip
+    directory: /scripts
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    groups:
+      pip:
+        patterns: ['*']
+  - package-ecosystem: github-actions
+    directories:
+      - /
+      - /.github/actions/*
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    groups:
+      github-actions:
+        patterns: ['*']

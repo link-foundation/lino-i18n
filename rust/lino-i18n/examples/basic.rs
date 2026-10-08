@@ -4,7 +4,7 @@
 
 use std::sync::OnceLock;
 
-use lino_i18n::{i18n, I18n, TOptions};
+use lino_i18n::{I18n, TOptions, i18n};
 
 fn catalog() -> &'static I18n {
     static C: OnceLock<I18n> = OnceLock::new();

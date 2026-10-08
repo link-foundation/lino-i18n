@@ -1,0 +1,52 @@
+[
+  {
+    "workflow": "documentation",
+    "run_id": 37796450346,
+    "attempt": 1,
+    "head_sha": "7d0cedd",
+    "conclusion": "success",
+    "member": "documentation-37796450346.log",
+    "bytes": 166827,
+    "sha256": "cb0e429fe9a04207c013ce8df1939d0dc8511b5abb9e7dd516f6b65cc5ba30b3"
+  },
+  {
+    "workflow": "javascript",
+    "run_id": 37796449941,
+    "attempt": 2,
+    "head_sha": "7d0cedd",
+    "conclusion": "success",
+    "member": "javascript-37796449941.log",
+    "bytes": 774255,
+    "sha256": "d92092d6fb5547b2fac76673a5124f5c887a1156e738941f56902f62c5d6b7f4"
+  },
+  {
+    "workflow": "rust",
+    "run_id": 37796450246,
+    "attempt": 1,
+    "head_sha": "7d0cedd",
+    "conclusion": "success",
+    "member": "rust-37796450246.log",
+    "bytes": 934794,
+    "sha256": "37a67f1fc3712f2bd154582f763d6f60b681ad03e2acb19968aa768c7ec0d736"
+  },
+  {
+    "workflow": "security",
+    "run_id": 37796449969,
+    "attempt": 1,
+    "head_sha": "7d0cedd",
+    "conclusion": "success",
+    "member": "security-37796449969.log",
+    "bytes": 969027,
+    "sha256": "cf2cab1e3048cf4dc12e4d36b51c43567318e832d08f0c5179daa39634cf8b36"
+  },
+  {
+    "workflow": "workflows",
+    "run_id": 37796450120,
+    "attempt": 1,
+    "head_sha": "7d0cedd",
+    "conclusion": "success",
+    "member": "workflows-37796450120.log",
+    "bytes": 126195,
+    "sha256": "86f671d5aa8ad51cfc700d400adde7203418608e15c6a36886717e6b385fb259"
+  }
+]

@@ -2,7 +2,7 @@
 //! Compare package/workspace versions semantically, including member manifests.
 //! ```cargo
 //! [dependencies]
-//! toml = "0.8"
+//! toml = "1.1.7"
 //! ```
 use std::{env, process::exit};
 #[path = "git-changes.rs"]
@@ -10,7 +10,7 @@ use std::{env, process::exit};
 mod git_changes;
 
 fn versions(text: &str) -> Result<(Option<toml::Value>, Option<toml::Value>), String> {
-    let document: toml::Value = text.parse::<toml::Value>().map_err(|e| e.to_string())?;
+    let document = text.parse::<toml::Table>().map_err(|e| e.to_string())?;
     let package = document
         .get("package")
         .and_then(|v| v.get("version"))
@@ -49,4 +49,22 @@ fn main() {
         exit(1);
     }
     println!("Package and workspace versions are unchanged.");
+}
+
+#[cfg(test)]
+mod tests {
+    use super::versions;
+
+    #[test]
+    fn reads_package_and_workspace_versions_from_whole_manifests() {
+        let package = versions("[package]\nname = \"a\"\nversion = \"1.2.3\"\n").unwrap();
+        assert_eq!(package.0, Some(toml::Value::String("1.2.3".into())));
+        assert_eq!(package.1, None);
+        let workspace =
+            versions("[workspace]\nmembers = []\n[workspace.package]\nversion = \"2.0.0\"\n")
+                .unwrap();
+        assert_eq!(workspace.0, None);
+        assert_eq!(workspace.1, Some(toml::Value::String("2.0.0".into())));
+        assert!(versions("[package\n").is_err());
+    }
 }

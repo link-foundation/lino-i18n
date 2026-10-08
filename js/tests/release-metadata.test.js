@@ -13,7 +13,7 @@ import { tmpdir } from 'node:os';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import test from 'node:test';
-import { recoverNpm } from '../scripts/setup-npm.mjs';
+import { NPM_RECOVERY_VERSION, recoverNpm } from '../scripts/setup-npm.mjs';
 
 const jsRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -104,14 +104,14 @@ test('actual JS release syncs a detached validated checkout before versioning', 
 test('npm recovery rejects tampered archive bytes before invoking commands', async () => {
   let commands = 0;
   const fetchFn = async (url) => {
-    if (url.endsWith('/npm/11.20.0')) {
+    if (url.endsWith(`/npm/${NPM_RECOVERY_VERSION}`)) {
       return {
         ok: true,
         json: async () => ({
-          version: '11.20.0',
+          version: NPM_RECOVERY_VERSION,
           dist: {
             integrity: 'sha512-invalid',
-            tarball: 'https://registry.npmjs.org/npm/-/npm-11.20.0.tgz',
+            tarball: `https://registry.npmjs.org/npm/-/npm-${NPM_RECOVERY_VERSION}.tgz`,
           },
         }),
       };

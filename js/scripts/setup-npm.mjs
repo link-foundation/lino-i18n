@@ -17,6 +17,8 @@ import { fileURLToPath } from 'node:url';
 export const NPM_MIN_VERSION = '11.5.1';
 export const NODE_MIN_VERSION = '22.14.0';
 export const NPM_TARGET_MAJOR = 11;
+// Newest npm 11 release; every current Node.js line still bundles npm 11.
+export const NPM_RECOVERY_VERSION = '11.21.0';
 export const NPM_REGISTRY_METADATA_URL = 'https://registry.npmjs.org/npm';
 
 export function parseVersion(version) {
@@ -103,7 +105,7 @@ export function selectLatestSupportedNpmRelease(metadata) {
 
 function validateRecoveryMetadata(metadata) {
   if (
-    metadata.version !== '11.20.0' ||
+    metadata.version !== NPM_RECOVERY_VERSION ||
     !metadata.dist?.integrity?.startsWith('sha512-') ||
     !metadata.dist.tarball.startsWith('https://registry.npmjs.org/npm/-/')
   ) {
@@ -116,9 +118,12 @@ export async function recoverNpm({
   npmDirectory = resolve(dirname(process.execPath), '../lib/node_modules/npm'),
   runner = runStrict,
 } = {}) {
-  const response = await fetchFn('https://registry.npmjs.org/npm/11.20.0', {
-    signal: globalThis.AbortSignal.timeout(15000),
-  });
+  const response = await fetchFn(
+    `${NPM_REGISTRY_METADATA_URL}/${NPM_RECOVERY_VERSION}`,
+    {
+      signal: globalThis.AbortSignal.timeout(15000),
+    }
+  );
   if (!response.ok) {
     throw new Error(`npm recovery metadata returned HTTP ${response.status}`);
   }
@@ -145,7 +150,7 @@ export async function recoverNpm({
     const manifest = JSON.parse(
       await readFile(join(temporary, 'package/package.json'), 'utf8')
     );
-    if (manifest.name !== 'npm' || manifest.version !== '11.20.0') {
+    if (manifest.name !== 'npm' || manifest.version !== NPM_RECOVERY_VERSION) {
       throw new Error('Unexpected npm recovery package');
     }
     await rename(npmDirectory, backup);
@@ -182,7 +187,7 @@ export async function setupNpm() {
     await runStrict('npm', [
       'install',
       '-g',
-      'npm@11.20.0',
+      `npm@${NPM_RECOVERY_VERSION}`,
       '--ignore-scripts',
     ]);
   } catch (error) {

@@ -1,0 +1,17 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.06s
+   Doc-tests lino_i18n
+
+running 1 test
+test lino-i18n/src/lib.rs - (line 11) ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+all doctests ran in 0.86s; merged doctests compilation took 0.84s
+   Doc-tests lino_i18n_macros
+
+running 1 test
+test lino-i18n-macros/src/lib.rs - (line 7) ... ignored
+
+test result: ok. 0 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+all doctests ran in 0.66s; merged doctests compilation took 0.63s

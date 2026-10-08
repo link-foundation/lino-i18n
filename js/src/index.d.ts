@@ -1,10 +1,7 @@
 // Type declarations for the `lino-i18n` package.
 
 export type CompatibilityAlias =
-  | 'collapseTail'
-  | 'collapse-tail'
-  | 'parentLabel'
-  | 'parent-label';
+  'collapseTail' | 'collapse-tail' | 'parentLabel' | 'parent-label';
 
 export interface CompatibilityAliasOptions {
   /** Alias modes used to expose migration keys without overwriting explicit keys. */

@@ -1,0 +1,19 @@
+Checking /tmp/gh-issue-solver-1791468136225/js/package.json
+
+
+Patch   Backwards-compatible bug fixes
+ eslint-plugin-prettier  ^5.5.5  →  ^5.5.6
+
+Minor   Backwards-compatible features
+ @playwright/test   ^1.63.0  →   ^1.64.0
+ @types/node        ^26.1.1  →   ^26.6.4
+ @types/react      ^19.2.17  →   ^19.3.0
+ eslint             ^10.4.0  →  ^10.12.0
+ prettier            ^3.8.3  →    ^3.9.9
+ react              ^19.1.1  →   ^19.3.0
+
+Major version zero   Anything may change
+ links-notation      ^0.13.0  →  ^0.23.0
+ lino-objects-codec   ^0.4.0  →   ^0.9.0
+
+Run npx npm-check-updates -u to upgrade package.json

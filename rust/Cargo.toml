@@ -1,5 +1,5 @@
 [workspace]
-resolver = "2"
+resolver = "3"
 members = [
     "lino-i18n",
     "lino-i18n-macros",
@@ -7,8 +7,10 @@ members = [
 
 [workspace.package]
 version = "0.3.0"
-edition = "2021"
-rust-version = "1.75"
+edition = "2024"
+# links-notation 0.23 (via lino-objects-codec 0.8) calls u*::is_multiple_of,
+# stable since 1.87; it does not declare this itself (links-notation#334).
+rust-version = "1.87"
 license = "Unlicense"
 repository = "https://github.com/link-foundation/lino-i18n"
 homepage = "https://github.com/link-foundation/lino-i18n"

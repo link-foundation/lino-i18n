@@ -1,0 +1,74 @@
+[0m[38;5;245mrunning 5 tests from ./tests/browser.test.js[0m
+browser entry loads and merges all locale roots in URL order ... [0m[32mok[0m [0m[38;5;245m(48ms)[0m
+browser loader applies compatibility aliases after merging ... [0m[32mok[0m [0m[38;5;245m(8ms)[0m
+browser loader handles empty input and reports the failed URL ... [0m[32mok[0m [0m[38;5;245m(5ms)[0m
+language resolution respects preferences, regional tags, and fallbacks ... [0m[32mok[0m [0m[38;5;245m(690µs)[0m
+detectLanguage uses navigator languages, then language, and works without navigator ... [0m[32mok[0m [0m[38;5;245m(599µs)[0m
+[0m[38;5;245mrunning 6 tests from ./tests/ci-change-detection.test.js[0m
+a main merge detects source changes before the final docs commit ... [0m[32mok[0m [0m[38;5;245m(744ms)[0m
+PR detection uses all commits, including when the last commit is docs ... [0m[32mok[0m [0m[38;5;245m(512ms)[0m
+invalid explicit PR refs fail instead of reporting no changes ... [0m[32mok[0m [0m[38;5;245m(211ms)[0m
+a dependency lock change triggers package validation ... [0m[32mok[0m [0m[38;5;245m(381ms)[0m
+configuration, hooks and guard experiments trigger validation ... [0m[32mok[0m [0m[38;5;245m(2s)[0m
+version guard catches monorepo changes and ignores manifest formatting ... [0m[32mok[0m [0m[38;5;245m(1s)[0m
+[0m[38;5;245mrunning 5 tests from ./tests/cli.test.js[0m
+convert i18next JSON to .lino ... [0m[32mok[0m [0m[38;5;245m(27ms)[0m
+convert can bundle multiple locales into one .lino file ... [0m[32mok[0m [0m[38;5;245m(92ms)[0m
+convert reads defaults from a JSON config file ... [0m[32mok[0m [0m[38;5;245m(9ms)[0m
+check reports missing keys against a reference locale ... [0m[32mok[0m [0m[38;5;245m(10ms)[0m
+t command translates a key with parameters ... [0m[32mok[0m [0m[38;5;245m(33ms)[0m
+[0m[38;5;245mrunning 7 tests from ./tests/converters.test.js[0m
+fromI18next flattens nested keys with dot separator ... [0m[32mok[0m [0m[38;5;245m(2ms)[0m
+fromI18next supports namespace shape with `ns:` prefix ... [0m[32mok[0m [0m[38;5;245m(531µs)[0m
+fromI18next defaults to provided locale when input is a single catalogue ... [0m[32mok[0m [0m[38;5;245m(177µs)[0m
+fromI18nJs rewrites %{var} into {{var}} ... [0m[32mok[0m [0m[38;5;245m(530µs)[0m
+fromReactIntl handles plain ICU strings ... [0m[32mok[0m [0m[38;5;245m(345µs)[0m
+fromReactIntl extracts defaultMessage ... [0m[32mok[0m [0m[38;5;245m(253µs)[0m
+fromReactIntl decompiles compiled AST nodes ... [0m[32mok[0m [0m[38;5;245m(212µs)[0m
+[0m[38;5;245mrunning 22 tests from ./tests/i18n.test.js[0m
+interpolate replaces {{var}} and {var} ... [0m[32mok[0m [0m[38;5;245m(4ms)[0m
+pluralSuffix follows CLDR rules ... [0m[32mok[0m [0m[38;5;245m(831µs)[0m
+parseLinoCatalog round-trips with formatLinoCatalog ... [0m[32mok[0m [0m[38;5;245m(2ms)[0m
+parseLinoCatalog flattens nested groups and selector variants ... [0m[32mok[0m [0m[38;5;245m(1ms)[0m
+parseLinoCatalog flattens Hive Mind style deep multiline catalogues ... [0m[32mok[0m [0m[38;5;245m(8ms)[0m
+parseLinoCatalogs accepts bundled multi-locale files ... [0m[32mok[0m [0m[38;5;245m(782µs)[0m
+parseLinoCatalog can expand compatibility aliases while loading ... [0m[32mok[0m [0m[38;5;245m(349µs)[0m
+formatLinoCatalog emits nested catalogue syntax by default ... [0m[32mok[0m [0m[38;5;245m(3ms)[0m
+formatLinoCatalog preserves scalar parent translations as labels ... [0m[32mok[0m [0m[38;5;245m(625µs)[0m
+parseLinoCatalog aliases nested label children to their parent key ... [0m[32mok[0m [0m[38;5;245m(255µs)[0m
+label aliases preserve selector suffix groups ... [0m[32mok[0m [0m[38;5;245m(297µs)[0m
+createI18n resolves missing keys via fallback ... [0m[32mok[0m [0m[38;5;245m(869µs)[0m
+createI18n subscriptions report observable catalogue changes ... [0m[32mok[0m [0m[38;5;245m(317µs)[0m
+createI18n applies CLDR plurals per locale ... [0m[32mok[0m [0m[38;5;245m(163ms)[0m
+loadLocalesFromDirectory merges bundled and per-language files ... [0m[32mok[0m [0m[38;5;245m(49ms)[0m
+createI18n.loadLocaleFile registers bundled locale files ... [0m[32mok[0m [0m[38;5;245m(128ms)[0m
+createI18n falls back to onMissingKey when set ... [0m[32mok[0m [0m[38;5;245m(503µs)[0m
+createI18n exposes context (gender) suffixes ... [0m[32mok[0m [0m[38;5;245m(257µs)[0m
+createI18n exposes namespace-prefixed keys ... [0m[32mok[0m [0m[38;5;245m(129µs)[0m
+expandCompatibilityAliases adds migration aliases without overwriting explicit keys ... [0m[32mok[0m [0m[38;5;245m(178µs)[0m
+createI18n can expose underscore-tail migration aliases ... [0m[32mok[0m [0m[38;5;245m(173µs)[0m
+createI18n resolves label aliases while explicit keys win ... [0m[32mok[0m [0m[38;5;245m(139µs)[0m
+[0m[38;5;245mrunning 1 test from ./tests/package-metadata.test.js[0m
+npm package dry-run contains the publishable runtime surface ... [0m[32mok[0m [0m[38;5;245m(1s)[0m
+[0m[38;5;245mrunning 5 tests from ./tests/publish-retry.test.js[0m
+accepted publish polls through delayed visibility without another write ... [0m[32mok[0m [0m[38;5;245m(2ms)[0m
+staged conflict polls once and fails with approval guidance when not public ... [0m[32mok[0m [0m[38;5;245m(690µs)[0m
+registry outages stay unknown instead of claiming a missing package ... [0m[32mok[0m [0m[38;5;245m(805µs)[0m
+transient command failure retries, permanent authentication failure does not ... [0m[32mok[0m [0m[38;5;245m(896µs)[0m
+fresh exact-version metadata distinguishes 404, errors, and malformed responses ... [0m[32mok[0m [0m[38;5;245m(15ms)[0m
+[0m[38;5;245mrunning 3 tests from ./tests/react.test.js[0m
+provider hooks react to locale changes and support key prefixes ... [0m[32mok[0m [0m[38;5;245m(73ms)[0m
+Trans, locale selector, and locale-aware format components compose ... [0m[32mok[0m [0m[38;5;245m(85ms)[0m
+hooks fail clearly outside I18nProvider ... [0m[32mok[0m [0m[38;5;245m(6ms)[0m
+[0m[38;5;245mrunning 4 tests from ./tests/release-delivery.test.js[0m
+delivery jobs keep running after optional release gates are skipped ... [0m[32mok[0m [0m[38;5;245m(3ms)[0m
+root README advertises package, release, and CI/CD status badges ... [0m[32mok[0m [0m[38;5;245m(673µs)[0m
+Rust local path dependencies match the workspace package version ... [0m[32mok[0m [0m[38;5;245m(1ms)[0m
+JavaScript GitHub release notes include package and CI/CD badges ... [0m[32mok[0m [0m[38;5;245m(843µs)[0m
+[0m[38;5;245mrunning 3 tests from ./tests/release-metadata.test.js[0m
+actual JS release syncs a detached validated checkout before versioning ... [0m[32mok[0m [0m[38;5;245m(3s)[0m
+npm recovery rejects tampered archive bytes before invoking commands ... [0m[32mok[0m [0m[38;5;245m(12ms)[0m
+merging changesets rejects an invalid fragment before changing files ... [0m[32mok[0m [0m[38;5;245m(155ms)[0m
+
+[0m[32mok[0m | 61 passed | 0 failed [0m[38;5;245m(16s)[0m
+

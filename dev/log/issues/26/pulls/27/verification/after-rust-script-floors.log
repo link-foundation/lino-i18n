@@ -1,0 +1,199 @@
+Checking build-docs-site.rs (including its unit tests)
+    Checking build-docs-site_ff477ec543782b4204bbb53b v0.1.0 (/home/box/.cache/rust-script/projects/ff477ec543782b4204bbb53b)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.22s
+   Compiling build-docs-site_ff477ec543782b4204bbb53b v0.1.0 (/home/box/.cache/rust-script/projects/ff477ec543782b4204bbb53b)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.42s
+     Running unittests /tmp/gh-issue-solver-1791468136225/rust/scripts/build-docs-site.rs (/tmp/gh-issue-solver-1791468136225/rust/target/ci-scripts/debug/deps/build_docs_site_ff477ec543782b4204bbb53b-f17a5d0fea84311f)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+Checking bump-version.rs (including its unit tests)
+    Checking bump-version_10ea83755137c0801e557cc0 v0.1.0 (/home/box/.cache/rust-script/projects/10ea83755137c0801e557cc0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.34s
+   Compiling bump-version_10ea83755137c0801e557cc0 v0.1.0 (/home/box/.cache/rust-script/projects/10ea83755137c0801e557cc0)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.49s
+     Running unittests /tmp/gh-issue-solver-1791468136225/rust/scripts/bump-version.rs (/tmp/gh-issue-solver-1791468136225/rust/target/ci-scripts/debug/deps/bump_version_10ea83755137c0801e557cc0-e810b737d35b5ac2)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+Checking check-changelog-fragment.rs (including its unit tests)
+    Checking check-changelog-fragment_d70f5096a24d7fb625fd61dd v0.1.0 (/home/box/.cache/rust-script/projects/d70f5096a24d7fb625fd61dd)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.19s
+   Compiling check-changelog-fragment_d70f5096a24d7fb625fd61dd v0.1.0 (/home/box/.cache/rust-script/projects/d70f5096a24d7fb625fd61dd)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.42s
+     Running unittests /tmp/gh-issue-solver-1791468136225/rust/scripts/check-changelog-fragment.rs (/tmp/gh-issue-solver-1791468136225/rust/target/ci-scripts/debug/deps/check_changelog_fragment_d70f5096a24d7fb625fd61dd-7d90bfef10b80bda)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+Checking check-file-size.rs (including its unit tests)
+    Checking check-file-size_fc70bb760fd2a0b1a3b61492 v0.1.0 (/home/box/.cache/rust-script/projects/fc70bb760fd2a0b1a3b61492)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.26s
+   Compiling check-file-size_fc70bb760fd2a0b1a3b61492 v0.1.0 (/home/box/.cache/rust-script/projects/fc70bb760fd2a0b1a3b61492)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.67s
+     Running unittests /tmp/gh-issue-solver-1791468136225/rust/scripts/check-file-size.rs (/tmp/gh-issue-solver-1791468136225/rust/target/ci-scripts/debug/deps/check_file_size_fc70bb760fd2a0b1a3b61492-148b1f9094753c64)
+
+running 4 tests
+test tests::classifies_hard_limit_violations ... ok
+test tests::classifies_warning_band_without_blocking ... ok
+test tests::warning_annotation_uses_github_actions_format ... ok
+test tests::check_directory_reports_warning_and_violation_separately ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+Checking check-release-needed.rs (including its unit tests)
+    Checking check-release-needed_725cca295588d8198fce3a2d v0.1.0 (/home/box/.cache/rust-script/projects/725cca295588d8198fce3a2d)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.65s
+   Compiling check-release-needed_725cca295588d8198fce3a2d v0.1.0 (/home/box/.cache/rust-script/projects/725cca295588d8198fce3a2d)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.16s
+     Running unittests /tmp/gh-issue-solver-1791468136225/rust/scripts/check-release-needed.rs (/tmp/gh-issue-solver-1791468136225/rust/target/ci-scripts/debug/deps/check_release_needed_725cca295588d8198fce3a2d-b9516979675b78da)
+
+running 1 test
+test registry_state::tests::only_matching_valid_version_metadata_proves_visibility ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+Checking check-version-modification.rs (including its unit tests)
+    Checking check-version-modification_2d1d219344f76bd20c347b85 v0.1.0 (/home/box/.cache/rust-script/projects/2d1d219344f76bd20c347b85)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.25s
+   Compiling check-version-modification_2d1d219344f76bd20c347b85 v0.1.0 (/home/box/.cache/rust-script/projects/2d1d219344f76bd20c347b85)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.73s
+     Running unittests /tmp/gh-issue-solver-1791468136225/rust/scripts/check-version-modification.rs (/tmp/gh-issue-solver-1791468136225/rust/target/ci-scripts/debug/deps/check_version_modification_2d1d219344f76bd20c347b85-d24a4c8974c8e80c)
+
+running 1 test
+test tests::reads_package_and_workspace_versions_from_whole_manifests ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+Checking collect-changelog.rs (including its unit tests)
+    Checking collect-changelog_17d005a647ac7726f11af2b8 v0.1.0 (/home/box/.cache/rust-script/projects/17d005a647ac7726f11af2b8)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.27s
+   Compiling collect-changelog_17d005a647ac7726f11af2b8 v0.1.0 (/home/box/.cache/rust-script/projects/17d005a647ac7726f11af2b8)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.01s
+     Running unittests /tmp/gh-issue-solver-1791468136225/rust/scripts/collect-changelog.rs (/tmp/gh-issue-solver-1791468136225/rust/target/ci-scripts/debug/deps/collect_changelog_17d005a647ac7726f11af2b8-a0c80934e8b150e2)
+
+running 1 test
+test tests::fragment_cleanup_does_not_hide_filesystem_errors ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+Checking create-changelog-fragment.rs (including its unit tests)
+    Checking create-changelog-fragment_f86cd082b14601a3f99bbb1f v0.1.0 (/home/box/.cache/rust-script/projects/f86cd082b14601a3f99bbb1f)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.20s
+   Compiling create-changelog-fragment_f86cd082b14601a3f99bbb1f v0.1.0 (/home/box/.cache/rust-script/projects/f86cd082b14601a3f99bbb1f)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.45s
+     Running unittests /tmp/gh-issue-solver-1791468136225/rust/scripts/create-changelog-fragment.rs (/tmp/gh-issue-solver-1791468136225/rust/target/ci-scripts/debug/deps/create_changelog_fragment_f86cd082b14601a3f99bbb1f-5f9aa1355d0bfdd4)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+Checking create-github-release.rs (including its unit tests)
+    Checking create-github-release_9a5e23acd72efb39631bd247 v0.1.0 (/home/box/.cache/rust-script/projects/9a5e23acd72efb39631bd247)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.27s
+   Compiling create-github-release_9a5e23acd72efb39631bd247 v0.1.0 (/home/box/.cache/rust-script/projects/9a5e23acd72efb39631bd247)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.86s
+     Running unittests /tmp/gh-issue-solver-1791468136225/rust/scripts/create-github-release.rs (/tmp/gh-issue-solver-1791468136225/rust/target/ci-scripts/debug/deps/create_github_release_9a5e23acd72efb39631bd247-219cacd4043ff0fc)
+
+running 8 tests
+test tests::docker_hub_badge_escapes_build_metadata ... ok
+test tests::docker_hub_badge_links_to_exact_tag ... ok
+test tests::workflow_badge_links_to_main_branch_status ... ok
+test tests::release_payload_keeps_tag_prefix_out_of_release_name ... ok
+test tests::release_label_remains_optional_suffix ... ok
+test tests::release_title_defaults_empty_language_to_rust ... ok
+test tests::release_tag_uses_prefix_with_normalized_semver ... ok
+test tests::release_title_uses_language_and_bare_semver ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+Checking detect-code-changes.rs (including its unit tests)
+    Checking detect-code-changes_0a1d9ebda6527c6da9c2b9de v0.1.0 (/home/box/.cache/rust-script/projects/0a1d9ebda6527c6da9c2b9de)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.14s
+   Compiling detect-code-changes_0a1d9ebda6527c6da9c2b9de v0.1.0 (/home/box/.cache/rust-script/projects/0a1d9ebda6527c6da9c2b9de)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.24s
+     Running unittests /tmp/gh-issue-solver-1791468136225/rust/scripts/detect-code-changes.rs (/tmp/gh-issue-solver-1791468136225/rust/target/ci-scripts/debug/deps/detect_code_changes_0a1d9ebda6527c6da9c2b9de-db163081b6d9ce47)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+Checking get-bump-type.rs (including its unit tests)
+    Checking get-bump-type_99a5f3680967472a6147c737 v0.1.0 (/home/box/.cache/rust-script/projects/99a5f3680967472a6147c737)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.15s
+   Compiling get-bump-type_99a5f3680967472a6147c737 v0.1.0 (/home/box/.cache/rust-script/projects/99a5f3680967472a6147c737)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.32s
+     Running unittests /tmp/gh-issue-solver-1791468136225/rust/scripts/get-bump-type.rs (/tmp/gh-issue-solver-1791468136225/rust/target/ci-scripts/debug/deps/get_bump_type_99a5f3680967472a6147c737-7299704294891f39)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+Checking get-version.rs (including its unit tests)
+    Checking get-version_1fb6c56198157f24bf68aac8 v0.1.0 (/home/box/.cache/rust-script/projects/1fb6c56198157f24bf68aac8)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.27s
+   Compiling get-version_1fb6c56198157f24bf68aac8 v0.1.0 (/home/box/.cache/rust-script/projects/1fb6c56198157f24bf68aac8)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.37s
+     Running unittests /tmp/gh-issue-solver-1791468136225/rust/scripts/get-version.rs (/tmp/gh-issue-solver-1791468136225/rust/target/ci-scripts/debug/deps/get_version_1fb6c56198157f24bf68aac8-ea1267fae9f045e4)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+Checking git-config.rs (including its unit tests)
+    Checking git-config_e7e3c63e38560e898bc7bbbe v0.1.0 (/home/box/.cache/rust-script/projects/e7e3c63e38560e898bc7bbbe)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.11s
+   Compiling git-config_e7e3c63e38560e898bc7bbbe v0.1.0 (/home/box/.cache/rust-script/projects/e7e3c63e38560e898bc7bbbe)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.32s
+     Running unittests /tmp/gh-issue-solver-1791468136225/rust/scripts/git-config.rs (/tmp/gh-issue-solver-1791468136225/rust/target/ci-scripts/debug/deps/git_config_e7e3c63e38560e898bc7bbbe-0f48310b71335dbf)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+Checking publish-crate.rs (including its unit tests)
+    Checking publish-crate_14eac72cc44d93a36af67135 v0.1.0 (/home/box/.cache/rust-script/projects/14eac72cc44d93a36af67135)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.38s
+   Compiling publish-crate_14eac72cc44d93a36af67135 v0.1.0 (/home/box/.cache/rust-script/projects/14eac72cc44d93a36af67135)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.82s
+     Running unittests /tmp/gh-issue-solver-1791468136225/rust/scripts/publish-crate.rs (/tmp/gh-issue-solver-1791468136225/rust/target/ci-scripts/debug/deps/publish_crate_14eac72cc44d93a36af67135-bc945e912d787fea)
+
+running 1 test
+test registry_state::tests::only_matching_valid_version_metadata_proves_visibility ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+Checking version-and-commit.rs (including its unit tests)
+    Checking version-and-commit_76b555fe0b9e4fa7c9ff1e68 v0.1.0 (/home/box/.cache/rust-script/projects/76b555fe0b9e4fa7c9ff1e68)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.53s
+   Compiling version-and-commit_76b555fe0b9e4fa7c9ff1e68 v0.1.0 (/home/box/.cache/rust-script/projects/76b555fe0b9e4fa7c9ff1e68)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.93s
+     Running unittests /tmp/gh-issue-solver-1791468136225/rust/scripts/version-and-commit.rs (/tmp/gh-issue-solver-1791468136225/rust/target/ci-scripts/debug/deps/version_and_commit_76b555fe0b9e4fa7c9ff1e68-a3b2b0918ed6e808)
+
+running 1 test
+test registry_state::tests::only_matching_valid_version_metadata_proves_visibility ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+Checking wait-for-crate.rs (including its unit tests)
+    Checking wait-for-crate_430c2e7783577e976e31fefb v0.1.0 (/home/box/.cache/rust-script/projects/430c2e7783577e976e31fefb)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.30s
+   Compiling wait-for-crate_430c2e7783577e976e31fefb v0.1.0 (/home/box/.cache/rust-script/projects/430c2e7783577e976e31fefb)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.73s
+     Running unittests /tmp/gh-issue-solver-1791468136225/rust/scripts/wait-for-crate.rs (/tmp/gh-issue-solver-1791468136225/rust/target/ci-scripts/debug/deps/wait_for_crate_430c2e7783577e976e31fefb-4cb352ea96563c05)
+
+running 3 tests
+test tests::skips_template_default_package_name ... ok
+test tests::waits_for_real_package_names ... ok
+test registry_state::tests::only_matching_valid_version_metadata_proves_visibility ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+Prepared 17 Cargo targets for standalone helper analysis
+Executable helpers: 17; included as Cargo targets: 17
+Every executable helper is included in the semantic-analysis manifest.

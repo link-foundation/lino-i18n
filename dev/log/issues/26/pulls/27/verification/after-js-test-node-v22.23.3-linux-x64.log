@@ -1,0 +1,382 @@
+v22.23.3
+10.9.9
+
+> lino-i18n@0.3.0 test
+> node --throw-deprecation --test --test-timeout=30000 tests/*.test.js
+
+TAP version 13
+# Subtest: browser entry loads and merges all locale roots in URL order
+ok 1 - browser entry loads and merges all locale roots in URL order
+  ---
+  duration_ms: 86.370252
+  type: 'test'
+  ...
+# Subtest: browser loader applies compatibility aliases after merging
+ok 2 - browser loader applies compatibility aliases after merging
+  ---
+  duration_ms: 6.065847
+  type: 'test'
+  ...
+# Subtest: browser loader handles empty input and reports the failed URL
+ok 3 - browser loader handles empty input and reports the failed URL
+  ---
+  duration_ms: 10.566673
+  type: 'test'
+  ...
+# Subtest: language resolution respects preferences, regional tags, and fallbacks
+ok 4 - language resolution respects preferences, regional tags, and fallbacks
+  ---
+  duration_ms: 15.306606
+  type: 'test'
+  ...
+# Subtest: detectLanguage uses navigator languages, then language, and works without navigator
+ok 5 - detectLanguage uses navigator languages, then language, and works without navigator
+  ---
+  duration_ms: 3.207955
+  type: 'test'
+  ...
+# Subtest: a main merge detects source changes before the final docs commit
+ok 6 - a main merge detects source changes before the final docs commit
+  ---
+  duration_ms: 1619.217185
+  type: 'test'
+  ...
+# Subtest: PR detection uses all commits, including when the last commit is docs
+ok 7 - PR detection uses all commits, including when the last commit is docs
+  ---
+  duration_ms: 1576.997764
+  type: 'test'
+  ...
+# Subtest: invalid explicit PR refs fail instead of reporting no changes
+ok 8 - invalid explicit PR refs fail instead of reporting no changes
+  ---
+  duration_ms: 672.307246
+  type: 'test'
+  ...
+# Subtest: a dependency lock change triggers package validation
+ok 9 - a dependency lock change triggers package validation
+  ---
+  duration_ms: 842.692768
+  type: 'test'
+  ...
+# Subtest: configuration, hooks and guard experiments trigger validation
+ok 10 - configuration, hooks and guard experiments trigger validation
+  ---
+  duration_ms: 4974.575115
+  type: 'test'
+  ...
+# Subtest: version guard catches monorepo changes and ignores manifest formatting
+ok 11 - version guard catches monorepo changes and ignores manifest formatting
+  ---
+  duration_ms: 1297.406139
+  type: 'test'
+  ...
+# Subtest: convert i18next JSON to .lino
+ok 12 - convert i18next JSON to .lino
+  ---
+  duration_ms: 93.341817
+  type: 'test'
+  ...
+# Subtest: convert can bundle multiple locales into one .lino file
+ok 13 - convert can bundle multiple locales into one .lino file
+  ---
+  duration_ms: 39.020777
+  type: 'test'
+  ...
+# Subtest: convert reads defaults from a JSON config file
+ok 14 - convert reads defaults from a JSON config file
+  ---
+  duration_ms: 83.118365
+  type: 'test'
+  ...
+# Subtest: check reports missing keys against a reference locale
+ok 15 - check reports missing keys against a reference locale
+  ---
+  duration_ms: 50.250358
+  type: 'test'
+  ...
+# Subtest: t command translates a key with parameters
+ok 16 - t command translates a key with parameters
+  ---
+  duration_ms: 43.284842
+  type: 'test'
+  ...
+# Subtest: fromI18next flattens nested keys with dot separator
+ok 17 - fromI18next flattens nested keys with dot separator
+  ---
+  duration_ms: 13.163047
+  type: 'test'
+  ...
+# Subtest: fromI18next supports namespace shape with `ns:` prefix
+ok 18 - fromI18next supports namespace shape with `ns:` prefix
+  ---
+  duration_ms: 3.999752
+  type: 'test'
+  ...
+# Subtest: fromI18next defaults to provided locale when input is a single catalogue
+ok 19 - fromI18next defaults to provided locale when input is a single catalogue
+  ---
+  duration_ms: 0.497599
+  type: 'test'
+  ...
+# Subtest: fromI18nJs rewrites %{var} into {{var}}
+ok 20 - fromI18nJs rewrites %{var} into {{var}}
+  ---
+  duration_ms: 10.47359
+  type: 'test'
+  ...
+# Subtest: fromReactIntl handles plain ICU strings
+ok 21 - fromReactIntl handles plain ICU strings
+  ---
+  duration_ms: 0.656335
+  type: 'test'
+  ...
+# Subtest: fromReactIntl extracts defaultMessage
+ok 22 - fromReactIntl extracts defaultMessage
+  ---
+  duration_ms: 4.517018
+  type: 'test'
+  ...
+# Subtest: fromReactIntl decompiles compiled AST nodes
+ok 23 - fromReactIntl decompiles compiled AST nodes
+  ---
+  duration_ms: 0.656765
+  type: 'test'
+  ...
+# Subtest: interpolate replaces {{var}} and {var}
+ok 24 - interpolate replaces {{var}} and {var}
+  ---
+  duration_ms: 1.851655
+  type: 'test'
+  ...
+# Subtest: pluralSuffix follows CLDR rules
+ok 25 - pluralSuffix follows CLDR rules
+  ---
+  duration_ms: 1.687249
+  type: 'test'
+  ...
+# Subtest: parseLinoCatalog round-trips with formatLinoCatalog
+ok 26 - parseLinoCatalog round-trips with formatLinoCatalog
+  ---
+  duration_ms: 4.737868
+  type: 'test'
+  ...
+# Subtest: parseLinoCatalog flattens nested groups and selector variants
+ok 27 - parseLinoCatalog flattens nested groups and selector variants
+  ---
+  duration_ms: 0.902173
+  type: 'test'
+  ...
+# Subtest: parseLinoCatalog flattens Hive Mind style deep multiline catalogues
+ok 28 - parseLinoCatalog flattens Hive Mind style deep multiline catalogues
+  ---
+  duration_ms: 0.778413
+  type: 'test'
+  ...
+# Subtest: parseLinoCatalogs accepts bundled multi-locale files
+ok 29 - parseLinoCatalogs accepts bundled multi-locale files
+  ---
+  duration_ms: 0.54147
+  type: 'test'
+  ...
+# Subtest: parseLinoCatalog can expand compatibility aliases while loading
+ok 30 - parseLinoCatalog can expand compatibility aliases while loading
+  ---
+  duration_ms: 2.613717
+  type: 'test'
+  ...
+# Subtest: formatLinoCatalog emits nested catalogue syntax by default
+ok 31 - formatLinoCatalog emits nested catalogue syntax by default
+  ---
+  duration_ms: 1.079584
+  type: 'test'
+  ...
+# Subtest: formatLinoCatalog preserves scalar parent translations as labels
+ok 32 - formatLinoCatalog preserves scalar parent translations as labels
+  ---
+  duration_ms: 0.848183
+  type: 'test'
+  ...
+# Subtest: parseLinoCatalog aliases nested label children to their parent key
+ok 33 - parseLinoCatalog aliases nested label children to their parent key
+  ---
+  duration_ms: 0.920156
+  type: 'test'
+  ...
+# Subtest: label aliases preserve selector suffix groups
+ok 34 - label aliases preserve selector suffix groups
+  ---
+  duration_ms: 0.583569
+  type: 'test'
+  ...
+# Subtest: createI18n resolves missing keys via fallback
+ok 35 - createI18n resolves missing keys via fallback
+  ---
+  duration_ms: 1.017739
+  type: 'test'
+  ...
+# Subtest: createI18n subscriptions report observable catalogue changes
+ok 36 - createI18n subscriptions report observable catalogue changes
+  ---
+  duration_ms: 0.413381
+  type: 'test'
+  ...
+# Subtest: createI18n applies CLDR plurals per locale
+ok 37 - createI18n applies CLDR plurals per locale
+  ---
+  duration_ms: 175.270774
+  type: 'test'
+  ...
+# Subtest: loadLocalesFromDirectory merges bundled and per-language files
+ok 38 - loadLocalesFromDirectory merges bundled and per-language files
+  ---
+  duration_ms: 82.292625
+  type: 'test'
+  ...
+# Subtest: createI18n.loadLocaleFile registers bundled locale files
+ok 39 - createI18n.loadLocaleFile registers bundled locale files
+  ---
+  duration_ms: 40.285446
+  type: 'test'
+  ...
+# Subtest: createI18n falls back to onMissingKey when set
+ok 40 - createI18n falls back to onMissingKey when set
+  ---
+  duration_ms: 0.98579
+  type: 'test'
+  ...
+# Subtest: createI18n exposes context (gender) suffixes
+ok 41 - createI18n exposes context (gender) suffixes
+  ---
+  duration_ms: 0.445692
+  type: 'test'
+  ...
+# Subtest: createI18n exposes namespace-prefixed keys
+ok 42 - createI18n exposes namespace-prefixed keys
+  ---
+  duration_ms: 0.260606
+  type: 'test'
+  ...
+# Subtest: expandCompatibilityAliases adds migration aliases without overwriting explicit keys
+ok 43 - expandCompatibilityAliases adds migration aliases without overwriting explicit keys
+  ---
+  duration_ms: 0.640497
+  type: 'test'
+  ...
+# Subtest: createI18n can expose underscore-tail migration aliases
+ok 44 - createI18n can expose underscore-tail migration aliases
+  ---
+  duration_ms: 0.457814
+  type: 'test'
+  ...
+# Subtest: createI18n resolves label aliases while explicit keys win
+ok 45 - createI18n resolves label aliases while explicit keys win
+  ---
+  duration_ms: 0.260676
+  type: 'test'
+  ...
+# Subtest: npm package dry-run contains the publishable runtime surface
+ok 46 - npm package dry-run contains the publishable runtime surface
+  ---
+  duration_ms: 7202.050363
+  type: 'test'
+  ...
+# Subtest: accepted publish polls through delayed visibility without another write
+ok 47 - accepted publish polls through delayed visibility without another write
+  ---
+  duration_ms: 22.790078
+  type: 'test'
+  ...
+# Subtest: staged conflict polls once and fails with approval guidance when not public
+ok 48 - staged conflict polls once and fails with approval guidance when not public
+  ---
+  duration_ms: 0.888678
+  type: 'test'
+  ...
+# Subtest: registry outages stay unknown instead of claiming a missing package
+ok 49 - registry outages stay unknown instead of claiming a missing package
+  ---
+  duration_ms: 1.817109
+  type: 'test'
+  ...
+# Subtest: transient command failure retries, permanent authentication failure does not
+ok 50 - transient command failure retries, permanent authentication failure does not
+  ---
+  duration_ms: 10.541686
+  type: 'test'
+  ...
+# Subtest: fresh exact-version metadata distinguishes 404, errors, and malformed responses
+ok 51 - fresh exact-version metadata distinguishes 404, errors, and malformed responses
+  ---
+  duration_ms: 12.537419
+  type: 'test'
+  ...
+# Subtest: provider hooks react to locale changes and support key prefixes
+ok 52 - provider hooks react to locale changes and support key prefixes
+  ---
+  duration_ms: 289.173313
+  type: 'test'
+  ...
+# Subtest: Trans, locale selector, and locale-aware format components compose
+ok 53 - Trans, locale selector, and locale-aware format components compose
+  ---
+  duration_ms: 278.040223
+  type: 'test'
+  ...
+# Subtest: hooks fail clearly outside I18nProvider
+ok 54 - hooks fail clearly outside I18nProvider
+  ---
+  duration_ms: 28.468923
+  type: 'test'
+  ...
+# Subtest: delivery jobs keep running after optional release gates are skipped
+ok 55 - delivery jobs keep running after optional release gates are skipped
+  ---
+  duration_ms: 76.434687
+  type: 'test'
+  ...
+# Subtest: root README advertises package, release, and CI/CD status badges
+ok 56 - root README advertises package, release, and CI/CD status badges
+  ---
+  duration_ms: 0.71872
+  type: 'test'
+  ...
+# Subtest: Rust local path dependencies match the workspace package version
+ok 57 - Rust local path dependencies match the workspace package version
+  ---
+  duration_ms: 14.356574
+  type: 'test'
+  ...
+# Subtest: JavaScript GitHub release notes include package and CI/CD badges
+ok 58 - JavaScript GitHub release notes include package and CI/CD badges
+  ---
+  duration_ms: 11.305942
+  type: 'test'
+  ...
+# Subtest: actual JS release syncs a detached validated checkout before versioning
+ok 59 - actual JS release syncs a detached validated checkout before versioning
+  ---
+  duration_ms: 8463.77304
+  type: 'test'
+  ...
+# Subtest: npm recovery rejects tampered archive bytes before invoking commands
+ok 60 - npm recovery rejects tampered archive bytes before invoking commands
+  ---
+  duration_ms: 16.727537
+  type: 'test'
+  ...
+# Subtest: merging changesets rejects an invalid fragment before changing files
+ok 61 - merging changesets rejects an invalid fragment before changing files
+  ---
+  duration_ms: 152.263744
+  type: 'test'
+  ...
+1..61
+# tests 61
+# suites 0
+# pass 61
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 11827.594634

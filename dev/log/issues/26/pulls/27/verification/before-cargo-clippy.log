@@ -1,0 +1,12 @@
+    Checking memchr v2.8.0
+    Checking base64 v0.22.1
+    Checking unicode-ident v1.0.24
+    Checking proc-macro2 v1.0.106
+    Checking quote v1.0.45
+    Checking nom v8.0.0
+    Checking syn v2.0.117
+    Checking links-notation v0.13.0
+    Checking lino-objects-codec v0.2.1
+    Checking lino-i18n-macros v0.3.0 (/tmp/gh-issue-solver-1791468136225/rust/lino-i18n-macros)
+    Checking lino-i18n v0.3.0 (/tmp/gh-issue-solver-1791468136225/rust/lino-i18n)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 14.01s

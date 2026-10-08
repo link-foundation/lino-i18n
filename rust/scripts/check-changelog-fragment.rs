@@ -2,7 +2,7 @@
 //! Require a new, valid fragment for every published Rust package change.
 //! ```cargo
 //! [dependencies]
-//! regex = "1"
+//! regex = "1.13.1"
 //! ```
 use std::process::exit;
 #[path = "git-changes.rs"]

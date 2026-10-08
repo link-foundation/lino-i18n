@@ -172,7 +172,7 @@ function parseLogicalLines(text) {
     .replace(/\r\n/g, '\n')
     .split('\n');
   const entries = [];
-  for (let index = 0; index < lines.length; ) {
+  for (let index = 0; index < lines.length;) {
     const raw = lines[index].replace(/\r$/, '');
     const content = raw.trimEnd();
     if (!content.trim() || content.trimStart().startsWith('#')) {

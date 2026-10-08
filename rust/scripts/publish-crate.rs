@@ -19,9 +19,9 @@
 //!
 //! ```cargo
 //! [dependencies]
-//! regex = "1"
-//! ureq = "2"
-//! serde_json = "1"
+//! regex = "1.13.1"
+//! ureq = "3.4.2"
+//! serde_json = "1.0.151"
 //! ```
 
 #[path = "github-output.rs"]

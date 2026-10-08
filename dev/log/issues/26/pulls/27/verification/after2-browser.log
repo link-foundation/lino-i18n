@@ -1,0 +1,11 @@
+
+> lino-i18n@0.3.0 test:browser
+> playwright test
+
+
+Running 2 tests using 1 worker
+
+  ✓  1 tests/browser/catalogs.pw.js:18:1 › native browser modules fetch catalogs and switch language at runtime (1.1s)
+  ✓  2 tests/browser/catalogs.pw.js:46:1 › public browser export bundles without Node built-ins and tree-shakes unused loading code (1.1s)
+
+  2 passed (7.4s)

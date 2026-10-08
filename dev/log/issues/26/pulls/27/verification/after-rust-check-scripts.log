@@ -1,0 +1,332 @@
+Checking build-docs-site.rs (including its unit tests)
+    Checking build-docs-site_ff477ec543782b4204bbb53b v0.1.0 (/home/box/.cache/rust-script/projects/ff477ec543782b4204bbb53b)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.34s
+   Compiling build-docs-site_ff477ec543782b4204bbb53b v0.1.0 (/home/box/.cache/rust-script/projects/ff477ec543782b4204bbb53b)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.48s
+     Running unittests /tmp/gh-issue-solver-1791468136225/rust/scripts/build-docs-site.rs (/tmp/gh-issue-solver-1791468136225/rust/target/ci-scripts/debug/deps/build_docs_site_ff477ec543782b4204bbb53b-f17a5d0fea84311f)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+Checking bump-version.rs (including its unit tests)
+    Updating crates.io index
+     Locking 5 packages to latest compatible versions
+    Checking memchr v2.8.3
+    Checking regex-syntax v0.8.11
+    Checking aho-corasick v1.1.5
+    Checking regex-automata v0.4.18
+    Checking regex v1.13.1
+    Checking bump-version_10ea83755137c0801e557cc0 v0.1.0 (/home/box/.cache/rust-script/projects/10ea83755137c0801e557cc0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 7.01s
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+   Compiling memchr v2.8.3
+   Compiling regex-syntax v0.8.11
+   Compiling aho-corasick v1.1.5
+   Compiling regex-automata v0.4.18
+   Compiling regex v1.13.1
+   Compiling bump-version_10ea83755137c0801e557cc0 v0.1.0 (/home/box/.cache/rust-script/projects/10ea83755137c0801e557cc0)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 12.36s
+     Running unittests /tmp/gh-issue-solver-1791468136225/rust/scripts/bump-version.rs (/tmp/gh-issue-solver-1791468136225/rust/target/ci-scripts/debug/deps/bump_version_10ea83755137c0801e557cc0-e810b737d35b5ac2)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+Checking check-changelog-fragment.rs (including its unit tests)
+    Checking check-changelog-fragment_d70f5096a24d7fb625fd61dd v0.1.0 (/home/box/.cache/rust-script/projects/d70f5096a24d7fb625fd61dd)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.27s
+   Compiling check-changelog-fragment_d70f5096a24d7fb625fd61dd v0.1.0 (/home/box/.cache/rust-script/projects/d70f5096a24d7fb625fd61dd)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.44s
+     Running unittests /tmp/gh-issue-solver-1791468136225/rust/scripts/check-changelog-fragment.rs (/tmp/gh-issue-solver-1791468136225/rust/target/ci-scripts/debug/deps/check_changelog_fragment_d70f5096a24d7fb625fd61dd-7d90bfef10b80bda)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+Checking check-file-size.rs (including its unit tests)
+    Checking same-file v1.0.6
+    Checking walkdir v2.5.0
+    Checking check-file-size_fc70bb760fd2a0b1a3b61492 v0.1.0 (/home/box/.cache/rust-script/projects/fc70bb760fd2a0b1a3b61492)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.64s
+   Compiling same-file v1.0.6
+   Compiling walkdir v2.5.0
+   Compiling check-file-size_fc70bb760fd2a0b1a3b61492 v0.1.0 (/home/box/.cache/rust-script/projects/fc70bb760fd2a0b1a3b61492)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.60s
+     Running unittests /tmp/gh-issue-solver-1791468136225/rust/scripts/check-file-size.rs (/tmp/gh-issue-solver-1791468136225/rust/target/ci-scripts/debug/deps/check_file_size_fc70bb760fd2a0b1a3b61492-148b1f9094753c64)
+
+running 4 tests
+test tests::warning_annotation_uses_github_actions_format ... ok
+test tests::classifies_hard_limit_violations ... ok
+test tests::classifies_warning_band_without_blocking ... ok
+test tests::check_directory_reports_warning_and_violation_separately ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+Checking check-release-needed.rs (including its unit tests)
+    Updating crates.io index
+     Locking 56 packages to latest compatible versions
+   Compiling find-msvc-tools v0.1.14
+   Compiling shlex v2.0.1
+    Checking cfg-if v1.0.5
+   Compiling libc v0.2.190
+   Compiling proc-macro2 v1.0.107
+   Compiling quote v1.0.47
+   Compiling unicode-ident v1.0.26
+    Checking zeroize v1.9.1
+   Compiling cc v1.6.0
+   Compiling crc32fast v1.5.2
+   Compiling serde_core v1.0.229
+    Checking rustls-pki-types v1.15.1
+    Checking itoa v1.0.18
+    Checking untrusted v0.9.0
+   Compiling httparse v1.10.1
+   Compiling zmij v1.0.23
+    Checking simd-adler32 v0.3.10
+    Checking bytes v1.12.1
+    Checking log v0.4.34
+    Checking adler2 v2.0.1
+   Compiling rustls v0.23.45
+    Checking miniz_oxide v0.9.1
+    Checking http v1.5.0
+   Compiling serde v1.0.229
+    Checking getrandom v0.2.17
+   Compiling syn v3.0.6
+   Compiling serde_json v1.0.151
+    Checking subtle v2.6.1
+    Checking base64 v0.23.1
+    Checking once_cell v1.21.4
+    Checking flate2 v1.1.10
+   Compiling ring v0.17.14
+    Checking ureq-proto v0.6.4
+    Checking webpki-roots v1.0.9
+    Checking utf8-zero v0.8.1
+    Checking percent-encoding v2.3.2
+   Compiling serde_derive v1.0.229
+    Checking rustls-webpki v0.103.15
+    Checking ureq v3.4.2
+    Checking check-release-needed_725cca295588d8198fce3a2d v0.1.0 (/home/box/.cache/rust-script/projects/725cca295588d8198fce3a2d)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 25.39s
+   Compiling cfg-if v1.0.5
+   Compiling zeroize v1.9.1
+   Compiling libc v0.2.190
+   Compiling itoa v1.0.18
+   Compiling untrusted v0.9.0
+   Compiling adler2 v2.0.1
+   Compiling simd-adler32 v0.3.10
+   Compiling bytes v1.12.1
+   Compiling rustls-pki-types v1.15.1
+   Compiling log v0.4.34
+   Compiling miniz_oxide v0.9.1
+   Compiling crc32fast v1.5.2
+   Compiling httparse v1.10.1
+   Compiling serde_core v1.0.229
+   Compiling base64 v0.23.1
+   Compiling once_cell v1.21.4
+   Compiling subtle v2.6.1
+   Compiling http v1.5.0
+   Compiling flate2 v1.1.10
+   Compiling getrandom v0.2.17
+   Compiling webpki-roots v1.0.9
+   Compiling zmij v1.0.23
+   Compiling utf8-zero v0.8.1
+   Compiling ring v0.17.14
+   Compiling percent-encoding v2.3.2
+   Compiling ureq-proto v0.6.4
+   Compiling rustls-webpki v0.103.15
+   Compiling serde v1.0.229
+   Compiling serde_json v1.0.151
+   Compiling rustls v0.23.45
+   Compiling ureq v3.4.2
+   Compiling check-release-needed_725cca295588d8198fce3a2d v0.1.0 (/home/box/.cache/rust-script/projects/725cca295588d8198fce3a2d)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 26.17s
+     Running unittests /tmp/gh-issue-solver-1791468136225/rust/scripts/check-release-needed.rs (/tmp/gh-issue-solver-1791468136225/rust/target/ci-scripts/debug/deps/check_release_needed_725cca295588d8198fce3a2d-b9516979675b78da)
+
+running 1 test
+test registry_state::tests::only_matching_valid_version_metadata_proves_visibility ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+Checking check-version-modification.rs (including its unit tests)
+    Updating crates.io index
+     Locking 6 packages to latest compatible versions
+    Updating serde_spanned v0.6.9 -> v1.1.2
+    Updating toml v0.8.23 -> v1.1.7+spec-1.1.0
+    Updating toml_datetime v0.6.11 -> v1.1.2+spec-1.1.0
+      Adding toml_parser v1.1.4+spec-1.1.0
+      Adding toml_writer v1.1.3+spec-1.1.0
+    Updating winnow v0.7.15 -> v1.0.4
+   Compiling serde_core v1.0.229
+    Checking winnow v1.0.4
+    Checking toml_writer v1.1.3+spec-1.1.0
+    Checking toml_parser v1.1.4+spec-1.1.0
+    Checking serde_spanned v1.1.2
+    Checking toml_datetime v1.1.2+spec-1.1.0
+    Checking toml v1.1.7+spec-1.1.0
+    Checking check-version-modification_2d1d219344f76bd20c347b85 v0.1.0 (/home/box/.cache/rust-script/projects/2d1d219344f76bd20c347b85)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 6.65s
+   Compiling serde_core v1.0.229
+   Compiling winnow v1.0.4
+   Compiling toml_writer v1.1.3+spec-1.1.0
+   Compiling toml_parser v1.1.4+spec-1.1.0
+   Compiling toml_datetime v1.1.2+spec-1.1.0
+   Compiling serde_spanned v1.1.2
+   Compiling toml v1.1.7+spec-1.1.0
+   Compiling check-version-modification_2d1d219344f76bd20c347b85 v0.1.0 (/home/box/.cache/rust-script/projects/2d1d219344f76bd20c347b85)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 9.08s
+     Running unittests /tmp/gh-issue-solver-1791468136225/rust/scripts/check-version-modification.rs (/tmp/gh-issue-solver-1791468136225/rust/target/ci-scripts/debug/deps/check_version_modification_2d1d219344f76bd20c347b85-d24a4c8974c8e80c)
+
+running 1 test
+test tests::reads_package_and_workspace_versions_from_whole_manifests ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+Checking collect-changelog.rs (including its unit tests)
+    Updating crates.io index
+     Locking 42 packages to latest compatible versions
+   Compiling autocfg v1.5.1
+    Checking iana-time-zone v0.1.65
+   Compiling num-traits v0.2.19
+    Checking chrono v0.4.45
+    Checking collect-changelog_17d005a647ac7726f11af2b8 v0.1.0 (/home/box/.cache/rust-script/projects/17d005a647ac7726f11af2b8)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 5.38s
+   Compiling num-traits v0.2.19
+   Compiling iana-time-zone v0.1.65
+   Compiling chrono v0.4.45
+   Compiling collect-changelog_17d005a647ac7726f11af2b8 v0.1.0 (/home/box/.cache/rust-script/projects/17d005a647ac7726f11af2b8)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 4.41s
+     Running unittests /tmp/gh-issue-solver-1791468136225/rust/scripts/collect-changelog.rs (/tmp/gh-issue-solver-1791468136225/rust/target/ci-scripts/debug/deps/collect_changelog_17d005a647ac7726f11af2b8-a0c80934e8b150e2)
+
+running 1 test
+test tests::fragment_cleanup_does_not_hide_filesystem_errors ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+Checking create-changelog-fragment.rs (including its unit tests)
+    Updating crates.io index
+     Locking 37 packages to latest compatible versions
+    Checking create-changelog-fragment_f86cd082b14601a3f99bbb1f v0.1.0 (/home/box/.cache/rust-script/projects/f86cd082b14601a3f99bbb1f)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.53s
+   Compiling create-changelog-fragment_f86cd082b14601a3f99bbb1f v0.1.0 (/home/box/.cache/rust-script/projects/f86cd082b14601a3f99bbb1f)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.37s
+     Running unittests /tmp/gh-issue-solver-1791468136225/rust/scripts/create-changelog-fragment.rs (/tmp/gh-issue-solver-1791468136225/rust/target/ci-scripts/debug/deps/create_changelog_fragment_f86cd082b14601a3f99bbb1f-5f9aa1355d0bfdd4)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+Checking create-github-release.rs (including its unit tests)
+    Updating crates.io index
+     Locking 15 packages to latest compatible versions
+    Checking create-github-release_9a5e23acd72efb39631bd247 v0.1.0 (/home/box/.cache/rust-script/projects/9a5e23acd72efb39631bd247)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.55s
+   Compiling create-github-release_9a5e23acd72efb39631bd247 v0.1.0 (/home/box/.cache/rust-script/projects/9a5e23acd72efb39631bd247)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.04s
+     Running unittests /tmp/gh-issue-solver-1791468136225/rust/scripts/create-github-release.rs (/tmp/gh-issue-solver-1791468136225/rust/target/ci-scripts/debug/deps/create_github_release_9a5e23acd72efb39631bd247-219cacd4043ff0fc)
+
+running 8 tests
+test tests::docker_hub_badge_links_to_exact_tag ... ok
+test tests::docker_hub_badge_escapes_build_metadata ... ok
+test tests::workflow_badge_links_to_main_branch_status ... ok
+test tests::release_title_defaults_empty_language_to_rust ... ok
+test tests::release_payload_keeps_tag_prefix_out_of_release_name ... ok
+test tests::release_label_remains_optional_suffix ... ok
+test tests::release_title_uses_language_and_bare_semver ... ok
+test tests::release_tag_uses_prefix_with_normalized_semver ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+Checking detect-code-changes.rs (including its unit tests)
+    Checking detect-code-changes_0a1d9ebda6527c6da9c2b9de v0.1.0 (/home/box/.cache/rust-script/projects/0a1d9ebda6527c6da9c2b9de)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.22s
+   Compiling detect-code-changes_0a1d9ebda6527c6da9c2b9de v0.1.0 (/home/box/.cache/rust-script/projects/0a1d9ebda6527c6da9c2b9de)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.37s
+     Running unittests /tmp/gh-issue-solver-1791468136225/rust/scripts/detect-code-changes.rs (/tmp/gh-issue-solver-1791468136225/rust/target/ci-scripts/debug/deps/detect_code_changes_0a1d9ebda6527c6da9c2b9de-db163081b6d9ce47)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+Checking get-bump-type.rs (including its unit tests)
+    Checking get-bump-type_99a5f3680967472a6147c737 v0.1.0 (/home/box/.cache/rust-script/projects/99a5f3680967472a6147c737)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.23s
+   Compiling get-bump-type_99a5f3680967472a6147c737 v0.1.0 (/home/box/.cache/rust-script/projects/99a5f3680967472a6147c737)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.50s
+     Running unittests /tmp/gh-issue-solver-1791468136225/rust/scripts/get-bump-type.rs (/tmp/gh-issue-solver-1791468136225/rust/target/ci-scripts/debug/deps/get_bump_type_99a5f3680967472a6147c737-7299704294891f39)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+Checking get-version.rs (including its unit tests)
+    Checking get-version_1fb6c56198157f24bf68aac8 v0.1.0 (/home/box/.cache/rust-script/projects/1fb6c56198157f24bf68aac8)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.31s
+   Compiling get-version_1fb6c56198157f24bf68aac8 v0.1.0 (/home/box/.cache/rust-script/projects/1fb6c56198157f24bf68aac8)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.44s
+     Running unittests /tmp/gh-issue-solver-1791468136225/rust/scripts/get-version.rs (/tmp/gh-issue-solver-1791468136225/rust/target/ci-scripts/debug/deps/get_version_1fb6c56198157f24bf68aac8-ea1267fae9f045e4)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+Checking git-config.rs (including its unit tests)
+    Checking git-config_e7e3c63e38560e898bc7bbbe v0.1.0 (/home/box/.cache/rust-script/projects/e7e3c63e38560e898bc7bbbe)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s
+   Compiling git-config_e7e3c63e38560e898bc7bbbe v0.1.0 (/home/box/.cache/rust-script/projects/e7e3c63e38560e898bc7bbbe)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.36s
+     Running unittests /tmp/gh-issue-solver-1791468136225/rust/scripts/git-config.rs (/tmp/gh-issue-solver-1791468136225/rust/target/ci-scripts/debug/deps/git_config_e7e3c63e38560e898bc7bbbe-0f48310b71335dbf)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+Checking publish-crate.rs (including its unit tests)
+    Updating crates.io index
+     Locking 56 packages to latest compatible versions
+   Compiling serde_core v1.0.229
+    Checking serde_json v1.0.151
+    Checking publish-crate_14eac72cc44d93a36af67135 v0.1.0 (/home/box/.cache/rust-script/projects/14eac72cc44d93a36af67135)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 5.23s
+   Compiling serde_core v1.0.229
+   Compiling serde_json v1.0.151
+   Compiling publish-crate_14eac72cc44d93a36af67135 v0.1.0 (/home/box/.cache/rust-script/projects/14eac72cc44d93a36af67135)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 7.78s
+     Running unittests /tmp/gh-issue-solver-1791468136225/rust/scripts/publish-crate.rs (/tmp/gh-issue-solver-1791468136225/rust/target/ci-scripts/debug/deps/publish_crate_14eac72cc44d93a36af67135-bc945e912d787fea)
+
+running 1 test
+test registry_state::tests::only_matching_valid_version_metadata_proves_visibility ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+Checking version-and-commit.rs (including its unit tests)
+    Updating crates.io index
+     Locking 82 packages to latest compatible versions
+    Checking version-and-commit_76b555fe0b9e4fa7c9ff1e68 v0.1.0 (/home/box/.cache/rust-script/projects/76b555fe0b9e4fa7c9ff1e68)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.38s
+   Compiling version-and-commit_76b555fe0b9e4fa7c9ff1e68 v0.1.0 (/home/box/.cache/rust-script/projects/76b555fe0b9e4fa7c9ff1e68)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.91s
+     Running unittests /tmp/gh-issue-solver-1791468136225/rust/scripts/version-and-commit.rs (/tmp/gh-issue-solver-1791468136225/rust/target/ci-scripts/debug/deps/version_and_commit_76b555fe0b9e4fa7c9ff1e68-a3b2b0918ed6e808)
+
+running 1 test
+test registry_state::tests::only_matching_valid_version_metadata_proves_visibility ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+Checking wait-for-crate.rs (including its unit tests)
+    Updating crates.io index
+     Locking 56 packages to latest compatible versions
+    Checking wait-for-crate_430c2e7783577e976e31fefb v0.1.0 (/home/box/.cache/rust-script/projects/430c2e7783577e976e31fefb)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.97s
+   Compiling wait-for-crate_430c2e7783577e976e31fefb v0.1.0 (/home/box/.cache/rust-script/projects/430c2e7783577e976e31fefb)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.06s
+     Running unittests /tmp/gh-issue-solver-1791468136225/rust/scripts/wait-for-crate.rs (/tmp/gh-issue-solver-1791468136225/rust/target/ci-scripts/debug/deps/wait_for_crate_430c2e7783577e976e31fefb-4cb352ea96563c05)
+
+running 3 tests
+test tests::skips_template_default_package_name ... ok
+test tests::waits_for_real_package_names ... ok
+test registry_state::tests::only_matching_valid_version_metadata_proves_visibility ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

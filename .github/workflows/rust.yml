@@ -62,7 +62,7 @@ env:
 jobs:
   detect-changes:
     name: Detect Changes
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     if: always() && !cancelled() && !contains(needs.*.result, 'failure') && github.event_name != 'workflow_dispatch'
     outputs:
@@ -72,11 +72,11 @@ jobs:
       workflow-changed: ${{ steps.changes.outputs.workflow-changed }}
       any-code-changed: ${{ steps.changes.outputs.any-code-changed }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           fetch-depth: 0
-      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d
+      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d # stable
         with:
           toolchain: stable
       - name: Install rust-script
@@ -93,17 +93,17 @@ jobs:
       - release-preflight
   changelog:
     name: Changelog Fragment Check
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     needs:
       - detect-changes
     if: github.event_name == 'pull_request' && needs.detect-changes.outputs.any-code-changed == 'true'
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           fetch-depth: 0
-      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d
+      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d # stable
         with:
           toolchain: stable
       - name: Install rust-script
@@ -117,15 +117,15 @@ jobs:
       cancel-in-progress: true
   version-check:
     name: Version Modification Check
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     if: github.event_name == 'pull_request'
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           fetch-depth: 0
-      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d
+      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d # stable
         with:
           toolchain: stable
       - name: Install rust-script
@@ -140,7 +140,7 @@ jobs:
       cancel-in-progress: true
   lint:
     name: Lint and Format Check
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 15
     needs:
       - detect-changes
@@ -157,7 +157,7 @@ jobs:
         needs.detect-changes.outputs.workflow-changed == 'true'
       )
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -166,11 +166,11 @@ jobs:
         env:
           BASE_REF: ${{ github.base_ref }}
         run: bash scripts/simulate-fresh-merge.sh
-      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d
+      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d # stable
         with:
           components: rustfmt, clippy
           toolchain: stable
-      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
         with:
           workspaces: rust
       - name: Install rust-script
@@ -188,7 +188,7 @@ jobs:
       group: check-rust-${{ github.ref }}-lint-
       cancel-in-progress: true
   test:
-    name: Test (${{ matrix.os }})
+    name: Test (${{ matrix.os }}${{ matrix.toolchain != 'stable' && format(', Rust {0}', matrix.toolchain) || '' }})
     runs-on: ${{ matrix.os }}
     timeout-minutes: 20
     needs:
@@ -199,11 +199,17 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          - ubuntu-24.04
-          - macos-15
+          - ubuntu-26.04
+          - macos-26
           - windows-2025
+        toolchain:
+          - stable
+        include:
+          # Must equal `rust-version` in rust/Cargo.toml (enforced by scripts/check-dependency-pins.py).
+          - os: ubuntu-26.04
+            toolchain: '1.87'
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -212,21 +218,21 @@ jobs:
         env:
           BASE_REF: ${{ github.base_ref }}
         run: bash scripts/simulate-fresh-merge.sh
-      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d
+      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d # stable
         with:
-          toolchain: stable
-      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6
+          toolchain: ${{ matrix.toolchain }}
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
         with:
           workspaces: rust
       - run: cargo build --locked --manifest-path rust/Cargo.toml --all-targets
       - run: cargo test --locked --manifest-path rust/Cargo.toml --all-targets
       - run: cargo run --locked --manifest-path rust/lino-i18n/Cargo.toml --example basic
     concurrency:
-      group: check-rust-${{ github.ref }}-test-${{ matrix.os }}
+      group: check-rust-${{ github.ref }}-test-${{ matrix.os }}-${{ matrix.toolchain }}
       cancel-in-progress: true
   package:
     name: Package Dry Run
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 15
     needs:
       - lint
@@ -236,7 +242,7 @@ jobs:
       needs.lint.result == 'success' &&
       needs.test.result == 'success'
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -245,10 +251,10 @@ jobs:
         env:
           BASE_REF: ${{ github.base_ref }}
         run: bash scripts/simulate-fresh-merge.sh
-      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d
+      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d # stable
         with:
           toolchain: stable
-      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
         with:
           workspaces: rust
       - run: cargo package --manifest-path rust/lino-i18n-macros/Cargo.toml --allow-dirty
@@ -259,7 +265,7 @@ jobs:
       cancel-in-progress: true
   auto-release:
     name: Publish Crates and GitHub Release
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 30
     needs:
       - package
@@ -273,17 +279,17 @@ jobs:
       name: crates.io
       url: https://crates.io/crates/lino-i18n
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: true
           fetch-depth: 0
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: 24.x
-      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d
+      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d # stable
         with:
           toolchain: stable
-      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
         with:
           workspaces: rust
       - name: Install rust-script
@@ -350,7 +356,7 @@ jobs:
       queue: max
   manual-release:
     name: Manual Rust Release
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 30
     if: always() && !cancelled() && needs.package.result == 'success' && github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'
       && inputs.release_mode == 'instant' && needs.release-preflight.result == 'success'
@@ -358,17 +364,17 @@ jobs:
       name: crates.io
       url: https://crates.io/crates/lino-i18n
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: true
           fetch-depth: 0
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: 24.x
-      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d
+      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d # stable
         with:
           toolchain: stable
-      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
         with:
           workspaces: rust
       - name: Install rust-script
@@ -417,15 +423,15 @@ jobs:
       queue: max
   changelog-pr:
     name: Create Manual Changelog PR
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.release_mode == 'changelog-pr' && github.ref == 'refs/heads/main'
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: true
           fetch-depth: 0
-      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d
+      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d # stable
         with:
           toolchain: stable
       - name: Install rust-script
@@ -435,7 +441,7 @@ jobs:
         env:
           RELEASE_DESCRIPTION: ${{ inputs.description }}
           BUMP_TYPE: ${{ inputs.bump_type }}
-      - uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1
+      - uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
           commit-message: 'chore: add changelog for manual ${{ github.event.inputs.bump_type }} release'
           branch: changelog-manual-release-${{ github.run_id }}
@@ -455,7 +461,7 @@ jobs:
       queue: max
   deploy-docs:
     name: Deploy Rust Docs
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 15
     needs:
       - package
@@ -474,14 +480,14 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           fetch-depth: 0
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: 24.x
-      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d
+      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d # stable
         with:
           toolchain: stable
       - name: Install rust-script
@@ -509,16 +515,16 @@ jobs:
     environment:
       name: crates.io
       url: https://crates.io/crates/lino-i18n
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-Release credential preflight
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: 24.x
       - run: bash scripts/preflight-publish.sh crates
@@ -528,13 +534,13 @@ jobs:
       'instant'))
   pipeline-status:
     name: Pipeline Status
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-Pipeline Status
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
       - env:

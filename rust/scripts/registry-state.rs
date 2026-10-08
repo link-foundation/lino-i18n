@@ -19,16 +19,19 @@ pub fn version_exists(crate_name: &str, version: &str) -> bool {
         eprintln!("Reading anonymous version metadata: {url}");
     }
     let state = match ureq::get(&url)
-        .timeout(std::time::Duration::from_secs(15))
-        .set("User-Agent", "lino-i18n-release")
+        .config()
+        .timeout_global(Some(std::time::Duration::from_secs(15)))
+        .build()
+        .header("User-Agent", "lino-i18n-release")
         .call()
     {
-        Ok(response) if response.status() == 200 => response
-            .into_string()
+        Ok(mut response) if response.status() == 200 => response
+            .body_mut()
+            .read_to_string()
             .map_err(|error| error.to_string())
             .and_then(|body| parse_version(&body, version)),
         Ok(response) => Err(format!("Unexpected HTTP {}", response.status())),
-        Err(ureq::Error::Status(404, _)) => Ok(false),
+        Err(ureq::Error::StatusCode(404)) => Ok(false),
         Err(error) => Err(error.to_string()),
     };
     state.unwrap_or_else(|error| {

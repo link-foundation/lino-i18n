@@ -1,0 +1,28 @@
+# Primary sources and reusable components
+
+Reviewed on 2026-10-08. Registry values are frozen in `registry/`; live pages may change afterward.
+
+| Source | Fact used | Application and limit |
+| --- | --- | --- |
+| [Issue 26](https://github.com/link-foundation/lino-i18n/issues/26) | Ecosystems, manifests, the update commands, the Dependabot suggestion and the rules for "all" | Requirement matrix R1–R18 |
+| [hive-mind dependency-update best practices](https://github.com/link-assistant/hive-mind/blob/main/docs/DEPENDENCY-UPDATE-BEST-PRACTICES.md) (copy in `research/`) | Ten principles plus automatic updates | Principle matrix in ANALYSIS.md |
+| [npm-check-updates](https://github.com/raineorshine/npm-check-updates) | `-u` rewrites ranges to the `latest` dist-tag; `npm update` stays inside ranges | Used for the JS update (`verification/ncu-upgrade.log`) |
+| [cargo-edit](https://github.com/killercup/cargo-edit) `cargo upgrade --incompatible` | The stable route across Cargo majors | Used for the Rust manifests |
+| [Cargo resolver 3](https://doc.rust-lang.org/cargo/reference/resolver.html#rust-version) | The resolver prefers versions compatible with `rust-version`; a virtual workspace must set `resolver = "3"` explicitly | Adopted in `rust/Cargo.toml` |
+| [Rust 2024 edition guide](https://doc.rust-lang.org/edition-guide/rust-2024/index.html) | `cargo fix --edition`; rustfmt 2024 style edition | Edition 2024; no code changes needed |
+| [Rust 1.87 release notes](https://blog.rust-lang.org/2025/05/15/Rust-1.87.0/) and [rust-lang/rust#128101](https://github.com/rust-lang/rust/issues/128101) | `unsigned_is_multiple_of` is stable since 1.87 | Explains the measured MSRV 1.87 |
+| [syn 3.0.0 release](https://github.com/dtolnay/syn/releases/tag/3.0.0) | Breaking changes in syn 3 | Macro crate compiles unchanged; checked on 1.87 and 1.99 |
+| [ureq MIGRATE-2-to-3](https://github.com/algesten/ureq/blob/main/MIGRATE-2-to-3.md) | `config().timeout_global()`, `header()`, `Error::StatusCode`, `body_mut()` | Four rust-script helpers migrated; live check in `experiments/issue-26-ureq3-registry-state.rs` |
+| [toml CHANGELOG](https://github.com/toml-rs/toml/blob/main/crates/toml/CHANGELOG.md) | From 0.9, `Value`'s `FromStr` parses a single value; whole documents parse as `Table` | `check-version-modification.rs` fixed and unit-tested |
+| [lino-objects-codec Rust CHANGELOG](https://github.com/link-foundation/lino-objects-codec/blob/main/rust/CHANGELOG.md) and the JS changelog | 0.2 → 0.8 (Rust) and 0.4 → 0.9 (JS) changes; JS 0.9 needs Node >= 22.11.0 | Node floor raised; no API used by this repository changed |
+| [Node.js release schedule](https://github.com/nodejs/Release/blob/main/schedule.json) (`registry/node-release-schedule.txt`) and [dist index](https://nodejs.org/dist/index.json) | Node 20 EOL 2026-04-30; 22 maintenance, 24 active LTS, 26 current; current lines bundle npm 11 | Node floor 22.11; CI legs 22/24/26; npm recovery pin kept on 11 |
+| [Python versions](https://devguide.python.org/versions/) (`registry/python-eol.txt`) | 3.14 is the newest feature release (EOL 2030-10) | Policy job pins Python 3.14 |
+| [actions/runner-images](https://github.com/actions/runner-images) and [#14747](https://github.com/actions/runner-images/issues/14747), [#14748](https://github.com/actions/runner-images/issues/14748) | ubuntu-26.04 is GA; `ubuntu-latest` moves to it between Oct 19 and Nov 19, 2026; `macos-latest` = macos-26; `windows-latest` = windows-2025 | Explicit ubuntu-26.04 / macos-26 / windows-2025 labels |
+| [rhysd/actionlint#682](https://github.com/rhysd/actionlint/issues/682) and [#657](https://github.com/rhysd/actionlint/issues/657) | actionlint 1.7.12 (latest) doesn't know ubuntu-26.04 or the `queue` concurrency key | `.github/actionlint.yaml` label entry; the existing exact `-ignore` kept |
+| [Dependabot options reference](https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference) | `directories`, `groups`, `cooldown` | `.github/dependabot.yml` |
+| [dependabot-core cargo file fetcher](https://github.com/dependabot/dependabot-core/blob/main/cargo/lib/dependabot/cargo/file_fetcher.rb) (pinned copy in `research/dependabot-core/`) | Workspace members and the root lock are fetched from the root manifest | One cargo entry for `/rust` instead of three directories |
+| [zizmor audits: dependabot-cooldown](https://docs.zizmor.sh/audits/#dependabot-cooldown) | Flags Dependabot updates without a cooldown | 7-day cooldown; zizmor now audits `.github/dependabot.yml` |
+| [Renovate](https://github.com/renovatebot/renovate) | Alternative with grouping, automerge and regex managers | Not adopted: the issue asks for Dependabot, and its grouping covers the need. Renovate regex managers could update rust-script blocks later |
+| [lino-arguments PR 38](https://github.com/link-foundation/lino-arguments/pull/38) and [failed release run](https://github.com/link-foundation/lino-arguments/actions/runs/37564452408) | Dependency bump merged; npm 0.4.0 release failed in `rust-paths.mjs:82` | Reported as [lino-arguments#41](https://github.com/link-foundation/lino-arguments/issues/41); lino-arguments stays 0.3.0 |
+| [links-notation](https://github.com/link-foundation/links-notation) `rust/links-notation/Cargo.toml` at `5b106e6` | No `rust-version`; `src/quotes.rs:131` uses `is_multiple_of` | Reported as [links-notation#334](https://github.com/link-foundation/links-notation/issues/334) |
+| [rustsec cargo-audit](https://github.com/rustsec/rustsec/tree/main/cargo-audit), [pip-audit](https://github.com/pypa/pip-audit), `npm audit` | Advisory databases for each ecosystem | All three are clean (`verification/after-*-audit.log`) |
