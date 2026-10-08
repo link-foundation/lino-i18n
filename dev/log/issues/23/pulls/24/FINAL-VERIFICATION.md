@@ -60,10 +60,30 @@ Commit `e738911dad803a34be95ad11a96d4153f2e8d7a7` preceded all five runs created
 
 The repaired workflow uses the same narrow regex with escaped space/quote characters in one whitespace-free token. `verification/docker-actionlint-after.log` verifies the exact pinned Docker image, including bundled ShellCheck and Pyflakes, rather than only the host executable. The real failure is preserved before the repair.
 
-The same log exposed zizmor's warning that online audits were unavailable. Both invocations now receive the read-only job token and use `--strict-collection`, so malformed inputs fail instead of being skipped with warnings. `verification/online-zizmor.log` records both actual online checks passing. Final workflow outcomes will be appended after the follow-up push; no pending result is classified as successful.
+The same log exposed zizmor's warning that online audits were unavailable. Both invocations now receive the read-only job token and use `--strict-collection`, so malformed inputs fail instead of being skipped with warnings. `verification/online-zizmor.log` records both actual online checks passing. The subsequent complete outcomes are recorded below; no pending result is classified as successful.
 
 ## Security warning review
 
 `security-37772796545.log:4488–4507` identifies twenty Rust helper/module files absent from Cargo's loaded source graph. CodeQL's syntax scan still ran, but macro expansion was skipped, weakening semantic coverage. The new `prepare-codeql-rust.py` generates a separate, nonpublishable manifest in the analysis checkout, reusing and validating the helpers' existing embedded dependency declarations. Its seventeen binary targets include the directly executable path utility; shared modules are reached through their existing imports. Product manifests and publication packages are unaffected. `codeql-manifest-before.log` proves the original graph includes zero helper targets; `codeql-manifest-after.log` verifies all seventeen through actual Cargo metadata. Workflows CI keeps this regression active, and fresh CodeQL logs verify actual extractor behavior.
 
 Lines 351–361 contain eleven optional OpenSSF aggregate repository-health scores below the action's default threshold of three. These scores do not describe a vulnerability in the locked dependency version; the action's documentation separates them from vulnerability enforcement. The newly introduced dependency-review job now explicitly omits this optional heuristic annotation source. High-severity dependency review, zero-vulnerability npm lock audit and warnings-denied Cargo audit remain required. Original scores and package names remain in the full Security log for review; no vulnerability advisory is exempted.
+
+## Complete production-code verification
+
+Commit `18327a596801c90fce25d1aad1294fff4aa60b0a` preceded every run below, created at 2026-10-08 12:03:00 UTC. Every workflow completed successfully. Full logs, checksums, branch run list and complete per-job run metadata are preserved here.
+
+| Workflow | Run | Result |
+| --- | --- | --- |
+| Documentation | [37774151243](https://github.com/link-foundation/lino-i18n/actions/runs/37774151243) | Success |
+| JavaScript | [37774151242](https://github.com/link-foundation/lino-i18n/actions/runs/37774151242) | Success |
+| Rust | [37774151222](https://github.com/link-foundation/lino-i18n/actions/runs/37774151222) | Success |
+| Security | [37774151337](https://github.com/link-foundation/lino-i18n/actions/runs/37774151337) | Success |
+| Workflows | [37774151238](https://github.com/link-foundation/lino-i18n/actions/runs/37774151238) | Success |
+
+All nine JavaScript runtime/OS combinations, all three Rust OS jobs and the Rust package dry run passed. Security's actual extractor loads `rust/scripts/Cargo.toml` and `rust/Cargo.toml` at `security-37774151337.log:4523–4524`; the prior twenty missing-semantic-graph warnings are absent. Required dependency review, npm/Cargo audits and all three CodeQL languages passed. The exact pinned Docker action and both online zizmor invocations passed. Scanning all five full logs finds no GitHub warning annotation, `warning:`, `WARN` or deprecation warning.
+
+## Evidence integrity and terminal validation
+
+Repeated evidence archiving exposed a collector defect: `pr-run-*.json` also selected `pr-run-details-index.json`, bundled it, rewrote it and then deleted it as an input. `verification/archive-integrity-before.log` reproduces the missing index. The archiver now selects only numeric run IDs, restores the generated index and verifies every original record before removing individual input copies. Running it twice preserves all twenty complete PR run records and the index. `archive-integrity-after.log` verifies all run/verification archive members and each retained CI log or expired-download error against its original byte count and checksum. Workflows CI now requires this integrity check.
+
+The last changes repair the investigation tools, add the integrity check and finalize this evidence. A separate fresh validation at the final pushed SHA is recorded in PR 24's checks and final verification comment; complete logs and job identities are downloaded to the local `verification/final-head/` directory. That directory is ignored to avoid a self-referential cycle of committing a commit's logs and requiring another validation commit. No release or production deployment is attempted from this PR branch, and expired historical logs remain explicitly unavailable.

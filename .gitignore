@@ -170,3 +170,6 @@ dev/log/issues/23/pulls/24/templates/js/
 dev/log/issues/23/pulls/24/templates/rust/
 dev/log/issues/23/pulls/24/verification/local-history/
 dev/log/issues/23/pulls/24/ci-logs/expired/
+
+# Terminal CI captures validate the archive commit without creating another CI-triggering commit.
+dev/log/issues/23/pulls/24/verification/final-head/

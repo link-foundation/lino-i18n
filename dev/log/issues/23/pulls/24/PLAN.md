@@ -11,7 +11,8 @@
 - [x] Report reproducible template/upstream defects with examples, workarounds and code-level suggestions when applicable.
 - [x] Run all repository tests and relevant local CI checks; preserve detailed logs; prepare the release trigger required by the repository.
 - [x] Review the complete diff, ensure main is incorporated, make atomic commits and push only issue-23-bc288e2f1144.
-- [ ] Update PR 24 with reproduction, requirements/evidence, final behavior and verification; inspect fresh CI at the latest SHA, download non-passing logs and fix failures.
-- [ ] Mark PR 24 ready, confirm passing applicable checks and a clean tree, and report the final result with the PR URL.
+- [x] Update PR 24 with reproduction, requirements/evidence, final behavior and verification; inspect fresh CI at the latest SHA, download non-passing logs and fix failures.
+
+The final external-state checklist is recorded on PR 24 after the last evidence push: all five workflows at that exact SHA pass, final logs are collected locally, the PR is ready for review, main is incorporated and the working tree is clean. Its terminal CI logs remain local under `verification/final-head/` to avoid recursively creating another commit and CI run merely to record the preceding run.
 
 Investigation artifacts are kept under this directory. Large command outputs are saved rather than streamed. No delegated agents or background work may be left running at completion.

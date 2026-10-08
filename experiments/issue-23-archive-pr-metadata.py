@@ -5,14 +5,21 @@ import json
 from pathlib import Path
 import tarfile
 import io
+import re
 
 github = Path(__file__).resolve().parents[1] / "dev/log/issues/23/pulls/24/github"
 archive = github / "pr-run-details.tar.gz"
 records = {}
+is_run = re.compile(r"pr-run-\d+\.json$")
 if archive.exists():
     with tarfile.open(archive) as bundle:
-        records = {member.name: bundle.extractfile(member).read() for member in bundle}
-paths = sorted(github.glob("pr-run-*.json"))
+        for member in bundle:
+            # Older collector versions also matched their generated index.
+            if member.name == "pr-run-details-index.json":
+                continue
+            assert is_run.fullmatch(member.name), member.name
+            records[member.name] = bundle.extractfile(member).read()
+paths = sorted(path for path in github.glob("pr-run-*.json") if is_run.fullmatch(path.name))
 records.update({path.name: path.read_bytes() for path in paths})
 with tarfile.open(archive, "w:gz") as bundle:
     for name, data in sorted(records.items()):

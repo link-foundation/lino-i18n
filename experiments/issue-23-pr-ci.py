@@ -13,14 +13,21 @@ BRANCH = "issue-23-bc288e2f1144"
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("--label", required=True)
 parser.add_argument("--sha")
+parser.add_argument("--destination", type=Path, default=DEST,
+                    help="Evidence directory inside this repository; defaults to the investigation archive")
 args = parser.parse_args()
+DEST = args.destination.resolve()
+if not DEST.is_relative_to(ROOT):
+    parser.error("--destination must be inside this repository")
+for directory in ("github", "ci-logs"):
+    (DEST / directory).mkdir(parents=True, exist_ok=True)
 sha = args.sha or subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
 fields = "databaseId,conclusion,createdAt,headSha,status,workflowName,url"
 raw = subprocess.check_output(["gh", "run", "list", "--repo", REPO, "--branch", BRANCH,
                                "--limit", "5", "--json", fields], text=True)
 (DEST / "github" / f"branch-runs-{args.label}.json").write_text(raw)
 manifest_path = DEST / "ci-logs/manifest.json"
-manifest = json.loads(manifest_path.read_text())
+manifest = json.loads(manifest_path.read_text()) if manifest_path.exists() else []
 indexed = {item["databaseId"]: item for item in manifest}
 for run in json.loads(raw):
     if run["headSha"] != sha:
