@@ -67,6 +67,7 @@ function commandHelp(command) {
       '  --reference <locale>   Reference locale to diff against (default: en)',
       '  --config <path>        Read command defaults from a JSON config file',
       '  --manifest <path>      Validate ICU syntax and variables against extraction',
+      '  --previous-manifest <path> Flag stable ids whose source changed for review',
     ].join('\n');
   }
   if (command === 't') {
@@ -259,7 +260,12 @@ async function commandCheck(flags, log = console.log, err = console.error) {
   const catalogues = await loadLocalesFromDirectory(flags.dir);
   if (flags.manifest) {
     const { checkManifest } = await import('../src/tooling-files.js');
-    return checkManifest(flags.manifest, catalogues, log);
+    return checkManifest(
+      flags.manifest,
+      catalogues,
+      log,
+      flags['previous-manifest']
+    );
   }
   if (!catalogues[reference]) {
     err(

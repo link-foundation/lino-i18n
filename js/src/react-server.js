@@ -4,7 +4,7 @@ import {
   selectPlural,
   Plural as PluralMarker,
 } from './react-content.js';
-export { Var, Static, Branch } from './react-content.js';
+export { Var, Static, Branch, Derive } from './react-content.js';
 
 export function T({ i18n, ...props }) {
   if (!i18n) {

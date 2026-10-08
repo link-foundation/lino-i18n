@@ -3,6 +3,7 @@ import {
   msg,
   declareStatic,
   derive,
+  bindMessage,
 } from 'lino-i18n/messages';
 import { T, Var, Plural, useGT, useTranslation } from 'lino-i18n/react';
 import { Tx } from 'lino-i18n/react-server';
@@ -19,8 +20,11 @@ const i18n = createTranslator({
 i18n.gt(msg('Hi {name}'), { name: 'Ada' });
 i18n.gt`Hi ${'Ada'}`;
 i18n.m(
-  derive('A {gender} {genderValue}', { gender: declareStatic('Ada', 'female') })
+  bindMessage('A {gender} {genderValue}', {
+    gender: declareStatic('Ada', 'female'),
+  })
 );
+i18n.gt`Hello ${derive('Alice')}`;
 i18n.tx('Hello {name}', { name: 'Ada' }, { locale: 'en' });
 T({ children: Var({ name: 'name', children: 'Ada' }), id: 'hello' });
 Plural({ count: 2, other: 'items' });

@@ -4,7 +4,22 @@ import {
   extractMessages,
   validateCatalog,
   translateCatalog,
+  diffMessages,
 } from '../src/tooling.js';
+
+test('message aliases and non-rendered JSX children retain runtime identities', () => {
+  const result =
+    extractMessages(`import { createTranslator } from 'lino-i18n/messages';
+    import { T } from 'lino-i18n/react';
+    const { m } = createTranslator();
+    m\`Hello \${name}\`;
+    const node = <T>{false}Hello <b>{/* empty */}</b></T>;`);
+  assert.deepEqual(result.diagnostics, []);
+  assert.deepEqual(
+    result.messages.map(({ source }) => source),
+    ['Hello {v0}', 'Hello {c0}']
+  );
+});
 
 test('AST extraction follows import aliases and ignores comments and shadowed calls', () => {
   const code = `
@@ -73,6 +88,30 @@ test('catalog validation reports missing, unused, invalid ICU and placeholder dr
   assert.deepEqual(
     validateCatalog(messages, { extra: 'unused' }).map((entry) => entry.type),
     ['missing', 'unused']
+  );
+});
+
+test('changed stable IDs require review even when placeholders still match', () => {
+  const before = [
+    { id: 'hello', source: 'Hi {name}' },
+    { id: 'old', source: 'Old' },
+  ];
+  const after = [
+    { id: 'hello', source: 'Welcome {name}' },
+    { id: 'new', source: 'New' },
+  ];
+  assert.deepEqual(diffMessages(before, after), {
+    added: ['new'],
+    changed: ['hello'],
+    removed: ['old'],
+  });
+  assert.equal(
+    validateCatalog(
+      after,
+      { hello: 'Salut {name}', new: 'Nouveau' },
+      { previousMessages: before }
+    )[0].type,
+    'stale'
   );
 });
 

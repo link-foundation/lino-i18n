@@ -3,6 +3,7 @@ export {
   createTranslator,
   msg,
   derive,
+  bindMessage,
   declareStatic,
   formatMessage,
 } from './messages.js';
@@ -11,6 +12,7 @@ export type {
   TranslatorOptions,
   MessageDescriptor,
   MessageValues,
+  MessageOptions,
 } from './messages.js';
 export * from './intl.js';
 

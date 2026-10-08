@@ -42,6 +42,24 @@ test('npm package dry-run contains the publishable runtime surface', () => {
     import: './src/browser.js',
   });
   assert.ok(files.has('src/loaders.js'));
+  for (const subpath of [
+    'messages',
+    'intl',
+    'server',
+    'react-server',
+    'tooling',
+    'compiler',
+  ]) {
+    const entry = packageJson.exports[`./${subpath}`];
+    assert.ok(
+      files.has(entry.import.slice(2)),
+      `${subpath} runtime is published`
+    );
+    assert.ok(
+      files.has(entry.types.slice(2)),
+      `${subpath} declarations are published`
+    );
+  }
   assert.ok(!files.has('tests/i18n.test.js'));
   assert.ok(!files.has('scripts/publish-to-npm.mjs'));
 });

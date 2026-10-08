@@ -30,6 +30,19 @@ test('source messages, deferred descriptors, ICU and per-call locale share one A
   assert.equal(i18n.getLocale(), 'fr');
 });
 
+test('source calls honor explicit ids and reject ids for derived source variants', () => {
+  const i18n = createTranslator({
+    defaultLocale: 'fr',
+    locales: { fr: { welcome: 'Bienvenue' } },
+  });
+  assert.equal(i18n.gt('Welcome', {}, { id: 'welcome' }), 'Bienvenue');
+  assert.throws(
+    () =>
+      i18n.gt('Hello {name}', { name: { derived: 'Ada' } }, { id: 'hello' }),
+    /omit an explicit id/
+  );
+});
+
 test('ICU supports nested select, ordinal, offset, quoting and format skeletons', () => {
   const { gt } = createTranslator();
   assert.equal(
@@ -111,6 +124,26 @@ test('tagged literal text and array declarations preserve source identity', () =
     msg(['Save', 'Cancel'], { id: 'actions' }).map((entry) => entry.id),
     ['actions.0', 'actions.1']
   );
+});
+
+test('dictionary keys and subtrees format ICU with source-locale fallbacks', () => {
+  const i18n = createTranslator({
+    defaultLocale: 'fr',
+    locales: {
+      en: { 'actions.save': 'Save', 'actions.welcome': 'Hello {name}' },
+      fr: { 'actions.save': 'Enregistrer' },
+    },
+  });
+  assert.equal(
+    i18n.dictionary('actions.welcome', { name: 'Ada' }),
+    'Hello Ada'
+  );
+  assert.deepEqual(i18n.dictionaryObject('actions', { name: 'Ada' }), {
+    save: 'Enregistrer',
+    welcome: 'Hello Ada',
+  });
+  i18n.setEnabled(false);
+  assert.equal(i18n.dictionary('actions.save'), 'Save');
 });
 
 test('versioned caches, snapshots and region formatting survive catalog updates', async () => {

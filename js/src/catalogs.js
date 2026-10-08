@@ -20,6 +20,15 @@ const SELECTOR_SUFFIXES = new Set([
 
 const LABEL_ALIAS_KEY = 'label';
 
+function setEntry(object, key, value) {
+  Object.defineProperty(object, key, {
+    value,
+    enumerable: true,
+    writable: true,
+    configurable: true,
+  });
+}
+
 function unescapeValue(value, quote = '"') {
   let result = '';
   for (let index = 0; index < value.length; index += 1) {
@@ -247,16 +256,16 @@ function parseEntriesAt(lines, start, indent) {
 
     index += 1;
     if (line.value !== null) {
-      tree[line.key] = line.value;
+      setEntry(tree, line.key, line.value);
       continue;
     }
 
     if (index < lines.length && lines[index].indent > line.indent) {
       const parsed = parseEntriesAt(lines, index, lines[index].indent);
-      tree[line.key] = parsed.tree;
+      setEntry(tree, line.key, parsed.tree);
       index = parsed.index;
     } else {
-      tree[line.key] = {};
+      setEntry(tree, line.key, {});
     }
   }
 
@@ -314,14 +323,14 @@ function labelAliasValue(value) {
 
 function addLabelAlias(out, base, value) {
   if (!Object.prototype.hasOwnProperty.call(out, base)) {
-    out[base] = value;
+    setEntry(out, base, value);
   }
 }
 
 function flattenTree(tree, pathParts = [], out = {}) {
   for (const [key, value] of Object.entries(tree)) {
     if (typeof value === 'string') {
-      out[[...pathParts, key].join('.')] = value;
+      setEntry(out, [...pathParts, key].join('.'), value);
       continue;
     }
     if (!isPlainObject(value)) {
@@ -333,14 +342,14 @@ function flattenTree(tree, pathParts = [], out = {}) {
     const labelValue = labelAliasValue(value);
     if (isSelectorGroup(value)) {
       if (labelValue !== undefined) {
-        out[`${base}.${LABEL_ALIAS_KEY}`] = labelValue;
+        setEntry(out, `${base}.${LABEL_ALIAS_KEY}`, labelValue);
         addLabelAlias(out, base, labelValue);
       }
       for (const [suffix, child] of Object.entries(value)) {
         if (suffix === LABEL_ALIAS_KEY) {
           continue;
         }
-        out[`${base}_${suffix}`] = child;
+        setEntry(out, `${base}_${suffix}`, child);
       }
       continue;
     }
@@ -367,9 +376,9 @@ function splitSelectorSuffix(key) {
 function setNestedValue(tree, parts, value) {
   let node = tree;
   for (const part of parts.slice(0, -1)) {
-    const current = node[part];
+    const current = Object.hasOwn(node, part) ? node[part] : undefined;
     if (!isPlainObject(current)) {
-      node[part] = {};
+      setEntry(node, part, {});
       if (typeof current === 'string') {
         node[part][LABEL_ALIAS_KEY] = current;
       }
@@ -377,13 +386,13 @@ function setNestedValue(tree, parts, value) {
     node = node[part];
   }
   const leaf = parts[parts.length - 1];
-  if (isPlainObject(node[leaf])) {
+  if (Object.hasOwn(node, leaf) && isPlainObject(node[leaf])) {
     if (!Object.prototype.hasOwnProperty.call(node[leaf], LABEL_ALIAS_KEY)) {
       node[leaf][LABEL_ALIAS_KEY] = value;
     }
     return;
   }
-  node[leaf] = value;
+  setEntry(node, leaf, value);
 }
 
 function translationsToTree(translations) {

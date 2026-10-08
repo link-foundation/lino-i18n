@@ -1,7 +1,12 @@
 import { parse } from '@babel/parser';
 import babelTraverse from '@babel/traverse';
-import { extractJSX, jsxAttributes, literal } from './extract-jsx.js';
-import { messageVariables, escapeMessageText } from './message-schema.js';
+import { jsxAttributes, literal } from './extract-jsx.js';
+import { messageVariables } from './message-schema.js';
+import {
+  derivedTemplates,
+  derivedCalls,
+  derivedJSX,
+} from './extract-derived.js';
 
 const traverse = babelTraverse.default || babelTraverse;
 
@@ -90,6 +95,21 @@ function staticOptions(node) {
   return result;
 }
 
+function usesDescriptor(path, source) {
+  if (source?.type === 'CallExpression') {
+    return ['msg', 'bindMessage'].includes(apiName(path, source.callee));
+  }
+  if (source?.type === 'Identifier') {
+    const binding = path.scope.getBinding(source.name)?.path;
+    if (binding?.node.init?.type === 'CallExpression') {
+      return ['msg', 'bindMessage'].includes(
+        apiName(binding, binding.node.init.callee)
+      );
+    }
+  }
+  return false;
+}
+
 export function extractMessages(code, { file = '<source>' } = {}) {
   const ast = parse(code, {
     sourceType: 'unambiguous',
@@ -139,32 +159,14 @@ export function extractMessages(code, { file = '<source>' } = {}) {
   traverse(ast, {
     CallExpression(path) {
       const name = apiName(path, path.node.callee);
-      if (!['msg', 'gt', 'm', 'tx'].includes(name)) {
+      if (!['msg', 'bindMessage', 'gt', 'm', 'tx'].includes(name)) {
         return;
       }
       safely(path, () => {
         const [source, options] = path.node.arguments;
-        if (
-          name !== 'msg' &&
-          source?.type === 'CallExpression' &&
-          ['msg', 'derive'].includes(apiName(path, source.callee))
-        ) {
-          return;
-        }
         // Descriptor declarations are extracted at msg(), not their uses.
-        if (
-          source?.type === 'Identifier' &&
-          path.scope.getBinding(source.name)?.path.node.init?.type ===
-            'CallExpression'
-        ) {
-          const binding = path.scope.getBinding(source.name).path;
-          if (
-            ['msg', 'derive'].includes(
-              apiName(binding, binding.node.init.callee)
-            )
-          ) {
-            return;
-          }
+        if (name !== 'msg' && usesDescriptor(path, source)) {
+          return;
         }
         const metadata = staticOptions(
           name === 'msg' ? options : path.node.arguments[2]
@@ -177,23 +179,28 @@ export function extractMessages(code, { file = '<source>' } = {}) {
             })
           );
         } else {
-          add(path, literal(source), metadata);
+          const text = literal(source);
+          const variants =
+            typeof text === 'string' && name !== 'msg'
+              ? derivedCalls(path, text, (node) => apiName(path, node))
+              : [text];
+          if (variants.some((variant) => variant !== text) && metadata.id) {
+            throw new Error(
+              'Derived messages use source identities; omit an explicit id'
+            );
+          }
+          variants.forEach((variant) => add(path, variant, metadata));
         }
       });
     },
     TaggedTemplateExpression(path) {
-      if (apiName(path, path.node.tag) !== 'gt') {
+      if (!['gt', 'm'].includes(apiName(path, path.node.tag))) {
         return;
       }
-      add(
-        path,
-        path.node.quasi.quasis
-          .map(
-            (part, index) =>
-              (index ? `{v${index - 1}}` : '') +
-              escapeMessageText(part.value.cooked)
-          )
-          .join('')
+      safely(path, () =>
+        derivedTemplates(path, (node) => apiName(path, node)).forEach(
+          (source) => add(path, source)
+        )
       );
     },
     JSXElement(path) {
@@ -206,15 +213,22 @@ export function extractMessages(code, { file = '<source>' } = {}) {
         if (attributes.id && typeof id !== 'string') {
           throw new Error('T id must be static');
         }
-        const source = attributes.source
-          ? literal(attributes.source)
-          : extractJSX(path.node, (name) => apiName(path, name));
-        add(path, source, {
-          ...(id && { id }),
-          ...(literal(attributes.description) && {
-            description: literal(attributes.description),
-          }),
-        });
+        const { sources, derived } = attributes.source
+          ? { sources: [literal(attributes.source)], derived: false }
+          : derivedJSX(path, (name) => apiName(path, name));
+        if (derived && id) {
+          throw new Error(
+            'Derived messages use source identities; omit an explicit id'
+          );
+        }
+        sources.forEach((source) =>
+          add(path, source, {
+            ...(id && { id }),
+            ...(literal(attributes.description) && {
+              description: literal(attributes.description),
+            }),
+          })
+        );
       });
     },
   });

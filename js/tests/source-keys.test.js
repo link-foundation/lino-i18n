@@ -9,6 +9,8 @@ test('source-message keys round-trip whitespace, quoting and escaped newlines', 
     '# comment': 'Text',
     'line\nbreak': 'Lines',
     'path\\file': 'Path',
+    ['__proto__']: 'Prototype text',
+    'safe.__proto__.item': 'Nested text',
   };
   for (const style of ['flat', 'nested']) {
     const text = formatLinoCatalog('fr', translations, { style });

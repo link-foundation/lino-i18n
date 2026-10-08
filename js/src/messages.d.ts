@@ -14,17 +14,23 @@ export type MessageValue =
   | Date
   | null
   | undefined
+  | { readonly derived: string | number | boolean }
   | { readonly value: unknown; readonly context: string };
 export type MessageValues = Record<string, MessageValue>;
+export interface MessageOptions extends TOptions {
+  id?: string;
+  description?: string;
+}
 export interface MessageTranslator {
   (
     message: string | MessageDescriptor,
     values?: MessageValues,
-    options?: TOptions
+    options?: MessageOptions
   ): string;
   (strings: TemplateStringsArray, ...values: MessageValue[]): string;
 }
 export interface TranslatorOptions extends I18nOptions {
+  sourceLocale?: string;
   enabled?: boolean;
   region?: string;
   version?: string;
@@ -46,10 +52,16 @@ export interface TranslatorOptions extends I18nOptions {
 export interface Translator extends I18nCoreInstance {
   gt: MessageTranslator;
   m: MessageTranslator;
+  dictionary(key: string, values?: MessageValues, options?: TOptions): string;
+  dictionaryObject(
+    prefix?: string,
+    values?: MessageValues,
+    options?: TOptions
+  ): DictionaryObject;
   tx(
     message: string | MessageDescriptor,
     values?: MessageValues,
-    options?: TOptions
+    options?: MessageOptions
   ): Promise<string>;
   load(locale: string): Promise<string>;
   switchLocale(locale: string): Promise<string>;
@@ -65,6 +77,9 @@ export interface Translator extends I18nCoreInstance {
 export declare function createTranslator(
   options?: TranslatorOptions
 ): Translator;
+export interface DictionaryObject {
+  [key: string]: string | DictionaryObject;
+}
 export declare function msg(
   source: string,
   options?: { id?: string; description?: string; values?: MessageValues }
@@ -77,7 +92,10 @@ export declare function declareStatic(
   value: unknown,
   context?: string
 ): { readonly value: unknown; readonly context: string };
-export declare function derive(
+export declare function derive(value: string | number | boolean): {
+  readonly derived: string | number | boolean;
+};
+export declare function bindMessage(
   message: string | MessageDescriptor,
   values?: MessageValues
 ): MessageDescriptor;

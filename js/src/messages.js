@@ -3,6 +3,7 @@ import { IntlMessageFormat } from 'intl-messageformat';
 import { createI18n } from './i18n.js';
 import { parseLinoCatalogs } from './catalogs.js';
 import { escapeMessageText } from './message-schema.js';
+import { createDictionaryApi } from './dictionary.js';
 
 const compiled = new Map();
 
@@ -40,7 +41,7 @@ export function declareStatic(value, context = String(value)) {
   return Object.freeze({ value, context });
 }
 
-export function derive(message, values = {}) {
+export function bindMessage(message, values = {}) {
   const descriptor = typeof message === 'string' ? msg(message) : message;
   return Object.freeze({
     ...descriptor,
@@ -48,16 +49,65 @@ export function derive(message, values = {}) {
   });
 }
 
+export function derive(value) {
+  if (!['string', 'number', 'boolean'].includes(typeof value)) {
+    throw new TypeError('derive expects a string, number or boolean');
+  }
+  return Object.freeze({ derived: value });
+}
+
 function templateMessage(strings, values) {
   return {
     source: strings.reduce(
       (text, part, index) =>
-        text + (index ? `{v${index - 1}}` : '') + escapeMessageText(part),
+        text +
+        (index ? templateVariable(values[index - 1], index - 1) : '') +
+        escapeMessageText(part),
       ''
     ),
     values: Object.fromEntries(
-      values.map((value, index) => [`v${index}`, value])
+      values
+        .map((value, index) => [`v${index}`, value])
+        .filter(
+          ([, value]) =>
+            !(
+              value &&
+              typeof value === 'object' &&
+              Object.hasOwn(value, 'derived')
+            )
+        )
     ),
+  };
+}
+
+function templateVariable(value, index) {
+  return value && typeof value === 'object' && Object.hasOwn(value, 'derived')
+    ? escapeMessageText(value.derived)
+    : `{v${index}}`;
+}
+
+function resolveDerived(descriptor, values) {
+  let source = descriptor.source;
+  const variables = { ...descriptor.values, ...values };
+  for (const [name, value] of Object.entries(variables)) {
+    if (value && typeof value === 'object' && Object.hasOwn(value, 'derived')) {
+      if (!source.includes(`{${name}}`)) {
+        throw new Error('Derived values require a simple named {placeholder}');
+      }
+      source = source.replaceAll(`{${name}}`, escapeMessageText(value.derived));
+      delete variables[name];
+    }
+  }
+  if (source !== descriptor.source && descriptor.id !== descriptor.source) {
+    throw new Error(
+      'Derived messages use source identities; omit an explicit id'
+    );
+  }
+  return {
+    ...descriptor,
+    source,
+    id: source === descriptor.source ? descriptor.id : source,
+    values: variables,
   };
 }
 
@@ -179,7 +229,14 @@ export function createTranslator(options = {}) {
       );
       return gt(template.source, template.values);
     }
-    const descriptor = typeof message === 'string' ? msg(message) : message;
+    const input =
+      typeof message === 'string'
+        ? msg(message, {
+            id: callOptions.id,
+            description: callOptions.description,
+          })
+        : message;
+    const descriptor = input && resolveDerived(input, values);
     if (!descriptor || typeof descriptor.source !== 'string') {
       throw new TypeError('gt requires a source string or msg descriptor');
     }
@@ -191,7 +248,7 @@ export function createTranslator(options = {}) {
           { ...callOptions, defaultValue: descriptor.source }
         )
       : descriptor.source;
-    const variables = prepareVariables(descriptor, values);
+    const variables = prepareVariables(descriptor, {});
     const result = formatMessage(source, variables, locale);
     options.onTrace?.({
       type: 'translation',
@@ -242,6 +299,7 @@ export function createTranslator(options = {}) {
     ...core,
     gt,
     m: gt,
+    ...createDictionaryApi(core, gt, tables, options.sourceLocale || 'en'),
     async tx(message, values, callOptions = {}) {
       const locale = callOptions.locale || core.getLocale();
       await load(locale);
@@ -287,6 +345,7 @@ export function createTranslator(options = {}) {
         enabled,
         region,
         version: options.version,
+        sourceLocale: options.sourceLocale,
         compatibilityAliases: options.compatibilityAliases,
       };
     },

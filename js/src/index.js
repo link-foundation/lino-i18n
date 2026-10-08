@@ -30,6 +30,7 @@ export {
   createTranslator,
   msg,
   derive,
+  bindMessage,
   declareStatic,
   formatMessage,
 } from './messages.js';

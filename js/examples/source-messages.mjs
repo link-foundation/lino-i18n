@@ -3,6 +3,7 @@ import {
   msg,
   declareStatic,
   derive,
+  bindMessage,
 } from 'lino-i18n/messages';
 import { loadLocalesFromDirectory } from 'lino-i18n/loaders';
 import { fileURLToPath } from 'node:url';
@@ -17,8 +18,10 @@ const greeting = msg('Hello {name}', {
   description: 'A greeting',
 });
 console.log(i18n.m(greeting, { name: 'Ada' }));
-const title = derive(
+const title = bindMessage(
   '{gender, select, female {She} male {He} other {They}} is {genderValue}.',
   { gender: declareStatic('Ada', 'female') }
 );
 console.log(i18n.gt(title));
+const subject = Math.random() > 0.5 ? 'Alice' : 'Brian';
+console.log(i18n.gt`Hello ${derive(subject)}`);

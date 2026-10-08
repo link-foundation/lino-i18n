@@ -96,11 +96,16 @@ export async function readManifest(file) {
   return manifest.messages;
 }
 
-export async function checkManifest(file, catalogues, log) {
+export async function checkManifest(file, catalogues, log, previousFile) {
   const messages = await readManifest(file);
+  const previousMessages = previousFile
+    ? await readManifest(previousFile)
+    : undefined;
   let count = 0;
   for (const [locale, table] of Object.entries(catalogues)) {
-    for (const issue of validateCatalog(messages, table)) {
+    for (const issue of validateCatalog(messages, table, {
+      previousMessages,
+    })) {
       log(`${locale}: ${JSON.stringify(issue)}`);
       count += 1;
     }

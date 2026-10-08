@@ -1,19 +1,39 @@
 export { extractMessages } from './extract.js';
 import { messageVariables } from './message-schema.js';
 
+export function diffMessages(previous, current) {
+  const before = new Map(
+    previous.map((message) => [message.id, message.source])
+  );
+  const after = new Map(current.map((message) => [message.id, message.source]));
+  return {
+    added: current.filter(({ id }) => !before.has(id)).map(({ id }) => id),
+    changed: current
+      .filter(({ id, source }) => before.has(id) && before.get(id) !== source)
+      .map(({ id }) => id),
+    removed: previous.filter(({ id }) => !after.has(id)).map(({ id }) => id),
+  };
+}
+
 export function validateCatalog(
   messages,
   translations,
-  { unused = true } = {}
+  { unused = true, previousMessages } = {}
 ) {
   const issues = [];
   const ids = new Set(messages.map((message) => message.id));
+  const changed = new Set(
+    previousMessages ? diffMessages(previousMessages, messages).changed : []
+  );
   for (const { id, source } of messages) {
     if (!Object.hasOwn(translations, id)) {
       issues.push({ type: 'missing', id });
       continue;
     }
     try {
+      if (changed.has(id) && translations[id] !== source) {
+        issues.push({ type: 'stale', id });
+      }
       const expected = messageVariables(source);
       const actual = messageVariables(translations[id]);
       if (JSON.stringify(expected) !== JSON.stringify(actual)) {

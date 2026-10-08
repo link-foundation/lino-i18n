@@ -10,6 +10,14 @@ export function Static(props) {
   return createElement(Var, props);
 }
 
+export function Derive({ children }) {
+  return children;
+}
+
+function inlineContent(node) {
+  return node.type === React.Fragment || node.type === Derive;
+}
+
 function pluralCases(props) {
   const cases = { ...props.cases };
   for (const name of ['zero', 'one', 'two', 'few', 'many', 'other']) {
@@ -27,6 +35,12 @@ export function prepareContent(children) {
   let nodeId = 0;
   let branchId = 0;
   let renderedId = 0;
+  let derived = false;
+
+  function serializeInline(node) {
+    derived ||= node.type === Derive;
+    return serialize(node.props.children);
+  }
 
   function register(name, value) {
     if (!/^[A-Za-z_][A-Za-z0-9_]*$/.test(name)) {
@@ -71,8 +85,8 @@ export function prepareContent(children) {
     if (!isValidElement(node)) {
       return '';
     }
-    if (node.type === React.Fragment) {
-      return serialize(node.props.children);
+    if (inlineContent(node)) {
+      return serializeInline(node);
     }
     if (node.type === Var || node.type === Static) {
       return register(
@@ -103,7 +117,8 @@ export function prepareContent(children) {
   function serialize(nodes) {
     return Children.toArray(nodes).map(serializeNode).join('');
   }
-  return { source: serialize(children), values };
+  const source = serialize(children);
+  return { source, values, derived };
 }
 
 export function renderContent(
@@ -112,6 +127,11 @@ export function renderContent(
 ) {
   const prepared =
     source === undefined ? prepareContent(children) : { source, values: {} };
+  if (prepared.derived && id) {
+    throw new Error(
+      'Derived messages use source identities; omit an explicit id'
+    );
+  }
   const key = id || prepared.source;
   const message =
     i18n.getEnabled?.() === false

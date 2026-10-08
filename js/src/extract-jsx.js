@@ -50,7 +50,20 @@ function jsxText(value) {
   return nonEmpty.join(' ');
 }
 
-export function extractJSX(node, resolveName) {
+function opaqueElement(name, child) {
+  return (
+    name.type !== 'JSXIdentifier' ||
+    !/^[a-z]/.test(name.name) ||
+    child.children.every(
+      (entry) =>
+        (entry.type === 'JSXText' && !jsxText(entry.value)) ||
+        (entry.type === 'JSXExpressionContainer' &&
+          entry.expression.type === 'JSXEmptyExpression')
+    )
+  );
+}
+
+export function extractJSX(node, resolveName, resolveDerived) {
   let nodeId = 0;
   let branchId = 0;
 
@@ -83,6 +96,9 @@ export function extractJSX(node, resolveName) {
   }
 
   function serializeNode(child) {
+    if (child.type === 'BooleanLiteral') {
+      return '';
+    }
     if (child.type === 'JSXText') {
       return escapeMessageText(jsxText(child.value));
     }
@@ -103,6 +119,9 @@ export function extractJSX(node, resolveName) {
     }
     const name = child.openingElement.name;
     const api = resolveName(name);
+    if (api === 'Derive') {
+      return resolveDerived(child);
+    }
     if (api === 'Var' || api === 'Static') {
       const variable = literal(jsxAttributes(child).name);
       if (!variable) {
@@ -114,11 +133,7 @@ export function extractJSX(node, resolveName) {
       return serializeBranch(child, api === 'Plural');
     }
     const token = `c${nodeId++}`;
-    if (
-      name.type !== 'JSXIdentifier' ||
-      !/^[a-z]/.test(name.name) ||
-      child.children.length === 0
-    ) {
+    if (opaqueElement(name, child)) {
       return `{${token}}`;
     }
     return `<${token}>${serialize(child.children)}</${token}>`;

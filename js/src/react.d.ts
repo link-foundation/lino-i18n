@@ -35,11 +35,15 @@ export declare function LocaleSelector(
   }
 ): ReactNode;
 export declare function NumberFormat(props: {
-  value: number | bigint;
+  value?: number | bigint;
+  children?: number | bigint;
+  locale?: string;
   options?: Intl.NumberFormatOptions;
 }): ReactNode;
 export declare function DateTimeFormat(props: {
-  value: Date | number;
+  value?: Date | number;
+  children?: Date | number;
+  locale?: string;
   options?: Intl.DateTimeFormatOptions;
 }): ReactNode;
 export declare function RelativeTimeFormat(props: {
@@ -48,7 +52,9 @@ export declare function RelativeTimeFormat(props: {
   options?: Intl.RelativeTimeFormatOptions;
 }): ReactNode;
 export declare function CurrencyFormat(props: {
-  value: number | bigint;
+  value?: number | bigint;
+  children?: number | bigint;
+  locale?: string;
   currency: string;
   options?: Intl.NumberFormatOptions;
 }): ReactNode;
@@ -62,6 +68,7 @@ export interface ContentProps {
   description?: string;
 }
 export declare function T(props: ContentProps): ReactNode;
+export declare function Derive(props: { children: ReactNode }): ReactNode;
 export declare function Var(props: {
   name: string;
   children?: ReactNode;
@@ -93,6 +100,9 @@ export declare function Branch(props: {
 }): ReactNode;
 export declare function useGT(): MessageTranslator;
 export declare function useMessages(): MessageTranslator;
+export declare function useTranslations(
+  prefix?: string
+): import('./messages.js').Translator['dictionary'];
 export declare function useLocales(): string[];
 export declare function useSetLocale(): (
   locale: string

@@ -11,13 +11,14 @@ import {
   renderContent,
   Var,
   Static,
+  Derive,
   Branch,
   Plural as PluralMarker,
   selectPlural,
 } from './react-content.js';
 import { getLocaleDirection, getLocaleProperties, formatList } from './intl.js';
 
-export { Var, Static, Branch };
+export { Var, Static, Branch, Derive };
 
 const I18nContext = createContext(null);
 
@@ -107,9 +108,11 @@ export function LocaleSelector({ locales, labels = {}, ...props }) {
   );
 }
 
-function Format({ value, formatter, options }) {
-  const locale = useFormatLocale();
-  return new Intl[formatter](locale, options).format(value);
+function Format({ value, children, formatter, options, locale }) {
+  const activeLocale = useFormatLocale();
+  return new Intl[formatter](locale || activeLocale, options).format(
+    children ?? value
+  );
 }
 
 export function NumberFormat(props) {
@@ -153,6 +156,23 @@ export function useGT() {
 
 export function useMessages() {
   return useGT();
+}
+
+export function useTranslations(prefix = '') {
+  const i18n = useI18nContext();
+  return useCallback(
+    (key, values, options) => {
+      if (!i18n.dictionary) {
+        throw new Error('useTranslations requires a createTranslator instance');
+      }
+      return i18n.dictionary(
+        prefix ? `${prefix}.${key}` : key,
+        values,
+        options
+      );
+    },
+    [i18n, prefix]
+  );
 }
 
 export function useLocales() {

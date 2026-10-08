@@ -13,7 +13,7 @@ export interface ExtractionManifest {
   diagnostics: Array<{ file: string; line: number; message: string }>;
 }
 export interface CatalogIssue {
-  type: 'missing' | 'unused' | 'syntax' | 'variables';
+  type: 'missing' | 'unused' | 'syntax' | 'variables' | 'stale';
   id: string;
   expected?: string[];
   actual?: string[];
@@ -30,8 +30,12 @@ export declare function extractMessages(
 export declare function validateCatalog(
   messages: ExtractedMessage[],
   translations: Record<string, string>,
-  options?: { unused?: boolean }
+  options?: { unused?: boolean; previousMessages?: ExtractedMessage[] }
 ): CatalogIssue[];
+export declare function diffMessages(
+  previous: ExtractedMessage[],
+  current: ExtractedMessage[]
+): { added: string[]; changed: string[]; removed: string[] };
 export declare function translateCatalog(
   messages: ExtractedMessage[],
   existing: Record<string, string>,
