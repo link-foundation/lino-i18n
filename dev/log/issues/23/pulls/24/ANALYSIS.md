@@ -98,6 +98,8 @@ Malformed changesets now stop the merge before output mutation. Rust fragment an
 
 The standalone Rust changelog collector also swallowed directory-read and fragment-removal errors, reporting completion with consumed fragments still present. A filesystem-error unit test fails before the repair (`fragment-cleanup-before.log`) and passes afterward; cleanup errors now stop the helper with the failed path and OS error. This test runs with every helper in CI.
 
+The same ignored cleanup errors were confirmed in the pinned Rust template and reported with a portable test, workaround and suggested error propagation in [issue 192's follow-up](https://github.com/link-foundation/rust-ai-driven-development-pipeline-template/issues/192#issuecomment-6059288437).
+
 ### 5. Missing validation, false-green checks and noisy tools
 
 Cause: `npm ci || npm install` concealed lock mismatches; invalid duplication format could scan no files and pass; lint warnings were allowed; the deprecated React test renderer emitted warnings; workflows and release helpers were not themselves comprehensively checked; dependency audits, secrets scanning and full terminal gates were absent.

@@ -27,7 +27,7 @@ The configured Node, Bun and Deno commands each pass all 60 tests after the alia
 
 ## Portability follow-up CI
 
-Commit `ad168d68addbf6522d52921cd0a394190ccaddaf` preceded these runs, created on 2026-10-08 at approximately 11:24:50 UTC. All five completed successfully; complete logs and archived job metadata are preserved.
+Commit `ad168d68addbf6522d52921cd0a394190ccaddaf` preceded these runs, created on 2026-10-08 at 11:24:15 UTC. All five completed successfully; complete logs and archived job metadata are preserved.
 
 | Workflow | Run | Result |
 | --- | --- | --- |
@@ -54,4 +54,16 @@ Primary GitHub documentation confirms the queue behavior. Existing template issu
 
 Current local checks pass all **61** JavaScript tests on Node, Bun and Deno, along with types, zero-warning ESLint, formatting, secret scanning and duplication scanning (65 files, 4.28%). Workflow policy, actionlint with the precise schema exception, and zizmor's pedantic/high-confidence/high-severity checks pass. `verification/final-checks.tar.gz` preserves these outputs as individually hashed `final-*.log` members; all 16 executable Rust helpers are checked and tested with warnings denied.
 
-Fresh CI for the final code will be recorded after the next push. No pending result is classified as successful.
+## Final-code CI and Docker argument repair
+
+Commit `e738911dad803a34be95ad11a96d4153f2e8d7a7` preceded all five runs created at 2026-10-08 11:51:04 UTC. JavaScript, Rust, Security and Documentation passed; Workflows failed in run [37772796376](https://github.com/link-foundation/lino-i18n/actions/runs/37772796376). Its complete log identifies the cause at line 180: `could not read "queue": open queue: no such file or directory`. The Docker action runner split the single-quoted regex argument, so actionlint interpreted regex fragments as filenames. The local shell invocation had preserved that argument, which explains the difference.
+
+The repaired workflow uses the same narrow regex with escaped space/quote characters in one whitespace-free token. `verification/docker-actionlint-after.log` verifies the exact pinned Docker image, including bundled ShellCheck and Pyflakes, rather than only the host executable. The real failure is preserved before the repair.
+
+The same log exposed zizmor's warning that online audits were unavailable. Both invocations now receive the read-only job token and use `--strict-collection`, so malformed inputs fail instead of being skipped with warnings. `verification/online-zizmor.log` records both actual online checks passing. Final workflow outcomes will be appended after the follow-up push; no pending result is classified as successful.
+
+## Security warning review
+
+`security-37772796545.log:4488–4507` identifies twenty Rust helper/module files absent from Cargo's loaded source graph. CodeQL's syntax scan still ran, but macro expansion was skipped, weakening semantic coverage. The new `prepare-codeql-rust.py` generates a separate, nonpublishable manifest in the analysis checkout, reusing and validating the helpers' existing embedded dependency declarations. Its seventeen binary targets include the directly executable path utility; shared modules are reached through their existing imports. Product manifests and publication packages are unaffected. `codeql-manifest-before.log` proves the original graph includes zero helper targets; `codeql-manifest-after.log` verifies all seventeen through actual Cargo metadata. Workflows CI keeps this regression active, and fresh CodeQL logs verify actual extractor behavior.
+
+Lines 351–361 contain eleven optional OpenSSF aggregate repository-health scores below the action's default threshold of three. These scores do not describe a vulnerability in the locked dependency version; the action's documentation separates them from vulnerability enforcement. The newly introduced dependency-review job now explicitly omits this optional heuristic annotation source. High-severity dependency review, zero-vulnerability npm lock audit and warnings-denied Cargo audit remain required. Original scores and package names remain in the full Security log for review; no vulnerability advisory is exempted.

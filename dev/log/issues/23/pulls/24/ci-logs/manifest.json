@@ -599,5 +599,70 @@
     "log": "dev/log/issues/23/pulls/24/ci-logs/rust-37769807973.log",
     "bytes": 830607,
     "sha256": "3139b8e72e29ffe6db055d90933ecde35b7fa73f706c549a1939d89d79c27568"
+  },
+  {
+    "conclusion": "failure",
+    "createdAt": "2026-10-08T11:51:04Z",
+    "databaseId": 37772796376,
+    "headSha": "e738911dad803a34be95ad11a96d4153f2e8d7a7",
+    "status": "completed",
+    "url": "https://github.com/link-foundation/lino-i18n/actions/runs/37772796376",
+    "workflowName": "Workflows",
+    "download_exit_code": 0,
+    "log": "dev/log/issues/23/pulls/24/ci-logs/workflows-37772796376.log",
+    "bytes": 111266,
+    "sha256": "c89b5dd5621293bbf05ed9888e494ddada40286699889863bb8dd3f18e3c2df2"
+  },
+  {
+    "conclusion": "success",
+    "createdAt": "2026-10-08T11:51:04Z",
+    "databaseId": 37772796373,
+    "headSha": "e738911dad803a34be95ad11a96d4153f2e8d7a7",
+    "status": "completed",
+    "url": "https://github.com/link-foundation/lino-i18n/actions/runs/37772796373",
+    "workflowName": "Documentation",
+    "download_exit_code": 0,
+    "log": "dev/log/issues/23/pulls/24/ci-logs/documentation-37772796373.log",
+    "bytes": 165162,
+    "sha256": "0a5ed67688c4b05d0c4a70df9140fdb1147b3af942069e989628702a52a58918"
+  },
+  {
+    "conclusion": "success",
+    "createdAt": "2026-10-08T11:51:04Z",
+    "databaseId": 37772796457,
+    "headSha": "e738911dad803a34be95ad11a96d4153f2e8d7a7",
+    "status": "completed",
+    "url": "https://github.com/link-foundation/lino-i18n/actions/runs/37772796457",
+    "workflowName": "JavaScript",
+    "download_exit_code": 0,
+    "log": "dev/log/issues/23/pulls/24/ci-logs/javascript-37772796457.log",
+    "bytes": 697219,
+    "sha256": "9cb00b618e89b252d261c98198c381f0820a067dc164d5dc3d1fb7180c57a907"
+  },
+  {
+    "conclusion": "success",
+    "createdAt": "2026-10-08T11:51:04Z",
+    "databaseId": 37772796545,
+    "headSha": "e738911dad803a34be95ad11a96d4153f2e8d7a7",
+    "status": "completed",
+    "url": "https://github.com/link-foundation/lino-i18n/actions/runs/37772796545",
+    "workflowName": "Security",
+    "download_exit_code": 0,
+    "log": "dev/log/issues/23/pulls/24/ci-logs/security-37772796545.log",
+    "bytes": 1102791,
+    "sha256": "79514a9aa2e547192203d4b5db773f025141e24bc961f6cb5dae01a37f8a96af"
+  },
+  {
+    "conclusion": "success",
+    "createdAt": "2026-10-08T11:51:04Z",
+    "databaseId": 37772796413,
+    "headSha": "e738911dad803a34be95ad11a96d4153f2e8d7a7",
+    "status": "completed",
+    "url": "https://github.com/link-foundation/lino-i18n/actions/runs/37772796413",
+    "workflowName": "Rust",
+    "download_exit_code": 0,
+    "log": "dev/log/issues/23/pulls/24/ci-logs/rust-37772796413.log",
+    "bytes": 834855,
+    "sha256": "9c6206acb9f2317c2ea48ee8efa43d80b3f0fb24a67a0e5e72aef4744fe2c346"
   }
 ]

@@ -1,0 +1,1229 @@
+Product links	Set up job	﻿2026-10-08T11:51:07.6385397Z Current runner version: '2.337.0'
+Product links	Set up job	2026-10-08T11:51:07.6413988Z ##[group]Runner Image Provisioner
+Product links	Set up job	2026-10-08T11:51:07.6414950Z Hosted Compute Agent
+Product links	Set up job	2026-10-08T11:51:07.6415654Z Version: 20260901.588
+Product links	Set up job	2026-10-08T11:51:07.6416305Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+Product links	Set up job	2026-10-08T11:51:07.6417058Z Build Date: 2026-09-01T19:56:44Z
+Product links	Set up job	2026-10-08T11:51:07.6417821Z Worker ID: {5b029677-a254-4e44-8887-41a154fe3932}
+Product links	Set up job	2026-10-08T11:51:07.6418580Z Azure Region: eastus
+Product links	Set up job	2026-10-08T11:51:07.6419127Z ##[endgroup]
+Product links	Set up job	2026-10-08T11:51:07.6420989Z ##[group]Operating System
+Product links	Set up job	2026-10-08T11:51:07.6421688Z Ubuntu
+Product links	Set up job	2026-10-08T11:51:07.6422272Z 24.04.5
+Product links	Set up job	2026-10-08T11:51:07.6422839Z LTS
+Product links	Set up job	2026-10-08T11:51:07.6423413Z ##[endgroup]
+Product links	Set up job	2026-10-08T11:51:07.6423974Z ##[group]Runner Image
+Product links	Set up job	2026-10-08T11:51:07.6424573Z Image: ubuntu-24.04
+Product links	Set up job	2026-10-08T11:51:07.6425172Z Version: 20260927.320.1
+Product links	Set up job	2026-10-08T11:51:07.6426283Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+Product links	Set up job	2026-10-08T11:51:07.6428138Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+Product links	Set up job	2026-10-08T11:51:07.6429132Z ##[endgroup]
+Product links	Set up job	2026-10-08T11:51:07.6430463Z ##[group]GITHUB_TOKEN Permissions
+Product links	Set up job	2026-10-08T11:51:07.6432699Z Contents: read
+Product links	Set up job	2026-10-08T11:51:07.6433449Z Metadata: read
+Product links	Set up job	2026-10-08T11:51:07.6434061Z ##[endgroup]
+Product links	Set up job	2026-10-08T11:51:07.6436722Z Secret source: Actions
+Product links	Set up job	2026-10-08T11:51:07.6437774Z Cache mode: write
+Product links	Set up job	2026-10-08T11:51:07.6438835Z Prepare workflow directory
+Product links	Set up job	2026-10-08T11:51:07.6844843Z Prepare all required actions
+Product links	Set up job	2026-10-08T11:51:07.6894265Z Getting action download info
+Product links	Set up job	2026-10-08T11:51:07.9850180Z Download action repository 'actions/checkout@v6' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+Product links	Set up job	2026-10-08T11:51:08.0939149Z Download action repository 'actions/setup-node@v6' (SHA:249970729cb0ef3589644e2896645e5dc5ba9c38)
+Product links	Set up job	2026-10-08T11:51:08.1796535Z Download action repository 'lycheeverse/lychee-action@v2' (SHA:e7477775783ea5526144ba13e8db5eec57747ce8)
+Product links	Set up job	2026-10-08T11:51:08.2944551Z Download action repository 'actions/upload-artifact@v6' (SHA:b7c566a772e6b6bfb58ed0dc250532a479d7789f)
+Product links	Set up job	2026-10-08T11:51:08.5507616Z Complete job name: Product links
+Product links	Run actions/checkout@v6	﻿2026-10-08T11:51:08.6403924Z ##[group]Run actions/checkout@v6
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.6404905Z with:
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.6405364Z   persist-credentials: false
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.6405907Z   repository: link-foundation/lino-i18n
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.6410358Z   token: ***
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.6410859Z   ssh-strict: true
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.6411303Z   ssh-user: git
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.6411723Z   clean: true
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.6412165Z   sparse-checkout-cone-mode: true
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.6412696Z   fetch-depth: 1
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.6413128Z   fetch-tags: false
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.6413570Z   show-progress: true
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.6414038Z   lfs: false
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.6414450Z   submodules: false
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.6414894Z   set-safe-directory: true
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.6415402Z   allow-unsafe-pr-checkout: false
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.6416271Z env:
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.6416676Z   GIT_CONFIG_COUNT: 1
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.6417151Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.6417692Z   GIT_CONFIG_VALUE_0: main
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.6418196Z ##[endgroup]
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.7704179Z Syncing repository: link-foundation/lino-i18n
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.7707010Z ##[group]Getting Git version info
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.7708564Z Working directory is '/home/runner/work/lino-i18n/lino-i18n'
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.7710568Z [command]/usr/bin/git version
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.7711417Z git version 2.55.0
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.7713933Z ##[endgroup]
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.7721073Z Temporarily overriding HOME='/home/runner/work/_temp/99b84552-6647-4c5b-85ef-06c2c6d785b9' before making global git config changes
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.7723330Z Adding repository directory to the temporary git global config as a safe directory
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.7725161Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/lino-i18n/lino-i18n
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.7763664Z Deleting the contents of '/home/runner/work/lino-i18n/lino-i18n'
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.7775564Z ##[group]Determining repository object format
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.7776865Z ##[endgroup]
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.7777836Z ##[group]Initializing the repository
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.7788774Z [command]/usr/bin/git init /home/runner/work/lino-i18n/lino-i18n
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.7898291Z Initialized empty Git repository in /home/runner/work/lino-i18n/lino-i18n/.git/
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.7923139Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/lino-i18n
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.7966814Z ##[endgroup]
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.7968197Z ##[group]Disabling automatic garbage collection
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.7972700Z [command]/usr/bin/git config --local gc.auto 0
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.8011673Z ##[endgroup]
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.8012984Z ##[group]Setting up auth
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.8013961Z Removing SSH command configuration
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.8021574Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.8060883Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.8432626Z Removing HTTP extra header
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.8438097Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.8496289Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.8748691Z Removing includeIf entries pointing to credentials config files
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.8757056Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.8798563Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.9044901Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-9fc5e686-2abc-4dfa-b7cb-461b65215aca.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.9087846Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git.path /home/runner/work/_temp/git-credentials-9fc5e686-2abc-4dfa-b7cb-461b65215aca.config
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.9124760Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-9fc5e686-2abc-4dfa-b7cb-461b65215aca.config
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.9166306Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-9fc5e686-2abc-4dfa-b7cb-461b65215aca.config
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.9209523Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-9fc5e686-2abc-4dfa-b7cb-461b65215aca.config
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.9242756Z ##[endgroup]
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.9243871Z ##[group]Fetching the repository
+Product links	Run actions/checkout@v6	2026-10-08T11:51:08.9250672Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +73ef5ebb7a11e719368438021f697788c72863b4:refs/remotes/pull/24/merge
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.6766038Z From https://github.com/link-foundation/lino-i18n
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.6768346Z  * [new ref]         73ef5ebb7a11e719368438021f697788c72863b4 -> pull/24/merge
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.6773783Z ##[endgroup]
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.6774985Z ##[group]Determining the checkout info
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.6776270Z ##[endgroup]
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.6778908Z [command]/usr/bin/git sparse-checkout disable
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.6834437Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.6869056Z ##[group]Checking out the ref
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.6873302Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/24/merge
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.7879720Z Note: switching to 'refs/remotes/pull/24/merge'.
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.7881541Z 
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.7882740Z You are in 'detached HEAD' state. You can look around, make experimental
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.7885520Z changes and commit them, and you can discard any commits you make in this
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.7888119Z state without impacting any branches by switching back to a branch.
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.7889685Z 
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.7891111Z If you want to create a new branch to retain commits you create, you may
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.7893609Z do so (now or later) by using -c with the switch command. Example:
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.7895004Z 
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.7895614Z   git switch -c <new-branch-name>
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.7896552Z 
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.7897037Z Or undo this operation with:
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.7897746Z 
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.7898164Z   git switch -
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.7898710Z 
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.7899550Z Turn off this advice by setting config variable advice.detachedHead to false
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.7901768Z 
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.7903215Z HEAD is now at 73ef5eb Merge e738911dad803a34be95ad11a96d4153f2e8d7a7 into 36ff249dd256393ff4c8e1bf5e42bc04b3db166c
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.7907806Z ##[endgroup]
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.7952417Z [command]/usr/bin/git log -1 --format=%H
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.7983425Z 73ef5ebb7a11e719368438021f697788c72863b4
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.7995872Z ##[group]Removing auth
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.7997107Z Removing SSH command configuration
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.7999655Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.8038189Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.8266292Z Removing HTTP extra header
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.8271348Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.8317221Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.8556978Z Removing includeIf entries pointing to credentials config files
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.8560744Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.8593127Z includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git.path
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.8596100Z includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git/worktrees/*.path
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.8598531Z includeif.gitdir:/github/workspace/.git.path
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.8600621Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.8605675Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git.path
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.8631224Z /home/runner/work/_temp/git-credentials-9fc5e686-2abc-4dfa-b7cb-461b65215aca.config
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.8643632Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git.path /home/runner/work/_temp/git-credentials-9fc5e686-2abc-4dfa-b7cb-461b65215aca.config
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.8684310Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git/worktrees/*.path
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.8711024Z /home/runner/work/_temp/git-credentials-9fc5e686-2abc-4dfa-b7cb-461b65215aca.config
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.8723080Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-9fc5e686-2abc-4dfa-b7cb-461b65215aca.config
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.8762966Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.8794128Z /github/runner_temp/git-credentials-9fc5e686-2abc-4dfa-b7cb-461b65215aca.config
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.8812421Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-9fc5e686-2abc-4dfa-b7cb-461b65215aca.config
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.8851293Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.8878203Z /github/runner_temp/git-credentials-9fc5e686-2abc-4dfa-b7cb-461b65215aca.config
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.8893702Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-9fc5e686-2abc-4dfa-b7cb-461b65215aca.config
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.8930853Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.9157404Z Removing credentials config '/home/runner/work/_temp/git-credentials-9fc5e686-2abc-4dfa-b7cb-461b65215aca.config'
+Product links	Run actions/checkout@v6	2026-10-08T11:51:09.9166107Z ##[endgroup]
+Product links	Run actions/setup-node@v6	﻿2026-10-08T11:51:09.9538908Z ##[group]Run actions/setup-node@v6
+Product links	Run actions/setup-node@v6	2026-10-08T11:51:09.9540269Z with:
+Product links	Run actions/setup-node@v6	2026-10-08T11:51:09.9541051Z   node-version: 24.x
+Product links	Run actions/setup-node@v6	2026-10-08T11:51:09.9541950Z   check-latest: false
+Product links	Run actions/setup-node@v6	2026-10-08T11:51:09.9552128Z   token: ***
+Product links	Run actions/setup-node@v6	2026-10-08T11:51:09.9553009Z   package-manager-cache: true
+Product links	Run actions/setup-node@v6	2026-10-08T11:51:09.9554001Z env:
+Product links	Run actions/setup-node@v6	2026-10-08T11:51:09.9554751Z   GIT_CONFIG_COUNT: 1
+Product links	Run actions/setup-node@v6	2026-10-08T11:51:09.9555696Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Product links	Run actions/setup-node@v6	2026-10-08T11:51:09.9556790Z   GIT_CONFIG_VALUE_0: main
+Product links	Run actions/setup-node@v6	2026-10-08T11:51:09.9557734Z ##[endgroup]
+Product links	Run actions/setup-node@v6	2026-10-08T11:51:10.1030762Z Found in cache @ /opt/hostedtoolcache/node/24.21.0/x64
+Product links	Run actions/setup-node@v6	2026-10-08T11:51:10.1034329Z ##[group]Environment details
+Product links	Run actions/setup-node@v6	2026-10-08T11:51:10.5074937Z node: v24.21.0
+Product links	Run actions/setup-node@v6	2026-10-08T11:51:10.5076868Z npm: 11.19.0
+Product links	Run actions/setup-node@v6	2026-10-08T11:51:10.5077925Z yarn: 1.22.22
+Product links	Run actions/setup-node@v6	2026-10-08T11:51:10.5079518Z ##[endgroup]
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	﻿2026-10-08T11:51:10.5232107Z ##[group]Run node --test --test-timeout=30000 scripts/*.test.mjs
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.5232781Z ^[[36;1mnode --test --test-timeout=30000 scripts/*.test.mjs^[[0m
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.5494803Z shell: /usr/bin/bash -e {0}
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.5495308Z env:
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.5495613Z   GIT_CONFIG_COUNT: 1
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.5495958Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.5496344Z   GIT_CONFIG_VALUE_0: main
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.5496690Z ##[endgroup]
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.6791682Z ✔ the errors section stops at the next top-level heading (2.789991ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.6809596Z ✔ redirected links are not reported as broken (0.958019ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.6811932Z ✔ every http error is extracted exactly once (1.483289ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.6814024Z ✔ errors that the Wayback Machine cannot answer are still reported (0.287827ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.6821824Z ✔ the parsed error count matches the count lychee reports (0.60533ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.6830402Z ✔ a report whose only errors are non-HTTP is not "all archived" (0.376413ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.6833685Z ✔ a report with only redirects yields no broken links (0.319126ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.6835653Z ✔ extractBrokenUrls retains full-report parsing for legacy output (0.238715ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.6957245Z ✔ publish body has valid metadata and no archive length or archive bytes (3.022553ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.6960189Z ✔ only the exact missing tarball response proves scoped API credentials (0.704375ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.6961876Z ✔ HTTP 200 cannot pass credential preflight (0.431846ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.6962861Z ✔ HTTP 401 cannot pass credential preflight (0.262139ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.6963488Z ✔ HTTP 403 cannot pass credential preflight (0.275304ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.6964081Z ✔ HTTP 404 cannot pass credential preflight (0.265505ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.6964691Z ✔ HTTP 429 cannot pass credential preflight (0.231813ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.6965288Z ✔ HTTP 500 cannot pass credential preflight (0.274082ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.6965891Z ✔ HTTP 503 cannot pass credential preflight (0.412129ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.6966769Z ✔ an unrelated HTTP 400 is unverified: [{"detail":"invalid metadata length"}] (0.607154ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.6967802Z ✔ an unrelated HTTP 400 is unverified: [{"detail":"invalid tarball length for remaining payload"}] (0.305911ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.6969196Z ✔ an unrelated HTTP 400 is unverified: [] (0.297546ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.6970553Z ✔ an unrelated HTTP 400 is unverified: [{"detail":"invalid tarball length"},{"detail":"denied"}] (0.207006ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.6971967Z ✔ network and malformed JSON errors stay unknown without leaking secrets (0.665141ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.7281780Z ▶ lychee report classification
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.7283421Z   ✔ marks a failure carrying a status code as final (2.103988ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.7285115Z   ✔ marks ERROR, TIMEOUT, and UNKNOWN markers as never answered (0.370341ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.7287038Z   ✔ treats a rejected status code as an answer whatever the marker (0.195445ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.7290447Z   ✔ keeps non-http failures out of the re-check even when unanswered (0.347198ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.7293692Z ✔ lychee report classification (4.384826ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.7301091Z ▶ lychee request option sharing
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.7302347Z   ✔ reads the same accept list and user agent as the lychee step (0.384548ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.7307295Z   ✔ extracts the flags when the workflow sets them (0.211896ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.7312051Z ✔ lychee request option sharing (0.831292ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.7314553Z ▶ accept list parsing
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.7315511Z   ✔ honours ranges, singles, and stray spaces (0.435834ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.7316874Z ✔ accept list parsing (0.75013ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.7347030Z ▶ re-check requests
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.7347754Z   ✔ retries transient HTTP 429 until it recovers (10.630036ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.7366273Z   ✔ retries transient HTTP 500 until it recovers (2.489608ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.7373978Z   ✔ retries transient HTTP 502 until it recovers (0.96386ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.7382371Z   ✔ retries transient HTTP 503 until it recovers (0.665763ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.7391071Z   ✔ retries transient HTTP 504 until it recovers (0.793782ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.7555484Z   ✔ bounds repeated 503 responses and leaves the link failed (15.240644ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.7561737Z   ✔ recovers a URL that answers accepted (0.523347ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.7566634Z   ✔ stops at the first rejected answer and never retries it (0.345876ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.7714033Z   ✔ retries a URL that never answers and takes a later success (3.685581ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.7716402Z   ✔ gives up without an answer once the budget expires (0.406128ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.7719706Z   ✔ asks a duplicated URL only once (0.308315ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.7734357Z   ✔ sends the request the way lychee was configured to (0.278881ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.7735735Z ✔ re-check requests (37.388044ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.9387392Z ▶ re-check step end to end
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:10.9388692Z   ✔ recovers numeric 429 and rejected 503 reports after backoff (174.48521ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:11.0229178Z   ✔ recovers only the URLs that answer healthy and never re-asks a 404 (83.672876ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:11.1151977Z   ✔ releases the gate only when every unanswered link recovered (90.972346ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:11.2092373Z   ✔ keeps the gate closed when a recovered transport error accompanies a final 404 (95.440989ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:11.2432198Z   ✔ exits 0 even when the report is missing entirely (36.094899ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:11.2434888Z ✔ re-check step end to end (481.358923ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:11.2436237Z ▶ web archive fallback honouring the re-check
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:11.2437502Z   ✔ drops recovered URLs from the archive lookup (0.332751ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:11.2438947Z   ✔ skips nothing when the recovered file is missing or empty (0.13369ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:11.2440588Z ✔ web archive fallback honouring the re-check (0.609127ms)
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:11.2543474Z ℹ tests 48
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:11.2544622Z ℹ suites 6
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:11.2545668Z ℹ pass 48
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:11.2546381Z ℹ fail 0
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:11.2547165Z ℹ cancelled 0
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:11.2547987Z ℹ skipped 0
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:11.2548771Z ℹ todo 0
+Product links	Run node --test --test-timeout=30000 scripts/*.test.mjs	2026-10-08T11:51:11.2549713Z ℹ duration_ms 658.001126
+Product links	Run lycheeverse/lychee-action@v2	﻿2026-10-08T11:51:11.2782399Z ##[group]Run lycheeverse/lychee-action@v2
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.2782747Z with:
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.2784036Z   args: --verbose --no-progress --max-retries 3 --timeout 30 --exclude-path docs/case-studies --exclude-path dev --exclude-path node_modules --exclude-path target --exclude-path experiments --exclude-path js/site --exclude-path rust/site --exclude-path site --exclude-path js/reports './README.md' './js/README.md' './rust/lino-i18n/README.md' './docs/**/*.md'
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.2785354Z   fail: false
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.2785563Z   output: lychee/out.md
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.2785793Z   debug: false
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.2785996Z   failIfEmpty: true
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.2786198Z   format: markdown
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.2786409Z   jobSummary: true
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.2786621Z   lycheeVersion: v0.24.2
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.2786847Z   checkbox: true
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.2789447Z   token: ***
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.2789668Z   workingDirectory: .
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.2790080Z env:
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.2790291Z   GIT_CONFIG_COUNT: 1
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.2790574Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.2790844Z   GIT_CONFIG_VALUE_0: main
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.2793385Z   GITHUB_TOKEN: ***
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.2793597Z ##[endgroup]
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.2854040Z ##[start-action display=Set up environment;id=lychee.__run]
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.2913319Z ##[group]Run # Install into $RUNNER_TEMP (not $HOME) so the install path is stable
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.2913942Z ^[[36;1m# Install into $RUNNER_TEMP (not $HOME) so the install path is stable^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.2914461Z ^[[36;1m# across composite steps. On some runners $HOME is overridden per step^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.2914954Z ^[[36;1m# (e.g. actions/checkout temporarily sets it), which made the PATH^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.2915437Z ^[[36;1m# entry from one step and the install in another step diverge.^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.2915872Z ^[[36;1mecho "$RUNNER_TEMP/lychee/bin" >> "$GITHUB_PATH"^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.2916229Z ^[[36;1mmkdir -p "$RUNNER_TEMP/lychee/bin"^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.2983028Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.2983415Z env:
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.2983621Z   GIT_CONFIG_COUNT: 1
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.2983867Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.2984153Z   GIT_CONFIG_VALUE_0: main
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.2986996Z   GITHUB_TOKEN: ***
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.2987242Z ##[endgroup]
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3106182Z ##[end-action id=lychee.__run;outcome=success;conclusion=success;duration_ms=25]
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3111134Z ##[start-action display=Download and extract lychee in temp directory;id=lychee.lychee-setup]
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3131282Z ##[group]Run # Create a temporary directory for downloads and extraction
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3131846Z ^[[36;1m# Create a temporary directory for downloads and extraction^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3132269Z ^[[36;1mTEMP_DIR="${RUNNER_TEMP}/lychee-download"^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3132647Z ^[[36;1mrm -rf "${TEMP_DIR}" && mkdir -p "${TEMP_DIR}"^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3132993Z ^[[36;1mcd "${TEMP_DIR}"^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3133236Z ^[[36;1m^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3133432Z ^[[36;1mARCH=$(uname -m)^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3133736Z ^[[36;1m# Determine filename and download URL based on version^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3134137Z ^[[36;1mif [[ "${LYCHEE_VERSION}" =~ ^v0\.0|^v0\.1[0-5]\. ]]; then^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3134591Z ^[[36;1m  FILENAME="lychee-${LYCHEE_VERSION}-${ARCH}-unknown-linux-gnu.tar.gz"^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3135268Z ^[[36;1m  DOWNLOAD_URL="https://github.com/lycheeverse/lychee/releases/download/${LYCHEE_VERSION}/${FILENAME}"^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3135783Z ^[[36;1melse^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3136065Z ^[[36;1m  FILENAME="lychee-${ARCH}-unknown-linux-gnu.tar.gz"^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3136450Z ^[[36;1m  if [[ "${LYCHEE_VERSION}" == 'nightly' ]]; then^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3136994Z ^[[36;1m    DOWNLOAD_URL="https://github.com/lycheeverse/lychee/releases/download/nightly/${FILENAME}"^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3137588Z ^[[36;1m  elif [[ "${LYCHEE_VERSION}" == 'latest' ]]; then^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3138442Z ^[[36;1m    DOWNLOAD_URL="https://github.com/lycheeverse/lychee/releases/latest/download/${FILENAME}"^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3138914Z ^[[36;1m  else^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3139406Z ^[[36;1m    DOWNLOAD_URL="https://github.com/lycheeverse/lychee/releases/download/lychee-${LYCHEE_VERSION}/${FILENAME}"^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3140190Z ^[[36;1m  fi^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3140392Z ^[[36;1mfi^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3140576Z ^[[36;1m^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3140800Z ^[[36;1mecho "Downloading from: ${DOWNLOAD_URL}"^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3141117Z ^[[36;1mcurl -sfLO "${DOWNLOAD_URL}"^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3141374Z ^[[36;1m^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3141573Z ^[[36;1mecho "Extracting ${FILENAME}"^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3141846Z ^[[36;1mtar -xvzf "${FILENAME}"^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3142109Z ^[[36;1mrm -rv "${FILENAME}"^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3142337Z ^[[36;1m^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3142620Z ^[[36;1m# Detect if lychee binary is in a subfolder within the tar.gz^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3143014Z ^[[36;1mif ! [[ -f "${TEMP_DIR}/lychee" ]]; then^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3143427Z ^[[36;1m  TEMP_DIR="$(echo "${TEMP_DIR}"/lychee-*)"  # need `echo` to evaluate glob^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3143806Z ^[[36;1mfi^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3144023Z ^[[36;1mif ! [[ -f "${TEMP_DIR}/lychee" ]]; then^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3144461Z ^[[36;1m  echo "Cannot find lychee binary in $TEMP_DIR. Did the archive structure change?" >&2^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3144892Z ^[[36;1m  exit 1^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3145087Z ^[[36;1mfi^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3145265Z ^[[36;1m^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3145498Z ^[[36;1m# Output temp directory for use in later steps^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3145854Z ^[[36;1mecho "temp_dir=${TEMP_DIR}" >> $GITHUB_OUTPUT^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3211387Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3211761Z env:
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3211997Z   GIT_CONFIG_COUNT: 1
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3212256Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3212557Z   GIT_CONFIG_VALUE_0: main
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3215415Z   GITHUB_TOKEN: ***
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3215650Z   LYCHEE_VERSION: v0.24.2
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3215878Z ##[endgroup]
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.3348351Z Downloading from: https://github.com/lycheeverse/lychee/releases/download/lychee-v0.24.2/lychee-x86_64-unknown-linux-gnu.tar.gz
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.5074257Z Extracting lychee-x86_64-unknown-linux-gnu.tar.gz
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.5109299Z lychee-x86_64-unknown-linux-gnu/
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.5110372Z lychee-x86_64-unknown-linux-gnu/README.md
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.5118906Z lychee-x86_64-unknown-linux-gnu/docs/
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.5119612Z lychee-x86_64-unknown-linux-gnu/docs/lychee.1
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.5120550Z lychee-x86_64-unknown-linux-gnu/docs/TROUBLESHOOTING.md
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.5121245Z lychee-x86_64-unknown-linux-gnu/docs/PRE_COMMIT.md
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.5121968Z lychee-x86_64-unknown-linux-gnu/complete/
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.5122587Z lychee-x86_64-unknown-linux-gnu/complete/_lychee.ps1
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.5123295Z lychee-x86_64-unknown-linux-gnu/complete/lychee.elv
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.5124069Z lychee-x86_64-unknown-linux-gnu/complete/lychee.fish
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.5124808Z lychee-x86_64-unknown-linux-gnu/complete/lychee.bash
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.5125522Z lychee-x86_64-unknown-linux-gnu/complete/_lychee
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.5126109Z lychee-x86_64-unknown-linux-gnu/lychee
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.6509484Z removed 'lychee-x86_64-unknown-linux-gnu.tar.gz'
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.6536798Z ##[end-action id=lychee.lychee-setup;outcome=success;conclusion=success;duration_ms=342]
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.6542197Z ##[start-action display=Install lychee;id=lychee.__run_2]
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.6582000Z ##[group]Run # Install lychee from the temporary directory
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.6582437Z ^[[36;1m# Install lychee from the temporary directory^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.6583051Z ^[[36;1minstall -t "$RUNNER_TEMP/lychee/bin" -D "/home/runner/work/_temp/lychee-download/lychee-x86_64-unknown-linux-gnu/lychee"^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.6652607Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.6653365Z env:
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.6653570Z   GIT_CONFIG_COUNT: 1
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.6653810Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.6654088Z   GIT_CONFIG_VALUE_0: main
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.6656885Z   GITHUB_TOKEN: ***
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.6657111Z ##[endgroup]
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.6849381Z ##[end-action id=lychee.__run_2;outcome=success;conclusion=success;duration_ms=30]
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.6858353Z ##[start-action display=Run Lychee;id=lychee.run-lychee]
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.6879008Z ##[group]Run /home/runner/work/_actions/lycheeverse/lychee-action/v2/entrypoint.sh
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.6879581Z ^[[36;1m/home/runner/work/_actions/lycheeverse/lychee-action/v2/entrypoint.sh^[[0m
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.6947553Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.6947918Z env:
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.6948113Z   GIT_CONFIG_COUNT: 1
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.6948360Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.6948647Z   GIT_CONFIG_VALUE_0: main
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.6951577Z   GITHUB_TOKEN: ***
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.6954186Z   INPUT_TOKEN: ***
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.6955552Z   INPUT_ARGS: --verbose --no-progress --max-retries 3 --timeout 30 --exclude-path docs/case-studies --exclude-path dev --exclude-path node_modules --exclude-path target --exclude-path experiments --exclude-path js/site --exclude-path rust/site --exclude-path site --exclude-path js/reports './README.md' './js/README.md' './rust/lino-i18n/README.md' './docs/**/*.md'
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.6956987Z   INPUT_DEBUG: false
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.6957199Z   INPUT_FAIL: false
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.6957410Z   INPUT_FAILIFEMPTY: true
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.6957662Z   INPUT_FORMAT: markdown
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.6957892Z   INPUT_JOBSUMMARY: true
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.6958107Z   INPUT_CHECKBOX: true
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.6958324Z   INPUT_OUTPUT: lychee/out.md
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.6958797Z   SUMMARY_URL: https://github.com/link-foundation/lino-i18n/actions/runs/37772796373#summary-113296233810
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.6959319Z ##[endgroup]
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.8610824Z [EXCLUDED] https://www.npmjs.com/package/lino-i18n (at 5:1) | This is due to your 'exclude' values
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:11.8614564Z [EXCLUDED] https://www.npmjs.com/package/lino-i18n (at 4:1) | This is due to your 'exclude' values
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:13.3864747Z # Summary
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:13.3865006Z 
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:13.3865249Z | Status         | Count |
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:13.3865767Z |----------------|-------|
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:13.3866293Z | 🔍 Total       | 52    |
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:13.3866607Z | 🔗 Unique      | 32    |
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:13.3866905Z | ✅ Successful  | 50    |
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:13.3867235Z | ⏳ Timeouts    | 0     |
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:13.3867957Z | 🔀 Redirected  | 7     |
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:13.3868730Z | 👻 Excluded    | 2     |
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:13.3869249Z | ❓ Unknown     | 0     |
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:13.3870103Z | 🚫 Errors      | 0     |
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:13.3870727Z | ⛔ Unsupported | 0     |
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:13.3871036Z 
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:13.3871226Z ## Redirects per input
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:13.3871495Z 
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:13.3871765Z ### Redirects in ./js/README.md
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:13.3872067Z 
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:13.3872951Z * https://github.com/linksplatform/Protocols.Lino --[301]--> https://github.com/link-foundation/links-notation
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:13.3873780Z 
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:13.3873994Z ### Redirects in ./README.md
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:13.3874292Z 
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:13.3874918Z * https://docs.rs/lino-i18n --[302]--> https://docs.rs/lino-i18n/latest/lino_i18n/
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:13.3876258Z * https://docs.rs/lino-i18n/badge.svg --[301]--> https://img.shields.io/docsrs/lino-i18n/latest
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:13.3877783Z * https://github.com/linksplatform/Protocols.Lino --[301]--> https://github.com/link-foundation/links-notation
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:13.3878639Z 
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:13.3878985Z ### Redirects in ./rust/lino-i18n/README.md
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:13.3879348Z 
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:13.3880197Z * https://docs.rs/lino-i18n --[302]--> https://docs.rs/lino-i18n/latest/lino_i18n/
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:13.3881917Z * https://docs.rs/lino-i18n/badge.svg --[301]--> https://img.shields.io/docsrs/lino-i18n/latest
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:13.3883329Z * https://github.com/linksplatform/Protocols.Lino --[301]--> https://github.com/link-foundation/links-notation
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:13.3883778Z 
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:13.3883809Z 
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:13.3902872Z ##[notice]Summary report available at: https://github.com/link-foundation/lino-i18n/actions/runs/37772796373#summary-113296233810
+Product links	Run lycheeverse/lychee-action@v2	2026-10-08T11:51:13.3921831Z ##[end-action id=lychee.run-lychee;outcome=success;conclusion=success;duration_ms=1706]
+Product links	Run actions/upload-artifact@v6	﻿2026-10-08T11:51:13.4014538Z ##[group]Run actions/upload-artifact@v6
+Product links	Run actions/upload-artifact@v6	2026-10-08T11:51:13.4014866Z with:
+Product links	Run actions/upload-artifact@v6	2026-10-08T11:51:13.4015077Z   name: product-links
+Product links	Run actions/upload-artifact@v6	2026-10-08T11:51:13.4015305Z   path: lychee/out.md
+Product links	Run actions/upload-artifact@v6	2026-10-08T11:51:13.4015525Z   if-no-files-found: error
+Product links	Run actions/upload-artifact@v6	2026-10-08T11:51:13.4015764Z   compression-level: 6
+Product links	Run actions/upload-artifact@v6	2026-10-08T11:51:13.4015986Z   overwrite: false
+Product links	Run actions/upload-artifact@v6	2026-10-08T11:51:13.4016218Z   include-hidden-files: false
+Product links	Run actions/upload-artifact@v6	2026-10-08T11:51:13.4016451Z env:
+Product links	Run actions/upload-artifact@v6	2026-10-08T11:51:13.4016635Z   GIT_CONFIG_COUNT: 1
+Product links	Run actions/upload-artifact@v6	2026-10-08T11:51:13.4016862Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Product links	Run actions/upload-artifact@v6	2026-10-08T11:51:13.4017130Z   GIT_CONFIG_VALUE_0: main
+Product links	Run actions/upload-artifact@v6	2026-10-08T11:51:13.4017349Z ##[endgroup]
+Product links	Run actions/upload-artifact@v6	2026-10-08T11:51:13.5711743Z With the provided path, there will be 1 file uploaded
+Product links	Run actions/upload-artifact@v6	2026-10-08T11:51:13.5718503Z Artifact name is valid!
+Product links	Run actions/upload-artifact@v6	2026-10-08T11:51:13.5719419Z Root directory input is valid!
+Product links	Run actions/upload-artifact@v6	2026-10-08T11:51:13.7719233Z Beginning upload of artifact content to blob storage
+Product links	Run actions/upload-artifact@v6	2026-10-08T11:51:13.8463582Z Uploaded bytes 553
+Product links	Run actions/upload-artifact@v6	2026-10-08T11:51:13.8603841Z Finished uploading artifact content to blob storage!
+Product links	Run actions/upload-artifact@v6	2026-10-08T11:51:13.8605673Z SHA256 digest of uploaded artifact zip is ea9c990e222f048dec599f8db69b330d6440705a9cc6b6477438c41d1fad895a
+Product links	Run actions/upload-artifact@v6	2026-10-08T11:51:13.8607101Z Finalizing artifact upload
+Product links	Run actions/upload-artifact@v6	2026-10-08T11:51:14.1165438Z Artifact product-links.zip successfully finalized. Artifact ID 11548204011
+Product links	Run actions/upload-artifact@v6	2026-10-08T11:51:14.1167005Z Artifact product-links has been successfully uploaded! Final size is 553 bytes. Artifact ID is 11548204011
+Product links	Run actions/upload-artifact@v6	2026-10-08T11:51:14.1171385Z Artifact download URL: https://github.com/link-foundation/lino-i18n/actions/runs/37772796373/artifacts/11548204011
+Product links	Post Run actions/setup-node@v6	﻿2026-10-08T11:51:14.1484748Z Post job cleanup.
+Product links	Post Run actions/checkout@v6	﻿2026-10-08T11:51:14.3019001Z Post job cleanup.
+Product links	Post Run actions/checkout@v6	2026-10-08T11:51:14.3958904Z [command]/usr/bin/git version
+Product links	Post Run actions/checkout@v6	2026-10-08T11:51:14.4005336Z git version 2.55.0
+Product links	Post Run actions/checkout@v6	2026-10-08T11:51:14.4049285Z Temporarily overriding HOME='/home/runner/work/_temp/95226c6a-7a01-4d45-91b9-d392115af29e' before making global git config changes
+Product links	Post Run actions/checkout@v6	2026-10-08T11:51:14.4051039Z Adding repository directory to the temporary git global config as a safe directory
+Product links	Post Run actions/checkout@v6	2026-10-08T11:51:14.4056667Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/lino-i18n/lino-i18n
+Product links	Post Run actions/checkout@v6	2026-10-08T11:51:14.4097349Z Removing SSH command configuration
+Product links	Post Run actions/checkout@v6	2026-10-08T11:51:14.4106012Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Product links	Post Run actions/checkout@v6	2026-10-08T11:51:14.4153516Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Product links	Post Run actions/checkout@v6	2026-10-08T11:51:14.4443684Z Removing HTTP extra header
+Product links	Post Run actions/checkout@v6	2026-10-08T11:51:14.4445108Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Product links	Post Run actions/checkout@v6	2026-10-08T11:51:14.4502260Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Product links	Post Run actions/checkout@v6	2026-10-08T11:51:14.4842954Z Removing includeIf entries pointing to credentials config files
+Product links	Post Run actions/checkout@v6	2026-10-08T11:51:14.4854741Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Product links	Post Run actions/checkout@v6	2026-10-08T11:51:14.4914783Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Product links	Complete job	﻿2026-10-08T11:51:14.5386247Z Cleaning up orphan processes
+Validate docs	Set up job	﻿2026-10-08T11:51:07.9328465Z Current runner version: '2.337.0'
+Validate docs	Set up job	2026-10-08T11:51:07.9349922Z ##[group]Runner Image Provisioner
+Validate docs	Set up job	2026-10-08T11:51:07.9350743Z Hosted Compute Agent
+Validate docs	Set up job	2026-10-08T11:51:07.9351303Z Version: 20261002.596
+Validate docs	Set up job	2026-10-08T11:51:07.9351826Z Commit: c3d12f3313a95f25162a1503be624f3b0617f8c0
+Validate docs	Set up job	2026-10-08T11:51:07.9352584Z Build Date: 2026-10-02T22:28:27Z
+Validate docs	Set up job	2026-10-08T11:51:07.9353294Z Worker ID: {435c8692-e34b-4165-8c61-2fb38e03251b}
+Validate docs	Set up job	2026-10-08T11:51:07.9353954Z Region: westus3
+Validate docs	Set up job	2026-10-08T11:51:07.9354502Z Cloud: Azure
+Validate docs	Set up job	2026-10-08T11:51:07.9354971Z ##[endgroup]
+Validate docs	Set up job	2026-10-08T11:51:07.9356331Z ##[group]Operating System
+Validate docs	Set up job	2026-10-08T11:51:07.9356943Z Ubuntu
+Validate docs	Set up job	2026-10-08T11:51:07.9357430Z 24.04.5
+Validate docs	Set up job	2026-10-08T11:51:07.9357959Z LTS
+Validate docs	Set up job	2026-10-08T11:51:07.9358423Z ##[endgroup]
+Validate docs	Set up job	2026-10-08T11:51:07.9358874Z ##[group]Runner Image
+Validate docs	Set up job	2026-10-08T11:51:07.9359543Z Image: ubuntu-24.04
+Validate docs	Set up job	2026-10-08T11:51:07.9360008Z Version: 20261004.327.1
+Validate docs	Set up job	2026-10-08T11:51:07.9360922Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261004.327/images/ubuntu/Ubuntu2404-Readme.md
+Validate docs	Set up job	2026-10-08T11:51:07.9362477Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261004.327
+Validate docs	Set up job	2026-10-08T11:51:07.9363396Z ##[endgroup]
+Validate docs	Set up job	2026-10-08T11:51:07.9364305Z ##[group]GITHUB_TOKEN Permissions
+Validate docs	Set up job	2026-10-08T11:51:07.9365954Z Contents: read
+Validate docs	Set up job	2026-10-08T11:51:07.9366423Z Metadata: read
+Validate docs	Set up job	2026-10-08T11:51:07.9366954Z ##[endgroup]
+Validate docs	Set up job	2026-10-08T11:51:07.9368644Z Secret source: Actions
+Validate docs	Set up job	2026-10-08T11:51:07.9369517Z Cache mode: write
+Validate docs	Set up job	2026-10-08T11:51:07.9370121Z Prepare workflow directory
+Validate docs	Set up job	2026-10-08T11:51:07.9628962Z Prepare all required actions
+Validate docs	Set up job	2026-10-08T11:51:07.9658039Z Getting action download info
+Validate docs	Set up job	2026-10-08T11:51:08.2724793Z Download action repository 'actions/checkout@v6' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+Validate docs	Set up job	2026-10-08T11:51:08.3441886Z Download action repository 'actions/setup-node@v6' (SHA:249970729cb0ef3589644e2896645e5dc5ba9c38)
+Validate docs	Set up job	2026-10-08T11:51:08.5953578Z Download action repository 'dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d' (SHA:89b12181fb390509a0842a86cc55eeb8eb928c1d)
+Validate docs	Set up job	2026-10-08T11:51:08.9018024Z Complete job name: Validate docs
+Validate docs	Run actions/checkout@v6	﻿2026-10-08T11:51:08.9469110Z ##[group]Run actions/checkout@v6
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:08.9469542Z with:
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:08.9469782Z   persist-credentials: false
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:08.9470072Z   repository: link-foundation/lino-i18n
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:08.9472492Z   token: ***
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:08.9472722Z   ssh-strict: true
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:08.9472957Z   ssh-user: git
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:08.9473184Z   clean: true
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:08.9473429Z   sparse-checkout-cone-mode: true
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:08.9473710Z   fetch-depth: 1
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:08.9473939Z   fetch-tags: false
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:08.9474177Z   show-progress: true
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:08.9474417Z   lfs: false
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:08.9474635Z   submodules: false
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:08.9474877Z   set-safe-directory: true
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:08.9475150Z   allow-unsafe-pr-checkout: false
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:08.9475486Z env:
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:08.9476015Z   GIT_CONFIG_COUNT: 1
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:08.9476296Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:08.9476587Z   GIT_CONFIG_VALUE_0: main
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:08.9476862Z ##[endgroup]
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.0092206Z Syncing repository: link-foundation/lino-i18n
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.0093648Z ##[group]Getting Git version info
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.0094164Z Working directory is '/home/runner/work/lino-i18n/lino-i18n'
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.0094725Z [command]/usr/bin/git version
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.0206932Z git version 2.55.0
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.0217375Z ##[endgroup]
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.0228190Z Temporarily overriding HOME='/home/runner/work/_temp/7c9cd81f-ee1c-4637-9305-e29f503b3d40' before making global git config changes
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.0229401Z Adding repository directory to the temporary git global config as a safe directory
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.0232824Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/lino-i18n/lino-i18n
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.0278298Z Deleting the contents of '/home/runner/work/lino-i18n/lino-i18n'
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.0280936Z ##[group]Determining repository object format
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.0282289Z ##[endgroup]
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.0283053Z ##[group]Initializing the repository
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.0284905Z [command]/usr/bin/git init /home/runner/work/lino-i18n/lino-i18n
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.0490794Z Initialized empty Git repository in /home/runner/work/lino-i18n/lino-i18n/.git/
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.0499312Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/lino-i18n
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.0545914Z ##[endgroup]
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.0546358Z ##[group]Disabling automatic garbage collection
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.0548861Z [command]/usr/bin/git config --local gc.auto 0
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.0576336Z ##[endgroup]
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.0576740Z ##[group]Setting up auth
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.0577148Z Removing SSH command configuration
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.0581162Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.0608428Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.0892489Z Removing HTTP extra header
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.0896856Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.0922907Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.1085237Z Removing includeIf entries pointing to credentials config files
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.1089838Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.1116749Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.1289450Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-cf719faa-e8e4-43d7-9f23-abc9a577e477.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.1319794Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git.path /home/runner/work/_temp/git-credentials-cf719faa-e8e4-43d7-9f23-abc9a577e477.config
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.1347814Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-cf719faa-e8e4-43d7-9f23-abc9a577e477.config
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.1377495Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-cf719faa-e8e4-43d7-9f23-abc9a577e477.config
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.1408624Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-cf719faa-e8e4-43d7-9f23-abc9a577e477.config
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.1432978Z ##[endgroup]
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.1433630Z ##[group]Fetching the repository
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:09.1438163Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +73ef5ebb7a11e719368438021f697788c72863b4:refs/remotes/pull/24/merge
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.5737426Z From https://github.com/link-foundation/lino-i18n
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.5738847Z  * [new ref]         73ef5ebb7a11e719368438021f697788c72863b4 -> pull/24/merge
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.5741704Z ##[endgroup]
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.5742594Z ##[group]Determining the checkout info
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.5743599Z ##[endgroup]
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.5746418Z [command]/usr/bin/git sparse-checkout disable
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.5790460Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.5819451Z ##[group]Checking out the ref
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.5820414Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/24/merge
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.6537888Z Note: switching to 'refs/remotes/pull/24/merge'.
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.6547519Z 
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.6548093Z You are in 'detached HEAD' state. You can look around, make experimental
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.6549258Z changes and commit them, and you can discard any commits you make in this
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.6550407Z state without impacting any branches by switching back to a branch.
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.6551073Z 
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.6551516Z If you want to create a new branch to retain commits you create, you may
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.6552568Z do so (now or later) by using -c with the switch command. Example:
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.6553186Z 
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.6553510Z   git switch -c <new-branch-name>
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.6554019Z 
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.6554342Z Or undo this operation with:
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.6554814Z 
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.6555111Z   git switch -
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.6555912Z 
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.6556804Z Turn off this advice by setting config variable advice.detachedHead to false
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.6557757Z 
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.6558713Z HEAD is now at 73ef5eb Merge e738911dad803a34be95ad11a96d4153f2e8d7a7 into 36ff249dd256393ff4c8e1bf5e42bc04b3db166c
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.6562540Z ##[endgroup]
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.6593842Z [command]/usr/bin/git log -1 --format=%H
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.6616852Z 73ef5ebb7a11e719368438021f697788c72863b4
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.6629524Z ##[group]Removing auth
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.6630483Z Removing SSH command configuration
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.6631750Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.6658196Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.6837803Z Removing HTTP extra header
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.6841245Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.6870654Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.7038194Z Removing includeIf entries pointing to credentials config files
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.7040132Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.7062021Z includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git.path
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.7063386Z includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git/worktrees/*.path
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.7064699Z includeif.gitdir:/github/workspace/.git.path
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.7065803Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.7068802Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git.path
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.7089198Z /home/runner/work/_temp/git-credentials-cf719faa-e8e4-43d7-9f23-abc9a577e477.config
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.7097633Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git.path /home/runner/work/_temp/git-credentials-cf719faa-e8e4-43d7-9f23-abc9a577e477.config
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.7126684Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git/worktrees/*.path
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.7147049Z /home/runner/work/_temp/git-credentials-cf719faa-e8e4-43d7-9f23-abc9a577e477.config
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.7153292Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-cf719faa-e8e4-43d7-9f23-abc9a577e477.config
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.7180879Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.7202286Z /github/runner_temp/git-credentials-cf719faa-e8e4-43d7-9f23-abc9a577e477.config
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.7208670Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-cf719faa-e8e4-43d7-9f23-abc9a577e477.config
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.7239687Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.7259137Z /github/runner_temp/git-credentials-cf719faa-e8e4-43d7-9f23-abc9a577e477.config
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.7267558Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-cf719faa-e8e4-43d7-9f23-abc9a577e477.config
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.7293962Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.7452516Z Removing credentials config '/home/runner/work/_temp/git-credentials-cf719faa-e8e4-43d7-9f23-abc9a577e477.config'
+Validate docs	Run actions/checkout@v6	2026-10-08T11:51:10.7458592Z ##[endgroup]
+Validate docs	Run python3 scripts/check-docs.py	﻿2026-10-08T11:51:10.7668998Z ##[group]Run python3 scripts/check-docs.py
+Validate docs	Run python3 scripts/check-docs.py	2026-10-08T11:51:10.7669886Z ^[[36;1mpython3 scripts/check-docs.py^[[0m
+Validate docs	Run python3 scripts/check-docs.py	2026-10-08T11:51:10.7888783Z shell: /usr/bin/bash -e {0}
+Validate docs	Run python3 scripts/check-docs.py	2026-10-08T11:51:10.7889446Z env:
+Validate docs	Run python3 scripts/check-docs.py	2026-10-08T11:51:10.7889935Z   GIT_CONFIG_COUNT: 1
+Validate docs	Run python3 scripts/check-docs.py	2026-10-08T11:51:10.7890549Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Validate docs	Run python3 scripts/check-docs.py	2026-10-08T11:51:10.7891265Z   GIT_CONFIG_VALUE_0: main
+Validate docs	Run python3 scripts/check-docs.py	2026-10-08T11:51:10.7891863Z ##[endgroup]
+Validate docs	Run python3 scripts/check-docs.py	2026-10-08T11:51:10.8144322Z Validated 43 product documents.
+Validate docs	Run actions/setup-node@v6	﻿2026-10-08T11:51:10.8296067Z ##[group]Run actions/setup-node@v6
+Validate docs	Run actions/setup-node@v6	2026-10-08T11:51:10.8296732Z with:
+Validate docs	Run actions/setup-node@v6	2026-10-08T11:51:10.8297221Z   node-version: 24.x
+Validate docs	Run actions/setup-node@v6	2026-10-08T11:51:10.8297777Z   check-latest: false
+Validate docs	Run actions/setup-node@v6	2026-10-08T11:51:10.8303247Z   token: ***
+Validate docs	Run actions/setup-node@v6	2026-10-08T11:51:10.8303783Z   package-manager-cache: true
+Validate docs	Run actions/setup-node@v6	2026-10-08T11:51:10.8304393Z env:
+Validate docs	Run actions/setup-node@v6	2026-10-08T11:51:10.8304863Z   GIT_CONFIG_COUNT: 1
+Validate docs	Run actions/setup-node@v6	2026-10-08T11:51:10.8305453Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Validate docs	Run actions/setup-node@v6	2026-10-08T11:51:10.8306202Z   GIT_CONFIG_VALUE_0: main
+Validate docs	Run actions/setup-node@v6	2026-10-08T11:51:10.8306780Z ##[endgroup]
+Validate docs	Run actions/setup-node@v6	2026-10-08T11:51:10.9191662Z Found in cache @ /opt/hostedtoolcache/node/24.21.0/x64
+Validate docs	Run actions/setup-node@v6	2026-10-08T11:51:10.9195035Z ##[group]Environment details
+Validate docs	Run actions/setup-node@v6	2026-10-08T11:51:11.2087956Z node: v24.21.0
+Validate docs	Run actions/setup-node@v6	2026-10-08T11:51:11.2088318Z npm: 11.19.0
+Validate docs	Run actions/setup-node@v6	2026-10-08T11:51:11.2088474Z yarn: 1.22.22
+Validate docs	Run actions/setup-node@v6	2026-10-08T11:51:11.2088925Z ##[endgroup]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	﻿2026-10-08T11:51:11.2265022Z ##[group]Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2265309Z with:
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2265458Z   toolchain: stable
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2265811Z env:
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2265948Z   GIT_CONFIG_COUNT: 1
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2266121Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2266304Z   GIT_CONFIG_VALUE_0: main
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2266461Z ##[endgroup]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2310812Z ##[start-action display=Parse toolchain version;id=__dtolnay_rust-toolchain.parse]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2344756Z ##[group]Run if [[ -z $toolchain ]]; then
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2345018Z ^[[36;1mif [[ -z $toolchain ]]; then^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2345353Z ^[[36;1m  # GitHub does not enforce `required: true` inputs itself. https://github.com/actions/runner/issues/1070^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2345886Z ^[[36;1m  echo "'toolchain' is a required input" >&2^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2346086Z ^[[36;1m  exit 1^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2346306Z ^[[36;1melif [[ $toolchain =~ ^stable' '[0-9]+' '(year|month|week|day)s?' 'ago$ ]]; then^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2346596Z ^[[36;1m  if [[ Linux == macOS ]]; then^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2346921Z ^[[36;1m    echo "toolchain=1.$((($(date -v-$(sed 's/stable \([0-9]*\) \(.\).*/\1\2/' <<< $toolchain) +%s)/60/60/24-16569)/7/6))" >> $GITHUB_OUTPUT^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2347232Z ^[[36;1m  else^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2347489Z ^[[36;1m    echo "toolchain=1.$((($(date --date "${toolchain#stable }" +%s)/60/60/24-16569)/7/6))" >> $GITHUB_OUTPUT^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2347772Z ^[[36;1m  fi^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2347982Z ^[[36;1melif [[ $toolchain =~ ^stable' 'minus' '[0-9]+' 'releases?$ ]]; then^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2348305Z ^[[36;1m  echo "toolchain=1.$((($(date +%s)/60/60/24-16569)/7/6-${toolchain//[^0-9]/}))" >> $GITHUB_OUTPUT^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2348716Z ^[[36;1melif [[ $toolchain =~ ^1\.[0-9]+$ ]]; then^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2349035Z ^[[36;1m  echo "toolchain=1.$((i=${toolchain#1.}, c=($(date +%s)/60/60/24-16569)/7/6, i+9*i*(10*i<=c)+90*i*(100*i<=c)))" >> $GITHUB_OUTPUT^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2349338Z ^[[36;1melse^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2349508Z ^[[36;1m  echo "toolchain=$toolchain" >> $GITHUB_OUTPUT^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2349704Z ^[[36;1mfi^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2410416Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2410661Z env:
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2410803Z   GIT_CONFIG_COUNT: 1
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2410970Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2411152Z   GIT_CONFIG_VALUE_0: main
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2411310Z   toolchain: stable
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2411454Z ##[endgroup]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2504568Z ##[end-action id=__dtolnay_rust-toolchain.parse;outcome=success;conclusion=success;duration_ms=19]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2508921Z ##[start-action display=Construct rustup command line;id=__dtolnay_rust-toolchain.flags]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2527085Z ##[group]Run echo "targets=$(for t in ${targets//,/ }; do echo -n ' --target' $t; done)" >> $GITHUB_OUTPUT
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2527493Z ^[[36;1mecho "targets=$(for t in ${targets//,/ }; do echo -n ' --target' $t; done)" >> $GITHUB_OUTPUT^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2527879Z ^[[36;1mecho "components=$(for c in ${components//,/ }; do echo -n ' --component' $c; done)" >> $GITHUB_OUTPUT^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2528175Z ^[[36;1mecho "downgrade=" >> $GITHUB_OUTPUT^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2577606Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2577819Z env:
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2577960Z   GIT_CONFIG_COUNT: 1
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2578124Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2578308Z   GIT_CONFIG_VALUE_0: main
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2578465Z   targets: 
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2578599Z   components: 
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2578740Z ##[endgroup]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2658418Z ##[end-action id=__dtolnay_rust-toolchain.flags;outcome=success;conclusion=success;duration_ms=14]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2659976Z ##[start-action display=Set $CARGO_HOME;id=__dtolnay_rust-toolchain.__run]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2697987Z ##[group]Run echo CARGO_HOME=${CARGO_HOME:-"$HOME/.cargo"} >> $GITHUB_ENV
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2698465Z ^[[36;1mecho CARGO_HOME=${CARGO_HOME:-"$HOME/.cargo"} >> $GITHUB_ENV^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2749772Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2749990Z env:
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2750131Z   GIT_CONFIG_COUNT: 1
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2750296Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2750479Z   GIT_CONFIG_VALUE_0: main
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2750635Z ##[endgroup]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2825174Z ##[end-action id=__dtolnay_rust-toolchain.__run;outcome=success;conclusion=success;duration_ms=14]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2826885Z ##[start-action display=Install rustup if needed;id=__dtolnay_rust-toolchain.__run_2]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2847613Z ##[group]Run if ! command -v rustup &>/dev/null; then
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2847951Z ^[[36;1mif ! command -v rustup &>/dev/null; then^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2848405Z ^[[36;1m  curl --proto '=https' --tlsv1.2 --retry 10 --retry-connrefused --location --silent --show-error --fail https://sh.rustup.rs | sh -s -- --default-toolchain none -y^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2848844Z ^[[36;1m  echo "$CARGO_HOME/bin" >> $GITHUB_PATH^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2849031Z ^[[36;1mfi^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2895305Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2895670Z env:
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2895814Z   GIT_CONFIG_COUNT: 1
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2895983Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2896170Z   GIT_CONFIG_VALUE_0: main
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2896342Z   CARGO_HOME: /home/runner/.cargo
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2896512Z ##[endgroup]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2963916Z ##[end-action id=__dtolnay_rust-toolchain.__run_2;outcome=success;conclusion=success;duration_ms=13]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2965431Z ##[start-action display=Install rustup if needed on windows;id=__dtolnay_rust-toolchain.__run_3]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2969458Z ##[end-action id=__dtolnay_rust-toolchain.__run_3;outcome=skipped;conclusion=skipped;duration_ms=0]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2976345Z ##[start-action display=rustup toolchain install stable;id=__dtolnay_rust-toolchain.__run_4]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2993758Z ##[group]Run log=$(mktemp)
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2993965Z ^[[36;1mlog=$(mktemp)^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2994134Z ^[[36;1mtrap 'rm -f "$log"' EXIT^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2994317Z ^[[36;1mfor attempt in 1 2 3 4 5; do^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2994638Z ^[[36;1m  if rustup toolchain install stable --profile minimal --no-self-update --force-non-host 2>&1 | tee "$log"; then^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2994951Z ^[[36;1m    break^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2995093Z ^[[36;1m  else^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2995237Z ^[[36;1m    status=$?^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2995392Z ^[[36;1m  fi^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2995774Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' "$log" \^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2996107Z ^[[36;1m      || ! grep -Fq 'this is likely due to an ongoing update of the official release server' "$log"; then^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2996402Z ^[[36;1m    exit "$status"^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2996562Z ^[[36;1m  fi^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2996798Z ^[[36;1m  echo "Retrying rustup toolchain install in 30 seconds (retry $attempt of 4)" >&2^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2997057Z ^[[36;1m  sleep 30^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.2997204Z ^[[36;1mdone^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.3044536Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.3044753Z env:
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.3044902Z   GIT_CONFIG_COUNT: 1
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.3045073Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.3045259Z   GIT_CONFIG_VALUE_0: main
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.3045433Z   CARGO_HOME: /home/runner/.cargo
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.3045762Z   RUSTUP_PERMIT_COPY_RENAME: 1
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.3045929Z ##[endgroup]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.4580106Z info: syncing channel updates for stable-x86_64-unknown-linux-gnu
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.5843723Z 
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.5911945Z   stable-x86_64-unknown-linux-gnu unchanged - rustc 1.99.0 (b940084d7 2026-09-28)
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.5912277Z 
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.5950044Z ##[end-action id=__dtolnay_rust-toolchain.__run_4;outcome=success;conclusion=success;duration_ms=297]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.5954123Z ##[start-action display=rustup default stable;id=__dtolnay_rust-toolchain.__run_5]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.5972146Z ##[group]Run rustup default stable --force-non-host
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.5972418Z ^[[36;1mrustup default stable --force-non-host^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6026295Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6026510Z env:
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6026655Z   GIT_CONFIG_COUNT: 1
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6026822Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6027007Z   GIT_CONFIG_VALUE_0: main
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6027176Z   CARGO_HOME: /home/runner/.cargo
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6027345Z ##[endgroup]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6124367Z info: using existing install for stable-x86_64-unknown-linux-gnu
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6172156Z info: default toolchain set to stable-x86_64-unknown-linux-gnu
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6172481Z 
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6233720Z   stable-x86_64-unknown-linux-gnu unchanged - rustc 1.99.0 (b940084d7 2026-09-28)
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6234140Z 
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6248858Z ##[end-action id=__dtolnay_rust-toolchain.__run_5;outcome=success;conclusion=success;duration_ms=29]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6251029Z ##[start-action display=Create cachekey;id=__dtolnay_rust-toolchain.rustc-version]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6270841Z ##[group]Run DATE=$(rustc +stable --version --verbose | sed -ne 's/^commit-date: \(20[0-9][0-9]\)-\([01][0-9]\)-\([0-3][0-9]\)$/\1\2\3/p')
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6271350Z ^[[36;1mDATE=$(rustc +stable --version --verbose | sed -ne 's/^commit-date: \(20[0-9][0-9]\)-\([01][0-9]\)-\([0-3][0-9]\)$/\1\2\3/p')^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6271728Z ^[[36;1mHASH=$(rustc +stable --version --verbose | sed -ne 's/^commit-hash: //p')^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6272035Z ^[[36;1mecho "cachekey=$(echo $DATE$HASH | head -c12)" >> $GITHUB_OUTPUT^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6324835Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6325049Z env:
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6325193Z   GIT_CONFIG_COUNT: 1
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6325377Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6325729Z   GIT_CONFIG_VALUE_0: main
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6325916Z   CARGO_HOME: /home/runner/.cargo
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6326084Z ##[endgroup]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6623303Z ##[end-action id=__dtolnay_rust-toolchain.rustc-version;outcome=success;conclusion=success;duration_ms=37]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6625844Z ##[start-action display=Disable incremental compilation;id=__dtolnay_rust-toolchain.__run_6]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6644897Z ##[group]Run if [ -z "${CARGO_INCREMENTAL+set}" ]; then
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6645183Z ^[[36;1mif [ -z "${CARGO_INCREMENTAL+set}" ]; then^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6645400Z ^[[36;1m  echo CARGO_INCREMENTAL=0 >> $GITHUB_ENV^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6645788Z ^[[36;1mfi^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6699928Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6700144Z env:
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6700290Z   GIT_CONFIG_COUNT: 1
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6700460Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6700660Z   GIT_CONFIG_VALUE_0: main
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6700832Z   CARGO_HOME: /home/runner/.cargo
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6701005Z ##[endgroup]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6771464Z ##[end-action id=__dtolnay_rust-toolchain.__run_6;outcome=success;conclusion=success;duration_ms=14]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6773082Z ##[start-action display=Enable colors in Cargo output;id=__dtolnay_rust-toolchain.__run_7]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6790250Z ##[group]Run if [ -z "${CARGO_TERM_COLOR+set}" ]; then
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6790501Z ^[[36;1mif [ -z "${CARGO_TERM_COLOR+set}" ]; then^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6790719Z ^[[36;1m  echo CARGO_TERM_COLOR=always >> $GITHUB_ENV^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6790910Z ^[[36;1mfi^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6838142Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6838375Z env:
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6838517Z   GIT_CONFIG_COUNT: 1
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6838684Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6838869Z   GIT_CONFIG_VALUE_0: main
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6839038Z   CARGO_HOME: /home/runner/.cargo
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6839344Z   CARGO_INCREMENTAL: 0
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6839495Z ##[endgroup]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6906932Z ##[end-action id=__dtolnay_rust-toolchain.__run_7;outcome=success;conclusion=success;duration_ms=13]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6908416Z ##[start-action display=Enable Cargo sparse registry;id=__dtolnay_rust-toolchain.__run_8]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6939680Z ##[group]Run # implemented in 1.66, stabilized in 1.68, made default in 1.70
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6940015Z ^[[36;1m# implemented in 1.66, stabilized in 1.68, made default in 1.70^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6940425Z ^[[36;1mif [ -z "${CARGO_REGISTRIES_CRATES_IO_PROTOCOL+set}" -o -f "/home/runner/work/_temp"/.implicit_cargo_registries_crates_io_protocol ]; then^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6940842Z ^[[36;1m  if rustc +stable --version --verbose | grep -q '^release: 1\.6[89]\.'; then^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6941197Z ^[[36;1m    touch "/home/runner/work/_temp"/.implicit_cargo_registries_crates_io_protocol || true^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6941522Z ^[[36;1m    echo CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse >> $GITHUB_ENV^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6941822Z ^[[36;1m  elif rustc +stable --version --verbose | grep -q '^release: 1\.6[67]\.'; then^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6942158Z ^[[36;1m    touch "/home/runner/work/_temp"/.implicit_cargo_registries_crates_io_protocol || true^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6942467Z ^[[36;1m    echo CARGO_REGISTRIES_CRATES_IO_PROTOCOL=git >> $GITHUB_ENV^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6942685Z ^[[36;1m  fi^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6942821Z ^[[36;1mfi^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6988421Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6988631Z env:
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6988771Z   GIT_CONFIG_COUNT: 1
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6988937Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6989251Z   GIT_CONFIG_VALUE_0: main
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6989419Z   CARGO_HOME: /home/runner/.cargo
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6989587Z   CARGO_INCREMENTAL: 0
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6989743Z   CARGO_TERM_COLOR: always
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.6989904Z ##[endgroup]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7249696Z ##[end-action id=__dtolnay_rust-toolchain.__run_8;outcome=success;conclusion=success;duration_ms=34]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7251863Z ##[start-action display=Work around spurious network errors in curl 8.0;id=__dtolnay_rust-toolchain.__run_9]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7271866Z ##[group]Run # https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo/topic/timeout.20investigation
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7272315Z ^[[36;1m# https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo/topic/timeout.20investigation^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7272666Z ^[[36;1mif rustc +stable --version --verbose | grep -q '^release: 1\.7[01]\.'; then^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7272987Z ^[[36;1m  echo CARGO_HTTP_MULTIPLEXING=false >> $GITHUB_ENV^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7273207Z ^[[36;1mfi^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7325851Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7326061Z env:
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7326203Z   GIT_CONFIG_COUNT: 1
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7326365Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7326561Z   GIT_CONFIG_VALUE_0: main
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7326727Z   CARGO_HOME: /home/runner/.cargo
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7326892Z   CARGO_INCREMENTAL: 0
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7327047Z   CARGO_TERM_COLOR: always
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7327205Z ##[endgroup]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7486750Z ##[end-action id=__dtolnay_rust-toolchain.__run_9;outcome=success;conclusion=success;duration_ms=23]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7489692Z ##[start-action display=rustc +stable --version --verbose;id=__dtolnay_rust-toolchain.__run_10]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7507262Z ##[group]Run rustc +stable --version --verbose
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7507504Z ^[[36;1mrustc +stable --version --verbose^[[0m
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7552837Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7553063Z env:
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7553207Z   GIT_CONFIG_COUNT: 1
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7553375Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7553559Z   GIT_CONFIG_VALUE_0: main
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7553847Z   CARGO_HOME: /home/runner/.cargo
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7554017Z   CARGO_INCREMENTAL: 0
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7554174Z   CARGO_TERM_COLOR: always
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7554331Z ##[endgroup]
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7689890Z rustc 1.99.0 (b940084d7 2026-09-28)
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7690292Z binary: rustc
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7690570Z commit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7690805Z commit-date: 2026-09-28
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7691016Z host: x86_64-unknown-linux-gnu
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7691192Z release: 1.99.0
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7691514Z LLVM version: 23.1.1
+Validate docs	Run dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d	2026-10-08T11:51:11.7708546Z ##[end-action id=__dtolnay_rust-toolchain.__run_10;outcome=success;conclusion=success;duration_ms=21]
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	﻿2026-10-08T11:51:11.7757432Z ##[group]Run cargo install rust-script --version 0.36.0 --locked
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:11.7757761Z ^[[36;1mcargo install rust-script --version 0.36.0 --locked^[[0m
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:11.7803431Z shell: /usr/bin/bash -e {0}
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:11.7803599Z env:
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:11.7803737Z   GIT_CONFIG_COUNT: 1
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:11.7803898Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:11.7804078Z   GIT_CONFIG_VALUE_0: main
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:11.7804248Z   CARGO_HOME: /home/runner/.cargo
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:11.7804415Z   CARGO_INCREMENTAL: 0
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:11.7804569Z   CARGO_TERM_COLOR: always
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:11.7804723Z ##[endgroup]
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:11.8499240Z ^[[1m^[[92m    Updating^[[0m crates.io index
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:11.9234475Z ^[[1m^[[92m Downloading^[[0m crates ...
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:11.9682568Z ^[[1m^[[92m  Downloaded^[[0m rust-script v0.36.0
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.0148904Z ^[[1m^[[92m  Installing^[[0m rust-script v0.36.0
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.0167115Z ^[[1m^[[92m    Updating^[[0m crates.io index
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.3423524Z ^[[1m^[[92m    Updating^[[0m crates.io index
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4130819Z ^[[1m^[[92m Downloading^[[0m crates ...
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4437872Z ^[[1m^[[92m  Downloaded^[[0m aho-corasick v1.1.3
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4477345Z ^[[1m^[[92m  Downloaded^[[0m anstyle-query v1.1.4
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4485475Z ^[[1m^[[92m  Downloaded^[[0m anstyle-parse v0.2.7
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4496488Z ^[[1m^[[92m  Downloaded^[[0m anstyle v1.0.11
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4506214Z ^[[1m^[[92m  Downloaded^[[0m anstream v0.6.20
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4520082Z ^[[1m^[[92m  Downloaded^[[0m cpufeatures v0.2.17
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4547977Z ^[[1m^[[92m  Downloaded^[[0m pulldown-cmark-escape v0.11.0
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4553468Z ^[[1m^[[92m  Downloaded^[[0m crypto-common v0.1.6
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4607541Z ^[[1m^[[92m  Downloaded^[[0m clap_lex v0.7.5
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4615303Z ^[[1m^[[92m  Downloaded^[[0m option-ext v0.2.0
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4621303Z ^[[1m^[[92m  Downloaded^[[0m sha1 v0.10.6
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4633089Z ^[[1m^[[92m  Downloaded^[[0m strsim v0.11.1
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4642160Z ^[[1m^[[92m  Downloaded^[[0m version_check v0.9.5
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4650581Z ^[[1m^[[92m  Downloaded^[[0m equivalent v1.0.2
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4657116Z ^[[1m^[[92m  Downloaded^[[0m dirs v6.0.0
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4665785Z ^[[1m^[[92m  Downloaded^[[0m utf8parse v0.2.2
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4672227Z ^[[1m^[[92m  Downloaded^[[0m shell-words v1.1.0
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4678124Z ^[[1m^[[92m  Downloaded^[[0m dirs-sys v0.5.0
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4685714Z ^[[1m^[[92m  Downloaded^[[0m fastrand v2.3.0
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4694978Z ^[[1m^[[92m  Downloaded^[[0m block-buffer v0.10.4
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4702370Z ^[[1m^[[92m  Downloaded^[[0m generic-array v0.14.7
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4715676Z ^[[1m^[[92m  Downloaded^[[0m cfg-if v1.0.1
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4724454Z ^[[1m^[[92m  Downloaded^[[0m colorchoice v1.0.4
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4731112Z ^[[1m^[[92m  Downloaded^[[0m errno v0.3.13
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4743901Z ^[[1m^[[92m  Downloaded^[[0m serde_spanned v1.0.0
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4751483Z ^[[1m^[[92m  Downloaded^[[0m toml_datetime v0.7.0
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4774239Z ^[[1m^[[92m  Downloaded^[[0m env_filter v0.1.3
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4784749Z ^[[1m^[[92m  Downloaded^[[0m env_logger v0.11.8
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4804962Z ^[[1m^[[92m  Downloaded^[[0m getopts v0.2.23
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4815280Z ^[[1m^[[92m  Downloaded^[[0m digest v0.10.7
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4827704Z ^[[1m^[[92m  Downloaded^[[0m is_terminal_polyfill v1.70.1
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4833555Z ^[[1m^[[92m  Downloaded^[[0m toml_writer v1.0.2
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4842650Z ^[[1m^[[92m  Downloaded^[[0m tempfile v3.20.0
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4864236Z ^[[1m^[[92m  Downloaded^[[0m toml_parser v1.0.2
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4882629Z ^[[1m^[[92m  Downloaded^[[0m once_cell v1.21.3
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4901207Z ^[[1m^[[92m  Downloaded^[[0m bitflags v2.9.1
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4931282Z ^[[1m^[[92m  Downloaded^[[0m unicase v2.8.1
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4940934Z ^[[1m^[[92m  Downloaded^[[0m getrandom v0.3.3
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.4968805Z ^[[1m^[[92m  Downloaded^[[0m clap v4.5.45
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.5039391Z ^[[1m^[[92m  Downloaded^[[0m log v0.4.27
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.5058622Z ^[[1m^[[92m  Downloaded^[[0m toml v0.9.5
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.5088489Z ^[[1m^[[92m  Downloaded^[[0m typenum v1.18.0
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.5113162Z ^[[1m^[[92m  Downloaded^[[0m indexmap v2.10.0
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.5143565Z ^[[1m^[[92m  Downloaded^[[0m serde v1.0.219
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.5164393Z ^[[1m^[[92m  Downloaded^[[0m memchr v2.7.5
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.5202751Z ^[[1m^[[92m  Downloaded^[[0m hashbrown v0.15.5
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.5237292Z ^[[1m^[[92m  Downloaded^[[0m winnow v0.7.12
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.5302116Z ^[[1m^[[92m  Downloaded^[[0m clap_builder v4.5.44
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.5346966Z ^[[1m^[[92m  Downloaded^[[0m pulldown-cmark v0.13.0
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.5386394Z ^[[1m^[[92m  Downloaded^[[0m regex v1.11.1
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.5486470Z ^[[1m^[[92m  Downloaded^[[0m unicode-width v0.2.1
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.5526368Z ^[[1m^[[92m  Downloaded^[[0m regex-automata v0.4.9
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.5634577Z ^[[1m^[[92m  Downloaded^[[0m regex-syntax v0.8.5
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.5683539Z ^[[1m^[[92m  Downloaded^[[0m rustix v1.0.8
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.5886088Z ^[[1m^[[92m  Downloaded^[[0m jiff v0.2.15
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.6000846Z ^[[1m^[[92m  Downloaded^[[0m libc v0.2.175
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.6215726Z ^[[1m^[[92m  Downloaded^[[0m linux-raw-sys v0.9.4
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.7159142Z ^[[1m^[[92m   Compiling^[[0m version_check v0.9.5
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.7159772Z ^[[1m^[[92m   Compiling^[[0m typenum v1.18.0
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.7160160Z ^[[1m^[[92m   Compiling^[[0m libc v0.2.175
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:12.7160529Z ^[[1m^[[92m   Compiling^[[0m memchr v2.7.5
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:13.0107314Z ^[[1m^[[92m   Compiling^[[0m generic-array v0.14.7
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:13.1293036Z ^[[1m^[[92m   Compiling^[[0m serde v1.0.219
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:13.1306035Z ^[[1m^[[92m   Compiling^[[0m utf8parse v0.2.2
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:13.2094532Z ^[[1m^[[92m   Compiling^[[0m anstyle-parse v0.2.7
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:13.2610501Z ^[[1m^[[92m   Compiling^[[0m aho-corasick v1.1.3
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:13.6457013Z ^[[1m^[[92m   Compiling^[[0m anstyle v1.0.11
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:13.7655498Z ^[[1m^[[92m   Compiling^[[0m is_terminal_polyfill v1.70.1
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:13.7977104Z ^[[1m^[[92m   Compiling^[[0m regex-syntax v0.8.5
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:13.8464575Z ^[[1m^[[92m   Compiling^[[0m colorchoice v1.0.4
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:13.8774114Z ^[[1m^[[92m   Compiling^[[0m anstyle-query v1.1.4
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:13.9074480Z ^[[1m^[[92m   Compiling^[[0m anstream v0.6.20
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:14.1057065Z ^[[1m^[[92m   Compiling^[[0m bitflags v2.9.1
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:14.2558417Z ^[[1m^[[92m   Compiling^[[0m cfg-if v1.0.1
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:14.2787146Z ^[[1m^[[92m   Compiling^[[0m getrandom v0.3.3
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:14.3736999Z ^[[1m^[[92m   Compiling^[[0m rustix v1.0.8
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:14.5197507Z ^[[1m^[[92m   Compiling^[[0m block-buffer v0.10.4
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:14.5748763Z ^[[1m^[[92m   Compiling^[[0m crypto-common v0.1.6
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:14.6157064Z ^[[1m^[[92m   Compiling^[[0m unicode-width v0.2.1
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:14.7407164Z ^[[1m^[[92m   Compiling^[[0m option-ext v0.2.0
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:14.7649187Z ^[[1m^[[92m   Compiling^[[0m log v0.4.27
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:14.8828471Z ^[[1m^[[92m   Compiling^[[0m winnow v0.7.12
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:15.1793326Z ^[[1m^[[92m   Compiling^[[0m regex-automata v0.4.9
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:15.6657282Z ^[[1m^[[92m   Compiling^[[0m strsim v0.11.1
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:15.9517209Z ^[[1m^[[92m   Compiling^[[0m linux-raw-sys v0.9.4
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:15.9967109Z ^[[1m^[[92m   Compiling^[[0m clap_lex v0.7.5
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:16.1252767Z ^[[1m^[[92m   Compiling^[[0m pulldown-cmark v0.13.0
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:16.2209938Z ^[[1m^[[92m   Compiling^[[0m clap_builder v4.5.44
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:16.3487127Z ^[[1m^[[92m   Compiling^[[0m toml_parser v1.0.2
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:16.9827091Z ^[[1m^[[92m   Compiling^[[0m regex v1.11.1
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:17.4536930Z ^[[1m^[[92m   Compiling^[[0m env_filter v0.1.3
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:17.5297430Z ^[[1m^[[92m   Compiling^[[0m toml_datetime v0.7.0
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:17.7447997Z ^[[1m^[[92m   Compiling^[[0m serde_spanned v1.0.0
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:17.7777372Z ^[[1m^[[92m   Compiling^[[0m dirs-sys v0.5.0
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:17.7967156Z ^[[1m^[[92m   Compiling^[[0m getopts v0.2.23
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:17.9616863Z ^[[1m^[[92m   Compiling^[[0m digest v0.10.7
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:18.1438125Z ^[[1m^[[92m   Compiling^[[0m once_cell v1.21.3
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:18.1496676Z ^[[1m^[[92m   Compiling^[[0m unicase v2.8.1
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:18.2407101Z ^[[1m^[[92m   Compiling^[[0m cpufeatures v0.2.17
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:18.2446124Z ^[[1m^[[92m   Compiling^[[0m pulldown-cmark-escape v0.11.0
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:18.2677296Z ^[[1m^[[92m   Compiling^[[0m fastrand v2.3.0
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:18.2857439Z ^[[1m^[[92m   Compiling^[[0m toml_writer v1.0.2
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:18.3947266Z ^[[1m^[[92m   Compiling^[[0m jiff v0.2.15
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:18.4006723Z ^[[1m^[[92m   Compiling^[[0m toml v0.9.5
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:19.0086965Z ^[[1m^[[92m   Compiling^[[0m tempfile v3.20.0
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:19.7417090Z ^[[1m^[[92m   Compiling^[[0m sha1 v0.10.6
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:19.8607204Z ^[[1m^[[92m   Compiling^[[0m dirs v6.0.0
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:19.9087413Z ^[[1m^[[92m   Compiling^[[0m clap v4.5.45
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:19.9355176Z ^[[1m^[[92m   Compiling^[[0m shell-words v1.1.0
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:20.6085320Z ^[[1m^[[92m   Compiling^[[0m env_logger v0.11.8
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:21.2359004Z ^[[1m^[[92m   Compiling^[[0m rust-script v0.36.0
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:35.2302125Z ^[[1m^[[92m    Finished^[[0m `release` profile [optimized] target(s) in 23.41s
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:35.2345869Z ^[[1m^[[92m  Installing^[[0m /home/runner/.cargo/bin/rust-script
+Validate docs	Run cargo install rust-script --version 0.36.0 --locked	2026-10-08T11:51:35.2506830Z ^[[1m^[[92m   Installed^[[0m package `rust-script v0.36.0` (executable `rust-script`)
+Validate docs	Run node js/scripts/build-docs-site.mjs	﻿2026-10-08T11:51:35.2799950Z ##[group]Run node js/scripts/build-docs-site.mjs
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:35.2800185Z ^[[36;1mnode js/scripts/build-docs-site.mjs^[[0m
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:35.2800414Z ^[[36;1mcargo doc --locked --manifest-path rust/Cargo.toml --workspace --no-deps^[[0m
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:35.2800819Z ^[[36;1mrust-script rust/scripts/build-docs-site.rs^[[0m
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:35.2800992Z ^[[36;1mpython3 scripts/assemble-docs.py^[[0m
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:35.2853150Z shell: /usr/bin/bash -e {0}
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:35.2853290Z env:
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:35.2853400Z   GIT_CONFIG_COUNT: 1
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:35.2853525Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:35.2853672Z   GIT_CONFIG_VALUE_0: main
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:35.2853797Z   CARGO_HOME: /home/runner/.cargo
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:35.2853939Z   CARGO_INCREMENTAL: 0
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:35.2854055Z   CARGO_TERM_COLOR: always
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:35.2854177Z ##[endgroup]
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:35.3108544Z Generated JavaScript docs site at /home/runner/work/lino-i18n/lino-i18n/js/site
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:35.4628873Z ^[[1m^[[92m    Updating^[[0m crates.io index
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:35.5563004Z ^[[1m^[[92m Downloading^[[0m crates ...
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:35.6417571Z ^[[1m^[[92m  Downloaded^[[0m base64 v0.22.1
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:35.6500301Z ^[[1m^[[92m  Downloaded^[[0m links-notation v0.13.0
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:35.6515435Z ^[[1m^[[92m  Downloaded^[[0m lino-objects-codec v0.2.1
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:35.6529744Z ^[[1m^[[92m  Downloaded^[[0m quote v1.0.45
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:35.6561076Z ^[[1m^[[92m  Downloaded^[[0m unicode-ident v1.0.24
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:35.6580714Z ^[[1m^[[92m  Downloaded^[[0m memchr v2.8.0
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:35.6620098Z ^[[1m^[[92m  Downloaded^[[0m proc-macro2 v1.0.106
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:35.6641769Z ^[[1m^[[92m  Downloaded^[[0m nom v8.0.0
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:35.6699353Z ^[[1m^[[92m  Downloaded^[[0m syn v2.0.117
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:35.7011561Z ^[[1m^[[92m   Compiling^[[0m proc-macro2 v1.0.106
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:35.7012324Z ^[[1m^[[92m   Compiling^[[0m quote v1.0.45
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:35.7012618Z ^[[1m^[[92m    Checking^[[0m memchr v2.8.0
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:35.8247623Z ^[[1m^[[92m   Compiling^[[0m unicode-ident v1.0.24
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:35.8996142Z ^[[1m^[[92m    Checking^[[0m base64 v0.22.1
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:35.9155092Z ^[[1m^[[92m    Checking^[[0m nom v8.0.0
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:36.3727267Z ^[[1m^[[92m   Compiling^[[0m syn v2.0.117
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:37.3658061Z ^[[1m^[[92m    Checking^[[0m links-notation v0.13.0
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:37.4837852Z ^[[1m^[[92m    Checking^[[0m lino-objects-codec v0.2.1
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:37.5617290Z ^[[1m^[[92m Documenting^[[0m lino-i18n-macros v0.2.0 (/home/runner/work/lino-i18n/lino-i18n/rust/lino-i18n-macros)
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:38.0641317Z ^[[1m^[[92m   Compiling^[[0m lino-i18n-macros v0.2.0 (/home/runner/work/lino-i18n/lino-i18n/rust/lino-i18n-macros)
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:38.1743139Z ^[[1m^[[92m Documenting^[[0m lino-i18n v0.2.0 (/home/runner/work/lino-i18n/lino-i18n/rust/lino-i18n)
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:38.6964027Z ^[[1m^[[92m    Finished^[[0m `dev` profile [unoptimized + debuginfo] target(s) in 3.37s
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:38.6976584Z ^[[1m^[[92m   Generated^[[0m /home/runner/work/lino-i18n/lino-i18n/rust/target/doc/lino_i18n/index.html and 1 other file
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:38.8938446Z Generated Rust docs site at ./rust/site
+Validate docs	Run node js/scripts/build-docs-site.mjs	2026-10-08T11:51:38.9179050Z Combined JS and Rust documentation is ready in site/
+Validate docs	Post Run actions/setup-node@v6	﻿2026-10-08T11:51:38.9286089Z Post job cleanup.
+Validate docs	Post Run actions/checkout@v6	﻿2026-10-08T11:51:39.0226493Z Post job cleanup.
+Validate docs	Post Run actions/checkout@v6	2026-10-08T11:51:39.0770253Z [command]/usr/bin/git version
+Validate docs	Post Run actions/checkout@v6	2026-10-08T11:51:39.0799486Z git version 2.55.0
+Validate docs	Post Run actions/checkout@v6	2026-10-08T11:51:39.0823401Z Temporarily overriding HOME='/home/runner/work/_temp/e84f17dd-49dd-4cea-b3d9-6779dd6bbcbd' before making global git config changes
+Validate docs	Post Run actions/checkout@v6	2026-10-08T11:51:39.0824235Z Adding repository directory to the temporary git global config as a safe directory
+Validate docs	Post Run actions/checkout@v6	2026-10-08T11:51:39.0826757Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/lino-i18n/lino-i18n
+Validate docs	Post Run actions/checkout@v6	2026-10-08T11:51:39.0852256Z Removing SSH command configuration
+Validate docs	Post Run actions/checkout@v6	2026-10-08T11:51:39.0856243Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Validate docs	Post Run actions/checkout@v6	2026-10-08T11:51:39.0884300Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Validate docs	Post Run actions/checkout@v6	2026-10-08T11:51:39.1069158Z Removing HTTP extra header
+Validate docs	Post Run actions/checkout@v6	2026-10-08T11:51:39.1073885Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Validate docs	Post Run actions/checkout@v6	2026-10-08T11:51:39.1100621Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Validate docs	Post Run actions/checkout@v6	2026-10-08T11:51:39.1287042Z Removing includeIf entries pointing to credentials config files
+Validate docs	Post Run actions/checkout@v6	2026-10-08T11:51:39.1296147Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Validate docs	Post Run actions/checkout@v6	2026-10-08T11:51:39.1330006Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Validate docs	Complete job	﻿2026-10-08T11:51:39.1613424Z Cleaning up orphan processes
+Pipeline Status	Set up job	﻿2026-10-08T11:51:44.6698386Z Current runner version: '2.337.0'
+Pipeline Status	Set up job	2026-10-08T11:51:44.6737458Z ##[group]Runner Image Provisioner
+Pipeline Status	Set up job	2026-10-08T11:51:44.6738953Z Hosted Compute Agent
+Pipeline Status	Set up job	2026-10-08T11:51:44.6740035Z Version: 20261002.596
+Pipeline Status	Set up job	2026-10-08T11:51:44.6741398Z Commit: c3d12f3313a95f25162a1503be624f3b0617f8c0
+Pipeline Status	Set up job	2026-10-08T11:51:44.6742856Z Build Date: 2026-10-02T22:28:27Z
+Pipeline Status	Set up job	2026-10-08T11:51:44.6744281Z Worker ID: {b61f175c-b75a-4541-a12f-ed2727f82415}
+Pipeline Status	Set up job	2026-10-08T11:51:44.6745621Z Region: eastus2
+Pipeline Status	Set up job	2026-10-08T11:51:44.6746622Z Cloud: Azure
+Pipeline Status	Set up job	2026-10-08T11:51:44.6748131Z ##[endgroup]
+Pipeline Status	Set up job	2026-10-08T11:51:44.6750555Z ##[group]Operating System
+Pipeline Status	Set up job	2026-10-08T11:51:44.6751779Z Ubuntu
+Pipeline Status	Set up job	2026-10-08T11:51:44.6752757Z 24.04.5
+Pipeline Status	Set up job	2026-10-08T11:51:44.6753734Z LTS
+Pipeline Status	Set up job	2026-10-08T11:51:44.6754842Z ##[endgroup]
+Pipeline Status	Set up job	2026-10-08T11:51:44.6755854Z ##[group]Runner Image
+Pipeline Status	Set up job	2026-10-08T11:51:44.6757028Z Image: ubuntu-24.04
+Pipeline Status	Set up job	2026-10-08T11:51:44.6758370Z Version: 20261004.327.1
+Pipeline Status	Set up job	2026-10-08T11:51:44.6760402Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261004.327/images/ubuntu/Ubuntu2404-Readme.md
+Pipeline Status	Set up job	2026-10-08T11:51:44.6763724Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261004.327
+Pipeline Status	Set up job	2026-10-08T11:51:44.6765654Z ##[endgroup]
+Pipeline Status	Set up job	2026-10-08T11:51:44.6767749Z ##[group]GITHUB_TOKEN Permissions
+Pipeline Status	Set up job	2026-10-08T11:51:44.6770771Z Contents: read
+Pipeline Status	Set up job	2026-10-08T11:51:44.6771803Z Metadata: read
+Pipeline Status	Set up job	2026-10-08T11:51:44.6772743Z ##[endgroup]
+Pipeline Status	Set up job	2026-10-08T11:51:44.6778093Z Secret source: Actions
+Pipeline Status	Set up job	2026-10-08T11:51:44.6780109Z Cache mode: write
+Pipeline Status	Set up job	2026-10-08T11:51:44.6781775Z Prepare workflow directory
+Pipeline Status	Set up job	2026-10-08T11:51:44.7376436Z Prepare all required actions
+Pipeline Status	Set up job	2026-10-08T11:51:44.7452603Z Getting action download info
+Pipeline Status	Set up job	2026-10-08T11:51:44.9686765Z Download action repository 'actions/checkout@v6' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+Pipeline Status	Set up job	2026-10-08T11:51:45.1773567Z Complete job name: Pipeline Status
+Pipeline Status	Run actions/checkout@v6	﻿2026-10-08T11:51:45.2604714Z ##[group]Run actions/checkout@v6
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.2605675Z with:
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.2606170Z   persist-credentials: false
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.2606796Z   repository: link-foundation/lino-i18n
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.2611413Z   token: ***
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.2611981Z   ssh-strict: true
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.2612463Z   ssh-user: git
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.2612926Z   clean: true
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.2613421Z   sparse-checkout-cone-mode: true
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.2614008Z   fetch-depth: 1
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.2614480Z   fetch-tags: false
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.2614970Z   show-progress: true
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.2615483Z   lfs: false
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.2615938Z   submodules: false
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.2616436Z   set-safe-directory: true
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.2616992Z   allow-unsafe-pr-checkout: false
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.2618338Z env:
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.2618873Z   GIT_CONFIG_COUNT: 1
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.2619404Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.2620013Z   GIT_CONFIG_VALUE_0: main
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.2620585Z ##[endgroup]
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.3795393Z Syncing repository: link-foundation/lino-i18n
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.3798629Z ##[group]Getting Git version info
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.3799941Z Working directory is '/home/runner/work/lino-i18n/lino-i18n'
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.3801785Z [command]/usr/bin/git version
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.3894053Z git version 2.55.0
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.3928969Z ##[endgroup]
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.3949752Z Temporarily overriding HOME='/home/runner/work/_temp/629ddce7-25d9-4a37-ab40-5f0c42f50948' before making global git config changes
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.3953210Z Adding repository directory to the temporary git global config as a safe directory
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.3978835Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/lino-i18n/lino-i18n
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.4018980Z Deleting the contents of '/home/runner/work/lino-i18n/lino-i18n'
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.4023108Z ##[group]Determining repository object format
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.4025921Z ##[endgroup]
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.4027530Z ##[group]Initializing the repository
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.4032781Z [command]/usr/bin/git init /home/runner/work/lino-i18n/lino-i18n
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.4175565Z Initialized empty Git repository in /home/runner/work/lino-i18n/lino-i18n/.git/
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.4188476Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/lino-i18n
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.4248472Z ##[endgroup]
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.4250213Z ##[group]Disabling automatic garbage collection
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.4252615Z [command]/usr/bin/git config --local gc.auto 0
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.4288767Z ##[endgroup]
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.4290156Z ##[group]Setting up auth
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.4291155Z Removing SSH command configuration
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.4298251Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.4351189Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.4781748Z Removing HTTP extra header
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.4793437Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.4837914Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.5090080Z Removing includeIf entries pointing to credentials config files
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.5091759Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.5134421Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.5390263Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-662099f2-2e94-4f0d-856d-33aec1d73e7e.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.5438455Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git.path /home/runner/work/_temp/git-credentials-662099f2-2e94-4f0d-856d-33aec1d73e7e.config
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.5478698Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-662099f2-2e94-4f0d-856d-33aec1d73e7e.config
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.5524291Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-662099f2-2e94-4f0d-856d-33aec1d73e7e.config
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.5570315Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-662099f2-2e94-4f0d-856d-33aec1d73e7e.config
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.5603555Z ##[endgroup]
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.5604610Z ##[group]Fetching the repository
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.5613997Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +73ef5ebb7a11e719368438021f697788c72863b4:refs/remotes/pull/24/merge
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.9352176Z From https://github.com/link-foundation/lino-i18n
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.9355288Z  * [new ref]         73ef5ebb7a11e719368438021f697788c72863b4 -> pull/24/merge
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.9361839Z ##[endgroup]
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.9363857Z ##[group]Determining the checkout info
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.9366308Z ##[endgroup]
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.9371543Z [command]/usr/bin/git sparse-checkout disable
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.9438458Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.9476379Z ##[group]Checking out the ref
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:45.9481839Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/24/merge
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.0542471Z Note: switching to 'refs/remotes/pull/24/merge'.
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.0543991Z 
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.0545159Z You are in 'detached HEAD' state. You can look around, make experimental
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.0548228Z changes and commit them, and you can discard any commits you make in this
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.0550952Z state without impacting any branches by switching back to a branch.
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.0552484Z 
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.0553472Z If you want to create a new branch to retain commits you create, you may
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.0555698Z do so (now or later) by using -c with the switch command. Example:
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.0557087Z 
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.0557925Z   git switch -c <new-branch-name>
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.0558807Z 
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.0559252Z Or undo this operation with:
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.0559946Z 
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.0560414Z   git switch -
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.0560996Z 
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.0562185Z Turn off this advice by setting config variable advice.detachedHead to false
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.0563753Z 
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.0565330Z HEAD is now at 73ef5eb Merge e738911dad803a34be95ad11a96d4153f2e8d7a7 into 36ff249dd256393ff4c8e1bf5e42bc04b3db166c
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.0570316Z ##[endgroup]
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.0622633Z [command]/usr/bin/git log -1 --format=%H
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.0654998Z 73ef5ebb7a11e719368438021f697788c72863b4
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.0670530Z ##[group]Removing auth
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.0671736Z Removing SSH command configuration
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.0673626Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.0714271Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.0971917Z Removing HTTP extra header
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.0976223Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.1019844Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.1254972Z Removing includeIf entries pointing to credentials config files
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.1260454Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.1291381Z includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git.path
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.1293873Z includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git/worktrees/*.path
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.1295994Z includeif.gitdir:/github/workspace/.git.path
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.1298097Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.1303693Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git.path
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.1330325Z /home/runner/work/_temp/git-credentials-662099f2-2e94-4f0d-856d-33aec1d73e7e.config
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.1343212Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git.path /home/runner/work/_temp/git-credentials-662099f2-2e94-4f0d-856d-33aec1d73e7e.config
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.1383275Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git/worktrees/*.path
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.1410625Z /home/runner/work/_temp/git-credentials-662099f2-2e94-4f0d-856d-33aec1d73e7e.config
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.1422588Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/lino-i18n/lino-i18n/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-662099f2-2e94-4f0d-856d-33aec1d73e7e.config
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.1460311Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.1490168Z /github/runner_temp/git-credentials-662099f2-2e94-4f0d-856d-33aec1d73e7e.config
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.1509780Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-662099f2-2e94-4f0d-856d-33aec1d73e7e.config
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.1547053Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.1574658Z /github/runner_temp/git-credentials-662099f2-2e94-4f0d-856d-33aec1d73e7e.config
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.1589653Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-662099f2-2e94-4f0d-856d-33aec1d73e7e.config
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.1626832Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.1865893Z Removing credentials config '/home/runner/work/_temp/git-credentials-662099f2-2e94-4f0d-856d-33aec1d73e7e.config'
+Pipeline Status	Run actions/checkout@v6	2026-10-08T11:51:46.1873555Z ##[endgroup]
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	﻿2026-10-08T11:51:46.2242693Z ##[group]Run python3 scripts/check-pipeline-status.py
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	2026-10-08T11:51:46.2244645Z ^[[36;1mpython3 scripts/check-pipeline-status.py^[[0m
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	2026-10-08T11:51:46.2521463Z shell: /usr/bin/bash -e {0}
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	2026-10-08T11:51:46.2523322Z env:
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	2026-10-08T11:51:46.2524760Z   GIT_CONFIG_COUNT: 1
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	2026-10-08T11:51:46.2526485Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	2026-10-08T11:51:46.2528489Z   GIT_CONFIG_VALUE_0: main
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	2026-10-08T11:51:46.2531581Z   NEEDS_JSON: {
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	  "validate-docs": {
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	    "result": "success",
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	    "outputs": {}
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	  },
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	  "links": {
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	    "result": "success",
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	    "outputs": {}
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	  }
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	}
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	2026-10-08T11:51:46.2535034Z   CANCELLABLE_JOBS: ["validate-docs", "links"]
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	2026-10-08T11:51:46.2537044Z   RUN_SHA: e738911dad803a34be95ad11a96d4153f2e8d7a7
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	2026-10-08T11:51:46.2538933Z   BRANCH_NAME: issue-23-bc288e2f1144
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	2026-10-08T11:51:46.2540415Z ##[endgroup]
+Pipeline Status	Run python3 scripts/check-pipeline-status.py	2026-10-08T11:51:46.2922876Z Every dependency passed, was skipped, or was superseded under its cancellation policy.
+Pipeline Status	Post Run actions/checkout@v6	﻿2026-10-08T11:51:46.3328114Z Post job cleanup.
+Pipeline Status	Post Run actions/checkout@v6	2026-10-08T11:51:46.4289091Z [command]/usr/bin/git version
+Pipeline Status	Post Run actions/checkout@v6	2026-10-08T11:51:46.4340733Z git version 2.55.0
+Pipeline Status	Post Run actions/checkout@v6	2026-10-08T11:51:46.4392817Z Temporarily overriding HOME='/home/runner/work/_temp/ae756cf0-58a8-492c-ac6d-ccc59ec43cc0' before making global git config changes
+Pipeline Status	Post Run actions/checkout@v6	2026-10-08T11:51:46.4398574Z Adding repository directory to the temporary git global config as a safe directory
+Pipeline Status	Post Run actions/checkout@v6	2026-10-08T11:51:46.4403598Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/lino-i18n/lino-i18n
+Pipeline Status	Post Run actions/checkout@v6	2026-10-08T11:51:46.4439659Z Removing SSH command configuration
+Pipeline Status	Post Run actions/checkout@v6	2026-10-08T11:51:46.4443900Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Pipeline Status	Post Run actions/checkout@v6	2026-10-08T11:51:46.4486536Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Pipeline Status	Post Run actions/checkout@v6	2026-10-08T11:51:46.4752914Z Removing HTTP extra header
+Pipeline Status	Post Run actions/checkout@v6	2026-10-08T11:51:46.4759708Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Pipeline Status	Post Run actions/checkout@v6	2026-10-08T11:51:46.5075031Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Pipeline Status	Post Run actions/checkout@v6	2026-10-08T11:51:46.5085608Z Removing includeIf entries pointing to credentials config files
+Pipeline Status	Post Run actions/checkout@v6	2026-10-08T11:51:46.5088355Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Pipeline Status	Post Run actions/checkout@v6	2026-10-08T11:51:46.5126288Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Pipeline Status	Complete job	﻿2026-10-08T11:51:46.5576497Z Cleaning up orphan processes

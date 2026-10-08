@@ -1,0 +1,6 @@
+Executable helpers: 17; included as Cargo targets: 0
+Traceback (most recent call last):
+  File "/tmp/gh-issue-solver-1791452293811/experiments/issue-23-codeql-manifests.py", line 32, in <module>
+    assert not missing, "Semantic analysis lacks these helper targets: " + ", ".join(sorted(path.name for path in missing))
+           ^^^^^^^^^^^
+AssertionError: Semantic analysis lacks these helper targets: build-docs-site.rs, bump-version.rs, check-changelog-fragment.rs, check-file-size.rs, check-release-needed.rs, check-version-modification.rs, collect-changelog.rs, create-changelog-fragment.rs, create-github-release.rs, detect-code-changes.rs, get-bump-type.rs, get-version.rs, git-config.rs, publish-crate.rs, rust-paths.rs, version-and-commit.rs, wait-for-crate.rs

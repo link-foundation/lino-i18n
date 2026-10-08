@@ -70,6 +70,7 @@ scripts/crates-publish-preflight.mjs
 scripts/crates-publish-preflight.test.mjs
 scripts/fixtures/lychee-report.md
 scripts/preflight-publish.sh
+scripts/prepare-codeql-rust.py
 scripts/recheck-broken-links.mjs
 scripts/recheck-broken-links.test.mjs
 scripts/requirements-ci.txt
