@@ -24,13 +24,13 @@ env:
 jobs:
   actionlint:
     name: actionlint
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-actionlint
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
       - uses: docker://rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667
@@ -41,28 +41,31 @@ jobs:
           args: -color -ignore unexpected\x20key\x20\x22queue\x22\x20for\x20\x22concurrency\x22\x20section
   policy:
     name: Workflow policy
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-Workflow policy
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.14'
       - run: python3 -m pip install --requirement scripts/requirements-ci.txt
       - run: python3 scripts/check-ci-policy.py && python3 scripts/check-file-line-limits.py && python3 experiments/issue-23-shared-guards.py && python3 experiments/issue-23-hook.py
       - run: python3 experiments/issue-23-codeql-manifests.py --prepare
       - run: python3 experiments/issue-23-archive-integrity.py
   zizmor:
     name: zizmor
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-zizmor
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
       - env:
@@ -74,13 +77,13 @@ jobs:
           .github/actions
   pipeline-status:
     name: Pipeline Status
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-Pipeline Status
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
       - env:

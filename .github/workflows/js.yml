@@ -61,7 +61,7 @@ env:
 jobs:
   detect-changes:
     name: Detect Changes
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     if: always() && !cancelled() && !contains(needs.*.result, 'failure') && github.event_name != 'workflow_dispatch'
     outputs:
@@ -72,11 +72,11 @@ jobs:
       workflow-changed: ${{ steps.changes.outputs.workflow-changed }}
       any-code-changed: ${{ steps.changes.outputs.any-code-changed }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           fetch-depth: 0
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
       - name: Detect JavaScript changes
@@ -89,7 +89,7 @@ jobs:
       - release-preflight
   test-compilation:
     name: Test Compilation
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     needs:
       - detect-changes
@@ -105,7 +105,7 @@ jobs:
       run:
         working-directory: js
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -114,7 +114,7 @@ jobs:
         env:
           BASE_REF: ${{ github.base_ref }}
         run: bash ../scripts/simulate-fresh-merge.sh
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
       - run: bash scripts/check-mjs-syntax.sh
@@ -123,7 +123,7 @@ jobs:
       cancel-in-progress: true
   check-file-line-limits:
     name: Check File Line Limits
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     needs:
       - detect-changes
@@ -139,7 +139,7 @@ jobs:
       run:
         working-directory: js
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -154,14 +154,14 @@ jobs:
       cancel-in-progress: true
   version-check:
     name: Check for Manual Version Changes
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     if: github.event_name == 'pull_request'
     defaults:
       run:
         working-directory: js
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -175,7 +175,7 @@ jobs:
       cancel-in-progress: true
   changeset-check:
     name: Check for Changesets
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     needs:
       - detect-changes
@@ -184,11 +184,11 @@ jobs:
       run:
         working-directory: js
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           fetch-depth: 0
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: npm
@@ -205,7 +205,7 @@ jobs:
       cancel-in-progress: true
   lint:
     name: Lint and Format Check
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     needs:
       - detect-changes
@@ -228,7 +228,7 @@ jobs:
       run:
         working-directory: js
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -237,7 +237,7 @@ jobs:
         env:
           BASE_REF: ${{ github.base_ref }}
         run: bash ../scripts/simulate-fresh-merge.sh
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: npm
@@ -268,8 +268,8 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          - ubuntu-24.04
-          - macos-15
+          - ubuntu-26.04
+          - macos-26
           - windows-2025
         runtime:
           - node
@@ -280,17 +280,17 @@ jobs:
         node:
           - 24.x
         include:
-          - os: ubuntu-24.04
+          - os: ubuntu-26.04
             runtime: node
             node: 22.x
-          - os: ubuntu-24.04
+          - os: ubuntu-26.04
             runtime: node
             node: 26.x
     defaults:
       run:
         working-directory: js
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -299,12 +299,12 @@ jobs:
         env:
           BASE_REF: ${{ github.base_ref }}
         run: bash ../scripts/simulate-fresh-merge.sh
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: 24.x
       - name: Setup Node.js
         if: matrix.runtime == 'node'
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node }}
           cache: npm
@@ -317,7 +317,7 @@ jobs:
         run: npm test
       - name: Setup Bun
         if: matrix.runtime == 'bun'
-        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
         with:
           bun-version: 1.4.2
       - name: Install dependencies (Bun)
@@ -328,9 +328,9 @@ jobs:
         run: bun test --timeout 30000
       - name: Setup Deno
         if: matrix.runtime == 'deno'
-        uses: denoland/setup-deno@22d081ff2d3a40755e97629de92e3bcbfa7cf2ed
+        uses: denoland/setup-deno@22d081ff2d3a40755e97629de92e3bcbfa7cf2ed # v2.0.5
         with:
-          deno-version: 2.9.6
+          deno-version: 2.9.7
       - name: Install dependencies (Deno)
         if: matrix.runtime == 'deno'
         run: npm ci
@@ -342,7 +342,7 @@ jobs:
       cancel-in-progress: true
   browser-test:
     name: Browser Test (Chromium)
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     needs:
       - lint
@@ -350,7 +350,7 @@ jobs:
       run:
         working-directory: js
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -359,7 +359,7 @@ jobs:
         env:
           BASE_REF: ${{ github.base_ref }}
         run: bash ../scripts/simulate-fresh-merge.sh
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: npm
@@ -378,7 +378,7 @@ jobs:
       cancel-in-progress: true
   cli-smoke-test:
     name: CLI Smoke Test
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     needs:
       - lint
@@ -386,7 +386,7 @@ jobs:
       run:
         working-directory: js
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -395,7 +395,7 @@ jobs:
         env:
           BASE_REF: ${{ github.base_ref }}
         run: bash ../scripts/simulate-fresh-merge.sh
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: npm
@@ -415,7 +415,7 @@ jobs:
       cancel-in-progress: true
   package:
     name: Package Dry Run
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     needs:
       - test
@@ -430,7 +430,7 @@ jobs:
       run:
         working-directory: js
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -439,7 +439,7 @@ jobs:
         env:
           BASE_REF: ${{ github.base_ref }}
         run: bash ../scripts/simulate-fresh-merge.sh
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: npm
@@ -451,7 +451,7 @@ jobs:
       cancel-in-progress: true
   auto-release:
     name: Publish npm Package and GitHub Release
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 35
     needs:
       - package
@@ -468,11 +468,11 @@ jobs:
       name: npm
       url: https://www.npmjs.com/package/lino-i18n
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: true
           fetch-depth: 0
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
           registry-url: https://registry.npmjs.org
@@ -523,7 +523,7 @@ jobs:
       queue: max
   manual-release:
     name: Manual npm Release
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 35
     if: always() && !cancelled() && needs.package.result == 'success' && github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'
       && inputs.release_mode == 'instant' && needs.release-preflight.result == 'success'
@@ -534,11 +534,11 @@ jobs:
       name: npm
       url: https://www.npmjs.com/package/lino-i18n
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: true
           fetch-depth: 0
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
           registry-url: https://registry.npmjs.org
@@ -581,18 +581,18 @@ jobs:
       queue: max
   changeset-pr:
     name: Create Manual Changeset PR
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.release_mode == 'changeset-pr' && github.ref == 'refs/heads/main'
     defaults:
       run:
         working-directory: js
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: true
           fetch-depth: 0
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: npm
@@ -603,7 +603,7 @@ jobs:
         env:
           RELEASE_DESCRIPTION: ${{ inputs.description }}
           BUMP_TYPE: ${{ inputs.bump_type }}
-      - uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1
+      - uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
           commit-message: 'chore: add changeset for manual ${{ github.event.inputs.bump_type }} release'
           branch: changeset-manual-release-${{ github.run_id }}
@@ -623,7 +623,7 @@ jobs:
       queue: max
   deploy-docs:
     name: Deploy JavaScript Docs
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     needs:
       - package
@@ -639,14 +639,14 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           fetch-depth: 0
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: 24.x
-      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d
+      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d # stable
         with:
           toolchain: stable
       - name: Install rust-script
@@ -674,16 +674,16 @@ jobs:
       queue: max
   release-preflight:
     name: Release credential preflight
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-Release credential preflight
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: 24.x
       - run: bash scripts/preflight-publish.sh npm
@@ -695,13 +695,13 @@ jobs:
       id-token: write # Obtain the job-scoped npm or Pages OIDC token.
   pipeline-status:
     name: Pipeline Status
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-Pipeline Status
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
       - env:
