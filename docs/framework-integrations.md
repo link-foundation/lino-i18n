@@ -58,3 +58,10 @@ implementation plans and explicit remaining gaps.
 ## Session replay
 
 The [rrweb adapter](rrweb.md) reuses the published GT recorder/player with bounded `.lino` ICU harvesting. Marked source messages preserve recorded variables; real Chromium recording/playback tests cover translated mutations, privacy markers, locale switching and cleanup.
+
+## Editor diagnostics
+
+The optional [ESLint plugin](eslint.md) shares the static source extractor for
+string/JSX/Branch rules. It supports flat configuration, TypeScript/TSX parsers
+and explicit named-variable suggestions. Project graph extraction remains a
+separate CLI/build operation.

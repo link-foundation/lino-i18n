@@ -210,10 +210,24 @@ export function parseSource(code, file) {
   });
 }
 
-export function extractMessages(code, { file = '<source>', ast: parsed } = {}) {
+export function extractMessages(
+  code,
+  { file = '<source>', ast: parsed, onDiagnostic } = {}
+) {
   const ast = parsed || parseSource(code, file);
   const messages = [];
   const diagnostics = [];
+
+  function diagnose(path, error) {
+    const diagnostic = {
+      file,
+      line: path.node.loc.start.line,
+      message: error.message,
+    };
+    diagnostics.push(diagnostic);
+    // Internal tooling can retain precise AST locations without changing manifests.
+    onDiagnostic?.(diagnostic, path);
+  }
 
   function add(path, source, options = {}) {
     try {
@@ -232,11 +246,7 @@ export function extractMessages(code, { file = '<source>', ast: parsed } = {}) {
         column: path.node.loc.start.column + 1,
       });
     } catch (error) {
-      diagnostics.push({
-        file,
-        line: path.node.loc.start.line,
-        message: error.message,
-      });
+      diagnose(path, error);
     }
   }
 
@@ -244,11 +254,7 @@ export function extractMessages(code, { file = '<source>', ast: parsed } = {}) {
     try {
       callback();
     } catch (error) {
-      diagnostics.push({
-        file,
-        line: path.node.loc.start.line,
-        message: error.message,
-      });
+      diagnose(path, error);
     }
   }
 

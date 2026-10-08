@@ -25,3 +25,5 @@ Add an injected React Native Text adapter with rich content, native formatter wr
 Add optional TanStack Start request middleware and Router hydration/navigation adapters, verified with actual server functions, a production build and browser tests.
 
 Add optional rrweb recording/replay over `.lino` catalogs using the published GT player/recorder, bounded ICU harvesting, stable variable leaves and protected source values, with an actual browser privacy/playback regression.
+
+Add an optional ESLint flat-config plugin sharing the static extractor, with source/JSX/headless-Branch diagnostics, explicit named-variable suggestions and bounded analysis.

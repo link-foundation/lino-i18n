@@ -252,3 +252,28 @@ message parity.
 ![Source replay](../../screenshots/issue-25-rrweb-en.png)
 
 ![French replay](../../screenshots/issue-25-rrweb-fr.png)
+
+## Optional lint diagnostics
+
+The initial test failed because no lint export existed. Actual ESLint tests now
+cover source calls, aliases, namespaces, translator factories, shadowed imports,
+valid descriptors/finite derivation, ICU syntax, source JSX and headless Branch
+attributes. The three rules share the existing Babel extractor and cached
+analysis. Finite source-byte and AST budgets are checked before the additional
+Babel parse; the configured ESLint parser still runs first.
+
+A direct identifier can be wrapped in an explicitly named Var through an editor
+suggestion. Re-linting the suggested result verifies valid extraction, a single
+value occurrence, collision avoidance and preservation of the use-client
+directive. There is no automatic concatenation or branch rewrite because GT's
+JSX contract differs. The optional plugin has strict actual ESLint type coverage.
+
+All five workflows for replay commit `65e14dc` passed, created 2026-10-08
+22:26 UTC: runs 37853477128, 37853477068, 37853477113, 37853477058
+and 37853477084. Acceptance requires checking the final pushed SHA.
+
+Local lint validation: 187 Node tests, eight affected Bun tests, eight affected
+Deno tests, all five strict type configurations, nine Chromium tests, the runnable
+ESLint example, lint/format/duplication, secrets, docs and policy/pin checks pass.
+The installed development dependency graph has zero reported npm vulnerabilities.
+The final suggestion test also prevents shadowing an existing global identifier.

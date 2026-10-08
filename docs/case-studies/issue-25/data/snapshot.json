@@ -200,6 +200,21 @@
       "sha256": "a3bea099a6f9f9fa12613f9fbf064f8844467b65b53cb5181b65c8de9295b6e2"
     },
     {
+      "path": "packages/react-core-linter/src/rules/no-data-attrs-on-branch/index.ts",
+      "file": "packages--react-core-linter--src--rules--no-data-attrs-on-branch--index.ts",
+      "sha256": "fc4cb17e4b4a1b801b6716a384f655526e9a7ebe0e0ad036bcd64e9466ee55a9"
+    },
+    {
+      "path": "packages/react-core-linter/src/rules/static-jsx/index.ts",
+      "file": "packages--react-core-linter--src--rules--static-jsx--index.ts",
+      "sha256": "bed541eb8a4cb5119eefdea7fdf0763087186b62dd51f45fd79248299a9a378a"
+    },
+    {
+      "path": "packages/react-core-linter/src/rules/static-string/index.ts",
+      "file": "packages--react-core-linter--src--rules--static-string--index.ts",
+      "sha256": "b33e23b540fa9f50a8d86d4f405e4683f5e875f1107bf492213de508f543ab03"
+    },
+    {
       "path": "packages/react-core/package.json",
       "file": "packages--react-core--package.json",
       "sha256": "f04f14fd39617212955880faedb5b1d08e28dc99fe43276c880e8948c3220406"
@@ -333,6 +348,16 @@
       "path": "packages/sanity/src/index.ts",
       "file": "packages--sanity--src--index.ts",
       "sha256": "8f5f46a2bbec8e26d80db256fa1ea3aaf298a0d1671b67e7aeb2d205703d8d18"
+    },
+    {
+      "path": "packages/sanity/src/serialization/serialize/index.ts",
+      "file": "packages--sanity--src--serialization--serialize--index.ts",
+      "sha256": "7bdbde07c55f7e2867ea144343c55657de11f199370704dda3b42b4d6bf3f93f"
+    },
+    {
+      "path": "packages/sanity/src/serialization/types.ts",
+      "file": "packages--sanity--src--serialization--types.ts",
+      "sha256": "1ce71d9c3625d669e22a70bb9a182b4d55fede6dae66f0d8b4a8882e2c271a52"
     },
     {
       "path": "packages/sanity/src/types.ts",
