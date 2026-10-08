@@ -98,12 +98,20 @@
     "./react-native": {
       "types": "./src/react-native.d.ts",
       "import": "./src/react-native.js"
+    },
+    "./tanstack-start/server": {
+      "types": "./src/tanstack-start/server.d.ts",
+      "import": "./src/tanstack-start/server.js"
+    },
+    "./tanstack-start/client": {
+      "types": "./src/tanstack-start/client.d.ts",
+      "import": "./src/tanstack-start/client.js"
     }
   },
   "scripts": {
     "test": "node --throw-deprecation --test --test-timeout=30000 tests/*.test.js",
     "test:browser": "playwright test",
-    "test:types": "tsc --project tests/types/tsconfig.json && tsc --project tests/types/tsconfig.next.json && tsc --project tests/types/tsconfig.native.json",
+    "test:types": "tsc --project tests/types/tsconfig.json && tsc --project tests/types/tsconfig.next.json && tsc --project tests/types/tsconfig.native.json && tsc --project tests/types/tsconfig.tanstack.json",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
@@ -116,7 +124,9 @@
     "pack:dry-run": "npm pack --dry-run",
     "lint:secrets": "secretlint \"bin/**\" \"src/**\" \"scripts/**\" \"tests/**\" \"../scripts/**\" \"../rust/scripts/**\" \"../rust/lino-i18n/src/**\" \"../rust/lino-i18n/tests/**\" \"../rust/lino-i18n-macros/src/**\" \"../.github/**\" \"../.githooks/**\"",
     "test:next": "playwright test --config playwright-next.config.js",
-    "build:next": "next build examples/next-usage --webpack"
+    "build:next": "next build examples/next-usage --webpack",
+    "build:tanstack": "vite build --config examples/tanstack-usage/vite.config.js",
+    "test:tanstack": "playwright test --config playwright-tanstack.config.js"
   },
   "keywords": [
     "i18n",
@@ -160,9 +170,12 @@
     "@generaltranslation/supported-locales": "2.1.41",
     "@playwright/test": "^1.64.0",
     "@secretlint/secretlint-rule-preset-recommend": "^13.0.7",
+    "@tanstack/react-router": "1.170.41",
+    "@tanstack/react-start": "1.168.60",
     "@testing-library/react": "^16.3.3",
     "@types/node": "^26.6.4",
     "@types/react": "^19.3.0",
+    "@vitejs/plugin-react": "6.1.2",
     "@vue/compiler-sfc": "3.5.43",
     "@vue/server-renderer": "3.5.43",
     "esbuild": "^0.28.2",
@@ -183,13 +196,17 @@
     "remark-stringify": "11.0.0",
     "rollup": "^4.64.2",
     "secretlint": "^13.0.7",
+    "srvx": "0.11.22",
     "test-anywhere": "^0.9.1",
     "typescript": "^7.0.2",
     "unified": "11.0.5",
+    "vite": "8.3.4",
     "vue": "3.5.43"
   },
   "peerDependencies": {
     "@generaltranslation/supported-locales": ">=2.1.41 <3",
+    "@tanstack/react-router": ">=1.170 <2",
+    "@tanstack/react-start": ">=1.168 <2",
     "@vue/compiler-sfc": ">=3.5 <4",
     "generaltranslation": ">=9.5.5 <10",
     "gt-remark": ">=1.0.12 <2",
@@ -217,6 +234,12 @@
       "optional": true
     },
     "@generaltranslation/supported-locales": {
+      "optional": true
+    },
+    "@tanstack/react-start": {
+      "optional": true
+    },
+    "@tanstack/react-router": {
       "optional": true
     }
   },

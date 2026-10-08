@@ -88,6 +88,7 @@ export default [
       'examples/vue-usage/*.js',
       'examples/native-usage/*.js',
       'src/next/client.js',
+      'src/tanstack-start/client.js',
     ],
     languageOptions: {
       globals: {
@@ -114,6 +115,10 @@ export default [
       // JSX examples are parsed and exercised by the compiler and browser suite.
       'examples/compiler-usage/*.jsx',
       'examples/next-usage/**/*.jsx',
+      'examples/tanstack-usage/**/*.jsx',
+      'examples/tanstack-usage/src/routeTree.gen.ts',
+      'examples/tanstack-usage/dist/**',
+      'examples/tanstack-usage/.tanstack/**',
       '**/.next/**',
       'node_modules/**',
       '**/node_modules/**',

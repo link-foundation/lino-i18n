@@ -201,3 +201,21 @@ regression reproduced the exact stylesheet import failure before the fix. The
 shared DOM fixture now supplies ShadowRoot and restores every original global
 descriptor on disposal. Complete Node/Bun suites and the affected Deno suite
 pass, including the import and restoration regression.
+
+## TanStack Start
+
+Start 1.168.60/Router 1.170.41 are exercised through the real Vite plugin and
+production Web server. Four unit regressions cover request overlap, nested
+failures, source bootstrap, snapshot preloading and factory/hook extraction.
+The core request regression preserves keyed catalog loading without an explicit
+source locale. Strict types use actual middleware and Link declarations.
+
+The first browser run reproduced a browser import of `node:async_hooks`; the
+fixture now initializes its server adapter behind Start's server-only boundary.
+A production run then exposed missing static scripts; srvx resolves its static
+directory against the server entry. The corrected `../client` path serves the
+built assets. Both production Chromium scenarios pass with SSR French, hydration,
+preserved component count, query/hash navigation, ambient server functions,
+cookies, preloading and cancelled clicks. CI builds and tests that production
+fixture. MCP verified lang/cookie/heading in both locales, recorded no console
+errors, saved the two screenshots and closed the browser/server.

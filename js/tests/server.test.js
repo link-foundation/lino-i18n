@@ -8,6 +8,27 @@ import {
   createLocaleMiddleware,
 } from '../src/server.js';
 
+test('explicit source requests skip downloads while keyed request loading remains compatible', async () => {
+  const loads = [];
+  const options = {
+    supportedLanguages: ['en', 'fr'],
+    loadCatalog: async (locale) => {
+      loads.push(locale);
+      return { greeting: 'loaded' };
+    },
+  };
+  const request = new Request('https://example.org/en');
+  const source = await createRequestTranslator(request, {
+    ...options,
+    sourceLocale: 'en',
+  });
+  assert.equal(source.gt('Hello'), 'Hello');
+  assert.deepEqual(loads, []);
+  const keyed = await createRequestTranslator(request, options);
+  assert.equal(keyed.t('greeting'), 'loaded');
+  assert.deepEqual(loads, ['en']);
+});
+
 test('server plural components use configured canonical locale rules', async () => {
   const { createTranslator } = await import('../src/messages.js');
   const { Plural } = await import('../src/react-server.js');

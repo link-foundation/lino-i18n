@@ -80,7 +80,7 @@ export async function createRequestTranslator(request, options = {}) {
     ...options,
     defaultLocale: getRequestLocale(request, options),
   });
-  if (options.loadCatalog) {
+  if (options.loadCatalog && i18n.getLocale() !== options.sourceLocale) {
     await i18n.load(i18n.getLocale());
   }
   return i18n;

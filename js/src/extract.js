@@ -97,7 +97,7 @@ function importApi(binding, seen) {
     return nativeImport(binding);
   }
   if (
-    !/^lino-i18n(?:\/(?:messages|react|react-native|react-server|server|node|vue|next\/(?:server|client)))?$/.test(
+    !/^lino-i18n(?:\/(?:messages|react|react-native|react-server|server|node|vue|(?:next|tanstack-start)\/(?:server|client)))?$/.test(
       source
     )
   ) {
@@ -135,7 +135,7 @@ export function valueApi(path, node, seen = new Set(), id, localName) {
     if (name === 'createNativeI18n') {
       return nativeBinding(id, localName);
     }
-    if (name === 'createNextI18n') {
+    if (['createNextI18n', 'createTanStackI18n'].includes(name)) {
       return factoryBinding(id, localName, 'next');
     }
     if (

@@ -6,7 +6,7 @@ Translation (GT), collected evidence, and a plan covering every requirement in
 one pull request. [PR 28](https://github.com/link-foundation/lino-i18n/pull/28)
 implements source messages, rich React translation, optional ICU in Rust,
 request isolation, typed dictionaries, locale configuration, a JSX compiler,
-Next App Router and Vue/SFC integration, optional GT SDK services and bounded module-aware
+Next App Router, TanStack Start and Vue/SFC integration, optional GT SDK services and bounded module-aware
 extraction/translation workflows.
 
 **This is substantial runtime and tooling coverage, not complete feature parity
@@ -152,7 +152,7 @@ a before/after screenshot of a reported visual defect.
 
 The optional Next App Router adapter, JSX compiler and published GT SDK bridge
 are implemented and tested, as are Vue/SFC, Python extraction and Native Text
-adapters. Dedicated TanStack/Sanity integrations, a replacement GT project/CDN
+adapters. TanStack Start middleware, hydration and navigation are also tested. Dedicated Sanity integration, a replacement GT project/CDN
 backend, editor UI and replay tooling remain outstanding. The matrix supplies concrete solutions and
 validation plans for them. They cannot be called complete because a generic
 provider or a framework recipe exists. The issue's request for entire-monorepo

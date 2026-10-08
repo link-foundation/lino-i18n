@@ -21,3 +21,5 @@ Add optional Vue 3.5 reactive source components, formatting, lazy initialization
 Add bounded Python AST extraction into shared manifests, optional upstream Markdown helpers with safe entity serialization, and a GT service locale registry bridge.
 
 Add an injected React Native Text adapter with rich content, native formatter wrappers, headless selectors, serialized locale persistence and matching JSX extraction.
+
+Add optional TanStack Start request middleware and Router hydration/navigation adapters, verified with actual server functions, a production build and browser tests.

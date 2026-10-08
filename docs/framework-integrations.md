@@ -2,7 +2,8 @@
 
 The source runtime is instance-based. Frameworks can share immutable catalogs
 but should create a translator for each server request and each independent
-client application. The tested framework adapter is Next 16 App Router; Web Request/Response,
+client application. Tested adapters cover Next 16 App Router, TanStack Start,
+Vue and Native Text; Web Request/Response,
 React server rendering/hydration and Vite/Rollup extraction are also tested.
 Other framework sections describe integration points and their remaining limits.
 
@@ -16,6 +17,11 @@ concurrent request and hydration checks, and application-specific boundaries.
 See `js/examples/next-usage`. Next remains an optional peer dependency.
 
 ## TanStack Start, React Router and Node servers
+
+The optional `lino-i18n/tanstack-start/server` and `/client` entries provide
+request middleware, ambient server access, loader snapshots, hydration and
+locale-aware Router links/selectors. The [Start guide](tanstack-start.md) includes
+the actual production build and browser fixture, server-only setup and limits.
 
 Pass a Web Request from a route loader to `createRequestTranslator`. For Node
 HTTP servers, adapt the URL and headers to a Web Request, and place the instance
@@ -37,15 +43,14 @@ revalidation APIs remain application responsibilities.
 
 ## React Native, Vue and Svelte
 
-Plain `createTranslator`, formatting helpers and `subscribe` can be used behind
-an application adapter. React Native can use the provider/hooks with
-code-owned native elements passed as variables; HTML selectors and automatic
-native-element content traversal are not provided. Vue/Svelte can subscribe to
-the instance and dispose subscriptions at component teardown, but this package
-does not ship Vue directives, Svelte bindings or template extractors.
+The [Native adapter](react-native.md) uses injected Text, rich traversal, native
+formatter wrappers, headless selectors and serialized locale persistence.
+The [Vue adapter](vue.md) provides a reactive plugin, source components,
+composables, SSR snapshots and bounded SFC extraction. Both have real framework
+fixtures. Svelte applications can subscribe to `createTranslator` and dispose
+subscriptions on teardown; dedicated Svelte bindings remain outside the package.
 
-Extract shared `.js`/`.ts` message declarations with the CLI. Vue/Svelte template
-extraction and native-language rich rendering need separate adapters and
-fixtures before those modes can claim parity with GT's dedicated packages.
+Extract shared `.js`/`.ts` message declarations with the CLI. Vue templates and
+Native Text imports use the shipped extractors; Svelte templates need an adapter.
 See the [requirement matrix](case-studies/issue-25/REQUIREMENTS.md) for the
 implementation plans and explicit remaining gaps.
