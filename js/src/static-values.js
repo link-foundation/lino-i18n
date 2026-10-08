@@ -1,5 +1,6 @@
 // Finite static derivation. Never executes application code during extraction.
 import { literal } from './extract-jsx.js';
+import { staticDeclaration } from './extract-bindings.js';
 
 export function combine(left, right, join = (a, b) => a + b) {
   if (left.length * right.length > 100) {
@@ -24,23 +25,14 @@ function returns(node) {
 }
 
 function declaration(path, node) {
-  if (node?.type !== 'Identifier') {
-    throw new Error('Derivation requires a local static declaration');
-  }
-  const binding = path.scope.getBinding(node.name);
-  if (!binding?.constant) {
-    throw new Error(`Cannot statically derive ${node.name}`);
-  }
-  return binding.path.isVariableDeclarator()
-    ? binding.path.get('init')
-    : binding.path;
+  return staticDeclaration(path, node);
 }
 
 function propertyValues(path, node, depth) {
-  const object =
-    node.object.type === 'Identifier'
-      ? declaration(path, node.object).node
-      : node.object;
+  const declared = ['Identifier', 'MemberExpression'].includes(node.object.type)
+    ? declaration(path, node.object)
+    : undefined;
+  const object = declared?.node || node.object;
   if (object.type !== 'ObjectExpression') {
     throw new Error('Derivation supports local literal dictionaries');
   }
@@ -58,7 +50,7 @@ function propertyValues(path, node, depth) {
     throw new Error('Derived dictionary keys must be static');
   }
   return properties.flatMap((property) =>
-    staticValues(path, property.value, depth + 1)
+    staticValues(declared || path, property.value, depth + 1)
   );
 }
 

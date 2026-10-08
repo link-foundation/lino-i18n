@@ -1,66 +1,16 @@
-import { readdir, readFile, stat, mkdir, writeFile } from 'node:fs/promises';
+import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import {
-  extractMessages,
+  extractProject,
   validateCatalog,
   translateCatalog,
 } from './tooling.js';
 import { formatLinoCatalog, loadLocalesFromDirectory } from './loaders.js';
+import { readProjectSources } from './source-project-files.js';
 
-async function sourceFiles(input) {
-  const info = await stat(input);
-  if (info.isFile()) {
-    return [input];
-  }
-  const files = [];
-  for (const entry of (await readdir(input, { withFileTypes: true })).sort(
-    (a, b) => a.name.localeCompare(b.name)
-  )) {
-    if (['node_modules', '.git', 'dist', 'coverage'].includes(entry.name)) {
-      continue;
-    }
-    const file = path.join(input, entry.name);
-    if (entry.isDirectory()) {
-      files.push(...(await sourceFiles(file)));
-    } else if (
-      entry.isFile() &&
-      /\.[cm]?[jt]sx?$/.test(entry.name) &&
-      !entry.name.endsWith('.d.ts')
-    ) {
-      files.push(file);
-    }
-  }
-  return files;
-}
-
-export async function extractFiles(input) {
-  const messages = new Map();
-  const diagnostics = [];
-  for (const file of await sourceFiles(input)) {
-    const result = extractMessages(await readFile(file, 'utf8'), {
-      file:
-        path.relative(input, file).replaceAll('\\', '/') || path.basename(file),
-    });
-    diagnostics.push(...result.diagnostics);
-    for (const message of result.messages) {
-      const existing = messages.get(message.id);
-      if (existing && existing.source !== message.source) {
-        diagnostics.push({
-          file,
-          line: message.line,
-          message: `Conflicting source messages for id ${message.id}`,
-        });
-      } else {
-        messages.set(message.id, existing || message);
-      }
-    }
-  }
-  return {
-    version: 1,
-    messages: [...messages.values()].sort((a, b) => a.id.localeCompare(b.id)),
-    diagnostics,
-  };
+export async function extractFiles(input, options = {}) {
+  return extractProject(await readProjectSources(input, options), options);
 }
 
 export async function commandExtract(flags, log, err) {
@@ -70,7 +20,12 @@ export async function commandExtract(flags, log, err) {
     );
     return 1;
   }
-  const manifest = await extractFiles(flags.in);
+  const manifest = await extractFiles(flags.in, {
+    maxFiles:
+      flags['max-files'] === undefined ? undefined : Number(flags['max-files']),
+    maxBytes:
+      flags['max-bytes'] === undefined ? undefined : Number(flags['max-bytes']),
+  });
   if (manifest.diagnostics.length) {
     err(JSON.stringify(manifest.diagnostics, null, 2));
     return 2;

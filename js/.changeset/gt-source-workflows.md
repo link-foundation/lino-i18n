@@ -13,3 +13,5 @@ Round-trip quoted source keys without interpreting prototype property names.
 Preserve complete ICU semantics when converting compiled FormatJS catalogs.
 
 Add an optional Next 16 App Router adapter for request-scoped server access, hydration, locale proxy/cookies, localized navigation, static params and SEO, verified with a production build and browser tests.
+
+Resolve shared translator factories, imported finite derivation and dictionary schemas through bounded static module graphs in the CLI and Vite/Rollup plugin.

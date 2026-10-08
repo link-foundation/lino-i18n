@@ -27,6 +27,14 @@ export declare function extractMessages(
   code: string,
   options?: { file?: string }
 ): ExtractionManifest;
+export declare function extractProject(
+  sources: Record<string, string>,
+  options?: {
+    maxFiles?: number;
+    maxBytes?: number;
+    resolveImport?: (source: string, importer: string) => string | undefined;
+  }
+): ExtractionManifest;
 export declare function validateCatalog(
   messages: ExtractedMessage[],
   translations: Record<string, string>,

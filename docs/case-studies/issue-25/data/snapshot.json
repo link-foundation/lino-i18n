@@ -160,9 +160,29 @@
       "sha256": "699b145f13a4644540541e5e6931745918f0db7cf7d619a37093cc24ad0d7fc2"
     },
     {
+      "path": "packages/python-extractor/src/extractCalls.ts",
+      "file": "packages--python-extractor--src--extractCalls.ts",
+      "sha256": "e122ee094630ede5c819504780814ea583a165bd99fcaea980a4789e263159d1"
+    },
+    {
+      "path": "packages/python-extractor/src/extractImports.ts",
+      "file": "packages--python-extractor--src--extractImports.ts",
+      "sha256": "9a1d5236e539707da811f4457aded1cb0e9b46a94ee7da1ffbbfcba0d86ef4c2"
+    },
+    {
+      "path": "packages/python-extractor/src/index.ts",
+      "file": "packages--python-extractor--src--index.ts",
+      "sha256": "79f153e40f249583a2f8cb1d96438005fb0d63b6fbb9389a01f7d8335462c1d5"
+    },
+    {
       "path": "packages/react-core-linter/package.json",
       "file": "packages--react-core-linter--package.json",
       "sha256": "c5935261e87a9d482a010547375b07712385f1ebd9239d5c47481a1fa527e211"
+    },
+    {
+      "path": "packages/react-core-linter/src/index.ts",
+      "file": "packages--react-core-linter--src--index.ts",
+      "sha256": "a3bea099a6f9f9fa12613f9fbf064f8844467b65b53cb5181b65c8de9295b6e2"
     },
     {
       "path": "packages/react-core/package.json",
@@ -178,6 +198,11 @@
       "path": "packages/react-native/package.json",
       "file": "packages--react-native--package.json",
       "sha256": "8b18537417946f03032a91a86a7524ce4e6fcffee6d4d8b40f89ee7518e84743"
+    },
+    {
+      "path": "packages/react-native/src/index.tsx",
+      "file": "packages--react-native--src--index.tsx",
+      "sha256": "ee5bdbc62046163fd16d1f5899bdb063c3e421866014409e0502c15484bfd360"
     },
     {
       "path": "packages/react/package.json",
@@ -205,9 +230,29 @@
       "sha256": "24a84ca6b4ef162fec860d77d0d1c52310c25fc3dac910963d453f72c829c858"
     },
     {
+      "path": "packages/remark/src/index.ts",
+      "file": "packages--remark--src--index.ts",
+      "sha256": "03b3f74b1c788e60950172cd36ea15c8e70b9da8837d8f6fff2c36e874dbb0fa"
+    },
+    {
+      "path": "packages/remark/src/plugins/escapeHtmlInTextNodes.ts",
+      "file": "packages--remark--src--plugins--escapeHtmlInTextNodes.ts",
+      "sha256": "ee4fe7dfae00ff7502c203158c6eac01e590c0818470b2756a7be437abb21840"
+    },
+    {
       "path": "packages/rrweb/package.json",
       "file": "packages--rrweb--package.json",
       "sha256": "40eed189b196df61cf9910a3781f80254103506ae288894d9699388a8d366dd9"
+    },
+    {
+      "path": "packages/rrweb/src/harvest.ts",
+      "file": "packages--rrweb--src--harvest.ts",
+      "sha256": "a93da8e84ccb41e2c88d59009344328a915fad464251a727d36282072aab255b"
+    },
+    {
+      "path": "packages/rrweb/src/index.ts",
+      "file": "packages--rrweb--src--index.ts",
+      "sha256": "44ffa1997ca06faf1107b18f24f1624b2eb103906212ace10e83ece0c19d5017"
     },
     {
       "path": "packages/sanity/package.json",
@@ -225,6 +270,11 @@
       "sha256": "2e0ec6944268242a9668ff0fd507d21ea4609360f9225a45d01d2b9dd4d7b976"
     },
     {
+      "path": "packages/tanstack-start/src/middleware/gtMiddleware.ts",
+      "file": "packages--tanstack-start--src--middleware--gtMiddleware.ts",
+      "sha256": "3c99f2ec20815c192eb2545e574124951de9a0c29ad0ecb226801cc9b67b7bcf"
+    },
+    {
       "path": "packages/vue-extractor/package.json",
       "file": "packages--vue-extractor--package.json",
       "sha256": "bf7e5f8ecf94d32819d465202e573f6b7295d5e8f1c8f11e92e997df300fc608"
@@ -233,6 +283,41 @@
       "path": "packages/vue/package.json",
       "file": "packages--vue--package.json",
       "sha256": "37dfa8115095375a561043383282e432425ce975067c7e5501f9f92f1a90af78"
+    },
+    {
+      "path": "packages/vue/src/components/T.ts",
+      "file": "packages--vue--src--components--T.ts",
+      "sha256": "4eb39f47d36b54f350060eb04ec47fa41faf37d8133ff0fba86f09de10415f5e"
+    },
+    {
+      "path": "packages/vue/src/composables/strings.ts",
+      "file": "packages--vue--src--composables--strings.ts",
+      "sha256": "afee6b500cb36a086194f6567734816074ca6a8f033b3d351e65a41cd23e0074"
+    },
+    {
+      "path": "packages/vue/src/index.ts",
+      "file": "packages--vue--src--index.ts",
+      "sha256": "e744b851c6ba7b7f637ebdb1a52edf41811b38556f59cff1d4ca10d07ae2c34b"
+    },
+    {
+      "path": "packages/vue/src/rendering/translateVueChildren.ts",
+      "file": "packages--vue--src--rendering--translateVueChildren.ts",
+      "sha256": "e9185e28a17accf1868818045afdd8bb5cb08d84a4fcd40c43c69b4be956a028"
+    },
+    {
+      "path": "packages/vue/src/runtime/spa.ts",
+      "file": "packages--vue--src--runtime--spa.ts",
+      "sha256": "49f0ac4841a3eb90018fcf7856d0e938db0141c1ed4df7e9f3815db5cbf64381"
+    },
+    {
+      "path": "packages/vue/src/runtime/state.ts",
+      "file": "packages--vue--src--runtime--state.ts",
+      "sha256": "4cf6d19fabdc58fe22e08f8bc1e6bdf5ee916db8932e53c7e55f2c53878db1cd"
+    },
+    {
+      "path": "packages/vue/src/types/index.ts",
+      "file": "packages--vue--src--types--index.ts",
+      "sha256": "95e9c0491abf9907f002507a6ae62342aa0a8c50e1685dc0fd754126b50f2250"
     }
   ]
 }

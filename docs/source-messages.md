@@ -269,8 +269,26 @@ spreads and conflicting ids fail extraction with diagnostics. Calls to `gt` in
 HTML properties extract normally. Automatic attribute/text translation is an
 opt-in compiler transform described below.
 
-`extractMessages(code)`, `validateCatalog(messages, table)` and
+`extractMessages(code)`, `extractProject(sources)`, `validateCatalog(messages, table)` and
 `diffMessages(previous, current)` are also available from `lino-i18n/tooling`.
+The CLI and build plugin resolve static local imports, named/default exports,
+barrels, namespaces, and shared translator/Next factories. Imported derivation
+functions and dictionaries retain their declaration scope. The plugin uses the
+bundler's own resolution, including aliases. `extractProject` takes a map of
+POSIX file names to source strings and an optional synchronous
+`resolveImport(source, importer)` callback. No application module is imported or
+executed during extraction. Extensionless imports and `.js` references to
+TypeScript sources are supported; ambiguous resolutions diagnose.
+
+A directory input examines its source files and excludes dependencies, build
+outputs and hidden framework bundles. A single-file input follows only its
+static local dependency graph. Defaults are 1,000 files and 10 MiB total source;
+`--max-files` / `--max-bytes` (or programmatic options) accept finite limits up to
+10,000 files / 100 MiB. Directories are bounded to 50 levels / 10,000 directories,
+API resolution to 100 bindings, and derivation to its existing 100 variants /
+20 levels. Dynamic imports, CommonJS resolution, arbitrary function execution,
+and package export resolution outside the bundler remain explicit boundaries.
+
 Validation finds missing/unused messages, invalid ICU, mismatched placeholder
 and tag names. A previous manifest additionally flags translations under stable
 ids whose source changed. A `stale` result requires review; after review advance

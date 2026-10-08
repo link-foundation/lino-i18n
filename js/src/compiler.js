@@ -1,5 +1,6 @@
 // Vite/Rollup plugin emits reviewable catalogs, with optional JSX translation.
-import { extractMessages } from './extract.js';
+import { parseSource } from './extract.js';
+import { extractProject } from './extract-project.js';
 import { formatLinoCatalog } from './catalogs.js';
 import { transformJSX } from './transform-jsx.js';
 
@@ -25,29 +26,18 @@ export function createExtractionPlugin({
       const output = transform
         ? transformJSX(code, { ...transform, file: id })
         : null;
-      const manifest = extractMessages(output?.code || code, { file: id });
+      files.set(id, output?.code || code);
+      return output ? { code: output.code, map: output.map } : null;
+    },
+    async generateBundle() {
+      const resolveImport = await bundlerImports(this, files);
+      const manifest = extractProject(Object.fromEntries(files), {
+        resolveImport,
+      });
       if (manifest.diagnostics.length) {
         this.error(JSON.stringify(manifest.diagnostics));
       }
-      files.set(id, manifest.messages);
-      return output ? { code: output.code, map: output.map } : null;
-    },
-    generateBundle() {
-      const entries = new Map();
-      for (const messages of files.values()) {
-        for (const entry of messages) {
-          if (
-            entries.has(entry.id) &&
-            entries.get(entry.id).source !== entry.source
-          ) {
-            this.error(`Conflicting source messages for id ${entry.id}`);
-          }
-          entries.set(entry.id, entry);
-        }
-      }
-      const messages = [...entries.values()].sort((a, b) =>
-        a.id.localeCompare(b.id)
-      );
+      const { messages } = manifest;
       this.emitFile({
         type: 'asset',
         fileName: catalogFile,
@@ -60,4 +50,23 @@ export function createExtractionPlugin({
       });
     },
   };
+}
+
+async function bundlerImports(context, files) {
+  const resolved = new Map();
+  if (context.resolve) {
+    for (const [file, code] of files) {
+      for (const statement of parseSource(code, file).program.body) {
+        const source = statement.source?.value;
+        if (!source) {
+          continue;
+        }
+        const target = await context.resolve(source, file, { skipSelf: true });
+        if (target && !target.external && files.has(target.id)) {
+          resolved.set(`${file}\0${source}`, target.id);
+        }
+      }
+    }
+  }
+  return (source, file) => resolved.get(`${file}\0${source}`);
 }

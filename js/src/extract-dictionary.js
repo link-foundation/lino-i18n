@@ -1,11 +1,9 @@
 import { literal } from './extract-jsx.js';
+import { staticDeclaration } from './extract-bindings.js';
 
 function declaration(path, node) {
-  const binding = path.scope.getBinding(node.name);
-  if (!binding?.constant || !binding.path.isVariableDeclarator()) {
-    throw new Error('Dictionary sources require a local static declaration');
-  }
-  return { path: binding.path, node: binding.path.node.init };
+  const declared = staticDeclaration(path, node);
+  return { path: declared, node: declared.node };
 }
 
 function untyped(node) {

@@ -59,6 +59,23 @@ def collect():
         'packages/format/src/types.ts',
         'packages/format/src/locales/customLocaleMapping.ts',
         'packages/format/src/locales/isSupersetLocale.ts',
+        'packages/vue/src/index.ts',
+        'packages/vue/src/types/index.ts',
+        'packages/vue/src/runtime/spa.ts',
+        'packages/vue/src/runtime/state.ts',
+        'packages/vue/src/rendering/translateVueChildren.ts',
+        'packages/vue/src/composables/strings.ts',
+        'packages/vue/src/components/T.ts',
+        'packages/remark/src/index.ts',
+        'packages/remark/src/plugins/escapeHtmlInTextNodes.ts',
+        'packages/python-extractor/src/index.ts',
+        'packages/python-extractor/src/extractCalls.ts',
+        'packages/python-extractor/src/extractImports.ts',
+        'packages/react-native/src/index.tsx',
+        'packages/tanstack-start/src/middleware/gtMiddleware.ts',
+        'packages/rrweb/src/index.ts',
+        'packages/rrweb/src/harvest.ts',
+        'packages/react-core-linter/src/index.ts',
     ]
     existing = [path.name.replace('--', '/') for path in DATA.glob('packages--*')]
     files = []

@@ -4,15 +4,27 @@ import { rollup } from 'rollup';
 import { createExtractionPlugin } from '../src/compiler.js';
 import { parseLinoCatalog } from '../src/catalogs.js';
 
-const code = `import { msg } from 'lino-i18n/messages'; export const text = msg('Add an item');`;
+const sources = {
+  '/virtual/app.js': `import { msg, derive } from 'lino-i18n/messages';
+    import { i18n } from './i18n.js'; import { label } from './copy.js';
+    export const text = msg('Add an item'); i18n.gt('Shared');
+    i18n.gt('Item {label}', { label: derive(label(flag)) });`,
+  '/virtual/i18n.js': `import { createTranslator } from 'lino-i18n/messages'; export const i18n = createTranslator();`,
+  '/virtual/copy.js': `export function label(flag) { return flag ? 'One' : 'Two'; }`,
+};
 const bundle = await rollup({
   input: '/virtual/app.js',
   external: ['lino-i18n/messages'],
   plugins: [
     {
       name: 'fixture',
-      resolveId: (id) => (id === '/virtual/app.js' ? id : null),
-      load: (id) => (id === '/virtual/app.js' ? code : null),
+      resolveId: (id, importer) => {
+        const target = id.startsWith('.')
+          ? new URL(id, `file://${importer}`).pathname
+          : id;
+        return Object.hasOwn(sources, target) ? target : null;
+      },
+      load: (id) => sources[id] || null,
     },
     createExtractionPlugin(),
   ],
@@ -28,7 +40,12 @@ try {
     JSON.parse(
       output.find((asset) => asset.fileName === 'messages.json').source
     ).messages.length,
-    1
+    4
+  );
+  assert.equal(parseLinoCatalog(catalog.source).translations.Shared, 'Shared');
+  assert.equal(
+    parseLinoCatalog(catalog.source).translations['Item Two'],
+    'Item Two'
   );
 } finally {
   await bundle.close();

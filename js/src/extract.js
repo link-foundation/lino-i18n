@@ -3,6 +3,7 @@ import babelTraverse from '@babel/traverse';
 import { jsxAttributes, literal } from './extract-jsx.js';
 import { messageVariables } from './message-schema.js';
 import { dictionaryEntries } from './extract-dictionary.js';
+import { importResolver, referencePath } from './extract-bindings.js';
 import {
   derivedTemplates,
   derivedCalls,
@@ -12,6 +13,9 @@ import {
 const traverse = babelTraverse.default || babelTraverse;
 
 export function apiName(path, node, seen = new Set()) {
+  if (seen.size > 100) {
+    throw new Error('Source API resolution exceeds 100 bindings');
+  }
   if (!node) {
     return undefined;
   }
@@ -32,6 +36,9 @@ export function apiName(path, node, seen = new Set()) {
 function memberApi(path, node, seen) {
   const object = apiName(path, node.object, seen);
   const property = node.computed ? literal(node.property) : node.property.name;
+  if (object?.resolveApi) {
+    return object.resolveApi(property, seen);
+  }
   return object === '*' ||
     (object === 'translator' && ['gt', 'm', 'tx'].includes(property)) ||
     (object === 'next' &&
@@ -41,54 +48,74 @@ function memberApi(path, node, seen) {
 }
 
 function bindingApi(binding, localName, seen) {
-  if (
-    binding.path.isImportSpecifier() ||
-    binding.path.isImportNamespaceSpecifier()
-  ) {
-    const source = binding.path.parent.source.value;
-    if (
-      !/^lino-i18n(?:\/(?:messages|react|react-server|server|node|next\/(?:server|client)))?$/.test(
-        source
-      )
-    ) {
-      return undefined;
-    }
-    return binding.path.isImportNamespaceSpecifier()
-      ? '*'
-      : binding.path.node.imported.name;
+  if (/^Import/.test(binding.path.type)) {
+    return importApi(binding, seen);
   }
   if (binding.path.isVariableDeclarator()) {
     const { id } = binding.path.node;
-    const init =
-      binding.path.node.init?.type === 'AwaitExpression'
-        ? binding.path.node.init.argument
-        : binding.path.node.init;
-    if (init?.type === 'CallExpression') {
-      const name = apiName(binding.path, init.callee, seen);
-      if (['useGT', 'useMessages', 'getGT', 'getMessages'].includes(name)) {
-        return 'gt';
-      }
-      if (name === 'createNextI18n') {
-        return factoryBinding(id, localName, 'next');
-      }
-      if (
-        [
-          'createTranslator',
-          'createDictionaryTranslator',
-          'createRequestTranslator',
-          'getTranslator',
-        ].includes(name)
-      ) {
-        return factoryBinding(id, localName, 'translator');
-      }
-    }
-    return apiName(binding.path, init, seen);
+    return valueApi(binding.path, binding.path.node.init, seen, id, localName);
   }
   return undefined;
 }
 
+function importApi(binding, seen) {
+  if (
+    binding.path.node.importKind === 'type' ||
+    binding.path.parent.importKind === 'type'
+  ) {
+    return undefined;
+  }
+  const source = binding.path.parent.source.value;
+  if (
+    !/^lino-i18n(?:\/(?:messages|react|react-server|server|node|next\/(?:server|client)))?$/.test(
+      source
+    )
+  ) {
+    const imported = importResolver(binding.path)?.(binding.path, seen);
+    return (
+      imported?.api ||
+      (imported?.resolveApi
+        ? imported
+        : imported?.node && valueApi(imported, imported.node, seen))
+    );
+  }
+  return binding.path.isImportNamespaceSpecifier()
+    ? '*'
+    : binding.path.node.imported?.name;
+}
+
+export function valueApi(path, node, seen = new Set(), id, localName) {
+  if (/^Import/.test(path.type)) {
+    return apiName(path, path.node.local, seen);
+  }
+  const init = node?.type === 'AwaitExpression' ? node.argument : node;
+  if (path.isVariableDeclarator() && node === path.node) {
+    return valueApi(path, node.init, seen, node.id, localName);
+  }
+  if (init?.type === 'CallExpression') {
+    const name = apiName(path, init.callee, seen);
+    if (['useGT', 'useMessages', 'getGT', 'getMessages'].includes(name)) {
+      return 'gt';
+    }
+    if (name === 'createNextI18n') {
+      return factoryBinding(id, localName, 'next');
+    }
+    if (
+      [
+        'createTranslator',
+        'createDictionaryTranslator',
+        'createRequestTranslator',
+        'getTranslator',
+      ].includes(name)
+    ) {
+      return factoryBinding(id, localName, 'translator');
+    }
+  }
+  return apiName(path, init, seen);
+}
+
 function factoryBinding(id, localName, kind) {
-  return id.type === 'ObjectPattern'
+  return id?.type === 'ObjectPattern'
     ? id.properties.find((property) => property.value?.name === localName)?.key
         ?.name
     : kind;
@@ -124,8 +151,8 @@ function usesDescriptor(path, source) {
   if (source?.type === 'CallExpression') {
     return ['msg', 'bindMessage'].includes(apiName(path, source.callee));
   }
-  if (source?.type === 'Identifier') {
-    const binding = path.scope.getBinding(source.name)?.path;
+  if (['Identifier', 'MemberExpression'].includes(source?.type)) {
+    const binding = referencePath(path, source);
     if (binding?.node.init?.type === 'CallExpression') {
       return ['msg', 'bindMessage'].includes(
         apiName(binding, binding.node.init.callee)
@@ -135,12 +162,16 @@ function usesDescriptor(path, source) {
   return false;
 }
 
-export function extractMessages(code, { file = '<source>' } = {}) {
-  const ast = parse(code, {
+export function parseSource(code, file) {
+  return parse(code, {
     sourceType: 'unambiguous',
     plugins: ['jsx', 'typescript'],
     sourceFilename: file,
   });
+}
+
+export function extractMessages(code, { file = '<source>', ast: parsed } = {}) {
+  const ast = parsed || parseSource(code, file);
   const messages = [];
   const diagnostics = [];
 

@@ -6,7 +6,8 @@ Translation (GT), collected evidence, and a plan covering every requirement in
 one pull request. [PR 28](https://github.com/link-foundation/lino-i18n/pull/28)
 implements source messages, rich React translation, optional ICU in Rust,
 request isolation, typed dictionaries, locale configuration, a JSX compiler,
-Next App Router integration, optional GT SDK services and local extraction/translation workflows.
+Next App Router integration, optional GT SDK services and bounded module-aware
+extraction/translation workflows.
 
 **This is substantial runtime and tooling coverage, not complete feature parity
 with the entire GT monorepo.** GT also includes hosted services, framework
@@ -77,7 +78,7 @@ so a slow previous locale selection cannot overwrite the latest selection.
 | Rust ICU | Reimplement ICU; require new Rust for all users; optional engine | Optional `formatjs_icu_messageformat` feature. Default Rust 1.87 remains supported; ICU needs 1.92. |
 | Extraction | Regex; TypeScript-only compiler; Babel AST | Babel handles JS/TS/JSX, import aliases and lexical scope with no application execution. |
 | JSX restoration | HTML-string injection; translation-generated props; code-owned elements | ICU tags restore only original elements and props. Arbitrary dynamic values are named opaque placeholders. |
-| Derivation | Execute application functions; unlimited enumeration; bounded static analysis | Enumerate local static returns/dictionaries/conditionals; fail with diagnostics at 100 variants or 20 levels. |
+| Derivation | Execute application functions; unlimited enumeration; bounded static analysis | Enumerate local/imported static returns/dictionaries/conditionals; fail with diagnostics at 100 variants or 20 levels. |
 | Framework state | Global mutable singleton; per-request explicit instance | Explicit instances and JSON snapshots make concurrency and hydration testable without framework dependencies. |
 | Translation services | Embed one vendor SDK; use a provider interface | Providers return validated candidates; approved entries are preserved and catalog format stays portable. |
 | Compiler integration | Regex wrapping; unbounded evaluation; AST transformation | Opt-in Babel transform wraps JSX text/variables and configured attributes, retains source maps and explicit boundaries, and emits matching manifests through Vite/Rollup. |
@@ -149,9 +150,10 @@ a before/after screenshot of a reported visual defect.
 
 ## Acceptance limits
 
-No dedicated Next/TanStack/Native/Vue/Sanity package, GT project/CDN service,
-automatic JSX attribute compiler, editor UI, replay tooling or Python extractor
-is implemented by this change. The matrix supplies concrete solutions and
+The optional Next App Router adapter, JSX compiler and published GT SDK bridge
+are implemented and tested. Dedicated TanStack/Native/Vue/Sanity packages, a
+replacement GT project/CDN backend, editor UI, replay tooling and Python
+extraction remain outstanding. The matrix supplies concrete solutions and
 validation plans for them. They cannot be called complete because a generic
 provider or a framework recipe exists. The issue's request for entire-monorepo
 parity remains broader than the implementation, and PR 28 should report that

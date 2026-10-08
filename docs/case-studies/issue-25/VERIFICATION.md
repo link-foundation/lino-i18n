@@ -29,9 +29,9 @@ Run JavaScript commands from `js/` and other commands from the repository root.
 
 | Command | Result |
 | --- | --- |
-| `npm test` | 127 tests pass with a 30-second per-test timeout. |
-| `bun test --timeout 30000` | 127 tests pass. |
-| `deno test --no-check --allow-read --allow-write --allow-env --allow-run` | 127 tests pass. Node subprocesses run CLI/Rollup build integration fixtures. |
+| `npm test` | 135 tests pass with a 30-second per-test timeout. |
+| `bun test --timeout 30000` | 135 tests pass. |
+| `deno test --no-check --allow-read --allow-write --allow-env --allow-run` | 135 tests pass. Node subprocesses run CLI/Rollup build integration fixtures. |
 | `npm run test:types` | Core declarations compile with the existing strict check; optional Next usage compiles with the framework type configuration. |
 | `npm run test:browser` | Four Chromium tests pass, including React source content switching and native browser export/tree shaking. |
 | `npm run build:next` and `LINO_NEXT_PRODUCTION=1 npm run test:next` | Production Next 16.4.0 build generates both locale static pages; four Chromium tests cover hydration, request/cache isolation, cookies, navigation, metadata and document language/direction. |
@@ -118,6 +118,14 @@ totals; the unit regression also checks an explicit locale and zero value.
 | Prefetch a link targeting another locale | Next strips prefetch headers before Proxy; background fetches now only forward the payload locale, and actual link navigation persists the preference while respecting cancellation. | `next.test.js` and `tests/next-browser/app.pw.js` |
 | Request an unknown asset path in the Next fixture | Filename became a locale and returned 500; route validation now returns 404. | `tests/next-browser/app.pw.js` |
 | Navigate Next locale pages without document language attributes | `html.lang` was absent; the localized root layout supplies canonical language and direction, including static pages. | `tests/next-browser/app.pw.js` |
+
+Imported translator factories previously produced no extracted messages. The
+module graph regression now follows named/default/namespace/barrel imports,
+shared Next accessors, imported finite derivation and dictionaries, alias
+resolution, cycles and ambiguous exports. The actual Next fixture extracts all
+five authored source messages, excluding its generated `.next` bundles. The
+Rollup experiment failed with one entry where four were required before graph
+extraction, then passed after resolving its shared modules.
 
 ## Compiler and Next visual evidence
 

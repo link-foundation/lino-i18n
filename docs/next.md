@@ -94,7 +94,7 @@ and sends overlapping English/French HTTP requests. The example validates route
 locale parameters with Next `notFound()` so asset filenames do not become invalid
 locale codes; its static routes set `dynamicParams: false`. The regular unit suite
 checks proxy headers, static source helpers and metadata; extraction recognizes
-locally declared Next factories and their accessors. The Next-specific type
+locally declared or statically imported Next factories and their accessors. The Next-specific type
 fixture uses the framework's usual `skipLibCheck`; core declarations retain the
 existing strict check.
 

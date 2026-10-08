@@ -41,5 +41,13 @@ export declare function createExtractionPlugin(options?: {
       fileName: string;
       source: string;
     }): unknown;
-  }): void;
+    resolve?(
+      source: string,
+      importer: string,
+      options: { skipSelf: true }
+    ): Promise<{
+      id: string;
+      external?: boolean | 'absolute' | 'relative';
+    } | null>;
+  }): Promise<void>;
 };

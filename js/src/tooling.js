@@ -1,4 +1,5 @@
 export { extractMessages } from './extract.js';
+export { extractProject } from './extract-project.js';
 import { messageVariables } from './message-schema.js';
 
 export function diffMessages(previous, current) {
