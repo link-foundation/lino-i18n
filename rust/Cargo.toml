@@ -1,5 +1,5 @@
 [workspace]
-resolver = "2"
+resolver = "3"
 members = [
     "lino-i18n",
     "lino-i18n-macros",
