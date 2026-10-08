@@ -50,6 +50,7 @@ test('npm package dry-run contains the publishable runtime surface', () => {
     'react-server',
     'tooling',
     'compiler',
+    'providers/gt',
   ]) {
     const entry = packageJson.exports[`./${subpath}`];
     assert.ok(

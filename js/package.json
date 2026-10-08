@@ -58,6 +58,10 @@
     "./compiler": {
       "types": "./src/compiler.d.ts",
       "import": "./src/compiler.js"
+    },
+    "./providers/gt": {
+      "types": "./src/providers/gt.d.ts",
+      "import": "./src/providers/gt.js"
     }
   },
   "scripts": {
@@ -124,6 +128,7 @@
     "eslint": "^10.12.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.6",
+    "generaltranslation": "9.5.5",
     "jscpd": "^5.4.0",
     "jsdom": "^30.1.2",
     "prettier": "^3.9.9",
@@ -135,9 +140,13 @@
     "typescript": "^7.0.2"
   },
   "peerDependencies": {
+    "generaltranslation": ">=9.5.5 <10",
     "react": ">=18.0.0"
   },
   "peerDependenciesMeta": {
+    "generaltranslation": {
+      "optional": true
+    },
     "react": {
       "optional": true
     }

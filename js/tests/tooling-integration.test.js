@@ -81,6 +81,14 @@ test('Rollup transforms JSX and attributes with source maps and unchanged expres
   assert.equal(result.status, 0, result.stderr + result.stdout);
 });
 
+test('published GT SDK uses the real runtime, upload and download HTTP contracts', () => {
+  const script = fileURLToPath(
+    new URL('../experiments/gt-sdk-contract.mjs', import.meta.url)
+  );
+  const result = spawnSync('node', [script], { encoding: 'utf8' });
+  assert.equal(result.status, 0, result.stderr + result.stdout);
+});
+
 test('CLI detects translations requiring review after a stable-id source change', async () => {
   const directory = await mkdtemp(path.join(tmpdir(), 'lino-stale-'));
   try {

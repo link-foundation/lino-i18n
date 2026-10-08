@@ -45,6 +45,31 @@
       "sha256": "196943f005de9607c12dbc412b86023554f81c29387b1439da4578a9167b4796"
     },
     {
+      "path": "packages/core/src/runtime.ts",
+      "file": "packages--core--src--runtime.ts",
+      "sha256": "a9f294ac0cc96b6abfe454875c108e96ffd734acbf301247a16692983c228005"
+    },
+    {
+      "path": "packages/core/src/translate/runtimeTranslate.ts",
+      "file": "packages--core--src--translate--runtimeTranslate.ts",
+      "sha256": "765e270257aa85f891da51ec2813524d51783d29d5cf399f82b14a51a9b8bc26"
+    },
+    {
+      "path": "packages/core/src/types-dir/api/entry.ts",
+      "file": "packages--core--src--types-dir--api--entry.ts",
+      "sha256": "c7dd9e86d8155ca9bf4ba9c4e6ed00d5fa617eea9fb4f185149e3e1309456819"
+    },
+    {
+      "path": "packages/core/src/types-dir/api/file.ts",
+      "file": "packages--core--src--types-dir--api--file.ts",
+      "sha256": "5b3f9f4f7847d3998e227b845466b39e7fa3cd5a79f2605fcedf09c2fe62bf54"
+    },
+    {
+      "path": "packages/core/src/types-dir/api/uploadFiles.ts",
+      "file": "packages--core--src--types-dir--api--uploadFiles.ts",
+      "sha256": "041744a57ad3b0223210dcc17387fc2812902a67150b87092e7a3a2ab70ec1a8"
+    },
+    {
       "path": "packages/format/package.json",
       "file": "packages--format--package.json",
       "sha256": "23eb6d202fc451c145f185123fd3e4fea2b956aa66b3cf264579a59adf86e148"

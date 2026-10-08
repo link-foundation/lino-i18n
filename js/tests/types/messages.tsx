@@ -17,6 +17,12 @@ import { extractMessages, translateCatalog } from 'lino-i18n/tooling';
 import { createExtractionPlugin, transformJSX } from 'lino-i18n/compiler';
 import { formatList, getLocaleDirection, LocaleConfig } from 'lino-i18n/intl';
 import { runWithTranslator, getGT } from 'lino-i18n/node';
+import { GT } from 'generaltranslation';
+import {
+  createGTProvider,
+  createGTCatalogLoader,
+  createGTSourceFile,
+} from 'lino-i18n/providers/gt';
 const i18n = createTranslator({
   loadCatalog: async () => ({ greeting: 'Hello {name}' }),
 });
@@ -39,6 +45,14 @@ createLocaleMiddleware({ supportedLanguages: ['en'] });
 formatList(['Ada', 'Lin']);
 getLocaleDirection('ar');
 const manifest = extractMessages('');
+const sdk = new GT();
+createGTProvider(sdk);
+createTranslator({
+  loadCatalog: createGTCatalogLoader(sdk, { fileId: 'source-file' }),
+});
+sdk.uploadSourceFiles([{ source: createGTSourceFile(manifest.messages) }], {
+  sourceLocale: 'en',
+});
 await translateCatalog(
   manifest.messages,
   {},

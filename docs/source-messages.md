@@ -249,6 +249,10 @@ locale/version helpers use the active translator. Run
 
 ## Extraction, validation and translation providers
 
+The optional [GT service bridge](gt-provider.md) provides ICU translation
+candidates and versioned SDK downloads without adding credentials or service
+dependencies to the core/browser entries.
+
 ```sh
 lino-i18n extract --in src --out locales --locale en
 lino-i18n check --dir locales --manifest locales/messages.json
@@ -258,11 +262,12 @@ lino-i18n translate-catalog --manifest locales/messages.json --dir locales --loc
 
 The Babel-based extractor recognizes imported APIs, renamed imports, namespace
 imports, local translator destructuring and hooks. Shadowed bindings are
-ignored. It captures static source text, descriptions, ids, file locations,
-rich JSX and all branch alternatives. Dynamic sources, unwrapped expressions,
+ignored. Scoped Node helpers, asynchronous request factories and typed dictionary
+declarations are recognized. It captures static source text, descriptions, ids,
+file locations, rich JSX and all branch alternatives. Dynamic sources, unwrapped expressions,
 spreads and conflicting ids fail extraction with diagnostics. Calls to `gt` in
-HTML properties extract normally; the extractor does not automatically rewrite
-attributes or wrap JSX.
+HTML properties extract normally. Automatic attribute/text translation is an
+opt-in compiler transform described below.
 
 `extractMessages(code)`, `validateCatalog(messages, table)` and
 `diffMessages(previous, current)` are also available from `lino-i18n/tooling`.
