@@ -52,7 +52,7 @@ with tempfile.TemporaryDirectory(prefix="lino-metadata-") as temporary:
     def validate(expected):
         output = subprocess.run(["python3", str(ROOT / "scripts/check-release-metadata.py"), base, "--", "--cached"], cwd=repo,
                                 text=True, capture_output=True, env={**os.environ, "GITHUB_SHA": ""})
-        print(output.stdout + output.stderr)
+        print((output.stdout + output.stderr).replace("::", ": :"))
         assert (output.returncode == 0) == expected
 
     manifest.write_text('{"name":"fixture","version":"1.0.1","dependencies":{"example":"1"}}\n')

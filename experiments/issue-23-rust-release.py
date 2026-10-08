@@ -65,7 +65,7 @@ with tempfile.TemporaryDirectory(prefix="lino-rust-release-") as temporary:
                              "--description", "Race fixture release", "--release-label", "verification"],
                             cwd=repo, text=True, capture_output=True,
                             env={**os.environ, "RUSTFLAGS": "-A dead_code -A unused_variables", "GITHUB_OUTPUT": "", "GITHUB_SHA": "", "RUST_LOG": "error"})
-    print(result.stdout, result.stderr)
+    print((result.stdout + result.stderr).replace("::", ": :"))
     assert result.returncode == 0, "release must sync a clean checkout before generating metadata"
     assert not run("git", "status", "--porcelain", cwd=repo).stdout.strip()
     assert not (repo / "rust/changelog.d/fix.md").exists(), "released fragments must be consumed"

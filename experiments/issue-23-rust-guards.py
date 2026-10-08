@@ -37,7 +37,8 @@ with tempfile.TemporaryDirectory(prefix="lino-rust-guards-") as temporary:
                        "GITHUB_BEFORE_SHA": "", "RUST_LOG": "error", **overrides}
         result = subprocess.run(["rust-script", str(ROOT / "rust/scripts" / script)], cwd=repo,
                                 env=environment, text=True, capture_output=True)
-        print(f"{script}: exit {result.returncode}\n{result.stdout}{result.stderr}")
+        diagnostic = (result.stdout + result.stderr).replace("::", ": :")
+        print(f"{script}: exit {result.returncode}\n{diagnostic}")
         assert (result.returncode == 0) == success, f"Unexpected guard result: {script}"
         return result.stdout
 

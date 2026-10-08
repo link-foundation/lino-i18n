@@ -183,7 +183,7 @@ jobs:
         working-directory: rust
         run: rust-script scripts/check-file-size.rs
       - name: Exercise release and CI script regressions
-        run: python3 experiments/issue-23-rust-release.py && python3 experiments/issue-23-rust-guards.py && python3 experiments/issue-23-rust-output.py && python3 experiments/issue-23-rust-io.py
+        run: python3 experiments/issue-23-ci-annotations.py
     concurrency:
       group: check-rust-${{ github.ref }}-lint-
       cancel-in-progress: true

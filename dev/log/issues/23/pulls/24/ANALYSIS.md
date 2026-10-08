@@ -116,6 +116,8 @@ Successful Security runs also exposed incomplete Rust semantic coverage: twenty 
 
 The evidence collector itself matched its generated run index with `pr-run-*.json`, then deleted that index when bundling a second time. Numeric run-name matching repairs repeated collection without losing any original run record. The before/after integrity regression and required CI checksum check verify every bundled member, retained log and expired-download error.
 
+An additional successful run exposed six false error annotations: negative guard tests reprinted their expected `::error::` diagnostics to the runner. The check-run API and complete Rust log confirm they belong to passing regression tests. Options were to disable workflow-command processing around the entire step or render captured fixture messages as plain text; the latter preserves normal runner behavior and production guards' genuine annotations. All five CI fixtures now render their captured diagnostics without command delimiters. `issue-23-ci-annotations.py` executes the actual fixtures, verifies their exit status and rejects emitted workflow commands; it fails before the change and passes afterward. GitHub's macOS capacity and link-report messages were separately verified as informational notices, with no warning/failure severity.
+
 ### 6. Permissions, source validation, recovery and documentation writers
 
 Cause: broad workflow write/OIDC permissions, interpolated dispatch values in shell code, stale unchecked writer trees, unpinned remote helper evaluation and language-specific Pages writers exposed avoidable failure modes. Independent docs publishers could erase the other language site.

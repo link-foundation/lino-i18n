@@ -12,6 +12,6 @@ with tempfile.TemporaryDirectory(prefix="lino-output-") as temporary:
         cwd=ROOT, text=True, capture_output=True,
         env={**os.environ, "RUST_LOG": "error", "GITHUB_OUTPUT": temporary},
     )
-    print(result.stdout + result.stderr)
+    print((result.stdout + result.stderr).replace("::", ": :"))
     assert result.returncode != 0, "The version step passed despite an unwritable output file"
 print("Unwritable Actions output correctly fails the step.")

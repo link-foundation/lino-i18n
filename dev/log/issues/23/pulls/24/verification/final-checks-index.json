@@ -5,6 +5,36 @@
     "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
   },
   {
+    "member": "final-annotation-actionlint.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "member": "final-annotation-fixtures.log",
+    "bytes": 4027,
+    "sha256": "694dc9757bf9542c578f8dcd2eb71be77c789ec13fb03445fa858018198a3bd5"
+  },
+  {
+    "member": "final-annotation-integrity.log",
+    "bytes": 226,
+    "sha256": "01b8e495085e8618116361991106f6b0f60fb9ff5dcf797a51b6fdc30efc8b5d"
+  },
+  {
+    "member": "final-annotation-inventory.log",
+    "bytes": 50,
+    "sha256": "e981e26969a694419850254b7fe21d9d1a3a42c79d8a5a6795095d45c25fd164"
+  },
+  {
+    "member": "final-annotation-lines.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "member": "final-annotation-policy.log",
+    "bytes": 244,
+    "sha256": "c6c15183ae97f8b752f884a56df53844e580c3d3d4f602ce80d07569c98c364c"
+  },
+  {
     "member": "final-bun.log",
     "bytes": 4946,
     "sha256": "6029c30cc49832aeea13b1a0da65a194d42b90b269c2b04c38b0cdb3c94fe48c"

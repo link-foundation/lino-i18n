@@ -98,6 +98,6 @@ with (DEST / "templates/full-tree-comparison.csv").open("w", newline="") as stre
     writer.writerows(rows)
 (DEST / "templates/preserved-files.json").write_text(json.dumps(manifest, indent=2) + "\n")
 paths = subprocess.check_output(["git", "ls-files", "--cached", "--others", "--exclude-standard"], cwd=ROOT, text=True).splitlines()
-ci_paths = sorted({p for p in paths if p.startswith((".github/", ".githooks/", "scripts/", "js/scripts/", "rust/scripts/"))})
+ci_paths = sorted({p for p in paths if p.startswith((".github/", ".githooks/", "scripts/", "js/scripts/", "rust/scripts/", "experiments/"))})
 (DEST / "github/current-ci-file-tree.txt").write_text("\n".join(ci_paths) + "\n")
 print(f"Indexed {len(rows)} template files and {len(ci_paths)} local CI files")

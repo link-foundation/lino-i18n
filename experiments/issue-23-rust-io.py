@@ -20,7 +20,8 @@ for helper in ["get-bump-type", "check-file-size"]:
             cwd=cwd, text=True, capture_output=True,
             env={**os.environ, "RUST_LOG": "error", "RUSTFLAGS": "-Dwarnings", "GITHUB_OUTPUT": ""},
         )
-        print(f"{helper}: exit={result.returncode}\n{result.stdout}{result.stderr}")
+        diagnostic = (result.stdout + result.stderr).replace("::", ": :")
+        print(f"{helper}: exit={result.returncode}\n{diagnostic}")
         if result.returncode == 0:
             failures.append(helper)
 assert not failures, f"Helpers passed without checking their inputs: {failures}"

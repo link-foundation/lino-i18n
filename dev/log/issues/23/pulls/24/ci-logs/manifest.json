@@ -520,7 +520,9 @@
     "download_exit_code": 0,
     "log": "dev/log/issues/23/pulls/24/ci-logs/documentation-37767930240.log",
     "bytes": 166299,
-    "sha256": "908006cc07ddd11aed1dde7e477e9874b8c9cd666c121ff5debe6add411a5b01"
+    "sha256": "908006cc07ddd11aed1dde7e477e9874b8c9cd666c121ff5debe6add411a5b01",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/pr-successful-logs.tar.gz",
+    "archive_member": "documentation-37767930240.log"
   },
   {
     "conclusion": "success",
@@ -533,7 +535,9 @@
     "download_exit_code": 0,
     "log": "dev/log/issues/23/pulls/24/ci-logs/rust-37767930096.log",
     "bytes": 911044,
-    "sha256": "45ff229e6bfafb82dd192fb1dca0542c6650427c382c537ca23730508ae21f68"
+    "sha256": "45ff229e6bfafb82dd192fb1dca0542c6650427c382c537ca23730508ae21f68",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/pr-successful-logs.tar.gz",
+    "archive_member": "rust-37767930096.log"
   },
   {
     "conclusion": "success",
@@ -546,7 +550,9 @@
     "download_exit_code": 0,
     "log": "dev/log/issues/23/pulls/24/ci-logs/documentation-37769807796.log",
     "bytes": 166344,
-    "sha256": "a3216961041b57e1b2e2b9435391ec81ee8639dcf428b6349cd4218c22b94cc1"
+    "sha256": "a3216961041b57e1b2e2b9435391ec81ee8639dcf428b6349cd4218c22b94cc1",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/pr-successful-logs.tar.gz",
+    "archive_member": "documentation-37769807796.log"
   },
   {
     "conclusion": "success",
@@ -559,7 +565,9 @@
     "download_exit_code": 0,
     "log": "dev/log/issues/23/pulls/24/ci-logs/javascript-37769807872.log",
     "bytes": 697551,
-    "sha256": "872bb057cfe60182f44192170853203caa1b6f148322ec0674410f2b889b4a43"
+    "sha256": "872bb057cfe60182f44192170853203caa1b6f148322ec0674410f2b889b4a43",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/pr-successful-logs.tar.gz",
+    "archive_member": "javascript-37769807872.log"
   },
   {
     "conclusion": "success",
@@ -572,7 +580,9 @@
     "download_exit_code": 0,
     "log": "dev/log/issues/23/pulls/24/ci-logs/security-37769807895.log",
     "bytes": 1102858,
-    "sha256": "fff60afee7c73d25bfc13b3214432bd24e720d1bb11b4f6b92277aad2bdd3fa2"
+    "sha256": "fff60afee7c73d25bfc13b3214432bd24e720d1bb11b4f6b92277aad2bdd3fa2",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/pr-successful-logs.tar.gz",
+    "archive_member": "security-37769807895.log"
   },
   {
     "conclusion": "success",
@@ -585,7 +595,9 @@
     "download_exit_code": 0,
     "log": "dev/log/issues/23/pulls/24/ci-logs/workflows-37769807995.log",
     "bytes": 111127,
-    "sha256": "9950c04e164d53231d05be71c5de90d029ef0458ae191d9434bfe374df7f588f"
+    "sha256": "9950c04e164d53231d05be71c5de90d029ef0458ae191d9434bfe374df7f588f",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/pr-successful-logs.tar.gz",
+    "archive_member": "workflows-37769807995.log"
   },
   {
     "conclusion": "success",
@@ -598,7 +610,9 @@
     "download_exit_code": 0,
     "log": "dev/log/issues/23/pulls/24/ci-logs/rust-37769807973.log",
     "bytes": 830607,
-    "sha256": "3139b8e72e29ffe6db055d90933ecde35b7fa73f706c549a1939d89d79c27568"
+    "sha256": "3139b8e72e29ffe6db055d90933ecde35b7fa73f706c549a1939d89d79c27568",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/pr-successful-logs.tar.gz",
+    "archive_member": "rust-37769807973.log"
   },
   {
     "conclusion": "failure",
@@ -624,7 +638,9 @@
     "download_exit_code": 0,
     "log": "dev/log/issues/23/pulls/24/ci-logs/documentation-37772796373.log",
     "bytes": 165162,
-    "sha256": "0a5ed67688c4b05d0c4a70df9140fdb1147b3af942069e989628702a52a58918"
+    "sha256": "0a5ed67688c4b05d0c4a70df9140fdb1147b3af942069e989628702a52a58918",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/pr-successful-logs.tar.gz",
+    "archive_member": "documentation-37772796373.log"
   },
   {
     "conclusion": "success",
@@ -637,7 +653,9 @@
     "download_exit_code": 0,
     "log": "dev/log/issues/23/pulls/24/ci-logs/javascript-37772796457.log",
     "bytes": 697219,
-    "sha256": "9cb00b618e89b252d261c98198c381f0820a067dc164d5dc3d1fb7180c57a907"
+    "sha256": "9cb00b618e89b252d261c98198c381f0820a067dc164d5dc3d1fb7180c57a907",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/pr-successful-logs.tar.gz",
+    "archive_member": "javascript-37772796457.log"
   },
   {
     "conclusion": "success",
@@ -650,7 +668,9 @@
     "download_exit_code": 0,
     "log": "dev/log/issues/23/pulls/24/ci-logs/security-37772796545.log",
     "bytes": 1102791,
-    "sha256": "79514a9aa2e547192203d4b5db773f025141e24bc961f6cb5dae01a37f8a96af"
+    "sha256": "79514a9aa2e547192203d4b5db773f025141e24bc961f6cb5dae01a37f8a96af",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/pr-successful-logs.tar.gz",
+    "archive_member": "security-37772796545.log"
   },
   {
     "conclusion": "success",
@@ -663,7 +683,9 @@
     "download_exit_code": 0,
     "log": "dev/log/issues/23/pulls/24/ci-logs/rust-37772796413.log",
     "bytes": 834855,
-    "sha256": "9c6206acb9f2317c2ea48ee8efa43d80b3f0fb24a67a0e5e72aef4744fe2c346"
+    "sha256": "9c6206acb9f2317c2ea48ee8efa43d80b3f0fb24a67a0e5e72aef4744fe2c346",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/pr-successful-logs.tar.gz",
+    "archive_member": "rust-37772796413.log"
   },
   {
     "conclusion": "success",
@@ -676,7 +698,9 @@
     "download_exit_code": 0,
     "log": "dev/log/issues/23/pulls/24/ci-logs/workflows-37774151238.log",
     "bytes": 113215,
-    "sha256": "bbd1e44ee8d2f933b0b2021d55f2697d383b51101a4e3060ead5ec2bf6161cdd"
+    "sha256": "bbd1e44ee8d2f933b0b2021d55f2697d383b51101a4e3060ead5ec2bf6161cdd",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/pr-successful-logs.tar.gz",
+    "archive_member": "workflows-37774151238.log"
   },
   {
     "conclusion": "success",
@@ -689,7 +713,9 @@
     "download_exit_code": 0,
     "log": "dev/log/issues/23/pulls/24/ci-logs/documentation-37774151243.log",
     "bytes": 165171,
-    "sha256": "89662f336efbbed9c10a85650b9bc4e5c1f3a8f33f90a295221d1d5534af82ed"
+    "sha256": "89662f336efbbed9c10a85650b9bc4e5c1f3a8f33f90a295221d1d5534af82ed",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/pr-successful-logs.tar.gz",
+    "archive_member": "documentation-37774151243.log"
   },
   {
     "conclusion": "success",
@@ -702,7 +728,9 @@
     "download_exit_code": 0,
     "log": "dev/log/issues/23/pulls/24/ci-logs/javascript-37774151242.log",
     "bytes": 697107,
-    "sha256": "bebcad89824f6f0fadeba12ecd69d2cf925c7e2191995ed8e35685afbc2706e5"
+    "sha256": "bebcad89824f6f0fadeba12ecd69d2cf925c7e2191995ed8e35685afbc2706e5",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/pr-successful-logs.tar.gz",
+    "archive_member": "javascript-37774151242.log"
   },
   {
     "conclusion": "success",
@@ -715,7 +743,9 @@
     "download_exit_code": 0,
     "log": "dev/log/issues/23/pulls/24/ci-logs/security-37774151337.log",
     "bytes": 1069965,
-    "sha256": "c015d4c278fc30d92db69edceb1073122936c897d7986fd5aa952502ab28fd6f"
+    "sha256": "c015d4c278fc30d92db69edceb1073122936c897d7986fd5aa952502ab28fd6f",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/pr-successful-logs.tar.gz",
+    "archive_member": "security-37774151337.log"
   },
   {
     "conclusion": "success",
@@ -728,6 +758,83 @@
     "download_exit_code": 0,
     "log": "dev/log/issues/23/pulls/24/ci-logs/rust-37774151222.log",
     "bytes": 836182,
-    "sha256": "bea2236dd78d46221bd1534227471d377a4514f61ea89951a5c8928430a2fa17"
+    "sha256": "bea2236dd78d46221bd1534227471d377a4514f61ea89951a5c8928430a2fa17",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/pr-successful-logs.tar.gz",
+    "archive_member": "rust-37774151222.log"
+  },
+  {
+    "conclusion": "success",
+    "createdAt": "2026-10-08T12:19:49Z",
+    "databaseId": 37776088147,
+    "headSha": "a24aecf55be19ce22d0ed7059cac40a6e912b7a1",
+    "status": "completed",
+    "url": "https://github.com/link-foundation/lino-i18n/actions/runs/37776088147",
+    "workflowName": "Workflows",
+    "download_exit_code": 0,
+    "log": "dev/log/issues/23/pulls/24/ci-logs/workflows-37776088147.log",
+    "bytes": 115268,
+    "sha256": "9a1318a547c1966db3b913b4eb38a382c6f75f57e64c5a687a6a931fb637ddc6",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/pr-successful-logs.tar.gz",
+    "archive_member": "workflows-37776088147.log"
+  },
+  {
+    "conclusion": "success",
+    "createdAt": "2026-10-08T12:19:49Z",
+    "databaseId": 37776088225,
+    "headSha": "a24aecf55be19ce22d0ed7059cac40a6e912b7a1",
+    "status": "completed",
+    "url": "https://github.com/link-foundation/lino-i18n/actions/runs/37776088225",
+    "workflowName": "Documentation",
+    "download_exit_code": 0,
+    "log": "dev/log/issues/23/pulls/24/ci-logs/documentation-37776088225.log",
+    "bytes": 165102,
+    "sha256": "850d52f0b8a073e920a84b291d8b94eed4f3f89596367cbc032465b6c4e33df3",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/pr-successful-logs.tar.gz",
+    "archive_member": "documentation-37776088225.log"
+  },
+  {
+    "conclusion": "success",
+    "createdAt": "2026-10-08T12:19:49Z",
+    "databaseId": 37776088162,
+    "headSha": "a24aecf55be19ce22d0ed7059cac40a6e912b7a1",
+    "status": "completed",
+    "url": "https://github.com/link-foundation/lino-i18n/actions/runs/37776088162",
+    "workflowName": "JavaScript",
+    "download_exit_code": 0,
+    "log": "dev/log/issues/23/pulls/24/ci-logs/javascript-37776088162.log",
+    "bytes": 697613,
+    "sha256": "322556a323cfe325ab5508c769767dcc29649a435e9cd4ce2abf07c0012e9f22",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/pr-successful-logs.tar.gz",
+    "archive_member": "javascript-37776088162.log"
+  },
+  {
+    "conclusion": "success",
+    "createdAt": "2026-10-08T12:19:49Z",
+    "databaseId": 37776088118,
+    "headSha": "a24aecf55be19ce22d0ed7059cac40a6e912b7a1",
+    "status": "completed",
+    "url": "https://github.com/link-foundation/lino-i18n/actions/runs/37776088118",
+    "workflowName": "Security",
+    "download_exit_code": 0,
+    "log": "dev/log/issues/23/pulls/24/ci-logs/security-37776088118.log",
+    "bytes": 1069886,
+    "sha256": "c694b19d74e8e1c52ce41e8298e3d86e9f3a88408a6d4382ef8745abd8052d9e",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/pr-successful-logs.tar.gz",
+    "archive_member": "security-37776088118.log"
+  },
+  {
+    "conclusion": "success",
+    "createdAt": "2026-10-08T12:19:49Z",
+    "databaseId": 37776088066,
+    "headSha": "a24aecf55be19ce22d0ed7059cac40a6e912b7a1",
+    "status": "completed",
+    "url": "https://github.com/link-foundation/lino-i18n/actions/runs/37776088066",
+    "workflowName": "Rust",
+    "download_exit_code": 0,
+    "log": "dev/log/issues/23/pulls/24/ci-logs/rust-37776088066.log",
+    "bytes": 836033,
+    "sha256": "c97161e9d9b9cbf4f8f8543a6d3e95cf76aa5faad280e47f43e475483c5640ac",
+    "archive": "dev/log/issues/23/pulls/24/ci-logs/pr-successful-logs.tar.gz",
+    "archive_member": "rust-37776088066.log"
   }
 ]
