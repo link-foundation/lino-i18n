@@ -14,6 +14,8 @@ except (ImportError, ValueError, OSError):
 if sys.version_info < (3, 11):
     sys.exit('Python 3.11 or newer is required')
 
+sys.stdin.reconfigure(encoding='utf-8')
+
 PACKAGES = ('gt_flask', 'gt_fastapi', 'lino_i18n')
 APIS = ('t', 'gt', 'm', 'msg', 'derive')
 

@@ -163,3 +163,11 @@ Markdown emphasis, code and expressions. Registry tests use the real 2.1.41
 package (133 locales), preserving script/region matches and independent lists.
 Twelve affected tests pass in Node, Bun and Deno. The complete Node suite has
 159 tests, with strict positive/negative TypeScript API fixtures.
+
+The first cross-platform CI run for `5ada2e9` failed only on Windows in all
+three runtimes: expected Unicode column 6, received 9 (downloaded JavaScript
+run 37846323232, lines 5167–5176, 5699 and 9717). Python's piped stdin inherited
+the platform encoding. The parser now explicitly reconfigures stdin to UTF-8.
+`js/experiments/python-encoding.mjs` reproduces a cp1252 pipe locally and verifies
+both the column and a Chinese literal. The automated regression covers that
+encoding regardless of the host OS.

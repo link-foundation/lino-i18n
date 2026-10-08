@@ -3,6 +3,8 @@ import { test } from 'test-anywhere';
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
+import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 import { commandExtract, extractFiles } from '../src/tooling-files.js';
 import {
   extractPythonMessages,
@@ -78,6 +80,29 @@ test('Python literals preserve decoded escapes, unicode offsets and ICU syntax',
     'Line\n{count, plural, one {One} other {Many}}'
   );
   assert.deepEqual(result.messages[0].variables, ['count']);
+});
+
+test('Python extraction decodes UTF-8 pipes under a legacy system encoding', () => {
+  // Without -I, PYTHONIOENCODING emulates the Windows cp1252 stdin default.
+  const result = JSON.parse(
+    execFileSync(
+      process.platform === 'win32' ? 'python' : 'python3',
+      [fileURLToPath(new URL('../src/python-extract.py', import.meta.url))],
+      {
+        input: JSON.stringify({
+          source: 'from gt_flask import t\n"😀"; t("你好")\n',
+          file: 'unicode.py',
+          maxVariants: 100,
+        }),
+        encoding: 'utf8',
+        maxBuffer: 1024 * 1024,
+        env: { ...process.env, PYTHONIOENCODING: 'cp1252' },
+      }
+    )
+  );
+  assert.deepEqual(result.diagnostics, []);
+  assert.equal(result.messages[0].column, 6);
+  assert.equal(result.messages[0].source, '你好');
 });
 
 test('Python extraction bounds source, AST and finite cross products', async () => {
