@@ -4,6 +4,16 @@
 
 
 
+
+## [0.5.0] - 2026-10-08
+
+### Added
+
+- Source-text and deferred messages through `Message`, `I18n::gt`, and `I18n::m`.
+- Optional `icu` feature with a bounded compiled-message cache, typed ICU values,
+  nested plural/select/ordinal messages and skeletons. This optional feature
+  requires Rust 1.92; default features retain Rust 1.87 support.
+
 ## [0.4.0] - 2026-10-08
 
 ### Changed
