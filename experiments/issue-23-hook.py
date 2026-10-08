@@ -16,6 +16,7 @@ with tempfile.TemporaryDirectory(prefix="lino-hook-") as temporary:
         'if sys.argv[1] == "rev-parse": print(os.environ["HOOK_FIXTURE"])\n'
         'else: print("js/src/index.js\\nrust/src/lib.rs\\n" + "archive/evidence-file\\n" * 10000)\n'
     )
+    (cwd / "bin/rg").write_text('#!/bin/sh\necho "rg unavailable" >&2\nexit 127\n')
     for tool in ["npm", "cargo"]:
         (cwd / "bin" / tool).write_text(
             '#!/usr/bin/env python3\nimport os,sys\n'

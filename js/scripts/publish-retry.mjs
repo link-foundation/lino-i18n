@@ -12,8 +12,8 @@
  * failure.
  */
 
-// 34 checks span 15.5 minutes with the backoff below. Recent accepted npm
-// publishes took over five minutes to reach the public read path.
+// 34 checks span 15.5 minutes with the backoff below. This allows delayed
+// readback without assuming that an invisible stage will become public.
 export const DEFAULT_VERIFY_ATTEMPTS = 34;
 export const DEFAULT_VERIFY_INITIAL_DELAY = 2000;
 export const DEFAULT_VERIFY_MAX_DELAY = 30000;

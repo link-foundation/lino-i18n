@@ -28,6 +28,7 @@ test('actual JS release syncs a detached validated checkout before versioning', 
   execFileSync('git', ['clone', '-q', remote, cwd], { stdio: 'ignore' });
   git('config', 'user.name', 'Test');
   git('config', 'user.email', 'test@example.com');
+  git('config', 'core.autocrlf', 'false');
   const write = (name, content) => {
     mkdirSync(dirname(resolve(cwd, name)), { recursive: true });
     writeFileSync(resolve(cwd, name), content);
@@ -58,6 +59,8 @@ test('actual JS release syncs a detached validated checkout before versioning', 
     resolve(cwd, 'js/node_modules'),
     'junction'
   );
+  const alias = resolve(temporary, 'package-alias');
+  symlinkSync(resolve(cwd, 'js'), alias, 'junction');
   git('add', '.');
   git('commit', '-qm', 'validated tree');
   const validated = git('rev-parse', 'HEAD');
@@ -69,7 +72,7 @@ test('actual JS release syncs a detached validated checkout before versioning', 
   git('checkout', '-q', '--detach', validated);
   const result = spawnSync(
     'node',
-    [resolve(jsRoot, 'scripts/version-and-commit.mjs')],
+    [resolve(jsRoot, 'scripts/version-and-commit.mjs'), '--js-root', alias],
     {
       cwd,
       encoding: 'utf8',

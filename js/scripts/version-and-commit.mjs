@@ -5,6 +5,7 @@ import {
   readFileSync,
   writeFileSync,
   existsSync,
+  realpathSync,
 } from 'node:fs';
 import { resolve, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -48,8 +49,8 @@ try {
   if (git(['branch', '--show-current']) !== 'main') {
     throw new Error('Release requires the main branch');
   }
-  const repository = git(['rev-parse', '--show-toplevel']);
-  const jsRoot = resolve(getJsRoot({ jsRoot: values['js-root'] }));
+  const repository = realpathSync.native(git(['rev-parse', '--show-toplevel']));
+  const jsRoot = realpathSync.native(getJsRoot({ jsRoot: values['js-root'] }));
   const packagePath = resolve(jsRoot, 'package.json');
   const metadataValidator = resolve(
     repository,

@@ -1,0 +1,58 @@
+✖ actual JS release syncs a detached validated checkout before versioning (2619.799594ms)
+✔ npm recovery rejects tampered archive bytes before invoking commands (3.661711ms)
+✔ merging changesets rejects an invalid fragment before changing files (82.419118ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 2
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3020.886715
+
+✖ failing tests:
+
+test at js/tests/release-metadata.test.js:20:1
+✖ actual JS release syncs a detached validated checkout before versioning (2619.799594ms)
+  AssertionError [ERR_ASSERTION]: $ git switch -C main HEAD
+  Your branch is behind 'origin/main' by 1 commit, and can be fast-forwarded.
+    (use "git pull" to update your local branch)
+  $ git fetch origin main
+  $ python3 /tmp/lino-js-release-ujRuHn/repo/scripts/check-release-metadata.py 46f3a3973e1991bc0b3d5100104ff99a24eaaf5c origin/main
+  Allowed release metadata: rust/Cargo.toml
+  $ git rebase origin/main
+  $ /home/box/.nvm/versions/node/v26.11.0/bin/node /tmp/gh-issue-solver-1791452293811/js/scripts/merge-changesets.mjs
+  Checking for multiple changesets to merge...
+  Detected single-language repository (package.json in root)
+  Package: fixture
+  Found 1 changeset file(s)
+  No merging needed (0 or 1 changeset found)
+  $ /home/box/.nvm/versions/node/v26.11.0/bin/node /tmp/lino-js-release-ujRuHn/package-alias/node_modules/@changesets/cli/bin.js version
+  🦋 changeset v3.0.3
+  
+  All files have been updated. Review them and commit at your leisure
+  $ git add -A -- ../package-alias/package.json ../package-alias/package-lock.json ../package-alias/CHANGELOG.md ../package-alias/.changeset
+  Switched to and reset branch 'main'
+  From /tmp/lino-js-release-ujRuHn/remote
+   * branch            main       -> FETCH_HEAD
+                                                                                  Successfully rebased and updated refs/heads/main.
+  fatal: ../package-alias/package.json: '../package-alias/package.json' is outside repository at '/tmp/lino-js-release-ujRuHn/repo'
+  ::error::Command failed (exit 128): git add -A -- ../package-alias/package.json ../package-alias/package-lock.json ../package-alias/CHANGELOG.md ../package-alias/.changeset
+  fatal: ../package-alias/package.json: '../package-alias/package.json' is outside repository at '/tmp/lino-js-release-ujRuHn/repo'
+  
+  
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///tmp/gh-issue-solver-1791452293811/js/tests/release-metadata.test.js:88:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

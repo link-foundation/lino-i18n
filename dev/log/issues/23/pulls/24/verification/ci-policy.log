@@ -1,5 +1,0 @@
-.github/workflows/security.yml: all 5 jobs covered
-.github/workflows/rust.yml: all 12 jobs covered
-.github/workflows/docs.yml: all 3 jobs covered
-.github/workflows/workflows.yml: all 4 jobs covered
-.github/workflows/js.yml: all 16 jobs covered

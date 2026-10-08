@@ -1,0 +1,16 @@
+✔ a main merge detects source changes before the final docs commit (500.693326ms)
+✔ PR detection uses all commits, including when the last commit is docs (452.207564ms)
+✔ invalid explicit PR refs fail instead of reporting no changes (178.308621ms)
+✔ a dependency lock change triggers package validation (275.034014ms)
+✔ version guard catches monorepo changes and ignores manifest formatting (676.759114ms)
+✔ actual JS release syncs a detached validated checkout before versioning (2588.371475ms)
+✔ npm recovery rejects tampered archive bytes before invoking commands (4.4595ms)
+✔ merging changesets rejects an invalid fragment before changing files (108.028837ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2952.136499

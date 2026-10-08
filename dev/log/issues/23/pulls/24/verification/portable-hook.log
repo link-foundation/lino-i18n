@@ -1,0 +1,8 @@
+
+/tmp/lino-hook-aoaqjh3_/bin/npm run lint:secrets
+/tmp/lino-hook-aoaqjh3_/bin/npm run check
+/tmp/lino-hook-aoaqjh3_/bin/npm run test:types
+/tmp/lino-hook-aoaqjh3_/bin/cargo fmt --manifest-path rust/Cargo.toml --all -- --check
+/tmp/lino-hook-aoaqjh3_/bin/cargo clippy --locked --manifest-path rust/Cargo.toml --all-targets --all-features -- -D warnings
+
+Pre-commit checks run for a large staged file list.

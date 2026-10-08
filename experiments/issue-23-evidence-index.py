@@ -5,6 +5,7 @@ import hashlib
 import json
 from pathlib import Path
 import subprocess
+import tarfile
 
 ROOT = Path(__file__).resolve().parents[1]
 DEST = ROOT / "dev/log/issues/23/pulls/24"
@@ -72,16 +73,24 @@ manifest = []
 for language in ["js", "rust"]:
     tree = json.loads((DEST / f"templates/{language}-tree.json").read_text())
     preserved = []
+    archive_path = DEST / "templates" / f"{language}-source.tar.gz"
+    archived_sources = {}
+    if archive_path.exists():
+        with tarfile.open(archive_path) as archive:
+            for entry in archive.getmembers():
+                if entry.isfile():
+                    archived_sources[entry.name.partition("/")[2]] = archive.extractfile(entry).read()
     for item in tree["tree"]:
         if item["type"] != "blob":
             continue
         path = item["path"]
         category, target = mapping(language, path)
         archived = DEST / "templates" / language / path
-        rows.append([language, tree["sha"], path, item["sha"], category, target, archived.exists()])
-        if archived.exists():
-            preserved.append({"path": path, "bytes": archived.stat().st_size,
-                              "sha256": hashlib.sha256(archived.read_bytes()).hexdigest()})
+        content = archived.read_bytes() if archived.exists() else archived_sources.get(path)
+        rows.append([language, tree["sha"], path, item["sha"], category, target, content is not None])
+        if content is not None:
+            preserved.append({"path": path, "bytes": len(content),
+                              "sha256": hashlib.sha256(content).hexdigest()})
     manifest.append({"language": language, "sha": tree["sha"], "preserved": preserved})
 with (DEST / "templates/full-tree-comparison.csv").open("w", newline="") as stream:
     writer = csv.writer(stream)

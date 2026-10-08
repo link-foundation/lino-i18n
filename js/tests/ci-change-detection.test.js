@@ -1,6 +1,12 @@
 import assert from 'node:assert/strict';
 import { execFileSync, spawnSync } from 'node:child_process';
-import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
+import {
+  mkdtempSync,
+  mkdirSync,
+  writeFileSync,
+  rmSync,
+  symlinkSync,
+} from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -23,6 +29,7 @@ function fixture(t) {
   git('init', '-q', '-b', 'main');
   git('config', 'user.name', 'Test');
   git('config', 'user.email', 'test@example.com');
+  git('config', 'core.autocrlf', 'false');
   commit('js/package.json', '{"name":"fixture","version":"1.0.0"}');
   const base = git('rev-parse', 'HEAD');
   return { cwd, git, commit, base };
@@ -95,6 +102,8 @@ test('a dependency lock change triggers package validation', (t) => {
 
 test('version guard catches monorepo changes and ignores manifest formatting', (t) => {
   const { cwd, git, commit, base } = fixture(t);
+  const alias = resolve(cwd, 'package-alias');
+  symlinkSync(resolve(cwd, 'js'), alias, 'junction');
   git('update-ref', 'refs/remotes/origin/main', base);
   commit(
     'js/package.json',
@@ -104,6 +113,7 @@ test('version guard catches monorepo changes and ignores manifest formatting', (
     GITHUB_EVENT_NAME: 'pull_request',
     GITHUB_BASE_SHA: base,
     GITHUB_HEAD_SHA: 'HEAD',
+    JS_ROOT: alias,
   };
   assert.equal(run(cwd, 'scripts/check-version.mjs', env).status, 0);
   commit('js/package.json', '{"name":"fixture","version":"2.0.0"}');

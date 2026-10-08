@@ -164,3 +164,8 @@ ci-logs/
 # Python verification caches
 __pycache__/
 *.py[cod]
+
+# Raw investigation sources and intermediate logs are preserved in checked-in archives.
+dev/log/issues/23/pulls/24/templates/js/
+dev/log/issues/23/pulls/24/templates/rust/
+dev/log/issues/23/pulls/24/verification/local-history/

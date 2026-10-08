@@ -1,0 +1,10 @@
+rg unavailable
+rg unavailable
+
+/tmp/lino-hook-m76hoazm/bin/npm run lint:secrets
+
+Traceback (most recent call last):
+  File "/tmp/gh-issue-solver-1791452293811/experiments/issue-23-hook.py", line 38, in <module>
+    assert expected in recorded, f"Hook skipped {expected} for a large staged list"
+           ^^^^^^^^^^^^^^^^^^^^
+AssertionError: Hook skipped run check for a large staged list
