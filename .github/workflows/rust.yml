@@ -97,7 +97,9 @@ jobs:
     timeout-minutes: 10
     needs:
       - detect-changes
-    if: github.event_name == 'pull_request' && needs.detect-changes.outputs.any-code-changed == 'true'
+    if: >-
+      !cancelled() && needs.detect-changes.result == 'success' &&
+      github.event_name == 'pull_request' && needs.detect-changes.outputs.any-code-changed == 'true'
     steps:
       - uses: actions/checkout@v7
         with:

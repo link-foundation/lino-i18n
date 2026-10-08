@@ -179,7 +179,9 @@ jobs:
     timeout-minutes: 10
     needs:
       - detect-changes
-    if: github.event_name == 'pull_request' && needs.detect-changes.outputs.any-code-changed == 'true'
+    if: >-
+      !cancelled() && needs.detect-changes.result == 'success' &&
+      github.event_name == 'pull_request' && needs.detect-changes.outputs.any-code-changed == 'true'
     defaults:
       run:
         working-directory: js
@@ -346,6 +348,7 @@ jobs:
     timeout-minutes: 10
     needs:
       - lint
+    if: "!cancelled() && needs.lint.result == 'success'"
     defaults:
       run:
         working-directory: js
@@ -382,6 +385,7 @@ jobs:
     timeout-minutes: 5
     needs:
       - lint
+    if: "!cancelled() && needs.lint.result == 'success'"
     defaults:
       run:
         working-directory: js

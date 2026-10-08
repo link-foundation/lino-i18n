@@ -19,6 +19,8 @@ See PR 28's checks for the final pushed revision and platform matrix.
 | Extract the `m` tagged alias and boolean/comment-only JSX | Extraction omitted `m` and produced `falseHello <c0></c0>` instead of runtime identities. | `tooling.test.js` |
 | Derive one JSX variant with an explicit id | Extractor accepted an id inconsistent with source-variant identities. | `derivation.test.js` |
 | Derive a boolean JSX child | Extracted `Hello false` where React renders `Hello `. | `derivation.test.js` |
+| Follow inherited case-study links after moving their files | Three links target missing files. | `experiments/issue-25-ci-regressions.py` |
+| Run PR checks with the release preflight intentionally skipped | Changeset, changelog, browser and CLI jobs skip despite detected code changes. | Workflow policy and `experiments/issue-25-ci-regressions.py` |
 
 ## Local checks
 
@@ -48,6 +50,7 @@ Run JavaScript commands from `js/` and other commands from the repository root.
 | `python3 scripts/check-dependency-pins.py` | Pass with pinned PyYAML installed. |
 | `python3 experiments/issue-26-dependency-pins.py` | Pass; deliberate action/tool/MSRV/Node drift fixtures are rejected. |
 | `python3 experiments/issue-23-shared-guards.py` | Pass. |
+| `python3 experiments/issue-25-ci-regressions.py` | Three tests pass; before the fix, five subcases fail for moved links and implicit workflow status conditions. |
 | `node js/scripts/build-docs-site.mjs` and `cargo doc --locked --manifest-path rust/Cargo.toml --workspace --no-deps` | Documentation builds pass. |
 | `python3 experiments/collect-issue-25.py` | Pinned evidence recollection succeeds. |
 
@@ -56,6 +59,24 @@ runtime exports and declarations ship while tests/build scripts stay excluded.
 Screenshots were captured with Chromium through Playwright MCP, then the browser
 and example server were closed. The optional ICU cache holds at most 100 compiled
 messages; static derivation is bounded to 100 variants and 20 levels.
+
+## CI investigation
+
+The first pushed revision was `8fbe27cd6681acf31d8ebf60e6d9ff5e14608455`.
+Runs created at `2026-10-08T18:37:16Z` were verified against that SHA; logs were
+downloaded before making corrections.
+
+- [Documentation run 37825695185](https://github.com/link-foundation/lino-i18n/actions/runs/37825695185):
+  log lines 974–976 and 996–998 report three missing local case-study files
+  referenced from `docs/BEST-PRACTICES.md`. Their links now include the preserved
+  `template-background/` location.
+- [JavaScript run 37825695215](https://github.com/link-foundation/lino-i18n/actions/runs/37825695215):
+  log lines 526–531 confirm all code flags, including `any-code-changed=true`.
+  The skipped checks were caused by GitHub's implicit `success()` job condition
+  following an intentionally skipped release-preflight ancestor. The affected
+  checks now use `!cancelled()` and require their immediate dependency to pass.
+  Workflow policy rejects this accidental implicit gating, and the regression
+  experiment runs in the workflow-policy job.
 
 ## Limits of the evidence
 

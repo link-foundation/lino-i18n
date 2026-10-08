@@ -61,6 +61,7 @@ jobs:
           python-version: '3.14'
       - run: python3 -m pip install --requirement scripts/requirements-ci.txt
       - run: python3 scripts/check-ci-policy.py && python3 scripts/check-file-line-limits.py && python3 experiments/issue-23-shared-guards.py && python3 experiments/issue-23-hook.py
+      - run: python3 experiments/issue-25-ci-regressions.py
       - run: python3 experiments/issue-23-codeql-manifests.py --prepare
       - run: python3 experiments/issue-23-archive-integrity.py
       - run: python3 scripts/check-dependency-pins.py && python3 experiments/issue-26-dependency-pins.py
