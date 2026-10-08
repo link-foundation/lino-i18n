@@ -3,6 +3,14 @@ import assert from 'node:assert/strict';
 import * as compiler from '../src/compiler.js';
 import { extractMessages } from '../src/extract.js';
 
+test('generated variable names avoid explicit names in the same content boundary', () => {
+  const code = `import { Var } from 'lino-i18n/react';
+    const node = <p>Hello <Var name={'auto0'}>{name}</Var> and {friend}</p>;`;
+  const result = extractMessages(compiler.transformJSX(code).code);
+  assert.deepEqual(result.diagnostics, []);
+  assert.equal(result.messages[0].source, 'Hello {auto0} and {auto1}');
+});
+
 test('automatic JSX translation preserves rich content, attributes and source locations', () => {
   const code = `import { useGT } from 'lino-i18n/react';
     export function Page({ name }) {

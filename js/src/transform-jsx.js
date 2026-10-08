@@ -4,6 +4,7 @@ import babelGenerate from '@babel/generator';
 import * as types from '@babel/types';
 import { apiName } from './extract.js';
 import { escapeMessageText } from './message-schema.js';
+import { literal } from './extract-jsx.js';
 
 const traverse = babelTraverse.default || babelTraverse;
 const generate = babelGenerate.default || babelGenerate;
@@ -102,7 +103,7 @@ function automaticChildren(children, variableName, state) {
         types.jsxOpeningElement(marker, [
           types.jsxAttribute(
             types.jsxIdentifier('name'),
-            types.stringLiteral(`auto${state.index++}`)
+            types.stringLiteral(nextVariableName(state))
           ),
         ]),
         types.jsxClosingElement(marker),
@@ -121,6 +122,29 @@ function automaticChildren(children, variableName, state) {
     }
     return child;
   });
+}
+
+function nextVariableName(state) {
+  let name;
+  do {
+    name = `auto${state.index++}`;
+  } while (state.reserved.has(name));
+  state.reserved.add(name);
+  return name;
+}
+
+function variableState(node) {
+  const reserved = new Set();
+  types.traverseFast(node, (child) => {
+    if (
+      child.type === 'JSXAttribute' &&
+      child.name.name === 'name' &&
+      typeof literal(child.value) === 'string'
+    ) {
+      reserved.add(literal(child.value));
+    }
+  });
+  return { index: 0, reserved };
 }
 
 export function transformJSX(code, options = {}) {
@@ -171,7 +195,11 @@ export function transformJSX(code, options = {}) {
       const wrapped = types.jsxElement(
         types.jsxOpeningElement(marker, attributes),
         types.jsxClosingElement(marker),
-        automaticChildren(path.node.children, variableName, { index: 0 }),
+        automaticChildren(
+          path.node.children,
+          variableName,
+          variableState(path.node)
+        ),
         false
       );
       types.inherits(wrapped, path.node);

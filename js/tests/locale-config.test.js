@@ -16,6 +16,17 @@ function configuration() {
   });
 }
 
+test('keyed plural suffixes use canonical tags while retaining custom catalog identities', () => {
+  const i18n = createTranslator({
+    defaultLocale: 'company',
+    localeConfig: { customMapping: { company: { code: 'ar' } } },
+    locales: { company: { items_two: 'pair', items_other: 'many' } },
+  });
+  assert.equal(i18n.t('items', { count: 2 }), 'pair');
+  assert.equal(i18n.t('items', { count: 3 }), 'many');
+  assert.equal(i18n.getLocale(), 'company');
+});
+
 test('custom locale identities negotiate canonical tags without mixing scripts', () => {
   const config = configuration();
   assert.equal(config.resolveCanonicalLocale('anglophone'), 'en-US');

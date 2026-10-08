@@ -19,6 +19,10 @@ export async function Tx({ i18n, ...props }) {
 }
 
 export function Plural({ i18n, ...props }) {
-  return selectPlural(props.locale || i18n.getLocale(), props);
+  const locale = props.locale || i18n.getLocale();
+  return selectPlural(
+    i18n.getLocaleConfig?.().resolveCanonicalLocale(locale) || locale,
+    props
+  );
 }
 Plural.contentMarker = PluralMarker;

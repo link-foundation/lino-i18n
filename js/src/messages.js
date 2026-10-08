@@ -246,6 +246,7 @@ export function createTranslator(options = {}) {
   const core = createI18n({
     ...options,
     defaultLocale: options.defaultLocale || localeConfig.defaultLocale,
+    pluralLocale: (locale) => localeConfig.resolveCanonicalLocale(locale),
   });
   const tables = cloneTables(options);
   const listeners = new Set();

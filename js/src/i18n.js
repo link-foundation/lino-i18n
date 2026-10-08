@@ -24,6 +24,7 @@ export function createI18n(options = {}) {
     onMissingKey,
     interpolation = { prefix: '{{', suffix: '}}' },
     compatibilityAliases: requestedCompatibilityAliases = [],
+    pluralLocale = (locale) => locale,
   } = options;
   const compatibilityAliases = normalizeCompatibilityAliases(
     requestedCompatibilityAliases
@@ -105,7 +106,7 @@ export function createI18n(options = {}) {
       const value = resolveKey(table, key, {
         count: opts?.count,
         context: opts?.context,
-        locale,
+        locale: pluralLocale(locale),
       });
       if (value !== undefined) {
         return { value, locale };

@@ -7,6 +7,57 @@ import {
   diffMessages,
 } from '../src/tooling.js';
 
+test('extraction follows scoped Node helpers and asynchronous server factories', () => {
+  const result = extractMessages(`
+    import { gt, getGT, getMessages } from 'lino-i18n/node';
+    import { createRequestTranslator } from 'lino-i18n/server';
+    import { createDictionaryTranslator } from 'lino-i18n/messages';
+    gt('Scoped');
+    const scoped = getGT(); scoped('Helper');
+    const messages = getMessages(); messages\`Hi \${name}\`;
+    const request = await createRequestTranslator(req); request.gt('Server');
+    const dictionary = createDictionaryTranslator({}); dictionary.gt('Schema');
+    function unrelated(gt, getGT) { gt('Ignore'); const other = getGT(); other('Ignore'); }
+  `);
+  assert.deepEqual(result.diagnostics, []);
+  assert.deepEqual(
+    result.messages.map(({ source }) => source),
+    ['Scoped', 'Helper', 'Hi {v0}', 'Server', 'Schema']
+  );
+});
+
+test('dictionary schemas extract array paths and diagnose dynamic or cyclic declarations', () => {
+  const result = extractMessages(`
+    import { defineDictionary, createDictionaryTranslator, createTranslator } from 'lino-i18n/messages';
+    const schema = defineDictionary({ page: { title: 'Welcome', buttons: ['Save', 'Cancel'] } } as const);
+    const i18n = createDictionaryTranslator(schema);
+    const other = createTranslator({ dictionary: { item: '{n, number} items' } });
+  `);
+  assert.deepEqual(result.diagnostics, []);
+  assert.deepEqual(
+    result.messages.map(({ id, source }) => [id, source]),
+    [
+      ['page.title', 'Welcome'],
+      ['page.buttons.0', 'Save'],
+      ['page.buttons.1', 'Cancel'],
+      ['item', '{n, number} items'],
+    ]
+  );
+  for (const source of [
+    `const schema = { title: value }; defineDictionary(schema);`,
+    `const schema = { nested: schema }; defineDictionary(schema);`,
+    `defineDictionary({ ...schema });`,
+    `defineDictionary({ 'bad.key': 'Invalid' });`,
+    `defineDictionary({ __proto__: 'Invalid' });`,
+    `defineDictionary(['Save', , 'Cancel']);`,
+  ]) {
+    const invalid = extractMessages(
+      `import { defineDictionary } from 'lino-i18n/messages'; ${source}`
+    );
+    assert.equal(invalid.diagnostics.length, 1, source);
+  }
+});
+
 test('message aliases and non-rendered JSX children retain runtime identities', () => {
   const result =
     extractMessages(`import { createTranslator } from 'lino-i18n/messages';

@@ -2,6 +2,7 @@ import { parse } from '@babel/parser';
 import babelTraverse from '@babel/traverse';
 import { jsxAttributes, literal } from './extract-jsx.js';
 import { messageVariables } from './message-schema.js';
+import { dictionaryEntries } from './extract-dictionary.js';
 import {
   derivedTemplates,
   derivedCalls,
@@ -43,7 +44,11 @@ function bindingApi(binding, localName, seen) {
     binding.path.isImportNamespaceSpecifier()
   ) {
     const source = binding.path.parent.source.value;
-    if (!/^lino-i18n(?:\/(?:messages|react|react-server))?$/.test(source)) {
+    if (
+      !/^lino-i18n(?:\/(?:messages|react|react-server|server|node))?$/.test(
+        source
+      )
+    ) {
       return undefined;
     }
     return binding.path.isImportNamespaceSpecifier()
@@ -51,13 +56,23 @@ function bindingApi(binding, localName, seen) {
       : binding.path.node.imported.name;
   }
   if (binding.path.isVariableDeclarator()) {
-    const { init, id } = binding.path.node;
+    const { id } = binding.path.node;
+    const init =
+      binding.path.node.init?.type === 'AwaitExpression'
+        ? binding.path.node.init.argument
+        : binding.path.node.init;
     if (init?.type === 'CallExpression') {
       const name = apiName(binding.path, init.callee, seen);
-      if (name === 'useGT' || name === 'useMessages') {
+      if (['useGT', 'useMessages', 'getGT', 'getMessages'].includes(name)) {
         return 'gt';
       }
-      if (name === 'createTranslator') {
+      if (
+        [
+          'createTranslator',
+          'createDictionaryTranslator',
+          'createRequestTranslator',
+        ].includes(name)
+      ) {
         return id.type === 'ObjectPattern'
           ? id.properties.find((property) => property.value?.name === localName)
               ?.key?.name
@@ -159,6 +174,21 @@ export function extractMessages(code, { file = '<source>' } = {}) {
   traverse(ast, {
     CallExpression(path) {
       const name = apiName(path, path.node.callee);
+      if (
+        [
+          'defineDictionary',
+          'createDictionaryTranslator',
+          'createTranslator',
+          'createRequestTranslator',
+        ].includes(name)
+      ) {
+        safely(path, () =>
+          dictionaryEntries(path, apiName).forEach(({ id, source }) =>
+            add(path, source, { id })
+          )
+        );
+        return;
+      }
       if (!['msg', 'bindMessage', 'gt', 'm', 'tx'].includes(name)) {
         return;
       }

@@ -8,6 +8,20 @@ import {
   createLocaleMiddleware,
 } from '../src/server.js';
 
+test('server plural components use configured canonical locale rules', async () => {
+  const { createTranslator } = await import('../src/messages.js');
+  const { Plural } = await import('../src/react-server.js');
+  const i18n = createTranslator({
+    defaultLocale: 'company',
+    localeConfig: { customMapping: { company: { code: 'ar' } } },
+  });
+  assert.equal(Plural({ i18n, count: 2, two: 'pair', other: 'many' }), 'pair');
+  assert.equal(
+    Plural({ i18n, locale: 'en', count: 2, two: 'pair', other: 'many' }),
+    'many'
+  );
+});
+
 test('request negotiation respects URL, cookie and weighted Accept-Language priorities', () => {
   const options = {
     supportedLanguages: ['en', 'fr', 'de'],

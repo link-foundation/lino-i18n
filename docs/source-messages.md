@@ -51,8 +51,10 @@ quotes, backslashes and newlines. Catalog keys are data, including `__proto__`.
 
 `dictionary(key, values)` resolves the source from `sourceLocale` (default `en`)
 and formats the selected translation as ICU. `dictionaryObject('actions')`
-returns the dotted-key subtree. Keep dictionary sources in the source catalog;
-source extraction discovers source declarations, not arbitrary dictionary files.
+returns the dotted-key subtree. The extractor discovers static `defineDictionary`
+declarations and inline schemas supplied to translator factories, including
+array index paths. External dictionary files still need an explicit import/build
+adapter; dynamic schemas produce diagnostics rather than being executed.
 
 Use `defineDictionary` and `createDictionaryTranslator` when the dictionary has
 arrays or needs typed paths:

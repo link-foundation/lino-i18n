@@ -1,4 +1,4 @@
-// Vite/Rollup plugin emits reviewable .lino catalogs without rewriting app code.
+// Vite/Rollup plugin emits reviewable catalogs, with optional JSX translation.
 import { extractMessages } from './extract.js';
 import { formatLinoCatalog } from './catalogs.js';
 import { transformJSX } from './transform-jsx.js';
