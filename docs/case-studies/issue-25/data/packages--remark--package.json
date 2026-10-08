@@ -1,0 +1,68 @@
+{
+  "name": "gt-remark",
+  "version": "1.0.12",
+  "description": "Remark plugin for processing MDX/Markdown by escaping HTML-sensitive characters in text nodes.",
+  "keywords": [
+    "remark",
+    "remark-stringify",
+    "unified",
+    "mdast",
+    "markdown",
+    "plugin",
+    "html",
+    "escape",
+    "mdx"
+  ],
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "emit-types": "sh ../../scripts/emit-types.sh",
+    "transpile": "tsdown && pnpm run emit-types",
+    "build": "pnpm run transpile",
+    "build:clean": "sh ../../scripts/clean.sh && pnpm run build",
+    "build:release": "pnpm run build:clean",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/generaltranslation/gt.git"
+  },
+  "author": "General Translation, Inc.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/generaltranslation/gt/issues"
+  },
+  "homepage": "https://generaltranslation.com/",
+  "dependencies": {
+    "mdast-util-find-and-replace": "^3.0.1",
+    "mdast-util-gfm-footnote": "^2.1.0",
+    "mdast-util-gfm-strikethrough": "^2.0.0",
+    "mdast-util-gfm-table": "^2.0.0",
+    "mdast-util-gfm-task-list-item": "^2.0.0",
+    "micromark-extension-gfm-footnote": "^2.1.0",
+    "micromark-extension-gfm-strikethrough": "^2.1.0",
+    "micromark-extension-gfm-table": "^2.1.1",
+    "micromark-extension-gfm-task-list-item": "^2.1.0"
+  },
+  "devDependencies": {
+    "@types/mdast": "^4.0.4",
+    "remark-parse": "^11.0.0",
+    "remark-stringify": "^11.0.0",
+    "tsdown": "catalog:",
+    "typescript": "catalog:",
+    "unified": "^11.0.5",
+    "vitest": "catalog:"
+  }
+}

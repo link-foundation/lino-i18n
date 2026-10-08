@@ -1,0 +1,104 @@
+{
+  "name": "gt-node",
+  "version": "1.0.37",
+  "description": "Node.js utilities for General Translation",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.cts",
+  "files": [
+    "dist",
+    "CHANGELOG.md"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build:release": "pnpm run build:clean",
+    "build:clean": "sh ../../scripts/clean.sh && pnpm run build",
+    "build": "tsdown",
+    "test": "vitest run --config=./vitest.config.ts",
+    "test:watch": "vitest --config=./vitest.config.ts",
+    "release": "pnpm run build:clean && pnpm publish",
+    "release:alpha": "pnpm run build:clean && pnpm publish --tag alpha",
+    "release:beta": "pnpm run build:clean && pnpm publish --tag beta",
+    "release:latest": "pnpm run build:clean && pnpm publish --tag latest",
+    "typecheck": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/generaltranslation/gt.git"
+  },
+  "keywords": [
+    "node",
+    "nodejs",
+    "language",
+    "translation",
+    "internationalization",
+    "localization",
+    "translate",
+    "locale",
+    "i18n",
+    "toolkit"
+  ],
+  "author": "General Translation, Inc.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/generaltranslation/gt/issues"
+  },
+  "homepage": "https://generaltranslation.com/",
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "tsdown": "catalog:",
+    "typescript": "catalog:"
+  },
+  "typescript": {
+    "definition": "dist/index.d.cts"
+  },
+  "dependencies": {
+    "gt-i18n": "workspace:*",
+    "generaltranslation": "workspace:*"
+  },
+  "exports": {
+    ".": {
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      },
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      }
+    },
+    "./types": {
+      "require": {
+        "types": "./dist/types.d.cts",
+        "default": "./dist/types.cjs"
+      },
+      "import": {
+        "types": "./dist/types.d.mts",
+        "default": "./dist/types.mjs"
+      }
+    },
+    "./internal": {
+      "require": {
+        "types": "./dist/internal.d.cts",
+        "default": "./dist/internal.cjs"
+      },
+      "import": {
+        "types": "./dist/internal.d.mts",
+        "default": "./dist/internal.mjs"
+      }
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "types": [
+        "./dist/types.d.cts"
+      ],
+      "internal": [
+        "./dist/internal.d.cts"
+      ]
+    }
+  }
+}

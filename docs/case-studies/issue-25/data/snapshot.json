@@ -1,0 +1,493 @@
+{
+  "repository": "https://github.com/generaltranslation/gt",
+  "commit": "fb7584f5548b7454a7c95827de459c684f659d5b",
+  "observed": "2026-10-08",
+  "license": "MIT (see gt-LICENSE.txt)",
+  "files": [
+    {
+      "path": "packages/api/package.json",
+      "file": "packages--api--package.json",
+      "sha256": "b33bc32da6a8f8bcdff5ca4e6d8b3330ef24c480b5339ba9eac08ec8f7fd3efd"
+    },
+    {
+      "path": "packages/cli/package.json",
+      "file": "packages--cli--package.json",
+      "sha256": "c15253f0e9ec47f064f730ef45fd44e85c8535af1bb6016d49da9bc1eb06ac70"
+    },
+    {
+      "path": "packages/compiler/package.json",
+      "file": "packages--compiler--package.json",
+      "sha256": "bd4f0752203530aea9358c1569ae7383b36cba1bda72ef1452050c7a9f3da7aa"
+    },
+    {
+      "path": "packages/compiler/src/index.ts",
+      "file": "packages--compiler--src--index.ts",
+      "sha256": "922cbfa7acf12bbeeb342f0931f35dfb2200014c7928147d5e2a296fdf6e6ae1"
+    },
+    {
+      "path": "packages/core/package.json",
+      "file": "packages--core--package.json",
+      "sha256": "7d95b68bff90e8fa339aa775e68aac1d64df30e4ae01a4a28979367eb157e232"
+    },
+    {
+      "path": "packages/core/src/derive/declareVar.ts",
+      "file": "packages--core--src--derive--declareVar.ts",
+      "sha256": "e35549eade42a9984b6aab3a7e5e5baf97cf05835229accbf72df19adc727728"
+    },
+    {
+      "path": "packages/core/src/derive/derive.ts",
+      "file": "packages--core--src--derive--derive.ts",
+      "sha256": "85c0c4b05f51e4be118cc7028ca964bb91c9bc070994bf8a84643f62a1bc55e4"
+    },
+    {
+      "path": "packages/core/src/index.ts",
+      "file": "packages--core--src--index.ts",
+      "sha256": "196943f005de9607c12dbc412b86023554f81c29387b1439da4578a9167b4796"
+    },
+    {
+      "path": "packages/core/src/runtime.ts",
+      "file": "packages--core--src--runtime.ts",
+      "sha256": "a9f294ac0cc96b6abfe454875c108e96ffd734acbf301247a16692983c228005"
+    },
+    {
+      "path": "packages/core/src/translate/runtimeTranslate.ts",
+      "file": "packages--core--src--translate--runtimeTranslate.ts",
+      "sha256": "765e270257aa85f891da51ec2813524d51783d29d5cf399f82b14a51a9b8bc26"
+    },
+    {
+      "path": "packages/core/src/types-dir/api/entry.ts",
+      "file": "packages--core--src--types-dir--api--entry.ts",
+      "sha256": "c7dd9e86d8155ca9bf4ba9c4e6ed00d5fa617eea9fb4f185149e3e1309456819"
+    },
+    {
+      "path": "packages/core/src/types-dir/api/file.ts",
+      "file": "packages--core--src--types-dir--api--file.ts",
+      "sha256": "5b3f9f4f7847d3998e227b845466b39e7fa3cd5a79f2605fcedf09c2fe62bf54"
+    },
+    {
+      "path": "packages/core/src/types-dir/api/uploadFiles.ts",
+      "file": "packages--core--src--types-dir--api--uploadFiles.ts",
+      "sha256": "041744a57ad3b0223210dcc17387fc2812902a67150b87092e7a3a2ab70ec1a8"
+    },
+    {
+      "path": "packages/format/package.json",
+      "file": "packages--format--package.json",
+      "sha256": "23eb6d202fc451c145f185123fd3e4fea2b956aa66b3cf264579a59adf86e148"
+    },
+    {
+      "path": "packages/format/src/LocaleConfig.ts",
+      "file": "packages--format--src--LocaleConfig.ts",
+      "sha256": "8678f244695644225951f843cf4fc991193e4e7b7778b2fc8ea9b02e65e6240a"
+    },
+    {
+      "path": "packages/format/src/formatting/format.ts",
+      "file": "packages--format--src--formatting--format.ts",
+      "sha256": "3b108e45bc0bf24ca66312072f5e0f53ba6eb0aa0af135625f76a91d28fffd98"
+    },
+    {
+      "path": "packages/format/src/index.ts",
+      "file": "packages--format--src--index.ts",
+      "sha256": "bebc5151ce8cebd8ed9180f2a3dc93f4819998a2b0ee851778109e01a9f457d2"
+    },
+    {
+      "path": "packages/format/src/locales/customLocaleMapping.ts",
+      "file": "packages--format--src--locales--customLocaleMapping.ts",
+      "sha256": "58610cfd1ba56907cc083f7f2967ad2fdf90fd4d7968002fac06204a981a18cf"
+    },
+    {
+      "path": "packages/format/src/locales/isSupersetLocale.ts",
+      "file": "packages--format--src--locales--isSupersetLocale.ts",
+      "sha256": "7687e34410fe7fa3a78b70e8cd0d655144c6b810b0c7e0fdbf3e345a538adc1c"
+    },
+    {
+      "path": "packages/format/src/types.ts",
+      "file": "packages--format--src--types.ts",
+      "sha256": "f5d30a02d31ef27bd4fe0cd4d9e17b0e4df3e519a971a7948ffa9318a9c2e96c"
+    },
+    {
+      "path": "packages/gtx-cli/package.json",
+      "file": "packages--gtx-cli--package.json",
+      "sha256": "769e14797653b0425cc8f993fa4ed5265333408ae93ff99903e3343e8bbce820"
+    },
+    {
+      "path": "packages/i18n/package.json",
+      "file": "packages--i18n--package.json",
+      "sha256": "67a3a4a8e6fb776c4f005147ca2da8b410bfefbc0625868aa5a18b917feceb22"
+    },
+    {
+      "path": "packages/i18n/src/index.ts",
+      "file": "packages--i18n--src--index.ts",
+      "sha256": "a999fa454f8d4bbe74ac01f2fc99f4868fcd0ae4c3d34cf86bc0563fccb2d7ed"
+    },
+    {
+      "path": "packages/i18n/src/translation-functions/msg/msg.ts",
+      "file": "packages--i18n--src--translation-functions--msg--msg.ts",
+      "sha256": "e083c8e89b5dc07167f7dcab26c7915defd151d20f443eaadfed3a4584fa55b7"
+    },
+    {
+      "path": "packages/i18n/src/translation-functions/t.ts",
+      "file": "packages--i18n--src--translation-functions--t.ts",
+      "sha256": "6f97832efaa1016b1e8af9e3e6edb3a52bf3cd025744ed452e824b14afbe9c55"
+    },
+    {
+      "path": "packages/icu/package.json",
+      "file": "packages--icu--package.json",
+      "sha256": "ca1a8ab2aed584a192530ef4cf459748cfd382d2cad62c1bd7d78c48559da585"
+    },
+    {
+      "path": "packages/locadex/package.json",
+      "file": "packages--locadex--package.json",
+      "sha256": "5bf4f2e1a3828656df221f4e5a1293727d82df000a410ff7fc80d9a75f25781b"
+    },
+    {
+      "path": "packages/next/package.json",
+      "file": "packages--next--package.json",
+      "sha256": "a570dc903e66a4dac6e001fb82e98cd7d2bc0df9c1fec126e679854126441df4"
+    },
+    {
+      "path": "packages/node/package.json",
+      "file": "packages--node--package.json",
+      "sha256": "d1048734f2d40b7705536b3c3f75528a4db45984929a98217073c049c35df3ef"
+    },
+    {
+      "path": "packages/node/src/index.ts",
+      "file": "packages--node--src--index.ts",
+      "sha256": "7a415520f755292dfa3d080f2e207f4b025e75f6c8c80d8c84892a38045b57d7"
+    },
+    {
+      "path": "packages/python-extractor/package.json",
+      "file": "packages--python-extractor--package.json",
+      "sha256": "699b145f13a4644540541e5e6931745918f0db7cf7d619a37093cc24ad0d7fc2"
+    },
+    {
+      "path": "packages/python-extractor/src/__tests__/fixtures/declare_cartesian.py",
+      "file": "packages--python-extractor--src--__tests__--fixtures--declare_cartesian.py",
+      "sha256": "1788c5059387bef611c2b3da569855f708947c6576a511e5eb95de46aa596681"
+    },
+    {
+      "path": "packages/python-extractor/src/constants.ts",
+      "file": "packages--python-extractor--src--constants.ts",
+      "sha256": "09f5c491dce1639683b4790d6d16072637b3fdbd26b558351d46c6148a7d2008"
+    },
+    {
+      "path": "packages/python-extractor/src/extractCalls.ts",
+      "file": "packages--python-extractor--src--extractCalls.ts",
+      "sha256": "e122ee094630ede5c819504780814ea583a165bd99fcaea980a4789e263159d1"
+    },
+    {
+      "path": "packages/python-extractor/src/extractImports.ts",
+      "file": "packages--python-extractor--src--extractImports.ts",
+      "sha256": "9a1d5236e539707da811f4457aded1cb0e9b46a94ee7da1ffbbfcba0d86ef4c2"
+    },
+    {
+      "path": "packages/python-extractor/src/index.ts",
+      "file": "packages--python-extractor--src--index.ts",
+      "sha256": "79f153e40f249583a2f8cb1d96438005fb0d63b6fbb9389a01f7d8335462c1d5"
+    },
+    {
+      "path": "packages/python-extractor/src/parseStringExpression.ts",
+      "file": "packages--python-extractor--src--parseStringExpression.ts",
+      "sha256": "5f867b776c2495bcd589fd821634f0cffaf7de820d8d883e84cbcaf6a2e81cb7"
+    },
+    {
+      "path": "packages/react-core-linter/package.json",
+      "file": "packages--react-core-linter--package.json",
+      "sha256": "c5935261e87a9d482a010547375b07712385f1ebd9239d5c47481a1fa527e211"
+    },
+    {
+      "path": "packages/react-core-linter/src/index.ts",
+      "file": "packages--react-core-linter--src--index.ts",
+      "sha256": "a3bea099a6f9f9fa12613f9fbf064f8844467b65b53cb5181b65c8de9295b6e2"
+    },
+    {
+      "path": "packages/react-core-linter/src/rules/no-data-attrs-on-branch/index.ts",
+      "file": "packages--react-core-linter--src--rules--no-data-attrs-on-branch--index.ts",
+      "sha256": "fc4cb17e4b4a1b801b6716a384f655526e9a7ebe0e0ad036bcd64e9466ee55a9"
+    },
+    {
+      "path": "packages/react-core-linter/src/rules/static-jsx/index.ts",
+      "file": "packages--react-core-linter--src--rules--static-jsx--index.ts",
+      "sha256": "bed541eb8a4cb5119eefdea7fdf0763087186b62dd51f45fd79248299a9a378a"
+    },
+    {
+      "path": "packages/react-core-linter/src/rules/static-string/index.ts",
+      "file": "packages--react-core-linter--src--rules--static-string--index.ts",
+      "sha256": "b33e23b540fa9f50a8d86d4f405e4683f5e875f1107bf492213de508f543ab03"
+    },
+    {
+      "path": "packages/react-core/package.json",
+      "file": "packages--react-core--package.json",
+      "sha256": "f04f14fd39617212955880faedb5b1d08e28dc99fe43276c880e8948c3220406"
+    },
+    {
+      "path": "packages/react-core/src/components/derivation/Derive.tsx",
+      "file": "packages--react-core--src--components--derivation--Derive.tsx",
+      "sha256": "c371cd91be4a1111b825ba8f2742b16457c5c4c41caca003e1048a8103b426c6"
+    },
+    {
+      "path": "packages/react-native/package.json",
+      "file": "packages--react-native--package.json",
+      "sha256": "8b18537417946f03032a91a86a7524ce4e6fcffee6d4d8b40f89ee7518e84743"
+    },
+    {
+      "path": "packages/react-native/src/hooks/selectors.ts",
+      "file": "packages--react-native--src--hooks--selectors.ts",
+      "sha256": "30d59e2de036116594521fea0fe0d963be6052e8b46f35b90f7480a0579b567b"
+    },
+    {
+      "path": "packages/react-native/src/index.tsx",
+      "file": "packages--react-native--src--index.tsx",
+      "sha256": "ee5bdbc62046163fd16d1f5899bdb063c3e421866014409e0502c15484bfd360"
+    },
+    {
+      "path": "packages/react-native/src/setup/initializeGT.ts",
+      "file": "packages--react-native--src--setup--initializeGT.ts",
+      "sha256": "d4248721d82a4bd3f2ed46b97bf9f2cf366d390da154f984d241729fc8cecb21"
+    },
+    {
+      "path": "packages/react-native/src/utils/nativeStore.ts",
+      "file": "packages--react-native--src--utils--nativeStore.ts",
+      "sha256": "69d8516fb32a69aed6a0cfb9ecb32ad3c5ba9da105d0d35fdea3c60167c8cd1e"
+    },
+    {
+      "path": "packages/react/package.json",
+      "file": "packages--react--package.json",
+      "sha256": "666ab567e1825140e91e5d074586f8dec6cba2dbe23888ce063b069789d5dc99"
+    },
+    {
+      "path": "packages/react/src/index.client.ts",
+      "file": "packages--react--src--index.client.ts",
+      "sha256": "4490f558b163ba5a1a1320837ac3fd1d9ca2798f7f7261b9bbb6fff888221eda"
+    },
+    {
+      "path": "packages/react/src/index.rsc.ts",
+      "file": "packages--react--src--index.rsc.ts",
+      "sha256": "20c5e83816e31dd43694e45edd0c24f1e2df78a37c5881bd784e3b3487308b83"
+    },
+    {
+      "path": "packages/react/src/index.server.ts",
+      "file": "packages--react--src--index.server.ts",
+      "sha256": "e1dc17eabcf2b76ebbc82c77fdf5d6374d7ceb5748aa479d14e8df9238f7dfd4"
+    },
+    {
+      "path": "packages/remark/package.json",
+      "file": "packages--remark--package.json",
+      "sha256": "24a84ca6b4ef162fec860d77d0d1c52310c25fc3dac910963d453f72c829c858"
+    },
+    {
+      "path": "packages/remark/src/index.ts",
+      "file": "packages--remark--src--index.ts",
+      "sha256": "03b3f74b1c788e60950172cd36ea15c8e70b9da8837d8f6fff2c36e874dbb0fa"
+    },
+    {
+      "path": "packages/remark/src/plugins/escapeHtmlInTextNodes.ts",
+      "file": "packages--remark--src--plugins--escapeHtmlInTextNodes.ts",
+      "sha256": "ee4fe7dfae00ff7502c203158c6eac01e590c0818470b2756a7be437abb21840"
+    },
+    {
+      "path": "packages/rrweb/package.json",
+      "file": "packages--rrweb--package.json",
+      "sha256": "40eed189b196df61cf9910a3781f80254103506ae288894d9699388a8d366dd9"
+    },
+    {
+      "path": "packages/rrweb/src/harvest.ts",
+      "file": "packages--rrweb--src--harvest.ts",
+      "sha256": "a93da8e84ccb41e2c88d59009344328a915fad464251a727d36282072aab255b"
+    },
+    {
+      "path": "packages/rrweb/src/index.ts",
+      "file": "packages--rrweb--src--index.ts",
+      "sha256": "44ffa1997ca06faf1107b18f24f1624b2eb103906212ace10e83ece0c19d5017"
+    },
+    {
+      "path": "packages/rrweb/src/recorder/GTRecorder.tsx",
+      "file": "packages--rrweb--src--recorder--GTRecorder.tsx",
+      "sha256": "87fa3033e55caec17260de5fcf96e1171e8cb6cc0f216bf6f80bd8376bf59536"
+    },
+    {
+      "path": "packages/rrweb/src/recorder/recorderCore.ts",
+      "file": "packages--rrweb--src--recorder--recorderCore.ts",
+      "sha256": "44e06572ce0161904169e4df83a64e71a2aee7fc30dafe6d949da489d9720460"
+    },
+    {
+      "path": "packages/rrweb/src/recorder/useRecorder.ts",
+      "file": "packages--rrweb--src--recorder--useRecorder.ts",
+      "sha256": "3feda9e6aef50d7ec14c2480105b86c867411acd18160e9bc5950bd27ef7027f"
+    },
+    {
+      "path": "packages/rrweb/src/replay.ts",
+      "file": "packages--rrweb--src--replay.ts",
+      "sha256": "064f7c4f146802dd37b614d9d0b8c1d7ec68d2dc408257fa88516417d008019b"
+    },
+    {
+      "path": "packages/rrweb/src/replay/GTReplayer.tsx",
+      "file": "packages--rrweb--src--replay--GTReplayer.tsx",
+      "sha256": "c4f8e4bec9a56c4d973d928f259adf8a82f50c3d6079ac7c792098596b182b16"
+    },
+    {
+      "path": "packages/rrweb/src/replay/player.ts",
+      "file": "packages--rrweb--src--replay--player.ts",
+      "sha256": "a3193908b207dfed36a0df11d835ecbcec2a94dd3bd12ee0c131b1a096d7a376"
+    },
+    {
+      "path": "packages/rrweb/src/types.ts",
+      "file": "packages--rrweb--src--types.ts",
+      "sha256": "2f53f52d3666a9fee15bd0b4bbaac171bd9683bcd63ad1de45712943223ad229"
+    },
+    {
+      "path": "packages/sanity/package.json",
+      "file": "packages--sanity--package.json",
+      "sha256": "27b7ea9e2fa772755d3ec8cae964f40a96b17d5ea306f2069c89a6bd92ba5057"
+    },
+    {
+      "path": "packages/sanity/src/components/tab/TranslationsTab.tsx",
+      "file": "packages--sanity--src--components--tab--TranslationsTab.tsx",
+      "sha256": "c01ef4a6ba61a53403dd3948061f16508da8efc61675c0e948bd1b2eccc9823c"
+    },
+    {
+      "path": "packages/sanity/src/configuration/README.md",
+      "file": "packages--sanity--src--configuration--README.md",
+      "sha256": "5e1f4df44ba9d46743dcf97291a744be763b6a159f75e7aa3c706ceb8ed43824"
+    },
+    {
+      "path": "packages/sanity/src/index.ts",
+      "file": "packages--sanity--src--index.ts",
+      "sha256": "8f5f46a2bbec8e26d80db256fa1ea3aaf298a0d1671b67e7aeb2d205703d8d18"
+    },
+    {
+      "path": "packages/sanity/src/serialization/BaseDocumentMerger.ts",
+      "file": "packages--sanity--src--serialization--BaseDocumentMerger.ts",
+      "sha256": "06ce3509d4b7847bb44bad714caa12be43f67f35cbaf4238ecc49dc7bf6c8975"
+    },
+    {
+      "path": "packages/sanity/src/serialization/deserialize/BaseDocumentDeserializer.ts",
+      "file": "packages--sanity--src--serialization--deserialize--BaseDocumentDeserializer.ts",
+      "sha256": "4c466f8abce0b7bfebe4d617556e1fd8466ea4dc93c6eb281e6de017e938ced2"
+    },
+    {
+      "path": "packages/sanity/src/serialization/serialize/fieldFilters.ts",
+      "file": "packages--sanity--src--serialization--serialize--fieldFilters.ts",
+      "sha256": "e5c2e56ce0d44776a35cbe63a7dba10b12553c8ead50083655c3701794117584"
+    },
+    {
+      "path": "packages/sanity/src/serialization/serialize/index.ts",
+      "file": "packages--sanity--src--serialization--serialize--index.ts",
+      "sha256": "7bdbde07c55f7e2867ea144343c55657de11f199370704dda3b42b4d6bf3f93f"
+    },
+    {
+      "path": "packages/sanity/src/serialization/types.ts",
+      "file": "packages--sanity--src--serialization--types.ts",
+      "sha256": "1ce71d9c3625d669e22a70bb9a182b4d55fede6dae66f0d8b4a8882e2c271a52"
+    },
+    {
+      "path": "packages/sanity/src/types.ts",
+      "file": "packages--sanity--src--types.ts",
+      "sha256": "97cb387b1b068bd091fe325f85665fb6c96d7512687d015c4feddaa4f58c9dfc"
+    },
+    {
+      "path": "packages/supported-locales/package.json",
+      "file": "packages--supported-locales--package.json",
+      "sha256": "52c8bf2448a63db2b78179b6859c3ea00639c4abff0a92234a749a59ea0b97db"
+    },
+    {
+      "path": "packages/supported-locales/src/index.ts",
+      "file": "packages--supported-locales--src--index.ts",
+      "sha256": "f01567fbe8d929bbbe83fc7b29bf5e20838322df1fb088317254a23bf028b146"
+    },
+    {
+      "path": "packages/tanstack-start/package.json",
+      "file": "packages--tanstack-start--package.json",
+      "sha256": "2e0ec6944268242a9668ff0fd507d21ea4609360f9225a45d01d2b9dd4d7b976"
+    },
+    {
+      "path": "packages/tanstack-start/src/condition-store/AsyncLocalConditionStore.ts",
+      "file": "packages--tanstack-start--src--condition-store--AsyncLocalConditionStore.ts",
+      "sha256": "7187becc052543caec305f54c5bb8391106820880a9aae2f41109c67caa7d84d"
+    },
+    {
+      "path": "packages/tanstack-start/src/index.client.ts",
+      "file": "packages--tanstack-start--src--index.client.ts",
+      "sha256": "13f33ff17ff323195e8c97474d3e5765e85150281829dc2978fd531e516280dd"
+    },
+    {
+      "path": "packages/tanstack-start/src/index.server.ts",
+      "file": "packages--tanstack-start--src--index.server.ts",
+      "sha256": "1f667db7307d21b87dbec96af620db649e2d9ddd953611b9ab5012c93ed7c539"
+    },
+    {
+      "path": "packages/tanstack-start/src/index.shared.ts",
+      "file": "packages--tanstack-start--src--index.shared.ts",
+      "sha256": "59a59bdf35c476f31681c83fbe0da4f5970201732b40b0bceb66dca565bc88e2"
+    },
+    {
+      "path": "packages/tanstack-start/src/middleware/gtMiddleware.ts",
+      "file": "packages--tanstack-start--src--middleware--gtMiddleware.ts",
+      "sha256": "3c99f2ec20815c192eb2545e574124951de9a0c29ad0ecb226801cc9b67b7bcf"
+    },
+    {
+      "path": "packages/tanstack-start/src/provider/GTProvider.client.tsx",
+      "file": "packages--tanstack-start--src--provider--GTProvider.client.tsx",
+      "sha256": "7950cd76e7803244a48ba0827b0b1f689a8908d6cb4f3a28ca8f25fe238ed621"
+    },
+    {
+      "path": "packages/tanstack-start/src/server.ts",
+      "file": "packages--tanstack-start--src--server.ts",
+      "sha256": "619213639a1e9e363bf10ff3056bcb380d7d629e238a5085c2974c8f8bee10de"
+    },
+    {
+      "path": "packages/tanstack-start/src/setup/initializeGT.client.ts",
+      "file": "packages--tanstack-start--src--setup--initializeGT.client.ts",
+      "sha256": "fc3a5987b17f93a84fa7f3d6aba4d6a9b9592da2941316a410485bd382df32f4"
+    },
+    {
+      "path": "packages/tanstack-start/src/setup/initializeGT.server.ts",
+      "file": "packages--tanstack-start--src--setup--initializeGT.server.ts",
+      "sha256": "768bb7b0e24bc5ea7f1415f7f1022459f46ae6e011901719a8d389f3b5f35024"
+    },
+    {
+      "path": "packages/vue-extractor/package.json",
+      "file": "packages--vue-extractor--package.json",
+      "sha256": "bf7e5f8ecf94d32819d465202e573f6b7295d5e8f1c8f11e92e997df300fc608"
+    },
+    {
+      "path": "packages/vue/package.json",
+      "file": "packages--vue--package.json",
+      "sha256": "37dfa8115095375a561043383282e432425ce975067c7e5501f9f92f1a90af78"
+    },
+    {
+      "path": "packages/vue/src/components/T.ts",
+      "file": "packages--vue--src--components--T.ts",
+      "sha256": "4eb39f47d36b54f350060eb04ec47fa41faf37d8133ff0fba86f09de10415f5e"
+    },
+    {
+      "path": "packages/vue/src/composables/strings.ts",
+      "file": "packages--vue--src--composables--strings.ts",
+      "sha256": "afee6b500cb36a086194f6567734816074ca6a8f033b3d351e65a41cd23e0074"
+    },
+    {
+      "path": "packages/vue/src/index.ts",
+      "file": "packages--vue--src--index.ts",
+      "sha256": "e744b851c6ba7b7f637ebdb1a52edf41811b38556f59cff1d4ca10d07ae2c34b"
+    },
+    {
+      "path": "packages/vue/src/rendering/translateVueChildren.ts",
+      "file": "packages--vue--src--rendering--translateVueChildren.ts",
+      "sha256": "e9185e28a17accf1868818045afdd8bb5cb08d84a4fcd40c43c69b4be956a028"
+    },
+    {
+      "path": "packages/vue/src/runtime/spa.ts",
+      "file": "packages--vue--src--runtime--spa.ts",
+      "sha256": "49f0ac4841a3eb90018fcf7856d0e938db0141c1ed4df7e9f3815db5cbf64381"
+    },
+    {
+      "path": "packages/vue/src/runtime/state.ts",
+      "file": "packages--vue--src--runtime--state.ts",
+      "sha256": "4cf6d19fabdc58fe22e08f8bc1e6bdf5ee916db8932e53c7e55f2c53878db1cd"
+    },
+    {
+      "path": "packages/vue/src/types/index.ts",
+      "file": "packages--vue--src--types--index.ts",
+      "sha256": "95e9c0491abf9907f002507a6ae62342aa0a8c50e1685dc0fd754126b50f2250"
+    }
+  ]
+}

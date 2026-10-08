@@ -1,0 +1,6 @@
+fr
+  welcome "<c0>{name}</c0>, bienvenue !"
+  cart "{n0, plural, one {# article dans votre panier} other {# articles dans votre panier}}"
+  total "Total : {amount}"
+  "Add an item" "Ajouter un article"
+  "Read the guide" "Lire le guide"

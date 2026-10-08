@@ -20,6 +20,15 @@ const SELECTOR_SUFFIXES = new Set([
 
 const LABEL_ALIAS_KEY = 'label';
 
+function setEntry(object, key, value) {
+  Object.defineProperty(object, key, {
+    value,
+    enumerable: true,
+    writable: true,
+    configurable: true,
+  });
+}
+
 function unescapeValue(value, quote = '"') {
   let result = '';
   for (let index = 0; index < value.length; index += 1) {
@@ -57,6 +66,35 @@ function escapeValue(value) {
     .join('\\r')
     .split('\t')
     .join('\\t');
+}
+
+function formatKey(key) {
+  return !key || /[\s"'\\:#]/.test(key)
+    ? `"${escapeValue(key).replaceAll('\n', '\\n')}"`
+    : key;
+}
+
+function splitKey(line) {
+  if (line.startsWith('"') || line.startsWith("'")) {
+    const quote = line[0];
+    const closing = findClosingQuote(line, quote);
+    if (
+      closing === -1 ||
+      (line[closing + 1] && !/\s/.test(line[closing + 1]))
+    ) {
+      throw new Error('Malformed quoted catalog key');
+    }
+    return [
+      unescapeValue(line.slice(1, closing), quote),
+      line.slice(closing + 1).trimStart() || undefined,
+    ];
+  }
+  const match = /^(\S+)(?:\s+(.*))?$/.exec(line);
+  const key =
+    match[2] === undefined && match[1].endsWith(':')
+      ? match[1].slice(0, -1)
+      : match[1];
+  return [key, match[2]?.trimStart()];
 }
 
 function countIndent(line) {
@@ -182,17 +220,7 @@ function parseLogicalLines(text) {
 
     const indent = countIndent(content);
     const trimmed = content.trimStart();
-    const match = /^(\S+)(?:\s+(.*))?$/.exec(trimmed);
-    if (!match) {
-      index += 1;
-      continue;
-    }
-
-    let key = match[1];
-    const rest = match[2]?.trimStart();
-    if (rest === undefined && key.endsWith(':')) {
-      key = key.slice(0, -1);
-    }
+    const [key, rest] = splitKey(trimmed);
 
     if (rest === undefined) {
       entries.push({ indent, key, value: null });
@@ -228,16 +256,16 @@ function parseEntriesAt(lines, start, indent) {
 
     index += 1;
     if (line.value !== null) {
-      tree[line.key] = line.value;
+      setEntry(tree, line.key, line.value);
       continue;
     }
 
     if (index < lines.length && lines[index].indent > line.indent) {
       const parsed = parseEntriesAt(lines, index, lines[index].indent);
-      tree[line.key] = parsed.tree;
+      setEntry(tree, line.key, parsed.tree);
       index = parsed.index;
     } else {
-      tree[line.key] = {};
+      setEntry(tree, line.key, {});
     }
   }
 
@@ -295,14 +323,14 @@ function labelAliasValue(value) {
 
 function addLabelAlias(out, base, value) {
   if (!Object.prototype.hasOwnProperty.call(out, base)) {
-    out[base] = value;
+    setEntry(out, base, value);
   }
 }
 
 function flattenTree(tree, pathParts = [], out = {}) {
   for (const [key, value] of Object.entries(tree)) {
     if (typeof value === 'string') {
-      out[[...pathParts, key].join('.')] = value;
+      setEntry(out, [...pathParts, key].join('.'), value);
       continue;
     }
     if (!isPlainObject(value)) {
@@ -314,14 +342,14 @@ function flattenTree(tree, pathParts = [], out = {}) {
     const labelValue = labelAliasValue(value);
     if (isSelectorGroup(value)) {
       if (labelValue !== undefined) {
-        out[`${base}.${LABEL_ALIAS_KEY}`] = labelValue;
+        setEntry(out, `${base}.${LABEL_ALIAS_KEY}`, labelValue);
         addLabelAlias(out, base, labelValue);
       }
       for (const [suffix, child] of Object.entries(value)) {
         if (suffix === LABEL_ALIAS_KEY) {
           continue;
         }
-        out[`${base}_${suffix}`] = child;
+        setEntry(out, `${base}_${suffix}`, child);
       }
       continue;
     }
@@ -348,9 +376,9 @@ function splitSelectorSuffix(key) {
 function setNestedValue(tree, parts, value) {
   let node = tree;
   for (const part of parts.slice(0, -1)) {
-    const current = node[part];
+    const current = Object.hasOwn(node, part) ? node[part] : undefined;
     if (!isPlainObject(current)) {
-      node[part] = {};
+      setEntry(node, part, {});
       if (typeof current === 'string') {
         node[part][LABEL_ALIAS_KEY] = current;
       }
@@ -358,13 +386,13 @@ function setNestedValue(tree, parts, value) {
     node = node[part];
   }
   const leaf = parts[parts.length - 1];
-  if (isPlainObject(node[leaf])) {
+  if (Object.hasOwn(node, leaf) && isPlainObject(node[leaf])) {
     if (!Object.prototype.hasOwnProperty.call(node[leaf], LABEL_ALIAS_KEY)) {
       node[leaf][LABEL_ALIAS_KEY] = value;
     }
     return;
   }
-  node[leaf] = value;
+  setEntry(node, leaf, value);
 }
 
 function translationsToTree(translations) {
@@ -404,13 +432,13 @@ function formatTreeLines(tree, indent = '  ') {
     : entries;
   for (const [key, value] of orderedEntries) {
     if (typeof value === 'string') {
-      lines.push(`${indent}${key} ${formatValue(value, indent)}`);
+      lines.push(`${indent}${formatKey(key)} ${formatValue(value, indent)}`);
       continue;
     }
     if (!isPlainObject(value)) {
       continue;
     }
-    lines.push(`${indent}${key}`);
+    lines.push(`${indent}${formatKey(key)}`);
     lines.push(...formatTreeLines(value, `${indent}  `));
   }
   return lines;
@@ -420,7 +448,7 @@ function formatFlatCatalog(locale, translations) {
   const lines = [String(locale)];
   for (const [key, value] of Object.entries(translations || {})) {
     const safe = typeof value === 'string' ? value : String(value);
-    lines.push(`  ${key} ${formatValue(safe, '  ')}`);
+    lines.push(`  ${formatKey(key)} ${formatValue(safe, '  ')}`);
   }
   return lines.join('\n');
 }

@@ -1,5 +1,5 @@
 name: JavaScript
-'on':
+"on":
   push:
     branches:
       - main
@@ -51,11 +51,11 @@ permissions:
   contents: read
 env:
   NODE_VERSION: 24.x
-  NPM_CONFIG_PROVENANCE: 'true'
+  NPM_CONFIG_PROVENANCE: "true"
   GITHUB_BASE_SHA: ${{ github.event.pull_request.base.sha }}
   GITHUB_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
   GITHUB_BEFORE_SHA: ${{ github.event.before }}
-  GIT_CONFIG_COUNT: '1'
+  GIT_CONFIG_COUNT: "1"
   GIT_CONFIG_KEY_0: init.defaultBranch
   GIT_CONFIG_VALUE_0: main
 jobs:
@@ -179,7 +179,9 @@ jobs:
     timeout-minutes: 10
     needs:
       - detect-changes
-    if: github.event_name == 'pull_request' && needs.detect-changes.outputs.any-code-changed == 'true'
+    if: >-
+      !cancelled() && needs.detect-changes.result == 'success' &&
+      github.event_name == 'pull_request' && needs.detect-changes.outputs.any-code-changed == 'true'
     defaults:
       run:
         working-directory: js
@@ -302,6 +304,9 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 24.x
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.14"
       - name: Setup Node.js
         if: matrix.runtime == 'node'
         uses: actions/setup-node@v7
@@ -346,6 +351,7 @@ jobs:
     timeout-minutes: 10
     needs:
       - lint
+    if: "!cancelled() && needs.lint.result == 'success'"
     defaults:
       run:
         working-directory: js
@@ -368,6 +374,21 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: npm run test:types
       - run: npm run test:browser
+      - name: Build the Next App Router fixture
+        run: npm run build:next
+        env:
+          NEXT_TELEMETRY_DISABLED: "1"
+      - name: Check production Next navigation and request isolation
+        run: npm run test:next
+        env:
+          LINO_NEXT_PRODUCTION: "1"
+          NEXT_TELEMETRY_DISABLED: "1"
+      - name: Build the TanStack Start fixture
+        run: npm run build:tanstack
+      - name: Check production Start hydration, server functions and navigation
+        run: npm run test:tanstack
+        env:
+          LINO_TANSTACK_PRODUCTION: "1"
       - uses: actions/upload-artifact@v7
         if: failure()
         with:
@@ -382,6 +403,7 @@ jobs:
     timeout-minutes: 5
     needs:
       - lint
+    if: "!cancelled() && needs.lint.result == 'success'"
     defaults:
       run:
         working-directory: js
@@ -510,7 +532,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           PUBLISHED_VERSION: ${{ steps.publish.outputs.published_version }}
           REPOSITORY: ${{ github.repository }}
-        run: node scripts/create-github-release.mjs --release-version "${PUBLISHED_VERSION}" --repository "${REPOSITORY}" --tag-prefix js-v --language
+        run:
+          node scripts/create-github-release.mjs --release-version "${PUBLISHED_VERSION}" --repository "${REPOSITORY}" --tag-prefix js-v --language
           JavaScript
     permissions:
       # Push release metadata or create the manual release PR.
@@ -525,7 +548,8 @@ jobs:
     name: Manual npm Release
     runs-on: ubuntu-26.04
     timeout-minutes: 35
-    if: always() && !cancelled() && needs.package.result == 'success' && github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'
+    if:
+      always() && !cancelled() && needs.package.result == 'success' && github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'
       && inputs.release_mode == 'instant' && needs.release-preflight.result == 'success'
     defaults:
       run:
@@ -565,7 +589,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           PUBLISHED_VERSION: ${{ steps.publish.outputs.published_version }}
           REPOSITORY: ${{ github.repository }}
-        run: node scripts/create-github-release.mjs --release-version "${PUBLISHED_VERSION}" --repository "${REPOSITORY}" --tag-prefix js-v --language
+        run:
+          node scripts/create-github-release.mjs --release-version "${PUBLISHED_VERSION}" --repository "${REPOSITORY}" --tag-prefix js-v --language
           JavaScript
     permissions:
       # Push release metadata or create the manual release PR.
@@ -605,9 +630,9 @@ jobs:
           BUMP_TYPE: ${{ inputs.bump_type }}
       - uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
-          commit-message: 'chore: add changeset for manual ${{ github.event.inputs.bump_type }} release'
+          commit-message: "chore: add changeset for manual ${{ github.event.inputs.bump_type }} release"
           branch: changeset-manual-release-${{ github.run_id }}
-          title: 'chore: manual ${{ github.event.inputs.bump_type }} release'
+          title: "chore: manual ${{ github.event.inputs.bump_type }} release"
           body: |
             This PR was created by a manual workflow trigger to prepare a JavaScript release.
 
@@ -687,7 +712,8 @@ jobs:
         with:
           node-version: 24.x
       - run: bash scripts/preflight-publish.sh npm
-    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.release_mode ==
+    if:
+      github.ref == 'refs/heads/main' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.release_mode ==
       'instant'))
     permissions:
       contents: read
@@ -706,7 +732,8 @@ jobs:
           persist-credentials: false
       - env:
           NEEDS_JSON: ${{ toJSON(needs) }}
-          CANCELLABLE_JOBS: '["detect-changes", "test-compilation", "check-file-line-limits", "version-check", "changeset-check", "lint", "test",
+          CANCELLABLE_JOBS:
+            '["detect-changes", "test-compilation", "check-file-line-limits", "version-check", "changeset-check", "lint", "test",
             "browser-test", "cli-smoke-test", "package", "release-preflight"]'
           RUN_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
           BRANCH_NAME: ${{ github.head_ref || github.ref_name }}

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Links Notation replay</title>
+    <style>
+      body {
+        margin: 0;
+        color: #182f40;
+        background: #edf3f4;
+        font-family: system-ui, sans-serif;
+      }
+      .layout {
+        max-width: 960px;
+        margin: auto;
+        padding: 28px;
+      }
+      .toolbar {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .brand {
+        width: 100%;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+      button,
+      select {
+        padding: 8px 12px;
+        border: 1px solid #a1b7c3;
+        border-radius: 5px;
+        background: white;
+        color: inherit;
+      }
+      button {
+        cursor: pointer;
+      }
+      main {
+        margin: 24px 0;
+        padding: 32px;
+        border-radius: 12px;
+        background: white;
+      }
+      .eyebrow {
+        font-size: 12px;
+        letter-spacing: 0.12em;
+        color: #507284;
+      }
+      h1 {
+        font-size: 34px;
+        margin: 12px 0;
+      }
+      h2 {
+        font-weight: 400;
+      }
+      strong {
+        color: #087f75;
+      }
+      label {
+        display: block;
+        margin-top: 20px;
+      }
+      input {
+        display: block;
+        padding: 8px;
+        margin-top: 8px;
+      }
+      #replay {
+        padding-bottom: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./bundle.js"></script>
+  </body>
+</html>

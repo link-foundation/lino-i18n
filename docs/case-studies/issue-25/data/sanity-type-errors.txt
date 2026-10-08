@@ -1,0 +1,33 @@
+
+> test:types
+> tsc --project tsconfig.json
+
+node_modules/@sanity/comlink/dist/index.d.ts(67,16): error TS2304: Cannot find name 'PromiseWithResolvers'.
+node_modules/@sanity/comlink/dist/index.d.ts(179,15): error TS2304: Cannot find name 'PromiseWithResolvers'.
+node_modules/groq-js/dist/1-0fhXnGQk.d.ts(1,31): error TS7016: Could not find a declaration file for module './shared-C7P2VCv4.js'. 'node_modules/groq-js/dist/shared-C7P2VCv4.js' implicitly has an 'any' type.
+node_modules/groq-js/dist/index.d.ts(1,1217): error TS7016: Could not find a declaration file for module './shared-C7P2VCv4.js'. 'node_modules/groq-js/dist/shared-C7P2VCv4.js' implicitly has an 'any' type.
+node_modules/groq-js/dist/index.d.ts(2,228): error TS7016: Could not find a declaration file for module './evaluator-Cjkvq48Q.js'. 'node_modules/groq-js/dist/evaluator-Cjkvq48Q.js' implicitly has an 'any' type.
+node_modules/groq-js/dist/unparse-CEkIwVh_.d.ts(1,31): error TS7016: Could not find a declaration file for module './shared-C7P2VCv4.js'. 'node_modules/groq-js/dist/shared-C7P2VCv4.js' implicitly has an 'any' type.
+node_modules/quick-lru/index.d.ts(55,2): error TS2416: Property '[Symbol.iterator]' in type 'QuickLRU<KeyType, ValueType>' is not assignable to the same property in base type 'Map<KeyType, ValueType>'.
+  Type '() => IterableIterator<[KeyType, ValueType]>' is not assignable to type '() => MapIterator<[KeyType, ValueType]>'.
+    Property '[Symbol.dispose]' is missing in type 'IterableIterator<[KeyType, ValueType]>' but required in type 'MapIterator<[KeyType, ValueType]>'.
+node_modules/quick-lru/index.d.ts(134,2): error TS2416: Property 'keys' in type 'QuickLRU<KeyType, ValueType>' is not assignable to the same property in base type 'Map<KeyType, ValueType>'.
+  Type '() => IterableIterator<KeyType>' is not assignable to type '() => MapIterator<KeyType>'.
+    Property '[Symbol.dispose]' is missing in type 'IterableIterator<KeyType>' but required in type 'MapIterator<KeyType>'.
+node_modules/quick-lru/index.d.ts(139,2): error TS2416: Property 'values' in type 'QuickLRU<KeyType, ValueType>' is not assignable to the same property in base type 'Map<KeyType, ValueType>'.
+  Type '() => IterableIterator<ValueType>' is not assignable to type '() => MapIterator<ValueType>'.
+    Property '[Symbol.dispose]' is missing in type 'IterableIterator<ValueType>' but required in type 'MapIterator<ValueType>'.
+node_modules/sanity/lib/VisibleWorkspacesProvider-BdNr2lwx.d.ts(474,49): error TS2307: Cannot find module 'styled-components/dist/types' or its corresponding type declarations.
+node_modules/sanity/lib/_singletons.d.ts(17,24): error TS7016: Could not find a declaration file for module 'semver'. 'node_modules/semver/index.js' implicitly has an 'any' type.
+  Try `npm i --save-dev @types/semver` if it exists or add a new declaration (.d.ts) file containing `declare module 'semver';`
+node_modules/sanity/lib/useDocumentOperationEvent-BHp0rqk9.d.ts(25,34): error TS7016: Could not find a declaration file for module 'lodash-es/throttle.js'. 'node_modules/lodash-es/throttle.js' implicitly has an 'any' type.
+  Try `npm i --save-dev @types/lodash-es` if it exists or add a new declaration (.d.ts) file containing `declare module 'lodash-es/throttle.js';`
+node_modules/sanity/lib/useDocumentOperationEvent-BHp0rqk9.d.ts(1915,32): error TS2307: Cannot find module 'styled-components/dist/types' or its corresponding type declarations.
+node_modules/sanity/lib/useDocumentOperationEvent-BHp0rqk9.d.ts(1922,41): error TS2307: Cannot find module 'styled-components/dist/types' or its corresponding type declarations.
+node_modules/sanity/lib/useDocumentOperationEvent-BHp0rqk9.d.ts(2909,38): error TS2307: Cannot find module 'styled-components/dist/types' or its corresponding type declarations.
+node_modules/styled-components/dist/models/ServerStyleSheet.d.ts(2,37): error TS7016: Could not find a declaration file for module 'react-dom/server'. 'node_modules/react-dom/server.node.js' implicitly has an 'any' type.
+  Try `npm i --save-dev @types/react-dom` if it exists or add a new declaration (.d.ts) file containing `declare module 'react-dom/server';`
+node_modules/styled-components/dist/models/StyleSheetManager.d.ts(2,25): error TS7016: Could not find a declaration file for module 'stylis'. 'node_modules/stylis/dist/umd/stylis.js' implicitly has an 'any' type.
+  Try `npm i --save-dev @types/stylis` if it exists or add a new declaration (.d.ts) file containing `declare module 'stylis';`
+node_modules/styled-components/dist/utils/stylisPluginRSC.d.ts(1,33): error TS7016: Could not find a declaration file for module 'stylis'. 'node_modules/stylis/dist/umd/stylis.js' implicitly has an 'any' type.
+  Try `npm i --save-dev @types/stylis` if it exists or add a new declaration (.d.ts) file containing `declare module 'stylis';`

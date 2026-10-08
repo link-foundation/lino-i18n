@@ -1,0 +1,84 @@
+{
+  "name": "@generaltranslation/react-core-linter",
+  "version": "0.1.15",
+  "description": "ESLint plugin for General Translation React Core integration",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "eslint-plugin",
+    "react-core",
+    "translation",
+    "internationalization",
+    "i18n",
+    "jsx",
+    "react",
+    "typescript"
+  ],
+  "author": "General Translation, Inc.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/generaltranslation/gt.git",
+    "directory": "packages/react-core-linter"
+  },
+  "bugs": {
+    "url": "https://github.com/generaltranslation/gt/issues"
+  },
+  "homepage": "https://generaltranslation.com/",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "patch": "pnpm version patch",
+    "emit-types": "sh ../../scripts/emit-types.sh",
+    "transpile": "tsdown && pnpm run emit-types",
+    "build": "pnpm run transpile",
+    "build:clean": "sh ../../scripts/clean.sh && pnpm run build",
+    "build:release": "pnpm run build:clean",
+    "dev": "tsdown --watch",
+    "release": "pnpm run build:clean && pnpm publish",
+    "release:alpha": "pnpm run build:clean && pnpm publish --tag alpha",
+    "release:beta": "pnpm run build:clean && pnpm publish --tag beta",
+    "release:latest": "pnpm run build:clean && pnpm publish --tag latest",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prepublishOnly": "npm run build:clean",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "eslint": "^8.0.0 || ^9.0.0"
+  },
+  "devDependencies": {
+    "@types/eslint": "^8.56.0",
+    "@types/estree": "^1.0.8",
+    "@types/estree-jsx": "^1.0.5",
+    "@types/node": "catalog:",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "@typescript-eslint/rule-tester": "^8.50.1",
+    "eslint": "^9.0.0",
+    "tsdown": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "dependencies": {
+    "@generaltranslation/icu": "workspace:*",
+    "@typescript-eslint/utils": "^8.50.1"
+  }
+}

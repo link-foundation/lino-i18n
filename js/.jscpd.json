@@ -15,7 +15,8 @@
     "**/docs/case-studies/**/data/**",
     "**/package-lock.json",
     "**/pnpm-lock.yaml",
-    "**/yarn.lock"
+    "**/yarn.lock",
+    "**/.next/**"
   ],
   "format": ["javascript", "typescript", "bash"],
   "reporters": ["console", "html"],

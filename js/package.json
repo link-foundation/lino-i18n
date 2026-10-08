@@ -30,12 +30,108 @@
     "./react": {
       "types": "./src/react.d.ts",
       "import": "./src/react.js"
+    },
+    "./messages": {
+      "types": "./src/messages.d.ts",
+      "import": "./src/messages.js"
+    },
+    "./intl": {
+      "types": "./src/intl.d.ts",
+      "import": "./src/intl.js"
+    },
+    "./server": {
+      "types": "./src/server.d.ts",
+      "import": "./src/server.js"
+    },
+    "./react-server": {
+      "types": "./src/react-server.d.ts",
+      "import": "./src/react-server.js"
+    },
+    "./node": {
+      "types": "./src/node.d.ts",
+      "import": "./src/node.js"
+    },
+    "./tooling": {
+      "types": "./src/tooling.d.ts",
+      "import": "./src/tooling.js"
+    },
+    "./compiler": {
+      "types": "./src/compiler.d.ts",
+      "import": "./src/compiler.js"
+    },
+    "./providers/gt": {
+      "types": "./src/providers/gt.d.ts",
+      "import": "./src/providers/gt.js"
+    },
+    "./next/server": {
+      "types": "./src/next/server.d.ts",
+      "import": "./src/next/server.js"
+    },
+    "./next/client": {
+      "types": "./src/next/client.d.ts",
+      "import": "./src/next/client.js"
+    },
+    "./next/proxy": {
+      "types": "./src/next/proxy.d.ts",
+      "import": "./src/next/proxy.js"
+    },
+    "./vue": {
+      "types": "./src/vue.d.ts",
+      "import": "./src/vue.js"
+    },
+    "./vue/extract": {
+      "types": "./src/vue-extract.d.ts",
+      "import": "./src/vue-extract.js"
+    },
+    "./python/extract": {
+      "types": "./src/python-extract.d.ts",
+      "import": "./src/python-extract.js"
+    },
+    "./remark": {
+      "types": "./src/remark.d.ts",
+      "import": "./src/remark.js"
+    },
+    "./providers/gt-locales": {
+      "types": "./src/providers/gt-locales.d.ts",
+      "import": "./src/providers/gt-locales.js"
+    },
+    "./react-native": {
+      "types": "./src/react-native.d.ts",
+      "import": "./src/react-native.js"
+    },
+    "./tanstack-start/server": {
+      "types": "./src/tanstack-start/server.d.ts",
+      "import": "./src/tanstack-start/server.js"
+    },
+    "./tanstack-start/client": {
+      "types": "./src/tanstack-start/client.d.ts",
+      "import": "./src/tanstack-start/client.js"
+    },
+    "./rrweb": {
+      "types": "./src/rrweb/index.d.ts",
+      "import": "./src/rrweb/index.js"
+    },
+    "./rrweb/catalog": {
+      "types": "./src/rrweb/catalog.d.ts",
+      "import": "./src/rrweb/catalog.js"
+    },
+    "./rrweb/harvest": {
+      "types": "./src/rrweb/harvest.d.ts",
+      "import": "./src/rrweb/harvest.js"
+    },
+    "./rrweb/replay": {
+      "types": "./src/rrweb/replay.d.ts",
+      "import": "./src/rrweb/replay.js"
+    },
+    "./eslint": {
+      "types": "./src/eslint.d.ts",
+      "import": "./src/eslint.js"
     }
   },
   "scripts": {
     "test": "node --throw-deprecation --test --test-timeout=30000 tests/*.test.js",
     "test:browser": "playwright test",
-    "test:types": "tsc --project tests/types/tsconfig.json",
+    "test:types": "tsc --project tests/types/tsconfig.json && tsc --project tests/types/tsconfig.next.json && tsc --project tests/types/tsconfig.native.json && tsc --project tests/types/tsconfig.tanstack.json && tsc --project tests/types/tsconfig.rrweb.json",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
@@ -46,7 +142,11 @@
     "changeset:version": "node scripts/changeset-version.mjs",
     "changeset:publish": "changeset publish",
     "pack:dry-run": "npm pack --dry-run",
-    "lint:secrets": "secretlint \"bin/**\" \"src/**\" \"scripts/**\" \"tests/**\" \"../scripts/**\" \"../rust/scripts/**\" \"../rust/lino-i18n/src/**\" \"../rust/lino-i18n/tests/**\" \"../rust/lino-i18n-macros/src/**\" \"../.github/**\" \"../.githooks/**\""
+    "lint:secrets": "secretlint \"bin/**\" \"src/**\" \"scripts/**\" \"tests/**\" \"../scripts/**\" \"../rust/scripts/**\" \"../rust/lino-i18n/src/**\" \"../rust/lino-i18n/tests/**\" \"../rust/lino-i18n-macros/src/**\" \"../.github/**\" \"../.githooks/**\"",
+    "test:next": "playwright test --config playwright-next.config.js",
+    "build:next": "next build examples/next-usage --webpack",
+    "build:tanstack": "vite build --config examples/tanstack-usage/vite.config.js",
+    "test:tanstack": "playwright test --config playwright-tanstack.config.js"
   },
   "keywords": [
     "i18n",
@@ -74,35 +174,124 @@
     "node": ">=22.11.0"
   },
   "dependencies": {
+    "@babel/generator": "^7.29.8",
+    "@babel/parser": "^7.29.9",
+    "@babel/traverse": "^7.29.10",
+    "@babel/types": "^7.29.8",
+    "@formatjs/icu-messageformat-parser": "^3.5.21",
+    "intl-messageformat": "^12.1.3",
     "links-notation": "^0.23.0",
     "lino-arguments": "^0.3.0",
     "lino-objects-codec": "^0.9.0"
   },
   "devDependencies": {
+    "@babel/core": "^8.0.7",
+    "@babel/eslint-parser": "^8.0.7",
     "@changesets/cli": "^3.0.3",
     "@eslint/js": "^10.0.1",
+    "@generaltranslation/supported-locales": "2.1.41",
     "@playwright/test": "^1.64.0",
+    "@rrweb/record": "2.1.7",
+    "@rrweb/replay": "2.1.7",
+    "@rrweb/types": "2.1.7",
     "@secretlint/secretlint-rule-preset-recommend": "^13.0.7",
+    "@tanstack/react-router": "1.170.41",
+    "@tanstack/react-start": "1.168.60",
     "@testing-library/react": "^16.3.3",
+    "@types/eslint": "^9.6.1",
     "@types/node": "^26.6.4",
     "@types/react": "^19.3.0",
+    "@vitejs/plugin-react": "6.1.2",
+    "@vue/compiler-sfc": "3.5.43",
+    "@vue/server-renderer": "3.5.43",
     "esbuild": "^0.28.2",
     "eslint": "^10.12.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.6",
+    "eslint9": "npm:eslint@^9.39.5",
+    "generaltranslation": "9.5.5",
+    "gt-remark": "1.0.12",
+    "gt-rrweb": "0.2.0",
     "jscpd": "^5.4.0",
     "jsdom": "^30.1.2",
+    "next": "16.4.0",
     "prettier": "^3.9.9",
     "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "react-native-web": "0.21.4",
+    "remark-mdx": "3.1.1",
+    "remark-parse": "11.0.0",
+    "remark-stringify": "11.0.0",
+    "rollup": "^4.64.2",
     "secretlint": "^13.0.7",
+    "srvx": "0.11.22",
     "test-anywhere": "^0.9.1",
-    "typescript": "^7.0.2"
+    "typescript": "^7.0.2",
+    "unified": "11.0.5",
+    "vite": "8.3.4",
+    "vue": "3.5.43"
   },
   "peerDependencies": {
-    "react": ">=18.0.0"
+    "@generaltranslation/supported-locales": ">=2.1.41 <3",
+    "@rrweb/record": ">=2.1 <3",
+    "@rrweb/replay": ">=2.1 <3",
+    "@rrweb/types": ">=2.1 <3",
+    "@tanstack/react-router": ">=1.170 <2",
+    "@tanstack/react-start": ">=1.168 <2",
+    "@vue/compiler-sfc": ">=3.5 <4",
+    "eslint": ">=9 <11",
+    "generaltranslation": ">=9.5.5 <10",
+    "gt-remark": ">=1.0.12 <2",
+    "gt-rrweb": ">=0.2 <0.3",
+    "next": ">=16 <17",
+    "react": ">=18.0.0",
+    "react-dom": ">=18",
+    "vue": ">=3.5 <4"
   },
   "peerDependenciesMeta": {
+    "next": {
+      "optional": true
+    },
+    "generaltranslation": {
+      "optional": true
+    },
     "react": {
+      "optional": true
+    },
+    "vue": {
+      "optional": true
+    },
+    "@vue/compiler-sfc": {
+      "optional": true
+    },
+    "gt-remark": {
+      "optional": true
+    },
+    "@generaltranslation/supported-locales": {
+      "optional": true
+    },
+    "@tanstack/react-start": {
+      "optional": true
+    },
+    "@tanstack/react-router": {
+      "optional": true
+    },
+    "gt-rrweb": {
+      "optional": true
+    },
+    "@rrweb/record": {
+      "optional": true
+    },
+    "@rrweb/replay": {
+      "optional": true
+    },
+    "@rrweb/types": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    },
+    "eslint": {
       "optional": true
     }
   },

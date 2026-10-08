@@ -1,0 +1,132 @@
+"""Collect a pinned upstream capability inventory without running upstream code."""
+import hashlib
+import json
+import subprocess
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+STUDY = ROOT / 'docs/case-studies/issue-25'
+DATA = STUDY / 'data'
+COMMIT = 'fb7584f5548b7454a7c95827de459c684f659d5b'
+TEMPLATE_COMMIT = '1baa3ebb81a09dbe9cdb52244c169404d4377911'
+
+
+def command(*args):
+    return subprocess.check_output(args, cwd=ROOT)
+
+
+def preserve_template():
+    paths = command('git', 'ls-tree', '-r', '--name-only', TEMPLATE_COMMIT, '--',
+                    'docs/case-studies/issue-25').decode().splitlines()
+    for name in paths:
+        original = ROOT / name
+        relative = original.relative_to(STUDY)
+        saved = STUDY / 'template-background' / relative
+        saved.parent.mkdir(parents=True, exist_ok=True)
+        content = command('git', 'show', f'{TEMPLATE_COMMIT}:{name}')
+        saved.write_bytes(content)
+        if original.exists() and original.read_bytes() == content:
+            original.unlink()
+
+
+def collect():
+    preserve_template()
+    DATA.mkdir(parents=True, exist_ok=True)
+    readme = DATA / 'README.md'
+    if readme.exists() and readme.read_text().startswith('<div align="center">'):
+        readme.rename(DATA / 'gt-README.txt')
+    old_readme = DATA / 'gt-README.md'
+    if old_readme.exists():
+        old_readme.rename(DATA / 'gt-README.txt')
+    license_file = DATA / 'gt-LICENSE.md'
+    if license_file.exists():
+        license_file.rename(DATA / 'gt-LICENSE.txt')
+    tree = json.loads(command('gh', 'api',
+                              f'repos/generaltranslation/gt/git/trees/{COMMIT}?recursive=1'))
+    packages = [item['path'] for item in tree['tree']
+                if item['path'].startswith('packages/') and item['path'].endswith('/package.json')
+                and item['path'].count('/') == 2]
+    extra = [
+        'packages/react-core/src/components/derivation/Derive.tsx',
+        'packages/core/src/derive/derive.ts',
+        'packages/core/src/derive/declareVar.ts',
+        'packages/core/src/runtime.ts',
+        'packages/core/src/translate/runtimeTranslate.ts',
+        'packages/core/src/types-dir/api/entry.ts',
+        'packages/core/src/types-dir/api/uploadFiles.ts',
+        'packages/core/src/types-dir/api/file.ts',
+        'packages/format/src/LocaleConfig.ts',
+        'packages/format/src/types.ts',
+        'packages/format/src/locales/customLocaleMapping.ts',
+        'packages/format/src/locales/isSupersetLocale.ts',
+        'packages/vue/src/index.ts',
+        'packages/vue/src/types/index.ts',
+        'packages/vue/src/runtime/spa.ts',
+        'packages/vue/src/runtime/state.ts',
+        'packages/vue/src/rendering/translateVueChildren.ts',
+        'packages/vue/src/composables/strings.ts',
+        'packages/vue/src/components/T.ts',
+        'packages/remark/src/index.ts',
+        'packages/remark/src/plugins/escapeHtmlInTextNodes.ts',
+        'packages/python-extractor/src/index.ts',
+        'packages/python-extractor/src/constants.ts',
+        'packages/python-extractor/src/parseStringExpression.ts',
+        'packages/python-extractor/src/__tests__/fixtures/declare_cartesian.py',
+        'packages/supported-locales/src/index.ts',
+        'packages/python-extractor/src/extractCalls.ts',
+        'packages/python-extractor/src/extractImports.ts',
+        'packages/react-native/src/index.tsx',
+        'packages/react-native/src/hooks/selectors.ts',
+        'packages/react-native/src/utils/nativeStore.ts',
+        'packages/react-native/src/setup/initializeGT.ts',
+        'packages/tanstack-start/src/middleware/gtMiddleware.ts',
+        'packages/tanstack-start/src/index.shared.ts',
+        'packages/tanstack-start/src/index.server.ts',
+        'packages/tanstack-start/src/index.client.ts',
+        'packages/tanstack-start/src/server.ts',
+        'packages/tanstack-start/src/condition-store/AsyncLocalConditionStore.ts',
+        'packages/tanstack-start/src/provider/GTProvider.client.tsx',
+        'packages/tanstack-start/src/setup/initializeGT.server.ts',
+        'packages/tanstack-start/src/setup/initializeGT.client.ts',
+        'packages/sanity/src/index.ts',
+        'packages/sanity/src/types.ts',
+        'packages/sanity/src/configuration/README.md',
+        'packages/rrweb/src/recorder/recorderCore.ts',
+        'packages/rrweb/src/recorder/GTRecorder.tsx',
+        'packages/rrweb/src/recorder/useRecorder.ts',
+        'packages/rrweb/src/replay.ts',
+        'packages/rrweb/src/replay/GTReplayer.tsx',
+        'packages/rrweb/src/replay/player.ts',
+        'packages/rrweb/src/types.ts',
+        'packages/rrweb/src/index.ts',
+        'packages/rrweb/src/harvest.ts',
+        'packages/react-core-linter/src/index.ts',
+        'packages/react-core-linter/src/rules/no-data-attrs-on-branch/index.ts',
+        'packages/react-core-linter/src/rules/static-jsx/index.ts',
+        'packages/react-core-linter/src/rules/static-string/index.ts',
+        'packages/sanity/src/serialization/types.ts',
+        'packages/sanity/src/serialization/BaseDocumentMerger.ts',
+        'packages/sanity/src/serialization/deserialize/BaseDocumentDeserializer.ts',
+        'packages/sanity/src/serialization/serialize/fieldFilters.ts',
+        'packages/sanity/src/components/tab/TranslationsTab.tsx',
+        'packages/sanity/src/serialization/serialize/index.ts',
+    ]
+    existing = [path.name.replace('--', '/') for path in DATA.glob('packages--*')]
+    files = []
+    for source in sorted(set(packages + extra + existing)):
+        target = DATA / source.replace('/', '--')
+        if not target.exists():
+            content = command('gh', 'api', f'repos/generaltranslation/gt/contents/{source}?ref={COMMIT}',
+                              '-H', 'Accept: application/vnd.github.raw+json')
+            target.write_bytes(content)
+        files.append({'path': source, 'file': target.name,
+                      'sha256': hashlib.sha256(target.read_bytes()).hexdigest()})
+    (DATA / 'snapshot.json').write_text(json.dumps({
+        'repository': 'https://github.com/generaltranslation/gt', 'commit': COMMIT,
+        'observed': '2026-10-08', 'license': 'MIT (see gt-LICENSE.txt)',
+        'files': files,
+    }, indent=2) + '\n')
+
+
+if __name__ == '__main__':
+    collect()

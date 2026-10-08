@@ -18,14 +18,19 @@ export default [
         console: 'readonly',
         process: 'readonly',
         Buffer: 'readonly',
+        Headers: 'readonly',
+        setImmediate: 'readonly',
         __dirname: 'readonly',
         __filename: 'readonly',
         require: 'readonly',
         module: 'readonly',
         // Node.js 18+ globals
         fetch: 'readonly',
+        Request: 'readonly',
+        Response: 'readonly',
         URL: 'readonly',
         AbortController: 'readonly',
+        TextEncoder: 'readonly',
         // Runtime-specific globals
         Bun: 'readonly',
         Deno: 'readonly',
@@ -80,6 +85,12 @@ export default [
     files: [
       'examples/universal-app/src/**/*.js',
       'examples/browser-usage/*.js',
+      'examples/react-usage/*.js',
+      'examples/vue-usage/*.js',
+      'examples/native-usage/*.js',
+      'examples/rrweb-usage/*.js',
+      'src/next/client.js',
+      'src/tanstack-start/client.js',
     ],
     languageOptions: {
       globals: {
@@ -91,7 +102,7 @@ export default [
   {
     files: ['tests/browser/*.pw.js'],
     languageOptions: {
-      globals: { URL: 'readonly', Blob: 'readonly' },
+      globals: { URL: 'readonly', Blob: 'readonly', window: 'readonly' },
     },
   },
   {
@@ -103,6 +114,14 @@ export default [
   },
   {
     ignores: [
+      // JSX examples are parsed and exercised by the compiler and browser suite.
+      'examples/compiler-usage/*.jsx',
+      'examples/next-usage/**/*.jsx',
+      'examples/tanstack-usage/**/*.jsx',
+      'examples/tanstack-usage/src/routeTree.gen.ts',
+      'examples/tanstack-usage/dist/**',
+      'examples/tanstack-usage/.tanstack/**',
+      '**/.next/**',
       'node_modules/**',
       '**/node_modules/**',
       'coverage/**',

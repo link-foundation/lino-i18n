@@ -1,10 +1,31 @@
+'use client';
+
 import React, {
   createContext,
   createElement,
   useCallback,
   useContext,
+  useMemo,
   useSyncExternalStore,
 } from 'react';
+import {
+  renderContent,
+  Var,
+  Static,
+  Derive,
+  Branch,
+  Plural as PluralMarker,
+  selectPlural,
+} from './react-content.js';
+import { scopedDictionary } from './dictionary.js';
+import {
+  getLocaleDirection,
+  getLocaleProperties,
+  formatList,
+  formatRelativeTimeFromDate,
+} from './intl.js';
+
+export { Var, Static, Branch, Derive };
 
 const I18nContext = createContext(null);
 
@@ -94,9 +115,9 @@ export function LocaleSelector({ locales, labels = {}, ...props }) {
   );
 }
 
-function Format({ value, formatter, options }) {
-  const locale = useLocale();
-  return new Intl[formatter](locale, options).format(value);
+function Format({ value, children, formatter, options, locale }) {
+  const activeLocale = useFormatLocale(locale);
+  return new Intl[formatter](activeLocale, options).format(children ?? value);
 }
 
 export function NumberFormat(props) {
@@ -107,14 +128,147 @@ export function DateTimeFormat(props) {
   return createElement(Format, { ...props, formatter: 'DateTimeFormat' });
 }
 
-export function RelativeTimeFormat({ value, unit, options }) {
-  const locale = useLocale();
-  return new Intl.RelativeTimeFormat(locale, options).format(value, unit);
+export function RelativeTimeFormat({ value, children, unit, options, locale }) {
+  const activeLocale = useFormatLocale(locale);
+  return new Intl.RelativeTimeFormat(activeLocale, options).format(
+    children ?? value,
+    unit
+  );
 }
 
-export function CurrencyFormat({ value, currency, options }) {
+export function RelativeDate({ value, children, now, locale, options }) {
+  const activeLocale = useFormatLocale(locale);
+  if (now === undefined) {
+    throw new TypeError('RelativeDate requires an explicit now');
+  }
+  return formatRelativeTimeFromDate(
+    children ?? value,
+    now,
+    activeLocale,
+    options
+  );
+}
+
+export function CurrencyFormat({ currency, options, ...props }) {
   return createElement(NumberFormat, {
-    value,
+    ...props,
     options: { style: 'currency', currency, ...options },
   });
 }
+
+export function T(props) {
+  return renderContent(useI18nContext(), props);
+}
+
+export function Plural(props) {
+  return selectPlural(useFormatLocale(props.locale), props);
+}
+// Share the marker identity used by the serializer without invoking hooks there.
+Plural.contentMarker = PluralMarker;
+
+export function useGT() {
+  const i18n = useI18nContext();
+  if (!i18n.gt) {
+    throw new Error('useGT requires a createTranslator instance');
+  }
+  return i18n.gt;
+}
+
+export function useMessages() {
+  return useGT();
+}
+
+export function useTranslations(prefix = '') {
+  const i18n = useI18nContext();
+  return useMemo(() => scopedDictionary(() => i18n, prefix), [i18n, prefix]);
+}
+
+export function useLocales() {
+  return useI18nContext().listLocales();
+}
+
+export function useSetLocale() {
+  const i18n = useI18nContext();
+  return i18n.switchLocale || i18n.setLocale;
+}
+
+export function useLocaleDirection() {
+  const i18n = useI18nContext();
+  return (
+    i18n.getLocaleConfig?.().getLocaleDirection(i18n.getLocale()) ||
+    getLocaleDirection(i18n.getLocale())
+  );
+}
+
+export function useRegion() {
+  return useI18nContext().getRegion?.();
+}
+
+export function useEnabled() {
+  return useI18nContext().getEnabled?.() ?? true;
+}
+
+export function ListFormat({ values, options, locale }) {
+  return formatList(values, useFormatLocale(locale), options);
+}
+
+export function useFormatLocale(locale) {
+  const i18n = useI18nContext();
+  if (locale) {
+    return i18n.getLocaleConfig?.().resolveCanonicalLocale(locale) || locale;
+  }
+  return i18n.getFormatLocale?.() || i18n.getLocale();
+}
+
+export function useDefaultLocale() {
+  return useI18nContext().getDefaultLocale?.() || 'en';
+}
+
+export function useLocaleProperties() {
+  const i18n = useI18nContext();
+  return (
+    i18n.getLocaleConfig?.().getLocaleProperties(i18n.getLocale()) ||
+    getLocaleProperties(i18n.getLocale())
+  );
+}
+
+export function useSetRegion() {
+  return useI18nContext().setRegion;
+}
+
+export function useSetEnabled() {
+  return useI18nContext().setEnabled;
+}
+
+export function RegionSelector({ regions, labels = {}, ...props }) {
+  const i18n = useI18nContext();
+  if (!i18n.setRegion) {
+    throw new Error('RegionSelector requires a createTranslator instance');
+  }
+  return createElement(
+    'select',
+    {
+      'aria-label': 'Region',
+      ...props,
+      value: i18n.getRegion() || '',
+      onChange: (event) => {
+        i18n.setRegion(event.target.value);
+        props.onChange?.(event);
+      },
+    },
+    regions.map((region) =>
+      createElement(
+        'option',
+        { key: region, value: region },
+        labels[region] || region
+      )
+    )
+  );
+}
+
+export {
+  NumberFormat as Num,
+  DateTimeFormat as DateTime,
+  CurrencyFormat as Currency,
+  RelativeTimeFormat as RelativeTime,
+};

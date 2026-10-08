@@ -97,7 +97,9 @@ jobs:
     timeout-minutes: 10
     needs:
       - detect-changes
-    if: github.event_name == 'pull_request' && needs.detect-changes.outputs.any-code-changed == 'true'
+    if: >-
+      !cancelled() && needs.detect-changes.result == 'success' &&
+      github.event_name == 'pull_request' && needs.detect-changes.outputs.any-code-changed == 'true'
     steps:
       - uses: actions/checkout@v7
         with:
@@ -226,6 +228,9 @@ jobs:
           workspaces: rust
       - run: cargo build --locked --manifest-path rust/Cargo.toml --all-targets
       - run: cargo test --locked --manifest-path rust/Cargo.toml --all-targets
+      - name: Test optional ICU runtime on stable Rust
+        if: matrix.toolchain == 'stable'
+        run: cargo test --locked --manifest-path rust/Cargo.toml --all-targets --all-features
       - run: cargo run --locked --manifest-path rust/lino-i18n/Cargo.toml --example basic
     concurrency:
       group: check-rust-${{ github.ref }}-test-${{ matrix.os }}-${{ matrix.toolchain }}

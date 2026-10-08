@@ -361,6 +361,33 @@ fn parse_quoted_value(
     Err(parse_error(path, "unterminated quoted string"))
 }
 
+fn split_key<'a>(line: &'a str, path: &Path) -> Result<(String, Option<&'a str>), LoaderError> {
+    if line.starts_with('"') || line.starts_with('\'') {
+        let quote = line.chars().next().unwrap();
+        let closing = find_closing_quote(line, quote, 1)
+            .ok_or_else(|| parse_error(path, "unterminated quoted catalog key"))?;
+        let tail = &line[closing + 1..];
+        if !tail.is_empty() && !tail.starts_with(char::is_whitespace) {
+            return Err(parse_error(
+                path,
+                "expected whitespace after quoted catalog key",
+            ));
+        }
+        let rest = tail.trim_start();
+        return Ok((
+            unescape_value(&line[1..closing], quote),
+            (!rest.is_empty()).then_some(rest),
+        ));
+    }
+    let mut parts = line.splitn(2, char::is_whitespace);
+    let mut key = parts.next().unwrap_or_default().to_string();
+    let rest = parts.next().map(str::trim_start);
+    if rest.is_none() && key.ends_with(':') {
+        key.pop();
+    }
+    Ok((key, rest))
+}
+
 fn parse_logical_lines(text: &str, path: &Path) -> Result<Vec<LogicalLine>, LoaderError> {
     let normalized = text.replace("\r\n", "\n");
     let lines: Vec<&str> = normalized.lines().collect();
@@ -376,12 +403,7 @@ fn parse_logical_lines(text: &str, path: &Path) -> Result<Vec<LogicalLine>, Load
         }
 
         let indent = count_indent(content);
-        let mut parts = trimmed.splitn(2, char::is_whitespace);
-        let mut key = parts.next().unwrap_or_default().to_string();
-        let rest = parts.next().map(str::trim_start);
-        if rest.is_none() && key.ends_with(':') {
-            key.pop();
-        }
+        let (key, rest) = split_key(trimmed, path)?;
 
         if let Some(rest) = rest {
             if rest.starts_with('"') || rest.starts_with('\'') {
@@ -633,6 +655,15 @@ fn format_tree_lines(tree: &TreeMap, indent: &str, lines: &mut Vec<String>) {
         if key == LABEL_ALIAS_KEY {
             continue;
         }
+        let key = if key.is_empty()
+            || key
+                .chars()
+                .any(|c| c.is_whitespace() || "\"'\\:#".contains(c))
+        {
+            format!("\"{}\"", escape_value(key).replace('\n', "\\n"))
+        } else {
+            key.clone()
+        };
         match value {
             TreeValue::Leaf(text) => {
                 lines.push(format!("{indent}{key} {}", format_value(text, indent)));

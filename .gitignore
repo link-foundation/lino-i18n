@@ -79,6 +79,8 @@ playwright-report/
 
 # Next.js build output
 .next
+.tanstack/
+js/examples/tanstack-usage/src/routeTree.gen.ts
 out
 
 # Nuxt.js build / generate output

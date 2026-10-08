@@ -72,11 +72,19 @@ pub struct I18n {
     locales: BTreeMap<String, HashMap<String, String>>,
     compatibility_aliases: Vec<CompatibilityAlias>,
     on_missing: Option<MissingKeyHandler>,
+    #[cfg(feature = "icu")]
+    pub(crate) message_cache: std::sync::Mutex<HashMap<String, Arc<crate::IcuMessageFormat>>>,
 }
 
 impl std::fmt::Debug for I18n {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.debug_struct("I18n")
+        let mut debug = f.debug_struct("I18n");
+        #[cfg(feature = "icu")]
+        debug.field(
+            "message_cache",
+            &self.message_cache.try_lock().map(|cache| cache.len()).ok(),
+        );
+        debug
             .field("default_locale", &self.default_locale)
             .field("current_locale", &self.current_locale)
             .field("fallback", &self.fallback)
@@ -98,6 +106,8 @@ impl I18n {
             locales: BTreeMap::new(),
             compatibility_aliases: Vec::new(),
             on_missing: None,
+            #[cfg(feature = "icu")]
+            message_cache: std::sync::Mutex::new(HashMap::new()),
         }
     }
 

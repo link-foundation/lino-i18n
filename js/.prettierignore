@@ -12,3 +12,7 @@ reports/
 CLAUDE.md
 # Case study raw data files (downloaded from external sources)
 docs/case-studies/*/data/
+
+**/.next/**
+.tanstack/
+examples/tanstack-usage/src/routeTree.gen.ts

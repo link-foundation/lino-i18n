@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Check terminal gate coverage and invariants shared by every workflow."""
 import json
+import re
 from pathlib import Path
 import yaml
 
@@ -18,6 +19,9 @@ def check(path):
         assert job.get("timeout-minutes"), f"{path}/{name}: missing timeout"
         concurrency = job["concurrency"]
         writer = bool(job.get("permissions", {}).get("contents") == "write" or job.get("permissions", {}).get("pages") == "write")
+        if job.get("needs") and not writer:
+            condition = job.get("if", "")
+            assert re.search(r"\b(?:always|cancelled)\s*\(", condition), f"{path}/{name}: implicit success() skips checks after optional ancestors"
         assert concurrency["cancel-in-progress"] is not writer, f"{path}/{name}: cancellation policy disagrees with writer role"
         if writer:
             assert concurrency.get("queue") == "max", f"{path}/{name}: pending writers can be replaced; require queue: max"

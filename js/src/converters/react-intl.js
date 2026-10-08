@@ -13,35 +13,19 @@
 //     takes `defaultMessage`.
 //   - Compiled AST messages are decompiled back to ICU when possible.
 
+import { printAST } from '@formatjs/icu-messageformat-parser/printer.js';
+
 function decompileAst(ast) {
-  if (typeof ast === 'string') {
-    return ast;
-  }
-  if (!Array.isArray(ast)) {
+  try {
+    // Historical bundles may contain bare strings alongside AST nodes.
+    return printAST(
+      ast.map((node) =>
+        typeof node === 'string' ? { type: 0, value: node } : node
+      )
+    );
+  } catch {
     return null;
   }
-  let out = '';
-  for (const node of ast) {
-    if (typeof node === 'string') {
-      out += node;
-      continue;
-    }
-    if (!node || typeof node !== 'object') {
-      continue;
-    }
-    // FormatJS node shapes: { type: 0, value: 'text' } (literal)
-    // { type: 1, value: 'name' } (argument), etc.
-    if (node.type === 0 && typeof node.value === 'string') {
-      out += node.value;
-    } else if (node.type === 1 && typeof node.value === 'string') {
-      out += `{${node.value}}`;
-    } else if (typeof node.value === 'string') {
-      out += `{${node.value}}`;
-    } else {
-      return null; // cannot represent reliably
-    }
-  }
-  return out;
 }
 
 function normaliseMessage(entry) {

@@ -1,187 +1,184 @@
-# Case Study: Implementing Best Practices from hive-mind (Issue #25)
+# Issue 25: GT capabilities over Links Notation
 
-**Date**: 2026-02-14 (Updated)
-**Issue**: [#25](https://github.com/link-foundation/js-ai-driven-development-pipeline-template/issues/25)
-**Status**: Complete - Detailed comparison added
+[Issue 25](https://github.com/link-foundation/lino-i18n/issues/25) requests full
+React support, a similarly simple code-only API, comparison with General
+Translation (GT), collected evidence, and a plan covering every requirement in
+one pull request. [PR 28](https://github.com/link-foundation/lino-i18n/pull/28)
+implements source messages, rich React translation, optional ICU in Rust,
+request isolation, typed dictionaries, locale configuration, a JSX compiler,
+Next App Router, TanStack Start, Native and Vue/SFC integration, optional replay/GT SDK services and bounded module-aware
+extraction/translation workflows.
 
----
+**This is substantial runtime and tooling coverage, not complete feature parity
+with the entire GT monorepo.** GT also includes hosted services, framework
+packages, CMS integrations and development tools. The
+[requirement matrix](REQUIREMENTS.md) explicitly records those gaps and their
+solution plans. It must remain part of the acceptance review; a working React
+example alone does not satisfy the issue's unrestricted title.
 
-## Executive Summary
+## Research boundary and evidence
 
-This case study analyzes the best practices from the [hive-mind](https://github.com/link-assistant/hive-mind) repository and identifies which practices should be implemented in the `js-ai-driven-development-pipeline-template` repository. The analysis was triggered by two CI/CD incidents documented in issues #1274 and #1278.
+The upstream repository was inspected on 2026-10-08 at commit
+`fb7584f5548b7454a7c95827de459c684f659d5b`. Package manifests, public entrypoints,
+derivation implementations, locale configuration, the issue and recent related
+pull requests are stored under [data](data/README.md). The snapshot records
+SHA-256 checksums, making later upstream changes distinguishable from this study.
+Upstream files retain their MIT license in `data/gt-LICENSE.txt`.
 
----
+The previous contents of this directory described hive-mind template work,
+including unrelated issues 1274 and 1278. They are preserved without editing in
+[template-background](template-background/README.md); they are not evidence for
+this i18n issue.
 
-## Referenced Issues Analysis
+Primary online sources used alongside the saved code:
 
-### Issue #1274: No Release by CI/CD for PR #1273
+- [GT repository and package README](https://github.com/generaltranslation/gt/tree/fb7584f5548b7454a7c95827de459c684f659d5b): package inventory and architecture.
+- [GT React introduction](https://generaltranslation.com/docs/react/introduction) and [T component](https://generaltranslation.com/docs/react/api/components/t): source JSX authoring and runtime expectations.
+- [GT React 10.15.0 release](https://generaltranslation.com/en-GB/blog/gt-react_v10_15_0): derivation and tagged-template authoring.
+- [GT JSX attribute localization change](https://github.com/generaltranslation/gt/pull/2382): configurable attributes are a compiler capability, not just JSX child translation.
+- [FormatJS IntlMessageFormat documentation](https://formatjs.github.io/docs/intl-messageformat/) and [Rust ICU MessageFormat](https://formatjs.github.io/docs/rust/icu-messageformat/): existing parser/runtime capabilities.
+- [Babel parser](https://babeljs.io/docs/babel-parser) and [traverse](https://babeljs.io/docs/babel-traverse): parse real JS/TS/JSX and resolve lexical bindings rather than matching source strings.
+- [React use-client reference](https://react.dev/reference/rsc/use-client): explicit separation of client-hook and server-only exports.
 
-**Root Cause**: Workflow concurrency blocking due to slow ARM64 Docker builds preventing newer workflow runs from starting.
+Documentation pages are mutable; the pinned source files take precedence for
+claims about this particular snapshot. Recent local React/browser PRs and recent
+upstream PR metadata are saved with the issue. No issue comments existed when
+collected. No screenshots were attached to the issue.
 
-**Key Finding**: The `concurrency` configuration without `cancel-in-progress: true` caused workflow runs to queue indefinitely when a slow ARM64 build was running.
+## Root causes of the capability gap
 
-**Solution Applied in hive-mind**:
+The existing runtime translated catalog keys and handled suffix-based plurals.
+The React adapter added context, keyed `Trans`, selectors and Intl components,
+but did not translate source JSX or enumerate all possible branch content.
+Code-only consumers had no deferred source descriptor, full ICU formatting,
+tagged-template translation or extraction pipeline. A regex-based extractor
+would also mistake unrelated calls, comments and shadowed bindings for messages.
 
-```yaml
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: ${{ github.ref == 'refs/heads/main' }}
-```
+The catalog reader treated keys as unquoted tokens, so a source sentence could
+not serve as a key. Nested formatting used plain objects; special property names
+such as `__proto__` could disappear rather than survive a round trip. These were
+format/runtime defects independent of React. Both were reproduced before fixes.
 
-### Issue #1278: CI/CD Not Triggered on PR #1277 Merge
+The compiled React Intl converter reconstructed only part of the ICU AST. It
+could silently drop select branches or formatting details. Reusing the FormatJS
+AST printer fixes the actual conversion loss instead of expanding a partial
+printer branch by branch.
 
-**Root Cause**: Jobs using `if: always()` conditions are immune to GitHub Actions workflow cancellation.
+A further boundary is request state: a global translator would let one request's
+locale change affect another request and produce hydration mismatches. Server
+helpers now create an instance per request and client snapshots carry matching
+catalog state. Loaders also need deduplication, failure retry and ordering guards
+so a slow previous locale selection cannot overwrite the latest selection.
 
-**Key Finding**: Even with `cancel-in-progress: true`, jobs using `always()` continue running, blocking new workflow runs.
+## Implementation choices and alternatives
 
-**Solution Applied in hive-mind**:
-Replace `always()` with `!cancelled()`:
+| Area                 | Alternatives considered                                                       | Chosen approach and reason                                                                                                                                                |
+| -------------------- | ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| JS ICU               | Hand-written parser; ICU subset; FormatJS runtime                             | `intl-messageformat` and its parser/printer preserve nested ICU, skeletons and quotes with maintained implementations.                                                    |
+| Rust ICU             | Reimplement ICU; require new Rust for all users; optional engine              | Optional `formatjs_icu_messageformat` feature. Default Rust 1.87 remains supported; ICU needs 1.92.                                                                       |
+| Extraction           | Regex; TypeScript-only compiler; Babel AST                                    | Babel handles JS/TS/JSX, import aliases and lexical scope with no application execution.                                                                                  |
+| JSX restoration      | HTML-string injection; translation-generated props; code-owned elements       | ICU tags restore only original elements and props. Arbitrary dynamic values are named opaque placeholders.                                                                |
+| Derivation           | Execute application functions; unlimited enumeration; bounded static analysis | Enumerate local/imported static returns/dictionaries/conditionals; fail with diagnostics at 100 variants or 20 levels.                                                    |
+| Framework state      | Global mutable singleton; per-request explicit instance                       | Explicit instances and JSON snapshots make concurrency and hydration testable without framework dependencies.                                                             |
+| Translation services | Embed one vendor SDK; use a provider interface                                | Providers return validated candidates; approved entries are preserved and catalog format stays portable.                                                                  |
+| Compiler integration | Regex wrapping; unbounded evaluation; AST transformation                      | Opt-in Babel transform wraps JSX text/variables and configured attributes, retains source maps and explicit boundaries, and emits matching manifests through Vite/Rollup. |
+| Native browser       | Add npm imports to the browser entry; optional bundled features               | Native browser API remains dependency-free; source ICU and React use separate bundled entries.                                                                            |
 
-```yaml
-# Before (blocks cancellation)
-if: always() && needs.release.result == 'success'
+Known alternatives include GT itself for its hosted/framework workflows,
+FormatJS/react-intl for ICU and React formatting, and i18next for keyed catalogs,
+plugins and middleware. Replacing lino-i18n with one of them would lose its
+Links Notation storage contract. The implementation instead reuses parsing and
+formatting components while keeping catalogs, old APIs and release workflows.
+No service provider is selected on behalf of applications.
 
-# After (allows cancellation)
-if: "!cancelled() && needs.release.result == 'success'"
-```
+## Public workflow
 
----
+1. Author `gt`, `msg`, `T`, `Var`, `Plural`, `Branch` or finite `derive` messages.
+2. Extract static sources into `messages.json` and `en.lino` using the CLI or
+   Vite/Rollup plugin. Diagnostics stop unsupported extraction.
+3. Translate locally or call a provider to write candidate `.lino` catalogs.
+4. Validate ICU, placeholders, tags and missing/unused messages. Compare a
+   previous manifest to review source changes under stable ids.
+5. Load approved catalogs inline or through versioned loaders/cache adapters.
+6. Render with per-app/per-request instances; hydrate from the same snapshot.
 
-## Repository Comparison
+The [source-message guide](../../source-messages.md) documents actual signatures,
+examples and limits. The [framework guide](../../framework-integrations.md)
+documents the tested Next adapter and remaining ecosystem boundaries. The branch supplies minor release fragments for both JS and Rust.
 
-### Files Present in hive-mind but Missing in This Template
+## Reproduction and verification
 
-| Category                           | hive-mind | This Template | Status                       |
-| ---------------------------------- | --------- | ------------- | ---------------------------- |
-| `.dockerignore`                    | Yes       | No            | Optional (Docker not used)   |
-| `.env.example`                     | Yes       | No            | Optional (env vars not used) |
-| `.gitpod.yml`                      | Yes       | No            | Optional                     |
-| `cspell.json`                      | Yes       | No            | Consider adding              |
-| `Dockerfile`                       | Yes       | No            | Optional (Docker not used)   |
-| `docker-compose.yml`               | Yes       | No            | Optional (Docker not used)   |
-| `docs/BEST-PRACTICES.md`           | Yes       | No            | **Recommended**              |
-| `docs/CONTRIBUTING.md`             | Yes       | No            | **Recommended**              |
-| `docs/BRANCH_PROTECTION_POLICY.md` | Yes       | No            | Consider adding              |
-| `docs/FEATURES.md`                 | Yes       | No            | Optional                     |
-| `cleanup-test-repos.yml` workflow  | Yes       | No            | Optional                     |
-| `analyze-issue.md`                 | Yes       | No            | Optional                     |
+The added tests were first run against the old exports and failed because
+source runtime/tooling/server APIs were missing. Specific regressions were then
+reproduced for quoted source keys in JS/Rust, complete compiled ICU conversion,
+prototype-like keys, explicit-id derivation consistency and CLI stale-source
+review. Fixes made those tests pass; adding exports alone was insufficient.
 
-### CI/CD Best Practices Comparison
+| Behavior                                                                        | Automated evidence                                                             |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| Source/descriptors/templates, ICU select/ordinal/offset/skeletons               | `js/tests/messages.test.js`                                                    |
+| Loader deduplication, retry, latest-switch ordering, versions/cache/snapshots   | `js/tests/messages.test.js`                                                    |
+| JSX restoration, safe dynamic values, branches and server content               | `js/tests/react-content.test.js`, `js/tests/server.test.js`                    |
+| Snapshot hydration and catalog/region updates                                   | `js/tests/react.test.js`                                                       |
+| Finite function/dictionary/JSX derivation; cycles and unsupported expressions   | `js/tests/derivation.test.js`                                                  |
+| Aliases, shadowing, descriptors, JSX structure, ICU catalog/provider validation | `js/tests/tooling.test.js`                                                     |
+| CLI extraction/provider/check and real Rollup build                             | `js/tests/tooling-integration.test.js`, `js/experiments/rollup-extraction.mjs` |
+| Quoted and prototype-like catalog keys                                          | `js/tests/source-keys.test.js`, Rust integration tests                         |
+| Full ICU AST conversion                                                         | `js/tests/icu-conversion.test.js`                                              |
+| Native browser loading and locale controls                                      | Existing Playwright browser suite                                              |
+| New public declarations                                                         | `js/tests/types/messages.tsx`                                                  |
+| Rust source/deferred/optional ICU                                               | `rust/lino-i18n/tests/messages.rs`                                             |
 
-| Best Practice                            | hive-mind | This Template | Action Needed                   |
-| ---------------------------------------- | --------- | ------------- | ------------------------------- |
-| Concurrency with cancel-in-progress      | Yes       | Yes           | Already implemented             |
-| Fresh merge simulation                   | Yes       | Yes           | Already implemented             |
-| Use `!cancelled()` instead of `always()` | Yes       | N/A           | Not applicable (no Docker jobs) |
-| Version check for manual changes         | Yes       | Yes           | Already implemented             |
-| Changeset validation                     | Yes       | Yes           | Already implemented             |
-| ESLint max-lines rule                    | Yes       | Yes           | Already implemented             |
-| Code duplication check                   | Yes       | Yes           | Already implemented             |
-| Multi-runtime testing (Node, Bun, Deno)  | Yes       | Yes           | Already implemented             |
-| Cross-platform testing                   | Yes       | Yes           | Already implemented             |
-| OIDC trusted publishing                  | Yes       | Yes           | Already implemented             |
-| Timeout protection for jobs              | Yes       | Partial       | **Review needed**               |
+Local verification runs Node, Bun, Deno, TypeScript, Chromium browser tests,
+ESLint/Prettier/duplication/secrets checks, npm audit, Cargo tests with all
+features, Cargo default-feature MSRV tests, rustfmt and Clippy. CI runs the JS
+runtime/OS matrix and the existing release/workflow checks; the Rust workflow
+adds all-feature tests plus a default-feature Rust 1.87 test. Process test
+timeouts are finite and static derivation limits prevent unbounded expansion.
+The [verification record](VERIFICATION.md) records commands and outcomes.
 
-### Scripts Comparison
+## Visual verification
 
-| Script                        | hive-mind | This Template | Status                       |
-| ----------------------------- | --------- | ------------- | ---------------------------- |
-| `check-version.mjs`           | Yes       | Yes           | Present                      |
-| `create-github-release.mjs`   | Yes       | Yes           | Present                      |
-| `create-manual-changeset.mjs` | Yes       | Yes           | Present                      |
-| `detect-code-changes.mjs`     | Yes       | Yes           | Present                      |
-| `format-github-release.mjs`   | Yes       | Yes           | Present                      |
-| `format-release-notes.mjs`    | Yes       | Yes           | Present                      |
-| `merge-changesets.mjs`        | Yes       | Yes           | Present                      |
-| `publish-to-npm.mjs`          | Yes       | Yes           | Present                      |
-| `setup-npm.mjs`               | Yes       | Yes           | Present                      |
-| `validate-changeset.mjs`      | Yes       | Yes           | Present                      |
-| `version-and-commit.mjs`      | Yes       | Yes           | Present                      |
-| `instant-version-bump.mjs`    | Yes       | Yes           | Present                      |
-| `free-disk-space.mjs`         | Yes       | No            | Optional (for Docker builds) |
-| `helm-release.mjs`            | Yes       | No            | Optional (Helm not used)     |
-| `upload-sourcemaps.mjs`       | Yes       | No            | Optional (Sentry not used)   |
-| `wait-for-npm.mjs`            | Yes       | No            | Optional (for Docker builds) |
+The React example was opened in Chromium and switched from English to French.
+The screenshots preserve both rendered locales at 1000 × 720. Automated browser
+checks and React tests cover the relevant controls; this is a feature demo, not
+a before/after screenshot of a reported visual defect.
 
----
+![English React example](../../screenshots/issue-25-react-en.png)
 
-## Best Practices Already Present in This Template but Not in hive-mind
+![French React example](../../screenshots/issue-25-react-fr.png)
 
-| Best Practice           | Description                                  |
-| ----------------------- | -------------------------------------------- |
-| `changeset-version.mjs` | Custom changeset versioning script           |
-| `js-paths.mjs`          | JavaScript paths utility script              |
-| Experiment scripts      | Test scripts for changesets and formatting   |
-| Type declarations       | `src/index.d.ts` file for TypeScript support |
+## Acceptance limits
 
----
+The optional Next App Router adapter, JSX compiler and published GT SDK bridge
+are implemented and tested, as are Vue/SFC, Python extraction and Native Text
+adapters. TanStack Start middleware, hydration/navigation, recording/replay and
+ESLint source diagnostics are also tested. A Sanity candidate passed seven actual
+framework contracts but was reverted after dependency review found an unpatched
+upstream vulnerability; [the investigation](../../sanity.md) preserves its
+tests, evidence and resumption plan. Dedicated Sanity integration, a
+replacement GT project/CDN backend and GT agent/daemon protocols remain outstanding. The matrix supplies concrete solutions and
+validation plans for them. They cannot be called complete because a generic
+provider or a framework recipe exists. The issue's request for entire-monorepo
+parity remains broader than the implementation, and PR 28 should report that
+boundary rather than automatically close the issue.
 
-## Recommended Changes
+## Python and Markdown integration findings
 
-### High Priority
+Published `@generaltranslation/python-extractor` 0.2.60 reproduces a false
+translation call inside `def unrelated(t)` and silently returns no errors for
+`from gt_flask import t; t("bad"` with an unclosed call. The finite probe is kept
+in `js/experiments/gt-python-contract.mjs` (install that optional upstream package
+to rerun). Our Python extraction uses the standard-library AST with explicit
+lexical binding and syntax checks, and writes the shared manifest without
+executing source. Imported helper resolution and GT-specific context encodings
+remain explicit gaps rather than speculative equivalence.
 
-1. **Add `docs/BEST-PRACTICES.md`** - Reference the universal best practices document that applies to all AI-driven development templates.
-
-2. **Add `docs/CONTRIBUTING.md`** - Provide clear contribution guidelines that include:
-   - Changeset workflow explanation
-   - Code standards and file size limits
-   - Testing requirements
-   - Release process documentation
-
-### Medium Priority
-
-3. **Add spell checking** - Consider adding `cspell.json` for consistent spelling.
-
-4. **Review job timeouts** - Ensure all CI/CD jobs have appropriate `timeout-minutes` settings.
-
-### Low Priority
-
-5. **Add `.gitpod.yml`** for cloud development environment support.
-
-6. **Add `docs/BRANCH_PROTECTION_POLICY.md`** to document recommended branch protection settings.
-
----
-
-## Timeline of Analysis
-
-| Time (UTC)       | Event                                                 |
-| ---------------- | ----------------------------------------------------- |
-| 2026-02-13 23:32 | Issue #25 created                                     |
-| 2026-02-13 23:33 | Analysis started - fetching hive-mind file tree       |
-| 2026-02-13 23:34 | Downloaded case study data for issues #1274 and #1278 |
-| 2026-02-13 23:35 | Completed repository comparison                       |
-| 2026-02-13 23:36 | Created case study documentation                      |
-
----
-
-## Data Files
-
-| File                                                             | Description                                             |
-| ---------------------------------------------------------------- | ------------------------------------------------------- |
-| [DETAILED-COMPARISON.md](./DETAILED-COMPARISON.md)               | **Comprehensive comparison of ALL scripts and configs** |
-| [data/hive-mind-file-tree.txt](./data/hive-mind-file-tree.txt)   | Complete file tree of hive-mind repository              |
-| [data/template-file-tree.txt](./data/template-file-tree.txt)     | Complete file tree of this template                     |
-| [data/issue-1274-case-study.md](./data/issue-1274-case-study.md) | Case study for issue #1274                              |
-| [data/issue-1278-case-study.md](./data/issue-1278-case-study.md) | Case study for issue #1278                              |
-
----
-
-## Conclusion
-
-This template repository already implements most of the critical CI/CD best practices from hive-mind. The main gaps are in documentation (BEST-PRACTICES.md and CONTRIBUTING.md). The CI/CD workflow is well-designed with:
-
-- Proper concurrency handling with cancel-in-progress
-- Fresh merge simulation to detect conflicts early
-- Multi-runtime and cross-platform testing
-- Automated release workflow with OIDC trusted publishing
-
-The template serves as a solid foundation for AI-driven JavaScript development with comprehensive CI/CD automation.
-
----
-
-## References
-
-- [hive-mind Repository](https://github.com/link-assistant/hive-mind)
-- [Issue #1274 Case Study](https://github.com/link-assistant/hive-mind/tree/main/docs/case-studies/issue-1274)
-- [Issue #1278 Case Study](https://github.com/link-assistant/hive-mind/tree/main/docs/case-studies/issue-1278)
-- [Code Architecture Principles](https://github.com/link-foundation/code-architecture-principles)
+`gt-remark` 1.0.12 exports text escaping, GFM and CJK helpers, rather than a
+message-extraction API. The optional entry reuses these implementations. Actual
+MDX parse/stringify/reparse found that remark-stringify escapes the ampersands
+in the helper's generated character references. `preserveEscapedEntities` adds
+a serializer extension so readers recover literal punctuation without affecting
+code or expression nodes. The supported-locale adapter similarly reuses registry
+2.1.41, with regional matches preserved; its 133 service locales do not imply
+available local catalogs. See [usage and limits](../../ecosystem-tools.md).

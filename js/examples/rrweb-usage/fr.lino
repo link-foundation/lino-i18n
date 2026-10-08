@@ -1,0 +1,6 @@
+fr
+  greeting "Bonjour <c0>{name}</c0> !"
+  count "Articles : {count}"
+  "A recorded welcome" "Un accueil enregistré"
+  "Add an item" "Ajouter un article"
+  Ada "Adele"
