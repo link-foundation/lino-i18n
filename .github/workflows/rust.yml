@@ -188,7 +188,7 @@ jobs:
       group: check-rust-${{ github.ref }}-lint-
       cancel-in-progress: true
   test:
-    name: Test (${{ matrix.os }})
+    name: Test (${{ matrix.os }}${{ matrix.toolchain != 'stable' && format(', Rust {0}', matrix.toolchain) || '' }})
     runs-on: ${{ matrix.os }}
     timeout-minutes: 20
     needs:
@@ -202,6 +202,12 @@ jobs:
           - ubuntu-24.04
           - macos-15
           - windows-2025
+        toolchain:
+          - stable
+        include:
+          # Must equal `rust-version` in rust/Cargo.toml (scripts/check-dependency-pins.py).
+          - os: ubuntu-24.04
+            toolchain: '1.87'
     steps:
       - uses: actions/checkout@v6
         with:
@@ -214,7 +220,7 @@ jobs:
         run: bash scripts/simulate-fresh-merge.sh
       - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d
         with:
-          toolchain: stable
+          toolchain: ${{ matrix.toolchain }}
       - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6
         with:
           workspaces: rust
@@ -222,7 +228,7 @@ jobs:
       - run: cargo test --locked --manifest-path rust/Cargo.toml --all-targets
       - run: cargo run --locked --manifest-path rust/lino-i18n/Cargo.toml --example basic
     concurrency:
-      group: check-rust-${{ github.ref }}-test-${{ matrix.os }}
+      group: check-rust-${{ github.ref }}-test-${{ matrix.os }}-${{ matrix.toolchain }}
       cancel-in-progress: true
   package:
     name: Package Dry Run

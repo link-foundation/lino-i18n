@@ -20,5 +20,5 @@ default = ["macros"]
 macros = ["dep:lino-i18n-macros"]
 
 [dependencies]
-lino-objects-codec = "0.2.1"
+lino-objects-codec = "0.8.0"
 lino-i18n-macros = { version = "0.3.0", path = "../lino-i18n-macros", optional = true }

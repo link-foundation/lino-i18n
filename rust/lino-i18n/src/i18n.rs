@@ -6,8 +6,8 @@ use std::sync::Arc;
 
 use crate::format::interpolate;
 use crate::loader::{
-    compatibility_aliases_for_key, load_lino_catalogs, load_lino_directory, parse_lino_catalogs,
-    CompatibilityAlias, LoaderError,
+    CompatibilityAlias, LoaderError, compatibility_aliases_for_key, load_lino_catalogs,
+    load_lino_directory, parse_lino_catalogs,
 };
 use crate::plurals::plural_suffix;
 

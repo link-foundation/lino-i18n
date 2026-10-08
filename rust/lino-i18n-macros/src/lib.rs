@@ -25,7 +25,7 @@ use proc_macro::TokenStream;
 use proc_macro2::TokenStream as TokenStream2;
 use quote::quote;
 use syn::parse::{Parse, ParseStream};
-use syn::{parse_macro_input, LitStr, Token};
+use syn::{LitStr, Token, parse_macro_input};
 
 /// Arguments accepted by the macro:
 ///
@@ -66,7 +66,7 @@ impl Parse for MacroArgs {
                         format!(
                             "unknown argument `{other}` (expected `default`, `fallback`, or `compatibility_aliases`)"
                         ),
-                    ))
+                    ));
                 }
             }
         }

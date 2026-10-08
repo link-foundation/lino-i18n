@@ -7,8 +7,8 @@ members = [
 
 [workspace.package]
 version = "0.3.0"
-edition = "2021"
-rust-version = "1.75"
+edition = "2024"
+rust-version = "1.87"
 license = "Unlicense"
 repository = "https://github.com/link-foundation/lino-i18n"
 homepage = "https://github.com/link-foundation/lino-i18n"
