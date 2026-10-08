@@ -1,4 +1,18 @@
 // Type declarations for the `lino-i18n` package.
+export {
+  createTranslator,
+  msg,
+  derive,
+  declareStatic,
+  formatMessage,
+} from './messages.js';
+export type {
+  Translator,
+  TranslatorOptions,
+  MessageDescriptor,
+  MessageValues,
+} from './messages.js';
+export * from './intl.js';
 
 export type CompatibilityAlias =
   'collapseTail' | 'collapse-tail' | 'parentLabel' | 'parent-label';

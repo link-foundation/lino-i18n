@@ -24,6 +24,8 @@ export default [
         module: 'readonly',
         // Node.js 18+ globals
         fetch: 'readonly',
+        Request: 'readonly',
+        Response: 'readonly',
         URL: 'readonly',
         AbortController: 'readonly',
         // Runtime-specific globals
@@ -80,6 +82,7 @@ export default [
     files: [
       'examples/universal-app/src/**/*.js',
       'examples/browser-usage/*.js',
+      'examples/react-usage/*.js',
     ],
     languageOptions: {
       globals: {

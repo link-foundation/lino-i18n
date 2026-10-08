@@ -59,6 +59,35 @@ function escapeValue(value) {
     .join('\\t');
 }
 
+function formatKey(key) {
+  return !key || /[\s"'\\:#]/.test(key)
+    ? `"${escapeValue(key).replaceAll('\n', '\\n')}"`
+    : key;
+}
+
+function splitKey(line) {
+  if (line.startsWith('"') || line.startsWith("'")) {
+    const quote = line[0];
+    const closing = findClosingQuote(line, quote);
+    if (
+      closing === -1 ||
+      (line[closing + 1] && !/\s/.test(line[closing + 1]))
+    ) {
+      throw new Error('Malformed quoted catalog key');
+    }
+    return [
+      unescapeValue(line.slice(1, closing), quote),
+      line.slice(closing + 1).trimStart() || undefined,
+    ];
+  }
+  const match = /^(\S+)(?:\s+(.*))?$/.exec(line);
+  const key =
+    match[2] === undefined && match[1].endsWith(':')
+      ? match[1].slice(0, -1)
+      : match[1];
+  return [key, match[2]?.trimStart()];
+}
+
 function countIndent(line) {
   let count = 0;
   for (const char of line) {
@@ -182,17 +211,7 @@ function parseLogicalLines(text) {
 
     const indent = countIndent(content);
     const trimmed = content.trimStart();
-    const match = /^(\S+)(?:\s+(.*))?$/.exec(trimmed);
-    if (!match) {
-      index += 1;
-      continue;
-    }
-
-    let key = match[1];
-    const rest = match[2]?.trimStart();
-    if (rest === undefined && key.endsWith(':')) {
-      key = key.slice(0, -1);
-    }
+    const [key, rest] = splitKey(trimmed);
 
     if (rest === undefined) {
       entries.push({ indent, key, value: null });
@@ -404,13 +423,13 @@ function formatTreeLines(tree, indent = '  ') {
     : entries;
   for (const [key, value] of orderedEntries) {
     if (typeof value === 'string') {
-      lines.push(`${indent}${key} ${formatValue(value, indent)}`);
+      lines.push(`${indent}${formatKey(key)} ${formatValue(value, indent)}`);
       continue;
     }
     if (!isPlainObject(value)) {
       continue;
     }
-    lines.push(`${indent}${key}`);
+    lines.push(`${indent}${formatKey(key)}`);
     lines.push(...formatTreeLines(value, `${indent}  `));
   }
   return lines;
@@ -420,7 +439,7 @@ function formatFlatCatalog(locale, translations) {
   const lines = [String(locale)];
   for (const [key, value] of Object.entries(translations || {})) {
     const safe = typeof value === 'string' ? value : String(value);
-    lines.push(`  ${key} ${formatValue(safe, '  ')}`);
+    lines.push(`  ${formatKey(key)} ${formatValue(safe, '  ')}`);
   }
   return lines.join('\n');
 }

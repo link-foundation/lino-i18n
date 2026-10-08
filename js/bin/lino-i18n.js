@@ -30,12 +30,20 @@ function usage() {
     '  convert    Convert i18next / i18n-js / react-intl JSON files to .lino',
     '  check      Compare locales against a reference locale and report missing keys',
     '  t          Translate a key from the CLI for quick debugging',
+    '  extract    Extract source messages and JSX to .lino and a manifest',
+    '  translate-catalog  Generate validated candidates with a provider module',
     '',
     'Run `lino-i18n <command> --help` for command-specific options.',
   ].join('\n');
 }
 
 function commandHelp(command) {
+  if (command === 'extract') {
+    return 'Usage: lino-i18n extract --in <source file or directory> --out <directory> [--locale en]';
+  }
+  if (command === 'translate-catalog') {
+    return 'Usage: lino-i18n translate-catalog --manifest <messages.json> --dir <catalogs> --locale <locale> --provider <module.mjs> --out <locale.lino>';
+  }
   if (command === 'convert') {
     return [
       'Usage: lino-i18n convert --in <path> --out <dir> [options]',
@@ -58,6 +66,7 @@ function commandHelp(command) {
       '  --dir <dir>            Directory containing .lino files',
       '  --reference <locale>   Reference locale to diff against (default: en)',
       '  --config <path>        Read command defaults from a JSON config file',
+      '  --manifest <path>      Validate ICU syntax and variables against extraction',
     ].join('\n');
   }
   if (command === 't') {
@@ -248,6 +257,10 @@ async function commandCheck(flags, log = console.log, err = console.error) {
   }
   const reference = flags.reference || 'en';
   const catalogues = await loadLocalesFromDirectory(flags.dir);
+  if (flags.manifest) {
+    const { checkManifest } = await import('../src/tooling-files.js');
+    return checkManifest(flags.manifest, catalogues, log);
+  }
   if (!catalogues[reference]) {
     err(
       `lino-i18n check: reference locale '${reference}' not found in ${flags.dir}`
@@ -338,18 +351,33 @@ export async function runCli(argv, io = {}) {
   }
   const configuredFlags = await withConfig(command, flags);
   switch (command) {
+    case 'extract': {
+      const { commandExtract } = await import('../src/tooling-files.js');
+      return commandExtract(configuredFlags, log, err);
+    }
+    case 'translate-catalog': {
+      const { commandTranslateCatalog } =
+        await import('../src/tooling-files.js');
+      return commandTranslateCatalog(configuredFlags, log, err);
+    }
     case 'convert':
       return commandConvert(configuredFlags, log, err);
     case 'check':
       return commandCheck(configuredFlags, log, err);
     case 't':
-    case 'translate':
       return commandTranslate(configuredFlags, positional, log, err);
     default:
-      err(`Unknown command: ${command}`);
-      err(usage());
-      return 1;
+      return unknownCommand(command, configuredFlags, positional, log, err);
   }
+}
+
+function unknownCommand(command, flags, rest, log, err) {
+  if (command === 'translate') {
+    return commandTranslate(flags, rest, log, err);
+  }
+  err(`Unknown command: ${command}`);
+  err(usage());
+  return 1;
 }
 
 function isCliEntryPoint() {

@@ -12,6 +12,7 @@ export {
 } from './catalogs.js';
 export { expandCompatibilityAliases } from './compatibility.js';
 export { detectLanguage, resolveLanguage } from './language.js';
+export * from './intl.js';
 
 // Fetch concurrently, then merge in input order. Generate aliases only after
 // merging so a later explicit key always wins over an earlier generated alias.

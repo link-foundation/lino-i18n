@@ -55,3 +55,4 @@ export declare function detectLanguage(
   preference?: string | null,
   options?: LanguageOptions
 ): string;
+export * from './intl.js';

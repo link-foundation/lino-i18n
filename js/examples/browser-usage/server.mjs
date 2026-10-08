@@ -3,6 +3,7 @@ import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath, URL } from 'node:url';
 import { resolve, extname, sep } from 'node:path';
+import { build } from 'esbuild';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const types = {
@@ -21,6 +22,19 @@ const server = createServer(async (request, response) => {
     return;
   }
   try {
+    if (url.pathname === '/examples/react-usage/bundle.js') {
+      const result = await build({
+        entryPoints: [resolve(root, 'examples/react-usage/app.js')],
+        bundle: true,
+        format: 'esm',
+        platform: 'browser',
+        write: false,
+      });
+      response
+        .writeHead(200, { 'Content-Type': 'text/javascript' })
+        .end(result.outputFiles[0].text);
+      return;
+    }
     const body = await readFile(filePath);
     response.writeHead(200, {
       'Content-Type': types[extname(filePath)] || 'application/octet-stream',

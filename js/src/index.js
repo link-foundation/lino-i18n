@@ -26,3 +26,11 @@ export {
   applyContext,
 } from './format.js';
 export { fromI18next, fromI18nJs, fromReactIntl } from './converters/index.js';
+export {
+  createTranslator,
+  msg,
+  derive,
+  declareStatic,
+  formatMessage,
+} from './messages.js';
+export * from './intl.js';

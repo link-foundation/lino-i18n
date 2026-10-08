@@ -1,3 +1,5 @@
+'use client';
+
 import React, {
   createContext,
   createElement,
@@ -5,6 +7,17 @@ import React, {
   useContext,
   useSyncExternalStore,
 } from 'react';
+import {
+  renderContent,
+  Var,
+  Static,
+  Branch,
+  Plural as PluralMarker,
+  selectPlural,
+} from './react-content.js';
+import { getLocaleDirection, getLocaleProperties, formatList } from './intl.js';
+
+export { Var, Static, Branch };
 
 const I18nContext = createContext(null);
 
@@ -95,7 +108,7 @@ export function LocaleSelector({ locales, labels = {}, ...props }) {
 }
 
 function Format({ value, formatter, options }) {
-  const locale = useLocale();
+  const locale = useFormatLocale();
   return new Intl[formatter](locale, options).format(value);
 }
 
@@ -108,7 +121,7 @@ export function DateTimeFormat(props) {
 }
 
 export function RelativeTimeFormat({ value, unit, options }) {
-  const locale = useLocale();
+  const locale = useFormatLocale();
   return new Intl.RelativeTimeFormat(locale, options).format(value, unit);
 }
 
@@ -118,3 +131,105 @@ export function CurrencyFormat({ value, currency, options }) {
     options: { style: 'currency', currency, ...options },
   });
 }
+
+export function T(props) {
+  return renderContent(useI18nContext(), props);
+}
+
+export function Plural(props) {
+  const locale = useLocale();
+  return selectPlural(props.locale || locale, props);
+}
+// Share the marker identity used by the serializer without invoking hooks there.
+Plural.contentMarker = PluralMarker;
+
+export function useGT() {
+  const i18n = useI18nContext();
+  if (!i18n.gt) {
+    throw new Error('useGT requires a createTranslator instance');
+  }
+  return i18n.gt;
+}
+
+export function useMessages() {
+  return useGT();
+}
+
+export function useLocales() {
+  return useI18nContext().listLocales();
+}
+
+export function useSetLocale() {
+  const i18n = useI18nContext();
+  return i18n.switchLocale || i18n.setLocale;
+}
+
+export function useLocaleDirection() {
+  return getLocaleDirection(useLocale());
+}
+
+export function useRegion() {
+  return useI18nContext().getRegion?.();
+}
+
+export function useEnabled() {
+  return useI18nContext().getEnabled?.() ?? true;
+}
+
+export function ListFormat({ values, options }) {
+  return formatList(values, useFormatLocale(), options);
+}
+
+export function useFormatLocale() {
+  const i18n = useI18nContext();
+  return i18n.getFormatLocale?.() || i18n.getLocale();
+}
+
+export function useDefaultLocale() {
+  return useI18nContext().getDefaultLocale?.() || 'en';
+}
+
+export function useLocaleProperties() {
+  return getLocaleProperties(useLocale());
+}
+
+export function useSetRegion() {
+  return useI18nContext().setRegion;
+}
+
+export function useSetEnabled() {
+  return useI18nContext().setEnabled;
+}
+
+export function RegionSelector({ regions, labels = {}, ...props }) {
+  const i18n = useI18nContext();
+  if (!i18n.setRegion) {
+    throw new Error('RegionSelector requires a createTranslator instance');
+  }
+  return createElement(
+    'select',
+    {
+      'aria-label': 'Region',
+      ...props,
+      value: i18n.getRegion() || '',
+      onChange: (event) => {
+        i18n.setRegion(event.target.value);
+        props.onChange?.(event);
+      },
+    },
+    regions.map((region) =>
+      createElement(
+        'option',
+        { key: region, value: region },
+        labels[region] || region
+      )
+    )
+  );
+}
+
+export {
+  NumberFormat as Num,
+  DateTimeFormat as DateTime,
+  CurrencyFormat as Currency,
+  RelativeTimeFormat as RelativeTime,
+};
