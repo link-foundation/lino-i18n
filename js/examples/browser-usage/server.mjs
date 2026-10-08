@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { fileURLToPath, URL } from 'node:url';
 import { resolve, extname, sep } from 'node:path';
 import { build } from 'esbuild';
+import { transformJSX } from '../../src/compiler.js';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const types = {
@@ -22,13 +23,46 @@ const server = createServer(async (request, response) => {
     return;
   }
   try {
-    if (url.pathname === '/examples/react-usage/bundle.js') {
+    if (
+      [
+        '/examples/react-usage/bundle.js',
+        '/examples/compiler-usage/bundle.js',
+      ].includes(url.pathname)
+    ) {
+      const compiled = url.pathname.includes('compiler-usage');
       const result = await build({
-        entryPoints: [resolve(root, 'examples/react-usage/app.js')],
+        entryPoints: [
+          resolve(
+            root,
+            compiled
+              ? 'examples/compiler-usage/app.jsx'
+              : 'examples/react-usage/app.js'
+          ),
+        ],
         bundle: true,
         format: 'esm',
         platform: 'browser',
         write: false,
+        plugins: compiled
+          ? [
+              {
+                name: 'lino-transform',
+                setup(build) {
+                  build.onLoad(
+                    { filter: /compiler-usage\/app\.jsx$/ },
+                    async ({ path }) => ({
+                      contents: transformJSX(await readFile(path, 'utf8'), {
+                        file: path,
+                        attributeTranslator: 'gt',
+                        attributes: ['placeholder', 'aria-label'],
+                      }).code,
+                      loader: 'jsx',
+                    })
+                  );
+                },
+              },
+            ]
+          : [],
       });
       response
         .writeHead(200, { 'Content-Type': 'text/javascript' })

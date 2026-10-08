@@ -10,7 +10,7 @@ import {
 
 const traverse = babelTraverse.default || babelTraverse;
 
-function apiName(path, node, seen = new Set()) {
+export function apiName(path, node, seen = new Set()) {
   if (!node) {
     return undefined;
   }

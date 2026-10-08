@@ -106,6 +106,8 @@ export default [
   },
   {
     ignores: [
+      // JSX examples are parsed and exercised by the compiler and browser suite.
+      'examples/compiler-usage/*.jsx',
       'node_modules/**',
       '**/node_modules/**',
       'coverage/**',

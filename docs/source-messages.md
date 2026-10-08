@@ -293,9 +293,40 @@ import { createExtractionPlugin } from "lino-i18n/compiler";
 export default { plugins: [createExtractionPlugin({ locale: "en" })] };
 ```
 
-The plugin emits `locales/en.lino` and `messages.json`, checks conflicts, and resets its
-state each build. It does not transform application code or generate loaders.
-The CLI can run before builds using other compilers.
+The plugin emits `locales/en.lino` and `messages.json`, checks conflicts, and resets
+its state each build. Extraction alone is its default. Enable `transform` to
+wrap JSX text in `T`, preserve expressions as `Var`, and translate configured
+attributes through an existing in-scope `gt`/`m` function:
+
+```js
+createExtractionPlugin({
+  transform: {
+    attributes: ["placeholder", "aria-label", "title", "alt"],
+    attributeTranslator: "gt",
+    components: { "UI.Button": ["label"] },
+  },
+});
+```
+
+For example, a component with `const gt = useGT()` can author ordinary
+`<p>Hello <strong>{name}</strong>!</p>` and `<input placeholder="Search" />`.
+The compiler retains rich elements/event handlers, evaluates each expression
+once, honors existing `T` boundaries, and emits source maps. Native tags receive
+the configured attributes; custom/namespaced components require explicit
+`components` configuration. Dynamic template attributes become tagged messages;
+other runtime attribute values retain application-owned logic. Selected static
+attributes with prop spreads fail with a diagnostic. The translator must be a
+recognized constant lino function in scope, so shadowed/unrelated functions are
+not called. `autoText: false` enables attribute transformation alone.
+
+`transformJSX(code, options)` is available for other build tools. It preserves
+JSX/TypeScript syntax; run the toolchain's ordinary transpiler afterward.
+`serverTranslator: 'requestI18n'` selects server `T` imports and passes the
+explicit instance. No global state or hooks are injected into application code.
+Run the browser server and open `/examples/compiler-usage/` for a working JSX
+example. Its automated browser test verifies French content, accessible labels,
+locale changes and clicks; the Rollup fixture also verifies expression counts
+and source-map composition.
 
 ## Pure locale utilities and Rust
 

@@ -1,11 +1,15 @@
 // Vite/Rollup plugin emits reviewable .lino catalogs without rewriting app code.
 import { extractMessages } from './extract.js';
 import { formatLinoCatalog } from './catalogs.js';
+import { transformJSX } from './transform-jsx.js';
+
+export { transformJSX };
 
 export function createExtractionPlugin({
   locale = 'en',
   catalogFile = `locales/${locale}.lino`,
   manifestFile = 'messages.json',
+  transform,
 } = {}) {
   const files = new Map();
   return {
@@ -18,12 +22,15 @@ export function createExtractionPlugin({
       if (!/\.[cm]?[jt]sx?(?:\?|$)/.test(id) || id.includes('/node_modules/')) {
         return null;
       }
-      const manifest = extractMessages(code, { file: id });
+      const output = transform
+        ? transformJSX(code, { ...transform, file: id })
+        : null;
+      const manifest = extractMessages(output?.code || code, { file: id });
       if (manifest.diagnostics.length) {
         this.error(JSON.stringify(manifest.diagnostics));
       }
       files.set(id, manifest.messages);
-      return null;
+      return output ? { code: output.code, map: output.map } : null;
     },
     generateBundle() {
       const entries = new Map();

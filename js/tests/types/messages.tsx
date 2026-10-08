@@ -14,7 +14,7 @@ import {
   createLocaleMiddleware,
 } from 'lino-i18n/server';
 import { extractMessages, translateCatalog } from 'lino-i18n/tooling';
-import { createExtractionPlugin } from 'lino-i18n/compiler';
+import { createExtractionPlugin, transformJSX } from 'lino-i18n/compiler';
 import { formatList, getLocaleDirection, LocaleConfig } from 'lino-i18n/intl';
 import { runWithTranslator, getGT } from 'lino-i18n/node';
 const i18n = createTranslator({
@@ -45,6 +45,10 @@ await translateCatalog(
   { locale: 'fr', provider: async () => ({}) }
 );
 createExtractionPlugin({ locale: 'fr' });
+createExtractionPlugin({
+  transform: { attributes: ['placeholder'], attributeTranslator: 'gt' },
+});
+transformJSX('<p>Hello</p>', { file: 'page.tsx' }).code.toUpperCase();
 const config = new LocaleConfig({
   locales: ['company'],
   customMapping: { company: { code: 'fr-CA' } },
