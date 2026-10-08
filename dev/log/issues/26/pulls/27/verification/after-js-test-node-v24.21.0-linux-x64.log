@@ -1,0 +1,75 @@
+v24.21.0
+11.19.0
+
+> lino-i18n@0.3.0 test
+> node --throw-deprecation --test --test-timeout=30000 tests/*.test.js
+
+✔ browser entry loads and merges all locale roots in URL order (35.842067ms)
+✔ browser loader applies compatibility aliases after merging (7.700756ms)
+✔ browser loader handles empty input and reports the failed URL (8.751718ms)
+✔ language resolution respects preferences, regional tags, and fallbacks (1.037837ms)
+✔ detectLanguage uses navigator languages, then language, and works without navigator (7.961154ms)
+✔ a main merge detects source changes before the final docs commit (1459.686477ms)
+✔ PR detection uses all commits, including when the last commit is docs (849.719296ms)
+✔ invalid explicit PR refs fail instead of reporting no changes (547.044844ms)
+✔ a dependency lock change triggers package validation (956.729316ms)
+✔ configuration, hooks and guard experiments trigger validation (3365.042919ms)
+✔ version guard catches monorepo changes and ignores manifest formatting (1338.658066ms)
+✔ convert i18next JSON to .lino (290.621607ms)
+✔ convert can bundle multiple locales into one .lino file (53.322258ms)
+✔ convert reads defaults from a JSON config file (57.220852ms)
+✔ check reports missing keys against a reference locale (22.902048ms)
+✔ t command translates a key with parameters (21.416333ms)
+✔ fromI18next flattens nested keys with dot separator (17.055519ms)
+✔ fromI18next supports namespace shape with `ns:` prefix (20.755631ms)
+✔ fromI18next defaults to provided locale when input is a single catalogue (0.502216ms)
+✔ fromI18nJs rewrites %{var} into {{var}} (0.718079ms)
+✔ fromReactIntl handles plain ICU strings (15.882901ms)
+✔ fromReactIntl extracts defaultMessage (0.736816ms)
+✔ fromReactIntl decompiles compiled AST nodes (0.775126ms)
+✔ interpolate replaces {{var}} and {var} (5.811913ms)
+✔ pluralSuffix follows CLDR rules (5.335734ms)
+✔ parseLinoCatalog round-trips with formatLinoCatalog (35.561213ms)
+✔ parseLinoCatalog flattens nested groups and selector variants (10.701506ms)
+✔ parseLinoCatalog flattens Hive Mind style deep multiline catalogues (5.792727ms)
+✔ parseLinoCatalogs accepts bundled multi-locale files (10.12544ms)
+✔ parseLinoCatalog can expand compatibility aliases while loading (1.533782ms)
+✔ formatLinoCatalog emits nested catalogue syntax by default (2.521985ms)
+✔ formatLinoCatalog preserves scalar parent translations as labels (4.220554ms)
+✔ parseLinoCatalog aliases nested label children to their parent key (1.900956ms)
+✔ label aliases preserve selector suffix groups (0.561608ms)
+✔ createI18n resolves missing keys via fallback (3.34922ms)
+✔ createI18n subscriptions report observable catalogue changes (2.601624ms)
+✔ createI18n applies CLDR plurals per locale (108.455986ms)
+✔ loadLocalesFromDirectory merges bundled and per-language files (49.760964ms)
+✔ createI18n.loadLocaleFile registers bundled locale files (43.987543ms)
+✔ createI18n falls back to onMissingKey when set (1.916094ms)
+✔ createI18n exposes context (gender) suffixes (0.758455ms)
+✔ createI18n exposes namespace-prefixed keys (0.215783ms)
+✔ expandCompatibilityAliases adds migration aliases without overwriting explicit keys (0.489483ms)
+✔ createI18n can expose underscore-tail migration aliases (0.28451ms)
+✔ createI18n resolves label aliases while explicit keys win (0.210622ms)
+✔ npm package dry-run contains the publishable runtime surface (3198.603755ms)
+✔ accepted publish polls through delayed visibility without another write (2.732668ms)
+✔ staged conflict polls once and fails with approval guidance when not public (3.463941ms)
+✔ registry outages stay unknown instead of claiming a missing package (3.523112ms)
+✔ transient command failure retries, permanent authentication failure does not (2.010591ms)
+✔ fresh exact-version metadata distinguishes 404, errors, and malformed responses (2.315149ms)
+✔ provider hooks react to locale changes and support key prefixes (183.716645ms)
+✔ Trans, locale selector, and locale-aware format components compose (232.90399ms)
+✔ hooks fail clearly outside I18nProvider (29.919768ms)
+✔ delivery jobs keep running after optional release gates are skipped (17.899333ms)
+✔ root README advertises package, release, and CI/CD status badges (0.779014ms)
+✔ Rust local path dependencies match the workspace package version (7.495935ms)
+✔ JavaScript GitHub release notes include package and CI/CD badges (1.348967ms)
+✔ actual JS release syncs a detached validated checkout before versioning (5321.625383ms)
+✔ npm recovery rejects tampered archive bytes before invoking commands (13.75415ms)
+✔ merging changesets rejects an invalid fragment before changing files (232.628597ms)
+ℹ tests 61
+ℹ suites 0
+ℹ pass 61
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8862.818835

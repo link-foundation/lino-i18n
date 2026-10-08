@@ -1,0 +1,4 @@
+
+> lino-i18n@0.3.0 lint
+> eslint . --max-warnings 0
+

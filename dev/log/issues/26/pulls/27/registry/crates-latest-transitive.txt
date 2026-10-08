@@ -1,0 +1,2 @@
+links-notation-macro 0.1.0
+nom 8.0.0

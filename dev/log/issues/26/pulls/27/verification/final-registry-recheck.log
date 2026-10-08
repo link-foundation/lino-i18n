@@ -1,0 +1,32 @@
+# 2026-10-08T15:02:07Z final registry re-check at 7d0cedd
+## npm outdated (js/)
+exit=0
+## cargo update --dry-run (rust/)
+    Updating crates.io index
+     Locking 0 packages to latest Rust 1.87 compatible versions
+warning: not updating lockfile due to dry run
+## PyPI PyYAML
+6.0.3
+## GitHub Actions latest releases
+actions/checkout v7.0.1
+actions/setup-node v7.1.0
+actions/upload-artifact v7.0.2
+actions/setup-python v7.0.0
+actions/configure-pages v6.0.0
+actions/upload-pages-artifact v5.0.0
+actions/deploy-pages v5.0.1
+actions/dependency-review-action v5.0.0
+github/codeql-action codeql-bundle-v2.27.2
+lycheeverse/lychee-action v2.9.0
+Swatinem/rust-cache v2.9.2
+peter-evans/create-pull-request v8.1.1
+taiki-e/install-action v2.87.26
+oven-sh/setup-bun v2.2.0
+denoland/setup-deno v2.0.5
+denoland/deno v2.9.7
+oven-sh/bun bun-v1.4.2
+rhysd/actionlint v1.7.12
+fornwall/rust-script 0.36.0
+rustsec/rustsec cvss/v3.0.0
+zizmorcore/zizmor v1.30.1
+Note: github/codeql-action 'latest release' is the CodeQL bundle; the action tag v4.38.3 is in registry/codeql-action-tags.txt. rustsec/rustsec 'latest' is another crate in the monorepo; cargo-audit 0.22.2 is resolved from crates.io (registry/crates-latest.txt).

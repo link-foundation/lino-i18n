@@ -1,0 +1,9 @@
+
+> lino-i18n@0.3.0 format:check
+> prettier --check .
+
+Checking formatting...
+[warn] scripts/pr-comparison.mjs
+[warn] src/catalogs.js
+[warn] src/index.d.ts
+[warn] Code style issues found in 3 files. Run Prettier with --write to fix.

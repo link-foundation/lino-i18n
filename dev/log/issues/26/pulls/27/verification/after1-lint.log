@@ -1,0 +1,14 @@
+
+> lino-i18n@0.3.0 lint
+> eslint . --max-warnings 0
+
+
+/tmp/gh-issue-solver-1791468136225/js/scripts/pr-comparison.mjs
+  40:49  error  Delete `·`  prettier/prettier
+
+/tmp/gh-issue-solver-1791468136225/js/src/catalogs.js
+  175:44  error  Delete `·`  prettier/prettier
+
+✖ 2 problems (2 errors, 0 warnings)
+  2 errors and 0 warnings potentially fixable with the `--fix` option.
+

@@ -1,0 +1,63 @@
+Diff in /tmp/gh-issue-solver-1791468136225/rust/lino-i18n/examples/basic.rs:4:
+ 
+ use std::sync::OnceLock;
+ 
+-use lino_i18n::{i18n, I18n, TOptions};
++use lino_i18n::{I18n, TOptions, i18n};
+ 
+ fn catalog() -> &'static I18n {
+     static C: OnceLock<I18n> = OnceLock::new();
+Diff in /tmp/gh-issue-solver-1791468136225/rust/lino-i18n/src/i18n.rs:6:
+ 
+ use crate::format::interpolate;
+ use crate::loader::{
+-    compatibility_aliases_for_key, load_lino_catalogs, load_lino_directory, parse_lino_catalogs,
+-    CompatibilityAlias, LoaderError,
++    CompatibilityAlias, LoaderError, compatibility_aliases_for_key, load_lino_catalogs,
++    load_lino_directory, parse_lino_catalogs,
+ };
+ use crate::plurals::plural_suffix;
+ 
+Diff in /tmp/gh-issue-solver-1791468136225/rust/lino-i18n/src/lib.rs:45:
+ pub use format::interpolate;
+ pub use i18n::{I18n, MissingKeyHandler, TOptions};
+ pub use loader::{
+-    expand_compatibility_aliases, format_lino_catalog, load_lino_catalog, load_lino_catalogs,
+-    load_lino_directory, parse_lino_catalog, parse_lino_catalogs, Catalogue, CompatibilityAlias,
+-    LoaderError,
++    Catalogue, CompatibilityAlias, LoaderError, expand_compatibility_aliases, format_lino_catalog,
++    load_lino_catalog, load_lino_catalogs, load_lino_directory, parse_lino_catalog,
++    parse_lino_catalogs,
+ };
+-pub use plurals::{plural_category, plural_suffix, PluralCategory};
++pub use plurals::{PluralCategory, plural_category, plural_suffix};
+ 
+ #[cfg(feature = "macros")]
+ pub use lino_i18n_macros::i18n;
+Diff in /tmp/gh-issue-solver-1791468136225/rust/lino-i18n/tests/integration.rs:3:
+ 
+ use std::sync::OnceLock;
+ 
+-use lino_i18n::{i18n, parse_lino_catalog, I18n, TOptions};
++use lino_i18n::{I18n, TOptions, i18n, parse_lino_catalog};
+ 
+ fn macro_catalog() -> &'static I18n {
+     static C: OnceLock<I18n> = OnceLock::new();
+Diff in /tmp/gh-issue-solver-1791468136225/rust/lino-i18n-macros/src/lib.rs:25:
+ use proc_macro2::TokenStream as TokenStream2;
+ use quote::quote;
+ use syn::parse::{Parse, ParseStream};
+-use syn::{parse_macro_input, LitStr, Token};
++use syn::{LitStr, Token, parse_macro_input};
+ 
+ /// Arguments accepted by the macro:
+ ///
+Diff in /tmp/gh-issue-solver-1791468136225/rust/lino-i18n-macros/src/lib.rs:66:
+                         format!(
+                             "unknown argument `{other}` (expected `default`, `fallback`, or `compatibility_aliases`)"
+                         ),
+-                    ))
++                    ));
+                 }
+             }
+         }

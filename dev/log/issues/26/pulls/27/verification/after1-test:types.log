@@ -1,0 +1,4 @@
+
+> lino-i18n@0.3.0 test:types
+> tsc --project tests/types/tsconfig.json
+

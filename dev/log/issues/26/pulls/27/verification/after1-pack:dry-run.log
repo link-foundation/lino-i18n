@@ -1,0 +1,41 @@
+
+> lino-i18n@0.3.0 pack:dry-run
+> npm pack --dry-run
+
+npm notice
+npm notice package: lino-i18n@0.3.0
+npm notice Tarball Contents
+npm notice 1.2kB CHANGELOG.md
+npm notice 1.2kB LICENSE
+npm notice 8.9kB README.md
+npm notice 10.9kB bin/lino-i18n.js
+npm notice 3.2kB package.json
+npm notice 1.6kB src/browser.d.ts
+npm notice 1.8kB src/browser.js
+npm notice 12.9kB src/catalogs.js
+npm notice 2.3kB src/compatibility.js
+npm notice 1.5kB src/converters/detect.js
+npm notice 1.9kB src/converters/i18n-js.js
+npm notice 2.6kB src/converters/i18next.js
+npm notice 463B src/converters/index.js
+npm notice 2.8kB src/converters/react-intl.js
+npm notice 3.3kB src/format.js
+npm notice 4.5kB src/i18n.js
+npm notice 5.3kB src/index.d.ts
+npm notice 919B src/index.js
+npm notice 1.5kB src/language.js
+npm notice 1.9kB src/loaders.js
+npm notice 850B src/node-i18n.js
+npm notice 1.5kB src/react.d.ts
+npm notice 3.1kB src/react.js
+npm notice Tarball Details
+npm notice name: lino-i18n
+npm notice version: 0.3.0
+npm notice filename: lino-i18n-0.3.0.tgz
+npm notice package size: 21.3 kB
+npm notice unpacked size: 76.3 kB
+npm notice shasum: 2a1b284ffbc7fee590368530c031c578bae685a0
+npm notice integrity: sha512-2HnJlooJ5Ze05[...]bImuaP04vSy6w==
+npm notice total files: 23
+npm notice
+lino-i18n-0.3.0.tgz

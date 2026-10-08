@@ -1,0 +1,7 @@
+Value parse (toml 0.8 idiom): error: TOML parse error at line 1, column 10
+  |
+1 | [package]
+  |          ^
+unexpected content, expected nothing
+
+Table parse (toml 1 idiom): version = "1.2.3"

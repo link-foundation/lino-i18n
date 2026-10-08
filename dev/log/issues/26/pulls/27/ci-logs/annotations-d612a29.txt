@@ -1,0 +1,9 @@
+113375357116 Test (macos-26) 1
+113374589768 Test (node 24.x on macos-26) 1
+113374589523 Test (deno on macos-26) 1
+113374589521 Test (bun on macos-26) 1
+113374176554 Product links 1
+
+Annotation messages (all notice level):
+4x notice: Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+1x notice: Summary report available at: https://github.com/link-foundation/lino-i18n/actions/runs/37795617465#summary-113374176554

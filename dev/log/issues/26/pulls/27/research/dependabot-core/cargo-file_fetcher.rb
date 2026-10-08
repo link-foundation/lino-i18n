@@ -1,0 +1,576 @@
+# typed: strict
+# frozen_string_literal: true
+
+require "pathname"
+require "sorbet-runtime"
+require "toml-rb"
+
+require "dependabot/file_fetchers"
+require "dependabot/file_fetchers/base"
+require "dependabot/file_filtering"
+require "dependabot/cargo/file_parser"
+
+# Docs on Cargo workspaces:
+# https://doc.rust-lang.org/cargo/reference/manifest.html#the-workspace-section
+module Dependabot
+  module Cargo
+    class FileFetcher < Dependabot::FileFetchers::Base # rubocop:disable Metrics/ClassLength
+      extend T::Sig
+      extend T::Helpers
+
+      sig { override.params(filenames: T::Array[String]).returns(T::Boolean) }
+      def self.required_files_in?(filenames)
+        filenames.include?("Cargo.toml")
+      end
+
+      sig { override.returns(String) }
+      def self.required_files_message
+        "Repo must contain a Cargo.toml."
+      end
+
+      sig { override.returns(T.nilable(T::Hash[Symbol, T.anything])) }
+      def ecosystem_versions
+        channel = if rust_toolchain
+                    TomlRB.parse(T.must(rust_toolchain).content).dig("toolchain", "channel")
+                  else
+                    "default"
+                  end
+        { package_managers: { "cargo" => channel } }
+      rescue TomlRB::ParseError
+        raise Dependabot::DependencyFileNotParseable.new(
+          T.must(rust_toolchain).path,
+          "only rust-toolchain files formatted as TOML are supported, the non-TOML format was deprecated by Rust"
+        )
+      end
+
+      sig { override.returns(T::Array[DependencyFile]) }
+      def fetch_files
+        fetched_files = T.let([cargo_toml], T::Array[DependencyFile])
+        fetched_files << T.must(cargo_lock) if cargo_lock
+        fetched_files.concat(cargo_configs)
+        fetched_files << T.must(rust_toolchain) if rust_toolchain
+        fetched_files += fetch_path_dependency_and_workspace_files
+        parsed_manifest = parsed_file(cargo_toml)
+        if uses_workspace_dependencies?(parsed_manifest) || workspace_member?(parsed_manifest)
+          workspace_root = find_workspace_root(cargo_toml)
+          fetched_files << workspace_root if workspace_root && !fetched_files.include?(workspace_root)
+        end
+        fetched_files.reject do |file|
+          Dependabot::FileFiltering.should_exclude_path?(file.name, "file from final collection", @exclude_paths)
+        end.uniq
+      end
+
+      private
+
+      sig do
+        params(files: T.nilable(T::Array[Dependabot::DependencyFile])).returns(T::Array[Dependabot::DependencyFile])
+      end
+      def fetch_path_dependency_and_workspace_files(files = nil)
+        fetched_files = files || [cargo_toml]
+        fetched_files += path_dependency_files(fetched_files)
+        @workspace_files ||= T.let({}, T.nilable(T::Hash[String, T::Array[Dependabot::DependencyFile]]))
+        fetched_files += fetched_files.flat_map do |f|
+          @workspace_files[f.name] ||= fetch_workspace_files(file: f, previously_fetched_files: [])
+        end
+        updated_files = fetched_files.reject(&:support_file?).uniq
+        updated_files += fetched_files.uniq.reject { |f| updated_files.map(&:name).include?(f.name) }
+        return updated_files if updated_files == files
+
+        fetch_path_dependency_and_workspace_files(updated_files)
+      end
+
+      sig { params(fetched_files: T::Array[Dependabot::DependencyFile]).returns(T::Array[Dependabot::DependencyFile]) }
+      def path_dependency_files(fetched_files)
+        @path_dependency_files ||= T.let({}, T.nilable(T::Hash[String, T::Array[Dependabot::DependencyFile]]))
+        fetched_path_dependency_files = T.let([], T::Array[Dependabot::DependencyFile])
+        fetched_files.each do |file|
+          @path_dependency_files[file.name] ||= fetch_path_dependency_files(
+            file: file,
+            previously_fetched_files: fetched_files + fetched_path_dependency_files
+          )
+          fetched_path_dependency_files += T.must(@path_dependency_files[file.name])
+        end
+
+        fetched_path_dependency_files
+      end
+
+      sig do
+        params(
+          file: Dependabot::DependencyFile,
+          previously_fetched_files: T::Array[Dependabot::DependencyFile]
+        )
+          .returns(T::Array[Dependabot::DependencyFile])
+      end
+      def fetch_workspace_files(file:, previously_fetched_files:)
+        current_dir = file.name.rpartition("/").first
+        current_dir = nil if current_dir == ""
+
+        files = workspace_dependency_paths_from_file(file).flat_map do |path|
+          path = File.join(current_dir, path) unless current_dir.nil?
+          path = Pathname.new(path).cleanpath.to_path
+
+          next if previously_fetched_files.map(&:name).include?(path)
+          next if file.name == path
+          next if Dependabot::FileFiltering.should_exclude_path?(path, "file from final collection", @exclude_paths)
+
+          fetched_file = fetch_file_from_host(path, fetch_submodules: true)
+          previously_fetched_files << fetched_file
+          grandchild_requirement_files = fetch_workspace_files(
+            file: fetched_file,
+            previously_fetched_files: previously_fetched_files
+          )
+
+          workspace_root = workspace_root_for_file(fetched_file)
+          [fetched_file, *grandchild_requirement_files, workspace_root]
+        end.compact
+
+        files.each { |f| f.support_file = file != cargo_toml }
+        files
+      end
+
+      # rubocop:disable Metrics/PerceivedComplexity
+      sig do
+        params(
+          file: Dependabot::DependencyFile,
+          previously_fetched_files: T::Array[Dependabot::DependencyFile]
+        )
+          .returns(T::Array[Dependabot::DependencyFile])
+      end
+      def fetch_path_dependency_files(file:, previously_fetched_files:)
+        current_dir = file.name.rpartition("/").first
+        current_dir = nil if current_dir == ""
+        unfetchable_required_path_deps = []
+
+        path_dependency_files ||=
+          path_dependency_paths_from_file(file).flat_map do |path|
+            path = File.join(current_dir, path) unless current_dir.nil?
+            path = Pathname.new(path).cleanpath.to_path
+
+            next if previously_fetched_files.map(&:name).include?(path)
+            next if file.name == path
+            next if Dependabot::FileFiltering.should_exclude_path?(path, "file from final collection", @exclude_paths)
+
+            fetched_file = fetch_file_from_host(path, fetch_submodules: true)
+                           .tap { |f| f.support_file = true }
+            previously_fetched_files << fetched_file
+            grandchild_requirement_files = fetch_path_dependency_files(
+              file: fetched_file,
+              previously_fetched_files: previously_fetched_files
+            )
+
+            workspace_root = workspace_root_for_file(fetched_file)
+            [fetched_file, *grandchild_requirement_files, workspace_root]
+          rescue Dependabot::DependencyFileNotFound
+            next unless required_path?(file, path)
+
+            unfetchable_required_path_deps << path
+          end.compact
+
+        return path_dependency_files if unfetchable_required_path_deps.none?
+
+        raise Dependabot::PathDependenciesNotReachable,
+              unfetchable_required_path_deps
+      end
+
+      sig { params(file: Dependabot::DependencyFile).returns(T.nilable(Dependabot::DependencyFile)) }
+      def workspace_root_for_file(file)
+        parsed_manifest = parsed_file(file)
+        return unless workspace_member?(parsed_manifest) || uses_workspace_dependencies?(parsed_manifest)
+
+        find_workspace_root(file)
+      end
+
+      sig { params(dependencies: T::Hash[String, T.anything]).returns(T::Array[String]) }
+      def collect_path_dependencies_paths(dependencies)
+        dependencies.filter_map do |_, details|
+          details = toml_table(details)
+          path = T.cast(details&.fetch("path", nil), T.nilable(String))
+          next unless path
+
+          File.join(path, "Cargo.toml").delete_prefix("/")
+        end
+      end
+
+      # rubocop:enable Metrics/PerceivedComplexity
+      sig { params(file: Dependabot::DependencyFile).returns(T::Array[String]) }
+      def path_dependency_paths_from_file(file)
+        paths = T.let([], T::Array[String])
+
+        workspace = toml_table_or_empty(parsed_file(file).fetch("workspace", {}))
+        Cargo::FileParser::DEPENDENCY_TYPES.each do |type|
+          # Paths specified in dependency declaration
+          paths += collect_path_dependencies_paths(toml_table_or_empty(parsed_file(file).fetch(type, {})))
+          # Paths specified as workspace dependencies in workspace root
+          paths += collect_path_dependencies_paths(toml_table_or_empty(workspace.fetch(type, {})))
+        end
+
+        # Paths specified for target-specific dependencies
+        toml_table_or_empty(parsed_file(file).fetch("target", {})).each do |_, t_details|
+          t_details = toml_table_or_empty(t_details)
+          Cargo::FileParser::DEPENDENCY_TYPES.each do |type|
+            paths += collect_path_dependencies_paths(toml_table_or_empty(t_details.fetch(type, {})))
+          end
+        end
+
+        paths + replacement_path_dependency_paths_from_file(file)
+      end
+
+      sig { params(file: Dependabot::DependencyFile).returns(T::Array[String]) }
+      def replacement_path_dependency_paths_from_file(file)
+        paths = []
+
+        # Paths specified as replacements
+        toml_table_or_empty(parsed_file(file).fetch("replace", {})).each do |_, details|
+          details = toml_table(details)
+          path = T.cast(details&.fetch("path", nil), T.nilable(String))
+          next unless path
+
+          paths << File.join(path, "Cargo.toml")
+        end
+
+        # Paths specified as patches
+        toml_table_or_empty(parsed_file(file).fetch("patch", {})).each do |_, details|
+          details = toml_table(details)
+          next unless details
+
+          details.each do |_, dep_details|
+            dep_details = toml_table(dep_details)
+            path = T.cast(dep_details&.fetch("path", nil), T.nilable(String))
+            next unless path
+
+            paths << File.join(path, "Cargo.toml")
+          end
+        end
+
+        paths
+      end
+
+      # Check if this Cargo manifest uses workspace dependencies
+      # (e.g. dependency = { workspace = true }).
+      sig { params(parsed_manifest: T::Hash[String, T.anything]).returns(T::Boolean) }
+      def uses_workspace_dependencies?(parsed_manifest)
+        # Check regular dependencies
+        workspace_deps = Cargo::FileParser::DEPENDENCY_TYPES.any? do |type|
+          deps = toml_table_or_empty(parsed_manifest.fetch(type, {}))
+          deps.any? do |_, details|
+            details = toml_table(details)
+            next false unless details
+
+            T.cast(details["workspace"], T.nilable(Object)) == true
+          end
+        end
+
+        return true if workspace_deps
+
+        # Check target-specific dependencies
+        toml_table_or_empty(parsed_manifest.fetch("target", {})).any? do |_, target_details|
+          target_details = toml_table_or_empty(target_details)
+          Cargo::FileParser::DEPENDENCY_TYPES.any? do |type|
+            deps = toml_table_or_empty(target_details.fetch(type, {}))
+            deps.any? do |_, details|
+              details = toml_table(details)
+              next false unless details
+
+              T.cast(details["workspace"], T.nilable(Object)) == true
+            end
+          end
+        end
+      end
+
+      # See if this Cargo manifest inherits any property from a workspace
+      # (e.g. edition = { workspace = true }).
+      sig { params(hash: T::Hash[String, T.anything]).returns(T::Boolean) }
+      def workspace_member?(hash)
+        hash.each do |key, value|
+          value = T.cast(value, T.nilable(Object))
+          if key == "workspace" && value == true
+            return true
+          elsif value.is_a?(Hash)
+            return workspace_member?(toml_table_or_empty(value))
+          end
+        end
+        false
+      end
+
+      # Find workspace root of this workspace member, first via package.workspace
+      # manifest key if present, otherwise resort to searching parent directories
+      # up till the repository root.
+      sig do
+        params(workspace_member: Dependabot::DependencyFile).returns(T.nilable(Dependabot::DependencyFile))
+      end
+      def find_workspace_root(workspace_member)
+        current_dir = workspace_member.name.rpartition("/").first
+
+        package = toml_table_or_empty(parsed_file(workspace_member)["package"])
+        workspace_root_dir = T.cast(package["workspace"], T.nilable(String))
+        unless workspace_root_dir.nil?
+          workspace_root = fetch_file_from_host(
+            File.join(current_dir, workspace_root_dir, "Cargo.toml"),
+            fetch_submodules: true
+          )
+          return workspace_root if parsed_file(workspace_root)["workspace"]
+
+          # To avoid accidentally breaking backward compatibility, we don't throw errors
+          return nil
+        end
+
+        parent_dirs = current_dir.scan("/").length
+        while parent_dirs >= 0
+          current_dir = File.join(current_dir, "..")
+          begin
+            parent_manifest = fetch_file_from_host(
+              File.join(current_dir, "Cargo.toml"),
+              fetch_submodules: true
+            )
+            return parent_manifest if parsed_file(parent_manifest)["workspace"]
+          rescue Dependabot::DependencyFileNotFound
+            # Cargo.toml not found in this parent, keep searching up
+          end
+          parent_dirs -= 1
+        end
+
+        # To avoid accidentally breaking backward compatibility, we don't throw errors
+        nil
+      end
+
+      sig { params(file: Dependabot::DependencyFile).returns(T::Array[String]) }
+      def workspace_dependency_paths_from_file(file)
+        workspace = toml_table(parsed_file(file)["workspace"])
+        return path_dependency_paths_from_file(file) if workspace && !workspace.key?("members")
+
+        workspace_paths = T.cast(workspace&.fetch("members", nil), T.nilable(T::Array[String]))
+        return [] unless workspace_paths&.any?
+
+        # Expand any workspace paths that specify a `*`
+        workspace_paths = workspace_paths.flat_map do |path|
+          path.include?("*") ? expand_workspaces(path) : [path]
+        end
+
+        # Excluded paths, to be subtracted for the workspaces array
+        excluded_paths = workspace_excluded_paths(workspace)
+
+        (workspace_paths - excluded_paths).map do |path|
+          File.join(path, "Cargo.toml")
+        end
+      end
+
+      # Check whether a path is required or not. It will not be required if
+      # an alternative source (i.e., a git source) is also specified
+      # rubocop:disable Metrics/PerceivedComplexity
+      sig { params(file: Dependabot::DependencyFile, path: String).returns(T::Boolean) }
+      def required_path?(file, path)
+        # Paths specified in dependency declaration
+        Cargo::FileParser::DEPENDENCY_TYPES.each do |type|
+          toml_table_or_empty(parsed_file(file).fetch(type, {})).each do |_, details|
+            return true if required_dependency_details?(details, path)
+          end
+        end
+
+        # Paths specified for target-specific dependencies
+        toml_table_or_empty(parsed_file(file).fetch("target", {})).each do |_, t_details|
+          t_details = toml_table_or_empty(t_details)
+          Cargo::FileParser::DEPENDENCY_TYPES.each do |type|
+            toml_table_or_empty(t_details.fetch(type, {})).each do |_, details|
+              return true if required_dependency_details?(details, path)
+            end
+          end
+        end
+
+        # Paths specified for workspace-wide dependencies
+        workspace = toml_table_or_empty(parsed_file(file).fetch("workspace", {}))
+        toml_table_or_empty(workspace.fetch("dependencies", {})).each do |_, details|
+          return true if required_dependency_details?(details, path)
+        end
+
+        # Paths specified as replacements
+        toml_table_or_empty(parsed_file(file).fetch("replace", {})).each do |_, details|
+          return true if required_dependency_details?(details, path)
+        end
+
+        false
+      end
+      # rubocop:enable Metrics/PerceivedComplexity
+
+      sig { params(path: String).returns(T::Array[String]) }
+      def expand_workspaces(path)
+        path = Pathname.new(path).cleanpath.to_path
+        dir = directory.gsub(%r{(^/|/$)}, "")
+        unglobbed_path = (path.split("*").first || "").gsub(%r{(?<=/)[^/]*$}, "")
+        repo_contents(dir: unglobbed_path, raise_errors: false)
+          .select { |file| file.type == "dir" }
+          .map { |f| f.path.gsub(%r{^/?#{Regexp.escape(dir)}/?}, "") }
+          .select { |filename| File.fnmatch?(path, filename) }
+      end
+
+      sig { params(file: Dependabot::DependencyFile).returns(T::Hash[String, T.anything]) }
+      def parsed_file(file)
+        TomlRB.parse(file.content)
+      rescue TomlRB::ParseError, TomlRB::ValueOverwriteError
+        raise Dependabot::DependencyFileNotParseable, file.path
+      end
+
+      sig { params(workspace: T.nilable(T::Hash[String, T.anything])).returns(T::Array[String]) }
+      def workspace_excluded_paths(workspace)
+        (T.cast(workspace&.fetch("excluded_paths", nil), T.nilable(T::Array[String])) || []) +
+          (T.cast(workspace&.fetch("exclude", nil), T.nilable(T::Array[String])) || [])
+      end
+
+      sig { params(details: T.anything, path: String).returns(T::Boolean) }
+      def required_dependency_details?(details, path)
+        details = toml_table(details)
+        dependency_path = T.cast(details&.fetch("path", nil), T.nilable(String))
+        return false unless details && dependency_path
+        return false unless path == File.join(dependency_path, "Cargo.toml")
+
+        T.cast(details["git"], T.nilable(Object)).nil?
+      end
+
+      # Returns the value as a TOML table (Hash) when it is one, otherwise nil.
+      # TOML dependency values are polymorphic (e.g. `foo = "1.0"` is a String
+      # while `foo = { version = "1.0" }` is a table), so callers must narrow at
+      # runtime rather than assert a type with T.cast (which would raise).
+      sig { params(value: T.anything).returns(T.nilable(T::Hash[String, T.anything])) }
+      def toml_table(value)
+        obj = T.cast(value, T.nilable(Object))
+        obj.is_a?(Hash) ? obj : nil
+      end
+
+      sig { params(value: T.anything).returns(T::Hash[String, T.anything]) }
+      def toml_table_or_empty(value)
+        toml_table(value) || {}
+      end
+
+      sig { returns(Dependabot::DependencyFile) }
+      def cargo_toml
+        @cargo_toml ||= T.let(fetch_file_from_host("Cargo.toml"), T.nilable(Dependabot::DependencyFile))
+      end
+
+      sig { returns(T.nilable(Dependabot::DependencyFile)) }
+      def cargo_lock
+        @cargo_lock ||= T.let(fetch_file_if_present("Cargo.lock"), T.nilable(Dependabot::DependencyFile))
+      end
+
+      # Cargo merges configuration hierarchically: it reads `.cargo/config.toml`
+      # from the package directory *and* every ancestor directory up to the repo
+      # root, combining them. We therefore collect all of them so that registries
+      # (and other settings) defined higher up the tree are not dropped.
+      #
+      # The package-directory config keeps the canonical name `.cargo/config.toml`
+      # (single-config consumers rely on this). Ancestor configs keep their
+      # relative `../` paths so they are written to the correct location and can
+      # be merged by Cargo. When the package directory has no config of its own,
+      # the nearest ancestor is promoted to the canonical name to preserve the
+      # historical behaviour that downstream consumers depend on.
+      sig { returns(T::Array[Dependabot::DependencyFile]) }
+      def cargo_configs
+        return T.must(@cargo_configs) if defined?(@cargo_configs)
+
+        configs = T.let([], T::Array[Dependabot::DependencyFile])
+        local = local_cargo_config
+        parents = parent_dir_cargo_configs
+
+        if local
+          configs << local
+          configs.concat(parents)
+        elsif parents.any?
+          effective = T.must(parents.first)
+          effective.name = ".cargo/config.toml"
+          configs << effective
+          configs.concat(parents.drop(1))
+        end
+
+        @cargo_configs = T.let(configs, T.nilable(T::Array[Dependabot::DependencyFile]))
+        configs
+      end
+
+      sig { returns(T.nilable(Dependabot::DependencyFile)) }
+      def cargo_config
+        cargo_configs.find { |f| f.name == ".cargo/config.toml" }
+      end
+
+      sig { returns(T.nilable(Dependabot::DependencyFile)) }
+      def local_cargo_config
+        return @local_cargo_config if defined?(@local_cargo_config)
+
+        @local_cargo_config = fetch_support_file(".cargo/config.toml")
+        @local_cargo_config ||= T.let(
+          fetch_support_file(".cargo/config")&.tap { |f| f.name = ".cargo/config.toml" },
+          T.nilable(Dependabot::DependencyFile)
+        )
+      end
+
+      sig { returns(T.nilable(Dependabot::DependencyFile)) }
+      def rust_toolchain
+        return @rust_toolchain if defined?(@rust_toolchain)
+
+        @rust_toolchain = fetch_support_file("rust-toolchain")
+        @rust_toolchain ||= T.let(
+          fetch_support_file("rust-toolchain.toml")&.tap { |f| f.name = "rust-toolchain" },
+          T.nilable(Dependabot::DependencyFile)
+        )
+      end
+
+      sig { override.params(filename: T.any(Pathname, String)).returns(Dependabot::DependencyFile) }
+      def load_cloned_file_if_present(filename)
+        super.tap { |f| f.name = Pathname.new(f.name).cleanpath.to_s.gsub(%r{^/+}, "") }
+      end
+
+      sig do
+        override.params(
+          filename: T.any(Pathname, String),
+          type: String,
+          fetch_submodules: T::Boolean
+        ).returns(Dependabot::DependencyFile)
+      end
+      def fetch_file_from_host(filename, type: "file", fetch_submodules: false)
+        super.tap { |f| f.name = Pathname.new(f.name).cleanpath.to_s.gsub(%r{^/+}, "") }
+      end
+
+      sig { returns(T::Array[Dependabot::DependencyFile]) }
+      def parent_dir_cargo_configs
+        return T.must(@parent_dir_cargo_configs) if defined?(@parent_dir_cargo_configs)
+
+        configs = T.let([], T::Array[Dependabot::DependencyFile])
+        @parent_dir_cargo_configs = T.let(configs, T.nilable(T::Array[Dependabot::DependencyFile]))
+        return configs if directory.empty?
+
+        # Count directory depth to determine how many levels to search up
+        depth = directory.split("/").count { |s| !s.empty? }
+        return configs if depth.zero?
+
+        # Collect a config from every ancestor directory that has one, nearest first
+        depth.times do |i|
+          parent_path = ([".."] * (i + 1)).join("/")
+          config = try_fetch_config_at_path(parent_path)
+          configs << config if config
+        end
+
+        configs
+      end
+
+      sig { params(parent_path: String).returns(T.nilable(Dependabot::DependencyFile)) }
+      def try_fetch_config_at_path(parent_path)
+        [".cargo/config.toml", ".cargo/config"].each do |config_name|
+          full_path = File.join(parent_path, config_name)
+          Dependabot.logger.debug("Attempting to fetch config from: #{full_path}")
+          config = fetch_file_from_host(
+            full_path,
+            fetch_submodules: false
+          )
+          Dependabot.logger.debug("Successfully fetched config from: #{full_path}")
+          config.support_file = true
+          # Normalise `.cargo/config` to `.cargo/config.toml` while preserving the
+          # relative `../` path so the file is written to the right location.
+          config.name = Pathname.new(File.join(parent_path, ".cargo/config.toml")).cleanpath.to_s
+          return config
+        rescue Dependabot::DependencyFileNotFound
+          Dependabot.logger.debug("No config found at: #{full_path}")
+          next
+        end
+        nil
+      end
+    end
+  end
+end
+
+Dependabot::FileFetchers.register("cargo", Dependabot::Cargo::FileFetcher)
