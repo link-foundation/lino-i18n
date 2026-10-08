@@ -29,11 +29,11 @@ Run JavaScript commands from `js/` and other commands from the repository root.
 
 | Command                                                                                                              | Result                                                                                                                                                                                        |
 | -------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `npm test`                                                                                                           | 159 tests pass with a 30-second per-test timeout.                                                                                                                                             |
-| `bun test --timeout 30000`                                                                                           | 159 tests pass.                                                                                                                                                                               |
-| `deno test --no-check --allow-read --allow-write --allow-env --allow-run`                                            | 159 tests pass. Node subprocesses run CLI/Rollup build integration fixtures.                                                                                                                  |
-| `npm run test:types`                                                                                                 | Core declarations compile with the existing strict check; optional Vue and Next usage compile with the framework type configuration.                                                          |
-| `npm run test:browser`                                                                                               | Six Chromium tests pass, including React source content switching and native browser export/tree shaking.                                                                                     |
+| `npm test`                                                                                                           | 187 tests pass with a 30-second per-test timeout.                                                                                                                                             |
+| `bun test --timeout 30000`                                                                                           | 187 tests pass.                                                                                                                                                                               |
+| `deno test --no-check --allow-read --allow-write --allow-env --allow-run`                                            | 187 tests pass. Node subprocesses run CLI/Rollup build integration fixtures.                                                                                                                  |
+| `npm run test:types`                                                                                                 | Five strict configurations compile core, Vue, Next, Native, Start, replay and lint positive/negative API usage.                                                          |
+| `npm run test:browser`                                                                                               | Nine Chromium tests pass, covering native browser, React, compiler, Vue, Native Text and replay.                                                                                     |
 | `npm run build:next` and `LINO_NEXT_PRODUCTION=1 npm run test:next`                                                  | Production Next 16.4.0 build generates both locale static pages; four Chromium tests cover hydration, request/cache isolation, cookies, navigation, metadata and document language/direction. |
 | `node experiments/gt-sdk-contract.mjs`                                                                               | Published GT 9.5.5 SDK sends real HTTP runtime, upload and versioned-download contracts to an isolated loopback fixture.                                                                      |
 | `npm run check`                                                                                                      | ESLint, Prettier and duplication checks pass.                                                                                                                                                 |
@@ -277,3 +277,35 @@ Deno tests, all five strict type configurations, nine Chromium tests, the runnab
 ESLint example, lint/format/duplication, secrets, docs and policy/pin checks pass.
 The installed development dependency graph has zero reported npm vulnerabilities.
 The final suggestion test also prevents shadowing an existing global identifier.
+
+## Sanity contract and upstream limits
+
+The absent Sanity entry first reproduced `ERR_MODULE_NOT_FOUND`. Actual GT
+4.0.24 decoding then regenerated the Portable Text span key instead of `span1`;
+the document import regression now preserves that key and its strong mark. A
+second regression returned a title-only plan when the target's block array was
+empty, silently losing the translated block. The bridge now rejects missing
+target array keys before calling GT's merger. Tests also preserve excluded
+localized fields, immutable inputs and target metadata, reject stale revisions
+and markup/field injection, and verify a real Sanity client's `ifRevisionID`
+patch against a loopback HTTP server.
+
+The isolated `js/examples/sanity-usage` consumer tests the installed local package,
+actual Sanity/schema 6.18.0 and the published serializer/merger exports. Its
+seven runtime tests and positive/negative consumer type checks run in the
+existing Chromium CI job. Studio declarations require `skipLibCheck` after
+actual upstream GROQ, QuickLRU and type-import errors;
+[saved diagnostics](data/sanity-type-errors.txt) record that limit. Core's five
+type configurations retain strict library checks.
+
+A fresh audit reported 19 upstream Studio/CLI advisories (nine high, ten
+moderate); the [saved advisory report](data/sanity-advisories.json) includes
+their exact links and affected ranges. Published braces 3.0.3 and sprintf-js
+1.1.3 remain the registry maxima and have no compatible patched release in
+this graph. Core's separate clean install/audit reports zero vulnerabilities.
+The optional graph's advisories are unresolved; isolation does not repair them.
+No authenticated Studio, hosted translation or document publication was tested.
+
+See [Sanity usage and bounds](../../sanity.md), including the 1,000-item array
+limit that bounds the upstream keyed merger. The requirement matrix retains
+hosted service, deployment, Python runtime and agent/daemon acceptance limits.

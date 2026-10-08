@@ -153,8 +153,10 @@ a before/after screenshot of a reported visual defect.
 The optional Next App Router adapter, JSX compiler and published GT SDK bridge
 are implemented and tested, as are Vue/SFC, Python extraction and Native Text
 adapters. TanStack Start middleware, hydration/navigation, recording/replay and
-ESLint source diagnostics are also tested. Dedicated Sanity integration, a
-replacement GT project/CDN backend and GT agent/daemon protocols remain outstanding. The matrix supplies concrete solutions and
+ESLint source diagnostics are also tested. The optional Sanity entry preserves
+actual upstream exports and supplies revision-bound document/field catalog
+transport; authenticated Studio publication is unverified. A replacement GT
+project/CDN backend and GT agent/daemon protocols remain outstanding. The matrix supplies concrete solutions and
 validation plans for them. They cannot be called complete because a generic
 provider or a framework recipe exists. The issue's request for entire-monorepo
 parity remains broader than the implementation, and PR 28 should report that

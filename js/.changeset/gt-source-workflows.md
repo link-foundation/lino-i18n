@@ -27,3 +27,5 @@ Add optional TanStack Start request middleware and Router hydration/navigation a
 Add optional rrweb recording/replay over `.lino` catalogs using the published GT player/recorder, bounded ICU harvesting, stable variable leaves and protected source values, with an actual browser privacy/playback regression.
 
 Add an optional ESLint flat-config plugin sharing the static extractor, with source/JSX/headless-Branch diagnostics, explicit named-variable suggestions and bounded analysis.
+
+Add optional published GT Sanity exports and bounded document/legacy-field `.lino` transport with preserved Portable Text span keys and revision-guarded mutation plans, tested against actual framework serializers and a loopback client.

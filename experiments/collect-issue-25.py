@@ -105,6 +105,10 @@ def collect():
         'packages/react-core-linter/src/rules/static-jsx/index.ts',
         'packages/react-core-linter/src/rules/static-string/index.ts',
         'packages/sanity/src/serialization/types.ts',
+        'packages/sanity/src/serialization/BaseDocumentMerger.ts',
+        'packages/sanity/src/serialization/deserialize/BaseDocumentDeserializer.ts',
+        'packages/sanity/src/serialization/serialize/fieldFilters.ts',
+        'packages/sanity/src/components/tab/TranslationsTab.tsx',
         'packages/sanity/src/serialization/serialize/index.ts',
     ]
     existing = [path.name.replace('--', '/') for path in DATA.glob('packages--*')]

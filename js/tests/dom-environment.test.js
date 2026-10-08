@@ -5,7 +5,7 @@ test('the browser test environment supports Native Web styles and restores globa
   const script = `
     import assert from 'node:assert/strict';
     import { setupDOM } from './tests/helpers/dom.js';
-    const keys = ['window', 'document', 'HTMLElement', 'ShadowRoot', 'IS_REACT_ACT_ENVIRONMENT'];
+    const keys = ['window', 'document', 'HTMLElement', 'ShadowRoot', 'DOMParser', 'Element', 'Node', 'IS_REACT_ACT_ENVIRONMENT'];
     const originals = keys.map(key => Object.getOwnPropertyDescriptor(globalThis, key));
     const dispose = setupDOM();
     await import('react-native-web');

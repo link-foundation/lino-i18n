@@ -340,6 +340,11 @@
       "sha256": "27b7ea9e2fa772755d3ec8cae964f40a96b17d5ea306f2069c89a6bd92ba5057"
     },
     {
+      "path": "packages/sanity/src/components/tab/TranslationsTab.tsx",
+      "file": "packages--sanity--src--components--tab--TranslationsTab.tsx",
+      "sha256": "c01ef4a6ba61a53403dd3948061f16508da8efc61675c0e948bd1b2eccc9823c"
+    },
+    {
       "path": "packages/sanity/src/configuration/README.md",
       "file": "packages--sanity--src--configuration--README.md",
       "sha256": "5e1f4df44ba9d46743dcf97291a744be763b6a159f75e7aa3c706ceb8ed43824"
@@ -348,6 +353,21 @@
       "path": "packages/sanity/src/index.ts",
       "file": "packages--sanity--src--index.ts",
       "sha256": "8f5f46a2bbec8e26d80db256fa1ea3aaf298a0d1671b67e7aeb2d205703d8d18"
+    },
+    {
+      "path": "packages/sanity/src/serialization/BaseDocumentMerger.ts",
+      "file": "packages--sanity--src--serialization--BaseDocumentMerger.ts",
+      "sha256": "06ce3509d4b7847bb44bad714caa12be43f67f35cbaf4238ecc49dc7bf6c8975"
+    },
+    {
+      "path": "packages/sanity/src/serialization/deserialize/BaseDocumentDeserializer.ts",
+      "file": "packages--sanity--src--serialization--deserialize--BaseDocumentDeserializer.ts",
+      "sha256": "4c466f8abce0b7bfebe4d617556e1fd8466ea4dc93c6eb281e6de017e938ced2"
+    },
+    {
+      "path": "packages/sanity/src/serialization/serialize/fieldFilters.ts",
+      "file": "packages--sanity--src--serialization--serialize--fieldFilters.ts",
+      "sha256": "e5c2e56ce0d44776a35cbe63a7dba10b12553c8ead50083655c3701794117584"
     },
     {
       "path": "packages/sanity/src/serialization/serialize/index.ts",

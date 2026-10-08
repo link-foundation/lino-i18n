@@ -8,6 +8,9 @@ export function setupDOM() {
     document: dom.window.document,
     HTMLElement: dom.window.HTMLElement,
     ShadowRoot: dom.window.ShadowRoot,
+    DOMParser: dom.window.DOMParser,
+    Element: dom.window.Element,
+    Node: dom.window.Node,
   };
   const originals = new Map();
   for (const [key, value] of Object.entries(values)) {

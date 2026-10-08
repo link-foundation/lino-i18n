@@ -389,6 +389,12 @@ jobs:
         run: npm run test:tanstack
         env:
           LINO_TANSTACK_PRODUCTION: "1"
+      - name: Install the optional Sanity contract fixture
+        run: npm ci --prefix examples/sanity-usage --install-links
+      - name: Check actual Sanity serialization, guarded mutations and types
+        run: |
+          npm --prefix examples/sanity-usage test
+          npm --prefix examples/sanity-usage run test:types
       - uses: actions/upload-artifact@v7
         if: failure()
         with:
