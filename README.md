@@ -271,7 +271,8 @@ that permission in npm's trusted publisher settings. CI reports this state
 and cannot approve a staged version through OIDC.
 
 The JavaScript tooling uses Node 24 and the committed npm lockfile in every
-runtime job; the package's supported runtime range remains Node 20 or newer.
+runtime job; the package's supported runtime range is Node 22.11 or newer.
+CI runs the test matrix on Node 22, 24 and 26.
 Duplication scanning uses jscpd's JavaScript/TypeScript/shell formats, fails
 when no files are scanned, and enforces the templates' 10% threshold.
 

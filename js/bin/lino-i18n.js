@@ -2,9 +2,7 @@
 
 // `lino-i18n` command-line entry point.
 //
-// Built on top of `lino-arguments` so configuration follows the same
-// priority chain as the rest of the Link Foundation stack: CLI flags
-// > environment variables > config file > defaults.
+// Configuration priority: CLI flags > JSON `--config` file > defaults.
 
 import { promises as fs } from 'node:fs';
 import path from 'node:path';

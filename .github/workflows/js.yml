@@ -254,7 +254,7 @@ jobs:
       group: check-js-${{ github.ref }}-lint-
       cancel-in-progress: true
   test:
-    name: Test (${{ matrix.runtime }} on ${{ matrix.os }})
+    name: Test (${{ matrix.runtime }}${{ matrix.runtime == 'node' && format(' {0}', matrix.node) || '' }} on ${{ matrix.os }})
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
     needs:
@@ -275,6 +275,17 @@ jobs:
           - node
           - bun
           - deno
+        # Node 24 is the active LTS used everywhere else; the extra legs cover
+        # the `engines` floor (22.x) and the newest release line (26.x).
+        node:
+          - 24.x
+        include:
+          - os: ubuntu-24.04
+            runtime: node
+            node: 22.x
+          - os: ubuntu-24.04
+            runtime: node
+            node: 26.x
     defaults:
       run:
         working-directory: js
@@ -295,7 +306,7 @@ jobs:
         if: matrix.runtime == 'node'
         uses: actions/setup-node@v6
         with:
-          node-version: ${{ env.NODE_VERSION }}
+          node-version: ${{ matrix.node }}
           cache: npm
           cache-dependency-path: js/package-lock.json
       - name: Install dependencies (Node.js)
@@ -327,7 +338,7 @@ jobs:
         if: matrix.runtime == 'deno'
         run: deno test --no-check --allow-read --allow-write --allow-env --allow-run
     concurrency:
-      group: check-js-${{ github.ref }}-test-${{ matrix.os }}-${{ matrix.runtime }}
+      group: check-js-${{ github.ref }}-test-${{ matrix.os }}-${{ matrix.runtime }}-${{ matrix.node }}
       cancel-in-progress: true
   browser-test:
     name: Browser Test (Chromium)
