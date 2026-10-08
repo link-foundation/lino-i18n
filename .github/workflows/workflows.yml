@@ -70,11 +70,11 @@ jobs:
           persist-credentials: false
       - env:
           GH_TOKEN: ${{ github.token }}
-        run: pipx run zizmor==1.30.1 --strict-collection --format=github --config .github/zizmor.yml --min-confidence medium .github/workflows .github/actions
+        run: pipx run zizmor==1.30.1 --strict-collection --format=github --config .github/zizmor.yml --min-confidence medium .github/workflows .github/actions .github/dependabot.yml
       - env:
           GH_TOKEN: ${{ github.token }}
         run: pipx run zizmor==1.30.1 --strict-collection --format=github --config .github/zizmor.yml --persona pedantic --min-severity high --min-confidence high .github/workflows
-          .github/actions
+          .github/actions .github/dependabot.yml
   pipeline-status:
     name: Pipeline Status
     runs-on: ubuntu-26.04
