@@ -6,7 +6,7 @@ members = [
 ]
 
 [workspace.package]
-version = "0.3.0"
+version = "0.4.0"
 edition = "2024"
 # links-notation 0.23 (via lino-objects-codec 0.8) calls u*::is_multiple_of,
 # stable since 1.87; it does not declare this itself (links-notation#334).

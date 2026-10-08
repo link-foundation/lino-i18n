@@ -31,7 +31,7 @@ dependencies = [
 
 [[package]]
 name = "lino-i18n"
-version = "0.3.0"
+version = "0.4.0"
 dependencies = [
  "lino-i18n-macros",
  "lino-objects-codec",
@@ -39,7 +39,7 @@ dependencies = [
 
 [[package]]
 name = "lino-i18n-macros"
-version = "0.3.0"
+version = "0.4.0"
 dependencies = [
  "lino-objects-codec",
  "proc-macro2",
