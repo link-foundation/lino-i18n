@@ -141,6 +141,11 @@ i18n.t('cart.items', { count: 0 });                 // → "Your cart is empty"
 i18n.t('cart.items', { count: 3 }, { locale: 'ru' }); // → "3 товара"
 ```
 
+For nested catalogs such as `locales/prompts/system/`, pass
+`{ recursive: true }` to `loadLocalesFromDirectory`. This opt-in traversal merges
+by the locale declared in each file. See the [directory loading guide](js/README.md#nested-locale-directories)
+for deterministic ordering, duplicate-key precedence and compatibility aliases.
+
 ### Rust
 
 ```bash

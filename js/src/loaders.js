@@ -34,19 +34,29 @@ export async function loadLocalesFromFile(filePath, options = {}) {
   ];
 }
 
-export async function loadLocalesFromDirectory(directory, options = {}) {
+// Yield files in traversal order; merge once so aliases never mask explicit keys.
+async function* localeFiles(directory, recursive) {
   const entries = (await fs.readdir(directory, { withFileTypes: true })).sort(
-    (left, right) => left.name.localeCompare(right.name)
+    (left, right) => {
+      if (!recursive) {
+        return left.name.localeCompare(right.name);
+      }
+      return left.name < right.name ? -1 : left.name > right.name ? 1 : 0;
+    }
   );
-  const catalogues = {};
   for (const entry of entries) {
-    if (!entry.isFile()) {
-      continue;
+    const entryPath = path.join(directory, entry.name);
+    if (recursive && entry.isDirectory()) {
+      yield* localeFiles(entryPath, recursive);
+    } else if (entry.isFile() && entry.name.endsWith('.lino')) {
+      yield entryPath;
     }
-    if (!entry.name.endsWith('.lino')) {
-      continue;
-    }
-    const filePath = path.join(directory, entry.name);
+  }
+}
+
+export async function loadLocalesFromDirectory(directory, options = {}) {
+  const catalogues = {};
+  for await (const filePath of localeFiles(directory, options.recursive)) {
     for (const { locale, translations } of await loadLocalesFromFile(
       filePath
     )) {
