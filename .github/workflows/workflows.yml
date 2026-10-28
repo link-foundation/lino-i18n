@@ -9,7 +9,7 @@ name: Workflows
       - scripts/**
       - experiments/issue-23-*
       - experiments/issue-26-dependency-pins.py
-      - experiments/issue-29-crates-auth.py
+      - experiments/issue-29-*
       - js/package.json
       - rust/Cargo.toml
   pull_request:
@@ -19,7 +19,7 @@ name: Workflows
       - scripts/**
       - experiments/issue-23-*
       - experiments/issue-26-dependency-pins.py
-      - experiments/issue-29-crates-auth.py
+      - experiments/issue-29-*
       - js/package.json
       - rust/Cargo.toml
   workflow_dispatch: null

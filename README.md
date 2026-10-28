@@ -261,7 +261,9 @@ Five workflows live in `.github/workflows/`:
 - **`rust.yml`** checks formatting, Clippy, every executable Rust CI script
   and its unit tests, the workspace test matrix, and both crate packages.
   Main releases publish the macros crate before the runtime and create
-  `rust-v*` GitHub releases.
+  `rust-v*` GitHub releases. Authentication prefers OIDC with stored token
+  fallback; see [crates.io publishing](docs/crates-io-publishing.md) for both
+  trusted publisher registrations and verification.
 - **`workflows.yml`** runs actionlint with ShellCheck, zizmor, and repository
   policy checks, including terminal status coverage and writer cancellation.
 - **`security.yml`** audits the committed npm and Cargo lockfiles on PRs,
