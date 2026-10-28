@@ -1,5 +1,11 @@
 # lino-i18n Changelog
 
+## 0.4.1
+
+### Patch Changes
+
+- f3d6c6b: Update the Next.js development fixture and transitive tooling dependencies to resolve dependency audit findings.
+
 ## 0.4.0
 
 ### Minor Changes
