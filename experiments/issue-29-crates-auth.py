@@ -2,6 +2,7 @@
 """Exercise Rust release authentication wiring and the real preflight offline."""
 from contextlib import contextmanager
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+import importlib.util
 import json
 import os
 from pathlib import Path
@@ -15,6 +16,9 @@ ROOT = Path(__file__).resolve().parents[1]
 AUTH_ACTION = "rust-lang/crates-io-auth-action@c6f97d42243bad5fab37ca0427f495c86d5b1a18"
 TOKEN_EXPRESSION = "${{ steps.crates_auth.outputs.token || secrets.CARGO_REGISTRY_TOKEN || secrets.CARGO_TOKEN }}"
 CRATES = ["lino-i18n-macros", "lino-i18n"]
+SPEC = importlib.util.spec_from_file_location("registration", ROOT / "experiments/issue-29-register-trusted-publishers.py")
+REGISTRATION = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(REGISTRATION)
 
 
 @contextmanager
@@ -119,6 +123,50 @@ class CratesAuthenticationTests(unittest.TestCase):
                 self.assertNotEqual(result.returncode, 0)
                 self.assertEqual([entry[2] for entry in requests], CRATES)
                 self.assertNotIn("mock-credential", result.stdout + result.stderr)
+
+
+class RegistrationTests(unittest.TestCase):
+    def test_existing_publisher_on_later_page_is_preserved(self):
+        calls = []
+
+        def request(method, query, body):
+            calls.append((method, query, body))
+            return {"github_configs": [] if len(calls) == 1 else [{"id": 1, **REGISTRATION.IDENTITY}],
+                    "meta": {"next_page": "?crate=lino-i18n&seek=next" if len(calls) == 1 else None}}
+
+        REGISTRATION.configure("lino-i18n", True, request)
+        self.assertEqual([call[0] for call in calls], ["GET", "GET"])
+
+    def test_missing_publisher_requires_explicit_execution_and_readback(self):
+        calls = []
+        registered = False
+
+        def request(method, query, body):
+            nonlocal registered
+            calls.append(method)
+            if method == "POST":
+                self.assertEqual(body, {"github_config": {"crate": "lino-i18n", **REGISTRATION.IDENTITY}})
+                registered = True
+                return {"github_config": body["github_config"]}
+            return {"github_configs": [{"id": 1, **REGISTRATION.IDENTITY}] if registered else [],
+                    "meta": {"next_page": None}}
+
+        with self.assertRaises(ValueError):
+            REGISTRATION.configure("lino-i18n", False, request)
+        self.assertEqual(calls, ["GET"])
+        calls.clear()
+        REGISTRATION.configure("lino-i18n", True, request)
+        self.assertEqual(calls, ["GET", "POST", "GET"])
+
+    def test_registration_must_be_visible_and_match_the_identity(self):
+        for returned in ({"crate": "lino-i18n", **REGISTRATION.IDENTITY}, {}):
+            def request(method, query, body):
+                if method == "POST":
+                    return {"github_config": returned}
+                return {"github_configs": [], "meta": {"next_page": None}}
+
+            with self.assertRaises(ValueError):
+                REGISTRATION.configure("lino-i18n", True, request)
 
 
 if __name__ == "__main__":
