@@ -5,6 +5,12 @@
 
 
 
+
+## [0.5.1] - 2026-10-28
+
+### Changed
+- Prefer crates.io trusted publishing for both Rust crates, retaining `CARGO_REGISTRY_TOKEN` and `CARGO_TOKEN` as fallbacks when OIDC is unavailable.
+
 ## [0.5.0] - 2026-10-08
 
 ### Added
