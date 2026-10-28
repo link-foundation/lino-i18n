@@ -1,5 +1,11 @@
 # lino-i18n Changelog
 
+## 0.5.0
+
+### Minor Changes
+
+- 38fa1d4: Add opt-in recursive directory loading with deterministic depth-first merging of nested locale catalogs, preserving compatibility aliases after merging. Publish types for the loaders entry point and the recursive option.
+
 ## 0.4.1
 
 ### Patch Changes
