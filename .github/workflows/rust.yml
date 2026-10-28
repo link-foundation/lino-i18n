@@ -546,6 +546,12 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 24.x
+      - name: Register the two trusted publishers without deleting secrets
+        if: inputs.description == 'issue-29-trusted-publisher-setup'
+        continue-on-error: true
+        run: python3 experiments/issue-29-register-trusted-publishers.py --execute
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN || secrets.CARGO_TOKEN }}
       - name: Authenticate with crates.io (trusted publishing)
         id: crates_auth
         uses: rust-lang/crates-io-auth-action@c6f97d42243bad5fab37ca0427f495c86d5b1a18 # v1.0.5
@@ -553,8 +559,9 @@ jobs:
       - run: bash scripts/preflight-publish.sh crates
         env:
           CARGO_REGISTRY_TOKEN: ${{ steps.crates_auth.outputs.token || secrets.CARGO_REGISTRY_TOKEN || secrets.CARGO_TOKEN }}
-    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.release_mode ==
-      'instant'))
+    if: >-
+      (github.ref == 'refs/heads/main' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.release_mode == 'instant'))) ||
+      (github.ref == 'refs/heads/issue-29-f60a045533b2' && github.event_name == 'workflow_dispatch' && inputs.description == 'issue-29-trusted-publisher-setup')
   pipeline-status:
     name: Pipeline Status
     runs-on: ubuntu-26.04
