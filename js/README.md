@@ -66,6 +66,42 @@ i18n.t('role', { context: 'female' }); // → "She is a developer"
 i18n.t('telegram.help.solve.alias.detail'); // → "Tool aliases imply `--tool <tool>`"
 ```
 
+### Nested locale directories
+
+Directory loading is shallow by default. Use `recursive: true` to merge UI text,
+user prompts and system prompts into the same locale tables:
+
+```text
+locales/
+  en.lino
+  prompts/
+    messages.lino
+    system/
+      messages.lino
+```
+
+```js
+const catalogues = await loadLocalesFromDirectory('./locales', {
+  recursive: true,
+  compatibilityAliases: ['collapseTail', 'parentLabel'], // Optional migration aliases
+});
+```
+
+Each file can declare multiple locales; locale roots inside files determine the
+catalogue language, regardless of filenames or directory names. Directory names
+add no prefix to translation keys. Recursive traversal sorts entries by name in
+UTF-16 code-unit order (case-sensitive and independent of the host locale), then
+visits them depth first: a directory's contents are processed at that directory's
+position among its siblings. Later files and later locale blocks overwrite earlier
+values for duplicate keys in the same locale. For example, `en.lino` is read before
+`prompts/`, and `z.lino` after it. Other keys are preserved.
+
+Only regular `.lino` files are loaded; symbolic links and other files are skipped.
+Read and parse errors reject the load. Compatibility aliases (including the
+`mode` shortcut) are expanded once after the entire tree is merged, preserving
+explicit keys. The returned catalogues work with the usual `createI18n` fallback,
+interpolation and plural handling.
+
 ## Browser
 
 Import `lino-i18n/browser` for native ES modules or browser bundles. This

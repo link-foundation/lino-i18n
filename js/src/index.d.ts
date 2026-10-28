@@ -142,9 +142,14 @@ export declare function loadLocalesFromFile(
   options?: CompatibilityAliasOptions
 ): Promise<Array<{ locale: string; translations: Record<string, string> }>>;
 
+export interface DirectoryLoaderOptions extends CompatibilityAliasOptions {
+  /** Walk subdirectories in sorted depth-first order. Defaults to false. */
+  recursive?: boolean;
+}
+
 export declare function loadLocalesFromDirectory(
   directory: string,
-  options?: CompatibilityAliasOptions
+  options?: DirectoryLoaderOptions
 ): Promise<Record<string, Record<string, string>>>;
 
 export declare function interpolate(
