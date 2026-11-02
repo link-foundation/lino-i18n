@@ -4,7 +4,7 @@
 //
 // Configuration priority: CLI flags > JSON `--config` file > defaults.
 
-import { promises as fs } from 'node:fs';
+import { promises as fs, realpathSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, URL } from 'node:url';
 
@@ -386,12 +386,19 @@ function unknownCommand(command, flags, rest, log, err) {
   return 1;
 }
 
-function isCliEntryPoint() {
-  if (!process.argv[1]) {
+// npm installs the bin as a symlink (`node_modules/.bin/lino-i18n ->
+// ../lino-i18n/bin/lino-i18n.js`). Node keeps the symlink path in
+// `process.argv[1]` while `import.meta.url` is the resolved real path, so both
+// sides must be compared after resolving symlinks.
+export function isCliEntryPoint(
+  argvPath = process.argv[1],
+  modulePath = fileURLToPath(import.meta.url)
+) {
+  if (!argvPath) {
     return false;
   }
   try {
-    return process.argv[1] === fileURLToPath(import.meta.url);
+    return realpathSync(argvPath) === realpathSync(modulePath);
   } catch {
     return false;
   }
