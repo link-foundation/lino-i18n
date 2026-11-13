@@ -13,7 +13,7 @@ import unittest
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
-AUTH_ACTION = "rust-lang/crates-io-auth-action@c6f97d42243bad5fab37ca0427f495c86d5b1a18"
+AUTH_ACTION = r"rust-lang/crates-io-auth-action@[0-9a-f]{40}"
 TOKEN_EXPRESSION = "${{ steps.crates_auth.outputs.token || secrets.CARGO_REGISTRY_TOKEN || secrets.CARGO_TOKEN }}"
 CRATES = ["lino-i18n-macros", "lino-i18n"]
 SPEC = importlib.util.spec_from_file_location("registration", ROOT / "experiments/issue-29-register-trusted-publishers.py")
@@ -65,7 +65,10 @@ class CratesAuthenticationTests(unittest.TestCase):
                 authentication = [step for step in steps if step.get("id") == "crates_auth"]
                 self.assertEqual(len(authentication), 1)
                 auth = authentication[0]
-                self.assertEqual(auth["uses"], AUTH_ACTION)
+                # Check the action identity and immutable pin, not a copied SHA
+                # that becomes stale on every legitimate Dependabot update.
+                # check-dependency-pins.py enforces one ref across every job.
+                self.assertRegex(auth["uses"], f"^{AUTH_ACTION}$")
                 self.assertIs(auth["continue-on-error"], True)
                 consumers = [step for step in steps if "preflight-publish.sh crates" in step.get("run", "")
                              or "publish-crate.rs" in step.get("run", "")]
