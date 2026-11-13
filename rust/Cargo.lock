@@ -613,7 +613,7 @@ dependencies = [
 
 [[package]]
 name = "lino-i18n"
-version = "0.5.1"
+version = "0.6.0"
 dependencies = [
  "formatjs_icu_messageformat",
  "lino-i18n-macros",
@@ -622,7 +622,7 @@ dependencies = [
 
 [[package]]
 name = "lino-i18n-macros"
-version = "0.5.1"
+version = "0.6.0"
 dependencies = [
  "lino-objects-codec",
  "proc-macro2",

@@ -6,6 +6,15 @@
 
 
 
+
+## [0.6.0] - 2026-11-13
+
+### Changed
+- Update the runtime, macro, ICU, release helper and CI dependencies to current releases with one tested Rust 1.92 floor for default and optional ICU features.
+
+### Fixed
+- Validate crates.io authentication action identity without duplicating an obsolete commit pin in workflow regression tests.
+
 ## [0.5.1] - 2026-10-28
 
 ### Changed
