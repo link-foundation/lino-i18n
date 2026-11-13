@@ -1,0 +1,5 @@
+---
+'lino-i18n': minor
+---
+
+Update all runtime and development dependencies, require Node 22.22.2 or newer, and use npm 12 with its supported Node patch floors for release tooling.

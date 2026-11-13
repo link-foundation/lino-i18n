@@ -27,9 +27,25 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-node@v7
         with:
-          node-version: 24.x
-      - run: npm audit --package-lock-only --audit-level=high
+          node-version: 26.x
+      - run: npm install --global npm@12.2.2 --ignore-scripts
+      - run: npm audit --package-lock-only --audit-level=low
         working-directory: js
+  pip-audit:
+    name: Python audit
+    runs-on: ubuntu-26.04
+    timeout-minutes: 10
+    concurrency:
+      group: check-${{ github.workflow }}-${{ github.ref }}-Python audit
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.15.2'
+      - run: pipx run pip-audit==2.10.1 --strict --requirement scripts/requirements-ci.txt
   cargo-audit:
     name: Cargo audit
     runs-on: ubuntu-26.04
@@ -41,9 +57,9 @@ jobs:
       - uses: actions/checkout@v7
         with:
           persist-credentials: false
-      - uses: taiki-e/install-action@86f7a0ffb25f40114606501a311ebcfaf882ea32 # v2.88.0
+      - uses: taiki-e/install-action@cfdb7ed4ccc7c7dce37759eae89dc5674b469b39 # v2.90.3
         with:
-          tool: cargo-audit@0.22.2
+          tool: cargo-audit@0.23.0
       - run: cargo audit --file rust/Cargo.lock --deny warnings
   codeql:
     name: CodeQL
@@ -91,7 +107,7 @@ jobs:
           persist-credentials: false
       - uses: actions/dependency-review-action@v5
         with:
-          fail-on-severity: high
+          fail-on-severity: low
           # Aggregate upstream repository-health scores are optional heuristics.
           # Vulnerability review and both lockfile audits remain required.
           show-openssf-scorecard: false
@@ -109,13 +125,14 @@ jobs:
           persist-credentials: false
       - env:
           NEEDS_JSON: ${{ toJSON(needs) }}
-          CANCELLABLE_JOBS: '["npm-audit", "cargo-audit", "codeql", "dependency-review"]'
+          CANCELLABLE_JOBS: '["npm-audit", "pip-audit", "cargo-audit", "codeql", "dependency-review"]'
           RUN_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
           BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
         run: python3 scripts/check-pipeline-status.py
     if: always()
     needs:
       - npm-audit
+      - pip-audit
       - cargo-audit
       - codeql
       - dependency-review

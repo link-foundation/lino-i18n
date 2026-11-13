@@ -188,10 +188,10 @@ pub(crate) fn compatibility_aliases_for_key(
     if aliases.contains(&CompatibilityAlias::CollapseTail) {
         out.extend(collapse_tail_aliases(key));
     }
-    if aliases.contains(&CompatibilityAlias::ParentLabel) {
-        if let Some(parent) = parent_label_alias(key) {
-            out.push(parent);
-        }
+    if aliases.contains(&CompatibilityAlias::ParentLabel)
+        && let Some(parent) = parent_label_alias(key)
+    {
+        out.push(parent);
     }
     out
 }
@@ -317,10 +317,10 @@ fn parse_triple_quoted_value(
     path: &Path,
 ) -> Result<(String, usize), LoaderError> {
     let same_line = &rest[3..];
-    if !same_line.trim().is_empty() {
-        if let Some(closing) = same_line.rfind("\"\"\"") {
-            return Ok((same_line[..closing].to_string(), index + 1));
-        }
+    if !same_line.trim().is_empty()
+        && let Some(closing) = same_line.rfind("\"\"\"")
+    {
+        return Ok((same_line[..closing].to_string(), index + 1));
     }
 
     let mut value_lines = Vec::new();

@@ -258,17 +258,17 @@ impl I18n {
         }
 
         for locale in chain {
-            if let Some(table) = self.locales.get(locale) {
-                if let Some(template) = resolve(table, key, locale, options) {
-                    return apply(&template, params);
-                }
+            if let Some(table) = self.locales.get(locale)
+                && let Some(template) = resolve(table, key, locale, options)
+            {
+                return apply(&template, params);
             }
         }
 
-        if let Some(handler) = &self.on_missing {
-            if let Some(value) = handler(key, params, options) {
-                return value;
-            }
+        if let Some(handler) = &self.on_missing
+            && let Some(value) = handler(key, params, options)
+        {
+            return value;
         }
         if let Some(default_value) = options.default_value {
             return apply(default_value, params);
@@ -316,10 +316,10 @@ fn resolve(
 
     for target in &targets {
         if let Some(count) = options.count {
-            if count == 0 {
-                if let Some(v) = table.get(&format!("{target}_zero")) {
-                    return Some(v.clone());
-                }
+            if count == 0
+                && let Some(v) = table.get(&format!("{target}_zero"))
+            {
+                return Some(v.clone());
             }
             let suffix = plural_suffix(locale, count);
             if let Some(v) = table.get(&format!("{target}_{suffix}")) {
@@ -337,10 +337,10 @@ fn resolve(
         }
     }
 
-    if options.context.is_some() {
-        if let Some(v) = table.get(&format!("{key}_other")) {
-            return Some(v.clone());
-        }
+    if options.context.is_some()
+        && let Some(v) = table.get(&format!("{key}_other"))
+    {
+        return Some(v.clone());
     }
 
     None

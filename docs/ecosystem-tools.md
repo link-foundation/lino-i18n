@@ -52,7 +52,7 @@ maps. No application imports or helper functions execute. A file defaults to
 Where the OS supports `resource` limits, processes also cap address space at 512 MiB and stack at 8 MiB. Options can
 select a `python` executable, byte/variant limits and deadline within documented
 API bounds. Project file/byte limits match JS extraction; each Python file remains
-limited to 1 MiB. CI installs Python 3.14 across all three operating systems and
+limited to 1 MiB. CI installs Python 3.15 across all three operating systems and
 runs this integration in Node, Bun and Deno.
 
 The [example source](../js/examples/python-usage/sources.py) deliberately contains
