@@ -224,13 +224,13 @@
     "remark-stringify": "11.0.0",
     "rollup": "^4.68.3",
     "secretlint": "^13.1.0",
+    "semver": "^7.8.6",
     "srvx": "1.0.8",
     "test-anywhere": "^0.9.1",
     "typescript": "^7.0.2",
     "unified": "11.0.5",
     "vite": "8.3.8",
-    "vue": "3.5.45",
-    "semver": "^7.8.6"
+    "vue": "3.5.45"
   },
   "peerDependencies": {
     "@generaltranslation/supported-locales": ">=2.1.48 <3",

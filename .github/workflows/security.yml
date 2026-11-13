@@ -28,7 +28,8 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 26.x
-      - run: npm install --global npm@12.2.2 --ignore-scripts
+      # Pin the package-manager tool; application dependencies still use npm ci.
+      - run: npm install --global npm@12.2.2 --ignore-scripts # zizmor: ignore[adhoc-packages]
       - run: npm audit --package-lock-only --audit-level=low
         working-directory: js
   pip-audit:
