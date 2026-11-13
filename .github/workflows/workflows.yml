@@ -60,7 +60,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-python@v7
         with:
-          python-version: '3.14'
+          python-version: '3.15.2'
       - run: python3 -m pip install --requirement scripts/requirements-ci.txt
       - run: python3 scripts/check-ci-policy.py && python3 scripts/check-file-line-limits.py && python3 experiments/issue-23-shared-guards.py && python3 experiments/issue-23-hook.py
       - run: python3 experiments/issue-25-ci-regressions.py
@@ -81,10 +81,10 @@ jobs:
           persist-credentials: false
       - env:
           GH_TOKEN: ${{ github.token }}
-        run: pipx run zizmor==1.30.1 --strict-collection --format=github --config .github/zizmor.yml --min-confidence medium .github/workflows .github/actions .github/dependabot.yml
+        run: pipx run zizmor==1.32.0 --strict-collection --format=github --config .github/zizmor.yml --min-confidence medium .github/workflows .github/actions .github/dependabot.yml
       - env:
           GH_TOKEN: ${{ github.token }}
-        run: pipx run zizmor==1.30.1 --strict-collection --format=github --config .github/zizmor.yml --persona pedantic --min-severity high --min-confidence high .github/workflows
+        run: pipx run zizmor==1.32.0 --strict-collection --format=github --config .github/zizmor.yml --persona pedantic --min-severity high --min-confidence high .github/workflows
           .github/actions .github/dependabot.yml
   pipeline-status:
     name: Pipeline Status

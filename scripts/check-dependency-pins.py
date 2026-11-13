@@ -11,6 +11,8 @@ TOOL_PINS = {
     "rust-script": r"cargo install rust-script --version (\S+)",
     "zizmor": r"zizmor==(\S+)",
     "cargo-audit": r"cargo-audit@(\S+)",
+    "pip-audit": r"pip-audit==(\S+)",
+    "npm": r"npm@([\d.]+)",
     "node-version": r"node-version: ([^$\s]\S*)",
     "bun-version": r"bun-version: (\S+)",
     "deno-version": r"deno-version: (\S+)",
@@ -32,6 +34,14 @@ def check(root):
     for name, refs in sorted(pins.items()):
         if len(refs) > 1:
             errors.append(f"{name} is pinned at {len(refs)} versions: {sorted(refs)}")
+
+    # npm's JSON formats and lifecycle policy changed in v12. Test and publish
+    # with the same CLI rather than relying on each Node release's bundled npm.
+    npm_versions = set(pins.get("npm", {}))
+    bootstrap = (root / "js/scripts/setup-npm.mjs").read_text()
+    npm_versions.update(re.findall(r"NPM_(?:MIN|RECOVERY)_VERSION = '([\d.]+)'", bootstrap))
+    if len(npm_versions) != 1:
+        errors.append(f"npm install and release bootstrap versions differ: {sorted(npm_versions)}")
 
     rust = tomllib.loads((root / "rust/Cargo.toml").read_text())["workspace"]["package"]["rust-version"]
     workflow = yaml.safe_load((root / ".github/workflows/rust.yml").read_text())

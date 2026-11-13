@@ -6,101 +6,27 @@ import { mkdtemp, readFile, rename, rm, writeFile } from 'node:fs/promises';
 import { runStrict } from './run-command.mjs';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
+import semver from 'semver';
 
 /**
  * Update npm for OIDC trusted publishing
- * npm trusted publishing requires npm >= 11.5.1
+ * Install the current npm release for OIDC trusted publishing.
  * Keep working npm installations. Recover the missing-module runner-image
  * failure using a registry tarball whose integrity is verified before use.
  */
 
-export const NPM_MIN_VERSION = '11.5.1';
-export const NODE_MIN_VERSION = '22.14.0';
-export const NPM_TARGET_MAJOR = 11;
-// Newest npm 11 release; every current Node.js line still bundles npm 11.
-export const NPM_RECOVERY_VERSION = '11.21.0';
+export const NPM_MIN_VERSION = '12.2.2';
+// npm 12's supported engines, including the patch floors on older LTS lines.
+export const NODE_VERSION_RANGE = '^22.22.2 || ^24.15.0 || >=26.0.0';
+export const NPM_RECOVERY_VERSION = '12.2.2';
 export const NPM_REGISTRY_METADATA_URL = 'https://registry.npmjs.org/npm';
 
-export function parseVersion(version) {
-  const match = String(version)
-    .trim()
-    .match(
-      /^v?(\d+)\.(\d+)\.(\d+)(?:-([0-9A-Za-z-.]+))?(?:\+[0-9A-Za-z-.]+)?$/
-    );
-
-  if (!match) {
-    throw new Error(`Invalid semantic version: ${version}`);
-  }
-
-  return {
-    major: Number(match[1]),
-    minor: Number(match[2]),
-    patch: Number(match[3]),
-    prerelease: match[4] || '',
-  };
-}
-
-export function compareVersions(leftVersion, rightVersion) {
-  const left = parseVersion(leftVersion);
-  const right = parseVersion(rightVersion);
-  const keys = ['major', 'minor', 'patch'];
-
-  for (const key of keys) {
-    if (left[key] !== right[key]) {
-      return left[key] > right[key] ? 1 : -1;
-    }
-  }
-
-  if (left.prerelease === right.prerelease) {
-    return 0;
-  }
-
-  if (!left.prerelease) {
-    return 1;
-  }
-
-  if (!right.prerelease) {
-    return -1;
-  }
-
-  return left.prerelease > right.prerelease ? 1 : -1;
-}
-
-export function isVersionAtLeast(version, minimumVersion) {
-  return compareVersions(version, minimumVersion) >= 0;
-}
-
 export function isSupportedNpmVersion(version) {
-  return isVersionAtLeast(version, NPM_MIN_VERSION);
+  return semver.gte(version, NPM_MIN_VERSION);
 }
 
 export function isSupportedNodeVersion(version) {
-  return isVersionAtLeast(version, NODE_MIN_VERSION);
-}
-
-export function selectLatestSupportedNpmRelease(metadata) {
-  const releases = Object.entries(metadata?.versions || {})
-    .filter(([version, release]) => {
-      const parsed = parseVersion(version);
-      return (
-        parsed.major === NPM_TARGET_MAJOR &&
-        !parsed.prerelease &&
-        isSupportedNpmVersion(version) &&
-        release?.dist?.tarball
-      );
-    })
-    .sort(([leftVersion], [rightVersion]) =>
-      compareVersions(rightVersion, leftVersion)
-    );
-
-  if (releases.length === 0) {
-    throw new Error(
-      `No npm ${NPM_TARGET_MAJOR}.x release found at or above ${NPM_MIN_VERSION}`
-    );
-  }
-
-  const [version, release] = releases[0];
-  return { version, tarballUrl: release.dist.tarball };
+  return semver.satisfies(version, NODE_VERSION_RANGE);
 }
 
 function validateRecoveryMetadata(metadata) {
@@ -172,19 +98,22 @@ export async function recoverNpm({
 }
 
 /** Keep supported npm and retain recovery for the known missing-module image. */
-export async function setupNpm() {
-  if (!isSupportedNodeVersion(process.version)) {
+export async function setupNpm({
+  runner = runStrict,
+  nodeVersion = process.version,
+} = {}) {
+  if (!isSupportedNodeVersion(nodeVersion)) {
     throw new Error(
-      `Node >= ${NODE_MIN_VERSION} is required for trusted publishing`
+      `Node ${NODE_VERSION_RANGE} is required for npm ${NPM_MIN_VERSION}`
     );
   }
   try {
-    const current = (await runStrict('npm', ['--version'])).stdout.trim();
+    const current = (await runner('npm', ['--version'])).stdout.trim();
     if (isSupportedNpmVersion(current)) {
       console.log(`npm ${current} supports trusted publishing`);
       return;
     }
-    await runStrict('npm', [
+    await runner('npm', [
       'install',
       '-g',
       `npm@${NPM_RECOVERY_VERSION}`,
@@ -202,7 +131,7 @@ export async function setupNpm() {
     );
     await recoverNpm();
   }
-  const updated = (await runStrict('npm', ['--version'])).stdout.trim();
+  const updated = (await runner('npm', ['--version'])).stdout.trim();
   if (!isSupportedNpmVersion(updated)) {
     throw new Error('npm update did not produce a supported version');
   }

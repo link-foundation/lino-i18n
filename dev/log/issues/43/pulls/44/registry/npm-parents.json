@@ -1,0 +1,2570 @@
+{
+  "node_modules/eslint9": [
+    {
+      "parent": "lino-i18n (root)",
+      "section": "devDependencies",
+      "range": "^9.39.5",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@jridgewell/gen-mapping": [
+    {
+      "parent": "@babel/generator@8.1.2",
+      "section": "dependencies",
+      "range": "0.4.0-beta.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@types/jsesc": [
+    {
+      "parent": "@babel/generator@8.1.2",
+      "section": "dependencies",
+      "range": "^2.5.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@babel/helper-module-imports/node_modules/@babel/traverse": [
+    {
+      "parent": "@babel/helper-module-imports@7.29.7",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@babel/helper-module-imports/node_modules/@babel/types": [
+    {
+      "parent": "@babel/helper-module-imports@7.29.7",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/generator@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/parser@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/template@7.29.7",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/traverse@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@babel/helper-module-imports/node_modules/@babel/helper-validator-identifier": [
+    {
+      "parent": "@babel/code-frame@7.29.7",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/types@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@babel/helper-module-imports/node_modules/js-tokens": [
+    {
+      "parent": "@babel/code-frame@7.29.7",
+      "section": "dependencies",
+      "range": "^4.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@babel/helper-module-imports/node_modules/@babel/parser": [
+    {
+      "parent": "@babel/generator@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/template@7.29.7",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/traverse@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@babel/helper-module-imports/node_modules/@babel/code-frame": [
+    {
+      "parent": "@babel/template@7.29.7",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/traverse@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@babel/helper-module-imports/node_modules/@babel/generator": [
+    {
+      "parent": "@babel/traverse@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@babel/helper-module-imports/node_modules/@babel/helper-globals": [
+    {
+      "parent": "@babel/traverse@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@babel/helper-module-imports/node_modules/@babel/template": [
+    {
+      "parent": "@babel/traverse@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@babel/helper-module-imports/node_modules/@babel/helper-string-parser": [
+    {
+      "parent": "@babel/types@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@keyv/bigmap": [
+    {
+      "parent": "@cacheable/memory@2.2.0",
+      "section": "dependencies",
+      "range": "^1.3.1",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/hookified": [
+    {
+      "parent": "@cacheable/memory@2.2.0",
+      "section": "dependencies",
+      "range": "^1.15.1",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@keyv/bigmap@1.3.1",
+      "section": "dependencies",
+      "range": "^1.15.0",
+      "latestAllowed": false
+    },
+    {
+      "parent": "cacheable@2.5.0",
+      "section": "dependencies",
+      "range": "^1.15.0",
+      "latestAllowed": false
+    },
+    {
+      "parent": "flat-cache@6.1.23",
+      "section": "dependencies",
+      "range": "^1.15.0",
+      "latestAllowed": false
+    },
+    {
+      "parent": "hashery@1.5.1",
+      "section": "dependencies",
+      "range": "^1.15.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/keyv": [
+    {
+      "parent": "@cacheable/memory@2.2.0",
+      "section": "dependencies",
+      "range": "^5.6.0",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@cacheable/utils@2.5.0",
+      "section": "dependencies",
+      "range": "^5.6.0",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@keyv/bigmap@1.3.1",
+      "section": "peerDependencies",
+      "range": "^5.6.0",
+      "latestAllowed": false
+    },
+    {
+      "parent": "cacheable@2.5.0",
+      "section": "dependencies",
+      "range": "^5.6.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/hashery": [
+    {
+      "parent": "@cacheable/utils@2.5.0",
+      "section": "dependencies",
+      "range": "^1.5.1",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@keyv/bigmap@1.3.1",
+      "section": "dependencies",
+      "range": "^1.4.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@pnpm/deps.graph-sequencer": [
+    {
+      "parent": "@changesets/cli@3.0.3",
+      "section": "dependencies",
+      "range": "^1100.0.1",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@eslint-community/eslint-utils/node_modules/eslint-visitor-keys": [
+    {
+      "parent": "@eslint-community/eslint-utils@4.10.1",
+      "section": "dependencies",
+      "range": "^3.4.3",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/ajv": [
+    {
+      "parent": "@eslint/eslintrc@3.3.7",
+      "section": "dependencies",
+      "range": "^6.14.0",
+      "latestAllowed": false
+    },
+    {
+      "parent": "eslint@10.15.0",
+      "section": "dependencies",
+      "range": "^6.14.0",
+      "latestAllowed": false
+    },
+    {
+      "parent": "eslint@9.39.5",
+      "section": "dependencies",
+      "range": "^6.14.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@eslint/eslintrc/node_modules/espree": [
+    {
+      "parent": "@eslint/eslintrc@3.3.7",
+      "section": "dependencies",
+      "range": "^10.0.1",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/globals": [
+    {
+      "parent": "@eslint/eslintrc@3.3.7",
+      "section": "dependencies",
+      "range": "^14.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/ignore": [
+    {
+      "parent": "@eslint/eslintrc@3.3.7",
+      "section": "dependencies",
+      "range": "^5.2.0",
+      "latestAllowed": false
+    },
+    {
+      "parent": "eslint@10.15.0",
+      "section": "dependencies",
+      "range": "^5.2.0",
+      "latestAllowed": false
+    },
+    {
+      "parent": "eslint@9.39.5",
+      "section": "dependencies",
+      "range": "^5.2.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/import-fresh": [
+    {
+      "parent": "@eslint/eslintrc@3.3.7",
+      "section": "dependencies",
+      "range": "^3.2.1",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/js-yaml": [
+    {
+      "parent": "@eslint/eslintrc@3.3.7",
+      "section": "dependencies",
+      "range": "^4.3.2",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@textlint/linter-formatter@15.8.0",
+      "section": "dependencies",
+      "range": "^4.3.0",
+      "latestAllowed": false
+    },
+    {
+      "parent": "rc-config-loader@4.1.4",
+      "section": "dependencies",
+      "range": "^4.1.1",
+      "latestAllowed": false
+    },
+    {
+      "parent": "xmlbuilder2@4.0.3",
+      "section": "dependencies",
+      "range": "^4.1.1",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@eslint/eslintrc/node_modules/minimatch": [
+    {
+      "parent": "@eslint/eslintrc@3.3.7",
+      "section": "dependencies",
+      "range": "^3.1.5",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/strip-json-comments": [
+    {
+      "parent": "@eslint/eslintrc@3.3.7",
+      "section": "dependencies",
+      "range": "^3.1.1",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@eslint/eslintrc/node_modules/balanced-match": [
+    {
+      "parent": "brace-expansion@1.1.22",
+      "section": "dependencies",
+      "range": "^1.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/concat-map": [
+    {
+      "parent": "brace-expansion@1.1.22",
+      "section": "dependencies",
+      "range": "0.0.1",
+      "latestAllowed": false
+    },
+    {
+      "parent": "brace-expansion@1.1.22",
+      "section": "dependencies",
+      "range": "0.0.1",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@eslint/eslintrc/node_modules/eslint-visitor-keys": [
+    {
+      "parent": "espree@10.4.0",
+      "section": "dependencies",
+      "range": "^4.2.1",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@eslint/eslintrc/node_modules/brace-expansion": [
+    {
+      "parent": "minimatch@3.1.5",
+      "section": "dependencies",
+      "range": "^1.1.7",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@humanfs/types": [
+    {
+      "parent": "@humanfs/core@0.19.2",
+      "section": "dependencies",
+      "range": "^0.15.0",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@humanfs/node@0.16.8",
+      "section": "dependencies",
+      "range": "^0.15.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@humanfs/core": [
+    {
+      "parent": "@humanfs/node@0.16.8",
+      "section": "dependencies",
+      "range": "^0.19.2",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@emnapi/core": [
+    {
+      "parent": "@napi-rs/wasm-runtime@1.2.6",
+      "section": "peerDependencies",
+      "range": "^1.7.1 || 2.0.0-beta.2",
+      "latestAllowed": true
+    },
+    {
+      "parent": "@rolldown/binding-wasm32-wasi@1.2.19",
+      "section": "dependencies",
+      "range": "2.0.0-beta.2",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@oozcitak/infra": [
+    {
+      "parent": "@oozcitak/dom@2.0.2",
+      "section": "dependencies",
+      "range": "^2.0.2",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@oozcitak/url@3.0.0",
+      "section": "dependencies",
+      "range": "^2.0.2",
+      "latestAllowed": false
+    },
+    {
+      "parent": "xmlbuilder2@4.0.3",
+      "section": "dependencies",
+      "range": "^2.0.2",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@oozcitak/url": [
+    {
+      "parent": "@oozcitak/dom@2.0.2",
+      "section": "dependencies",
+      "range": "^3.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@oozcitak/util": [
+    {
+      "parent": "@oozcitak/dom@2.0.2",
+      "section": "dependencies",
+      "range": "^10.0.0",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@oozcitak/infra@2.0.2",
+      "section": "dependencies",
+      "range": "^10.0.0",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@oozcitak/url@3.0.0",
+      "section": "dependencies",
+      "range": "^10.0.0",
+      "latestAllowed": false
+    },
+    {
+      "parent": "xmlbuilder2@4.0.3",
+      "section": "dependencies",
+      "range": "^10.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@rolldown/binding-wasm32-wasi/node_modules/@emnapi/runtime": [
+    {
+      "parent": "@rolldown/binding-wasm32-wasi@1.2.19",
+      "section": "dependencies",
+      "range": "2.0.0-beta.2",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@napi-rs/wasm-runtime": [
+    {
+      "parent": "@rolldown/binding-wasm32-wasi@1.2.19",
+      "section": "dependencies",
+      "range": "1.2.6",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/fast-uri": [
+    {
+      "parent": "ajv@8.20.0",
+      "section": "dependencies",
+      "range": "^3.0.1",
+      "latestAllowed": false
+    },
+    {
+      "parent": "ajv@8.20.0",
+      "section": "dependencies",
+      "range": "^3.0.1",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@secretlint/formatter/node_modules/chalk": [
+    {
+      "parent": "@secretlint/formatter@13.1.0",
+      "section": "dependencies",
+      "range": "^5.6.2",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/router-generator/node_modules/@babel/types": [
+    {
+      "parent": "@tanstack/router-generator@1.168.0",
+      "section": "dependencies",
+      "range": "^7.29.8",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/magic-string": [
+    {
+      "parent": "@tanstack/router-generator@1.168.0",
+      "section": "dependencies",
+      "range": "^0.30.21",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@vue/compiler-sfc@3.5.45",
+      "section": "dependencies",
+      "range": "^0.30.21",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/router-generator/node_modules/@babel/helper-string-parser": [
+    {
+      "parent": "@babel/types@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/router-generator/node_modules/@babel/helper-validator-identifier": [
+    {
+      "parent": "@babel/types@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/router-plugin/node_modules/@babel/core": [
+    {
+      "parent": "@tanstack/router-plugin@1.169.0",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/helper-module-transforms@7.29.14",
+      "section": "peerDependencies",
+      "range": "^7.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/router-plugin/node_modules/@babel/template": [
+    {
+      "parent": "@tanstack/router-plugin@1.169.0",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/core@7.29.13",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/helpers@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/traverse@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/router-plugin/node_modules/@babel/types": [
+    {
+      "parent": "@tanstack/router-plugin@1.169.0",
+      "section": "dependencies",
+      "range": "^7.29.8",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/core@7.29.13",
+      "section": "dependencies",
+      "range": "^7.29.11",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/generator@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/helpers@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/parser@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/template@7.29.7",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/traverse@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/chokidar": [
+    {
+      "parent": "@tanstack/router-plugin@1.169.0",
+      "section": "dependencies",
+      "range": "^5.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/router-plugin/node_modules/@babel/helper-validator-identifier": [
+    {
+      "parent": "@babel/code-frame@7.29.7",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/helper-module-transforms@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/types@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/router-plugin/node_modules/js-tokens": [
+    {
+      "parent": "@babel/code-frame@7.29.7",
+      "section": "dependencies",
+      "range": "^4.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/router-plugin/node_modules/@babel/code-frame": [
+    {
+      "parent": "@babel/core@7.29.13",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/template@7.29.7",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/traverse@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/router-plugin/node_modules/@babel/generator": [
+    {
+      "parent": "@babel/core@7.29.13",
+      "section": "dependencies",
+      "range": "^7.29.13",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/traverse@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/router-plugin/node_modules/@babel/helper-compilation-targets": [
+    {
+      "parent": "@babel/core@7.29.13",
+      "section": "dependencies",
+      "range": "^7.29.13",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/router-plugin/node_modules/@babel/helper-module-transforms": [
+    {
+      "parent": "@babel/core@7.29.13",
+      "section": "dependencies",
+      "range": "^7.29.13",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/router-plugin/node_modules/@babel/helpers": [
+    {
+      "parent": "@babel/core@7.29.13",
+      "section": "dependencies",
+      "range": "^7.29.13",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/router-plugin/node_modules/@babel/parser": [
+    {
+      "parent": "@babel/core@7.29.13",
+      "section": "dependencies",
+      "range": "^7.29.13",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/generator@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/template@7.29.7",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/traverse@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/router-plugin/node_modules/@babel/traverse": [
+    {
+      "parent": "@babel/core@7.29.13",
+      "section": "dependencies",
+      "range": "^7.29.13",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/helper-module-transforms@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/router-plugin/node_modules/semver": [
+    {
+      "parent": "@babel/core@7.29.13",
+      "section": "dependencies",
+      "range": "^6.3.1",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/helper-compilation-targets@7.29.13",
+      "section": "dependencies",
+      "range": "^6.3.1",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/router-plugin/node_modules/@babel/compat-data": [
+    {
+      "parent": "@babel/helper-compilation-targets@7.29.13",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/router-plugin/node_modules/@babel/helper-validator-option": [
+    {
+      "parent": "@babel/helper-compilation-targets@7.29.13",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/router-plugin/node_modules/lru-cache": [
+    {
+      "parent": "@babel/helper-compilation-targets@7.29.13",
+      "section": "dependencies",
+      "range": "^5.1.1",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@babel/helper-module-imports": [
+    {
+      "parent": "@babel/helper-module-transforms@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/helper-module-transforms@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/helper-module-transforms@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/router-plugin/node_modules/@babel/helper-globals": [
+    {
+      "parent": "@babel/traverse@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/router-plugin/node_modules/@babel/helper-string-parser": [
+    {
+      "parent": "@babel/types@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/yallist": [
+    {
+      "parent": "lru-cache@5.1.1",
+      "section": "dependencies",
+      "range": "^3.0.2",
+      "latestAllowed": false
+    },
+    {
+      "parent": "lru-cache@5.1.1",
+      "section": "dependencies",
+      "range": "^3.0.2",
+      "latestAllowed": false
+    },
+    {
+      "parent": "lru-cache@5.1.1",
+      "section": "dependencies",
+      "range": "^3.0.2",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/router-utils/node_modules/@babel/generator": [
+    {
+      "parent": "@tanstack/router-utils@1.163.0",
+      "section": "dependencies",
+      "range": "^7.29.8",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/router-utils/node_modules/@babel/parser": [
+    {
+      "parent": "@tanstack/router-utils@1.163.0",
+      "section": "dependencies",
+      "range": "^7.29.8",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/generator@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/router-utils/node_modules/@babel/types": [
+    {
+      "parent": "@tanstack/router-utils@1.163.0",
+      "section": "dependencies",
+      "range": "^7.29.8",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/generator@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/parser@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/babel-dead-code-elimination": [
+    {
+      "parent": "@tanstack/router-utils@1.163.0",
+      "section": "dependencies",
+      "range": "^1.0.12",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/router-utils/node_modules/@babel/helper-string-parser": [
+    {
+      "parent": "@babel/types@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/router-utils/node_modules/@babel/helper-validator-identifier": [
+    {
+      "parent": "@babel/types@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/start-plugin-core/node_modules/@babel/code-frame": [
+    {
+      "parent": "@tanstack/start-plugin-core@1.171.56",
+      "section": "dependencies",
+      "range": "7.29.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/core@7.29.13",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/template@7.29.7",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/traverse@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/start-plugin-core/node_modules/@babel/core": [
+    {
+      "parent": "@tanstack/start-plugin-core@1.171.56",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/helper-module-transforms@7.29.14",
+      "section": "peerDependencies",
+      "range": "^7.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/start-plugin-core/node_modules/@babel/types": [
+    {
+      "parent": "@tanstack/start-plugin-core@1.171.56",
+      "section": "dependencies",
+      "range": "^7.29.8",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/core@7.29.13",
+      "section": "dependencies",
+      "range": "^7.29.11",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/generator@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/helpers@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/parser@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/template@7.29.7",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/traverse@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/source-map": [
+    {
+      "parent": "@tanstack/start-plugin-core@1.171.56",
+      "section": "dependencies",
+      "range": "^0.7.6",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/start-plugin-core/node_modules/@babel/helper-validator-identifier": [
+    {
+      "parent": "@babel/code-frame@7.29.7",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/helper-module-transforms@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/types@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/start-plugin-core/node_modules/js-tokens": [
+    {
+      "parent": "@babel/code-frame@7.29.7",
+      "section": "dependencies",
+      "range": "^4.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/start-plugin-core/node_modules/@babel/generator": [
+    {
+      "parent": "@babel/core@7.29.13",
+      "section": "dependencies",
+      "range": "^7.29.13",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/traverse@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/start-plugin-core/node_modules/@babel/helper-compilation-targets": [
+    {
+      "parent": "@babel/core@7.29.13",
+      "section": "dependencies",
+      "range": "^7.29.13",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/start-plugin-core/node_modules/@babel/helper-module-transforms": [
+    {
+      "parent": "@babel/core@7.29.13",
+      "section": "dependencies",
+      "range": "^7.29.13",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/start-plugin-core/node_modules/@babel/helpers": [
+    {
+      "parent": "@babel/core@7.29.13",
+      "section": "dependencies",
+      "range": "^7.29.13",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/start-plugin-core/node_modules/@babel/parser": [
+    {
+      "parent": "@babel/core@7.29.13",
+      "section": "dependencies",
+      "range": "^7.29.13",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/generator@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/template@7.29.7",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/traverse@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/start-plugin-core/node_modules/@babel/template": [
+    {
+      "parent": "@babel/core@7.29.13",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/helpers@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/traverse@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/start-plugin-core/node_modules/@babel/traverse": [
+    {
+      "parent": "@babel/core@7.29.13",
+      "section": "dependencies",
+      "range": "^7.29.13",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/helper-module-transforms@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/start-plugin-core/node_modules/semver": [
+    {
+      "parent": "@babel/core@7.29.13",
+      "section": "dependencies",
+      "range": "^6.3.1",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/helper-compilation-targets@7.29.13",
+      "section": "dependencies",
+      "range": "^6.3.1",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/start-plugin-core/node_modules/@babel/compat-data": [
+    {
+      "parent": "@babel/helper-compilation-targets@7.29.13",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/start-plugin-core/node_modules/@babel/helper-validator-option": [
+    {
+      "parent": "@babel/helper-compilation-targets@7.29.13",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/start-plugin-core/node_modules/lru-cache": [
+    {
+      "parent": "@babel/helper-compilation-targets@7.29.13",
+      "section": "dependencies",
+      "range": "^5.1.1",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/start-plugin-core/node_modules/@babel/helper-globals": [
+    {
+      "parent": "@babel/traverse@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@tanstack/start-plugin-core/node_modules/@babel/helper-string-parser": [
+    {
+      "parent": "@babel/types@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@testing-library/dom/node_modules/@babel/code-frame": [
+    {
+      "parent": "@testing-library/dom@10.4.2",
+      "section": "dependencies",
+      "range": "^7.10.4",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@babel/runtime": [
+    {
+      "parent": "@testing-library/dom@10.4.2",
+      "section": "dependencies",
+      "range": "^7.12.5",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@testing-library/react@16.3.3",
+      "section": "dependencies",
+      "range": "^7.12.5",
+      "latestAllowed": false
+    },
+    {
+      "parent": "react-native-web@0.21.4",
+      "section": "dependencies",
+      "range": "^7.18.6",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/aria-query": [
+    {
+      "parent": "@testing-library/dom@10.4.2",
+      "section": "dependencies",
+      "range": "5.3.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/dom-accessibility-api": [
+    {
+      "parent": "@testing-library/dom@10.4.2",
+      "section": "dependencies",
+      "range": "^0.5.9",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/pretty-format": [
+    {
+      "parent": "@testing-library/dom@10.4.2",
+      "section": "dependencies",
+      "range": "^27.0.2",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@testing-library/dom/node_modules/@babel/helper-validator-identifier": [
+    {
+      "parent": "@babel/code-frame@7.29.7",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@testing-library/dom/node_modules/js-tokens": [
+    {
+      "parent": "@babel/code-frame@7.29.7",
+      "section": "dependencies",
+      "range": "^4.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@textlint/linter-formatter/node_modules/pluralize": [
+    {
+      "parent": "@textlint/linter-formatter@15.8.0",
+      "section": "dependencies",
+      "range": "^2.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/string-width": [
+    {
+      "parent": "@textlint/linter-formatter@15.8.0",
+      "section": "dependencies",
+      "range": "^4.2.3",
+      "latestAllowed": false
+    },
+    {
+      "parent": "table@6.10.1",
+      "section": "dependencies",
+      "range": "^4.2.3",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/strip-ansi": [
+    {
+      "parent": "@textlint/linter-formatter@15.8.0",
+      "section": "dependencies",
+      "range": "^6.0.1",
+      "latestAllowed": false
+    },
+    {
+      "parent": "string-width@4.2.3",
+      "section": "dependencies",
+      "range": "^6.0.1",
+      "latestAllowed": false
+    },
+    {
+      "parent": "table@6.10.1",
+      "section": "dependencies",
+      "range": "^6.0.1",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/undici-types": [
+    {
+      "parent": "@types/node@26.6.6",
+      "section": "dependencies",
+      "range": "~8.9.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@vue/compiler-core/node_modules/@babel/parser": [
+    {
+      "parent": "@vue/compiler-core@3.5.45",
+      "section": "dependencies",
+      "range": "^7.29.12",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/entities": [
+    {
+      "parent": "@vue/compiler-core@3.5.45",
+      "section": "dependencies",
+      "range": "^7.0.1",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/estree-walker": [
+    {
+      "parent": "@vue/compiler-core@3.5.45",
+      "section": "dependencies",
+      "range": "^2.0.2",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@vue/compiler-sfc@3.5.45",
+      "section": "dependencies",
+      "range": "^2.0.2",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@vue/compiler-core/node_modules/@babel/types": [
+    {
+      "parent": "@babel/parser@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@vue/compiler-core/node_modules/@babel/helper-string-parser": [
+    {
+      "parent": "@babel/types@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@vue/compiler-core/node_modules/@babel/helper-validator-identifier": [
+    {
+      "parent": "@babel/types@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@vue/compiler-sfc/node_modules/@babel/parser": [
+    {
+      "parent": "@vue/compiler-sfc@3.5.45",
+      "section": "dependencies",
+      "range": "^7.29.12",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@vue/compiler-sfc/node_modules/@babel/types": [
+    {
+      "parent": "@babel/parser@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@vue/compiler-sfc/node_modules/@babel/helper-string-parser": [
+    {
+      "parent": "@babel/types@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@vue/compiler-sfc/node_modules/@babel/helper-validator-identifier": [
+    {
+      "parent": "@babel/types@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/json-schema-traverse": [
+    {
+      "parent": "ajv@6.15.0",
+      "section": "dependencies",
+      "range": "^0.4.1",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/color-convert": [
+    {
+      "parent": "ansi-styles@4.3.0",
+      "section": "dependencies",
+      "range": "^2.0.1",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/babel-dead-code-elimination/node_modules/@babel/core": [
+    {
+      "parent": "babel-dead-code-elimination@1.0.12",
+      "section": "dependencies",
+      "range": "^7.23.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/helper-module-transforms@7.29.14",
+      "section": "peerDependencies",
+      "range": "^7.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/babel-dead-code-elimination/node_modules/@babel/parser": [
+    {
+      "parent": "babel-dead-code-elimination@1.0.12",
+      "section": "dependencies",
+      "range": "^7.23.6",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/core@7.29.13",
+      "section": "dependencies",
+      "range": "^7.29.13",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/generator@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/template@7.29.7",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/traverse@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/babel-dead-code-elimination/node_modules/@babel/traverse": [
+    {
+      "parent": "babel-dead-code-elimination@1.0.12",
+      "section": "dependencies",
+      "range": "^7.23.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/core@7.29.13",
+      "section": "dependencies",
+      "range": "^7.29.13",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/helper-module-transforms@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/babel-dead-code-elimination/node_modules/@babel/types": [
+    {
+      "parent": "babel-dead-code-elimination@1.0.12",
+      "section": "dependencies",
+      "range": "^7.23.6",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/core@7.29.13",
+      "section": "dependencies",
+      "range": "^7.29.11",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/generator@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/helpers@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/parser@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/template@7.29.7",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/traverse@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/babel-dead-code-elimination/node_modules/@babel/helper-validator-identifier": [
+    {
+      "parent": "@babel/code-frame@7.29.7",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/helper-module-transforms@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/types@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/babel-dead-code-elimination/node_modules/js-tokens": [
+    {
+      "parent": "@babel/code-frame@7.29.7",
+      "section": "dependencies",
+      "range": "^4.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/babel-dead-code-elimination/node_modules/@babel/code-frame": [
+    {
+      "parent": "@babel/core@7.29.13",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/template@7.29.7",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/traverse@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/babel-dead-code-elimination/node_modules/@babel/generator": [
+    {
+      "parent": "@babel/core@7.29.13",
+      "section": "dependencies",
+      "range": "^7.29.13",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/traverse@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/babel-dead-code-elimination/node_modules/@babel/helper-compilation-targets": [
+    {
+      "parent": "@babel/core@7.29.13",
+      "section": "dependencies",
+      "range": "^7.29.13",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/babel-dead-code-elimination/node_modules/@babel/helper-module-transforms": [
+    {
+      "parent": "@babel/core@7.29.13",
+      "section": "dependencies",
+      "range": "^7.29.13",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/babel-dead-code-elimination/node_modules/@babel/helpers": [
+    {
+      "parent": "@babel/core@7.29.13",
+      "section": "dependencies",
+      "range": "^7.29.13",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/babel-dead-code-elimination/node_modules/@babel/template": [
+    {
+      "parent": "@babel/core@7.29.13",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/helpers@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/traverse@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/babel-dead-code-elimination/node_modules/semver": [
+    {
+      "parent": "@babel/core@7.29.13",
+      "section": "dependencies",
+      "range": "^6.3.1",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@babel/helper-compilation-targets@7.29.13",
+      "section": "dependencies",
+      "range": "^6.3.1",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/babel-dead-code-elimination/node_modules/@babel/compat-data": [
+    {
+      "parent": "@babel/helper-compilation-targets@7.29.13",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/babel-dead-code-elimination/node_modules/@babel/helper-validator-option": [
+    {
+      "parent": "@babel/helper-compilation-targets@7.29.13",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/babel-dead-code-elimination/node_modules/lru-cache": [
+    {
+      "parent": "@babel/helper-compilation-targets@7.29.13",
+      "section": "dependencies",
+      "range": "^5.1.1",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/babel-dead-code-elimination/node_modules/@babel/helper-globals": [
+    {
+      "parent": "@babel/traverse@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/babel-dead-code-elimination/node_modules/@babel/helper-string-parser": [
+    {
+      "parent": "@babel/types@7.29.14",
+      "section": "dependencies",
+      "range": "^7.29.14",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/balanced-match": [
+    {
+      "parent": "brace-expansion@5.0.13",
+      "section": "dependencies",
+      "range": "^4.0.2",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/qified": [
+    {
+      "parent": "cacheable@2.5.0",
+      "section": "dependencies",
+      "range": "^0.10.1",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/ansi-styles": [
+    {
+      "parent": "chalk@4.1.2",
+      "section": "dependencies",
+      "range": "^4.1.0",
+      "latestAllowed": false
+    },
+    {
+      "parent": "slice-ansi@4.0.0",
+      "section": "dependencies",
+      "range": "^4.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/supports-color": [
+    {
+      "parent": "chalk@4.1.2",
+      "section": "dependencies",
+      "range": "^7.1.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/cliui/node_modules/string-width": [
+    {
+      "parent": "cliui@9.0.1",
+      "section": "dependencies",
+      "range": "^7.2.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/wrap-ansi": [
+    {
+      "parent": "cliui@9.0.1",
+      "section": "dependencies",
+      "range": "^9.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/cliui/node_modules/emoji-regex": [
+    {
+      "parent": "string-width@7.2.0",
+      "section": "dependencies",
+      "range": "^10.3.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/color-name": [
+    {
+      "parent": "color-convert@2.0.1",
+      "section": "dependencies",
+      "range": "~1.1.4",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/node-fetch": [
+    {
+      "parent": "cross-fetch@3.2.0",
+      "section": "dependencies",
+      "range": "^2.7.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/path-key": [
+    {
+      "parent": "cross-spawn@7.0.6",
+      "section": "dependencies",
+      "range": "^3.1.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/which": [
+    {
+      "parent": "cross-spawn@7.0.6",
+      "section": "dependencies",
+      "range": "^2.0.1",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@humanfs/node": [
+    {
+      "parent": "eslint@10.15.0",
+      "section": "dependencies",
+      "range": "^0.16.8",
+      "latestAllowed": false
+    },
+    {
+      "parent": "eslint@9.39.5",
+      "section": "dependencies",
+      "range": "^0.16.6",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/escape-string-regexp": [
+    {
+      "parent": "eslint@10.15.0",
+      "section": "dependencies",
+      "range": "^4.0.0",
+      "latestAllowed": false
+    },
+    {
+      "parent": "eslint@9.39.5",
+      "section": "dependencies",
+      "range": "^4.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/find-up": [
+    {
+      "parent": "eslint@10.15.0",
+      "section": "dependencies",
+      "range": "^5.0.0",
+      "latestAllowed": false
+    },
+    {
+      "parent": "eslint@9.39.5",
+      "section": "dependencies",
+      "range": "^5.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/eslint9/node_modules/@eslint/config-array": [
+    {
+      "parent": "eslint@9.39.5",
+      "section": "dependencies",
+      "range": "^0.21.2",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/eslint9/node_modules/@eslint/config-helpers": [
+    {
+      "parent": "eslint@9.39.5",
+      "section": "dependencies",
+      "range": "^0.4.2",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/eslint9/node_modules/@eslint/core": [
+    {
+      "parent": "eslint@9.39.5",
+      "section": "dependencies",
+      "range": "^0.17.0",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@eslint/config-helpers@0.4.2",
+      "section": "dependencies",
+      "range": "^0.17.0",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@eslint/plugin-kit@0.4.1",
+      "section": "dependencies",
+      "range": "^0.17.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/eslint9/node_modules/@eslint/js": [
+    {
+      "parent": "eslint@9.39.5",
+      "section": "dependencies",
+      "range": "9.39.5",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/eslint9/node_modules/@eslint/plugin-kit": [
+    {
+      "parent": "eslint@9.39.5",
+      "section": "dependencies",
+      "range": "^0.4.1",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/chalk": [
+    {
+      "parent": "eslint@9.39.5",
+      "section": "dependencies",
+      "range": "^4.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/eslint9/node_modules/eslint-scope": [
+    {
+      "parent": "eslint@9.39.5",
+      "section": "dependencies",
+      "range": "^8.4.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/eslint9/node_modules/eslint-visitor-keys": [
+    {
+      "parent": "eslint@9.39.5",
+      "section": "dependencies",
+      "range": "^4.2.1",
+      "latestAllowed": false
+    },
+    {
+      "parent": "espree@10.4.0",
+      "section": "dependencies",
+      "range": "^4.2.1",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/eslint9/node_modules/espree": [
+    {
+      "parent": "eslint@9.39.5",
+      "section": "dependencies",
+      "range": "^10.4.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/eslint9/node_modules/file-entry-cache": [
+    {
+      "parent": "eslint@9.39.5",
+      "section": "dependencies",
+      "range": "^8.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/eslint9/node_modules/minimatch": [
+    {
+      "parent": "eslint@9.39.5",
+      "section": "dependencies",
+      "range": "^3.1.5",
+      "latestAllowed": false
+    },
+    {
+      "parent": "@eslint/config-array@0.21.2",
+      "section": "dependencies",
+      "range": "^3.1.5",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/eslint9/node_modules/@eslint/object-schema": [
+    {
+      "parent": "@eslint/config-array@0.21.2",
+      "section": "dependencies",
+      "range": "^2.1.7",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/eslint9/node_modules/balanced-match": [
+    {
+      "parent": "brace-expansion@1.1.22",
+      "section": "dependencies",
+      "range": "^1.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/eslint9/node_modules/flat-cache": [
+    {
+      "parent": "file-entry-cache@8.0.0",
+      "section": "dependencies",
+      "range": "^4.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/eslint9/node_modules/keyv": [
+    {
+      "parent": "flat-cache@4.0.1",
+      "section": "dependencies",
+      "range": "^4.5.4",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/eslint9/node_modules/brace-expansion": [
+    {
+      "parent": "minimatch@3.1.5",
+      "section": "dependencies",
+      "range": "^1.1.7",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/cross-fetch": [
+    {
+      "parent": "fbjs@3.0.5",
+      "section": "dependencies",
+      "range": "^3.1.5",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/promise": [
+    {
+      "parent": "fbjs@3.0.5",
+      "section": "dependencies",
+      "range": "^7.1.1",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/ua-parser-js": [
+    {
+      "parent": "fbjs@3.0.5",
+      "section": "dependencies",
+      "range": "^1.0.35",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/locate-path": [
+    {
+      "parent": "find-up@5.0.0",
+      "section": "dependencies",
+      "range": "^6.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/path-exists": [
+    {
+      "parent": "find-up@5.0.0",
+      "section": "dependencies",
+      "range": "^4.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/parent-module": [
+    {
+      "parent": "import-fresh@3.3.1",
+      "section": "dependencies",
+      "range": "^1.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/resolve-from": [
+    {
+      "parent": "import-fresh@3.3.1",
+      "section": "dependencies",
+      "range": "^4.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/argparse": [
+    {
+      "parent": "js-yaml@4.3.2",
+      "section": "dependencies",
+      "range": "^2.0.1",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/lino-env/node_modules/links-notation": [
+    {
+      "parent": "lino-env@0.2.8",
+      "section": "dependencies",
+      "range": "^0.11.2",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/p-locate": [
+    {
+      "parent": "locate-path@6.0.0",
+      "section": "dependencies",
+      "range": "^5.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/loose-envify/node_modules/js-tokens": [
+    {
+      "parent": "loose-envify@1.4.0",
+      "section": "dependencies",
+      "range": "^3.0.0 || ^4.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@swc/helpers": [
+    {
+      "parent": "next@16.4.6",
+      "section": "dependencies",
+      "range": "0.5.23",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/next/node_modules/postcss": [
+    {
+      "parent": "next@16.4.6",
+      "section": "dependencies",
+      "range": "8.5.23",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/styled-jsx": [
+    {
+      "parent": "next@16.4.6",
+      "section": "dependencies",
+      "range": "5.1.6",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/nanoid": [
+    {
+      "parent": "postcss@8.5.23",
+      "section": "dependencies",
+      "range": "^3.3.16",
+      "latestAllowed": false
+    },
+    {
+      "parent": "postcss@8.5.32",
+      "section": "dependencies",
+      "range": "^3.3.20",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/node-fetch/node_modules/whatwg-url": [
+    {
+      "parent": "node-fetch@2.7.0",
+      "section": "dependencies",
+      "range": "^5.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/node-fetch/node_modules/tr46": [
+    {
+      "parent": "whatwg-url@5.0.0",
+      "section": "dependencies",
+      "range": "~0.0.3",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/node-fetch/node_modules/webidl-conversions": [
+    {
+      "parent": "whatwg-url@5.0.0",
+      "section": "dependencies",
+      "range": "^3.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/hosted-git-info": [
+    {
+      "parent": "normalize-package-data@8.0.0",
+      "section": "dependencies",
+      "range": "^9.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/fast-levenshtein": [
+    {
+      "parent": "optionator@0.9.4",
+      "section": "dependencies",
+      "range": "^2.0.6",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/yocto-queue": [
+    {
+      "parent": "p-limit@3.1.0",
+      "section": "dependencies",
+      "range": "^0.1.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/p-limit": [
+    {
+      "parent": "p-locate@5.0.0",
+      "section": "dependencies",
+      "range": "^3.0.2",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/callsites": [
+    {
+      "parent": "parent-module@1.0.1",
+      "section": "dependencies",
+      "range": "^3.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/parse-entities/node_modules/@types/unist": [
+    {
+      "parent": "parse-entities@4.0.2",
+      "section": "dependencies",
+      "range": "^2.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/parse-json/node_modules/@babel/code-frame": [
+    {
+      "parent": "parse-json@8.3.0",
+      "section": "dependencies",
+      "range": "^7.26.2",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/parse-json/node_modules/type-fest": [
+    {
+      "parent": "parse-json@8.3.0",
+      "section": "dependencies",
+      "range": "^4.39.1",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/parse-json/node_modules/@babel/helper-validator-identifier": [
+    {
+      "parent": "@babel/code-frame@7.29.7",
+      "section": "dependencies",
+      "range": "^7.29.7",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/parse-json/node_modules/js-tokens": [
+    {
+      "parent": "@babel/code-frame@7.29.7",
+      "section": "dependencies",
+      "range": "^4.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/ansi-regex": [
+    {
+      "parent": "pretty-format@27.5.1",
+      "section": "dependencies",
+      "range": "^5.0.1",
+      "latestAllowed": false
+    },
+    {
+      "parent": "strip-ansi@6.0.1",
+      "section": "dependencies",
+      "range": "^5.0.1",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/pretty-format/node_modules/ansi-styles": [
+    {
+      "parent": "pretty-format@27.5.1",
+      "section": "dependencies",
+      "range": "^5.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/react-is": [
+    {
+      "parent": "pretty-format@27.5.1",
+      "section": "dependencies",
+      "range": "^17.0.1",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/qified/node_modules/hookified": [
+    {
+      "parent": "qified@0.10.1",
+      "section": "dependencies",
+      "range": "^2.1.1",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@react-native/normalize-colors": [
+    {
+      "parent": "react-native-web@0.21.4",
+      "section": "dependencies",
+      "range": "^0.74.1",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/styleq": [
+    {
+      "parent": "react-native-web@0.21.4",
+      "section": "dependencies",
+      "range": "^0.1.3",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/normalize-package-data": [
+    {
+      "parent": "read-pkg@10.1.0",
+      "section": "dependencies",
+      "range": "^8.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@oxc-project/types": [
+    {
+      "parent": "rolldown@1.2.19",
+      "section": "dependencies",
+      "range": "=0.156.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@rolldown/binding-android-arm-eabi": [
+    {
+      "parent": "rolldown@1.2.19",
+      "section": "optionalDependencies",
+      "range": "1.2.19",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@rolldown/binding-android-arm64": [
+    {
+      "parent": "rolldown@1.2.19",
+      "section": "optionalDependencies",
+      "range": "1.2.19",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@rolldown/binding-darwin-arm64": [
+    {
+      "parent": "rolldown@1.2.19",
+      "section": "optionalDependencies",
+      "range": "1.2.19",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@rolldown/binding-darwin-x64": [
+    {
+      "parent": "rolldown@1.2.19",
+      "section": "optionalDependencies",
+      "range": "1.2.19",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@rolldown/binding-freebsd-x64": [
+    {
+      "parent": "rolldown@1.2.19",
+      "section": "optionalDependencies",
+      "range": "1.2.19",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@rolldown/binding-linux-arm-gnueabihf": [
+    {
+      "parent": "rolldown@1.2.19",
+      "section": "optionalDependencies",
+      "range": "1.2.19",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@rolldown/binding-linux-arm64-gnu": [
+    {
+      "parent": "rolldown@1.2.19",
+      "section": "optionalDependencies",
+      "range": "1.2.19",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@rolldown/binding-linux-arm64-musl": [
+    {
+      "parent": "rolldown@1.2.19",
+      "section": "optionalDependencies",
+      "range": "1.2.19",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@rolldown/binding-linux-ppc64-gnu": [
+    {
+      "parent": "rolldown@1.2.19",
+      "section": "optionalDependencies",
+      "range": "1.2.19",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@rolldown/binding-linux-s390x-gnu": [
+    {
+      "parent": "rolldown@1.2.19",
+      "section": "optionalDependencies",
+      "range": "1.2.19",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@rolldown/binding-linux-x64-gnu": [
+    {
+      "parent": "rolldown@1.2.19",
+      "section": "optionalDependencies",
+      "range": "1.2.19",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@rolldown/binding-linux-x64-musl": [
+    {
+      "parent": "rolldown@1.2.19",
+      "section": "optionalDependencies",
+      "range": "1.2.19",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@rolldown/binding-openharmony-arm64": [
+    {
+      "parent": "rolldown@1.2.19",
+      "section": "optionalDependencies",
+      "range": "1.2.19",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@rolldown/binding-wasm32-wasi": [
+    {
+      "parent": "rolldown@1.2.19",
+      "section": "optionalDependencies",
+      "range": "1.2.19",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@rolldown/binding-win32-arm64-msvc": [
+    {
+      "parent": "rolldown@1.2.19",
+      "section": "optionalDependencies",
+      "range": "1.2.19",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@rolldown/binding-win32-x64-msvc": [
+    {
+      "parent": "rolldown@1.2.19",
+      "section": "optionalDependencies",
+      "range": "1.2.19",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@types/css-font-loading-module": [
+    {
+      "parent": "rrweb@2.2.2",
+      "section": "dependencies",
+      "range": "0.0.7",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@xstate/fsm": [
+    {
+      "parent": "rrweb@2.2.2",
+      "section": "dependencies",
+      "range": "^1.4.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/shebang-regex": [
+    {
+      "parent": "shebang-command@2.0.0",
+      "section": "dependencies",
+      "range": "^3.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/is-fullwidth-code-point": [
+    {
+      "parent": "slice-ansi@4.0.0",
+      "section": "dependencies",
+      "range": "^3.0.0",
+      "latestAllowed": false
+    },
+    {
+      "parent": "string-width@4.2.3",
+      "section": "dependencies",
+      "range": "^3.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/spdx-expression-parse": [
+    {
+      "parent": "spdx-correct@3.2.0",
+      "section": "dependencies",
+      "range": "^3.0.0",
+      "latestAllowed": false
+    },
+    {
+      "parent": "validate-npm-package-license@3.0.4",
+      "section": "dependencies",
+      "range": "^3.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/emoji-regex": [
+    {
+      "parent": "string-width@4.2.3",
+      "section": "dependencies",
+      "range": "^8.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/has-flag": [
+    {
+      "parent": "supports-color@7.2.0",
+      "section": "dependencies",
+      "range": "^4.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/supports-hyperlinks/node_modules/supports-color": [
+    {
+      "parent": "supports-hyperlinks@4.6.0",
+      "section": "dependencies",
+      "range": "^10.2.2",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/slice-ansi": [
+    {
+      "parent": "table@6.10.1",
+      "section": "dependencies",
+      "range": "^4.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/supports-hyperlinks": [
+    {
+      "parent": "terminal-link@5.0.0",
+      "section": "dependencies",
+      "range": "^4.1.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/rolldown": [
+    {
+      "parent": "unplugin@3.7.0",
+      "section": "peerDependencies",
+      "range": "*",
+      "latestAllowed": true
+    },
+    {
+      "parent": "vite@8.3.8",
+      "section": "dependencies",
+      "range": "~1.2.18",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/isexe": [
+    {
+      "parent": "which@2.0.2",
+      "section": "dependencies",
+      "range": "^2.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/wrap-ansi/node_modules/ansi-styles": [
+    {
+      "parent": "wrap-ansi@9.0.2",
+      "section": "dependencies",
+      "range": "^6.2.1",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/wrap-ansi/node_modules/string-width": [
+    {
+      "parent": "wrap-ansi@9.0.2",
+      "section": "dependencies",
+      "range": "^7.0.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/wrap-ansi/node_modules/emoji-regex": [
+    {
+      "parent": "string-width@7.2.0",
+      "section": "dependencies",
+      "range": "^10.3.0",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/@oozcitak/dom": [
+    {
+      "parent": "xmlbuilder2@4.0.3",
+      "section": "dependencies",
+      "range": "^2.0.2",
+      "latestAllowed": false
+    }
+  ],
+  "node_modules/yargs/node_modules/string-width": [
+    {
+      "parent": "yargs@18.2.0",
+      "section": "dependencies",
+      "range": "^8.2.1",
+      "latestAllowed": false
+    }
+  ]
+}

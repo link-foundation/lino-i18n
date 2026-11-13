@@ -10,7 +10,7 @@ Universal internationalization for Rust, with translations stored in
 
 ```toml
 [dependencies]
-lino-i18n = { version = "0.0.1", features = ["macros"] }
+lino-i18n = { version = "0.5.1", features = ["macros"] }
 ```
 
 ## Quick start
@@ -18,8 +18,7 @@ lino-i18n = { version = "0.0.1", features = ["macros"] }
 Source messages are also available through `I18n::gt(source, params)` and deferred
 `Message::new(source).id(key)` passed to `I18n::m`. Source sentences can be quoted
 catalog keys. Enable the optional `icu` feature for `I18n::format_message` with
-full ICU formatting via FormatJS; that feature requires Rust 1.92 or newer.
-Default features retain Rust 1.87 support. See the
+full ICU formatting via FormatJS. All features require Rust 1.92 or newer. See the
 [source-message guide](../../docs/source-messages.md)
 for the cross-language workflow and its limits.
 

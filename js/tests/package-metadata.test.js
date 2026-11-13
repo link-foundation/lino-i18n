@@ -20,7 +20,8 @@ test('npm package dry-run contains the publishable runtime surface', () => {
   assert.ifError(result.error);
   assert.equal(result.status, 0, result.stderr);
 
-  const [pack] = JSON.parse(result.stdout);
+  // npm 12 keys pack results by package name (npm/cli's v12 migration).
+  const pack = JSON.parse(result.stdout)[packageJson.name];
   const files = new Set(pack.files.map((file) => file.path));
 
   assert.equal(pack.name, 'lino-i18n');

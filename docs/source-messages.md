@@ -390,8 +390,7 @@ their custom identities. GT-specific message wire encodings are not decoded.
 
 Rust adds `Message::new(source).id(key)`, `I18n::gt` and `I18n::m` while retaining
 the existing runtime and macros. Enable `lino-i18n/icu` for `format_message` with
-the FormatJS ICU engine. The optional engine requires Rust 1.92 or newer;
-default features continue supporting Rust 1.87. JavaScript and Rust share
+the FormatJS ICU engine. All features require Rust 1.92 or newer. JavaScript and Rust share
 catalog syntax, not a byte-identical ICU rendering guarantee.
 
 The native `lino-i18n/browser` entry remains dependency-free. It exposes the

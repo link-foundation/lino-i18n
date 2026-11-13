@@ -8,9 +8,8 @@ members = [
 [workspace.package]
 version = "0.5.1"
 edition = "2024"
-# links-notation 0.23 (via lino-objects-codec 0.8) calls u*::is_multiple_of,
-# stable since 1.87; it does not declare this itself (links-notation#334).
-rust-version = "1.87"
+# One tested floor for the default and optional FormatJS ICU runtimes.
+rust-version = "1.92"
 license = "Unlicense"
 repository = "https://github.com/link-foundation/lino-i18n"
 homepage = "https://github.com/link-foundation/lino-i18n"

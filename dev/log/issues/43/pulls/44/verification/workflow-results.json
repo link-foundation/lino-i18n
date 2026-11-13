@@ -1,0 +1,101 @@
+[
+  {
+    "name": "ci-policy",
+    "command": [
+      "/tmp/lino-issue43-venv/bin/python",
+      "scripts/check-ci-policy.py"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 0.33,
+    "peak_child_rss_kib": 15104,
+    "finished_at": "2026-11-13T22:08:12.162308+00:00"
+  },
+  {
+    "name": "pin-guard",
+    "command": [
+      "/tmp/lino-issue43-venv/bin/python",
+      "scripts/check-dependency-pins.py"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 0.29,
+    "peak_child_rss_kib": 15360,
+    "finished_at": "2026-11-13T22:08:12.450943+00:00"
+  },
+  {
+    "name": "pin-regression",
+    "command": [
+      "/tmp/lino-issue43-venv/bin/python",
+      "experiments/issue-26-dependency-pins.py"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 1.77,
+    "peak_child_rss_kib": 15488,
+    "finished_at": "2026-11-13T22:08:14.221849+00:00"
+  },
+  {
+    "name": "shared-guards",
+    "command": [
+      "/tmp/lino-issue43-venv/bin/python",
+      "experiments/issue-23-shared-guards.py"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 0.99,
+    "peak_child_rss_kib": 15488,
+    "finished_at": "2026-11-13T22:08:15.216662+00:00"
+  },
+  {
+    "name": "git-hook",
+    "command": [
+      "/tmp/lino-issue43-venv/bin/python",
+      "experiments/issue-23-hook.py"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 1.94,
+    "peak_child_rss_kib": 15488,
+    "finished_at": "2026-11-13T22:08:17.157282+00:00"
+  },
+  {
+    "name": "adapter-ci",
+    "command": [
+      "/tmp/lino-issue43-venv/bin/python",
+      "experiments/issue-25-ci-regressions.py"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 0.8,
+    "peak_child_rss_kib": 20584,
+    "finished_at": "2026-11-13T22:08:17.961025+00:00"
+  },
+  {
+    "name": "crates-auth",
+    "command": [
+      "/tmp/lino-issue43-venv/bin/python",
+      "experiments/issue-29-crates-auth.py"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 6.71,
+    "peak_child_rss_kib": 62968,
+    "finished_at": "2026-11-13T22:08:24.676417+00:00"
+  },
+  {
+    "name": "docs-check",
+    "command": [
+      "/tmp/lino-issue43-venv/bin/python",
+      "scripts/check-docs.py"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 0.17,
+    "peak_child_rss_kib": 62968,
+    "finished_at": "2026-11-13T22:08:24.848153+00:00"
+  },
+  {
+    "name": "file-lines",
+    "command": [
+      "/tmp/lino-issue43-venv/bin/python",
+      "scripts/check-file-line-limits.py"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 0.09,
+    "peak_child_rss_kib": 62968,
+    "finished_at": "2026-11-13T22:08:24.938702+00:00"
+  }
+]

@@ -63,10 +63,10 @@ impl I18n {
                 std::sync::Arc::clone(compiled)
             } else {
                 let compiled = std::sync::Arc::new(crate::IcuMessageFormat::try_new(&source)?);
-                if cache.len() >= 100 {
-                    if let Some(first) = cache.keys().next().cloned() {
-                        cache.remove(&first);
-                    }
+                if cache.len() >= 100
+                    && let Some(first) = cache.keys().next().cloned()
+                {
+                    cache.remove(&first);
                 }
                 cache.insert(source, std::sync::Arc::clone(&compiled));
                 compiled

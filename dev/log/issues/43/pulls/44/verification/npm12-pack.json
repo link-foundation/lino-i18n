@@ -1,0 +1,461 @@
+{
+  "lino-i18n": {
+    "id": "lino-i18n@0.5.1",
+    "name": "lino-i18n",
+    "version": "0.5.1",
+    "size": 81361,
+    "unpackedSize": 312018,
+    "shasum": "eb008b9fcbb7a1957c3dde300f66300f51196cd9",
+    "integrity": "sha512-Fy9rXjj+2pjbeASU0xd5iEo+PzA3s9XSNyzxDcM3/VfLkat9b88eOKGGTNEOSP/37d2D3kLwPh23/bK2XiZL+w==",
+    "filename": "lino-i18n-0.5.1.tgz",
+    "files": [
+      {
+        "path": "CHANGELOG.md",
+        "size": 4607,
+        "mode": 420
+      },
+      {
+        "path": "LICENSE",
+        "size": 1211,
+        "mode": 420
+      },
+      {
+        "path": "README.md",
+        "size": 12428,
+        "mode": 420
+      },
+      {
+        "path": "bin/lino-i18n.js",
+        "size": 12667,
+        "mode": 493
+      },
+      {
+        "path": "package.json",
+        "size": 8656,
+        "mode": 420
+      },
+      {
+        "path": "src/browser.d.ts",
+        "size": 1660,
+        "mode": 420
+      },
+      {
+        "path": "src/browser.js",
+        "size": 1814,
+        "mode": 420
+      },
+      {
+        "path": "src/catalogs.js",
+        "size": 13817,
+        "mode": 420
+      },
+      {
+        "path": "src/compatibility.js",
+        "size": 2325,
+        "mode": 420
+      },
+      {
+        "path": "src/compiler.d.ts",
+        "size": 1253,
+        "mode": 420
+      },
+      {
+        "path": "src/compiler.js",
+        "size": 2286,
+        "mode": 420
+      },
+      {
+        "path": "src/content.js",
+        "size": 4052,
+        "mode": 420
+      },
+      {
+        "path": "src/converters/detect.js",
+        "size": 1513,
+        "mode": 420
+      },
+      {
+        "path": "src/converters/i18n-js.js",
+        "size": 1887,
+        "mode": 420
+      },
+      {
+        "path": "src/converters/i18next.js",
+        "size": 2647,
+        "mode": 420
+      },
+      {
+        "path": "src/converters/index.js",
+        "size": 463,
+        "mode": 420
+      },
+      {
+        "path": "src/converters/react-intl.js",
+        "size": 2355,
+        "mode": 420
+      },
+      {
+        "path": "src/dictionary.js",
+        "size": 5131,
+        "mode": 420
+      },
+      {
+        "path": "src/eslint.d.ts",
+        "size": 416,
+        "mode": 420
+      },
+      {
+        "path": "src/eslint.js",
+        "size": 7039,
+        "mode": 420
+      },
+      {
+        "path": "src/extract-bindings.js",
+        "size": 1335,
+        "mode": 420
+      },
+      {
+        "path": "src/extract-derived.js",
+        "size": 2655,
+        "mode": 420
+      },
+      {
+        "path": "src/extract-dictionary.js",
+        "size": 3557,
+        "mode": 420
+      },
+      {
+        "path": "src/extract-jsx.js",
+        "size": 5072,
+        "mode": 420
+      },
+      {
+        "path": "src/extract-project.js",
+        "size": 8840,
+        "mode": 420
+      },
+      {
+        "path": "src/extract.js",
+        "size": 10879,
+        "mode": 420
+      },
+      {
+        "path": "src/format.js",
+        "size": 3334,
+        "mode": 420
+      },
+      {
+        "path": "src/i18n.js",
+        "size": 4532,
+        "mode": 420
+      },
+      {
+        "path": "src/index.d.ts",
+        "size": 5758,
+        "mode": 420
+      },
+      {
+        "path": "src/index.js",
+        "size": 1143,
+        "mode": 420
+      },
+      {
+        "path": "src/intl.d.ts",
+        "size": 5215,
+        "mode": 420
+      },
+      {
+        "path": "src/intl.js",
+        "size": 12324,
+        "mode": 420
+      },
+      {
+        "path": "src/language.js",
+        "size": 1467,
+        "mode": 420
+      },
+      {
+        "path": "src/loaders.d.ts",
+        "size": 323,
+        "mode": 420
+      },
+      {
+        "path": "src/loaders.js",
+        "size": 2369,
+        "mode": 420
+      },
+      {
+        "path": "src/message-schema.js",
+        "size": 676,
+        "mode": 420
+      },
+      {
+        "path": "src/messages.d.ts",
+        "size": 5508,
+        "mode": 420
+      },
+      {
+        "path": "src/messages.js",
+        "size": 11218,
+        "mode": 420
+      },
+      {
+        "path": "src/native-state.js",
+        "size": 1895,
+        "mode": 420
+      },
+      {
+        "path": "src/next/client.d.ts",
+        "size": 1335,
+        "mode": 420
+      },
+      {
+        "path": "src/next/client.js",
+        "size": 3871,
+        "mode": 420
+      },
+      {
+        "path": "src/next/proxy.d.ts",
+        "size": 532,
+        "mode": 420
+      },
+      {
+        "path": "src/next/proxy.js",
+        "size": 1584,
+        "mode": 420
+      },
+      {
+        "path": "src/next/server.d.ts",
+        "size": 1019,
+        "mode": 420
+      },
+      {
+        "path": "src/next/server.js",
+        "size": 3185,
+        "mode": 420
+      },
+      {
+        "path": "src/node-i18n.js",
+        "size": 850,
+        "mode": 420
+      },
+      {
+        "path": "src/node.d.ts",
+        "size": 1719,
+        "mode": 420
+      },
+      {
+        "path": "src/node.js",
+        "size": 1957,
+        "mode": 420
+      },
+      {
+        "path": "src/providers/gt-locales.d.ts",
+        "size": 137,
+        "mode": 420
+      },
+      {
+        "path": "src/providers/gt-locales.js",
+        "size": 236,
+        "mode": 420
+      },
+      {
+        "path": "src/providers/gt.d.ts",
+        "size": 1650,
+        "mode": 420
+      },
+      {
+        "path": "src/providers/gt.js",
+        "size": 4316,
+        "mode": 420
+      },
+      {
+        "path": "src/python-extract.d.ts",
+        "size": 508,
+        "mode": 420
+      },
+      {
+        "path": "src/python-extract.js",
+        "size": 3860,
+        "mode": 420
+      },
+      {
+        "path": "src/python-extract.py",
+        "size": 14720,
+        "mode": 420
+      },
+      {
+        "path": "src/react-content.js",
+        "size": 1965,
+        "mode": 420
+      },
+      {
+        "path": "src/react-native.d.ts",
+        "size": 2624,
+        "mode": 420
+      },
+      {
+        "path": "src/react-native.js",
+        "size": 2984,
+        "mode": 420
+      },
+      {
+        "path": "src/react-server.d.ts",
+        "size": 544,
+        "mode": 420
+      },
+      {
+        "path": "src/react-server.js",
+        "size": 801,
+        "mode": 420
+      },
+      {
+        "path": "src/react.d.ts",
+        "size": 4355,
+        "mode": 420
+      },
+      {
+        "path": "src/react.js",
+        "size": 6752,
+        "mode": 420
+      },
+      {
+        "path": "src/remark.d.ts",
+        "size": 357,
+        "mode": 420
+      },
+      {
+        "path": "src/remark.js",
+        "size": 1069,
+        "mode": 420
+      },
+      {
+        "path": "src/rrweb/catalog.d.ts",
+        "size": 1006,
+        "mode": 420
+      },
+      {
+        "path": "src/rrweb/catalog.js",
+        "size": 5289,
+        "mode": 420
+      },
+      {
+        "path": "src/rrweb/harvest.d.ts",
+        "size": 952,
+        "mode": 420
+      },
+      {
+        "path": "src/rrweb/harvest.js",
+        "size": 3340,
+        "mode": 420
+      },
+      {
+        "path": "src/rrweb/index.d.ts",
+        "size": 1147,
+        "mode": 420
+      },
+      {
+        "path": "src/rrweb/index.js",
+        "size": 3340,
+        "mode": 420
+      },
+      {
+        "path": "src/rrweb/replay.d.ts",
+        "size": 33,
+        "mode": 420
+      },
+      {
+        "path": "src/rrweb/replay.js",
+        "size": 79,
+        "mode": 420
+      },
+      {
+        "path": "src/server.d.ts",
+        "size": 795,
+        "mode": 420
+      },
+      {
+        "path": "src/server.js",
+        "size": 4045,
+        "mode": 420
+      },
+      {
+        "path": "src/source-project-files.js",
+        "size": 4554,
+        "mode": 420
+      },
+      {
+        "path": "src/static-values.js",
+        "size": 3663,
+        "mode": 420
+      },
+      {
+        "path": "src/tanstack-start/client.d.ts",
+        "size": 777,
+        "mode": 420
+      },
+      {
+        "path": "src/tanstack-start/client.js",
+        "size": 2833,
+        "mode": 420
+      },
+      {
+        "path": "src/tanstack-start/server.d.ts",
+        "size": 745,
+        "mode": 420
+      },
+      {
+        "path": "src/tanstack-start/server.js",
+        "size": 1337,
+        "mode": 420
+      },
+      {
+        "path": "src/tooling-files.js",
+        "size": 4259,
+        "mode": 420
+      },
+      {
+        "path": "src/tooling.d.ts",
+        "size": 1712,
+        "mode": 420
+      },
+      {
+        "path": "src/tooling.js",
+        "size": 2830,
+        "mode": 420
+      },
+      {
+        "path": "src/transform-jsx.js",
+        "size": 7089,
+        "mode": 420
+      },
+      {
+        "path": "src/vue-content.js",
+        "size": 2328,
+        "mode": 420
+      },
+      {
+        "path": "src/vue-extract.d.ts",
+        "size": 346,
+        "mode": 420
+      },
+      {
+        "path": "src/vue-extract.js",
+        "size": 8691,
+        "mode": 420
+      },
+      {
+        "path": "src/vue.d.ts",
+        "size": 3506,
+        "mode": 420
+      },
+      {
+        "path": "src/vue.js",
+        "size": 8065,
+        "mode": 420
+      }
+    ],
+    "entryCount": 89,
+    "bundled": []
+  }
+}

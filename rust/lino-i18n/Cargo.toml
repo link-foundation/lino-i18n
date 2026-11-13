@@ -21,7 +21,7 @@ macros = ["dep:lino-i18n-macros"]
 icu = ["dep:formatjs_icu_messageformat"]
 
 [dependencies]
-lino-objects-codec = "0.9.2"
+lino-objects-codec = "0.9.3"
 lino-i18n-macros = { version = "0.5.1", path = "../lino-i18n-macros", optional = true }
-# The optional ICU runtime requires Rust 1.92; the default runtime stays on 1.87.
-formatjs_icu_messageformat = { version = "0.3.1", optional = true }
+# The workspace floor covers the optional ICU runtime as well.
+formatjs_icu_messageformat = { version = "0.3.3", optional = true }

@@ -50,7 +50,7 @@ name: JavaScript
 permissions:
   contents: read
 env:
-  NODE_VERSION: 24.x
+  NODE_VERSION: 26.x
   NPM_CONFIG_PROVENANCE: "true"
   GITHUB_BASE_SHA: ${{ github.event.pull_request.base.sha }}
   GITHUB_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
@@ -79,6 +79,7 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
+          check-latest: true
       - name: Detect JavaScript changes
         id: changes
         run: node js/scripts/detect-code-changes.mjs
@@ -117,6 +118,7 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
+          check-latest: true
       - run: bash scripts/check-mjs-syntax.sh
     concurrency:
       group: check-js-${{ github.ref }}-test-compilation-
@@ -193,9 +195,11 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
+          check-latest: true
           cache: npm
           cache-dependency-path: js/package-lock.json
-      - run: npm ci
+      # Pin the package-manager tool; application dependencies still use npm ci.
+      - run: npm install --global npm@12.2.2 --ignore-scripts && npm ci # zizmor: ignore[adhoc-packages]
       - name: Validate changeset
         env:
           GITHUB_BASE_REF: ${{ github.base_ref }}
@@ -242,9 +246,11 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
+          check-latest: true
           cache: npm
           cache-dependency-path: js/package-lock.json
-      - run: npm ci
+      # Pin the package-manager tool; application dependencies still use npm ci.
+      - run: npm install --global npm@12.2.2 --ignore-scripts && npm ci # zizmor: ignore[adhoc-packages]
       - run: npm run lint
       - run: npm run format:check
       - run: npm run check:duplication
@@ -277,17 +283,17 @@ jobs:
           - node
           - bun
           - deno
-        # Node 24 is the active LTS used everywhere else; the extra legs cover
-        # the `engines` floor (22.x) and the newest release line (26.x).
+        # Node 26 is the active LTS used everywhere else; the extra legs cover
+        # the supported Node 22 and 24 release lines.
         node:
-          - 24.x
+          - 26.x
         include:
           - os: ubuntu-26.04
             runtime: node
             node: 22.x
           - os: ubuntu-26.04
             runtime: node
-            node: 26.x
+            node: 24.x
     defaults:
       run:
         working-directory: js
@@ -303,20 +309,23 @@ jobs:
         run: bash ../scripts/simulate-fresh-merge.sh
       - uses: actions/setup-node@v7
         with:
-          node-version: 24.x
+          node-version: 26.x
+          check-latest: true
       - uses: actions/setup-python@v7
         with:
-          python-version: "3.14"
+          python-version: "3.15.2"
       - name: Setup Node.js
         if: matrix.runtime == 'node'
         uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node }}
+          check-latest: true
           cache: npm
           cache-dependency-path: js/package-lock.json
       - name: Install dependencies (Node.js)
         if: matrix.runtime == 'node'
-        run: npm ci
+        # Pin the package-manager tool; application dependencies still use npm ci.
+        run: npm install --global npm@12.2.2 --ignore-scripts && npm ci # zizmor: ignore[adhoc-packages]
       - name: Run tests (Node.js)
         if: matrix.runtime == 'node'
         run: npm test
@@ -324,10 +333,11 @@ jobs:
         if: matrix.runtime == 'bun'
         uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
         with:
-          bun-version: 1.4.2
+          bun-version: 1.4.4
       - name: Install dependencies (Bun)
         if: matrix.runtime == 'bun'
-        run: npm ci
+        # Pin the package-manager tool; application dependencies still use npm ci.
+        run: npm install --global npm@12.2.2 --ignore-scripts && npm ci # zizmor: ignore[adhoc-packages]
       - name: Run tests (Bun)
         if: matrix.runtime == 'bun'
         run: bun test --timeout 30000
@@ -335,10 +345,11 @@ jobs:
         if: matrix.runtime == 'deno'
         uses: denoland/setup-deno@22d081ff2d3a40755e97629de92e3bcbfa7cf2ed # v2.0.5
         with:
-          deno-version: 2.9.7
+          deno-version: 2.9.8
       - name: Install dependencies (Deno)
         if: matrix.runtime == 'deno'
-        run: npm ci
+        # Pin the package-manager tool; application dependencies still use npm ci.
+        run: npm install --global npm@12.2.2 --ignore-scripts && npm ci # zizmor: ignore[adhoc-packages]
       - name: Run tests (Deno)
         if: matrix.runtime == 'deno'
         run: deno test --no-check --allow-read --allow-write --allow-env --allow-run
@@ -368,9 +379,11 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
+          check-latest: true
           cache: npm
           cache-dependency-path: js/package-lock.json
-      - run: npm ci
+      # Pin the package-manager tool; application dependencies still use npm ci.
+      - run: npm install --global npm@12.2.2 --ignore-scripts && npm ci # zizmor: ignore[adhoc-packages]
       - run: npx playwright install --with-deps chromium
       - run: npm run test:types
       - run: npm run test:browser
@@ -420,9 +433,11 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
+          check-latest: true
           cache: npm
           cache-dependency-path: js/package-lock.json
-      - run: npm ci
+      # Pin the package-manager tool; application dependencies still use npm ci.
+      - run: npm install --global npm@12.2.2 --ignore-scripts && npm ci # zizmor: ignore[adhoc-packages]
       - run: node bin/lino-i18n.js --help
       - name: Convert sample i18next JSON to lino
         run: |
@@ -464,9 +479,11 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
+          check-latest: true
           cache: npm
           cache-dependency-path: js/package-lock.json
-      - run: npm ci
+      # Pin the package-manager tool; application dependencies still use npm ci.
+      - run: npm install --global npm@12.2.2 --ignore-scripts && npm ci # zizmor: ignore[adhoc-packages]
       - run: npm pack --dry-run
     concurrency:
       group: check-js-${{ github.ref }}-package-
@@ -497,10 +514,12 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
+          check-latest: true
           registry-url: https://registry.npmjs.org
           cache: npm
           cache-dependency-path: js/package-lock.json
-      - run: npm ci
+      # Pin the package-manager tool; application dependencies still use npm ci.
+      - run: npm install --global npm@12.2.2 --ignore-scripts && npm ci # zizmor: ignore[adhoc-packages]
       - name: Update npm for OIDC trusted publishing
         run: node scripts/setup-npm.mjs
       - name: Synchronize only validated release metadata
@@ -565,10 +584,12 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
+          check-latest: true
           registry-url: https://registry.npmjs.org
           cache: npm
           cache-dependency-path: js/package-lock.json
-      - run: npm ci
+      # Pin the package-manager tool; application dependencies still use npm ci.
+      - run: npm install --global npm@12.2.2 --ignore-scripts && npm ci # zizmor: ignore[adhoc-packages]
       - name: Update npm for OIDC trusted publishing
         run: node scripts/setup-npm.mjs
       - name: Synchronize only validated release metadata
@@ -620,15 +641,17 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
+          check-latest: true
           cache: npm
           cache-dependency-path: js/package-lock.json
-      - run: npm ci
+      # Pin the package-manager tool; application dependencies still use npm ci.
+      - run: npm install --global npm@12.2.2 --ignore-scripts && npm ci # zizmor: ignore[adhoc-packages]
       - name: Create changeset
         run: node scripts/create-manual-changeset.mjs --bump-type "$BUMP_TYPE" --description "$RELEASE_DESCRIPTION"
         env:
           RELEASE_DESCRIPTION: ${{ inputs.description }}
           BUMP_TYPE: ${{ inputs.bump_type }}
-      - uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+      - uses: peter-evans/create-pull-request@3ffccacd46053766916f087ce41d627c0b8cf2d1 # v8.1.3
         with:
           commit-message: "chore: add changeset for manual ${{ github.event.inputs.bump_type }} release"
           branch: changeset-manual-release-${{ github.run_id }}
@@ -670,7 +693,8 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v7
         with:
-          node-version: 24.x
+          node-version: 26.x
+          check-latest: true
       - uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8 # v1
         with:
           toolchain: stable
@@ -710,7 +734,8 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-node@v7
         with:
-          node-version: 24.x
+          node-version: 26.x
+          check-latest: true
       - run: bash scripts/preflight-publish.sh npm
     if:
       github.ref == 'refs/heads/main' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.release_mode ==

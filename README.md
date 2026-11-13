@@ -291,8 +291,8 @@ approve its stage ID with 2FA. If direct publishing is intended, configure
 that permission in npm's trusted publisher settings. CI reports this state
 and cannot approve a staged version through OIDC.
 
-The JavaScript tooling uses Node 24 and the committed npm lockfile in every
-runtime job; the package's supported runtime range is Node 22.11 or newer.
+The JavaScript tooling uses Node 26 and the committed npm lockfile in every
+runtime job; the package's supported runtime range is Node 22.22.2 or newer.
 CI runs the test matrix on Node 22, 24 and 26.
 Duplication scanning uses jscpd's JavaScript/TypeScript/shell formats, fails
 when no files are scanned, and enforces the templates' 10% threshold.
@@ -312,9 +312,11 @@ records the historical failures, template comparison, and verification.
 4. Make your changes — keep `js/` and `rust/` behaviour consistent.
 5. Open a pull request.
 
-Install the development dependencies and enable the optional local hook:
+Use npm 12.2.2, matching CI, to install the development dependencies and enable
+the optional local hook:
 
 ```bash
+npm install --global npm@12.2.2 --ignore-scripts
 (cd js && npm ci)
 git config core.hooksPath .githooks
 ```
