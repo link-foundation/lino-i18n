@@ -10,7 +10,7 @@ Universal internationalization for Rust, with translations stored in
 
 ```toml
 [dependencies]
-lino-i18n = { version = "0.0.1", features = ["macros"] }
+lino-i18n = { version = "0.5.1", features = ["macros"] }
 ```
 
 ## Quick start
