@@ -1,0 +1,55 @@
+{
+  "checked_at": "2026-11-13T22:40:36.517223+00:00",
+  "runs": [
+    {
+      "conclusion": "success",
+      "createdAt": "2026-11-13T22:25:02Z",
+      "databaseId": 43519094568,
+      "headSha": "79343c0ea862322aebed5e134ee01e2c6cd45622",
+      "name": "Documentation",
+      "status": "completed",
+      "updatedAt": "2026-11-13T22:26:44Z",
+      "url": "https://github.com/link-foundation/lino-i18n/actions/runs/43519094568"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-11-13T22:25:02Z",
+      "databaseId": 43519094666,
+      "headSha": "79343c0ea862322aebed5e134ee01e2c6cd45622",
+      "name": "Workflows",
+      "status": "completed",
+      "updatedAt": "2026-11-13T22:26:46Z",
+      "url": "https://github.com/link-foundation/lino-i18n/actions/runs/43519094666"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-11-13T22:25:02Z",
+      "databaseId": 43519094812,
+      "headSha": "79343c0ea862322aebed5e134ee01e2c6cd45622",
+      "name": "Security",
+      "status": "completed",
+      "updatedAt": "2026-11-13T22:30:23Z",
+      "url": "https://github.com/link-foundation/lino-i18n/actions/runs/43519094812"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-11-13T22:25:02Z",
+      "databaseId": 43519094655,
+      "headSha": "79343c0ea862322aebed5e134ee01e2c6cd45622",
+      "name": "Rust",
+      "status": "completed",
+      "updatedAt": "2026-11-13T22:33:01Z",
+      "url": "https://github.com/link-foundation/lino-i18n/actions/runs/43519094655"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-11-13T22:25:02Z",
+      "databaseId": 43519094921,
+      "headSha": "79343c0ea862322aebed5e134ee01e2c6cd45622",
+      "name": "JavaScript",
+      "status": "completed",
+      "updatedAt": "2026-11-13T22:37:53Z",
+      "url": "https://github.com/link-foundation/lino-i18n/actions/runs/43519094921"
+    }
+  ]
+}

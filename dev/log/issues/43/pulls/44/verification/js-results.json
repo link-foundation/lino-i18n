@@ -1,0 +1,86 @@
+[
+  {
+    "name": "node-test",
+    "command": [
+      "npm",
+      "run",
+      "test"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 10.88,
+    "peak_child_rss_kib": 174552,
+    "finished_at": "2026-11-13T22:07:43.633089+00:00"
+  },
+  {
+    "name": "js-types",
+    "command": [
+      "npm",
+      "run",
+      "test:types"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 10.0,
+    "peak_child_rss_kib": 398848,
+    "finished_at": "2026-11-13T22:07:53.635631+00:00"
+  },
+  {
+    "name": "js-lint",
+    "command": [
+      "npm",
+      "run",
+      "lint"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 9.28,
+    "peak_child_rss_kib": 398848,
+    "finished_at": "2026-11-13T22:08:02.916243+00:00"
+  },
+  {
+    "name": "js-format",
+    "command": [
+      "npm",
+      "run",
+      "format:check"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 5.78,
+    "peak_child_rss_kib": 398848,
+    "finished_at": "2026-11-13T22:08:08.700667+00:00"
+  },
+  {
+    "name": "js-duplication",
+    "command": [
+      "npm",
+      "run",
+      "check:duplication"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 0.39,
+    "peak_child_rss_kib": 398848,
+    "finished_at": "2026-11-13T22:08:09.092184+00:00"
+  },
+  {
+    "name": "js-secrets",
+    "command": [
+      "npm",
+      "run",
+      "lint:secrets"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 1.08,
+    "peak_child_rss_kib": 398848,
+    "finished_at": "2026-11-13T22:08:10.169027+00:00"
+  },
+  {
+    "name": "js-pack",
+    "command": [
+      "npm",
+      "run",
+      "pack:dry-run"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 1.56,
+    "peak_child_rss_kib": 398848,
+    "finished_at": "2026-11-13T22:08:11.724729+00:00"
+  }
+]

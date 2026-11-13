@@ -1,0 +1,7 @@
+   Compiling lino-i18n-macros v0.5.1 (/tmp/gh-issue-solver-1794606311065/rust/lino-i18n-macros)
+    Checking lino-i18n v0.5.1 (/tmp/gh-issue-solver-1794606311065/rust/lino-i18n)
+       Fixed lino-i18n/src/messages.rs (1 fix)
+       Fixed lino-i18n/src/loader.rs (2 fixes)
+       Fixed lino-i18n/src/i18n.rs (4 fixes)
+    Checking syn v3.0.10
+    Finished `dev` profile [unoptimized] target(s) in 9.43s

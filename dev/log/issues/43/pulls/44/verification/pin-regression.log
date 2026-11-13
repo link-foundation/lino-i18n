@@ -1,0 +1,6 @@
+rejected a second checkout ref
+rejected a second rust-script version
+rejected an MSRV leg behind rust-version
+rejected an engines floor without a leg
+rejected a different npm release bootstrap
+Every pinned-version drift is rejected.

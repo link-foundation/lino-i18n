@@ -312,9 +312,11 @@ records the historical failures, template comparison, and verification.
 4. Make your changes — keep `js/` and `rust/` behaviour consistent.
 5. Open a pull request.
 
-Install the development dependencies and enable the optional local hook:
+Use npm 12.2.2, matching CI, to install the development dependencies and enable
+the optional local hook:
 
 ```bash
+npm install --global npm@12.2.2 --ignore-scripts
 (cd js && npm ci)
 git config core.hooksPath .githooks
 ```

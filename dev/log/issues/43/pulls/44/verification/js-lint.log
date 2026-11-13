@@ -1,0 +1,2 @@
+npm notice run lino-i18n@0.5.1 lint
+npm notice run eslint . --max-warnings 0

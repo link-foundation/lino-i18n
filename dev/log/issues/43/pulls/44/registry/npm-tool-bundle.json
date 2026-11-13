@@ -1,0 +1,5264 @@
+{
+  "cli_version": "11.20.0",
+  "queried_at": "2026-11-13T22:28:10.238447+00:00",
+  "cases": {
+    "legacy": {
+      "manifest": {
+        "private": true,
+        "dependencies": {
+          "npm": "11.21.0"
+        }
+      },
+      "lock_sha256": "98cb224ce8861de9b10e5482e6fa41ea67913c7d432ef868954bea11a901145e",
+      "glob": "13.0.6",
+      "minimatch": "10.2.5",
+      "audit_returncode": 1,
+      "audit_summary": {
+        "vulnerabilities": {
+          "info": 0,
+          "low": 0,
+          "moderate": 34,
+          "high": 2,
+          "critical": 0,
+          "total": 36
+        },
+        "dependencies": {
+          "prod": 143,
+          "dev": 0,
+          "optional": 2,
+          "peer": 0,
+          "peerOptional": 0,
+          "total": 144
+        }
+      },
+      "packages": {
+        "npm": {
+          "versions": [
+            "11.21.0"
+          ],
+          "locations": [
+            "node_modules/npm"
+          ],
+          "requirements": {
+            "@isaacs/string-locale-compare": "^1.1.0",
+            "@npmcli/arborist": "^9.9.2",
+            "@npmcli/config": "^10.14.0",
+            "@npmcli/fs": "^5.0.0",
+            "@npmcli/map-workspaces": "^5.0.3",
+            "@npmcli/metavuln-calculator": "^9.0.3",
+            "@npmcli/package-json": "^7.0.5",
+            "@npmcli/promise-spawn": "^9.0.1",
+            "@npmcli/redact": "^4.0.0",
+            "@npmcli/run-script": "^10.0.4",
+            "@sigstore/tuf": "^4.0.2",
+            "abbrev": "^4.0.0",
+            "archy": "~1.0.0",
+            "cacache": "^20.0.4",
+            "chalk": "^5.6.2",
+            "ci-info": "^4.4.0",
+            "fastest-levenshtein": "^1.0.16",
+            "fs-minipass": "^3.0.3",
+            "glob": "^13.0.6",
+            "graceful-fs": "^4.2.11",
+            "hosted-git-info": "^9.0.3",
+            "ini": "^6.0.0",
+            "init-package-json": "^8.2.5",
+            "is-cidr": "^6.0.4",
+            "json-parse-even-better-errors": "^5.0.0",
+            "libnpmaccess": "^10.0.3",
+            "libnpmdiff": "^8.1.13",
+            "libnpmexec": "^10.3.3",
+            "libnpmfund": "^7.0.27",
+            "libnpmorg": "^8.0.1",
+            "libnpmpack": "^9.1.14",
+            "libnpmpublish": "^11.2.1",
+            "libnpmsearch": "^9.0.1",
+            "libnpmteam": "^8.0.2",
+            "libnpmversion": "^8.0.4",
+            "make-fetch-happen": "^15.0.6",
+            "minimatch": "^10.2.5",
+            "minipass": "^7.1.3",
+            "minipass-pipeline": "^1.2.4",
+            "ms": "^2.1.2",
+            "node-gyp": "^12.4.0",
+            "nopt": "^9.0.0",
+            "npm-audit-report": "^7.0.0",
+            "npm-install-checks": "^8.0.0",
+            "npm-package-arg": "^13.0.2",
+            "npm-pick-manifest": "^11.0.3",
+            "npm-profile": "^12.0.2",
+            "npm-registry-fetch": "^19.1.1",
+            "npm-user-validate": "^4.0.0",
+            "p-map": "^7.0.4",
+            "pacote": "^21.5.1",
+            "parse-conflict-json": "^5.0.1",
+            "proc-log": "^6.1.0",
+            "qrcode-terminal": "^0.12.0",
+            "read": "^5.0.1",
+            "semver": "^7.8.5",
+            "spdx-expression-parse": "^4.0.0",
+            "ssri": "^13.0.1",
+            "supports-color": "^10.2.2",
+            "tar": "^7.5.22",
+            "text-table": "~0.2.0",
+            "tiny-relative-date": "^2.0.2",
+            "treeverse": "^3.0.0",
+            "validate-npm-package-name": "^7.0.2",
+            "which": "^6.0.1"
+          }
+        },
+        "@gar/promise-retry": {
+          "versions": [
+            "1.0.3"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@gar/promise-retry"
+          ],
+          "requirements": {}
+        },
+        "@isaacs/fs-minipass": {
+          "versions": [
+            "4.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@isaacs/fs-minipass"
+          ],
+          "requirements": {
+            "minipass": "^7.0.4"
+          }
+        },
+        "@isaacs/string-locale-compare": {
+          "versions": [
+            "1.1.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@isaacs/string-locale-compare"
+          ],
+          "requirements": {}
+        },
+        "@npmcli/agent": {
+          "versions": [
+            "4.0.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/agent"
+          ],
+          "requirements": {
+            "agent-base": "^7.1.0",
+            "http-proxy-agent": "^7.0.0",
+            "https-proxy-agent": "^7.0.1",
+            "lru-cache": "^11.2.1",
+            "socks-proxy-agent": "^8.0.3"
+          }
+        },
+        "@npmcli/arborist": {
+          "versions": [
+            "9.9.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/arborist"
+          ],
+          "requirements": {
+            "@gar/promise-retry": "^1.0.0",
+            "@isaacs/string-locale-compare": "^1.1.0",
+            "@npmcli/fs": "^5.0.0",
+            "@npmcli/installed-package-contents": "^4.0.0",
+            "@npmcli/map-workspaces": "^5.0.0",
+            "@npmcli/metavuln-calculator": "^9.0.2",
+            "@npmcli/name-from-folder": "^4.0.0",
+            "@npmcli/node-gyp": "^5.0.0",
+            "@npmcli/package-json": "^7.0.0",
+            "@npmcli/query": "^5.0.0",
+            "@npmcli/redact": "^4.0.0",
+            "@npmcli/run-script": "^10.0.0",
+            "bin-links": "^6.0.0",
+            "cacache": "^20.0.1",
+            "common-ancestor-path": "^2.0.0",
+            "hosted-git-info": "^9.0.0",
+            "json-stringify-nice": "^1.1.4",
+            "lru-cache": "^11.2.1",
+            "minimatch": "^10.0.3",
+            "nopt": "^9.0.0",
+            "npm-install-checks": "^8.0.0",
+            "npm-package-arg": "^13.0.0",
+            "npm-pick-manifest": "^11.0.1",
+            "npm-registry-fetch": "^19.0.0",
+            "pacote": "^21.0.2",
+            "parse-conflict-json": "^5.0.1",
+            "proc-log": "^6.0.0",
+            "proggy": "^4.0.0",
+            "promise-all-reject-late": "^1.0.0",
+            "promise-call-limit": "^3.0.1",
+            "semver": "^7.3.7",
+            "ssri": "^13.0.0",
+            "treeverse": "^3.0.0",
+            "walk-up-path": "^4.0.0"
+          }
+        },
+        "@npmcli/config": {
+          "versions": [
+            "10.14.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/config"
+          ],
+          "requirements": {
+            "@npmcli/map-workspaces": "^5.0.0",
+            "@npmcli/package-json": "^7.0.0",
+            "ci-info": "^4.0.0",
+            "ini": "^6.0.0",
+            "nopt": "^9.0.0",
+            "proc-log": "^6.0.0",
+            "semver": "^7.3.5",
+            "walk-up-path": "^4.0.0"
+          }
+        },
+        "@npmcli/fs": {
+          "versions": [
+            "5.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/fs"
+          ],
+          "requirements": {
+            "semver": "^7.3.5"
+          }
+        },
+        "@npmcli/git": {
+          "versions": [
+            "7.0.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/git"
+          ],
+          "requirements": {
+            "@gar/promise-retry": "^1.0.0",
+            "@npmcli/promise-spawn": "^9.0.0",
+            "ini": "^6.0.0",
+            "lru-cache": "^11.2.1",
+            "npm-pick-manifest": "^11.0.1",
+            "proc-log": "^6.0.0",
+            "semver": "^7.3.5",
+            "which": "^6.0.0"
+          }
+        },
+        "@npmcli/installed-package-contents": {
+          "versions": [
+            "4.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/installed-package-contents"
+          ],
+          "requirements": {
+            "npm-bundled": "^5.0.0",
+            "npm-normalize-package-bin": "^5.0.0"
+          }
+        },
+        "@npmcli/map-workspaces": {
+          "versions": [
+            "5.0.3"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/map-workspaces"
+          ],
+          "requirements": {
+            "@npmcli/name-from-folder": "^4.0.0",
+            "@npmcli/package-json": "^7.0.0",
+            "glob": "^13.0.0",
+            "minimatch": "^10.0.3"
+          }
+        },
+        "@npmcli/metavuln-calculator": {
+          "versions": [
+            "9.0.3"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/metavuln-calculator"
+          ],
+          "requirements": {
+            "cacache": "^20.0.0",
+            "json-parse-even-better-errors": "^5.0.0",
+            "pacote": "^21.0.0",
+            "proc-log": "^6.0.0",
+            "semver": "^7.3.5"
+          }
+        },
+        "@npmcli/name-from-folder": {
+          "versions": [
+            "4.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/name-from-folder"
+          ],
+          "requirements": {}
+        },
+        "@npmcli/node-gyp": {
+          "versions": [
+            "5.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/node-gyp"
+          ],
+          "requirements": {}
+        },
+        "@npmcli/package-json": {
+          "versions": [
+            "7.0.5"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/package-json"
+          ],
+          "requirements": {
+            "@npmcli/git": "^7.0.0",
+            "glob": "^13.0.0",
+            "hosted-git-info": "^9.0.0",
+            "json-parse-even-better-errors": "^5.0.0",
+            "proc-log": "^6.0.0",
+            "semver": "^7.5.3",
+            "spdx-expression-parse": "^4.0.0"
+          }
+        },
+        "@npmcli/promise-spawn": {
+          "versions": [
+            "9.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/promise-spawn"
+          ],
+          "requirements": {
+            "which": "^6.0.0"
+          }
+        },
+        "@npmcli/query": {
+          "versions": [
+            "5.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/query"
+          ],
+          "requirements": {
+            "postcss-selector-parser": "^7.0.0"
+          }
+        },
+        "@npmcli/redact": {
+          "versions": [
+            "4.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/redact"
+          ],
+          "requirements": {}
+        },
+        "@npmcli/run-script": {
+          "versions": [
+            "10.0.4"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/run-script"
+          ],
+          "requirements": {
+            "@npmcli/node-gyp": "^5.0.0",
+            "@npmcli/package-json": "^7.0.0",
+            "@npmcli/promise-spawn": "^9.0.0",
+            "node-gyp": "^12.1.0",
+            "proc-log": "^6.0.0"
+          }
+        },
+        "@sigstore/bundle": {
+          "versions": [
+            "4.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@sigstore/bundle"
+          ],
+          "requirements": {
+            "@sigstore/protobuf-specs": "^0.5.0"
+          }
+        },
+        "@sigstore/core": {
+          "versions": [
+            "3.2.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@sigstore/core"
+          ],
+          "requirements": {}
+        },
+        "@sigstore/protobuf-specs": {
+          "versions": [
+            "0.5.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@sigstore/protobuf-specs"
+          ],
+          "requirements": {}
+        },
+        "@sigstore/sign": {
+          "versions": [
+            "4.1.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@sigstore/sign"
+          ],
+          "requirements": {
+            "@gar/promise-retry": "^1.0.2",
+            "@sigstore/bundle": "^4.0.0",
+            "@sigstore/core": "^3.2.0",
+            "@sigstore/protobuf-specs": "^0.5.0",
+            "make-fetch-happen": "^15.0.4",
+            "proc-log": "^6.1.0"
+          }
+        },
+        "@sigstore/tuf": {
+          "versions": [
+            "4.0.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@sigstore/tuf"
+          ],
+          "requirements": {
+            "@sigstore/protobuf-specs": "^0.5.0",
+            "tuf-js": "^4.1.0"
+          }
+        },
+        "@sigstore/verify": {
+          "versions": [
+            "3.1.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@sigstore/verify"
+          ],
+          "requirements": {
+            "@sigstore/bundle": "^4.0.0",
+            "@sigstore/core": "^3.2.1",
+            "@sigstore/protobuf-specs": "^0.5.0"
+          }
+        },
+        "@tufjs/canonical-json": {
+          "versions": [
+            "2.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@tufjs/canonical-json"
+          ],
+          "requirements": {}
+        },
+        "@tufjs/models": {
+          "versions": [
+            "4.1.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@tufjs/models"
+          ],
+          "requirements": {
+            "@tufjs/canonical-json": "2.0.0",
+            "minimatch": "^10.1.1"
+          }
+        },
+        "abbrev": {
+          "versions": [
+            "4.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/abbrev"
+          ],
+          "requirements": {}
+        },
+        "agent-base": {
+          "versions": [
+            "7.1.4"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/agent-base"
+          ],
+          "requirements": {}
+        },
+        "aproba": {
+          "versions": [
+            "2.1.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/aproba"
+          ],
+          "requirements": {}
+        },
+        "archy": {
+          "versions": [
+            "1.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/archy"
+          ],
+          "requirements": {}
+        },
+        "balanced-match": {
+          "versions": [
+            "4.0.4"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/balanced-match"
+          ],
+          "requirements": {}
+        },
+        "bin-links": {
+          "versions": [
+            "6.0.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/bin-links"
+          ],
+          "requirements": {
+            "cmd-shim": "^8.0.0",
+            "npm-normalize-package-bin": "^5.0.0",
+            "proc-log": "^6.0.0",
+            "read-cmd-shim": "^6.0.0",
+            "write-file-atomic": "^7.0.0"
+          }
+        },
+        "binary-extensions": {
+          "versions": [
+            "3.1.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/binary-extensions"
+          ],
+          "requirements": {}
+        },
+        "brace-expansion": {
+          "versions": [
+            "5.0.9"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/brace-expansion"
+          ],
+          "requirements": {
+            "balanced-match": "^4.0.2"
+          }
+        },
+        "cacache": {
+          "versions": [
+            "20.0.4"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/cacache"
+          ],
+          "requirements": {
+            "@npmcli/fs": "^5.0.0",
+            "fs-minipass": "^3.0.0",
+            "glob": "^13.0.0",
+            "lru-cache": "^11.1.0",
+            "minipass": "^7.0.3",
+            "minipass-collect": "^2.0.1",
+            "minipass-flush": "^1.0.5",
+            "minipass-pipeline": "^1.2.4",
+            "p-map": "^7.0.2",
+            "ssri": "^13.0.0"
+          }
+        },
+        "chalk": {
+          "versions": [
+            "5.6.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/chalk"
+          ],
+          "requirements": {}
+        },
+        "chownr": {
+          "versions": [
+            "3.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/chownr"
+          ],
+          "requirements": {}
+        },
+        "ci-info": {
+          "versions": [
+            "4.4.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/ci-info"
+          ],
+          "requirements": {}
+        },
+        "cidr-regex": {
+          "versions": [
+            "5.0.5"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/cidr-regex"
+          ],
+          "requirements": {}
+        },
+        "cmd-shim": {
+          "versions": [
+            "8.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/cmd-shim"
+          ],
+          "requirements": {}
+        },
+        "common-ancestor-path": {
+          "versions": [
+            "2.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/common-ancestor-path"
+          ],
+          "requirements": {}
+        },
+        "cssesc": {
+          "versions": [
+            "3.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/cssesc"
+          ],
+          "requirements": {}
+        },
+        "debug": {
+          "versions": [
+            "4.4.3"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/debug"
+          ],
+          "requirements": {
+            "ms": "^2.1.3"
+          }
+        },
+        "diff": {
+          "versions": [
+            "8.0.4"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/diff"
+          ],
+          "requirements": {}
+        },
+        "env-paths": {
+          "versions": [
+            "2.2.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/env-paths"
+          ],
+          "requirements": {}
+        },
+        "exponential-backoff": {
+          "versions": [
+            "3.1.3"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/exponential-backoff"
+          ],
+          "requirements": {}
+        },
+        "fastest-levenshtein": {
+          "versions": [
+            "1.0.16"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/fastest-levenshtein"
+          ],
+          "requirements": {}
+        },
+        "fs-minipass": {
+          "versions": [
+            "3.0.3"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/fs-minipass"
+          ],
+          "requirements": {
+            "minipass": "^7.0.3"
+          }
+        },
+        "glob": {
+          "versions": [
+            "13.0.6"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/glob"
+          ],
+          "requirements": {
+            "minimatch": "^10.2.2",
+            "minipass": "^7.1.3",
+            "path-scurry": "^2.0.2"
+          }
+        },
+        "graceful-fs": {
+          "versions": [
+            "4.2.11"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/graceful-fs"
+          ],
+          "requirements": {}
+        },
+        "hosted-git-info": {
+          "versions": [
+            "9.0.3"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/hosted-git-info"
+          ],
+          "requirements": {
+            "lru-cache": "^11.1.0"
+          }
+        },
+        "http-cache-semantics": {
+          "versions": [
+            "4.2.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/http-cache-semantics"
+          ],
+          "requirements": {}
+        },
+        "http-proxy-agent": {
+          "versions": [
+            "7.0.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/http-proxy-agent"
+          ],
+          "requirements": {
+            "agent-base": "^7.1.0",
+            "debug": "^4.3.4"
+          }
+        },
+        "https-proxy-agent": {
+          "versions": [
+            "7.0.6"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/https-proxy-agent"
+          ],
+          "requirements": {
+            "agent-base": "^7.1.2",
+            "debug": "4"
+          }
+        },
+        "iconv-lite": {
+          "versions": [
+            "0.7.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/iconv-lite"
+          ],
+          "requirements": {
+            "safer-buffer": ">= 2.1.2 < 3.0.0"
+          }
+        },
+        "ignore-walk": {
+          "versions": [
+            "8.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/ignore-walk"
+          ],
+          "requirements": {
+            "minimatch": "^10.0.3"
+          }
+        },
+        "ini": {
+          "versions": [
+            "6.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/ini"
+          ],
+          "requirements": {}
+        },
+        "init-package-json": {
+          "versions": [
+            "8.2.5"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/init-package-json"
+          ],
+          "requirements": {
+            "@npmcli/package-json": "^7.0.0",
+            "npm-package-arg": "^13.0.0",
+            "promzard": "^3.0.1",
+            "read": "^5.0.1",
+            "semver": "^7.7.2",
+            "validate-npm-package-name": "^7.0.0"
+          }
+        },
+        "ip-address": {
+          "versions": [
+            "10.5.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/ip-address"
+          ],
+          "requirements": {}
+        },
+        "is-cidr": {
+          "versions": [
+            "6.0.4"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/is-cidr"
+          ],
+          "requirements": {
+            "cidr-regex": "^5.0.4"
+          }
+        },
+        "isexe": {
+          "versions": [
+            "4.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/isexe"
+          ],
+          "requirements": {}
+        },
+        "json-parse-even-better-errors": {
+          "versions": [
+            "5.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/json-parse-even-better-errors"
+          ],
+          "requirements": {}
+        },
+        "json-stringify-nice": {
+          "versions": [
+            "1.1.4"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/json-stringify-nice"
+          ],
+          "requirements": {}
+        },
+        "jsonparse": {
+          "versions": [
+            "1.3.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/jsonparse"
+          ],
+          "requirements": {}
+        },
+        "just-diff": {
+          "versions": [
+            "6.0.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/just-diff"
+          ],
+          "requirements": {}
+        },
+        "just-diff-apply": {
+          "versions": [
+            "5.5.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/just-diff-apply"
+          ],
+          "requirements": {}
+        },
+        "libnpmaccess": {
+          "versions": [
+            "10.0.3"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/libnpmaccess"
+          ],
+          "requirements": {
+            "npm-package-arg": "^13.0.0",
+            "npm-registry-fetch": "^19.0.0"
+          }
+        },
+        "libnpmdiff": {
+          "versions": [
+            "8.1.13"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/libnpmdiff"
+          ],
+          "requirements": {
+            "@npmcli/arborist": "^9.9.2",
+            "@npmcli/installed-package-contents": "^4.0.0",
+            "binary-extensions": "^3.0.0",
+            "diff": "^8.0.2",
+            "minimatch": "^10.0.3",
+            "npm-package-arg": "^13.0.0",
+            "pacote": "^21.0.2",
+            "tar": "^7.5.1"
+          }
+        },
+        "libnpmexec": {
+          "versions": [
+            "10.3.3"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/libnpmexec"
+          ],
+          "requirements": {
+            "@gar/promise-retry": "^1.0.0",
+            "@npmcli/arborist": "^9.9.2",
+            "@npmcli/package-json": "^7.0.0",
+            "@npmcli/run-script": "^10.0.0",
+            "ci-info": "^4.0.0",
+            "npm-package-arg": "^13.0.0",
+            "pacote": "^21.0.2",
+            "proc-log": "^6.0.0",
+            "read": "^5.0.1",
+            "semver": "^7.3.7",
+            "signal-exit": "^4.1.0",
+            "walk-up-path": "^4.0.0"
+          }
+        },
+        "libnpmfund": {
+          "versions": [
+            "7.0.27"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/libnpmfund"
+          ],
+          "requirements": {
+            "@npmcli/arborist": "^9.9.2"
+          }
+        },
+        "libnpmorg": {
+          "versions": [
+            "8.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/libnpmorg"
+          ],
+          "requirements": {
+            "aproba": "^2.0.0",
+            "npm-registry-fetch": "^19.0.0"
+          }
+        },
+        "libnpmpack": {
+          "versions": [
+            "9.1.14"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/libnpmpack"
+          ],
+          "requirements": {
+            "@npmcli/arborist": "^9.9.2",
+            "@npmcli/run-script": "^10.0.0",
+            "npm-package-arg": "^13.0.0",
+            "pacote": "^21.0.2"
+          }
+        },
+        "libnpmpublish": {
+          "versions": [
+            "11.2.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/libnpmpublish"
+          ],
+          "requirements": {
+            "@npmcli/package-json": "^7.0.0",
+            "ci-info": "^4.0.0",
+            "npm-package-arg": "^13.0.0",
+            "npm-registry-fetch": "^19.0.0",
+            "proc-log": "^6.0.0",
+            "semver": "^7.3.7",
+            "sigstore": "^4.0.0",
+            "ssri": "^13.0.0"
+          }
+        },
+        "libnpmsearch": {
+          "versions": [
+            "9.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/libnpmsearch"
+          ],
+          "requirements": {
+            "npm-registry-fetch": "^19.0.0"
+          }
+        },
+        "libnpmteam": {
+          "versions": [
+            "8.0.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/libnpmteam"
+          ],
+          "requirements": {
+            "aproba": "^2.0.0",
+            "npm-registry-fetch": "^19.0.0"
+          }
+        },
+        "libnpmversion": {
+          "versions": [
+            "8.0.4"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/libnpmversion"
+          ],
+          "requirements": {
+            "@npmcli/git": "^7.0.0",
+            "@npmcli/run-script": "^10.0.0",
+            "json-parse-even-better-errors": "^5.0.0",
+            "proc-log": "^6.0.0",
+            "semver": "^7.3.7"
+          }
+        },
+        "lru-cache": {
+          "versions": [
+            "11.5.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/lru-cache"
+          ],
+          "requirements": {}
+        },
+        "make-fetch-happen": {
+          "versions": [
+            "15.0.6"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/make-fetch-happen"
+          ],
+          "requirements": {
+            "@gar/promise-retry": "^1.0.0",
+            "@npmcli/agent": "^4.0.0",
+            "@npmcli/redact": "^4.0.0",
+            "cacache": "^20.0.1",
+            "http-cache-semantics": "^4.1.1",
+            "minipass": "^7.0.2",
+            "minipass-fetch": "^5.0.0",
+            "minipass-flush": "^1.0.5",
+            "minipass-pipeline": "^1.2.4",
+            "negotiator": "^1.0.0",
+            "proc-log": "^6.0.0",
+            "ssri": "^13.0.0"
+          }
+        },
+        "minimatch": {
+          "versions": [
+            "10.2.5"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/minimatch"
+          ],
+          "requirements": {
+            "brace-expansion": "^5.0.5"
+          }
+        },
+        "minipass": {
+          "versions": [
+            "7.1.3",
+            "3.3.6"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/minipass",
+            "node_modules/npm/node_modules/minipass-pipeline/node_modules/minipass"
+          ],
+          "requirements": {}
+        },
+        "minipass-collect": {
+          "versions": [
+            "2.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/minipass-collect"
+          ],
+          "requirements": {
+            "minipass": "^7.0.3"
+          }
+        },
+        "minipass-fetch": {
+          "versions": [
+            "5.0.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/minipass-fetch"
+          ],
+          "requirements": {
+            "minipass": "^7.0.3",
+            "minipass-sized": "^2.0.0",
+            "minizlib": "^3.0.1"
+          }
+        },
+        "minipass-flush": {
+          "versions": [
+            "1.0.6"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/minipass-flush"
+          ],
+          "requirements": {
+            "minipass": "^7.1.3"
+          }
+        },
+        "minipass-pipeline": {
+          "versions": [
+            "1.2.4"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/minipass-pipeline"
+          ],
+          "requirements": {
+            "minipass": "^3.0.0"
+          }
+        },
+        "yallist": {
+          "versions": [
+            "4.0.0",
+            "5.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/minipass-pipeline/node_modules/yallist",
+            "node_modules/npm/node_modules/yallist"
+          ],
+          "requirements": {}
+        },
+        "minipass-sized": {
+          "versions": [
+            "2.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/minipass-sized"
+          ],
+          "requirements": {
+            "minipass": "^7.1.2"
+          }
+        },
+        "minizlib": {
+          "versions": [
+            "3.1.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/minizlib"
+          ],
+          "requirements": {
+            "minipass": "^7.1.2"
+          }
+        },
+        "ms": {
+          "versions": [
+            "2.1.3"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/ms"
+          ],
+          "requirements": {}
+        },
+        "mute-stream": {
+          "versions": [
+            "3.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/mute-stream"
+          ],
+          "requirements": {}
+        },
+        "negotiator": {
+          "versions": [
+            "1.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/negotiator"
+          ],
+          "requirements": {}
+        },
+        "node-gyp": {
+          "versions": [
+            "12.4.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/node-gyp"
+          ],
+          "requirements": {
+            "env-paths": "^2.2.0",
+            "exponential-backoff": "^3.1.1",
+            "graceful-fs": "^4.2.6",
+            "nopt": "^9.0.0",
+            "proc-log": "^6.0.0",
+            "semver": "^7.3.5",
+            "tar": "^7.5.4",
+            "tinyglobby": "^0.2.12",
+            "undici": "^6.25.0",
+            "which": "^6.0.0"
+          }
+        },
+        "nopt": {
+          "versions": [
+            "9.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/nopt"
+          ],
+          "requirements": {
+            "abbrev": "^4.0.0"
+          }
+        },
+        "npm-audit-report": {
+          "versions": [
+            "7.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/npm-audit-report"
+          ],
+          "requirements": {}
+        },
+        "npm-bundled": {
+          "versions": [
+            "5.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/npm-bundled"
+          ],
+          "requirements": {
+            "npm-normalize-package-bin": "^5.0.0"
+          }
+        },
+        "npm-install-checks": {
+          "versions": [
+            "8.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/npm-install-checks"
+          ],
+          "requirements": {
+            "semver": "^7.1.1"
+          }
+        },
+        "npm-normalize-package-bin": {
+          "versions": [
+            "5.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/npm-normalize-package-bin"
+          ],
+          "requirements": {}
+        },
+        "npm-package-arg": {
+          "versions": [
+            "13.0.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/npm-package-arg"
+          ],
+          "requirements": {
+            "hosted-git-info": "^9.0.0",
+            "proc-log": "^6.0.0",
+            "semver": "^7.3.5",
+            "validate-npm-package-name": "^7.0.0"
+          }
+        },
+        "npm-packlist": {
+          "versions": [
+            "10.0.4"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/npm-packlist"
+          ],
+          "requirements": {
+            "ignore-walk": "^8.0.0",
+            "proc-log": "^6.0.0"
+          }
+        },
+        "npm-pick-manifest": {
+          "versions": [
+            "11.0.3"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/npm-pick-manifest"
+          ],
+          "requirements": {
+            "npm-install-checks": "^8.0.0",
+            "npm-normalize-package-bin": "^5.0.0",
+            "npm-package-arg": "^13.0.0",
+            "semver": "^7.3.5"
+          }
+        },
+        "npm-profile": {
+          "versions": [
+            "12.0.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/npm-profile"
+          ],
+          "requirements": {
+            "npm-registry-fetch": "^19.0.0",
+            "proc-log": "^6.1.0"
+          }
+        },
+        "npm-registry-fetch": {
+          "versions": [
+            "19.1.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/npm-registry-fetch"
+          ],
+          "requirements": {
+            "@npmcli/redact": "^4.0.0",
+            "jsonparse": "^1.3.1",
+            "make-fetch-happen": "^15.0.0",
+            "minipass": "^7.0.2",
+            "minipass-fetch": "^5.0.0",
+            "minizlib": "^3.0.1",
+            "npm-package-arg": "^13.0.0",
+            "proc-log": "^6.0.0"
+          }
+        },
+        "npm-user-validate": {
+          "versions": [
+            "4.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/npm-user-validate"
+          ],
+          "requirements": {}
+        },
+        "p-map": {
+          "versions": [
+            "7.0.4"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/p-map"
+          ],
+          "requirements": {}
+        },
+        "pacote": {
+          "versions": [
+            "21.5.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/pacote"
+          ],
+          "requirements": {
+            "@gar/promise-retry": "^1.0.0",
+            "@npmcli/git": "^7.0.0",
+            "@npmcli/installed-package-contents": "^4.0.0",
+            "@npmcli/package-json": "^7.0.0",
+            "@npmcli/promise-spawn": "^9.0.0",
+            "@npmcli/run-script": "^10.0.0",
+            "cacache": "^20.0.0",
+            "fs-minipass": "^3.0.0",
+            "minipass": "^7.0.2",
+            "npm-package-arg": "^13.0.0",
+            "npm-packlist": "^10.0.1",
+            "npm-pick-manifest": "^11.0.1",
+            "npm-registry-fetch": "^19.0.0",
+            "proc-log": "^6.0.0",
+            "sigstore": "^4.0.0",
+            "ssri": "^13.0.0",
+            "tar": "^7.4.3"
+          }
+        },
+        "parse-conflict-json": {
+          "versions": [
+            "5.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/parse-conflict-json"
+          ],
+          "requirements": {
+            "json-parse-even-better-errors": "^5.0.0",
+            "just-diff": "^6.0.0",
+            "just-diff-apply": "^5.2.0"
+          }
+        },
+        "path-scurry": {
+          "versions": [
+            "2.0.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/path-scurry"
+          ],
+          "requirements": {
+            "lru-cache": "^11.0.0",
+            "minipass": "^7.1.2"
+          }
+        },
+        "postcss-selector-parser": {
+          "versions": [
+            "7.1.4"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/postcss-selector-parser"
+          ],
+          "requirements": {
+            "cssesc": "^3.0.0",
+            "util-deprecate": "^1.0.2"
+          }
+        },
+        "proc-log": {
+          "versions": [
+            "6.1.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/proc-log"
+          ],
+          "requirements": {}
+        },
+        "proggy": {
+          "versions": [
+            "4.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/proggy"
+          ],
+          "requirements": {}
+        },
+        "promise-all-reject-late": {
+          "versions": [
+            "1.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/promise-all-reject-late"
+          ],
+          "requirements": {}
+        },
+        "promise-call-limit": {
+          "versions": [
+            "3.0.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/promise-call-limit"
+          ],
+          "requirements": {}
+        },
+        "promzard": {
+          "versions": [
+            "3.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/promzard"
+          ],
+          "requirements": {
+            "read": "^5.0.0"
+          }
+        },
+        "qrcode-terminal": {
+          "versions": [
+            "0.12.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/qrcode-terminal"
+          ],
+          "requirements": {}
+        },
+        "read": {
+          "versions": [
+            "5.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/read"
+          ],
+          "requirements": {
+            "mute-stream": "^3.0.0"
+          }
+        },
+        "read-cmd-shim": {
+          "versions": [
+            "6.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/read-cmd-shim"
+          ],
+          "requirements": {}
+        },
+        "safer-buffer": {
+          "versions": [
+            "2.1.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/safer-buffer"
+          ],
+          "requirements": {}
+        },
+        "semver": {
+          "versions": [
+            "7.8.5"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/semver"
+          ],
+          "requirements": {}
+        },
+        "signal-exit": {
+          "versions": [
+            "4.1.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/signal-exit"
+          ],
+          "requirements": {}
+        },
+        "sigstore": {
+          "versions": [
+            "4.1.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/sigstore"
+          ],
+          "requirements": {
+            "@sigstore/bundle": "^4.0.0",
+            "@sigstore/core": "^3.2.1",
+            "@sigstore/protobuf-specs": "^0.5.0",
+            "@sigstore/sign": "^4.1.1",
+            "@sigstore/tuf": "^4.0.2",
+            "@sigstore/verify": "^3.1.1"
+          }
+        },
+        "smart-buffer": {
+          "versions": [
+            "4.2.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/smart-buffer"
+          ],
+          "requirements": {}
+        },
+        "socks": {
+          "versions": [
+            "2.8.9"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/socks"
+          ],
+          "requirements": {
+            "ip-address": "^10.1.1",
+            "smart-buffer": "^4.2.0"
+          }
+        },
+        "socks-proxy-agent": {
+          "versions": [
+            "8.0.5"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/socks-proxy-agent"
+          ],
+          "requirements": {
+            "agent-base": "^7.1.2",
+            "debug": "^4.3.4",
+            "socks": "^2.8.3"
+          }
+        },
+        "spdx-exceptions": {
+          "versions": [
+            "2.5.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/spdx-exceptions"
+          ],
+          "requirements": {}
+        },
+        "spdx-expression-parse": {
+          "versions": [
+            "4.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/spdx-expression-parse"
+          ],
+          "requirements": {
+            "spdx-exceptions": "^2.1.0",
+            "spdx-license-ids": "^3.0.0"
+          }
+        },
+        "spdx-license-ids": {
+          "versions": [
+            "3.0.23"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/spdx-license-ids"
+          ],
+          "requirements": {}
+        },
+        "ssri": {
+          "versions": [
+            "13.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/ssri"
+          ],
+          "requirements": {
+            "minipass": "^7.0.3"
+          }
+        },
+        "supports-color": {
+          "versions": [
+            "10.2.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/supports-color"
+          ],
+          "requirements": {}
+        },
+        "tar": {
+          "versions": [
+            "7.5.22"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/tar"
+          ],
+          "requirements": {
+            "@isaacs/fs-minipass": "^4.0.0",
+            "chownr": "^3.0.0",
+            "minipass": "^7.1.2",
+            "minizlib": "^3.1.0",
+            "yallist": "^5.0.0"
+          }
+        },
+        "text-table": {
+          "versions": [
+            "0.2.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/text-table"
+          ],
+          "requirements": {}
+        },
+        "tiny-relative-date": {
+          "versions": [
+            "2.0.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/tiny-relative-date"
+          ],
+          "requirements": {}
+        },
+        "tinyglobby": {
+          "versions": [
+            "0.2.17"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/tinyglobby"
+          ],
+          "requirements": {
+            "fdir": "^6.5.0",
+            "picomatch": "^4.0.4"
+          }
+        },
+        "fdir": {
+          "versions": [
+            "6.5.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/tinyglobby/node_modules/fdir"
+          ],
+          "requirements": {}
+        },
+        "picomatch": {
+          "versions": [
+            "4.0.4"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/tinyglobby/node_modules/picomatch"
+          ],
+          "requirements": {}
+        },
+        "treeverse": {
+          "versions": [
+            "3.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/treeverse"
+          ],
+          "requirements": {}
+        },
+        "tuf-js": {
+          "versions": [
+            "4.1.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/tuf-js"
+          ],
+          "requirements": {
+            "@tufjs/models": "4.1.0",
+            "debug": "^4.4.3",
+            "make-fetch-happen": "^15.0.1"
+          }
+        },
+        "undici": {
+          "versions": [
+            "6.28.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/undici"
+          ],
+          "requirements": {}
+        },
+        "util-deprecate": {
+          "versions": [
+            "1.0.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/util-deprecate"
+          ],
+          "requirements": {}
+        },
+        "validate-npm-package-name": {
+          "versions": [
+            "7.0.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/validate-npm-package-name"
+          ],
+          "requirements": {}
+        },
+        "walk-up-path": {
+          "versions": [
+            "4.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/walk-up-path"
+          ],
+          "requirements": {}
+        },
+        "which": {
+          "versions": [
+            "6.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/which"
+          ],
+          "requirements": {
+            "isexe": "^4.0.0"
+          }
+        },
+        "write-file-atomic": {
+          "versions": [
+            "7.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/write-file-atomic"
+          ],
+          "requirements": {
+            "signal-exit": "^4.0.1"
+          }
+        }
+      }
+    },
+    "baseline": {
+      "manifest": {
+        "private": true,
+        "dependencies": {
+          "npm": "12.2.2"
+        }
+      },
+      "lock_sha256": "37331cb47cfbdf77bfa575aabf15c9f5246e91b663f49d95aeb0ceab6993708a",
+      "glob": "13.0.6",
+      "minimatch": "10.2.5",
+      "audit_returncode": 1,
+      "audit_summary": {
+        "vulnerabilities": {
+          "info": 0,
+          "low": 0,
+          "moderate": 21,
+          "high": 0,
+          "critical": 0,
+          "total": 21
+        },
+        "dependencies": {
+          "prod": 147,
+          "dev": 0,
+          "optional": 2,
+          "peer": 0,
+          "peerOptional": 0,
+          "total": 148
+        }
+      },
+      "packages": {
+        "npm": {
+          "versions": [
+            "12.2.2"
+          ],
+          "locations": [
+            "node_modules/npm"
+          ],
+          "requirements": {
+            "@isaacs/string-locale-compare": "^1.1.0",
+            "@npmcli/arborist": "^10.0.4",
+            "@npmcli/config": "^11.2.0",
+            "@npmcli/fs": "^6.0.0",
+            "@npmcli/git": "^8.0.0",
+            "@npmcli/map-workspaces": "^6.0.0",
+            "@npmcli/metavuln-calculator": "^10.0.0",
+            "@npmcli/package-json": "^8.0.0",
+            "@npmcli/promise-spawn": "^10.0.1",
+            "@npmcli/redact": "^5.0.0",
+            "@npmcli/run-script": "^11.0.0",
+            "@sigstore/tuf": "^5.0.0",
+            "abbrev": "^5.0.0",
+            "archy": "~1.0.0",
+            "bin-links": "^7.0.1",
+            "cacache": "^21.0.1",
+            "chalk": "^5.6.2",
+            "ci-info": "^4.4.0",
+            "diff": "^8.0.2",
+            "fastest-levenshtein": "^1.0.16",
+            "fs-minipass": "^3.0.3",
+            "glob": "^13.0.6",
+            "graceful-fs": "^4.2.11",
+            "hosted-git-info": "^10.1.1",
+            "ini": "^7.0.0",
+            "init-package-json": "^9.0.0",
+            "is-cidr": "^7.0.0",
+            "json-parse-even-better-errors": "^6.0.0",
+            "libnpmaccess": "^11.0.0",
+            "libnpmdiff": "^9.0.4",
+            "libnpmexec": "^11.0.5",
+            "libnpmfund": "^8.0.4",
+            "libnpmorg": "^9.0.0",
+            "libnpmpack": "^10.0.4",
+            "libnpmpublish": "^12.0.1",
+            "libnpmsearch": "^10.0.0",
+            "libnpmteam": "^9.0.0",
+            "libnpmversion": "^9.0.0",
+            "make-fetch-happen": "^16.0.1",
+            "minimatch": "^10.2.5",
+            "minipass": "^7.1.3",
+            "minipass-pipeline": "^1.2.4",
+            "ms": "^2.1.2",
+            "node-gyp": "^13.0.0",
+            "nopt": "^10.0.1",
+            "npm-audit-report": "^8.0.0",
+            "npm-install-checks": "^9.0.0",
+            "npm-package-arg": "^14.0.0",
+            "npm-pick-manifest": "^12.0.0",
+            "npm-profile": "^13.0.1",
+            "npm-registry-fetch": "^20.0.1",
+            "npm-user-validate": "^5.0.0",
+            "p-map": "^7.0.4",
+            "pacote": "^22.0.1",
+            "parse-conflict-json": "^6.0.0",
+            "proc-log": "^7.0.0",
+            "qrcode-terminal": "^0.12.0",
+            "read": "^6.0.0",
+            "semver": "^7.8.6",
+            "spdx-expression-parse": "^4.0.0",
+            "ssri": "^14.0.0",
+            "supports-color": "^10.2.2",
+            "tar": "^7.5.22",
+            "text-table": "~0.2.0",
+            "tiny-relative-date": "^2.0.2",
+            "treeverse": "^3.0.0",
+            "validate-npm-package-name": "^8.0.0",
+            "which": "^7.0.0"
+          }
+        },
+        "@gar/promise-retry": {
+          "versions": [
+            "1.0.3"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@gar/promise-retry"
+          ],
+          "requirements": {}
+        },
+        "@isaacs/fs-minipass": {
+          "versions": [
+            "4.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@isaacs/fs-minipass"
+          ],
+          "requirements": {
+            "minipass": "^7.0.4"
+          }
+        },
+        "@isaacs/string-locale-compare": {
+          "versions": [
+            "1.1.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@isaacs/string-locale-compare"
+          ],
+          "requirements": {}
+        },
+        "@npmcli/agent": {
+          "versions": [
+            "5.0.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/agent"
+          ],
+          "requirements": {
+            "agent-base": "^9.0.0",
+            "http-proxy-agent": "^9.0.0",
+            "https-proxy-agent": "^9.0.0",
+            "lru-cache": "^11.2.1",
+            "socks-proxy-agent": "^10.0.0"
+          }
+        },
+        "agent-base": {
+          "versions": [
+            "9.0.0",
+            "9.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/agent/node_modules/agent-base",
+            "node_modules/npm/node_modules/socks-proxy-agent/node_modules/agent-base"
+          ],
+          "requirements": {}
+        },
+        "http-proxy-agent": {
+          "versions": [
+            "9.1.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/agent/node_modules/http-proxy-agent"
+          ],
+          "requirements": {
+            "agent-base": "9.0.0",
+            "debug": "^4.3.4",
+            "proxy-agent-negotiate": "1.1.0"
+          }
+        },
+        "https-proxy-agent": {
+          "versions": [
+            "9.1.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/agent/node_modules/https-proxy-agent"
+          ],
+          "requirements": {
+            "agent-base": "9.0.0",
+            "debug": "^4.3.4",
+            "proxy-agent-negotiate": "1.1.0"
+          }
+        },
+        "@npmcli/arborist": {
+          "versions": [
+            "10.0.4"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/arborist"
+          ],
+          "requirements": {
+            "@gar/promise-retry": "^1.0.0",
+            "@isaacs/string-locale-compare": "^1.1.0",
+            "@npmcli/fs": "^6.0.0",
+            "@npmcli/installed-package-contents": "^5.0.0",
+            "@npmcli/map-workspaces": "^6.0.0",
+            "@npmcli/metavuln-calculator": "^10.0.0",
+            "@npmcli/name-from-folder": "^5.0.0",
+            "@npmcli/node-gyp": "^6.0.0",
+            "@npmcli/package-json": "^8.0.0",
+            "@npmcli/query": "^5.0.0",
+            "@npmcli/redact": "^5.0.0",
+            "@npmcli/run-script": "^11.0.0",
+            "bin-links": "^7.0.0",
+            "cacache": "^21.0.1",
+            "common-ancestor-path": "^2.0.0",
+            "diff": "^8.0.2",
+            "hosted-git-info": "^10.1.1",
+            "json-stringify-nice": "^1.1.4",
+            "lru-cache": "^11.2.1",
+            "minimatch": "^10.0.3",
+            "nopt": "^10.0.1",
+            "npm-install-checks": "^9.0.0",
+            "npm-package-arg": "^14.0.0",
+            "npm-pick-manifest": "^12.0.0",
+            "npm-registry-fetch": "^20.0.1",
+            "pacote": "^22.0.0",
+            "parse-conflict-json": "^6.0.0",
+            "proc-log": "^7.0.0",
+            "proggy": "^4.0.0",
+            "promise-all-reject-late": "^1.0.0",
+            "promise-call-limit": "^3.0.1",
+            "semver": "^7.3.7",
+            "ssri": "^14.0.0",
+            "treeverse": "^3.0.0",
+            "validate-npm-package-name": "^8.0.0",
+            "walk-up-path": "^4.0.0"
+          }
+        },
+        "@npmcli/config": {
+          "versions": [
+            "11.2.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/config"
+          ],
+          "requirements": {
+            "@npmcli/map-workspaces": "^6.0.0",
+            "@npmcli/package-json": "^8.0.0",
+            "ci-info": "^4.0.0",
+            "ini": "^7.0.0",
+            "nopt": "^10.0.1",
+            "proc-log": "^7.0.0",
+            "semver": "^7.3.5",
+            "walk-up-path": "^4.0.0"
+          }
+        },
+        "@npmcli/fs": {
+          "versions": [
+            "6.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/fs"
+          ],
+          "requirements": {
+            "semver": "^7.3.5"
+          }
+        },
+        "@npmcli/git": {
+          "versions": [
+            "8.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/git"
+          ],
+          "requirements": {
+            "@gar/promise-retry": "^1.0.0",
+            "@npmcli/promise-spawn": "^10.0.0",
+            "ini": "^7.0.0",
+            "lru-cache": "^11.2.1",
+            "npm-pick-manifest": "^12.0.0",
+            "proc-log": "^7.0.0",
+            "semver": "^7.3.5",
+            "which": "^7.0.0"
+          }
+        },
+        "@npmcli/installed-package-contents": {
+          "versions": [
+            "5.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/installed-package-contents"
+          ],
+          "requirements": {
+            "npm-bundled": "^6.0.0",
+            "npm-normalize-package-bin": "^6.0.0"
+          }
+        },
+        "npm-bundled": {
+          "versions": [
+            "6.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/installed-package-contents/node_modules/npm-bundled"
+          ],
+          "requirements": {
+            "npm-normalize-package-bin": "^6.0.0"
+          }
+        },
+        "npm-normalize-package-bin": {
+          "versions": [
+            "6.0.0",
+            "6.0.0",
+            "6.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/installed-package-contents/node_modules/npm-normalize-package-bin",
+            "node_modules/npm/node_modules/bin-links/node_modules/npm-normalize-package-bin",
+            "node_modules/npm/node_modules/npm-pick-manifest/node_modules/npm-normalize-package-bin"
+          ],
+          "requirements": {}
+        },
+        "@npmcli/map-workspaces": {
+          "versions": [
+            "6.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/map-workspaces"
+          ],
+          "requirements": {
+            "@npmcli/name-from-folder": "^5.0.0",
+            "@npmcli/package-json": "^8.0.0",
+            "glob": "^13.0.0",
+            "minimatch": "^10.0.3"
+          }
+        },
+        "@npmcli/metavuln-calculator": {
+          "versions": [
+            "10.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/metavuln-calculator"
+          ],
+          "requirements": {
+            "cacache": "^21.0.1",
+            "json-parse-even-better-errors": "^6.0.0",
+            "pacote": "^22.0.0",
+            "proc-log": "^7.0.0",
+            "semver": "^7.3.5"
+          }
+        },
+        "@npmcli/name-from-folder": {
+          "versions": [
+            "5.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/name-from-folder"
+          ],
+          "requirements": {}
+        },
+        "@npmcli/node-gyp": {
+          "versions": [
+            "6.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/node-gyp"
+          ],
+          "requirements": {}
+        },
+        "@npmcli/package-json": {
+          "versions": [
+            "8.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/package-json"
+          ],
+          "requirements": {
+            "@npmcli/git": "^8.0.0",
+            "glob": "^13.0.0",
+            "hosted-git-info": "^10.1.1",
+            "json-parse-even-better-errors": "^6.0.0",
+            "proc-log": "^7.0.0",
+            "semver": "^7.5.3",
+            "spdx-expression-parse": "^4.0.0"
+          }
+        },
+        "@npmcli/promise-spawn": {
+          "versions": [
+            "10.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/promise-spawn"
+          ],
+          "requirements": {
+            "which": "^7.0.0"
+          }
+        },
+        "@npmcli/query": {
+          "versions": [
+            "5.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/query"
+          ],
+          "requirements": {
+            "postcss-selector-parser": "^7.0.0"
+          }
+        },
+        "@npmcli/redact": {
+          "versions": [
+            "5.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/redact"
+          ],
+          "requirements": {}
+        },
+        "@npmcli/run-script": {
+          "versions": [
+            "11.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/run-script"
+          ],
+          "requirements": {
+            "@npmcli/node-gyp": "^6.0.0",
+            "@npmcli/package-json": "^8.0.0",
+            "@npmcli/promise-spawn": "^10.0.0",
+            "node-gyp": "^13.0.0",
+            "proc-log": "^7.0.0"
+          }
+        },
+        "@sigstore/bundle": {
+          "versions": [
+            "5.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@sigstore/bundle"
+          ],
+          "requirements": {
+            "@sigstore/protobuf-specs": "^0.5.0"
+          }
+        },
+        "@sigstore/core": {
+          "versions": [
+            "4.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@sigstore/core"
+          ],
+          "requirements": {}
+        },
+        "@sigstore/protobuf-specs": {
+          "versions": [
+            "0.5.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@sigstore/protobuf-specs"
+          ],
+          "requirements": {}
+        },
+        "@sigstore/sign": {
+          "versions": [
+            "5.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@sigstore/sign"
+          ],
+          "requirements": {
+            "@gar/promise-retry": "^1.0.2",
+            "@sigstore/bundle": "^5.0.0",
+            "@sigstore/core": "^4.0.0",
+            "@sigstore/protobuf-specs": "^0.5.0",
+            "make-fetch-happen": "^16.0.0",
+            "proc-log": "^7.0.0"
+          }
+        },
+        "@sigstore/tuf": {
+          "versions": [
+            "5.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@sigstore/tuf"
+          ],
+          "requirements": {
+            "@sigstore/protobuf-specs": "^0.5.0",
+            "tuf-js": "^6.0.0"
+          }
+        },
+        "@sigstore/verify": {
+          "versions": [
+            "4.1.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@sigstore/verify"
+          ],
+          "requirements": {
+            "@sigstore/bundle": "^5.0.0",
+            "@sigstore/core": "^4.0.1",
+            "@sigstore/protobuf-specs": "^0.5.0"
+          }
+        },
+        "@tufjs/canonical-json": {
+          "versions": [
+            "2.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@tufjs/canonical-json"
+          ],
+          "requirements": {}
+        },
+        "@tufjs/models": {
+          "versions": [
+            "5.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@tufjs/models"
+          ],
+          "requirements": {
+            "@tufjs/canonical-json": "2.0.0",
+            "minimatch": "^10.2.1"
+          }
+        },
+        "abbrev": {
+          "versions": [
+            "5.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/abbrev"
+          ],
+          "requirements": {}
+        },
+        "aproba": {
+          "versions": [
+            "2.1.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/aproba"
+          ],
+          "requirements": {}
+        },
+        "archy": {
+          "versions": [
+            "1.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/archy"
+          ],
+          "requirements": {}
+        },
+        "balanced-match": {
+          "versions": [
+            "4.0.4"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/balanced-match"
+          ],
+          "requirements": {}
+        },
+        "bin-links": {
+          "versions": [
+            "7.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/bin-links"
+          ],
+          "requirements": {
+            "cmd-shim": "^9.0.0",
+            "npm-normalize-package-bin": "^6.0.0",
+            "proc-log": "^7.0.0",
+            "read-cmd-shim": "^7.0.0",
+            "write-file-atomic": "^8.0.0"
+          }
+        },
+        "cmd-shim": {
+          "versions": [
+            "9.0.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/bin-links/node_modules/cmd-shim"
+          ],
+          "requirements": {}
+        },
+        "read-cmd-shim": {
+          "versions": [
+            "7.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/bin-links/node_modules/read-cmd-shim"
+          ],
+          "requirements": {}
+        },
+        "binary-extensions": {
+          "versions": [
+            "3.1.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/binary-extensions"
+          ],
+          "requirements": {}
+        },
+        "brace-expansion": {
+          "versions": [
+            "5.0.12"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/brace-expansion"
+          ],
+          "requirements": {
+            "balanced-match": "^4.0.2"
+          }
+        },
+        "cacache": {
+          "versions": [
+            "21.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/cacache"
+          ],
+          "requirements": {
+            "@npmcli/fs": "^6.0.0",
+            "fs-minipass": "^3.0.0",
+            "glob": "^13.0.0",
+            "lru-cache": "^11.1.0",
+            "minipass": "^7.0.3",
+            "minipass-collect": "^2.0.1",
+            "minipass-flush": "^1.0.5",
+            "minipass-pipeline": "^1.2.4",
+            "p-map": "^7.0.2",
+            "ssri": "^14.0.0"
+          }
+        },
+        "chalk": {
+          "versions": [
+            "5.6.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/chalk"
+          ],
+          "requirements": {}
+        },
+        "chownr": {
+          "versions": [
+            "3.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/chownr"
+          ],
+          "requirements": {}
+        },
+        "ci-info": {
+          "versions": [
+            "4.4.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/ci-info"
+          ],
+          "requirements": {}
+        },
+        "cidr-regex": {
+          "versions": [
+            "6.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/cidr-regex"
+          ],
+          "requirements": {}
+        },
+        "common-ancestor-path": {
+          "versions": [
+            "2.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/common-ancestor-path"
+          ],
+          "requirements": {}
+        },
+        "cssesc": {
+          "versions": [
+            "3.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/cssesc"
+          ],
+          "requirements": {}
+        },
+        "debug": {
+          "versions": [
+            "4.4.3"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/debug"
+          ],
+          "requirements": {
+            "ms": "^2.1.3"
+          }
+        },
+        "diff": {
+          "versions": [
+            "8.0.4"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/diff"
+          ],
+          "requirements": {}
+        },
+        "env-paths": {
+          "versions": [
+            "2.2.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/env-paths"
+          ],
+          "requirements": {}
+        },
+        "exponential-backoff": {
+          "versions": [
+            "3.1.3"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/exponential-backoff"
+          ],
+          "requirements": {}
+        },
+        "fastest-levenshtein": {
+          "versions": [
+            "1.0.16"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/fastest-levenshtein"
+          ],
+          "requirements": {}
+        },
+        "fs-minipass": {
+          "versions": [
+            "3.0.3"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/fs-minipass"
+          ],
+          "requirements": {
+            "minipass": "^7.0.3"
+          }
+        },
+        "glob": {
+          "versions": [
+            "13.0.6"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/glob"
+          ],
+          "requirements": {
+            "minimatch": "^10.2.2",
+            "minipass": "^7.1.3",
+            "path-scurry": "^2.0.2"
+          }
+        },
+        "graceful-fs": {
+          "versions": [
+            "4.2.11"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/graceful-fs"
+          ],
+          "requirements": {}
+        },
+        "hosted-git-info": {
+          "versions": [
+            "10.1.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/hosted-git-info"
+          ],
+          "requirements": {
+            "lru-cache": "^11.1.0"
+          }
+        },
+        "http-cache-semantics": {
+          "versions": [
+            "4.3.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/http-cache-semantics"
+          ],
+          "requirements": {}
+        },
+        "iconv-lite": {
+          "versions": [
+            "0.7.3"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/iconv-lite"
+          ],
+          "requirements": {
+            "safer-buffer": ">= 2.1.2 < 3.0.0"
+          }
+        },
+        "ini": {
+          "versions": [
+            "7.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/ini"
+          ],
+          "requirements": {}
+        },
+        "init-package-json": {
+          "versions": [
+            "9.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/init-package-json"
+          ],
+          "requirements": {
+            "@npmcli/package-json": "^8.0.0",
+            "npm-package-arg": "^14.0.0",
+            "promzard": "^4.0.0",
+            "read": "^6.0.0",
+            "semver": "^7.7.2",
+            "validate-npm-package-name": "^8.0.0"
+          }
+        },
+        "ip-address": {
+          "versions": [
+            "10.7.5"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/ip-address"
+          ],
+          "requirements": {}
+        },
+        "is-cidr": {
+          "versions": [
+            "7.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/is-cidr"
+          ],
+          "requirements": {
+            "cidr-regex": "^6.0.0"
+          }
+        },
+        "isexe": {
+          "versions": [
+            "4.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/isexe"
+          ],
+          "requirements": {}
+        },
+        "json-parse-even-better-errors": {
+          "versions": [
+            "6.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/json-parse-even-better-errors"
+          ],
+          "requirements": {}
+        },
+        "json-stringify-nice": {
+          "versions": [
+            "1.1.4"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/json-stringify-nice"
+          ],
+          "requirements": {}
+        },
+        "jsonparse": {
+          "versions": [
+            "1.3.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/jsonparse"
+          ],
+          "requirements": {}
+        },
+        "just-diff": {
+          "versions": [
+            "6.0.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/just-diff"
+          ],
+          "requirements": {}
+        },
+        "just-diff-apply": {
+          "versions": [
+            "5.5.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/just-diff-apply"
+          ],
+          "requirements": {}
+        },
+        "libnpmaccess": {
+          "versions": [
+            "11.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/libnpmaccess"
+          ],
+          "requirements": {
+            "npm-package-arg": "^14.0.0",
+            "npm-registry-fetch": "^20.0.1"
+          }
+        },
+        "libnpmdiff": {
+          "versions": [
+            "9.0.4"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/libnpmdiff"
+          ],
+          "requirements": {
+            "@npmcli/arborist": "^10.0.4",
+            "@npmcli/installed-package-contents": "^5.0.0",
+            "binary-extensions": "^3.0.0",
+            "diff": "^8.0.2",
+            "minimatch": "^10.0.3",
+            "npm-package-arg": "^14.0.0",
+            "pacote": "^22.0.0",
+            "tar": "^7.5.1"
+          }
+        },
+        "libnpmexec": {
+          "versions": [
+            "11.0.5"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/libnpmexec"
+          ],
+          "requirements": {
+            "@gar/promise-retry": "^1.0.0",
+            "@npmcli/arborist": "^10.0.4",
+            "@npmcli/package-json": "^8.0.0",
+            "@npmcli/run-script": "^11.0.0",
+            "ci-info": "^4.0.0",
+            "npm-package-arg": "^14.0.0",
+            "pacote": "^22.0.0",
+            "proc-log": "^7.0.0",
+            "read": "^6.0.0",
+            "semver": "^7.3.7",
+            "signal-exit": "^4.1.0",
+            "walk-up-path": "^4.0.0"
+          }
+        },
+        "libnpmfund": {
+          "versions": [
+            "8.0.4"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/libnpmfund"
+          ],
+          "requirements": {
+            "@npmcli/arborist": "^10.0.4"
+          }
+        },
+        "libnpmorg": {
+          "versions": [
+            "9.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/libnpmorg"
+          ],
+          "requirements": {
+            "aproba": "^2.0.0",
+            "npm-registry-fetch": "^20.0.1"
+          }
+        },
+        "libnpmpack": {
+          "versions": [
+            "10.0.4"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/libnpmpack"
+          ],
+          "requirements": {
+            "@npmcli/arborist": "^10.0.4",
+            "@npmcli/run-script": "^11.0.0",
+            "npm-package-arg": "^14.0.0",
+            "pacote": "^22.0.0"
+          }
+        },
+        "libnpmpublish": {
+          "versions": [
+            "12.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/libnpmpublish"
+          ],
+          "requirements": {
+            "@npmcli/package-json": "^8.0.0",
+            "ci-info": "^4.0.0",
+            "npm-package-arg": "^14.0.0",
+            "npm-registry-fetch": "^20.0.1",
+            "proc-log": "^7.0.0",
+            "semver": "^7.3.7",
+            "sigstore": "^5.0.0",
+            "ssri": "^14.0.0"
+          }
+        },
+        "libnpmsearch": {
+          "versions": [
+            "10.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/libnpmsearch"
+          ],
+          "requirements": {
+            "npm-registry-fetch": "^20.0.1"
+          }
+        },
+        "libnpmteam": {
+          "versions": [
+            "9.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/libnpmteam"
+          ],
+          "requirements": {
+            "aproba": "^2.0.0",
+            "npm-registry-fetch": "^20.0.1"
+          }
+        },
+        "libnpmversion": {
+          "versions": [
+            "9.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/libnpmversion"
+          ],
+          "requirements": {
+            "@npmcli/git": "^8.0.0",
+            "@npmcli/run-script": "^11.0.0",
+            "json-parse-even-better-errors": "^6.0.0",
+            "proc-log": "^7.0.0",
+            "semver": "^7.3.7"
+          }
+        },
+        "lru-cache": {
+          "versions": [
+            "11.5.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/lru-cache"
+          ],
+          "requirements": {}
+        },
+        "make-fetch-happen": {
+          "versions": [
+            "16.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/make-fetch-happen"
+          ],
+          "requirements": {
+            "@gar/promise-retry": "^1.0.0",
+            "@npmcli/agent": "^5.0.0",
+            "@npmcli/redact": "^5.0.0",
+            "cacache": "^21.0.0",
+            "http-cache-semantics": "^4.1.1",
+            "minipass": "^7.0.2",
+            "minipass-fetch": "^6.0.0",
+            "minipass-flush": "^1.0.5",
+            "minipass-pipeline": "^1.2.4",
+            "negotiator": "^1.0.0",
+            "proc-log": "^7.0.0",
+            "ssri": "^14.0.0"
+          }
+        },
+        "minimatch": {
+          "versions": [
+            "10.2.5"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/minimatch"
+          ],
+          "requirements": {
+            "brace-expansion": "^5.0.5"
+          }
+        },
+        "minipass": {
+          "versions": [
+            "7.1.3",
+            "3.3.6"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/minipass",
+            "node_modules/npm/node_modules/minipass-pipeline/node_modules/minipass"
+          ],
+          "requirements": {}
+        },
+        "minipass-collect": {
+          "versions": [
+            "2.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/minipass-collect"
+          ],
+          "requirements": {
+            "minipass": "^7.0.3"
+          }
+        },
+        "minipass-fetch": {
+          "versions": [
+            "6.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/minipass-fetch"
+          ],
+          "requirements": {
+            "minipass": "^7.0.3",
+            "minipass-sized": "^2.0.0",
+            "minizlib": "^3.0.1"
+          }
+        },
+        "minipass-flush": {
+          "versions": [
+            "1.0.6"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/minipass-flush"
+          ],
+          "requirements": {
+            "minipass": "^7.1.3"
+          }
+        },
+        "minipass-pipeline": {
+          "versions": [
+            "1.2.4"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/minipass-pipeline"
+          ],
+          "requirements": {
+            "minipass": "^3.0.0"
+          }
+        },
+        "yallist": {
+          "versions": [
+            "4.0.0",
+            "5.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/minipass-pipeline/node_modules/yallist",
+            "node_modules/npm/node_modules/yallist"
+          ],
+          "requirements": {}
+        },
+        "minipass-sized": {
+          "versions": [
+            "2.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/minipass-sized"
+          ],
+          "requirements": {
+            "minipass": "^7.1.2"
+          }
+        },
+        "minizlib": {
+          "versions": [
+            "3.1.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/minizlib"
+          ],
+          "requirements": {
+            "minipass": "^7.1.2"
+          }
+        },
+        "ms": {
+          "versions": [
+            "2.1.3"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/ms"
+          ],
+          "requirements": {}
+        },
+        "mute-stream": {
+          "versions": [
+            "4.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/mute-stream"
+          ],
+          "requirements": {}
+        },
+        "negotiator": {
+          "versions": [
+            "1.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/negotiator"
+          ],
+          "requirements": {}
+        },
+        "node-gyp": {
+          "versions": [
+            "13.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/node-gyp"
+          ],
+          "requirements": {
+            "env-paths": "^2.2.0",
+            "exponential-backoff": "^3.1.1",
+            "graceful-fs": "^4.2.6",
+            "nopt": "^10.0.0",
+            "proc-log": "^7.0.0",
+            "semver": "^7.3.5",
+            "tar": "^7.5.4",
+            "tinyglobby": "^0.2.12",
+            "undici": "^6.25.0",
+            "which": "^7.0.0"
+          }
+        },
+        "nopt": {
+          "versions": [
+            "10.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/nopt"
+          ],
+          "requirements": {
+            "abbrev": "^5.0.0"
+          }
+        },
+        "npm-audit-report": {
+          "versions": [
+            "8.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/npm-audit-report"
+          ],
+          "requirements": {}
+        },
+        "npm-install-checks": {
+          "versions": [
+            "9.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/npm-install-checks"
+          ],
+          "requirements": {
+            "semver": "^7.1.1"
+          }
+        },
+        "npm-package-arg": {
+          "versions": [
+            "14.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/npm-package-arg"
+          ],
+          "requirements": {
+            "hosted-git-info": "^10.1.0",
+            "proc-log": "^7.0.0",
+            "semver": "^7.3.5",
+            "validate-npm-package-name": "^8.0.0"
+          }
+        },
+        "npm-packlist": {
+          "versions": [
+            "11.3.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/npm-packlist"
+          ],
+          "requirements": {
+            "glob": "^13.0.6",
+            "ignore-walk": "^9.0.0",
+            "proc-log": "^7.0.0"
+          }
+        },
+        "ignore-walk": {
+          "versions": [
+            "9.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/npm-packlist/node_modules/ignore-walk"
+          ],
+          "requirements": {
+            "minimatch": "^10.0.3"
+          }
+        },
+        "npm-pick-manifest": {
+          "versions": [
+            "12.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/npm-pick-manifest"
+          ],
+          "requirements": {
+            "npm-install-checks": "^9.0.0",
+            "npm-normalize-package-bin": "^6.0.0",
+            "npm-package-arg": "^14.0.0",
+            "semver": "^7.3.5"
+          }
+        },
+        "npm-profile": {
+          "versions": [
+            "13.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/npm-profile"
+          ],
+          "requirements": {
+            "npm-registry-fetch": "^20.0.0",
+            "proc-log": "^7.0.0"
+          }
+        },
+        "npm-registry-fetch": {
+          "versions": [
+            "20.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/npm-registry-fetch"
+          ],
+          "requirements": {
+            "@npmcli/redact": "^5.0.0",
+            "jsonparse": "^1.3.1",
+            "make-fetch-happen": "^16.0.0",
+            "minipass": "^7.0.2",
+            "minipass-fetch": "^6.0.0",
+            "minizlib": "^3.0.1",
+            "npm-package-arg": "^14.0.0",
+            "proc-log": "^7.0.0"
+          }
+        },
+        "npm-user-validate": {
+          "versions": [
+            "5.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/npm-user-validate"
+          ],
+          "requirements": {}
+        },
+        "p-map": {
+          "versions": [
+            "7.0.5"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/p-map"
+          ],
+          "requirements": {}
+        },
+        "pacote": {
+          "versions": [
+            "22.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/pacote"
+          ],
+          "requirements": {
+            "@gar/promise-retry": "^1.0.0",
+            "@npmcli/git": "^8.0.0",
+            "@npmcli/installed-package-contents": "^5.0.0",
+            "@npmcli/package-json": "^8.0.0",
+            "@npmcli/promise-spawn": "^10.0.0",
+            "@npmcli/run-script": "^11.0.0",
+            "cacache": "^21.0.1",
+            "fs-minipass": "^3.0.0",
+            "minipass": "^7.0.2",
+            "npm-package-arg": "^14.0.0",
+            "npm-packlist": "^11.2.0",
+            "npm-pick-manifest": "^12.0.0",
+            "npm-registry-fetch": "^20.0.1",
+            "proc-log": "^7.0.0",
+            "sigstore": "^5.0.0",
+            "ssri": "^14.0.0",
+            "tar": "^7.4.3"
+          }
+        },
+        "parse-conflict-json": {
+          "versions": [
+            "6.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/parse-conflict-json"
+          ],
+          "requirements": {
+            "json-parse-even-better-errors": "^6.0.0",
+            "just-diff": "^6.0.0",
+            "just-diff-apply": "^5.2.0"
+          }
+        },
+        "path-scurry": {
+          "versions": [
+            "2.0.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/path-scurry"
+          ],
+          "requirements": {
+            "lru-cache": "^11.0.0",
+            "minipass": "^7.1.2"
+          }
+        },
+        "postcss-selector-parser": {
+          "versions": [
+            "7.1.6"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/postcss-selector-parser"
+          ],
+          "requirements": {
+            "cssesc": "^3.0.0",
+            "util-deprecate": "^1.0.2"
+          }
+        },
+        "proc-log": {
+          "versions": [
+            "7.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/proc-log"
+          ],
+          "requirements": {}
+        },
+        "proggy": {
+          "versions": [
+            "4.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/proggy"
+          ],
+          "requirements": {}
+        },
+        "promise-all-reject-late": {
+          "versions": [
+            "1.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/promise-all-reject-late"
+          ],
+          "requirements": {}
+        },
+        "promise-call-limit": {
+          "versions": [
+            "3.0.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/promise-call-limit"
+          ],
+          "requirements": {}
+        },
+        "promzard": {
+          "versions": [
+            "4.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/promzard"
+          ],
+          "requirements": {
+            "read": "^6.0.0"
+          }
+        },
+        "proxy-agent-negotiate": {
+          "versions": [
+            "1.1.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/proxy-agent-negotiate"
+          ],
+          "requirements": {}
+        },
+        "qrcode-terminal": {
+          "versions": [
+            "0.12.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/qrcode-terminal"
+          ],
+          "requirements": {}
+        },
+        "read": {
+          "versions": [
+            "6.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/read"
+          ],
+          "requirements": {
+            "mute-stream": "^4.0.0"
+          }
+        },
+        "safer-buffer": {
+          "versions": [
+            "2.1.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/safer-buffer"
+          ],
+          "requirements": {}
+        },
+        "semver": {
+          "versions": [
+            "7.8.6"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/semver"
+          ],
+          "requirements": {}
+        },
+        "signal-exit": {
+          "versions": [
+            "4.1.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/signal-exit"
+          ],
+          "requirements": {}
+        },
+        "sigstore": {
+          "versions": [
+            "5.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/sigstore"
+          ],
+          "requirements": {
+            "@sigstore/bundle": "^5.0.0",
+            "@sigstore/core": "^4.0.0",
+            "@sigstore/protobuf-specs": "^0.5.0",
+            "@sigstore/sign": "^5.0.0",
+            "@sigstore/tuf": "^5.0.0",
+            "@sigstore/verify": "^4.0.0"
+          }
+        },
+        "smart-buffer": {
+          "versions": [
+            "4.2.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/smart-buffer"
+          ],
+          "requirements": {}
+        },
+        "socks": {
+          "versions": [
+            "2.8.9"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/socks"
+          ],
+          "requirements": {
+            "ip-address": "^10.1.1",
+            "smart-buffer": "^4.2.0"
+          }
+        },
+        "socks-proxy-agent": {
+          "versions": [
+            "10.1.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/socks-proxy-agent"
+          ],
+          "requirements": {
+            "agent-base": "9.0.0",
+            "debug": "^4.3.4",
+            "socks": "^2.8.3"
+          }
+        },
+        "spdx-exceptions": {
+          "versions": [
+            "2.5.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/spdx-exceptions"
+          ],
+          "requirements": {}
+        },
+        "spdx-expression-parse": {
+          "versions": [
+            "4.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/spdx-expression-parse"
+          ],
+          "requirements": {
+            "spdx-exceptions": "^2.1.0",
+            "spdx-license-ids": "^3.0.0"
+          }
+        },
+        "spdx-license-ids": {
+          "versions": [
+            "3.0.23"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/spdx-license-ids"
+          ],
+          "requirements": {}
+        },
+        "ssri": {
+          "versions": [
+            "14.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/ssri"
+          ],
+          "requirements": {
+            "minipass": "^7.0.3"
+          }
+        },
+        "supports-color": {
+          "versions": [
+            "10.2.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/supports-color"
+          ],
+          "requirements": {}
+        },
+        "tar": {
+          "versions": [
+            "7.5.22"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/tar"
+          ],
+          "requirements": {
+            "@isaacs/fs-minipass": "^4.0.0",
+            "chownr": "^3.0.0",
+            "minipass": "^7.1.2",
+            "minizlib": "^3.1.0",
+            "yallist": "^5.0.0"
+          }
+        },
+        "text-table": {
+          "versions": [
+            "0.2.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/text-table"
+          ],
+          "requirements": {}
+        },
+        "tiny-relative-date": {
+          "versions": [
+            "2.0.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/tiny-relative-date"
+          ],
+          "requirements": {}
+        },
+        "tinyglobby": {
+          "versions": [
+            "0.2.17"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/tinyglobby"
+          ],
+          "requirements": {
+            "fdir": "^6.5.0",
+            "picomatch": "^4.0.4"
+          }
+        },
+        "fdir": {
+          "versions": [
+            "6.5.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/tinyglobby/node_modules/fdir"
+          ],
+          "requirements": {}
+        },
+        "picomatch": {
+          "versions": [
+            "4.0.5"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/tinyglobby/node_modules/picomatch"
+          ],
+          "requirements": {}
+        },
+        "treeverse": {
+          "versions": [
+            "3.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/treeverse"
+          ],
+          "requirements": {}
+        },
+        "tuf-js": {
+          "versions": [
+            "6.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/tuf-js"
+          ],
+          "requirements": {
+            "@gar/promise-retry": "^1.0.3",
+            "@tufjs/models": "5.0.0",
+            "debug": "^4.4.3"
+          }
+        },
+        "undici": {
+          "versions": [
+            "6.29.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/undici"
+          ],
+          "requirements": {}
+        },
+        "util-deprecate": {
+          "versions": [
+            "1.0.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/util-deprecate"
+          ],
+          "requirements": {}
+        },
+        "validate-npm-package-name": {
+          "versions": [
+            "8.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/validate-npm-package-name"
+          ],
+          "requirements": {}
+        },
+        "walk-up-path": {
+          "versions": [
+            "4.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/walk-up-path"
+          ],
+          "requirements": {}
+        },
+        "which": {
+          "versions": [
+            "7.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/which"
+          ],
+          "requirements": {
+            "isexe": "^4.0.0"
+          }
+        },
+        "write-file-atomic": {
+          "versions": [
+            "8.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/write-file-atomic"
+          ],
+          "requirements": {
+            "signal-exit": "^4.0.1"
+          }
+        }
+      }
+    },
+    "overrides": {
+      "manifest": {
+        "private": true,
+        "dependencies": {
+          "npm": "12.2.2"
+        },
+        "overrides": {
+          "glob": "14.0.2",
+          "minimatch": "11.0.8"
+        }
+      },
+      "lock_sha256": "37331cb47cfbdf77bfa575aabf15c9f5246e91b663f49d95aeb0ceab6993708a",
+      "glob": "13.0.6",
+      "minimatch": "10.2.5",
+      "audit_returncode": 1,
+      "audit_summary": {
+        "vulnerabilities": {
+          "info": 0,
+          "low": 0,
+          "moderate": 21,
+          "high": 0,
+          "critical": 0,
+          "total": 21
+        },
+        "dependencies": {
+          "prod": 147,
+          "dev": 0,
+          "optional": 2,
+          "peer": 0,
+          "peerOptional": 0,
+          "total": 148
+        }
+      },
+      "packages": {
+        "npm": {
+          "versions": [
+            "12.2.2"
+          ],
+          "locations": [
+            "node_modules/npm"
+          ],
+          "requirements": {
+            "@isaacs/string-locale-compare": "^1.1.0",
+            "@npmcli/arborist": "^10.0.4",
+            "@npmcli/config": "^11.2.0",
+            "@npmcli/fs": "^6.0.0",
+            "@npmcli/git": "^8.0.0",
+            "@npmcli/map-workspaces": "^6.0.0",
+            "@npmcli/metavuln-calculator": "^10.0.0",
+            "@npmcli/package-json": "^8.0.0",
+            "@npmcli/promise-spawn": "^10.0.1",
+            "@npmcli/redact": "^5.0.0",
+            "@npmcli/run-script": "^11.0.0",
+            "@sigstore/tuf": "^5.0.0",
+            "abbrev": "^5.0.0",
+            "archy": "~1.0.0",
+            "bin-links": "^7.0.1",
+            "cacache": "^21.0.1",
+            "chalk": "^5.6.2",
+            "ci-info": "^4.4.0",
+            "diff": "^8.0.2",
+            "fastest-levenshtein": "^1.0.16",
+            "fs-minipass": "^3.0.3",
+            "glob": "^13.0.6",
+            "graceful-fs": "^4.2.11",
+            "hosted-git-info": "^10.1.1",
+            "ini": "^7.0.0",
+            "init-package-json": "^9.0.0",
+            "is-cidr": "^7.0.0",
+            "json-parse-even-better-errors": "^6.0.0",
+            "libnpmaccess": "^11.0.0",
+            "libnpmdiff": "^9.0.4",
+            "libnpmexec": "^11.0.5",
+            "libnpmfund": "^8.0.4",
+            "libnpmorg": "^9.0.0",
+            "libnpmpack": "^10.0.4",
+            "libnpmpublish": "^12.0.1",
+            "libnpmsearch": "^10.0.0",
+            "libnpmteam": "^9.0.0",
+            "libnpmversion": "^9.0.0",
+            "make-fetch-happen": "^16.0.1",
+            "minimatch": "^10.2.5",
+            "minipass": "^7.1.3",
+            "minipass-pipeline": "^1.2.4",
+            "ms": "^2.1.2",
+            "node-gyp": "^13.0.0",
+            "nopt": "^10.0.1",
+            "npm-audit-report": "^8.0.0",
+            "npm-install-checks": "^9.0.0",
+            "npm-package-arg": "^14.0.0",
+            "npm-pick-manifest": "^12.0.0",
+            "npm-profile": "^13.0.1",
+            "npm-registry-fetch": "^20.0.1",
+            "npm-user-validate": "^5.0.0",
+            "p-map": "^7.0.4",
+            "pacote": "^22.0.1",
+            "parse-conflict-json": "^6.0.0",
+            "proc-log": "^7.0.0",
+            "qrcode-terminal": "^0.12.0",
+            "read": "^6.0.0",
+            "semver": "^7.8.6",
+            "spdx-expression-parse": "^4.0.0",
+            "ssri": "^14.0.0",
+            "supports-color": "^10.2.2",
+            "tar": "^7.5.22",
+            "text-table": "~0.2.0",
+            "tiny-relative-date": "^2.0.2",
+            "treeverse": "^3.0.0",
+            "validate-npm-package-name": "^8.0.0",
+            "which": "^7.0.0"
+          }
+        },
+        "@gar/promise-retry": {
+          "versions": [
+            "1.0.3"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@gar/promise-retry"
+          ],
+          "requirements": {}
+        },
+        "@isaacs/fs-minipass": {
+          "versions": [
+            "4.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@isaacs/fs-minipass"
+          ],
+          "requirements": {
+            "minipass": "^7.0.4"
+          }
+        },
+        "@isaacs/string-locale-compare": {
+          "versions": [
+            "1.1.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@isaacs/string-locale-compare"
+          ],
+          "requirements": {}
+        },
+        "@npmcli/agent": {
+          "versions": [
+            "5.0.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/agent"
+          ],
+          "requirements": {
+            "agent-base": "^9.0.0",
+            "http-proxy-agent": "^9.0.0",
+            "https-proxy-agent": "^9.0.0",
+            "lru-cache": "^11.2.1",
+            "socks-proxy-agent": "^10.0.0"
+          }
+        },
+        "agent-base": {
+          "versions": [
+            "9.0.0",
+            "9.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/agent/node_modules/agent-base",
+            "node_modules/npm/node_modules/socks-proxy-agent/node_modules/agent-base"
+          ],
+          "requirements": {}
+        },
+        "http-proxy-agent": {
+          "versions": [
+            "9.1.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/agent/node_modules/http-proxy-agent"
+          ],
+          "requirements": {
+            "agent-base": "9.0.0",
+            "debug": "^4.3.4",
+            "proxy-agent-negotiate": "1.1.0"
+          }
+        },
+        "https-proxy-agent": {
+          "versions": [
+            "9.1.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/agent/node_modules/https-proxy-agent"
+          ],
+          "requirements": {
+            "agent-base": "9.0.0",
+            "debug": "^4.3.4",
+            "proxy-agent-negotiate": "1.1.0"
+          }
+        },
+        "@npmcli/arborist": {
+          "versions": [
+            "10.0.4"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/arborist"
+          ],
+          "requirements": {
+            "@gar/promise-retry": "^1.0.0",
+            "@isaacs/string-locale-compare": "^1.1.0",
+            "@npmcli/fs": "^6.0.0",
+            "@npmcli/installed-package-contents": "^5.0.0",
+            "@npmcli/map-workspaces": "^6.0.0",
+            "@npmcli/metavuln-calculator": "^10.0.0",
+            "@npmcli/name-from-folder": "^5.0.0",
+            "@npmcli/node-gyp": "^6.0.0",
+            "@npmcli/package-json": "^8.0.0",
+            "@npmcli/query": "^5.0.0",
+            "@npmcli/redact": "^5.0.0",
+            "@npmcli/run-script": "^11.0.0",
+            "bin-links": "^7.0.0",
+            "cacache": "^21.0.1",
+            "common-ancestor-path": "^2.0.0",
+            "diff": "^8.0.2",
+            "hosted-git-info": "^10.1.1",
+            "json-stringify-nice": "^1.1.4",
+            "lru-cache": "^11.2.1",
+            "minimatch": "^10.0.3",
+            "nopt": "^10.0.1",
+            "npm-install-checks": "^9.0.0",
+            "npm-package-arg": "^14.0.0",
+            "npm-pick-manifest": "^12.0.0",
+            "npm-registry-fetch": "^20.0.1",
+            "pacote": "^22.0.0",
+            "parse-conflict-json": "^6.0.0",
+            "proc-log": "^7.0.0",
+            "proggy": "^4.0.0",
+            "promise-all-reject-late": "^1.0.0",
+            "promise-call-limit": "^3.0.1",
+            "semver": "^7.3.7",
+            "ssri": "^14.0.0",
+            "treeverse": "^3.0.0",
+            "validate-npm-package-name": "^8.0.0",
+            "walk-up-path": "^4.0.0"
+          }
+        },
+        "@npmcli/config": {
+          "versions": [
+            "11.2.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/config"
+          ],
+          "requirements": {
+            "@npmcli/map-workspaces": "^6.0.0",
+            "@npmcli/package-json": "^8.0.0",
+            "ci-info": "^4.0.0",
+            "ini": "^7.0.0",
+            "nopt": "^10.0.1",
+            "proc-log": "^7.0.0",
+            "semver": "^7.3.5",
+            "walk-up-path": "^4.0.0"
+          }
+        },
+        "@npmcli/fs": {
+          "versions": [
+            "6.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/fs"
+          ],
+          "requirements": {
+            "semver": "^7.3.5"
+          }
+        },
+        "@npmcli/git": {
+          "versions": [
+            "8.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/git"
+          ],
+          "requirements": {
+            "@gar/promise-retry": "^1.0.0",
+            "@npmcli/promise-spawn": "^10.0.0",
+            "ini": "^7.0.0",
+            "lru-cache": "^11.2.1",
+            "npm-pick-manifest": "^12.0.0",
+            "proc-log": "^7.0.0",
+            "semver": "^7.3.5",
+            "which": "^7.0.0"
+          }
+        },
+        "@npmcli/installed-package-contents": {
+          "versions": [
+            "5.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/installed-package-contents"
+          ],
+          "requirements": {
+            "npm-bundled": "^6.0.0",
+            "npm-normalize-package-bin": "^6.0.0"
+          }
+        },
+        "npm-bundled": {
+          "versions": [
+            "6.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/installed-package-contents/node_modules/npm-bundled"
+          ],
+          "requirements": {
+            "npm-normalize-package-bin": "^6.0.0"
+          }
+        },
+        "npm-normalize-package-bin": {
+          "versions": [
+            "6.0.0",
+            "6.0.0",
+            "6.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/installed-package-contents/node_modules/npm-normalize-package-bin",
+            "node_modules/npm/node_modules/bin-links/node_modules/npm-normalize-package-bin",
+            "node_modules/npm/node_modules/npm-pick-manifest/node_modules/npm-normalize-package-bin"
+          ],
+          "requirements": {}
+        },
+        "@npmcli/map-workspaces": {
+          "versions": [
+            "6.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/map-workspaces"
+          ],
+          "requirements": {
+            "@npmcli/name-from-folder": "^5.0.0",
+            "@npmcli/package-json": "^8.0.0",
+            "glob": "^13.0.0",
+            "minimatch": "^10.0.3"
+          }
+        },
+        "@npmcli/metavuln-calculator": {
+          "versions": [
+            "10.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/metavuln-calculator"
+          ],
+          "requirements": {
+            "cacache": "^21.0.1",
+            "json-parse-even-better-errors": "^6.0.0",
+            "pacote": "^22.0.0",
+            "proc-log": "^7.0.0",
+            "semver": "^7.3.5"
+          }
+        },
+        "@npmcli/name-from-folder": {
+          "versions": [
+            "5.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/name-from-folder"
+          ],
+          "requirements": {}
+        },
+        "@npmcli/node-gyp": {
+          "versions": [
+            "6.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/node-gyp"
+          ],
+          "requirements": {}
+        },
+        "@npmcli/package-json": {
+          "versions": [
+            "8.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/package-json"
+          ],
+          "requirements": {
+            "@npmcli/git": "^8.0.0",
+            "glob": "^13.0.0",
+            "hosted-git-info": "^10.1.1",
+            "json-parse-even-better-errors": "^6.0.0",
+            "proc-log": "^7.0.0",
+            "semver": "^7.5.3",
+            "spdx-expression-parse": "^4.0.0"
+          }
+        },
+        "@npmcli/promise-spawn": {
+          "versions": [
+            "10.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/promise-spawn"
+          ],
+          "requirements": {
+            "which": "^7.0.0"
+          }
+        },
+        "@npmcli/query": {
+          "versions": [
+            "5.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/query"
+          ],
+          "requirements": {
+            "postcss-selector-parser": "^7.0.0"
+          }
+        },
+        "@npmcli/redact": {
+          "versions": [
+            "5.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/redact"
+          ],
+          "requirements": {}
+        },
+        "@npmcli/run-script": {
+          "versions": [
+            "11.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@npmcli/run-script"
+          ],
+          "requirements": {
+            "@npmcli/node-gyp": "^6.0.0",
+            "@npmcli/package-json": "^8.0.0",
+            "@npmcli/promise-spawn": "^10.0.0",
+            "node-gyp": "^13.0.0",
+            "proc-log": "^7.0.0"
+          }
+        },
+        "@sigstore/bundle": {
+          "versions": [
+            "5.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@sigstore/bundle"
+          ],
+          "requirements": {
+            "@sigstore/protobuf-specs": "^0.5.0"
+          }
+        },
+        "@sigstore/core": {
+          "versions": [
+            "4.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@sigstore/core"
+          ],
+          "requirements": {}
+        },
+        "@sigstore/protobuf-specs": {
+          "versions": [
+            "0.5.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@sigstore/protobuf-specs"
+          ],
+          "requirements": {}
+        },
+        "@sigstore/sign": {
+          "versions": [
+            "5.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@sigstore/sign"
+          ],
+          "requirements": {
+            "@gar/promise-retry": "^1.0.2",
+            "@sigstore/bundle": "^5.0.0",
+            "@sigstore/core": "^4.0.0",
+            "@sigstore/protobuf-specs": "^0.5.0",
+            "make-fetch-happen": "^16.0.0",
+            "proc-log": "^7.0.0"
+          }
+        },
+        "@sigstore/tuf": {
+          "versions": [
+            "5.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@sigstore/tuf"
+          ],
+          "requirements": {
+            "@sigstore/protobuf-specs": "^0.5.0",
+            "tuf-js": "^6.0.0"
+          }
+        },
+        "@sigstore/verify": {
+          "versions": [
+            "4.1.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@sigstore/verify"
+          ],
+          "requirements": {
+            "@sigstore/bundle": "^5.0.0",
+            "@sigstore/core": "^4.0.1",
+            "@sigstore/protobuf-specs": "^0.5.0"
+          }
+        },
+        "@tufjs/canonical-json": {
+          "versions": [
+            "2.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@tufjs/canonical-json"
+          ],
+          "requirements": {}
+        },
+        "@tufjs/models": {
+          "versions": [
+            "5.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/@tufjs/models"
+          ],
+          "requirements": {
+            "@tufjs/canonical-json": "2.0.0",
+            "minimatch": "^10.2.1"
+          }
+        },
+        "abbrev": {
+          "versions": [
+            "5.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/abbrev"
+          ],
+          "requirements": {}
+        },
+        "aproba": {
+          "versions": [
+            "2.1.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/aproba"
+          ],
+          "requirements": {}
+        },
+        "archy": {
+          "versions": [
+            "1.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/archy"
+          ],
+          "requirements": {}
+        },
+        "balanced-match": {
+          "versions": [
+            "4.0.4"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/balanced-match"
+          ],
+          "requirements": {}
+        },
+        "bin-links": {
+          "versions": [
+            "7.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/bin-links"
+          ],
+          "requirements": {
+            "cmd-shim": "^9.0.0",
+            "npm-normalize-package-bin": "^6.0.0",
+            "proc-log": "^7.0.0",
+            "read-cmd-shim": "^7.0.0",
+            "write-file-atomic": "^8.0.0"
+          }
+        },
+        "cmd-shim": {
+          "versions": [
+            "9.0.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/bin-links/node_modules/cmd-shim"
+          ],
+          "requirements": {}
+        },
+        "read-cmd-shim": {
+          "versions": [
+            "7.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/bin-links/node_modules/read-cmd-shim"
+          ],
+          "requirements": {}
+        },
+        "binary-extensions": {
+          "versions": [
+            "3.1.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/binary-extensions"
+          ],
+          "requirements": {}
+        },
+        "brace-expansion": {
+          "versions": [
+            "5.0.12"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/brace-expansion"
+          ],
+          "requirements": {
+            "balanced-match": "^4.0.2"
+          }
+        },
+        "cacache": {
+          "versions": [
+            "21.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/cacache"
+          ],
+          "requirements": {
+            "@npmcli/fs": "^6.0.0",
+            "fs-minipass": "^3.0.0",
+            "glob": "^13.0.0",
+            "lru-cache": "^11.1.0",
+            "minipass": "^7.0.3",
+            "minipass-collect": "^2.0.1",
+            "minipass-flush": "^1.0.5",
+            "minipass-pipeline": "^1.2.4",
+            "p-map": "^7.0.2",
+            "ssri": "^14.0.0"
+          }
+        },
+        "chalk": {
+          "versions": [
+            "5.6.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/chalk"
+          ],
+          "requirements": {}
+        },
+        "chownr": {
+          "versions": [
+            "3.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/chownr"
+          ],
+          "requirements": {}
+        },
+        "ci-info": {
+          "versions": [
+            "4.4.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/ci-info"
+          ],
+          "requirements": {}
+        },
+        "cidr-regex": {
+          "versions": [
+            "6.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/cidr-regex"
+          ],
+          "requirements": {}
+        },
+        "common-ancestor-path": {
+          "versions": [
+            "2.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/common-ancestor-path"
+          ],
+          "requirements": {}
+        },
+        "cssesc": {
+          "versions": [
+            "3.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/cssesc"
+          ],
+          "requirements": {}
+        },
+        "debug": {
+          "versions": [
+            "4.4.3"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/debug"
+          ],
+          "requirements": {
+            "ms": "^2.1.3"
+          }
+        },
+        "diff": {
+          "versions": [
+            "8.0.4"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/diff"
+          ],
+          "requirements": {}
+        },
+        "env-paths": {
+          "versions": [
+            "2.2.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/env-paths"
+          ],
+          "requirements": {}
+        },
+        "exponential-backoff": {
+          "versions": [
+            "3.1.3"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/exponential-backoff"
+          ],
+          "requirements": {}
+        },
+        "fastest-levenshtein": {
+          "versions": [
+            "1.0.16"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/fastest-levenshtein"
+          ],
+          "requirements": {}
+        },
+        "fs-minipass": {
+          "versions": [
+            "3.0.3"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/fs-minipass"
+          ],
+          "requirements": {
+            "minipass": "^7.0.3"
+          }
+        },
+        "glob": {
+          "versions": [
+            "13.0.6"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/glob"
+          ],
+          "requirements": {
+            "minimatch": "^10.2.2",
+            "minipass": "^7.1.3",
+            "path-scurry": "^2.0.2"
+          }
+        },
+        "graceful-fs": {
+          "versions": [
+            "4.2.11"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/graceful-fs"
+          ],
+          "requirements": {}
+        },
+        "hosted-git-info": {
+          "versions": [
+            "10.1.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/hosted-git-info"
+          ],
+          "requirements": {
+            "lru-cache": "^11.1.0"
+          }
+        },
+        "http-cache-semantics": {
+          "versions": [
+            "4.3.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/http-cache-semantics"
+          ],
+          "requirements": {}
+        },
+        "iconv-lite": {
+          "versions": [
+            "0.7.3"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/iconv-lite"
+          ],
+          "requirements": {
+            "safer-buffer": ">= 2.1.2 < 3.0.0"
+          }
+        },
+        "ini": {
+          "versions": [
+            "7.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/ini"
+          ],
+          "requirements": {}
+        },
+        "init-package-json": {
+          "versions": [
+            "9.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/init-package-json"
+          ],
+          "requirements": {
+            "@npmcli/package-json": "^8.0.0",
+            "npm-package-arg": "^14.0.0",
+            "promzard": "^4.0.0",
+            "read": "^6.0.0",
+            "semver": "^7.7.2",
+            "validate-npm-package-name": "^8.0.0"
+          }
+        },
+        "ip-address": {
+          "versions": [
+            "10.7.5"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/ip-address"
+          ],
+          "requirements": {}
+        },
+        "is-cidr": {
+          "versions": [
+            "7.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/is-cidr"
+          ],
+          "requirements": {
+            "cidr-regex": "^6.0.0"
+          }
+        },
+        "isexe": {
+          "versions": [
+            "4.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/isexe"
+          ],
+          "requirements": {}
+        },
+        "json-parse-even-better-errors": {
+          "versions": [
+            "6.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/json-parse-even-better-errors"
+          ],
+          "requirements": {}
+        },
+        "json-stringify-nice": {
+          "versions": [
+            "1.1.4"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/json-stringify-nice"
+          ],
+          "requirements": {}
+        },
+        "jsonparse": {
+          "versions": [
+            "1.3.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/jsonparse"
+          ],
+          "requirements": {}
+        },
+        "just-diff": {
+          "versions": [
+            "6.0.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/just-diff"
+          ],
+          "requirements": {}
+        },
+        "just-diff-apply": {
+          "versions": [
+            "5.5.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/just-diff-apply"
+          ],
+          "requirements": {}
+        },
+        "libnpmaccess": {
+          "versions": [
+            "11.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/libnpmaccess"
+          ],
+          "requirements": {
+            "npm-package-arg": "^14.0.0",
+            "npm-registry-fetch": "^20.0.1"
+          }
+        },
+        "libnpmdiff": {
+          "versions": [
+            "9.0.4"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/libnpmdiff"
+          ],
+          "requirements": {
+            "@npmcli/arborist": "^10.0.4",
+            "@npmcli/installed-package-contents": "^5.0.0",
+            "binary-extensions": "^3.0.0",
+            "diff": "^8.0.2",
+            "minimatch": "^10.0.3",
+            "npm-package-arg": "^14.0.0",
+            "pacote": "^22.0.0",
+            "tar": "^7.5.1"
+          }
+        },
+        "libnpmexec": {
+          "versions": [
+            "11.0.5"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/libnpmexec"
+          ],
+          "requirements": {
+            "@gar/promise-retry": "^1.0.0",
+            "@npmcli/arborist": "^10.0.4",
+            "@npmcli/package-json": "^8.0.0",
+            "@npmcli/run-script": "^11.0.0",
+            "ci-info": "^4.0.0",
+            "npm-package-arg": "^14.0.0",
+            "pacote": "^22.0.0",
+            "proc-log": "^7.0.0",
+            "read": "^6.0.0",
+            "semver": "^7.3.7",
+            "signal-exit": "^4.1.0",
+            "walk-up-path": "^4.0.0"
+          }
+        },
+        "libnpmfund": {
+          "versions": [
+            "8.0.4"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/libnpmfund"
+          ],
+          "requirements": {
+            "@npmcli/arborist": "^10.0.4"
+          }
+        },
+        "libnpmorg": {
+          "versions": [
+            "9.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/libnpmorg"
+          ],
+          "requirements": {
+            "aproba": "^2.0.0",
+            "npm-registry-fetch": "^20.0.1"
+          }
+        },
+        "libnpmpack": {
+          "versions": [
+            "10.0.4"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/libnpmpack"
+          ],
+          "requirements": {
+            "@npmcli/arborist": "^10.0.4",
+            "@npmcli/run-script": "^11.0.0",
+            "npm-package-arg": "^14.0.0",
+            "pacote": "^22.0.0"
+          }
+        },
+        "libnpmpublish": {
+          "versions": [
+            "12.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/libnpmpublish"
+          ],
+          "requirements": {
+            "@npmcli/package-json": "^8.0.0",
+            "ci-info": "^4.0.0",
+            "npm-package-arg": "^14.0.0",
+            "npm-registry-fetch": "^20.0.1",
+            "proc-log": "^7.0.0",
+            "semver": "^7.3.7",
+            "sigstore": "^5.0.0",
+            "ssri": "^14.0.0"
+          }
+        },
+        "libnpmsearch": {
+          "versions": [
+            "10.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/libnpmsearch"
+          ],
+          "requirements": {
+            "npm-registry-fetch": "^20.0.1"
+          }
+        },
+        "libnpmteam": {
+          "versions": [
+            "9.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/libnpmteam"
+          ],
+          "requirements": {
+            "aproba": "^2.0.0",
+            "npm-registry-fetch": "^20.0.1"
+          }
+        },
+        "libnpmversion": {
+          "versions": [
+            "9.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/libnpmversion"
+          ],
+          "requirements": {
+            "@npmcli/git": "^8.0.0",
+            "@npmcli/run-script": "^11.0.0",
+            "json-parse-even-better-errors": "^6.0.0",
+            "proc-log": "^7.0.0",
+            "semver": "^7.3.7"
+          }
+        },
+        "lru-cache": {
+          "versions": [
+            "11.5.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/lru-cache"
+          ],
+          "requirements": {}
+        },
+        "make-fetch-happen": {
+          "versions": [
+            "16.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/make-fetch-happen"
+          ],
+          "requirements": {
+            "@gar/promise-retry": "^1.0.0",
+            "@npmcli/agent": "^5.0.0",
+            "@npmcli/redact": "^5.0.0",
+            "cacache": "^21.0.0",
+            "http-cache-semantics": "^4.1.1",
+            "minipass": "^7.0.2",
+            "minipass-fetch": "^6.0.0",
+            "minipass-flush": "^1.0.5",
+            "minipass-pipeline": "^1.2.4",
+            "negotiator": "^1.0.0",
+            "proc-log": "^7.0.0",
+            "ssri": "^14.0.0"
+          }
+        },
+        "minimatch": {
+          "versions": [
+            "10.2.5"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/minimatch"
+          ],
+          "requirements": {
+            "brace-expansion": "^5.0.5"
+          }
+        },
+        "minipass": {
+          "versions": [
+            "7.1.3",
+            "3.3.6"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/minipass",
+            "node_modules/npm/node_modules/minipass-pipeline/node_modules/minipass"
+          ],
+          "requirements": {}
+        },
+        "minipass-collect": {
+          "versions": [
+            "2.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/minipass-collect"
+          ],
+          "requirements": {
+            "minipass": "^7.0.3"
+          }
+        },
+        "minipass-fetch": {
+          "versions": [
+            "6.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/minipass-fetch"
+          ],
+          "requirements": {
+            "minipass": "^7.0.3",
+            "minipass-sized": "^2.0.0",
+            "minizlib": "^3.0.1"
+          }
+        },
+        "minipass-flush": {
+          "versions": [
+            "1.0.6"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/minipass-flush"
+          ],
+          "requirements": {
+            "minipass": "^7.1.3"
+          }
+        },
+        "minipass-pipeline": {
+          "versions": [
+            "1.2.4"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/minipass-pipeline"
+          ],
+          "requirements": {
+            "minipass": "^3.0.0"
+          }
+        },
+        "yallist": {
+          "versions": [
+            "4.0.0",
+            "5.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/minipass-pipeline/node_modules/yallist",
+            "node_modules/npm/node_modules/yallist"
+          ],
+          "requirements": {}
+        },
+        "minipass-sized": {
+          "versions": [
+            "2.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/minipass-sized"
+          ],
+          "requirements": {
+            "minipass": "^7.1.2"
+          }
+        },
+        "minizlib": {
+          "versions": [
+            "3.1.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/minizlib"
+          ],
+          "requirements": {
+            "minipass": "^7.1.2"
+          }
+        },
+        "ms": {
+          "versions": [
+            "2.1.3"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/ms"
+          ],
+          "requirements": {}
+        },
+        "mute-stream": {
+          "versions": [
+            "4.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/mute-stream"
+          ],
+          "requirements": {}
+        },
+        "negotiator": {
+          "versions": [
+            "1.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/negotiator"
+          ],
+          "requirements": {}
+        },
+        "node-gyp": {
+          "versions": [
+            "13.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/node-gyp"
+          ],
+          "requirements": {
+            "env-paths": "^2.2.0",
+            "exponential-backoff": "^3.1.1",
+            "graceful-fs": "^4.2.6",
+            "nopt": "^10.0.0",
+            "proc-log": "^7.0.0",
+            "semver": "^7.3.5",
+            "tar": "^7.5.4",
+            "tinyglobby": "^0.2.12",
+            "undici": "^6.25.0",
+            "which": "^7.0.0"
+          }
+        },
+        "nopt": {
+          "versions": [
+            "10.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/nopt"
+          ],
+          "requirements": {
+            "abbrev": "^5.0.0"
+          }
+        },
+        "npm-audit-report": {
+          "versions": [
+            "8.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/npm-audit-report"
+          ],
+          "requirements": {}
+        },
+        "npm-install-checks": {
+          "versions": [
+            "9.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/npm-install-checks"
+          ],
+          "requirements": {
+            "semver": "^7.1.1"
+          }
+        },
+        "npm-package-arg": {
+          "versions": [
+            "14.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/npm-package-arg"
+          ],
+          "requirements": {
+            "hosted-git-info": "^10.1.0",
+            "proc-log": "^7.0.0",
+            "semver": "^7.3.5",
+            "validate-npm-package-name": "^8.0.0"
+          }
+        },
+        "npm-packlist": {
+          "versions": [
+            "11.3.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/npm-packlist"
+          ],
+          "requirements": {
+            "glob": "^13.0.6",
+            "ignore-walk": "^9.0.0",
+            "proc-log": "^7.0.0"
+          }
+        },
+        "ignore-walk": {
+          "versions": [
+            "9.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/npm-packlist/node_modules/ignore-walk"
+          ],
+          "requirements": {
+            "minimatch": "^10.0.3"
+          }
+        },
+        "npm-pick-manifest": {
+          "versions": [
+            "12.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/npm-pick-manifest"
+          ],
+          "requirements": {
+            "npm-install-checks": "^9.0.0",
+            "npm-normalize-package-bin": "^6.0.0",
+            "npm-package-arg": "^14.0.0",
+            "semver": "^7.3.5"
+          }
+        },
+        "npm-profile": {
+          "versions": [
+            "13.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/npm-profile"
+          ],
+          "requirements": {
+            "npm-registry-fetch": "^20.0.0",
+            "proc-log": "^7.0.0"
+          }
+        },
+        "npm-registry-fetch": {
+          "versions": [
+            "20.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/npm-registry-fetch"
+          ],
+          "requirements": {
+            "@npmcli/redact": "^5.0.0",
+            "jsonparse": "^1.3.1",
+            "make-fetch-happen": "^16.0.0",
+            "minipass": "^7.0.2",
+            "minipass-fetch": "^6.0.0",
+            "minizlib": "^3.0.1",
+            "npm-package-arg": "^14.0.0",
+            "proc-log": "^7.0.0"
+          }
+        },
+        "npm-user-validate": {
+          "versions": [
+            "5.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/npm-user-validate"
+          ],
+          "requirements": {}
+        },
+        "p-map": {
+          "versions": [
+            "7.0.5"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/p-map"
+          ],
+          "requirements": {}
+        },
+        "pacote": {
+          "versions": [
+            "22.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/pacote"
+          ],
+          "requirements": {
+            "@gar/promise-retry": "^1.0.0",
+            "@npmcli/git": "^8.0.0",
+            "@npmcli/installed-package-contents": "^5.0.0",
+            "@npmcli/package-json": "^8.0.0",
+            "@npmcli/promise-spawn": "^10.0.0",
+            "@npmcli/run-script": "^11.0.0",
+            "cacache": "^21.0.1",
+            "fs-minipass": "^3.0.0",
+            "minipass": "^7.0.2",
+            "npm-package-arg": "^14.0.0",
+            "npm-packlist": "^11.2.0",
+            "npm-pick-manifest": "^12.0.0",
+            "npm-registry-fetch": "^20.0.1",
+            "proc-log": "^7.0.0",
+            "sigstore": "^5.0.0",
+            "ssri": "^14.0.0",
+            "tar": "^7.4.3"
+          }
+        },
+        "parse-conflict-json": {
+          "versions": [
+            "6.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/parse-conflict-json"
+          ],
+          "requirements": {
+            "json-parse-even-better-errors": "^6.0.0",
+            "just-diff": "^6.0.0",
+            "just-diff-apply": "^5.2.0"
+          }
+        },
+        "path-scurry": {
+          "versions": [
+            "2.0.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/path-scurry"
+          ],
+          "requirements": {
+            "lru-cache": "^11.0.0",
+            "minipass": "^7.1.2"
+          }
+        },
+        "postcss-selector-parser": {
+          "versions": [
+            "7.1.6"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/postcss-selector-parser"
+          ],
+          "requirements": {
+            "cssesc": "^3.0.0",
+            "util-deprecate": "^1.0.2"
+          }
+        },
+        "proc-log": {
+          "versions": [
+            "7.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/proc-log"
+          ],
+          "requirements": {}
+        },
+        "proggy": {
+          "versions": [
+            "4.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/proggy"
+          ],
+          "requirements": {}
+        },
+        "promise-all-reject-late": {
+          "versions": [
+            "1.0.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/promise-all-reject-late"
+          ],
+          "requirements": {}
+        },
+        "promise-call-limit": {
+          "versions": [
+            "3.0.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/promise-call-limit"
+          ],
+          "requirements": {}
+        },
+        "promzard": {
+          "versions": [
+            "4.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/promzard"
+          ],
+          "requirements": {
+            "read": "^6.0.0"
+          }
+        },
+        "proxy-agent-negotiate": {
+          "versions": [
+            "1.1.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/proxy-agent-negotiate"
+          ],
+          "requirements": {}
+        },
+        "qrcode-terminal": {
+          "versions": [
+            "0.12.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/qrcode-terminal"
+          ],
+          "requirements": {}
+        },
+        "read": {
+          "versions": [
+            "6.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/read"
+          ],
+          "requirements": {
+            "mute-stream": "^4.0.0"
+          }
+        },
+        "safer-buffer": {
+          "versions": [
+            "2.1.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/safer-buffer"
+          ],
+          "requirements": {}
+        },
+        "semver": {
+          "versions": [
+            "7.8.6"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/semver"
+          ],
+          "requirements": {}
+        },
+        "signal-exit": {
+          "versions": [
+            "4.1.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/signal-exit"
+          ],
+          "requirements": {}
+        },
+        "sigstore": {
+          "versions": [
+            "5.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/sigstore"
+          ],
+          "requirements": {
+            "@sigstore/bundle": "^5.0.0",
+            "@sigstore/core": "^4.0.0",
+            "@sigstore/protobuf-specs": "^0.5.0",
+            "@sigstore/sign": "^5.0.0",
+            "@sigstore/tuf": "^5.0.0",
+            "@sigstore/verify": "^4.0.0"
+          }
+        },
+        "smart-buffer": {
+          "versions": [
+            "4.2.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/smart-buffer"
+          ],
+          "requirements": {}
+        },
+        "socks": {
+          "versions": [
+            "2.8.9"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/socks"
+          ],
+          "requirements": {
+            "ip-address": "^10.1.1",
+            "smart-buffer": "^4.2.0"
+          }
+        },
+        "socks-proxy-agent": {
+          "versions": [
+            "10.1.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/socks-proxy-agent"
+          ],
+          "requirements": {
+            "agent-base": "9.0.0",
+            "debug": "^4.3.4",
+            "socks": "^2.8.3"
+          }
+        },
+        "spdx-exceptions": {
+          "versions": [
+            "2.5.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/spdx-exceptions"
+          ],
+          "requirements": {}
+        },
+        "spdx-expression-parse": {
+          "versions": [
+            "4.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/spdx-expression-parse"
+          ],
+          "requirements": {
+            "spdx-exceptions": "^2.1.0",
+            "spdx-license-ids": "^3.0.0"
+          }
+        },
+        "spdx-license-ids": {
+          "versions": [
+            "3.0.23"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/spdx-license-ids"
+          ],
+          "requirements": {}
+        },
+        "ssri": {
+          "versions": [
+            "14.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/ssri"
+          ],
+          "requirements": {
+            "minipass": "^7.0.3"
+          }
+        },
+        "supports-color": {
+          "versions": [
+            "10.2.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/supports-color"
+          ],
+          "requirements": {}
+        },
+        "tar": {
+          "versions": [
+            "7.5.22"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/tar"
+          ],
+          "requirements": {
+            "@isaacs/fs-minipass": "^4.0.0",
+            "chownr": "^3.0.0",
+            "minipass": "^7.1.2",
+            "minizlib": "^3.1.0",
+            "yallist": "^5.0.0"
+          }
+        },
+        "text-table": {
+          "versions": [
+            "0.2.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/text-table"
+          ],
+          "requirements": {}
+        },
+        "tiny-relative-date": {
+          "versions": [
+            "2.0.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/tiny-relative-date"
+          ],
+          "requirements": {}
+        },
+        "tinyglobby": {
+          "versions": [
+            "0.2.17"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/tinyglobby"
+          ],
+          "requirements": {
+            "fdir": "^6.5.0",
+            "picomatch": "^4.0.4"
+          }
+        },
+        "fdir": {
+          "versions": [
+            "6.5.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/tinyglobby/node_modules/fdir"
+          ],
+          "requirements": {}
+        },
+        "picomatch": {
+          "versions": [
+            "4.0.5"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/tinyglobby/node_modules/picomatch"
+          ],
+          "requirements": {}
+        },
+        "treeverse": {
+          "versions": [
+            "3.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/treeverse"
+          ],
+          "requirements": {}
+        },
+        "tuf-js": {
+          "versions": [
+            "6.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/tuf-js"
+          ],
+          "requirements": {
+            "@gar/promise-retry": "^1.0.3",
+            "@tufjs/models": "5.0.0",
+            "debug": "^4.4.3"
+          }
+        },
+        "undici": {
+          "versions": [
+            "6.29.1"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/undici"
+          ],
+          "requirements": {}
+        },
+        "util-deprecate": {
+          "versions": [
+            "1.0.2"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/util-deprecate"
+          ],
+          "requirements": {}
+        },
+        "validate-npm-package-name": {
+          "versions": [
+            "8.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/validate-npm-package-name"
+          ],
+          "requirements": {}
+        },
+        "walk-up-path": {
+          "versions": [
+            "4.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/walk-up-path"
+          ],
+          "requirements": {}
+        },
+        "which": {
+          "versions": [
+            "7.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/which"
+          ],
+          "requirements": {
+            "isexe": "^4.0.0"
+          }
+        },
+        "write-file-atomic": {
+          "versions": [
+            "8.0.0"
+          ],
+          "locations": [
+            "node_modules/npm/node_modules/write-file-atomic"
+          ],
+          "requirements": {
+            "signal-exit": "^4.0.1"
+          }
+        }
+      }
+    }
+  }
+}

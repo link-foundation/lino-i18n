@@ -1,0 +1,1209 @@
+{
+  "PyYAML": {
+    "version": "6.0.3",
+    "url": "https://pypi.org/project/PyYAML/",
+    "requires_python": ">=3.8"
+  },
+  "zizmor": {
+    "version": "1.32.0",
+    "url": "https://pypi.org/project/zizmor/",
+    "requires_python": ">=3.11"
+  },
+  "pip-audit": {
+    "version": "2.10.1",
+    "url": "https://pypi.org/project/pip-audit/",
+    "requires_python": ">=3.10"
+  },
+  "oven-sh/bun": {
+    "tag_name": "bun-v1.4.4",
+    "published_at": "2026-10-22T10:11:32Z",
+    "html_url": "https://github.com/oven-sh/bun/releases/tag/bun-v1.4.4",
+    "body": "To install Bun v1.4.4\n```bash\ncurl -fsSL https://bun.com/install | bash\n# or you can use npm\n# npm install -g bun\n```\n\nWindows:\n```bash\npowershell -c \"irm bun.com/install.ps1|iex\"\n```\n\nTo upgrade to Bun v1.4.4:\n```bash\nbun upgrade\n```\n\n### [Read Bun v1.4.4's release notes on Bun's blog](https://bun.com/blog/bun-v1.4.4)\n\n### Thanks to 39 contributors!\n\n- [@0xh3x](https://github.com/0xh3x)\n- [@1cedsoda](https://github.com/1cedsoda)\n- [@alex-mextner](https://github.com/alex-mextner)\n- [@alii](https://github.com/alii)\n- [@Artoria2e5](https://github.com/Artoria2e5)\n- [@bompus](https://github.com/bompus)\n- [@C0casio45](https://github.com/C0casio45)\n- [@cirospaciari](https://github.com/cirospaciari)\n- [@davidhevn](https://github.com/davidhevn)\n- [@deepshekhardas](https://github.com/deepshekhardas)\n- [@Dex4Sure](https://github.com/Dex4Sure)\n- [@dylan-conway](https://github.com/dylan-conway)\n- [@EffortlessSteven](https://github.com/EffortlessSteven)\n- [@eriklangille](https://github.com/eriklangille)\n- [@filipesarturi](https://github.com/filipesarturi)\n- [@fredluz](https://github.com/fredluz)\n- [@gerardp](https://github.com/gerardp)\n- [@gohryt](https://github.com/gohryt)\n- [@himself65](https://github.com/himself65)\n- [@hughescr](https://github.com/hughescr)\n- [@Jarred-Sumner](https://github.com/Jarred-Sumner)\n- [@jdjkelly](https://github.com/jdjkelly)\n- [@jecquas](https://github.com/jecquas)\n- [@jobansd](https://github.com/jobansd)\n- [@kernoeb](https://github.com/kernoeb)\n- [@KilianB](https://github.com/KilianB)\n- [@MarshallOfSound](https://github.com/MarshallOfSound)\n- [@Neekoras](https://github.com/Neekoras)\n- [@nikeee](https://github.com/nikeee)\n- [@nikelborm](https://github.com/nikelborm)\n- [@ousamabenyounes](https://github.com/ousamabenyounes)\n- [@pjb3](https://github.com/pjb3)\n- [@RajeshKumar11](https://github.com/RajeshKumar11)\n- [@ralyodio](https://github.com/ralyodio)\n- [@robobun](https://github.com/robobun)\n- [@RubenPari](https://github.com/RubenPari)\n- [@sosukesuzuki](https://github.com/sosukesuzuki)\n- [@steipete](https://github.com/steipete)\n- [@SyMind](https://github.com/SyMind)\n",
+    "assets": [
+      {
+        "name": "bun-darwin-aarch64-profile.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-darwin-aarch64-profile.zip"
+      },
+      {
+        "name": "bun-darwin-aarch64.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-darwin-aarch64.zip"
+      },
+      {
+        "name": "bun-darwin-x64-baseline-profile.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-darwin-x64-baseline-profile.zip"
+      },
+      {
+        "name": "bun-darwin-x64-baseline.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-darwin-x64-baseline.zip"
+      },
+      {
+        "name": "bun-darwin-x64-profile.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-darwin-x64-profile.zip"
+      },
+      {
+        "name": "bun-darwin-x64.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-darwin-x64.zip"
+      },
+      {
+        "name": "bun-freebsd-aarch64-profile.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-freebsd-aarch64-profile.zip"
+      },
+      {
+        "name": "bun-freebsd-aarch64.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-freebsd-aarch64.zip"
+      },
+      {
+        "name": "bun-freebsd-x64-baseline-profile.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-freebsd-x64-baseline-profile.zip"
+      },
+      {
+        "name": "bun-freebsd-x64-baseline.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-freebsd-x64-baseline.zip"
+      },
+      {
+        "name": "bun-freebsd-x64-profile.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-freebsd-x64-profile.zip"
+      },
+      {
+        "name": "bun-freebsd-x64.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-freebsd-x64.zip"
+      },
+      {
+        "name": "bun-linux-aarch64-android-profile.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-linux-aarch64-android-profile.zip"
+      },
+      {
+        "name": "bun-linux-aarch64-android.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-linux-aarch64-android.zip"
+      },
+      {
+        "name": "bun-linux-aarch64-musl-profile.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-linux-aarch64-musl-profile.zip"
+      },
+      {
+        "name": "bun-linux-aarch64-musl.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-linux-aarch64-musl.zip"
+      },
+      {
+        "name": "bun-linux-aarch64-profile.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-linux-aarch64-profile.zip"
+      },
+      {
+        "name": "bun-linux-aarch64.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-linux-aarch64.zip"
+      },
+      {
+        "name": "bun-linux-x64-android-baseline-profile.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-linux-x64-android-baseline-profile.zip"
+      },
+      {
+        "name": "bun-linux-x64-android-baseline.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-linux-x64-android-baseline.zip"
+      },
+      {
+        "name": "bun-linux-x64-android-profile.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-linux-x64-android-profile.zip"
+      },
+      {
+        "name": "bun-linux-x64-android.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-linux-x64-android.zip"
+      },
+      {
+        "name": "bun-linux-x64-baseline-profile.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-linux-x64-baseline-profile.zip"
+      },
+      {
+        "name": "bun-linux-x64-baseline.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-linux-x64-baseline.zip"
+      },
+      {
+        "name": "bun-linux-x64-musl-baseline-profile.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-linux-x64-musl-baseline-profile.zip"
+      },
+      {
+        "name": "bun-linux-x64-musl-baseline.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-linux-x64-musl-baseline.zip"
+      },
+      {
+        "name": "bun-linux-x64-musl-profile.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-linux-x64-musl-profile.zip"
+      },
+      {
+        "name": "bun-linux-x64-musl.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-linux-x64-musl.zip"
+      },
+      {
+        "name": "bun-linux-x64-profile.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-linux-x64-profile.zip"
+      },
+      {
+        "name": "bun-linux-x64.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-linux-x64.zip"
+      },
+      {
+        "name": "bun-windows-aarch64-profile.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-windows-aarch64-profile.zip"
+      },
+      {
+        "name": "bun-windows-aarch64.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-windows-aarch64.zip"
+      },
+      {
+        "name": "bun-windows-x64-baseline-profile.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-windows-x64-baseline-profile.zip"
+      },
+      {
+        "name": "bun-windows-x64-baseline.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-windows-x64-baseline.zip"
+      },
+      {
+        "name": "bun-windows-x64-profile.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-windows-x64-profile.zip"
+      },
+      {
+        "name": "bun-windows-x64.zip",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-windows-x64.zip"
+      },
+      {
+        "name": "SHASUMS256.txt",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/SHASUMS256.txt"
+      },
+      {
+        "name": "SHASUMS256.txt.asc",
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/SHASUMS256.txt.asc"
+      }
+    ]
+  },
+  "denoland/deno": {
+    "tag_name": "v2.9.8",
+    "published_at": "2026-10-21T15:28:53Z",
+    "html_url": "https://github.com/denoland/deno/releases/tag/v2.9.8",
+    "body": "### 2.9.8 / 2026.10.21\r\n\r\n- fix(compile): check read permission for dynamically imported local files\r\n  (#36925)\r\n- fix(completions): complete script paths for bare deno run in zsh (#36976)\r\n- fix(core): keep op contexts alive until the isolate is disposed (#37026)\r\n- fix(coverage): skip the V8 code cache while collecting coverage (#36901)\r\n- fix(ext/fetch): bump hyper-util to 0.1.21 and hyper to 1.11.1 to cancel idle\r\n  interval when pool empties (#36968)\r\n- fix(ext/napi): check napi_create_dataview bounds for overflow (#36962)\r\n- fix(ext/napi): ignore the callback return value while an exception is pending\r\n  (#36942)\r\n- fix(ext/node): align X.509v1 certificate handling with OpenSSL (#36933)\r\n- fix(ext/node): mock.reset() restores mock.method() implementations (#36886)\r\n- fix(ext/node): support assert message functions and format arguments (#36944)\r\n- fix(npm): validate package link names (#37047)\r\n- fix(tls): distrust compromised eMudhra certificate authorities (#37046)\r\n- fix: bump rand 0.9.x to patched version",
+    "assets": [
+      {
+        "name": "deno-aarch64-apple-darwin.from-2.9.7.bsdiff",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/deno-aarch64-apple-darwin.from-2.9.7.bsdiff"
+      },
+      {
+        "name": "deno-aarch64-apple-darwin.from-2.9.7.bsdiff.sha256sum",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/deno-aarch64-apple-darwin.from-2.9.7.bsdiff.sha256sum"
+      },
+      {
+        "name": "deno-aarch64-apple-darwin.sha256sum",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/deno-aarch64-apple-darwin.sha256sum"
+      },
+      {
+        "name": "deno-aarch64-apple-darwin.zip",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/deno-aarch64-apple-darwin.zip"
+      },
+      {
+        "name": "deno-aarch64-apple-darwin.zip.sha256sum",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/deno-aarch64-apple-darwin.zip.sha256sum"
+      },
+      {
+        "name": "deno-aarch64-pc-windows-msvc.from-2.9.7.bsdiff",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/deno-aarch64-pc-windows-msvc.from-2.9.7.bsdiff"
+      },
+      {
+        "name": "deno-aarch64-pc-windows-msvc.from-2.9.7.bsdiff.sha256sum",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/deno-aarch64-pc-windows-msvc.from-2.9.7.bsdiff.sha256sum"
+      },
+      {
+        "name": "deno-aarch64-pc-windows-msvc.sha256sum",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/deno-aarch64-pc-windows-msvc.sha256sum"
+      },
+      {
+        "name": "deno-aarch64-pc-windows-msvc.zip",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/deno-aarch64-pc-windows-msvc.zip"
+      },
+      {
+        "name": "deno-aarch64-pc-windows-msvc.zip.sha256sum",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/deno-aarch64-pc-windows-msvc.zip.sha256sum"
+      },
+      {
+        "name": "deno-aarch64-unknown-linux-gnu.from-2.9.7.bsdiff",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/deno-aarch64-unknown-linux-gnu.from-2.9.7.bsdiff"
+      },
+      {
+        "name": "deno-aarch64-unknown-linux-gnu.from-2.9.7.bsdiff.sha256sum",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/deno-aarch64-unknown-linux-gnu.from-2.9.7.bsdiff.sha256sum"
+      },
+      {
+        "name": "deno-aarch64-unknown-linux-gnu.sha256sum",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/deno-aarch64-unknown-linux-gnu.sha256sum"
+      },
+      {
+        "name": "deno-aarch64-unknown-linux-gnu.zip",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/deno-aarch64-unknown-linux-gnu.zip"
+      },
+      {
+        "name": "deno-aarch64-unknown-linux-gnu.zip.sha256sum",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/deno-aarch64-unknown-linux-gnu.zip.sha256sum"
+      },
+      {
+        "name": "deno-x86_64-apple-darwin.from-2.9.7.bsdiff",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/deno-x86_64-apple-darwin.from-2.9.7.bsdiff"
+      },
+      {
+        "name": "deno-x86_64-apple-darwin.from-2.9.7.bsdiff.sha256sum",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/deno-x86_64-apple-darwin.from-2.9.7.bsdiff.sha256sum"
+      },
+      {
+        "name": "deno-x86_64-apple-darwin.sha256sum",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/deno-x86_64-apple-darwin.sha256sum"
+      },
+      {
+        "name": "deno-x86_64-apple-darwin.zip",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/deno-x86_64-apple-darwin.zip"
+      },
+      {
+        "name": "deno-x86_64-apple-darwin.zip.sha256sum",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/deno-x86_64-apple-darwin.zip.sha256sum"
+      },
+      {
+        "name": "deno-x86_64-pc-windows-msvc.from-2.9.7.bsdiff",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/deno-x86_64-pc-windows-msvc.from-2.9.7.bsdiff"
+      },
+      {
+        "name": "deno-x86_64-pc-windows-msvc.from-2.9.7.bsdiff.sha256sum",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/deno-x86_64-pc-windows-msvc.from-2.9.7.bsdiff.sha256sum"
+      },
+      {
+        "name": "deno-x86_64-pc-windows-msvc.sha256sum",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/deno-x86_64-pc-windows-msvc.sha256sum"
+      },
+      {
+        "name": "deno-x86_64-pc-windows-msvc.zip",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/deno-x86_64-pc-windows-msvc.zip"
+      },
+      {
+        "name": "deno-x86_64-pc-windows-msvc.zip.sha256sum",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/deno-x86_64-pc-windows-msvc.zip.sha256sum"
+      },
+      {
+        "name": "deno-x86_64-unknown-linux-gnu.from-2.9.7.bsdiff",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/deno-x86_64-unknown-linux-gnu.from-2.9.7.bsdiff"
+      },
+      {
+        "name": "deno-x86_64-unknown-linux-gnu.from-2.9.7.bsdiff.sha256sum",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/deno-x86_64-unknown-linux-gnu.from-2.9.7.bsdiff.sha256sum"
+      },
+      {
+        "name": "deno-x86_64-unknown-linux-gnu.sha256sum",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/deno-x86_64-unknown-linux-gnu.sha256sum"
+      },
+      {
+        "name": "deno-x86_64-unknown-linux-gnu.zip",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/deno-x86_64-unknown-linux-gnu.zip"
+      },
+      {
+        "name": "deno-x86_64-unknown-linux-gnu.zip.sha256sum",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/deno-x86_64-unknown-linux-gnu.zip.sha256sum"
+      },
+      {
+        "name": "denort-aarch64-apple-darwin.zip",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/denort-aarch64-apple-darwin.zip"
+      },
+      {
+        "name": "denort-aarch64-apple-darwin.zip.sha256sum",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/denort-aarch64-apple-darwin.zip.sha256sum"
+      },
+      {
+        "name": "denort-aarch64-pc-windows-msvc.zip",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/denort-aarch64-pc-windows-msvc.zip"
+      },
+      {
+        "name": "denort-aarch64-pc-windows-msvc.zip.sha256sum",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/denort-aarch64-pc-windows-msvc.zip.sha256sum"
+      },
+      {
+        "name": "denort-aarch64-unknown-linux-gnu.zip",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/denort-aarch64-unknown-linux-gnu.zip"
+      },
+      {
+        "name": "denort-aarch64-unknown-linux-gnu.zip.sha256sum",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/denort-aarch64-unknown-linux-gnu.zip.sha256sum"
+      },
+      {
+        "name": "denort-x86_64-apple-darwin.zip",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/denort-x86_64-apple-darwin.zip"
+      },
+      {
+        "name": "denort-x86_64-apple-darwin.zip.sha256sum",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/denort-x86_64-apple-darwin.zip.sha256sum"
+      },
+      {
+        "name": "denort-x86_64-pc-windows-msvc.zip",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/denort-x86_64-pc-windows-msvc.zip"
+      },
+      {
+        "name": "denort-x86_64-pc-windows-msvc.zip.sha256sum",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/denort-x86_64-pc-windows-msvc.zip.sha256sum"
+      },
+      {
+        "name": "denort-x86_64-unknown-linux-gnu.zip",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/denort-x86_64-unknown-linux-gnu.zip"
+      },
+      {
+        "name": "denort-x86_64-unknown-linux-gnu.zip.sha256sum",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/denort-x86_64-unknown-linux-gnu.zip.sha256sum"
+      },
+      {
+        "name": "deno_src.tar.gz",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/deno_src.tar.gz"
+      },
+      {
+        "name": "lib.deno.d.ts",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/lib.deno.d.ts"
+      },
+      {
+        "name": "libdenort-aarch64-apple-darwin.zip",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/libdenort-aarch64-apple-darwin.zip"
+      },
+      {
+        "name": "libdenort-aarch64-apple-darwin.zip.sha256sum",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/libdenort-aarch64-apple-darwin.zip.sha256sum"
+      },
+      {
+        "name": "libdenort-aarch64-pc-windows-msvc.zip",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/libdenort-aarch64-pc-windows-msvc.zip"
+      },
+      {
+        "name": "libdenort-aarch64-pc-windows-msvc.zip.sha256sum",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/libdenort-aarch64-pc-windows-msvc.zip.sha256sum"
+      },
+      {
+        "name": "libdenort-aarch64-unknown-linux-gnu.zip",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/libdenort-aarch64-unknown-linux-gnu.zip"
+      },
+      {
+        "name": "libdenort-aarch64-unknown-linux-gnu.zip.sha256sum",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/libdenort-aarch64-unknown-linux-gnu.zip.sha256sum"
+      },
+      {
+        "name": "libdenort-x86_64-apple-darwin.zip",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/libdenort-x86_64-apple-darwin.zip"
+      },
+      {
+        "name": "libdenort-x86_64-apple-darwin.zip.sha256sum",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/libdenort-x86_64-apple-darwin.zip.sha256sum"
+      },
+      {
+        "name": "libdenort-x86_64-pc-windows-msvc.zip",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/libdenort-x86_64-pc-windows-msvc.zip"
+      },
+      {
+        "name": "libdenort-x86_64-pc-windows-msvc.zip.sha256sum",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/libdenort-x86_64-pc-windows-msvc.zip.sha256sum"
+      },
+      {
+        "name": "libdenort-x86_64-unknown-linux-gnu.zip",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/libdenort-x86_64-unknown-linux-gnu.zip"
+      },
+      {
+        "name": "libdenort-x86_64-unknown-linux-gnu.zip.sha256sum",
+        "url": "https://github.com/denoland/deno/releases/download/v2.9.8/libdenort-x86_64-unknown-linux-gnu.zip.sha256sum"
+      }
+    ]
+  },
+  "rust-lang/rust": {
+    "tag_name": "1.100.0",
+    "published_at": "2026-11-12T18:19:42Z",
+    "html_url": "https://github.com/rust-lang/rust/releases/tag/1.100.0",
+    "body": "<a id=\"1.100.0-Language\"></a>\n\n## Language\n\n- [Stabilize never type](https://github.com/rust-lang/rust/pull/155499)\n- [Lint against repeated `#[repr(..)]` attributes](https://github.com/rust-lang/rust/pull/157036)\n- [Stabilize `extern \"custom\"`](https://github.com/rust-lang/rust/pull/158504)\n- [Extend `dropping_references`, `dropping_copy_types` and `undropped_manually_drops` lints to `drop_in_place`](https://github.com/rust-lang/rust/pull/160229)\n- [`unfulfilled_lint_expectations` no longer fires on `#[expect(dead_code)]` inside code that is covered by a dead parent's diagnostic](https://github.com/rust-lang/rust/pull/161005)\n- [Turn the error for `repr(align)` fields in a `repr(packed)` type into a deny-by-default lint `aligned_fields_in_packed`](https://github.com/rust-lang/rust/pull/162160)\n- [volatile: allow accesses to non-AM memory to trap](https://github.com/rust-lang/rust/pull/160564/)\n\n<a id=\"1.100.0-Compiler\"></a>\n\n## Compiler\n\n- [Stabilize `-Cprofile-sample-use`](https://github.com/rust-lang/rust/pull/155942)\n- [Enable next solver by default in orphanck](https://github.com/rust-lang/rust/pull/160668)\n\n<a id=\"1.100.0-Platform-Support\"></a>\n\n## Platform Support\n\n- [`i686-pc-windows-gnu` is now a tier 2 without host tools target](https://github.com/rust-lang/rust/pull/161681)\n- [Promote `wasm32-wasip3` to Tier 2](https://github.com/rust-lang/rust/pull/161940)\n- [Add new Tier 3 target `powerpc64-sony-ps3`](https://github.com/rust-lang/rust/pull/162072)\n\nRefer to Rust's [platform support page](https://doc.rust-lang.org/rustc/platform-support.html) for more information on Rust's tiered platform support.\n\n<a id=\"1.100.0-Libraries\"></a>\n\n## Libraries\n\n- [Stabilize custom allocators](https://github.com/rust-lang/rust/pull/156882)\n- [Map `ENOTSUP` to `ErrorKind::Unsupported`](https://github.com/rust-lang/rust/pull/158580)\n- [Fix soundness issues in `std::sys::pal::sgx::waitqueue::unsafe_list`](https://github.com/rust-lang/rust/pull/161334)\n\n<a id=\"1.100.0-Stabilized-APIs\"></a>\n\n## Stabilized APIs\n\n- [`impl PartialEq<Cow<'_, [U]>> for Vec<T, A>`](https://doc.rust-lang.org/stable/std/vec/struct.Vec.html#impl-PartialEq%3CCow%3C'_,+%5BU%5D%3E%3E-for-Vec%3CT,+A%3E)\n- [`impl PartialEq<Cow<'_, [U]>> for &[T]`](https://doc.rust-lang.org/stable/std/primitive.slice.html#impl-PartialEq%3CCow%3C'_,+%5BU%5D%3E%3E-for-%26%5BT%5D)\n- [`impl PartialEq<Cow<'_, [U]>> for &mut [T]`](https://doc.rust-lang.org/stable/std/primitive.slice.html#impl-PartialEq%3CCow%3C'_,+%5BU%5D%3E%3E-for-%26mut+%5BT%5D)\n- [`std::alloc::Allocator`](https://doc.rust-lang.org/stable/std/alloc/trait.Allocator.html)\n- [`std::alloc::Global`](https://doc.rust-lang.org/stable/std/alloc/struct.Global.html)\n- [`std::alloc::System`](https://doc.rust-lang.org/stable/std/alloc/struct.System.html)\n- [`impl Allocator for Global`](https://doc.rust-lang.org/stable/std/alloc/trait.Allocator.html#impl-Allocator-for-Global)\n- [`impl Allocator for System`](https://doc.rust-lang.org/stable/std/alloc/trait.Allocator.html#impl-Allocator-for-System)\n- [`impl<A: Allocator> Allocator for &A`](https://doc.rust-lang.org/stable/std/alloc/trait.Allocator.html#impl-Allocator-for-%26A)\n- [`impl<T: Allocator, A: Allocator> Allocator for Box<T, A>`](https://doc.rust-lang.org/stable/std/alloc/trait.Allocator.html#impl-Allocator-for-Box%3CT,+A%3E)\n- [`impl<A: Allocator> Allocator for &mut A`](https://doc.rust-lang.org/stable/std/alloc/trait.Allocator.html#impl-Allocator-for-%26mut+A)\n- [`impl<T: Allocator, A: Allocator> Allocator for Arc<T, A>`](https://doc.rust-lang.org/stable/std/alloc/trait.Allocator.html#impl-Allocator-for-Arc%3CT,+A%3E)\n- [`impl<T: Allocator, A: Allocator> Allocator for Rc<T, A>`](https://doc.rust-lang.org/stable/std/alloc/trait.Allocator.html#impl-Allocator-for-Rc%3CT,+A%3E)\n- [`Box::new_in`](https://doc.rust-lang.org/stable/std/boxed/struct.Box.html#method.new_in)\n- [`Box::from_raw_in`](https://doc.rust-lang.org/stable/std/boxed/struct.Box.html#method.from_raw_in)\n- [`Box::from_non_null_in`](https://doc.rust-lang.org/stable/std/boxed/struct.Box.html#method.from_non_null_in)\n- [`Box::into_raw_with_allocator`](https://doc.rust-lang.org/stable/std/boxed/struct.Box.html#method.into_raw_with_allocator)\n- [`Box::into_non_null_with_allocator`](https://doc.rust-lang.org/stable/std/boxed/struct.Box.html#method.into_non_null_with_allocator)\n- [`Box::allocator`](https://doc.rust-lang.org/stable/std/boxed/struct.Box.html#method.allocator)\n- [`Vec::new_in`](https://doc.rust-lang.org/stable/std/vec/struct.Vec.html#method.new_in)\n- [`Vec::with_capacity_in`](https://doc.rust-lang.org/stable/std/vec/struct.Vec.html#method.with_capacity_in)\n- [`Vec::from_raw_parts_in`](https://doc.rust-lang.org/stable/std/vec/struct.Vec.html#method.from_raw_parts_in)\n- [`Vec::from_parts_in`](https://doc.rust-lang.org/stable/std/vec/struct.Vec.html#method.from_parts_in)\n- [`Vec::into_raw_parts_with_allocator`](https://doc.rust-lang.org/stable/std/vec/struct.Vec.html#method.into_raw_parts_with_allocator)\n- [`Vec::into_parts_with_allocator`](https://doc.rust-lang.org/stable/std/vec/struct.Vec.html#method.into_parts_with_allocator)\n- [`Vec::allocator`](https://doc.rust-lang.org/stable/std/vec/struct.Vec.html#method.allocator)\n- [`Child::main_thread_handle`](https://doc.rust-lang.org/stable/std/os/windows/process/trait.ChildExt.html#tymethod.main_thread_handle)\n- [`impl Default for std::sync::Once`](https://doc.rust-lang.org/stable/std/sync/struct.Once.html#impl-Default-for-Once)\n- [`bool::toggle`](https://doc.rust-lang.org/stable/std/primitive.bool.html#method.toggle)\n- [`Box::take`](https://doc.rust-lang.org/stable/std/boxed/struct.Box.html#method.take)\n- [`Box::map`](https://doc.rust-lang.org/stable/std/boxed/struct.Box.html#method.map)\n- [`Rc::map`](https://doc.rust-lang.org/stable/std/rc/struct.Rc.html#method.map)\n- [`Arc::map`](https://doc.rust-lang.org/stable/std/sync/struct.Arc.html#method.map)\n- [`impl AsRef<T> for !`](https://doc.rust-lang.org/stable/std/primitive.never.html#impl-AsRef\\<T\\>-for-!)\n- [`impl AsMut<T> for !`](https://doc.rust-lang.org/stable/std/primitive.never.html#impl-AsMut\\<T\\>-for-!)\n- [`core::mem::DropGuard`](https://doc.rust-lang.org/stable/core/mem/struct.DropGuard.html)\n- [`core::mem::conjure_zst`](https://doc.rust-lang.org/stable/core/mem/fn.conjure_zst.html)\n- [`UnsafeCell::replace`](https://doc.rust-lang.org/stable/std/cell/struct.UnsafeCell.html#method.replace)\n- [`UnsafeCell::as_ref_unchecked`](https://doc.rust-lang.org/stable/std/cell/struct.UnsafeCell.html#method.as_ref_unchecked)\n- [`UnsafeCell::as_mut_unchecked`](https://doc.rust-lang.org/stable/std/cell/struct.UnsafeCell.html#method.as_mut_unchecked)\n- [`str::trim_prefix`](https://doc.rust-lang.org/stable/std/primitive.str.html#method.trim_prefix)\n- [`str::trim_suffix`](https://doc.rust-lang.org/stable/std/primitive.str.html#method.trim_suffix)\n- [`[T]::trim_prefix`](https://doc.rust-lang.org/stable/std/primitive.slice.html#method.trim_prefix)\n- [`[T]::trim_suffix`](https://doc.rust-lang.org/stable/std/primitive.slice.html#method.trim_suffix)\n- [`Path::trim_prefix`](https://doc.rust-lang.org/stable/std/path/struct.Path.html#method.trim_prefix)\n- [`Vec::from_fn`](https://doc.rust-lang.org/stable/std/vec/struct.Vec.html#method.from_fn)\n- [`os::windows::process::CommandExt::show_window`](https://doc.rust-lang.org/stable/std/os/windows/process/trait.CommandExt.html#tymethod.show_window)\n\n<a id=\"1.100.0-Cargo\"></a>\n\n## Cargo\n\n- Introduced Cargo's own linting system: some Cargo warnings are now emitted as lints that users can control in the `[lints.cargo]` table. This includes a new built-in unused dependency check via the `cargo::unused_dependencies` lint. [docs](https://doc.rust-lang.org/stable/cargo/reference/lints.html) [\\#17298](https://github.com/rust-lang/cargo/pull/17298)\n- Introduced minimum publish age configurations, also known as dependency cooldowns. When the relevant config is set, the resolver ignores versions published more recently than that, unless they are already in `Cargo.lock`. ([RFC 3923](https://rust-lang.github.io/rfcs/3923-cargo-min-publish-age.html)) [docs](https://doc.rust-lang.org/stable/cargo/reference/resolver.html#publish-age) [\\#17335](https://github.com/rust-lang/cargo/pull/17335)\n- cargo-install: now uses the existing lockfile in the `.crate` tarball by default. `--locked` in cargo install becomes a no-op. [\\#17388](https://github.com/rust-lang/cargo/pull/17388)\n- Cargo now uses a new directory layout for intermediate build artifacts. Tools that inspect the build directory may need to use [Cargo\u2019s JSON messages](https://doc.rust-lang.org/stable/cargo/reference/external-tools.html#json-messages) to locate build artifacts instead of relying on the build directory layout. The layout is not a stable interface and is subject to change. ([build cache doc](https://doc.rust-lang.org/stable/cargo/reference/build-cache.html)) [\\#17354](https://github.com/rust-lang/cargo/pull/17354)\n\n## Rustdoc\n\n- [Add new `invalid_markdown_table` rustdoc lint](https://github.com/rust-lang/rust/pull/159583)\n\n<a id=\"1.100.0-Compatibility-Notes\"></a>\n\n## Compatibility Notes\n\n- [Closures now more precisely capture variables used in `if let`. This may cause new errors](https://github.com/rust-lang/rust/pull/154210)\n- [Check dyn-compatibility of trait objects in more places](https://github.com/rust-lang/rust/pull/154992)\n- [`Infallible` is now a type alias to `!`](https://github.com/rust-lang/rust/pull/155499)\n- [The never type fallback was changed to `!` on all editions](https://github.com/rust-lang/rust/pull/155499)\n- [`box` patterns are no longer syntactically allowed](https://github.com/rust-lang/rust/pull/156749)\n- [Report Query Cycle errors in more cases when computing the layout of enums with explicit discriminants](https://github.com/rust-lang/rust/pull/157562)\n- [Always escape grapheme extenders in `str::escape_debug`](https://github.com/rust-lang/rust/pull/158303)\n- [Make let-else respect `macro_rules` `expr` metavariable grouping](https://github.com/rust-lang/rust/pull/158515)\n- [`Iterator::{min,max}(_by_key)` changed which `Ord` methods they use.](https://github.com/rust-lang/rust/pull/160203) This cannot change behaviour (other than being potentially faster) for types correctly following the [`Ord` rules](https://doc.rust-lang.org/std/cmp/trait.Ord.html), but may impact types with inconsistent trait implementations.\n- [Emit an error when trying to enable SSE/AVX on an x86 (32bit or 64bit) softfloat target](https://github.com/rust-lang/rust/pull/160302)\n- [Require windowed (and exception) for Xtensa ABI](https://github.com/rust-lang/rust/pull/160643)\n- [windows-gnullvm: always link libunwind statically](https://github.com/rust-lang/rust/pull/160712)\n- [From version 1.94 up to 1.100 a number of ARMv7-A hardfloat targets required the `VFPv3-D32` FPU as a minimum, as they erroneously had the `d32` feature in their baseline list of features. Breakage introduced as a result of correcting this can be fixed by passing `-Ctarget-feature=+d32` to Rust.](https://github.com/rust-lang/rust/pull/160911)\n- [Change \"Rust\" ABI on x86 to use SSE registers if they are always-available for the current target](https://github.com/rust-lang/rust/pull/161583)\n- [Make the `ambiguous_glob_imported_traits` lint fire in slightly more cases](https://github.com/rust-lang/rust/pull/161805)\n- [Make `+fix-cortex-a53-835769` a default feature for `aarch64-unknown-fuchsia`](https://github.com/rust-lang/rust/pull/161886)\n- [Some impls on `Box` have been generalised to arbitrary allocators, which may cause new type inference errors](https://github.com/rust-lang/rust/pull/161946)\n- [The standard library now uses Unicode version 18.0.0](https://doc.rust-lang.org/stable/std/primitive.char.html#associatedconstant.UNICODE_VERSION)\n- [WASI SDK version was bumped from 33 to 34](https://github.com/rust-lang/rust/pull/163809)\n- [On ARM targets, `-Ctarget-feature`/`-Ctarget-cpu` values that would alter the ABI are rejected as hard errors now.](https://github.com/rust-lang/rust/pull/161280)\n\n<a id=\"1.100.0-Internal-Changes\"></a>\n\n## Other\n\n- [Test harness now allows passing `--test-threads` and `--color` multiple times, with later arguments overriding earlier ones](https://github.com/rust-lang/rust/pull/161312)\n",
+    "assets": []
+  },
+  "ruby/ruby": {
+    "tag_name": "v4.0.9",
+    "published_at": "2026-10-23T04:04:17Z",
+    "html_url": "https://github.com/ruby/ruby/releases/tag/v4.0.9",
+    "body": "## What's Changed\r\n\r\n* [Reject overflowed repeat/null-check IDs in huge regexps by makenowjust \u00b7 Pull Request #16801](https://github.com/ruby/ruby/pull/16801)\r\n\r\nNote: This list is automatically generated by tool/gen-github-release.rb. Because of this, some commits may be missing.\r\n\r\n## Full Changelog\r\n\r\nhttps://github.com/ruby/ruby/compare/v4.0.8...v4.0.9\r\n\r\n",
+    "assets": []
+  },
+  "astral-sh/uv": {
+    "tag_name": "0.13.8",
+    "published_at": "2026-11-12T17:03:07Z",
+    "html_url": "https://github.com/astral-sh/uv/releases/tag/0.13.8",
+    "body": "## Release Notes\n\nReleased on 2026-11-12.\n\n### Python\n\n- Add CPython 3.16.0a2 ([#23211](https://github.com/astral-sh/uv/pull/23211))\n- Update managed CPython 3.11, 3.12, 3.13, 3.14, and 3.15 builds to include pip 26.3, zlib 1.4, and Expat 2.10.0 ([#23211](https://github.com/astral-sh/uv/pull/23211))\n- Update GraalPy 3.13.0 to build 25.5.5 ([#23088](https://github.com/astral-sh/uv/pull/23088))\n\n### Preview features\n\n- Install wheel variants from local paths, direct URLs, and Git repositories in platform-specific resolutions ([#22720](https://github.com/astral-sh/uv/pull/22720), [#22722](https://github.com/astral-sh/uv/pull/22722), [#22724](https://github.com/astral-sh/uv/pull/22724))\n- Detect x86-64 microarchitecture levels and AArch64 architecture versions when selecting wheel variants ([#22832](https://github.com/astral-sh/uv/pull/22832), [#22949](https://github.com/astral-sh/uv/pull/22949))\n- Detect Google TPUs up when selecting wheel variants ([#23066](https://github.com/astral-sh/uv/pull/23066), [#23121](https://github.com/astral-sh/uv/pull/23121))\n- Fix CPU detection for wheel variants on macOS with GraalPy ([#23089](https://github.com/astral-sh/uv/pull/23089))\n- Report quarantined packages in `uv audit` when index URLs differ only in redacted query values ([#23129](https://github.com/astral-sh/uv/pull/23129))\n\n### Performance\n\n- Avoid duplicate environment builds when concurrent `uvx` or `uv run --with` invocations need the same environment ([#23123](https://github.com/astral-sh/uv/pull/23123))\n\n### Bug fixes\n\n- Restrict Unix plaintext credential files to owner-only permissions ([#23209](https://github.com/astral-sh/uv/pull/23209))\n- Honor per-index `exclude-newer-package` cutoffs during resolution ([#23122](https://github.com/astral-sh/uv/pull/23122))\n- Respect negative extra markers on constraints ([#23144](https://github.com/astral-sh/uv/pull/23144))\n- Resolve dependencies of recursive extras from a scoped override ([#23210](https://github.com/astral-sh/uv/pull/23210))\n- Fix `activate.bat` for Windows virtual environments whose paths contain apostrophes ([#23152](https://github.com/astral-sh/uv/pull/23152))\n\n### Documentation\n\n- Document the shell requirement for GitLab CI job images ([#23078](https://github.com/astral-sh/uv/pull/23078))\n\n## Install uv 0.13.8\n\n### Install prebuilt binaries via shell script\n\n```sh\ncurl --proto '=https' --tlsv1.2 -LsSf https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-installer.sh | sh\n```\n\n### Install prebuilt binaries via powershell script\n\n```sh\npowershell -ExecutionPolicy Bypass -c \"irm https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-installer.ps1 | iex\"\n```\n\n## Download uv 0.13.8\n\n|  File  | Platform | Checksum |\n|--------|----------|----------|\n| [uv-aarch64-apple-darwin.tar.gz](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-aarch64-apple-darwin.tar.gz) | Apple Silicon macOS | [checksum](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-aarch64-apple-darwin.tar.gz.sha256) |\n| [uv-x86_64-apple-darwin.tar.gz](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-x86_64-apple-darwin.tar.gz) | Intel macOS | [checksum](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-x86_64-apple-darwin.tar.gz.sha256) |\n| [uv-aarch64-pc-windows-msvc.zip](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-aarch64-pc-windows-msvc.zip) | ARM64 Windows | [checksum](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-aarch64-pc-windows-msvc.zip.sha256) |\n| [uv-i686-pc-windows-msvc.zip](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-i686-pc-windows-msvc.zip) | x86 Windows | [checksum](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-i686-pc-windows-msvc.zip.sha256) |\n| [uv-x86_64-pc-windows-msvc.zip](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-x86_64-pc-windows-msvc.zip) | x64 Windows | [checksum](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-x86_64-pc-windows-msvc.zip.sha256) |\n| [uv-aarch64-unknown-linux-gnu.tar.gz](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-aarch64-unknown-linux-gnu.tar.gz) | ARM64 Linux | [checksum](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-aarch64-unknown-linux-gnu.tar.gz.sha256) |\n| [uv-i686-unknown-linux-gnu.tar.gz](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-i686-unknown-linux-gnu.tar.gz) | x86 Linux | [checksum](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-i686-unknown-linux-gnu.tar.gz.sha256) |\n| [uv-powerpc64le-unknown-linux-gnu.tar.gz](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-powerpc64le-unknown-linux-gnu.tar.gz) | PPC64LE Linux | [checksum](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-powerpc64le-unknown-linux-gnu.tar.gz.sha256) |\n| [uv-riscv64gc-unknown-linux-gnu.tar.gz](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-riscv64gc-unknown-linux-gnu.tar.gz) | RISCV Linux | [checksum](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-riscv64gc-unknown-linux-gnu.tar.gz.sha256) |\n| [uv-s390x-unknown-linux-gnu.tar.gz](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-s390x-unknown-linux-gnu.tar.gz) | S390x Linux | [checksum](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-s390x-unknown-linux-gnu.tar.gz.sha256) |\n| [uv-x86_64-unknown-linux-gnu.tar.gz](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-x86_64-unknown-linux-gnu.tar.gz) | x64 Linux | [checksum](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-x86_64-unknown-linux-gnu.tar.gz.sha256) |\n| [uv-armv7-unknown-linux-gnueabihf.tar.gz](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-armv7-unknown-linux-gnueabihf.tar.gz) | ARMv7 Linux | [checksum](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-armv7-unknown-linux-gnueabihf.tar.gz.sha256) |\n| [uv-aarch64-unknown-linux-musl.tar.gz](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-aarch64-unknown-linux-musl.tar.gz) | ARM64 MUSL Linux | [checksum](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-aarch64-unknown-linux-musl.tar.gz.sha256) |\n| [uv-i686-unknown-linux-musl.tar.gz](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-i686-unknown-linux-musl.tar.gz) | x86 MUSL Linux | [checksum](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-i686-unknown-linux-musl.tar.gz.sha256) |\n| [uv-riscv64gc-unknown-linux-musl.tar.gz](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-riscv64gc-unknown-linux-musl.tar.gz) | RISCV MUSL Linux | [checksum](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-riscv64gc-unknown-linux-musl.tar.gz.sha256) |\n| [uv-x86_64-unknown-linux-musl.tar.gz](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-x86_64-unknown-linux-musl.tar.gz) | x64 MUSL Linux | [checksum](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-x86_64-unknown-linux-musl.tar.gz.sha256) |\n| [uv-arm-unknown-linux-musleabihf.tar.gz](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-arm-unknown-linux-musleabihf.tar.gz) | ARMv6 MUSL Linux (Hardfloat) | [checksum](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-arm-unknown-linux-musleabihf.tar.gz.sha256) |\n| [uv-armv7-unknown-linux-musleabihf.tar.gz](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-armv7-unknown-linux-musleabihf.tar.gz) | ARMv7 MUSL Linux | [checksum](https://releases.astral.sh/github/uv/releases/download/0.13.8/uv-armv7-unknown-linux-musleabihf.tar.gz.sha256) |\n\n## Verifying GitHub Artifact Attestations\n\nThe artifacts in this release have attestations generated with GitHub Artifact Attestations. These can be verified by using the [GitHub CLI](https://cli.github.com/manual/gh_attestation_verify):\n```sh\ngh attestation verify <file-path of downloaded artifact> --repo astral-sh/uv\n```\n\nYou can also download the attestation from [GitHub](https://github.com/astral-sh/uv/attestations) and verify against that directly:\n```sh\ngh attestation verify <file-path of downloaded artifact> --bundle <file-path of downloaded attestation>\n```\n\n\n",
+    "assets": [
+      {
+        "name": "dist-manifest.json",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/dist-manifest.json"
+      },
+      {
+        "name": "sha256.sum",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/sha256.sum"
+      },
+      {
+        "name": "source.tar.gz",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/source.tar.gz"
+      },
+      {
+        "name": "source.tar.gz.sha256",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/source.tar.gz.sha256"
+      },
+      {
+        "name": "uv-aarch64-apple-darwin.tar.gz",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-aarch64-apple-darwin.tar.gz"
+      },
+      {
+        "name": "uv-aarch64-apple-darwin.tar.gz.sha256",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-aarch64-apple-darwin.tar.gz.sha256"
+      },
+      {
+        "name": "uv-aarch64-pc-windows-msvc.zip",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-aarch64-pc-windows-msvc.zip"
+      },
+      {
+        "name": "uv-aarch64-pc-windows-msvc.zip.sha256",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-aarch64-pc-windows-msvc.zip.sha256"
+      },
+      {
+        "name": "uv-aarch64-unknown-linux-gnu.tar.gz",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-aarch64-unknown-linux-gnu.tar.gz"
+      },
+      {
+        "name": "uv-aarch64-unknown-linux-gnu.tar.gz.sha256",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-aarch64-unknown-linux-gnu.tar.gz.sha256"
+      },
+      {
+        "name": "uv-aarch64-unknown-linux-musl.tar.gz",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-aarch64-unknown-linux-musl.tar.gz"
+      },
+      {
+        "name": "uv-aarch64-unknown-linux-musl.tar.gz.sha256",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-aarch64-unknown-linux-musl.tar.gz.sha256"
+      },
+      {
+        "name": "uv-arm-unknown-linux-musleabihf.tar.gz",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-arm-unknown-linux-musleabihf.tar.gz"
+      },
+      {
+        "name": "uv-arm-unknown-linux-musleabihf.tar.gz.sha256",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-arm-unknown-linux-musleabihf.tar.gz.sha256"
+      },
+      {
+        "name": "uv-armv7-unknown-linux-gnueabihf.tar.gz",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-armv7-unknown-linux-gnueabihf.tar.gz"
+      },
+      {
+        "name": "uv-armv7-unknown-linux-gnueabihf.tar.gz.sha256",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-armv7-unknown-linux-gnueabihf.tar.gz.sha256"
+      },
+      {
+        "name": "uv-armv7-unknown-linux-musleabihf.tar.gz",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-armv7-unknown-linux-musleabihf.tar.gz"
+      },
+      {
+        "name": "uv-armv7-unknown-linux-musleabihf.tar.gz.sha256",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-armv7-unknown-linux-musleabihf.tar.gz.sha256"
+      },
+      {
+        "name": "uv-i686-pc-windows-msvc.zip",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-i686-pc-windows-msvc.zip"
+      },
+      {
+        "name": "uv-i686-pc-windows-msvc.zip.sha256",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-i686-pc-windows-msvc.zip.sha256"
+      },
+      {
+        "name": "uv-i686-unknown-linux-gnu.tar.gz",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-i686-unknown-linux-gnu.tar.gz"
+      },
+      {
+        "name": "uv-i686-unknown-linux-gnu.tar.gz.sha256",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-i686-unknown-linux-gnu.tar.gz.sha256"
+      },
+      {
+        "name": "uv-i686-unknown-linux-musl.tar.gz",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-i686-unknown-linux-musl.tar.gz"
+      },
+      {
+        "name": "uv-i686-unknown-linux-musl.tar.gz.sha256",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-i686-unknown-linux-musl.tar.gz.sha256"
+      },
+      {
+        "name": "uv-installer.ps1",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-installer.ps1"
+      },
+      {
+        "name": "uv-installer.sh",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-installer.sh"
+      },
+      {
+        "name": "uv-powerpc64le-unknown-linux-gnu.tar.gz",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-powerpc64le-unknown-linux-gnu.tar.gz"
+      },
+      {
+        "name": "uv-powerpc64le-unknown-linux-gnu.tar.gz.sha256",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-powerpc64le-unknown-linux-gnu.tar.gz.sha256"
+      },
+      {
+        "name": "uv-riscv64gc-unknown-linux-gnu.tar.gz",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-riscv64gc-unknown-linux-gnu.tar.gz"
+      },
+      {
+        "name": "uv-riscv64gc-unknown-linux-gnu.tar.gz.sha256",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-riscv64gc-unknown-linux-gnu.tar.gz.sha256"
+      },
+      {
+        "name": "uv-riscv64gc-unknown-linux-musl.tar.gz",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-riscv64gc-unknown-linux-musl.tar.gz"
+      },
+      {
+        "name": "uv-riscv64gc-unknown-linux-musl.tar.gz.sha256",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-riscv64gc-unknown-linux-musl.tar.gz.sha256"
+      },
+      {
+        "name": "uv-s390x-unknown-linux-gnu.tar.gz",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-s390x-unknown-linux-gnu.tar.gz"
+      },
+      {
+        "name": "uv-s390x-unknown-linux-gnu.tar.gz.sha256",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-s390x-unknown-linux-gnu.tar.gz.sha256"
+      },
+      {
+        "name": "uv-x86_64-apple-darwin.tar.gz",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-x86_64-apple-darwin.tar.gz"
+      },
+      {
+        "name": "uv-x86_64-apple-darwin.tar.gz.sha256",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-x86_64-apple-darwin.tar.gz.sha256"
+      },
+      {
+        "name": "uv-x86_64-pc-windows-msvc.zip",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-x86_64-pc-windows-msvc.zip"
+      },
+      {
+        "name": "uv-x86_64-pc-windows-msvc.zip.sha256",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-x86_64-pc-windows-msvc.zip.sha256"
+      },
+      {
+        "name": "uv-x86_64-unknown-linux-gnu.tar.gz",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-x86_64-unknown-linux-gnu.tar.gz"
+      },
+      {
+        "name": "uv-x86_64-unknown-linux-gnu.tar.gz.sha256",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-x86_64-unknown-linux-gnu.tar.gz.sha256"
+      },
+      {
+        "name": "uv-x86_64-unknown-linux-musl.tar.gz",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-x86_64-unknown-linux-musl.tar.gz"
+      },
+      {
+        "name": "uv-x86_64-unknown-linux-musl.tar.gz.sha256",
+        "url": "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-x86_64-unknown-linux-musl.tar.gz.sha256"
+      }
+    ]
+  },
+  "node": [
+    {
+      "version": "v27.0.0-alpha.0.1.0",
+      "date": "2026-11-12",
+      "files": [
+        "aix-ppc64",
+        "headers",
+        "linux-arm64",
+        "linux-ppc64le",
+        "linux-s390x",
+        "linux-x64",
+        "linux-x64-musl",
+        "osx-arm64-tar",
+        "osx-x64-pkg",
+        "src",
+        "win-arm64-7z",
+        "win-arm64-zip",
+        "win-x64-7z",
+        "win-x64-exe",
+        "win-x64-msi",
+        "win-x64-zip"
+      ],
+      "npm": "12.2.2",
+      "zlib": "1.3.2.1-motley",
+      "openssl": "4.1.0",
+      "modules": "153",
+      "lts": false,
+      "security": false
+    },
+    {
+      "version": "v27.0.0-alpha.0.0.0",
+      "date": "2026-10-29",
+      "files": [
+        "aix-ppc64",
+        "headers",
+        "linux-arm64",
+        "linux-ppc64le",
+        "linux-s390x",
+        "linux-x64",
+        "linux-x64-musl",
+        "osx-arm64-tar",
+        "osx-x64-pkg",
+        "src",
+        "win-arm64-7z",
+        "win-arm64-zip",
+        "win-x64-7z",
+        "win-x64-exe",
+        "win-x64-msi",
+        "win-x64-zip"
+      ],
+      "npm": "12.1.0",
+      "v8": "15.6.75.25",
+      "uv": "1.52.1",
+      "zlib": "1.3.2.1-motley",
+      "openssl": "4.1.0",
+      "modules": "153",
+      "lts": false,
+      "security": false
+    },
+    {
+      "version": "v26.13.1",
+      "date": "2026-11-10",
+      "files": [
+        "aix-ppc64",
+        "headers",
+        "linux-arm64",
+        "linux-ppc64le",
+        "linux-s390x",
+        "linux-x64",
+        "linux-x64-musl",
+        "osx-arm64-tar",
+        "osx-x64-pkg",
+        "osx-x64-tar",
+        "src",
+        "win-arm64-7z",
+        "win-arm64-zip",
+        "win-x64-7z",
+        "win-x64-exe",
+        "win-x64-msi",
+        "win-x64-zip"
+      ],
+      "npm": "11.20.0",
+      "zlib": "1.3.2.1-motley",
+      "openssl": "3.5.9",
+      "modules": "147",
+      "lts": "Lithium",
+      "security": true
+    },
+    {
+      "version": "v26.13.0",
+      "date": "2026-10-28",
+      "files": [
+        "aix-ppc64",
+        "headers",
+        "linux-arm64",
+        "linux-ppc64le",
+        "linux-s390x",
+        "linux-x64",
+        "linux-x64-musl",
+        "osx-arm64-tar",
+        "osx-x64-pkg",
+        "osx-x64-tar",
+        "src",
+        "win-arm64-7z",
+        "win-arm64-zip",
+        "win-x64-7z",
+        "win-x64-exe",
+        "win-x64-msi",
+        "win-x64-zip"
+      ],
+      "npm": "11.20.0",
+      "v8": "14.6.202.34",
+      "uv": "1.52.1",
+      "zlib": "1.3.2.1-motley",
+      "openssl": "3.5.9",
+      "modules": "147",
+      "lts": "Lithium",
+      "security": false
+    },
+    {
+      "version": "v26.12.1",
+      "date": "2026-10-21",
+      "files": [
+        "aix-ppc64",
+        "headers",
+        "linux-arm64",
+        "linux-ppc64le",
+        "linux-s390x",
+        "linux-x64",
+        "linux-x64-musl",
+        "osx-arm64-tar",
+        "osx-x64-pkg",
+        "osx-x64-tar",
+        "src",
+        "win-arm64-7z",
+        "win-arm64-zip",
+        "win-x64-7z",
+        "win-x64-exe",
+        "win-x64-msi",
+        "win-x64-zip"
+      ],
+      "npm": "11.20.0",
+      "v8": "14.6.202.34",
+      "uv": "1.52.1",
+      "zlib": "1.3.2.1-motley",
+      "openssl": "3.5.9",
+      "modules": "147",
+      "lts": false,
+      "security": true
+    },
+    {
+      "version": "v26.12.0",
+      "date": "2026-10-14",
+      "files": [
+        "aix-ppc64",
+        "headers",
+        "linux-arm64",
+        "linux-ppc64le",
+        "linux-s390x",
+        "linux-x64",
+        "linux-x64-musl",
+        "osx-arm64-tar",
+        "osx-x64-pkg",
+        "osx-x64-tar",
+        "src",
+        "win-arm64-7z",
+        "win-arm64-zip",
+        "win-x64-7z",
+        "win-x64-exe",
+        "win-x64-msi",
+        "win-x64-zip"
+      ],
+      "npm": "11.20.0",
+      "v8": "14.6.202.34",
+      "uv": "1.52.1",
+      "zlib": "1.3.2.1-motley",
+      "openssl": "3.5.9",
+      "modules": "147",
+      "lts": false,
+      "security": false
+    },
+    {
+      "version": "v26.11.1",
+      "date": "2026-10-07",
+      "files": [
+        "aix-ppc64",
+        "headers",
+        "linux-arm64",
+        "linux-ppc64le",
+        "linux-s390x",
+        "linux-x64",
+        "linux-x64-musl",
+        "osx-arm64-tar",
+        "osx-x64-pkg",
+        "osx-x64-tar",
+        "src",
+        "win-arm64-7z",
+        "win-arm64-zip",
+        "win-x64-7z",
+        "win-x64-exe",
+        "win-x64-msi",
+        "win-x64-zip"
+      ],
+      "npm": "11.20.0",
+      "v8": "14.6.202.34",
+      "uv": "1.52.1",
+      "zlib": "1.3.2.1-motley",
+      "openssl": "3.5.9",
+      "modules": "147",
+      "lts": false,
+      "security": false
+    },
+    {
+      "version": "v26.11.0",
+      "date": "2026-10-07",
+      "files": [
+        "aix-ppc64",
+        "headers",
+        "linux-arm64",
+        "linux-ppc64le",
+        "linux-s390x",
+        "linux-x64",
+        "linux-x64-musl",
+        "osx-arm64-tar",
+        "osx-x64-pkg",
+        "osx-x64-tar",
+        "src",
+        "win-arm64-7z",
+        "win-arm64-zip",
+        "win-x64-7z",
+        "win-x64-exe",
+        "win-x64-msi",
+        "win-x64-zip"
+      ],
+      "npm": "11.20.0",
+      "v8": "14.6.202.34",
+      "uv": "1.52.1",
+      "zlib": "1.3.2.1-motley",
+      "openssl": "3.5.9",
+      "modules": "147",
+      "lts": false,
+      "security": false
+    },
+    {
+      "version": "v26.10.0",
+      "date": "2026-09-21",
+      "files": [
+        "aix-ppc64",
+        "headers",
+        "linux-arm64",
+        "linux-ppc64le",
+        "linux-s390x",
+        "linux-x64",
+        "linux-x64-musl",
+        "osx-arm64-tar",
+        "osx-x64-pkg",
+        "osx-x64-tar",
+        "src",
+        "win-arm64-7z",
+        "win-arm64-zip",
+        "win-x64-7z",
+        "win-x64-exe",
+        "win-x64-msi",
+        "win-x64-zip"
+      ],
+      "npm": "11.19.1",
+      "v8": "14.6.202.34",
+      "uv": "1.52.1",
+      "zlib": "1.3.2.1-motley",
+      "openssl": "3.5.8",
+      "modules": "147",
+      "lts": false,
+      "security": false
+    },
+    {
+      "version": "v26.9.0",
+      "date": "2026-09-16",
+      "files": [
+        "aix-ppc64",
+        "headers",
+        "linux-arm64",
+        "linux-ppc64le",
+        "linux-s390x",
+        "linux-x64",
+        "linux-x64-musl",
+        "osx-arm64-tar",
+        "osx-x64-pkg",
+        "osx-x64-tar",
+        "src",
+        "win-arm64-7z",
+        "win-arm64-zip",
+        "win-x64-7z",
+        "win-x64-exe",
+        "win-x64-msi",
+        "win-x64-zip"
+      ],
+      "npm": "11.19.1",
+      "v8": "14.6.202.34",
+      "uv": "1.52.1",
+      "zlib": "1.3.2.1-motley",
+      "openssl": "3.5.8",
+      "modules": "147",
+      "lts": false,
+      "security": false
+    },
+    {
+      "version": "v26.8.2",
+      "date": "2026-09-09",
+      "files": [
+        "aix-ppc64",
+        "headers",
+        "linux-arm64",
+        "linux-ppc64le",
+        "linux-s390x",
+        "linux-x64",
+        "linux-x64-musl",
+        "osx-arm64-tar",
+        "osx-x64-pkg",
+        "osx-x64-tar",
+        "src",
+        "win-arm64-7z",
+        "win-arm64-zip",
+        "win-x64-7z",
+        "win-x64-exe",
+        "win-x64-msi",
+        "win-x64-zip"
+      ],
+      "npm": "11.19.1",
+      "v8": "14.6.202.34",
+      "uv": "1.52.1",
+      "zlib": "1.3.2.1-motley",
+      "openssl": "3.5.8",
+      "modules": "147",
+      "lts": false,
+      "security": false
+    },
+    {
+      "version": "v26.8.1",
+      "date": "2026-08-26",
+      "files": [
+        "aix-ppc64",
+        "headers",
+        "linux-arm64",
+        "linux-ppc64le",
+        "linux-s390x",
+        "linux-x64",
+        "linux-x64-musl",
+        "osx-arm64-tar",
+        "osx-x64-pkg",
+        "osx-x64-tar",
+        "src",
+        "win-arm64-7z",
+        "win-arm64-zip",
+        "win-x64-7z",
+        "win-x64-exe",
+        "win-x64-msi",
+        "win-x64-zip"
+      ],
+      "npm": "11.19.0",
+      "v8": "14.6.202.34",
+      "uv": "1.52.1",
+      "zlib": "1.3.2.1-motley",
+      "openssl": "3.5.7",
+      "modules": "147",
+      "lts": false,
+      "security": false
+    },
+    {
+      "version": "v26.8.0",
+      "date": "2026-08-25",
+      "files": [
+        "aix-ppc64",
+        "headers",
+        "linux-arm64",
+        "linux-ppc64le",
+        "linux-s390x",
+        "linux-x64",
+        "linux-x64-musl",
+        "osx-arm64-tar",
+        "osx-x64-pkg",
+        "osx-x64-tar",
+        "src",
+        "win-arm64-7z",
+        "win-arm64-zip",
+        "win-x64-7z",
+        "win-x64-exe",
+        "win-x64-msi",
+        "win-x64-zip"
+      ],
+      "npm": "11.19.0",
+      "v8": "14.6.202.34",
+      "uv": "1.52.1",
+      "zlib": "1.3.2.1-motley",
+      "openssl": "3.5.7",
+      "modules": "147",
+      "lts": false,
+      "security": false
+    },
+    {
+      "version": "v26.7.0",
+      "date": "2026-08-05",
+      "files": [
+        "aix-ppc64",
+        "headers",
+        "linux-arm64",
+        "linux-ppc64le",
+        "linux-s390x",
+        "linux-x64",
+        "osx-arm64-tar",
+        "osx-x64-pkg",
+        "osx-x64-tar",
+        "src",
+        "win-arm64-7z",
+        "win-arm64-zip",
+        "win-x64-7z",
+        "win-x64-exe",
+        "win-x64-msi",
+        "win-x64-zip"
+      ],
+      "npm": "11.19.0",
+      "v8": "14.6.202.34",
+      "uv": "1.52.1",
+      "zlib": "1.3.2.1-motley",
+      "openssl": "3.5.7",
+      "modules": "147",
+      "lts": false,
+      "security": false
+    },
+    {
+      "version": "v26.6.0",
+      "date": "2026-08-03",
+      "files": [
+        "aix-ppc64",
+        "headers",
+        "linux-arm64",
+        "linux-ppc64le",
+        "linux-s390x",
+        "linux-x64",
+        "osx-arm64-tar",
+        "osx-x64-pkg",
+        "osx-x64-tar",
+        "src",
+        "win-arm64-7z",
+        "win-arm64-zip",
+        "win-x64-7z",
+        "win-x64-exe",
+        "win-x64-msi",
+        "win-x64-zip"
+      ],
+      "npm": "11.18.0",
+      "v8": "14.6.202.34",
+      "uv": "1.52.1",
+      "zlib": "1.3.2.1-motley",
+      "openssl": "3.5.7",
+      "modules": "147",
+      "lts": false,
+      "security": false
+    },
+    {
+      "version": "v26.5.1",
+      "date": "2026-07-28",
+      "files": [
+        "aix-ppc64",
+        "headers",
+        "linux-arm64",
+        "linux-ppc64le",
+        "linux-s390x",
+        "linux-x64",
+        "osx-arm64-tar",
+        "osx-x64-pkg",
+        "osx-x64-tar",
+        "src",
+        "win-arm64-7z",
+        "win-arm64-zip",
+        "win-x64-7z",
+        "win-x64-exe",
+        "win-x64-msi",
+        "win-x64-zip"
+      ],
+      "npm": "11.17.0",
+      "v8": "14.6.202.34",
+      "uv": "1.52.1",
+      "zlib": "1.3.2.1-motley",
+      "openssl": "3.5.7",
+      "modules": "147",
+      "lts": false,
+      "security": true
+    },
+    {
+      "version": "v26.5.0",
+      "date": "2026-07-08",
+      "files": [
+        "aix-ppc64",
+        "headers",
+        "linux-arm64",
+        "linux-ppc64le",
+        "linux-s390x",
+        "linux-x64",
+        "osx-arm64-tar",
+        "osx-x64-pkg",
+        "osx-x64-tar",
+        "src",
+        "win-arm64-7z",
+        "win-arm64-zip",
+        "win-x64-7z",
+        "win-x64-exe",
+        "win-x64-msi",
+        "win-x64-zip"
+      ],
+      "npm": "11.17.0",
+      "v8": "14.6.202.34",
+      "uv": "1.52.1",
+      "zlib": "1.3.2.1-motley",
+      "openssl": "3.5.7",
+      "modules": "147",
+      "lts": false,
+      "security": false
+    },
+    {
+      "version": "v26.4.0",
+      "date": "2026-06-24",
+      "files": [
+        "aix-ppc64",
+        "headers",
+        "linux-arm64",
+        "linux-ppc64le",
+        "linux-s390x",
+        "linux-x64",
+        "osx-arm64-tar",
+        "osx-x64-pkg",
+        "osx-x64-tar",
+        "src",
+        "win-arm64-7z",
+        "win-arm64-zip",
+        "win-x64-7z",
+        "win-x64-exe",
+        "win-x64-msi",
+        "win-x64-zip"
+      ],
+      "npm": "11.17.0",
+      "v8": "14.6.202.34",
+      "uv": "1.52.1",
+      "zlib": "1.3.2.1-motley",
+      "openssl": "3.5.7",
+      "modules": "147",
+      "lts": false,
+      "security": false
+    },
+    {
+      "version": "v26.3.1",
+      "date": "2026-06-17",
+      "files": [
+        "aix-ppc64",
+        "headers",
+        "linux-arm64",
+        "linux-ppc64le",
+        "linux-s390x",
+        "linux-x64",
+        "osx-arm64-tar",
+        "osx-x64-pkg",
+        "osx-x64-tar",
+        "src",
+        "win-arm64-7z",
+        "win-arm64-zip",
+        "win-x64-7z",
+        "win-x64-exe",
+        "win-x64-msi",
+        "win-x64-zip"
+      ],
+      "npm": "11.16.0",
+      "v8": "14.6.202.34",
+      "uv": "1.52.1",
+      "zlib": "1.3.1",
+      "openssl": "3.5.7",
+      "modules": "147",
+      "lts": false,
+      "security": true
+    },
+    {
+      "version": "v26.3.0",
+      "date": "2026-06-01",
+      "files": [
+        "aix-ppc64",
+        "headers",
+        "linux-arm64",
+        "linux-ppc64le",
+        "linux-s390x",
+        "linux-x64",
+        "osx-arm64-tar",
+        "osx-x64-pkg",
+        "osx-x64-tar",
+        "src",
+        "win-arm64-7z",
+        "win-arm64-zip",
+        "win-x64-7z",
+        "win-x64-exe",
+        "win-x64-msi",
+        "win-x64-zip"
+      ],
+      "npm": "11.16.0",
+      "v8": "14.6.202.34",
+      "uv": "1.52.1",
+      "zlib": "1.3.1",
+      "openssl": "3.5.6",
+      "modules": "147",
+      "lts": false,
+      "security": false
+    }
+  ],
+  "queried_at": "2026-11-13T21:52:15.838457+00:00"
+}

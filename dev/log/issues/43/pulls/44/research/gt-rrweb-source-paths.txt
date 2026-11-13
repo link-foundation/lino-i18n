@@ -1,0 +1,7 @@
+packages/rrweb/src/__tests__
+packages/rrweb/src/harvest.ts
+packages/rrweb/src/index.ts
+packages/rrweb/src/recorder
+packages/rrweb/src/replay.ts
+packages/rrweb/src/replay
+packages/rrweb/src/types.ts

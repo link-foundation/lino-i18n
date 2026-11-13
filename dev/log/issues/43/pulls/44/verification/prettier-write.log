@@ -1,0 +1,5 @@
+npm notice run lino-i18n@0.5.1 npx
+npm notice run 'prettier' --write scripts/use-locked-npm.mjs tests/package-metadata.test.js package.json
+scripts/use-locked-npm.mjs 170ms
+tests/package-metadata.test.js 66ms (unchanged)
+package.json 29ms (unchanged)

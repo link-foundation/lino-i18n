@@ -290,6 +290,7 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 26.x
+          check-latest: true
       - uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8 # v1
         with:
           toolchain: stable
@@ -381,6 +382,7 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 26.x
+          check-latest: true
       - uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8 # v1
         with:
           toolchain: stable
@@ -502,6 +504,7 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 26.x
+          check-latest: true
       - uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8 # v1
         with:
           toolchain: stable
@@ -545,6 +548,7 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 26.x
+          check-latest: true
       - name: Authenticate with crates.io (trusted publishing)
         id: crates_auth
         uses: rust-lang/crates-io-auth-action@3268eb413133e2960fa4ae0e963ca76380c54cd9 # v1.0.6

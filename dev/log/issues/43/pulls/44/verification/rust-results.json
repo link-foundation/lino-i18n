@@ -1,0 +1,86 @@
+[
+  {
+    "name": "rust-fmt",
+    "command": [
+      "cargo",
+      "fmt",
+      "--manifest-path",
+      "rust/Cargo.toml",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 0.16,
+    "peak_child_rss_kib": 40192,
+    "finished_at": "2026-11-13T22:03:25.580113+00:00"
+  },
+  {
+    "name": "rust-clippy",
+    "command": [
+      "cargo",
+      "clippy",
+      "--locked",
+      "--manifest-path",
+      "rust/Cargo.toml",
+      "--all-targets",
+      "--all-features",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 3.82,
+    "peak_child_rss_kib": 183384,
+    "finished_at": "2026-11-13T22:03:29.402643+00:00"
+  },
+  {
+    "name": "rust-build",
+    "command": [
+      "cargo",
+      "build",
+      "--locked",
+      "--manifest-path",
+      "rust/Cargo.toml",
+      "--all-targets",
+      "--all-features"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 87.12,
+    "peak_child_rss_kib": 608180,
+    "finished_at": "2026-11-13T22:04:56.520433+00:00"
+  },
+  {
+    "name": "rust-test",
+    "command": [
+      "cargo",
+      "test",
+      "--locked",
+      "--manifest-path",
+      "rust/Cargo.toml",
+      "--workspace",
+      "--all-features"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 1.6,
+    "peak_child_rss_kib": 608180,
+    "finished_at": "2026-11-13T22:04:58.121045+00:00"
+  },
+  {
+    "name": "rust-doc",
+    "command": [
+      "cargo",
+      "doc",
+      "--locked",
+      "--manifest-path",
+      "rust/Cargo.toml",
+      "--workspace",
+      "--all-features",
+      "--no-deps"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 1.58,
+    "peak_child_rss_kib": 608180,
+    "finished_at": "2026-11-13T22:04:59.703557+00:00"
+  }
+]

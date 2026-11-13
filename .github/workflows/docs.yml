@@ -41,6 +41,7 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 26.x
+          check-latest: true
       - uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8 # v1
         with:
           toolchain: stable
@@ -64,6 +65,7 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 26.x
+          check-latest: true
       - run: node --test --test-timeout=30000 scripts/*.test.mjs
       - uses: lycheeverse/lychee-action@v2
         with:

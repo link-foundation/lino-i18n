@@ -1,0 +1,96 @@
+{
+  "legacy": {
+    "manifest": {
+      "private": true,
+      "dependencies": {
+        "npm": "11.21.0"
+      }
+    },
+    "lock_sha256": "98cb224ce8861de9b10e5482e6fa41ea67913c7d432ef868954bea11a901145e",
+    "glob": "13.0.6",
+    "minimatch": "10.2.5",
+    "audit_returncode": 1,
+    "audit_summary": {
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 34,
+        "high": 2,
+        "critical": 0,
+        "total": 36
+      },
+      "dependencies": {
+        "prod": 143,
+        "dev": 0,
+        "optional": 2,
+        "peer": 0,
+        "peerOptional": 0,
+        "total": 144
+      }
+    }
+  },
+  "baseline": {
+    "manifest": {
+      "private": true,
+      "dependencies": {
+        "npm": "12.2.2"
+      }
+    },
+    "lock_sha256": "37331cb47cfbdf77bfa575aabf15c9f5246e91b663f49d95aeb0ceab6993708a",
+    "glob": "13.0.6",
+    "minimatch": "10.2.5",
+    "audit_returncode": 1,
+    "audit_summary": {
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 21,
+        "high": 0,
+        "critical": 0,
+        "total": 21
+      },
+      "dependencies": {
+        "prod": 147,
+        "dev": 0,
+        "optional": 2,
+        "peer": 0,
+        "peerOptional": 0,
+        "total": 148
+      }
+    }
+  },
+  "overrides": {
+    "manifest": {
+      "private": true,
+      "dependencies": {
+        "npm": "12.2.2"
+      },
+      "overrides": {
+        "glob": "14.0.2",
+        "minimatch": "11.0.8"
+      }
+    },
+    "lock_sha256": "37331cb47cfbdf77bfa575aabf15c9f5246e91b663f49d95aeb0ceab6993708a",
+    "glob": "13.0.6",
+    "minimatch": "10.2.5",
+    "audit_returncode": 1,
+    "audit_summary": {
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 21,
+        "high": 0,
+        "critical": 0,
+        "total": 21
+      },
+      "dependencies": {
+        "prod": 147,
+        "dev": 0,
+        "optional": 2,
+        "peer": 0,
+        "peerOptional": 0,
+        "total": 148
+      }
+    }
+  }
+}
