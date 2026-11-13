@@ -1,7 +1,0 @@
-...
-----------------------------------------------------------------------
-Ran 3 tests in 0.557s
-
-OK
-/tmp/gh-issue-solver-1794606311065/.github/workflows/js.yml: all 16 jobs covered
-/tmp/gh-issue-solver-1794606311065/.github/workflows/rust.yml: all 12 jobs covered

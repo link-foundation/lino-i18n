@@ -1,8 +1,8 @@
-# Preserved CI logs
+# Preserved raw logs
 
-Names identify workflow/run IDs; run metadata and head SHAs are in `../github/`. Line references in ANALYSIS.md refer to the uncompressed bytes. Read with `gzip -dc NAME.log.gz` and bounded line ranges. Checksums below are SHA-256 of uncompressed data; gzip headers have a fixed zero timestamp.
+CI names identify workflow/run IDs; run metadata and head SHAs are in `../github/`. Local command exit statuses are in the `*-results.json` files. Line references in ANALYSIS.md refer to the uncompressed bytes. Read with `gzip -dc NAME.log.gz` and bounded line ranges. Checksums below are SHA-256 of uncompressed data; gzip headers have a fixed zero timestamp.
 
-| Downloaded log | Lines | Uncompressed bytes | SHA-256 |
+| Raw log | Lines | Uncompressed bytes | SHA-256 |
 | --- | --- | --- | --- |
 | [dependabot-js-43259599092.log.gz](dependabot-js-43259599092.log.gz) | 1516 | 179235 | `4215a8d9864c43f9a86cfda417032b56d8a0008a5d5e3fac9c6d373cc764d1ae` |
 | [dependabot-rust-42064277761.log.gz](dependabot-rust-42064277761.log.gz) | 2211 | 255029 | `22ff41215354a1f60773d451c4bec134b08b6cec62aceb246146fefa7489c15d` |

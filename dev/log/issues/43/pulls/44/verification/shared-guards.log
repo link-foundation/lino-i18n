@@ -1,7 +1,0 @@
-Allowed release metadata: js/package.json
-
-Release validation failed: Non-version change in js/package.json; rerun CI on the new main commit
-
-Release validation failed: Untested change A js/source.js; rerun CI on the new main commit
-
-Metadata-only synchronization and failed/cancelled/unknown terminal statuses verified.
