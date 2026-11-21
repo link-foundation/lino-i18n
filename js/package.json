@@ -182,7 +182,7 @@
     "intl-messageformat": "^12.1.5",
     "links-notation": "^0.31.3",
     "lino-arguments": "^0.4.1",
-    "lino-objects-codec": "^0.9.6"
+    "lino-objects-codec": "^0.9.6 || ^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^8.1.2",

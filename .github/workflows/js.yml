@@ -451,7 +451,7 @@ jobs:
       group: check-js-${{ github.ref }}-cli-smoke-test-
       cancel-in-progress: true
   package:
-    name: Package Dry Run
+    name: Package Smoke Test (Node ${{ matrix.node }})
     runs-on: ubuntu-26.04
     timeout-minutes: 10
     needs:
@@ -463,6 +463,15 @@ jobs:
       needs.test.result == 'success' &&
       needs.cli-smoke-test.result == 'success' &&
       needs.browser-test.result == 'success'
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - node: 22.22.2
+            # Install lino-i18n alone to check npm's engine-compatible selection.
+            codec: ""
+          - node: 26.13.1
+            codec: 1.0.0
     defaults:
       run:
         working-directory: js
@@ -478,15 +487,14 @@ jobs:
         run: bash ../scripts/simulate-fresh-merge.sh
       - uses: actions/setup-node@v7
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          check-latest: true
-          cache: npm
-          cache-dependency-path: js/package-lock.json
-      # Pin the package-manager tool; application dependencies still use npm ci.
-      - run: npm install --global npm@12.2.2 --ignore-scripts && npm ci # zizmor: ignore[adhoc-packages]
-      - run: npm pack --dry-run
+          node-version: ${{ matrix.node }}
+      - run: npm install --global npm@12.2.2 --ignore-scripts # zizmor: ignore[adhoc-packages]
+      - name: Install and exercise the packed release in a clean consumer
+        env:
+          CODEC_VERSION: ${{ matrix.codec }}
+        run: bash experiments/codec-compatibility.sh "$CODEC_VERSION"
     concurrency:
-      group: check-js-${{ github.ref }}-package-
+      group: check-js-${{ github.ref }}-package-${{ matrix.node }}
       cancel-in-progress: true
   auto-release:
     name: Publish npm Package and GitHub Release
