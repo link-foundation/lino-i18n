@@ -488,7 +488,10 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node }}
-      - run: npm install --global npm@12.2.2 --ignore-scripts # zizmor: ignore[adhoc-packages]
+      # The floor leg exercises the npm bundled with the supported Node release.
+      - name: Install pinned npm for the codec 1.x consumer
+        if: matrix.codec != ''
+        run: npm install --global npm@12.2.2 --ignore-scripts # zizmor: ignore[adhoc-packages]
       - name: Install and exercise the packed release in a clean consumer
         env:
           CODEC_VERSION: ${{ matrix.codec }}
